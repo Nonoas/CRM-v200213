@@ -85,6 +85,7 @@
 }
 
 /****************TableView*****************/
+
 .column-header-background .column-header{
     -fx-background-color: #eee;
     -fx-border-color: #ddd;
@@ -98,7 +99,7 @@
     -fx-background-color: #eee;
 }
 
-    /*************************************自定义类********************************* */
+/*************************************自定义类********************************* */
 .negative-btn {
     -fx-background-color: #cf4813;
     -fx-text-fill: white;

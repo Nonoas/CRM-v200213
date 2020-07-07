@@ -55,8 +55,6 @@ public class PackageContentEditTable extends TableView<PackageContentBean> {
 
     private final TableColumn<PackageContentBean, Number> item_count = new TableColumn<>("数量");
 
-    private final TableColumn<PackageContentBean, Number> item_integral_cost = new TableColumn<>("商品积分");
-
     private final TableColumn<PackageContentBean, String> item_total = new TableColumn<>("小计");
 
     public PackageContentEditTable() {
@@ -91,12 +89,6 @@ public class PackageContentEditTable extends TableView<PackageContentBean> {
             return new SimpleStringProperty(show);
         });
 
-        item_integral_cost.setCellValueFactory(param -> {
-            String packageID=param.getValue().getPkg_id();
-            PackageBean packageBean= PackageDao.getInstance().selectById(packageID);
-            return new SimpleIntegerProperty(packageBean.getIntegral_cost());
-        });
-
         item_count.setCellValueFactory(param -> new SimpleIntegerProperty(param.getValue().getGoods_amount()));
 
         item_count.setCellFactory(param -> new AmountCell());   //自定义数量单元格
@@ -105,8 +97,8 @@ public class PackageContentEditTable extends TableView<PackageContentBean> {
             String goodsID = param.getValue().getGoods_id();
             GoodsBean goodsBean = GoodsDao.getInstance().selectById(goodsID);
             double numMoney = goodsBean.getSell_price();
-            double amount=param.getValue().getGoods_amount();
-            String show=String.format("￥%.2f", numMoney*amount);
+            double amount = param.getValue().getGoods_amount();
+            String show = String.format("￥%.2f", numMoney * amount);
             return new SimpleStringProperty(show);
         });
 
@@ -116,7 +108,6 @@ public class PackageContentEditTable extends TableView<PackageContentBean> {
         cols.add(item_id);
         cols.add(item_name);
         cols.add(item_money_cost);
-        cols.add(item_integral_cost);
         cols.add(item_count);
         cols.add(item_total);
 
@@ -147,12 +138,19 @@ public class PackageContentEditTable extends TableView<PackageContentBean> {
     }
 
     /**
-     * 添加数据
+     * 添加不重复的数据
      *
      * @param bean 需要添加的数据
      */
     public void addBean(PackageContentBean bean) {
-        obList.add(bean);
+        boolean hasRepeat = false;
+        for (PackageContentBean packageContentBean : obList) {
+            String id1 = packageContentBean.getGoods_id();
+            String id2 = bean.getGoods_id();
+            hasRepeat = hasRepeat || id1.equals(id2);
+        }
+        if (!hasRepeat)
+            obList.add(bean);
     }
 
     /**

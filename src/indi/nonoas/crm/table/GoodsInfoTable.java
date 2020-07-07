@@ -51,7 +51,6 @@ public class GoodsInfoTable extends TableView<GoodsBean> {
 	}
 
 	private ChangeListener<GoodsBean> cl_select = (observable, oldValue, newValue) -> {
-//		System.out.println(observable);
 		System.out.println(newValue);
 		selectedBean = newValue;
 	};

@@ -34,8 +34,6 @@ public class PackageContentTable extends TableView<PackageContentBean> {
 
     private final TableColumn<PackageContentBean, Number> item_amount = new TableColumn<>("数量");
 
-    private final TableColumn<PackageContentBean, Number> item_integral_cost = new TableColumn<>("套餐积分");
-
     private final TableColumn<PackageContentBean, String> item_total = new TableColumn<>("小计");
 
     public PackageContentTable() {
@@ -64,11 +62,6 @@ public class PackageContentTable extends TableView<PackageContentBean> {
 			String show = String.format("￥%.2f", numMoney);
 			return new SimpleStringProperty(show);
 		});
-		item_integral_cost.setCellValueFactory(param -> {
-            String packageID=param.getValue().getPkg_id();
-            PackageBean packageBean=PackageDao.getInstance().selectById(packageID);
-            return new SimpleIntegerProperty(packageBean.getIntegral_cost());
-        });
 
 		item_amount.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getGoods_amount()));
 
@@ -84,7 +77,6 @@ public class PackageContentTable extends TableView<PackageContentBean> {
         getColumns().add(item_id);
         getColumns().add(item_name);
         getColumns().add(item_money_cost);
-        getColumns().add(item_integral_cost);
         getColumns().add(item_amount);
         getColumns().add(item_total);
     }
