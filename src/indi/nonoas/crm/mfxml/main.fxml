@@ -28,7 +28,7 @@
    <left>
       <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="472.0" prefWidth="110.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-          <Button fx:id="btn_consumption" contentDisplay="TOP" mnemonicParsing="false" onAction="#toConsumPane" text="用户消费" />
+          <Button fx:id="btn_consumption" contentDisplay="TOP" mnemonicParsing="false" onAction="#toConsumePane" text="用户消费" />
             <Button mnemonicParsing="false" onAction="#toVipManagerPane" text="会员管理" />
             <Button mnemonicParsing="false" onAction="#toGoodsManagePane" text="商品管理" />
             <Button mnemonicParsing="false" onAction="#toStaffManagePane" text="员工管理" />

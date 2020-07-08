@@ -95,11 +95,7 @@ public abstract class MyOrmUtil<T> {
      * @param t   传入的泛型Bean类
      */
     final protected void insert(String sql, T t) {
-        try {
-            beanToDataBase(sql, t);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        beanToDataBase(sql, t);
     }
 
     /**
@@ -109,11 +105,7 @@ public abstract class MyOrmUtil<T> {
      * @param t   传入的泛型Bean类
      */
     final protected void update(String sql, T t) {
-        try {
-            beanToDataBase(sql, t);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        beanToDataBase(sql, t);
     }
 
     /**
@@ -123,9 +115,34 @@ public abstract class MyOrmUtil<T> {
      * @param t   传入的泛型Bean类
      */
     final protected void delete(String sql, T t) {
-        try {
-            beanToDataBase(sql, t);
-        } catch (SQLException e) {
+        beanToDataBase(sql, t);
+    }
+
+    /**
+     * SQL批处理
+     *
+     * @param sql sql语句
+     * @param ts  bean类集合
+     */
+    final protected void executeBatch(String sql, ArrayList<T> ts) {
+
+        List<String> list = getParams(sql);
+        sql = getSql(sql); // 将SQL中的#{}占位符改为?
+
+        try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            for (T t : ts) {
+                Class<?> beanClass = t.getClass();
+                for (int i = 0; i < list.size(); i++) {
+                    String colnName = list.get(i);
+                    String methodName = "get" + firstUpperCase(colnName); // 方法名
+                    Method method = beanClass.getDeclaredMethod(methodName);
+                    Object value = method.invoke(t);
+                    ps.setObject(i + 1, value);
+                }
+                ps.addBatch();
+            }
+            ps.executeBatch();
+        } catch (SQLException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }
@@ -159,21 +176,7 @@ public abstract class MyOrmUtil<T> {
                 }
                 method.invoke(t, value); // 调用set方法
             }
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
+        } catch (InstantiationException | IllegalAccessException | NoSuchFieldException | SecurityException | SQLException | NoSuchMethodException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();
         }
         return t;
@@ -184,16 +187,12 @@ public abstract class MyOrmUtil<T> {
      *
      * @param sql 带#{}通配符的SQL语句
      * @param t   泛型Bean对象
-     * @throws SQLException 数据库异常
      */
-    private void beanToDataBase(String sql, T t) throws SQLException {
+    private void beanToDataBase(String sql, T t) {
         Class<?> beanClass = t.getClass();
-        List<String> list = getParms(sql);
+        List<String> list = getParams(sql);
         sql = getSql(sql); // 将SQL中的#{}占位符改为?
-        Connection con = getConnection();
-        PreparedStatement ps = null;
-        try {
-            ps = con.prepareStatement(sql);
+        try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             for (int i = 0; i < list.size(); i++) {
                 String colnName = list.get(i);
                 String methodName = "get" + firstUpperCase(colnName); // 方法名
@@ -202,22 +201,8 @@ public abstract class MyOrmUtil<T> {
                 ps.setObject(i + 1, value);
             }
             ps.execute();
-        } catch (SQLException e) {
+        } catch (SQLException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } finally {
-            if (ps != null)
-                ps.close();
-            con.close();
         }
     }
 
@@ -251,7 +236,7 @@ public abstract class MyOrmUtil<T> {
      * @param sql 传入的SQL语句（带#{}通配符）
      * @return 传递参数列名的List集合，不为null
      */
-    private List<String> getParms(String sql) {
+    private List<String> getParams(String sql) {
 
         List<String> list = new ArrayList<>(8);
         Pattern p = Pattern.compile("[#]\\{\\w*[}]");

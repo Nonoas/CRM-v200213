@@ -15,11 +15,7 @@ import javafx.stage.Stage;
 
 public class MainStage extends Stage {
 
-	private final String username;
-
-	public MainStage(LoginBean loginBean) throws IOException {
-		this.username = loginBean.getName();
-		System.out.println(username);
+	public MainStage() throws IOException {
 		initUI();
 	}
 
@@ -42,7 +38,6 @@ public class MainStage extends Stage {
 
 		MainController controller = fxmlLoader.getController(); // 获取Controller的实例对象
 		controller.initialize(location, null);
-		controller.setInfos(username);
 
 		setMaximized(true);
 		show();

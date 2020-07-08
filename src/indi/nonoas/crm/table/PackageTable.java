@@ -1,9 +1,5 @@
 package indi.nonoas.crm.table;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-
 import indi.nonoas.crm.bean.PackageBean;
 import indi.nonoas.crm.dao.PackageDao;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -13,6 +9,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+
+import java.util.ArrayList;
 
 /**
  * 项目信息表格
@@ -43,8 +41,6 @@ public class PackageTable extends TableView<PackageBean> {
     private final TableColumn<PackageBean, Number> item_integral_cost = new TableColumn<>("积分消费");
 
     private final TableColumn<PackageBean, Number> item_min_discount = new TableColumn<>("最低折扣");
-
-    private final TableColumn<PackageBean, String> item_duration = new TableColumn<>("持续时间");
 
     private final TableColumn<PackageBean, String> item_other = new TableColumn<>("备注信息");
 
@@ -80,13 +76,7 @@ public class PackageTable extends TableView<PackageBean> {
         });
         item_integral_cost.setCellValueFactory(parm -> new SimpleDoubleProperty(parm.getValue().getIntegral_cost()));
         item_min_discount.setCellValueFactory(parm -> new SimpleDoubleProperty(parm.getValue().getMin_discount()));
-        item_duration.setCellValueFactory(parm -> {
-            String value = parm.getValue().getDuration();
-            DateTimeFormatter fmt1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            DateTimeFormatter fmt2 = DateTimeFormatter.ofPattern("yyyy年MM月dd天");
-            LocalDate date = LocalDate.parse(value, fmt1);
-            return new SimpleStringProperty(date.format(fmt2));
-        });
+
         item_other.setCellValueFactory(parm -> new SimpleStringProperty(parm.getValue().getOther()));
 
         getColumns().add(item_id);
@@ -94,7 +84,6 @@ public class PackageTable extends TableView<PackageBean> {
         getColumns().add(item_money_cost);
         getColumns().add(item_integral_cost);
         getColumns().add(item_min_discount);
-        getColumns().add(item_duration);
         getColumns().add(item_other);
 
     }

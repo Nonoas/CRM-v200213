@@ -13,20 +13,27 @@ public class PackageDao extends MyDao<PackageBean> {
 
     private static final String SELECT_ALL = "select * from package_info";
 
-    private static final String SELECT_BY_ID="select * from package_info where id=#{id}";
+    private static final String SELECT_BY_ID = "select * from package_info where id=#{id}";
 
-    private static final String FIND_BY_FILTER = "select * from package_info where (id like #{id} or name like #{name}) "
-            + "and (money_cost between #{money1} and #{money2})";
+    private static final String FIND_BY_FILTER = "select * from package_info " +
+
+            "where (id like #{id} or name like #{name}) and (money_cost between #{money1} and #{money2})";
 
     private static final String DELETE_BY_ID = "delete from package_info where id=#{id}";
 
-    private PackageDao(){
+    private static final String INSERT_ONE = "insert into " +
+
+            "package_info (id,name,integral_cost,money_cost,min_discount,other) " +
+
+            "values (#{id},#{name},#{integral_cost},#{money_cost},#{min_discount},#{other})";
+
+    private PackageDao() {
 
     }
 
-    private static final PackageDao INSTANCE=new PackageDao();
+    private static final PackageDao INSTANCE = new PackageDao();
 
-    public static PackageDao getInstance(){
+    public static PackageDao getInstance() {
         return INSTANCE;
     }
 
@@ -41,11 +48,12 @@ public class PackageDao extends MyDao<PackageBean> {
 
     /**
      * 通过id查找项目信息
+     *
      * @param id 项目id
      * @return 对应的项目信息bean类对象
      */
-    public PackageBean selectById(String id){
-        return selectOne(SELECT_BY_ID,id);
+    public PackageBean selectById(String id) {
+        return selectOne(SELECT_BY_ID, id);
     }
 
     /**
@@ -70,9 +78,17 @@ public class PackageDao extends MyDao<PackageBean> {
         delete(DELETE_BY_ID, bean);
     }
 
-	@Override
-	protected Class<PackageBean> getBeanClass() {
-		return PackageBean.class;
-	}
+    /**
+     * 插入一条项目信息
+     * @param bean PackageBean对象
+     */
+    public void insert(PackageBean bean) {
+        insert(INSERT_ONE,bean);
+    }
+
+    @Override
+    protected Class<PackageBean> getBeanClass() {
+        return PackageBean.class;
+    }
 
 }

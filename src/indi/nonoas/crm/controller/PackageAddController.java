@@ -2,6 +2,8 @@ package indi.nonoas.crm.controller;
 
 import indi.nonoas.crm.bean.GoodsBean;
 import indi.nonoas.crm.bean.PackageBean;
+import indi.nonoas.crm.dao.PackageContentDao;
+import indi.nonoas.crm.dao.PackageDao;
 import indi.nonoas.crm.dialog.GoodsSelectDialog;
 import indi.nonoas.crm.dialog.MyAlert;
 import indi.nonoas.crm.table.PackageContentEditTable;
@@ -14,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class PackageAddController implements Initializable {
@@ -78,13 +81,21 @@ public class PackageAddController implements Initializable {
         if (hasEmpty())  //检查是否有未填写的必填项目
             return;
 
+        //套餐信息
         PackageBean packageBean = new PackageBean();
         packageBean.setId(tf_id.getText());
         packageBean.setName(tf_name.getText());
         packageBean.setMoney_cost(Double.parseDouble(tf_money.getText()));
         packageBean.setIntegral_cost(Integer.parseInt(tf_integral.getText()));
         packageBean.setOther(tf_other.getText());
-        //TODO 提交套餐信息DAO操作
+        //插入套餐信息到数据库
+        PackageDao.getInstance().insert(packageBean);
+        //套餐内容信息
+        ArrayList<PackageContentBean> packageContentBeans=pkgGoodsTable.getAllData();
+        for(PackageContentBean p:packageContentBeans){
+            p.setPkg_id(packageBean.getId());
+        }
+        PackageContentDao.getInstance().insertInfos(packageContentBeans);
 
         if (chc_isClose.isSelected()) { // 如果选择了提交后关闭，则关闭当前tab
             TabPane tabPane = parentTab.getTabPane();

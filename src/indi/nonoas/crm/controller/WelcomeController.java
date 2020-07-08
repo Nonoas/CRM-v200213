@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import indi.nonoas.crm.LoginInfo;
 import indi.nonoas.crm.app.MainStage;
 import indi.nonoas.crm.dialog.MyAlert;
 import indi.nonoas.crm.bean.LoginBean;
@@ -63,7 +64,8 @@ public class WelcomeController implements Initializable {
             if (newValue.getId() != null) {
                 Stage newStage = null;
                 try {
-                    newStage = new MainStage(newValue);
+                    LoginInfo.setLoginBean(newValue);
+                    newStage = new MainStage();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

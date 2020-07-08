@@ -86,7 +86,7 @@ public class PackageContentTable extends TableView<PackageContentBean> {
      */
     public void showAllInfos(String id) {
         clearData(); // 清空所有数据
-        ArrayList<PackageContentBean> listVipBeans = new PackageContentDao().selectById(id);
+        ArrayList<PackageContentBean> listVipBeans = PackageContentDao.getInstance().selectById(id);
         if (listVipBeans != null)
             obList.addAll(listVipBeans);
     }
