@@ -158,6 +158,7 @@ public class PackageContentEditTable extends TableView<Data> {
      */
     public void removeData(Data bean) {
         this.obList.remove(bean);
+        refresh();
     }
 
     /**
@@ -310,14 +311,12 @@ class AmountCell extends TableCell<Data, Number> {
             btn_add.setOnAction(event -> {
                 int amount = Integer.parseInt(tf_number.getText()) + 1;
                 tf_number.setText(String.valueOf(amount));
-                getTableView().refresh();
             });
             //减一
             btn_reduce.setOnAction(event -> {
                 int amount = Integer.parseInt(tf_number.getText()) - 1;
                 if (amount > 0) {
                     tf_number.setText(String.valueOf(amount));
-                    getTableView().refresh();
                 }
             });
             //文本框变化监听
@@ -326,6 +325,7 @@ class AmountCell extends TableCell<Data, Number> {
                 boolean isNumber = Pattern.matches(pattern, newValue); //判断是否为正整数
                 if (isNumber) {
                     bean.setGoods_amount(Integer.parseInt(newValue));
+                    getTableView().refresh();
                 } else {
                     tf_number.setText(oldValue);
                 }

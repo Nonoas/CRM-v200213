@@ -52,6 +52,9 @@ public class PackageAddController implements Initializable {
     private TextField tf_integral;
 
     @FXML
+    private TextField tf_min_discount;
+
+    @FXML
     private ImageView img_photo;
 
     @Override
@@ -68,7 +71,7 @@ public class PackageAddController implements Initializable {
             TabPane tabPane = parentTab.getTabPane();
             tabPane.getTabs().remove(parentTab);
         }
-        //TODO 没勾上的时候
+        //TODO 没勾上则清空所有内容
     }
 
 
@@ -87,12 +90,16 @@ public class PackageAddController implements Initializable {
         packageBean.setName(tf_name.getText());
         packageBean.setMoney_cost(Double.parseDouble(tf_money.getText()));
         packageBean.setIntegral_cost(Integer.parseInt(tf_integral.getText()));
+        String minDiscount = tf_min_discount.getText();
+        if (!minDiscount.equals("")) {
+            packageBean.setMin_discount(Double.parseDouble(minDiscount));
+        }
         packageBean.setOther(tf_other.getText());
         //插入套餐信息到数据库
         PackageDao.getInstance().insert(packageBean);
         //套餐内容信息
-        ArrayList<PackageContentBean> packageContentBeans=pkgGoodsTable.getAllData();
-        for(PackageContentBean p:packageContentBeans){
+        ArrayList<PackageContentBean> packageContentBeans = pkgGoodsTable.getAllData();
+        for (PackageContentBean p : packageContentBeans) {
             p.setPkg_id(packageBean.getId());
         }
         PackageContentDao.getInstance().insertInfos(packageContentBeans);
@@ -114,7 +121,7 @@ public class PackageAddController implements Initializable {
                 PackageContentBean packageContentBean = new PackageContentBean();
                 packageContentBean.setPkg_id(tf_id.getText());
                 packageContentBean.setGoods_id(goodsBean.getId());
-                packageContentBean.setGoods_amount(0);
+                packageContentBean.setGoods_amount(1);
                 pkgGoodsTable.addBean(packageContentBean);
             }
         }
@@ -122,7 +129,7 @@ public class PackageAddController implements Initializable {
 
     @FXML
     private void deleteGoods() {
-
+        pkgGoodsTable.removeData(pkgGoodsTable.getSelectedData());
     }
 
     @FXML
