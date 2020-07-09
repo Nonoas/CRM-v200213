@@ -34,7 +34,7 @@ public class PackageAddController implements Initializable {
     private CheckBox chc_isClose;
 
     @FXML
-    private HBox hbox_root;
+    private HBox hBox_root;
 
     @FXML
     private TextField tf_money;
@@ -67,11 +67,19 @@ public class PackageAddController implements Initializable {
      */
     @FXML
     private void cancelInfo() {
+
         if (chc_isClose.isSelected()) { // 如果选择了提交后关闭，则关闭当前tab
             TabPane tabPane = parentTab.getTabPane();
             tabPane.getTabs().remove(parentTab);
         }
-        //TODO 没勾上则清空所有内容
+
+        tf_id.setText("");
+        tf_integral.setText("");
+        tf_money.setText("");
+        tf_name.setText("");
+        tf_min_discount.setText("");
+        tf_other.setText("");
+
     }
 
 
@@ -110,6 +118,9 @@ public class PackageAddController implements Initializable {
         }
     }
 
+    /**
+     * 添加商品
+     */
     @FXML
     private void addGoods() {
         //添加套餐项目的商品
@@ -127,14 +138,20 @@ public class PackageAddController implements Initializable {
         }
     }
 
+    /**
+     * 删除商品
+     */
     @FXML
     private void deleteGoods() {
         pkgGoodsTable.removeData(pkgGoodsTable.getSelectedData());
     }
 
+    /**
+     * 清空商品
+     */
     @FXML
     private void clearGoods() {
-
+        pkgGoodsTable.clearData();
     }
 
     /**
@@ -143,6 +160,7 @@ public class PackageAddController implements Initializable {
      * @return 有则返回true，没有则返回false
      */
     private boolean hasEmpty() {
+
         if (tf_id.getText().equals("")) {
             new MyAlert(Alert.AlertType.WARNING, "项目编号不能为空！").show();
             return true;
@@ -157,6 +175,7 @@ public class PackageAddController implements Initializable {
             return true;
         }
         return false;
+
     }
 
     /**
