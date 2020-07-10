@@ -108,10 +108,10 @@ public class PackageContentEditTable extends TableView<Data> {
      */
     public void showAllInfos(String id) {
         clearData(); // 清空所有数据
-        ArrayList<PackageContentBean> listVipBeans = PackageContentDao.getInstance().selectById(id);
+        ArrayList<PackageContentBean> listPkgContentBeans = PackageContentDao.getInstance().selectById(id);
         ArrayList<Data> listData = new ArrayList<>();
-        if (listVipBeans != null) {
-            for (PackageContentBean p : listVipBeans) {
+        if (listPkgContentBeans != null) {
+            for (PackageContentBean p : listPkgContentBeans) {
                 listData.add(beanToData(p));
             }
             obList.addAll(listData);

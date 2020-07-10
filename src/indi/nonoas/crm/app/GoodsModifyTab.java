@@ -17,7 +17,7 @@ import javafx.scene.layout.Pane;
  */
 public class GoodsModifyTab extends Tab {
 
-	private GoodsBean bean;
+	private final GoodsBean bean;
 	
 	public GoodsModifyTab(GoodsBean bean) {
 		this("修改商品信息",bean);
@@ -40,8 +40,8 @@ public class GoodsModifyTab extends Tab {
 			e.printStackTrace();
 		}
 		setClosable(true);
-		GoodsModifyController contronller=fxmlLoader.getController();
-		contronller.setPane(this);
-		contronller.setBean(bean);
+		GoodsModifyController controller=fxmlLoader.getController();
+		controller.setPane(this);
+		controller.setBean(bean);
 	}
 }

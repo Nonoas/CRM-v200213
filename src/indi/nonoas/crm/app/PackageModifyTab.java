@@ -3,6 +3,7 @@ package indi.nonoas.crm.app;
 import java.io.IOException;
 import java.net.URL;
 
+import indi.nonoas.crm.bean.PackageBean;
 import indi.nonoas.crm.controller.PackageModifyController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
@@ -15,11 +16,15 @@ import javafx.scene.layout.Pane;
  *
  */
 public class PackageModifyTab extends Tab{
-	public PackageModifyTab() {
-		this("修改项目信息");
+
+	private PackageBean packageBean;
+
+	public PackageModifyTab(PackageBean packageBean) {
+		this("修改项目信息",packageBean);
 	}
-	public PackageModifyTab(String str) {
+	public PackageModifyTab(String str, PackageBean packageBean) {
 		super(str);
+		this.packageBean=packageBean;
 		initView();
 	}
 
@@ -37,5 +42,6 @@ public class PackageModifyTab extends Tab{
 		setClosable(true);
 		PackageModifyController controller=fxmlLoader.getController();
 		controller.setPane(this);
+		controller.setBean(packageBean);
 	}
 }

@@ -1,12 +1,14 @@
 package indi.nonoas.crm.controller;
 
-import indi.nonoas.crm.app.*;
+import indi.nonoas.crm.app.GoodsAddTab;
+import indi.nonoas.crm.app.GoodsModifyTab;
+import indi.nonoas.crm.app.PackageAddTab;
+import indi.nonoas.crm.app.PackageModifyTab;
 import indi.nonoas.crm.bean.GoodsBean;
 import indi.nonoas.crm.bean.PackageBean;
 import indi.nonoas.crm.dao.GoodsDao;
 import indi.nonoas.crm.dao.GoodsTypeDao;
 import indi.nonoas.crm.dao.PackageDao;
-import indi.nonoas.crm.dialog.GoodsSelectDialog;
 import indi.nonoas.crm.dialog.MyAlert;
 import indi.nonoas.crm.table.GoodsInfoTable;
 import indi.nonoas.crm.table.PackageContentTable;
@@ -28,6 +30,8 @@ public class GoodsManageController implements Initializable {
     private final GoodsInfoTable table = new GoodsInfoTable(); // 商品信息表
 
     private final GoodsDao goodsDao = GoodsDao.getInstance();
+
+    private PackageBean packageBean;
     @FXML
     private ScrollPane scrollPane; // 表格的父容器
     @FXML
@@ -196,7 +200,7 @@ public class GoodsManageController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             pkgTable.removeData(bean);
-           PackageDao.getInstance().deleteByID(bean);
+            PackageDao.getInstance().deleteByID(bean);
         }
     }
 
@@ -239,10 +243,9 @@ public class GoodsManageController implements Initializable {
             }
         }
 
-        PackageModifyTab tab = new PackageModifyTab();
+        PackageModifyTab tab = new PackageModifyTab(pkgTable.getSelectedData());
         tab.setUserData(DATA);
         obList.add(tab);
         tp_rootPane.getSelectionModel().select(tab);
     }
-
 }
