@@ -24,14 +24,10 @@ public abstract class MyOrmUtil<T> {
      */
     final protected T selectOne(String sql, Object... params) {
         T t = null;
-        Connection conn = getConnection();
         PreparedStatement ps = null;
-        ResultSet rs = null;
+        ResultSet rs;
         try {
-            ps = conn.prepareStatement(getSql(sql)); // 将#{}占位符替换为?
-            for (int i = 0; i < params.length; i++) {
-                ps.setObject(i + 1, params[i]);
-            }
+            ps = getGeneralPreparedStatement(sql, params); // 将#{}占位符替换为?
             rs = ps.executeQuery();
             if (rs.next())
                 t = mapToBean(rs, getBeanClass());
@@ -39,11 +35,13 @@ public abstract class MyOrmUtil<T> {
             e.printStackTrace();
         } finally {
             try {
-                if (ps != null)
+                Connection c = null;
+                if (ps != null) {
+                    c = ps.getConnection();
                     ps.close();
-                if (rs != null)
-                    rs.close();
-                conn.close();
+                }
+                if (c != null)
+                    c.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -60,14 +58,10 @@ public abstract class MyOrmUtil<T> {
      */
     final protected List<T> select(String sql, Object... params) {
         List<T> list = new ArrayList<>(8);
-        Connection conn = getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = conn.prepareStatement(getSql(sql)); // 将#{}占位符替换为?
-            for (int i = 0; i < params.length; i++) {
-                ps.setObject(i + 1, params[i]);
-            }
+            ps = getGeneralPreparedStatement(sql, params); // 获取带参数的PreparedStatement对象
             rs = ps.executeQuery();
             while (rs.next()) // 将查询结果加入list
                 list.add(mapToBean(rs, getBeanClass()));
@@ -145,6 +139,39 @@ public abstract class MyOrmUtil<T> {
         } catch (SQLException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 执行通用SQL语句
+     * @param sql SQL语句
+     * @param params 占位符参数
+     * @return 执行成功返回true，否则返回false
+     * @throws SQLException SQL异常
+     */
+    protected boolean execute(String sql, Object... params) throws SQLException {
+        PreparedStatement ps = getGeneralPreparedStatement(sql, params);
+        return ps.execute();
+    }
+
+    /**
+     * 获得通用的PrepareStatement对象
+     *
+     * @param sql    SQL语句
+     * @param params 占位符参数
+     * @return PrepareStatement对象
+     */
+    private PreparedStatement getGeneralPreparedStatement(String sql, Object... params) {
+        Connection conn = getConnection();
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement(getSql(sql)); // 将#{}占位符替换为?
+            for (int i = 0; i < params.length; i++) {
+                ps.setObject(i + 1, params[i]);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ps;
     }
 
     /**
