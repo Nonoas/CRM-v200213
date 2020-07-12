@@ -8,6 +8,7 @@ import indi.nonoas.crm.bean.GoodsBean;
 import indi.nonoas.crm.bean.PackageBean;
 import indi.nonoas.crm.dao.GoodsDao;
 import indi.nonoas.crm.dao.GoodsTypeDao;
+import indi.nonoas.crm.dao.PackageContentDao;
 import indi.nonoas.crm.dao.PackageDao;
 import indi.nonoas.crm.dialog.MyAlert;
 import indi.nonoas.crm.table.GoodsInfoTable;
@@ -111,7 +112,15 @@ public class GoodsManageController implements Initializable {
     }
 
     @FXML    //修改商品信息
-    private void updateInfo() {
+    private void updateGoods() {
+
+        GoodsBean bean=table.getSelectedData();
+
+        if(bean==null){
+            new MyAlert(AlertType.INFORMATION, "请先选择一条数据！").show();
+            return;
+        }
+
         ObservableList<Tab> obList = tp_rootPane.getTabs();
         final String DATA = "修改商品信息";
         for (Tab tab : obList) { // 遍历判断该tab是否已经添加
@@ -201,6 +210,7 @@ public class GoodsManageController implements Initializable {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             pkgTable.removeData(bean);
             PackageDao.getInstance().deleteByID(bean);
+            PackageContentDao.getInstance().deleteById(bean.getId());
         }
     }
 
@@ -232,6 +242,7 @@ public class GoodsManageController implements Initializable {
             new MyAlert(AlertType.INFORMATION, "请先选择一条套餐项目信息！").show();
             return;
         }
+
         ObservableList<Tab> obList = tp_rootPane.getTabs();
         // 遍历判断该Tab是否已经添加,如果已添加，则直接切换到该Tab
         final String DATA = "修改项目信息";

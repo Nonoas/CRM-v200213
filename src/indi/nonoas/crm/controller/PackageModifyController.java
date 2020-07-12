@@ -59,7 +59,15 @@ public class PackageModifyController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initView();
+    }
+
+    /**
+     * 界面初始化
+     */
+    private void initView() {
         sp_goods.setContent(pkgGoodsTable);
+        tf_id.setEditable(false);
     }
 
     /**
@@ -93,24 +101,17 @@ public class PackageModifyController implements Initializable {
             return;
 
         //套餐信息
-        PackageBean packageBean = new PackageBean();
-        packageBean.setId(tf_id.getText());
-        packageBean.setName(tf_name.getText());
-        packageBean.setMoney_cost(Double.parseDouble(tf_money.getText()));
-        packageBean.setIntegral_cost(Integer.parseInt(tf_integral.getText()));
-        String minDiscount = tf_min_discount.getText();
-        if (!minDiscount.equals("")) {
-            packageBean.setMin_discount(Double.parseDouble(minDiscount));
-        }
-        packageBean.setOther(tf_other.getText());
+        PackageBean packageBean = getPackageBean();
         //插入套餐信息到数据库
-        PackageDao.getInstance().insert(packageBean);
-        //套餐内容信息
-        ArrayList<PackageContentBean> packageContentBeans = pkgGoodsTable.getAllData();
-        for (PackageContentBean p : packageContentBeans) {
-            p.setPkg_id(packageBean.getId());
-        }
-        PackageContentDao.getInstance().insertInfos(packageContentBeans);
+        PackageDao.getInstance().update(packageBean);
+
+        //删除之前的商品内容
+        PackageContentDao packageContentDao = PackageContentDao.getInstance();
+        packageContentDao.deleteById(packageBean.getId());
+
+        //重新提交商品内容
+        ArrayList<PackageContentBean> packageContentBeans = getPackageContentBeans(packageBean.getId());
+        packageContentDao.insertInfos(packageContentBeans);
 
         if (chc_isClose.isSelected()) { // 如果选择了提交后关闭，则关闭当前tab
             TabPane tabPane = parentTab.getTabPane();
@@ -184,6 +185,38 @@ public class PackageModifyController implements Initializable {
     @FXML
     private void clearGoods() {
         pkgGoodsTable.clearData();
+    }
+
+    /**
+     * 通过界面内的信息生成商品信息对象
+     *
+     * @return PackageBean实例
+     */
+    private PackageBean getPackageBean() {
+        PackageBean packageBean = new PackageBean();
+        packageBean.setId(tf_id.getText());
+        packageBean.setName(tf_name.getText());
+        packageBean.setMoney_cost(Double.parseDouble(tf_money.getText()));
+        packageBean.setIntegral_cost(Integer.parseInt(tf_integral.getText()));
+        String minDiscount = tf_min_discount.getText();
+        if (!minDiscount.equals("")) {
+            packageBean.setMin_discount(Double.parseDouble(minDiscount));
+        }
+        packageBean.setOther(tf_other.getText());
+        return packageBean;
+    }
+
+    /**
+     * 获取套餐内商品信息列表
+     *
+     * @return PackageContentBean集合
+     */
+    private ArrayList<PackageContentBean> getPackageContentBeans(String PkgID) {
+        ArrayList<PackageContentBean> packageContentBeans = pkgGoodsTable.getAllData();
+        for (PackageContentBean p : packageContentBeans) {
+            p.setPkg_id(PkgID);
+        }
+        return packageContentBeans;
     }
 
     /**

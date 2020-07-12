@@ -59,7 +59,9 @@ public class PackageTable extends TableView<PackageBean> {
     ChangeListener<PackageBean> cl_select = (observable, oldValue, newValue) -> {
         System.out.println("项目信息表格选中：" + newValue);
         selectedBean = newValue;
-        packageContentTable.showAllInfos(selectedBean.getId());    //更新选中表格的内容
+        if(selectedBean!=null){
+            packageContentTable.showAllInfos(selectedBean.getId()); //更新选中表格的内容
+        }
     };
 
 
@@ -67,17 +69,17 @@ public class PackageTable extends TableView<PackageBean> {
 
         setTableMenuButtonVisible(true); // 显示表格菜单按钮
 
-        item_id.setCellValueFactory(parm -> new SimpleStringProperty(parm.getValue().getId()));
-        item_name.setCellValueFactory(parm -> new SimpleStringProperty(parm.getValue().getName()));
-        item_money_cost.setCellValueFactory(parm -> {
-            double numMoney = parm.getValue().getMoney_cost();
+        item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getId()));
+        item_name.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName()));
+        item_money_cost.setCellValueFactory(param -> {
+            double numMoney = param.getValue().getMoney_cost();
             String show = String.format("￥%.2f", numMoney);
             return new SimpleStringProperty(show);
         });
-        item_integral_cost.setCellValueFactory(parm -> new SimpleDoubleProperty(parm.getValue().getIntegral_cost()));
-        item_min_discount.setCellValueFactory(parm -> new SimpleDoubleProperty(parm.getValue().getMin_discount()));
+        item_integral_cost.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getIntegral_cost()));
+        item_min_discount.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getMin_discount()));
 
-        item_other.setCellValueFactory(parm -> new SimpleStringProperty(parm.getValue().getOther()));
+        item_other.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getOther()));
 
         getColumns().add(item_id);
         getColumns().add(item_name);

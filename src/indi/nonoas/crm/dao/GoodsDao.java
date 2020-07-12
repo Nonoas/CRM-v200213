@@ -18,7 +18,12 @@ public class GoodsDao extends MyDao<GoodsBean> {
 	private static final String INSERT_INFO = "insert into goods_info(id,name,sell_price,purchas_price,quantity,min_discount,deduction,deduction_rate,base_unit,type,photo) "
 			+ "values(#{id},#{name},#{sell_price},#{purchas_price},#{quantity},#{min_discount},#{deduction},#{deduction_rate},#{base_unit},#{type},#{photo})";
 	private static final String DELETE_BY_ID = "delete from goods_info where id=#{id}";
-	private static final String UPDATE = "update goods_info set name=#{name},sell_price=#{sell_price},purchas_price=#{purchas_price},quantity=#{quantity},min_discount=#{min_discount},deduction=#{deduction},deduction_rate=#{deduction_rate},base_unit=#{base_unit},type=#{type},photo=#{photo} where id=#{id}";
+
+	private static final String UPDATE = "update goods_info " +
+
+			"set name=#{name},sell_price=#{sell_price},purchas_price=#{purchas_price},quantity=#{quantity},min_discount=#{min_discount}," +
+
+			"deduction=#{deduction},deduction_rate=#{deduction_rate},base_unit=#{base_unit},type=#{type},photo=#{photo} where id=#{id}";
 
 
 	private static final GoodsDao INSTANCE = new GoodsDao();

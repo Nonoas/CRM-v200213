@@ -19,13 +19,15 @@ public class PackageContentDao extends MyDao<PackageContentBean> {
 
             "values (#{pkg_id},#{goods_id},#{goods_amount})";
 
-    private PackageContentDao(){
+    private static final String DELETE_BY_ID = "delete from package_content where pkg_id=#{pkg_id}";
+
+    private PackageContentDao() {
 
     }
 
-    private static final PackageContentDao INSTANCE=new PackageContentDao();
+    private static final PackageContentDao INSTANCE = new PackageContentDao();
 
-    public static PackageContentDao getInstance(){
+    public static PackageContentDao getInstance() {
         return INSTANCE;
     }
 
@@ -42,10 +44,22 @@ public class PackageContentDao extends MyDao<PackageContentBean> {
 
     /**
      * 批量插入套餐内商品信息
+     *
      * @param beans 商品信息集合
      */
-    public void insertInfos(ArrayList<PackageContentBean> beans){
-        executeBatch(INSERT_INFO,beans);
+    public void insertInfos(ArrayList<PackageContentBean> beans) {
+        executeBatch(INSERT_INFO, beans);
+    }
+
+    /**
+     * 根据id删除信息
+     *
+     * @param id 编号
+     */
+    public void deleteById(String id) {
+        PackageContentBean packageContentBean = new PackageContentBean();
+        packageContentBean.setPkg_id(id);
+        delete(DELETE_BY_ID, packageContentBean);
     }
 
     @Override

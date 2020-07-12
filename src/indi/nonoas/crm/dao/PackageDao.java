@@ -27,6 +27,10 @@ public class PackageDao extends MyDao<PackageBean> {
 
             "values (#{id},#{name},#{integral_cost},#{money_cost},#{min_discount},#{other})";
 
+    private static final String UPDATE_ONE="update package_info" +
+            
+            "set id=#{id},name=#{name},integral_cost=#{integral_cost},money_cost=#{money_cost},min_discount=#{min_discount},other=#{other}";
+
     private PackageDao() {
 
     }
@@ -84,6 +88,14 @@ public class PackageDao extends MyDao<PackageBean> {
      */
     public void insert(PackageBean bean) {
         insert(INSERT_ONE,bean);
+    }
+
+    /**
+     * 更新一条项目信息
+     * @param bean PackageBean对象
+     */
+    public void update(PackageBean bean){
+        update(UPDATE_ONE,bean);
     }
 
     @Override

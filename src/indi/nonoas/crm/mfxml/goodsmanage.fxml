@@ -53,7 +53,7 @@
                         <Button mnemonicParsing="false" onAction="#addGoods" text="添加商品" />
                         <Button mnemonicParsing="false" text="商品进货" />
                         <Button mnemonicParsing="false" text="商品退货" />
-                        <Button mnemonicParsing="false" onAction="#updateInfo" text="修改商品" />
+                        <Button mnemonicParsing="false" onAction="#updateGoods" text="修改商品" />
                         <Button mnemonicParsing="false" onAction="#deleteInfo" styleClass="negative-btn" text="删除商品" />
                      </children>
                   </HBox>
