@@ -8,7 +8,7 @@ public class GoodsBean {
 	/** 售价 */
 	private double sell_price;
 	/** 进价 */
-	private double purchas_price;
+	private double purchase_price;
 	/** 数量 */
 	private double quantity;
 	/** 最低折扣 */
@@ -67,12 +67,12 @@ public class GoodsBean {
 		this.sell_price = sell_price;
 	}
 
-	public double getPurchas_price() {
-		return purchas_price;
+	public double getPurchase_price() {
+		return purchase_price;
 	}
 
-	public void setPurchas_price(double purchas_price) {
-		this.purchas_price = purchas_price;
+	public void setPurchase_price(double purchase_price) {
+		this.purchase_price = purchase_price;
 	}
 
 	public double getQuantity() {

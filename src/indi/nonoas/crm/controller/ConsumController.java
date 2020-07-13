@@ -94,7 +94,7 @@ public class ConsumController implements Initializable {
 		String str = "%" + tf_findInfo.getText().trim() + "%";
 		String str0 = cb_distype.getValue().equals("全部类型") ? "" : cb_distype.getValue();
 		String distype = str0 + "%";
-		if (str.equals(""))
+		if (str.equals("%%"))
 			return;
 		ArrayList<VipBean> listVipBeans = vipInfoDao.selectByFiltrate(str, str, distype);
 		if (listVipBeans != null) {
@@ -151,7 +151,7 @@ public class ConsumController implements Initializable {
 	private void initView() {
 		tv_vipInfo.showAllInfos();
 		sp_userInfo.setContent(tv_vipInfo);
-		// 从数据库读出所用会员等级，并初始化CmboBox
+		// 从数据库读出所用会员等级，并初始化ComboBox
 		LinkedList<String> listName = new VipLevelDao().selectAllNames();
 		cb_distype.getItems().add("全部类型");
 		for (String str : listName) {
@@ -159,5 +159,8 @@ public class ConsumController implements Initializable {
 		}
 		cb_distype.setValue("全部类型");
 	}
+
+	////////////////////////商品消费///////////////////////////
+
 
 }

@@ -1,71 +1,26 @@
 package indi.nonoas.crm.controller;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-
 import indi.nonoas.crm.bean.GoodsBean;
 import indi.nonoas.crm.bean.PackageBean;
 import indi.nonoas.crm.bean.PackageContentBean;
 import indi.nonoas.crm.dao.PackageContentDao;
 import indi.nonoas.crm.dao.PackageDao;
 import indi.nonoas.crm.dialog.GoodsSelectDialog;
-import indi.nonoas.crm.dialog.MyAlert;
-import indi.nonoas.crm.table.PackageContentEditTable;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 
-public class PackageModifyController implements Initializable {
+import java.util.ArrayList;
 
-    private final PackageContentEditTable pkgGoodsTable = new PackageContentEditTable();
+public class PackageModifyController extends PackageController {
 
     private Tab parentTab;
-    @FXML
-    private Button btn_upload;
-
-    @FXML
-    private TextField tf_other;
-
-    @FXML
-    private CheckBox chc_isClose;
-
-    @FXML
-    private HBox hBox_root;
-
-    @FXML
-    private TextField tf_money;
-
-    @FXML
-    private TextField tf_name;
-
-    @FXML
-    private TextField tf_min_discount;
-
-    @FXML
-    private ScrollPane sp_goods;
-
-    @FXML
-    private TextField tf_id;
-
-    @FXML
-    private TextField tf_integral;
-
-    @FXML
-    private ImageView img_photo;
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        initView();
-    }
 
     /**
      * 界面初始化
      */
-    private void initView() {
+    protected void initView() {
         sp_goods.setContent(pkgGoodsTable);
         tf_id.setEditable(false);
     }
@@ -119,29 +74,6 @@ public class PackageModifyController implements Initializable {
         }
     }
 
-    /**
-     * 用于提交时候检查是否有未填选项
-     *
-     * @return 有则返回true，没有则返回false
-     */
-    private boolean hasEmpty() {
-
-        if (tf_id.getText().equals("")) {
-            new MyAlert(Alert.AlertType.WARNING, "项目编号不能为空！").show();
-            return true;
-        } else if (tf_name.getText().equals("")) {
-            new MyAlert(Alert.AlertType.WARNING, "项目名称不能为空！").show();
-            return true;
-        } else if (tf_money.getText().equals("")) {
-            new MyAlert(Alert.AlertType.WARNING, "套餐售价不能为空！").show();
-            return true;
-        } else if (tf_integral.getText().equals("")) {
-            new MyAlert(Alert.AlertType.WARNING, "套餐积分不能为空！").show();
-            return true;
-        }
-        return false;
-
-    }
 
 
     /**

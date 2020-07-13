@@ -99,7 +99,7 @@ public class GoodsAddController implements Initializable {
 		
 		String pp=tf_puchasPrice.getText().trim();	//进货单价
 		double pur_price=pp.equals("")?0:Double.parseDouble(pp);
-		bean.setPurchas_price(pur_price);
+		bean.setPurchase_price(pur_price);
 		
 		String quan=tf_quantity.getText().trim();	//初始库存
 		double quantity=quan.equals("")?0:Double.parseDouble(quan);

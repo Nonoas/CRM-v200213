@@ -62,7 +62,7 @@ public class GoodsInfoTable extends TableView<GoodsBean> {
 		item_id.setCellValueFactory(parm -> new SimpleStringProperty(parm.getValue().getId()));
 		item_name.setCellValueFactory(parm -> new SimpleStringProperty(parm.getValue().getName()));
 		item_sell_price.setCellValueFactory(parm -> new SimpleDoubleProperty(parm.getValue().getSell_price()));
-		item_purchas_price.setCellValueFactory(parm -> new SimpleDoubleProperty(parm.getValue().getPurchas_price()));
+		item_purchas_price.setCellValueFactory(parm -> new SimpleDoubleProperty(parm.getValue().getPurchase_price()));
 		item_quantity.setCellValueFactory(parm -> {
 			double quantity = parm.getValue().getQuantity(); // 数量
 			String unit = parm.getValue().getBase_unit(); // 单位

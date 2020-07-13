@@ -35,7 +35,7 @@ import java.util.regex.Pattern;
  * @Date: 2020/4/4 18:19
  * @Description: 可以编辑内容的“套餐内容”表格
  */
-public class PackageContentEditTable extends TableView<Data> {
+public class PackageContentEditTable extends TableView<PackageContentEditTable.Data> {
     /**
      * 数据源
      */
@@ -163,11 +163,12 @@ public class PackageContentEditTable extends TableView<Data> {
 
     /**
      * 获取表格内所有商品信息
+     *
      * @return PackageContentBean的集合
      */
-    public ArrayList<PackageContentBean> getAllData(){
-        ArrayList<PackageContentBean> packageContentBeans=new ArrayList<>();
-        for(Data d:obList){
+    public ArrayList<PackageContentBean> getAllData() {
+        ArrayList<PackageContentBean> packageContentBeans = new ArrayList<>();
+        for (Data d : obList) {
             packageContentBeans.add(dataToBean(d));
         }
         return packageContentBeans;
@@ -196,144 +197,148 @@ public class PackageContentEditTable extends TableView<Data> {
 
     /**
      * 将数据模型转换为bean类
+     *
      * @param data 表格数据模型
      * @return PackageContentBean对象
      */
-    private PackageContentBean dataToBean(Data data){
-        PackageContentBean packageContentBean=new PackageContentBean();
+    private PackageContentBean dataToBean(Data data) {
+        PackageContentBean packageContentBean = new PackageContentBean();
         packageContentBean.setGoods_id(data.getGoods_id());
         packageContentBean.setGoods_amount(data.getGoods_amount());
         return packageContentBean;
     }
 
-}
 
-/**
- * 数据模型类，用于和PackageContentBean相互转换
- */
-class Data {
-    private String goods_id;
-    private String goods_name;
-    private double goods_price;
-    private int goods_amount;
-    private double sum_price;
+    /**
+     * 数据模型类，用于和PackageContentBean相互转换
+     */
+    static class Data {
+        private String goods_id;
+        private String goods_name;
+        private double goods_price;
+        private int goods_amount;
+        private double sum_price;
 
-    public String getGoods_id() {
-        return goods_id;
-    }
+        public String getGoods_id() {
+            return goods_id;
+        }
 
-    public String getGoods_name() {
-        return goods_name;
-    }
+        public String getGoods_name() {
+            return goods_name;
+        }
 
-    public double getGoods_price() {
-        return goods_price;
-    }
+        public double getGoods_price() {
+            return goods_price;
+        }
 
-    public int getGoods_amount() {
-        return goods_amount;
-    }
+        public int getGoods_amount() {
+            return goods_amount;
+        }
 
-    public double getSum_price() {
-        return sum_price;
-    }
+        public double getSum_price() {
+            return sum_price;
+        }
 
-    public void setGoods_id(String goods_id) {
-        this.goods_id = goods_id;
-    }
+        public void setGoods_id(String goods_id) {
+            this.goods_id = goods_id;
+        }
 
-    public void setGoods_name(String goods_name) {
-        this.goods_name = goods_name;
-    }
+        public void setGoods_name(String goods_name) {
+            this.goods_name = goods_name;
+        }
 
-    public void setGoods_price(double goods_price) {
-        this.goods_price = goods_price;
-        this.sum_price = goods_price * goods_amount;
-    }
+        public void setGoods_price(double goods_price) {
+            this.goods_price = goods_price;
+            this.sum_price = goods_price * goods_amount;
+        }
 
-    public void setGoods_amount(int goods_amount) {
-        this.goods_amount = goods_amount;
-        this.sum_price = goods_price * goods_amount;
-    }
+        public void setGoods_amount(int goods_amount) {
+            this.goods_amount = goods_amount;
+            this.sum_price = goods_price * goods_amount;
+        }
 
-    @Override
-    public String toString() {
-        return "Data{" +
-                "goods_id='" + goods_id + '\'' +
-                ", goods_name='" + goods_name + '\'' +
-                ", goods_price=" + goods_price +
-                ", goods_amount=" + goods_amount +
-                ", sum_price=" + sum_price +
-                '}';
-    }
-}
-
-/**
- * 自定义“数量”单元格
- */
-class AmountCell extends TableCell<Data, Number> {
-
-    public AmountCell() {
-
-    }
-
-    //设置单元格样式
-    @Override
-    protected void updateItem(Number item, boolean empty) {
-
-        super.updateItem(item, empty);
-
-        if (!empty && item != null) {
-
-            HBox hBox = new HBox();
-            Button btn_add = new Button("+");
-            Button btn_reduce = new Button("-");
-            TextField tf_number = new TextField(item.toString());
-            //设置初始尺寸
-            btn_add.setPrefWidth(35);
-            btn_reduce.setPrefWidth(35);
-            tf_number.setPrefWidth(50);
-            //设置最小尺寸
-            btn_add.setMinWidth(35);
-            btn_reduce.setMinWidth(35);
-            tf_number.setMinWidth(50);
-
-            HBox.setHgrow(tf_number, Priority.ALWAYS);
-
-            hBox.getChildren().addAll(btn_add, tf_number, btn_reduce);
-            hBox.setSpacing(10);
-
-            ObservableList<Data> obList = getTableView().getItems(); //获取表格源数据
-            Data bean = obList.get(getIndex());
-
-            //设置按钮监听
-            //加一
-            btn_add.setOnAction(event -> {
-                int amount = Integer.parseInt(tf_number.getText()) + 1;
-                tf_number.setText(String.valueOf(amount));
-            });
-            //减一
-            btn_reduce.setOnAction(event -> {
-                int amount = Integer.parseInt(tf_number.getText()) - 1;
-                if (amount > 0) {
-                    tf_number.setText(String.valueOf(amount));
-                }
-            });
-            //文本框变化监听
-            tf_number.textProperty().addListener((observable, oldValue, newValue) -> {
-                String pattern = "^\\d+$";
-                boolean isNumber = Pattern.matches(pattern, newValue); //判断是否为正整数
-                if (isNumber) {
-                    bean.setGoods_amount(Integer.parseInt(newValue));
-                    getTableView().refresh();
-                } else {
-                    tf_number.setText(oldValue);
-                }
-            });
-
-            this.setGraphic(hBox);
+        @Override
+        public String toString() {
+            return "Data{" +
+                    "goods_id='" + goods_id + '\'' +
+                    ", goods_name='" + goods_name + '\'' +
+                    ", goods_price=" + goods_price +
+                    ", goods_amount=" + goods_amount +
+                    ", sum_price=" + sum_price +
+                    '}';
         }
     }
+
+    /**
+     * 自定义“数量”单元格
+     */
+    static class AmountCell extends TableCell<PackageContentEditTable.Data, Number> {
+
+        public AmountCell() {
+        }
+
+        //设置单元格样式
+        @Override
+        protected void updateItem(Number item, boolean empty) {
+
+            super.updateItem(item, empty);
+
+            if (!empty && item != null) {
+
+                HBox hBox = new HBox();
+                Button btn_add = new Button("+");
+                Button btn_reduce = new Button("-");
+                TextField tf_number = new TextField(item.toString());
+                //设置初始尺寸
+                btn_add.setPrefWidth(35);
+                btn_reduce.setPrefWidth(35);
+                tf_number.setPrefWidth(50);
+                //设置最小尺寸
+                btn_add.setMinWidth(35);
+                btn_reduce.setMinWidth(35);
+                tf_number.setMinWidth(50);
+
+                HBox.setHgrow(tf_number, Priority.ALWAYS);
+
+                hBox.getChildren().addAll(btn_add, tf_number, btn_reduce);
+                hBox.setSpacing(10);
+
+                ObservableList<PackageContentEditTable.Data> obList = getTableView().getItems(); //获取表格源数据
+                PackageContentEditTable.Data bean = obList.get(getIndex());
+
+                //设置按钮监听
+                //加一
+                btn_add.setOnAction(event -> {
+                    int amount = Integer.parseInt(tf_number.getText()) + 1;
+                    tf_number.setText(String.valueOf(amount));
+                });
+                //减一
+                btn_reduce.setOnAction(event -> {
+                    int amount = Integer.parseInt(tf_number.getText()) - 1;
+                    if (amount > 0) {
+                        tf_number.setText(String.valueOf(amount));
+                    }
+                });
+                //文本框变化监听
+                tf_number.textProperty().addListener((observable, oldValue, newValue) -> {
+                    String pattern = "^\\d+$";
+                    boolean isNumber = Pattern.matches(pattern, newValue); //判断是否为正整数
+                    if (isNumber) {
+                        bean.setGoods_amount(Integer.parseInt(newValue));
+                        getTableView().refresh();
+                    } else {
+                        tf_number.setText(oldValue);
+                    }
+                });
+
+                this.setGraphic(hBox);
+            }
+        }
+    }
+
+
 }
+
+
 
 

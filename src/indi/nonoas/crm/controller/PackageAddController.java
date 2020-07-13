@@ -19,46 +19,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class PackageAddController implements Initializable {
-
-    private final PackageContentEditTable pkgGoodsTable = new PackageContentEditTable();    //套餐内商品信息表
+public class PackageAddController extends PackageController {
 
     private Tab parentTab;  //当前tab的引用
-    @FXML
-    private Button btn_upload;    //上传照片按钮
-
-    @FXML
-    private TextField tf_other;
-
-    @FXML
-    private CheckBox chc_isClose;
-
-    @FXML
-    private HBox hBox_root;
-
-    @FXML
-    private TextField tf_money;
-
-    @FXML
-    private TextField tf_name;
-
-    @FXML
-    private ScrollPane sp_goods;
-
-    @FXML
-    private TextField tf_id;
-
-    @FXML
-    private TextField tf_integral;
-
-    @FXML
-    private TextField tf_min_discount;
-
-    @FXML
-    private ImageView img_photo;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    protected void initView() {
         sp_goods.setContent(pkgGoodsTable);
     }
 
@@ -118,65 +84,6 @@ public class PackageAddController implements Initializable {
         }
     }
 
-    /**
-     * 添加商品
-     */
-    @FXML
-    private void addGoods() {
-        //添加套餐项目的商品
-        GoodsSelectDialog dialog = new GoodsSelectDialog();
-        dialog.showAndWait();
-        ObservableList<GoodsBean> beans = dialog.getSelectGoods();
-        if (beans != null && beans.size() != 0) {
-            for (GoodsBean goodsBean : beans) {
-                PackageContentBean packageContentBean = new PackageContentBean();
-                packageContentBean.setPkg_id(tf_id.getText());
-                packageContentBean.setGoods_id(goodsBean.getId());
-                packageContentBean.setGoods_amount(1);
-                pkgGoodsTable.addBean(packageContentBean);
-            }
-        }
-    }
-
-    /**
-     * 删除商品
-     */
-    @FXML
-    private void deleteGoods() {
-        pkgGoodsTable.removeData(pkgGoodsTable.getSelectedData());
-    }
-
-    /**
-     * 清空商品
-     */
-    @FXML
-    private void clearGoods() {
-        pkgGoodsTable.clearData();
-    }
-
-    /**
-     * 用于提交时候检查是否有未填选项
-     *
-     * @return 有则返回true，没有则返回false
-     */
-    private boolean hasEmpty() {
-
-        if (tf_id.getText().equals("")) {
-            new MyAlert(Alert.AlertType.WARNING, "项目编号不能为空！").show();
-            return true;
-        } else if (tf_name.getText().equals("")) {
-            new MyAlert(Alert.AlertType.WARNING, "项目名称不能为空！").show();
-            return true;
-        } else if (tf_money.getText().equals("")) {
-            new MyAlert(Alert.AlertType.WARNING, "套餐售价不能为空！").show();
-            return true;
-        } else if (tf_integral.getText().equals("")) {
-            new MyAlert(Alert.AlertType.WARNING, "套餐积分不能为空！").show();
-            return true;
-        }
-        return false;
-
-    }
 
     /**
      * 传递当前tab的引用

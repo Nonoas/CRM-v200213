@@ -93,7 +93,7 @@ public class GoodsModifyController implements Initializable {
         goodsBean.setType(type);
         goodsBean.setQuantity(quantity);
         goodsBean.setBase_unit(unit);
-        goodsBean.setPurchas_price(purcPrice);
+        goodsBean.setPurchase_price(purcPrice);
         goodsBean.setMin_discount(minDiscount);
         goodsBean.setDeduction_rate(commissionRate);
         goodsBean.setDeduction(commission);
@@ -136,7 +136,7 @@ public class GoodsModifyController implements Initializable {
         String type = goodsBean.getType();
         double quantity = goodsBean.getQuantity();
         String unit = goodsBean.getBase_unit();
-        double purcPrice = goodsBean.getPurchas_price();
+        double purcPrice = goodsBean.getPurchase_price();
         double minDiscount = goodsBean.getMin_discount();
         double commissionRate = goodsBean.getDeduction_rate();
         double commission = goodsBean.getDeduction();
