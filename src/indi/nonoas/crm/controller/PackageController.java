@@ -17,10 +17,16 @@ import java.util.ResourceBundle;
 
 public abstract class PackageController implements Initializable {
 
+    /**
+     * 商品列表表格
+     */
     protected PackageContentEditTable pkgGoodsTable = new PackageContentEditTable();
 
+    /**
+     * 上传按钮
+     */
     @FXML
-    protected Button btn_upload;    //上传照片按钮
+    protected Button btn_upload;
 
     @FXML
     protected TextField tf_other;
@@ -122,6 +128,5 @@ public abstract class PackageController implements Initializable {
         return false;
 
     }
-
 
 }

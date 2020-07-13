@@ -74,49 +74,11 @@ public class PackageModifyController extends PackageController {
         }
     }
 
-
-
     /**
      * 传递当前tab的引用
      */
     public void setPane(Tab tab) {
         this.parentTab = tab;
-    }
-
-    /**
-     * 添加商品
-     */
-    @FXML
-    private void addGoods() {
-        //添加套餐项目的商品
-        GoodsSelectDialog dialog = new GoodsSelectDialog();
-        dialog.showAndWait();
-        ObservableList<GoodsBean> beans = dialog.getSelectGoods();
-        if (beans != null && beans.size() != 0) {
-            for (GoodsBean goodsBean : beans) {
-                PackageContentBean packageContentBean = new PackageContentBean();
-                packageContentBean.setPkg_id(tf_id.getText());
-                packageContentBean.setGoods_id(goodsBean.getId());
-                packageContentBean.setGoods_amount(1);
-                pkgGoodsTable.addBean(packageContentBean);
-            }
-        }
-    }
-
-    /**
-     * 删除商品
-     */
-    @FXML
-    private void deleteGoods() {
-        pkgGoodsTable.removeData(pkgGoodsTable.getSelectedData());
-    }
-
-    /**
-     * 清空商品
-     */
-    @FXML
-    private void clearGoods() {
-        pkgGoodsTable.clearData();
     }
 
     /**
