@@ -143,7 +143,8 @@ public abstract class MyOrmUtil<T> {
 
     /**
      * 执行通用SQL语句
-     * @param sql SQL语句
+     *
+     * @param sql    SQL语句
      * @param params 占位符参数
      * @return 执行成功返回true，否则返回false
      * @throws SQLException SQL异常

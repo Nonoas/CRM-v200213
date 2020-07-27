@@ -23,10 +23,17 @@ public class PackageTable extends TableView<PackageBean> {
      * 数据源
      */
     private final ObservableList<PackageBean> obList = FXCollections.observableArrayList();
+
+    /**
+     * 列集合
+     */
+    private final ObservableList<TableColumn<PackageBean, ?>> colList = getColumns();
+
     /**
      * 当前选中数据
      */
     private PackageBean selectedBean;
+
     /**
      * 绑定的套餐内容表格
      */
@@ -41,6 +48,8 @@ public class PackageTable extends TableView<PackageBean> {
     private final TableColumn<PackageBean, Number> item_integral_cost = new TableColumn<>("积分消费");
 
     private final TableColumn<PackageBean, Number> item_min_discount = new TableColumn<>("最低折扣");
+
+    private final TableColumn<PackageBean, String> item_type = new TableColumn<>("项目类型");
 
     private final TableColumn<PackageBean, String> item_other = new TableColumn<>("备注信息");
 
@@ -59,7 +68,7 @@ public class PackageTable extends TableView<PackageBean> {
     ChangeListener<PackageBean> cl_select = (observable, oldValue, newValue) -> {
         System.out.println("项目信息表格选中：" + newValue);
         selectedBean = newValue;
-        if(selectedBean!=null){
+        if (selectedBean != null) {
             packageContentTable.showAllInfos(selectedBean.getId()); //更新选中表格的内容
         }
     };
@@ -78,15 +87,17 @@ public class PackageTable extends TableView<PackageBean> {
         });
         item_integral_cost.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getIntegral_cost()));
         item_min_discount.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getMin_discount()));
+        item_type.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getType()));
 
         item_other.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getOther()));
 
-        getColumns().add(item_id);
-        getColumns().add(item_name);
-        getColumns().add(item_money_cost);
-        getColumns().add(item_integral_cost);
-        getColumns().add(item_min_discount);
-        getColumns().add(item_other);
+        colList.add(item_id);
+        colList.add(item_name);
+        colList.add(item_money_cost);
+        colList.add(item_integral_cost);
+        colList.add(item_min_discount);
+        colList.add(item_type);
+        colList.add(item_other);
 
     }
 
