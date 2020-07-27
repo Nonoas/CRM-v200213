@@ -73,7 +73,7 @@ public class GoodsManageController implements Initializable {
 
         // 初始化“商品分类”下拉列表框
         LinkedList<String> goodsTypes = new GoodsTypeDao().selectAllNames();
-        cb_type.getItems().add("所有类型");
+        cb_type.getItems().addAll("所有类型", "产品类", "服务类");
         if (goodsTypes != null) {
             for (String str : goodsTypes)
                 cb_type.getItems().add(str);
@@ -114,9 +114,9 @@ public class GoodsManageController implements Initializable {
     @FXML    //修改商品信息
     private void updateGoods() {
 
-        GoodsBean bean=table.getSelectedData();
+        GoodsBean bean = table.getSelectedData();
 
-        if(bean==null){
+        if (bean == null) {
             new MyAlert(AlertType.INFORMATION, "请先选择一条数据！").show();
             return;
         }
@@ -171,8 +171,9 @@ public class GoodsManageController implements Initializable {
         }
     }
 
-
-    ///////////////////  套餐项目 /////////////////////////
+    //===========================================================================
+    //                            套餐项目
+    //===========================================================================
 
     private final PackageContentTable pkgContTable = new PackageContentTable(); //套餐商品表格
 
