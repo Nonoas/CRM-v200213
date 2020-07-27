@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
  */
 public class StaffManagePane extends Pane {
     public StaffManagePane() {
-        URL url = getClass().getResource("/fxml/staffmanage.fxml");
+        URL url = getClass().getResource("/fxml/staff_manage.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(url);
         fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());

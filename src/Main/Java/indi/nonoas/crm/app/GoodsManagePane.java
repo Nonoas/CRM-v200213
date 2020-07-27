@@ -15,7 +15,7 @@ import javafx.scene.layout.Pane;
  */
 public class GoodsManagePane extends Pane {
     public GoodsManagePane() {
-        URL url = getClass().getResource("/fxml/goodsmanage.fxml");
+        URL url = getClass().getResource("/fxml/goods_manage.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(url);
         fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());

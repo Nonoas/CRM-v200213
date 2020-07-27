@@ -18,7 +18,7 @@ public class VipManagePane extends Pane {
 
 	public VipManagePane() {
 		
-		URL url = getClass().getResource("/fxml/vipmanage.fxml");
+		URL url = getClass().getResource("/fxml/vip_manage.fxml");
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		fxmlLoader.setLocation(url);
 		fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
