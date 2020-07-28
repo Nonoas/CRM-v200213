@@ -1,30 +1,30 @@
-package indi.nonoas.crm.app;
+package indi.nonoas.crm.app.goods;
 
 import java.io.IOException;
 import java.net.URL;
 
-import indi.nonoas.crm.bean.VipBean;
-import indi.nonoas.crm.controller.VipModifyController;
+import indi.nonoas.crm.controller.goods.PackageAddController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.Pane;
 
-public class VipModifyTab extends Tab {
-	
-	private VipBean bean;
-	
-	public VipModifyTab(VipBean bean) {
-		this("修改会员信息",bean);
+/**
+ * 项目添加面板
+ * @author Nonoas
+ *
+ */
+public class PackageAddTab extends Tab{
+	public PackageAddTab() {
+		this("添加项目");
 	}
-	public VipModifyTab(String str,VipBean bean) {
+	public PackageAddTab(String str) {
 		super(str);
-		this.bean=bean;
 		initView();
 	}
 
 	private void initView() {
-		URL url = getClass().getResource("/fxml/vip_modify.fxml");
+		URL url = getClass().getResource("/fxml/package_add.fxml");
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		fxmlLoader.setLocation(url);
 		fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
@@ -35,9 +35,7 @@ public class VipModifyTab extends Tab {
 			e.printStackTrace();
 		}
 		setClosable(true);
-		VipModifyController contronller=fxmlLoader.getController();
+		PackageAddController contronller=fxmlLoader.getController();
 		contronller.setPane(this);
-		contronller.setBean(this.bean);
 	}
-
 }

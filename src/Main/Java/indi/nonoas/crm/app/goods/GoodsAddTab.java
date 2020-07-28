@@ -1,26 +1,27 @@
-package indi.nonoas.crm.app;
+package indi.nonoas.crm.app.goods;
 
 import java.io.IOException;
 import java.net.URL;
 
-import indi.nonoas.crm.controller.VipAddController;
+import indi.nonoas.crm.controller.goods.GoodsAddController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.Pane;
 
-public class VipAddTab extends Tab {
+public class GoodsAddTab extends Tab {
 	
-	public VipAddTab() {
-		this("添加会员");
+	public GoodsAddTab() {
+		this("添加商品");
 	}
-	public VipAddTab(String str) {
+
+	private GoodsAddTab(String str) {
 		super(str);
 		initView();
 	}
 
 	private void initView() {
-		URL url = getClass().getResource("/fxml/vip_add.fxml");
+		URL url = getClass().getResource("/fxml/goods_add.fxml");
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		fxmlLoader.setLocation(url);
 		fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
@@ -31,7 +32,7 @@ public class VipAddTab extends Tab {
 			e.printStackTrace();
 		}
 		setClosable(true);
-		VipAddController contronller=fxmlLoader.getController();
+		GoodsAddController contronller=fxmlLoader.getController();
 		contronller.setPane(this);
 	}
 

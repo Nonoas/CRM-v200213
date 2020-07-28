@@ -1,9 +1,9 @@
-package indi.nonoas.crm.controller;
+package indi.nonoas.crm.controller.goods;
 
-import indi.nonoas.crm.app.GoodsAddTab;
-import indi.nonoas.crm.app.GoodsModifyTab;
-import indi.nonoas.crm.app.PackageAddTab;
-import indi.nonoas.crm.app.PackageModifyTab;
+import indi.nonoas.crm.app.goods.GoodsAddTab;
+import indi.nonoas.crm.app.goods.GoodsModifyTab;
+import indi.nonoas.crm.app.goods.PackageAddTab;
+import indi.nonoas.crm.app.goods.PackageModifyTab;
 import indi.nonoas.crm.bean.GoodsBean;
 import indi.nonoas.crm.bean.PackageBean;
 import indi.nonoas.crm.dao.GoodsDao;

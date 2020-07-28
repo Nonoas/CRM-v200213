@@ -1,4 +1,4 @@
-package indi.nonoas.crm.controller;
+package indi.nonoas.crm.controller.goods;
 
 import java.net.URL;
 import java.util.ResourceBundle;

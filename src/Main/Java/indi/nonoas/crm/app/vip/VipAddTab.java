@@ -1,30 +1,26 @@
-package indi.nonoas.crm.app;
+package indi.nonoas.crm.app.vip;
 
 import java.io.IOException;
 import java.net.URL;
 
-import indi.nonoas.crm.controller.PackageAddController;
+import indi.nonoas.crm.controller.vip.VipAddController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.Pane;
 
-/**
- * 项目添加面板
- * @author Nonoas
- *
- */
-public class PackageAddTab extends Tab{
-	public PackageAddTab() {
-		this("添加项目");
+public class VipAddTab extends Tab {
+	
+	public VipAddTab() {
+		this("添加会员");
 	}
-	public PackageAddTab(String str) {
+	public VipAddTab(String str) {
 		super(str);
 		initView();
 	}
 
 	private void initView() {
-		URL url = getClass().getResource("/fxml/package_add.fxml");
+		URL url = getClass().getResource("/fxml/vip_add.fxml");
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		fxmlLoader.setLocation(url);
 		fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
@@ -35,7 +31,8 @@ public class PackageAddTab extends Tab{
 			e.printStackTrace();
 		}
 		setClosable(true);
-		PackageAddController contronller=fxmlLoader.getController();
+		VipAddController contronller=fxmlLoader.getController();
 		contronller.setPane(this);
 	}
+
 }

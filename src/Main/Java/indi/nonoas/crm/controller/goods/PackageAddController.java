@@ -1,4 +1,4 @@
-package indi.nonoas.crm.controller;
+package indi.nonoas.crm.controller.goods;
 
 import indi.nonoas.crm.bean.PackageBean;
 import indi.nonoas.crm.dao.PackageContentDao;

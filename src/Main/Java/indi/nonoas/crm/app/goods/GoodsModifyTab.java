@@ -1,35 +1,35 @@
-package indi.nonoas.crm.app;
+package indi.nonoas.crm.app.goods;
 
 import java.io.IOException;
 import java.net.URL;
 
-import indi.nonoas.crm.bean.PackageBean;
-import indi.nonoas.crm.controller.PackageModifyController;
+import indi.nonoas.crm.bean.GoodsBean;
+import indi.nonoas.crm.controller.goods.GoodsModifyController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.Pane;
 
 /**
- * 项目信息修改面板
+ * 修改商品界面
  * @author Nonoas
  *
  */
-public class PackageModifyTab extends Tab{
+public class GoodsModifyTab extends Tab {
 
-	private PackageBean packageBean;
-
-	public PackageModifyTab(PackageBean packageBean) {
-		this("修改项目信息",packageBean);
+	private final GoodsBean bean;
+	
+	public GoodsModifyTab(GoodsBean bean) {
+		this("修改商品信息",bean);
 	}
-	public PackageModifyTab(String str, PackageBean packageBean) {
+	public GoodsModifyTab(String str,GoodsBean bean) {
 		super(str);
-		this.packageBean=packageBean;
+		this.bean=bean;
 		initView();
 	}
 
 	private void initView() {
-		URL url = getClass().getResource("/fxml/package_modify.fxml");
+		URL url = getClass().getResource("/fxml/goods_modify.fxml");
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		fxmlLoader.setLocation(url);
 		fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
@@ -40,8 +40,8 @@ public class PackageModifyTab extends Tab{
 			e.printStackTrace();
 		}
 		setClosable(true);
-		PackageModifyController controller=fxmlLoader.getController();
+		GoodsModifyController controller=fxmlLoader.getController();
 		controller.setPane(this);
-		controller.setBean(packageBean);
+		controller.setBean(bean);
 	}
 }

@@ -1,4 +1,4 @@
-package indi.nonoas.crm.app;
+package indi.nonoas.crm.app.vip;
 
 import java.io.IOException;
 import java.net.URL;
