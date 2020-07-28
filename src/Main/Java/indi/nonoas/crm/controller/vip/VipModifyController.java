@@ -115,7 +115,7 @@ public class VipModifyController implements Initializable {
     }
 
     @FXML
-    private void selectPreferrer() {
+    private void selectPreferred() {
 
     }
 
@@ -213,9 +213,9 @@ public class VipModifyController implements Initializable {
         String sex = bean.getSex();
 
         ObservableList<Toggle> toggles = tGroup.getToggles();
-        for (Toggle rbtn : toggles) {
-            if (sex != null && rbtn.getUserData().equals(sex)) // 设置显示的性别
-                rbtn.setSelected(true);
+        for (Toggle rBtn : toggles) {
+            if (sex != null && rBtn.getUserData().equals(sex)) // 设置显示的性别
+                rBtn.setSelected(true);
         }
     }
 

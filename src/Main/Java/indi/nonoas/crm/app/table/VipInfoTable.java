@@ -1,4 +1,4 @@
-package indi.nonoas.crm.table;
+package indi.nonoas.crm.app.table;
 
 import java.util.ArrayList;
 
@@ -12,13 +12,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.apache.log4j.Logger;
 
 /**
  * 会员信息的TableView
  *
  * @author Nonoas
  */
-public  class VipInfoTable extends TableView<VipBean> {
+public class VipInfoTable extends TableView<VipBean> {
+
+    private Logger logger = Logger.getLogger(VipInfoTable.class);
 
     /**
      * 数据源
@@ -71,7 +74,7 @@ public  class VipInfoTable extends TableView<VipBean> {
         setItems(obList);
         showAllInfos();
         ChangeListener<VipBean> cl_select = (observable, oldValue, newValue) -> {
-            System.out.println(newValue);
+            logger.debug(newValue);
             selectedBean = newValue;
         };
         getSelectionModel().selectedItemProperty().addListener(cl_select);

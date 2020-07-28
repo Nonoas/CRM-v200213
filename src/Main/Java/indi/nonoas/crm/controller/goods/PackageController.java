@@ -4,7 +4,7 @@ import indi.nonoas.crm.bean.GoodsBean;
 import indi.nonoas.crm.bean.PackageContentBean;
 import indi.nonoas.crm.view.dialog.GoodsSelectDialog;
 import indi.nonoas.crm.view.alert.MyAlert;
-import indi.nonoas.crm.table.PackageContentEditTable;
+import indi.nonoas.crm.app.table.PackageContentEditTable;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

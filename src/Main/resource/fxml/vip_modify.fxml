@@ -90,7 +90,7 @@
                      <HBox.margin>
                         <Insets right="-5.0" />
                      </HBox.margin></TextField>
-                  <Button mnemonicParsing="false" onAction="#selectPreferrer" text="选择推荐人" />
+                  <Button mnemonicParsing="false" onAction="#selectPreferred" text="选择推荐人" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1">

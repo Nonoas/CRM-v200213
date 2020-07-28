@@ -22,7 +22,7 @@ import javafx.scene.layout.HBox;
 
 public class GoodsAddController implements Initializable {
 	
-	private GoodsDao goodsDao = GoodsDao.getInstance();
+	private final GoodsDao goodsDao = GoodsDao.getInstance();
 
 	private Tab parentTab;
 	@FXML
