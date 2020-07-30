@@ -33,8 +33,12 @@
     -fx-background-color: #62c292;
 }
 
+.split-pane{
+    -fx-background-color: white;
+}
+
 /********TabPane**********/
-.tab-header-background{
+.tab-header-background {
     -fx-background-color: #eee;
 }
 
@@ -86,16 +90,16 @@
 
 /****************TableView*****************/
 
-.column-header-background .column-header{
+.column-header-background .column-header {
     -fx-background-color: #eee;
     -fx-border-color: #ddd;
 }
 
-.column-header-background  .filler{
+.column-header-background .filler {
     -fx-background-color: #eee;
 }
 
-.column-header-background .show-hide-columns-button{
+.column-header-background .show-hide-columns-button {
     -fx-background-color: #eee;
 }
 

@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
@@ -17,135 +18,127 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<TabPane fx:id="tp_rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-         prefHeight="800.0" prefWidth="1280.0" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinWidth="80.0"
-         xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-         fx:controller="indi.nonoas.crm.controller.ConsumeController">
+<TabPane fx:id="tp_rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="indi.nonoas.crm.controller.ConsumeController">
     <tabs>
         <Tab closable="false" text="会员消费">
             <content>
-                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="717.0"
-                      prefWidth="1133.0" BorderPane.alignment="CENTER">
+                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="717.0" prefWidth="1133.0" BorderPane.alignment="CENTER">
                     <children>
-                        <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="60.0" prefWidth="1180.0"
-                              spacing="10.0">
+                        <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="60.0" prefWidth="1180.0" spacing="10.0">
                             <children>
                                 <Label text="输入会员编号或姓名">
                                     <HBox.margin>
-                                        <Insets/>
+                                        <Insets />
                                     </HBox.margin>
                                 </Label>
                                 <TextField fx:id="tf_find" prefHeight="30.0" prefWidth="213.0">
                                     <HBox.margin>
-                                        <Insets/>
+                                        <Insets />
                                     </HBox.margin>
                                 </TextField>
                                 <Button mnemonicParsing="false" onAction="#inquireVIP" text="查询">
                                     <HBox.margin>
-                                        <Insets/>
+                                        <Insets />
                                     </HBox.margin>
                                 </Button>
                                 <Button mnemonicParsing="false" onAction="#clearInfo" text="清空">
                                     <HBox.margin>
-                                        <Insets/>
+                                        <Insets />
                                     </HBox.margin>
                                 </Button>
                                 <Button mnemonicParsing="false" onAction="#addVip" text="新增会员">
                                     <HBox.margin>
-                                        <Insets left="50.0"/>
+                                        <Insets left="50.0" />
                                     </HBox.margin>
                                 </Button>
                             </children>
                             <VBox.margin>
-                                <Insets/>
+                                <Insets />
                             </VBox.margin>
                         </HBox>
-                        <Separator prefWidth="200.0"/>
+                        <Separator prefWidth="200.0" />
                         <HBox prefHeight="86.0" prefWidth="928.0">
                             <children>
-                                <GridPane hgap="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0"
-                                          prefWidth="942.0" vgap="5.0">
+                                <GridPane hgap="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="1036.0" vgap="5.0">
                                     <children>
-                                        <Label text="会员卡号:" wrapText="true" GridPane.rowIndex="1"/>
-                                        <Label fx:id="lb_id" text="--" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                                        <Label text="会员姓名:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-                                        <Label fx:id="lb_name" text="--" GridPane.columnIndex="3"
-                                               GridPane.rowIndex="1"/>
-                                        <Label minWidth="-Infinity" text="会员卡的等级:" GridPane.columnIndex="4"
-                                               GridPane.rowIndex="1"/>
-                                        <Label fx:id="lb_cardLevel" prefHeight="20.0" prefWidth="78.0" text="--"
-                                               GridPane.columnIndex="5" GridPane.rowIndex="1"/>
-                                        <Label GridPane.columnIndex="7" GridPane.rowIndex="1"/>
-                                        <Label text="优惠的方式:" GridPane.columnIndex="6" GridPane.rowIndex="1"/>
-                                        <Label fx:id="lb_discountType" text="--" GridPane.columnIndex="7"
-                                               GridPane.rowIndex="1"/>
-                                        <Label text="会员积分:" wrapText="true" GridPane.rowIndex="2"/>
-                                        <Label fx:id="lb_integral" text="--" GridPane.columnIndex="1"
-                                               GridPane.rowIndex="2"/>
-                                        <Label text="累计消费:" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
-                                        <Label fx:id="lb_cumulative" text="--" GridPane.columnIndex="3"
-                                               GridPane.rowIndex="2"/>
-                                        <Label minWidth="-Infinity" text="卡内剩余次数:" GridPane.columnIndex="4"
-                                               GridPane.rowIndex="2"/>
-                                        <Label fx:id="lb_frequency" text="--" GridPane.columnIndex="5"
-                                               GridPane.rowIndex="2"/>
-                                        <Label text="会员卡状态:" GridPane.columnIndex="6" GridPane.rowIndex="2"/>
-                                        <Label fx:id="lb_cardState" text="--" GridPane.columnIndex="7"
-                                               GridPane.rowIndex="2"/>
+                                        <Label text="会员卡号:" wrapText="true" GridPane.rowIndex="1" />
+                                        <Label fx:id="lb_id" text="--" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label text="会员姓名:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                        <Label fx:id="lb_name" text="--" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                        <Label minWidth="-Infinity" text="会员卡等级:" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                        <Label fx:id="lb_cardLevel" prefHeight="20.0" prefWidth="78.0" text="--" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                                        <Label text="优惠方式:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                        <Label fx:id="lb_discountType" text="--" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                        <Label text="会员积分:" wrapText="true" GridPane.rowIndex="2" />
+                                        <Label fx:id="lb_integral" text="--" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                        <Label text="会员卡状态:" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                        <Label fx:id="lb_cardState" text="--" GridPane.columnIndex="5" GridPane.rowIndex="2" />
                                     </children>
                                     <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="156.0" minWidth="-Infinity"
-                                                           prefWidth="80.0"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.0" minWidth="160.0"
-                                                           prefWidth="160.0"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="382.0" minWidth="-Infinity"
-                                                           prefWidth="80.0"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="552.0" minWidth="160.0"
-                                                           prefWidth="160.0"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="599.0" minWidth="-Infinity"
-                                                           prefWidth="110.0"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="632.0" minWidth="160.0"
-                                                           prefWidth="160.0"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308"
-                                                           minWidth="-Infinity" prefWidth="91.0"/>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308"
-                                                           minWidth="160.0" prefWidth="179.0"/>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="156.0" minWidth="-Infinity" prefWidth="80.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.0" minWidth="160.0" prefWidth="160.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="382.0" minWidth="-Infinity" prefWidth="106.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="552.0" minWidth="134.0" prefWidth="134.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="599.0" minWidth="-Infinity" prefWidth="110.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="632.0" minWidth="160.0" prefWidth="160.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="91.0" />
                                     </columnConstraints>
                                     <rowConstraints>
-                                        <RowConstraints/>
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                        <RowConstraints />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                 </GridPane>
                             </children>
                         </HBox>
-                        <Separator prefHeight="20.0" prefWidth="1133.0"/>
-                        <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="567.0"
-                                 prefWidth="1093.0" tabMinWidth="80.0" VBox.vgrow="ALWAYS">
+                        <Separator prefHeight="20.0" prefWidth="1133.0" />
+                        <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="567.0" prefWidth="1093.0" tabMinWidth="80.0" VBox.vgrow="ALWAYS">
                             <tabs>
                                 <Tab closable="false" text="普通消费">
-                                    <content>
-                                        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                                            <children>
-                                                <ScrollPane fx:id="sp_general" fitToHeight="true" fitToWidth="true"
-                                                            maxHeight="1.7976931348623157E308"
-                                                            maxWidth="1.7976931348623157E308" prefHeight="171.0"
-                                                            prefViewportHeight="491.0" prefViewportWidth="1093.0"
-                                                            prefWidth="1093.0" VBox.vgrow="ALWAYS"/>
-                                            </children>
-                                        </VBox>
-                                    </content>
+                           <content>
+                              <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
+                                 <items>
+                                    <BorderPane fx:id="pt_borderPane" prefHeight="358.0" prefWidth="616.0">
+                                       <top>
+                                          <GridPane prefHeight="40.0" prefWidth="616.0" BorderPane.alignment="CENTER">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <Label fx:id="pt_lb_order_num" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="309.0" text="订单号" />
+                                                <Label fx:id="pt_lb_order_date" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="日期" GridPane.columnIndex="1" />
+                                             </children>
+                                          </GridPane>
+                                       </top>
+                                       <bottom>
+                                          <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="付款" BorderPane.alignment="CENTER" />
+                                       </bottom>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </BorderPane>
+                                    <ScrollPane fx:id="pt_sp_goods" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" />
+                                 </items>
+                              </SplitPane>
+                           </content>
                                 </Tab>
                                 <Tab closable="false" text="计次消费">
                                     <content>
-                                        <TextArea prefHeight="200.0" prefWidth="200.0"/>
+                                        <TextArea prefHeight="200.0" prefWidth="200.0" />
                                     </content>
                                 </Tab>
                             </tabs>
                         </TabPane>
                     </children>
                     <padding>
-                        <Insets left="20.0" right="20.0"/>
+                        <Insets bottom="10.0" left="20.0" right="20.0" />
                     </padding>
                 </VBox>
             </content>
@@ -156,36 +149,33 @@
                     <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="1133.0" spacing="10.0">
                             <children>
-                                <Label text="会员卡号或姓名:"/>
+                                <Label text="会员卡号或姓名:" />
                                 <TextField fx:id="tf_findInfo" prefHeight="30.0" prefWidth="179.0">
                                     <HBox.margin>
-                                        <Insets right="20.0"/>
+                                        <Insets right="20.0" />
                                     </HBox.margin>
                                 </TextField>
-                                <Label text="会员等级:"/>
+                                <Label text="会员等级:" />
                                 <ComboBox fx:id="cb_disType" visibleRowCount="5">
                                     <HBox.margin>
-                                        <Insets right="20.0"/>
+                                        <Insets right="20.0" />
                                     </HBox.margin>
                                 </ComboBox>
-                                <Button mnemonicParsing="false" onAction="#inquireVIPInfo" text="查询"/>
+                                <Button mnemonicParsing="false" onAction="#inquireVIPInfo" text="查询" />
                             </children>
                         </HBox>
-                        <Separator prefWidth="200.0"/>
-                        <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="60.0"
-                              prefWidth="200.0" spacing="20.0">
+                        <Separator prefWidth="200.0" />
+                        <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="200.0" spacing="20.0">
                             <children>
-                                <Button mnemonicParsing="false" onAction="#showAll" text="显示全部"/>
-                                <Button mnemonicParsing="false" text="导出信息"/>
-                                <Button mnemonicParsing="false" text="打印信息"/>
+                                <Button mnemonicParsing="false" onAction="#showAll" text="显示全部" />
+                                <Button mnemonicParsing="false" text="导出信息" />
+                                <Button mnemonicParsing="false" text="打印信息" />
                             </children>
                         </HBox>
-                        <ScrollPane fx:id="sp_userInfo" fitToHeight="true" fitToWidth="true"
-                                    maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                                    prefViewportHeight="200.0" prefViewportWidth="1133.0" VBox.vgrow="ALWAYS"/>
+                        <ScrollPane fx:id="sp_userInfo" fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefViewportHeight="200.0" prefViewportWidth="1133.0" VBox.vgrow="ALWAYS" />
                     </children>
                     <padding>
-                        <Insets left="20.0" right="20.0"/>
+                        <Insets left="20.0" right="20.0" />
                     </padding>
                 </VBox>
             </content>

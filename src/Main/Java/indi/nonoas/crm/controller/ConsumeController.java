@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
+import indi.nonoas.crm.app.table.GoodsSelectTable;
+import indi.nonoas.crm.app.table.PackageContentEditTable;
 import indi.nonoas.crm.view.alert.MyAlert;
 import indi.nonoas.crm.app.table.VipInfoTable;
 import indi.nonoas.crm.app.vip.VipAddTab;
@@ -21,6 +23,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 
 public class ConsumeController implements Initializable {
 
@@ -33,11 +37,7 @@ public class ConsumeController implements Initializable {
     @FXML
     private Label lb_discountType;
     @FXML
-    private Label lb_frequency;
-    @FXML
     private Label lb_cardState;
-    @FXML
-    private Label lb_cumulative;
     @FXML
     private Label lb_id;
     @FXML
@@ -73,9 +73,7 @@ public class ConsumeController implements Initializable {
             return;
         VipBean vipBean = vipInfoDao.getInfoByIdOrName(str, str);
         if (vipBean != null) {
-            lb_frequency.setText(String.valueOf(vipBean.getFrequency()));
             lb_cardState.setText("可用");
-            lb_cumulative.setText("￥" + vipBean.getCumulative());
             lb_id.setText(vipBean.getId());
             lb_integral.setText(String.valueOf(vipBean.getIntegral()));
             lb_cardLevel.setText(vipBean.getCard_level());
@@ -111,9 +109,7 @@ public class ConsumeController implements Initializable {
     private void clearInfo() {
         tf_find.setText("");
         lb_discountType.setText("--");
-        lb_frequency.setText("--");
         lb_cardState.setText("--");
-        lb_cumulative.setText("--");
         lb_id.setText("--");
         lb_integral.setText("--");
         lb_cardLevel.setText("--");
@@ -152,9 +148,20 @@ public class ConsumeController implements Initializable {
             cb_disType.getItems().add(str);
         }
         cb_disType.setValue("全部类型");
+        pt_borderPane.setCenter(pkg_edit_table);
+        pt_sp_goods.setContent(goodsSelectTable);
     }
 
-    ////////////////////////商品消费///////////////////////////
+    //===========================================================================
+    //                             普通消费
+    //===========================================================================
 
+    private final PackageContentEditTable pkg_edit_table = new PackageContentEditTable();
+
+    private final GoodsSelectTable goodsSelectTable = new GoodsSelectTable();
+    @FXML
+    private BorderPane pt_borderPane;
+    @FXML
+    private ScrollPane pt_sp_goods;
 
 }

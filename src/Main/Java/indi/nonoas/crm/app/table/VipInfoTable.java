@@ -21,7 +21,7 @@ import org.apache.log4j.Logger;
  */
 public class VipInfoTable extends TableView<VipBean> {
 
-    private Logger logger = Logger.getLogger(VipInfoTable.class);
+    private final Logger logger = Logger.getLogger(VipInfoTable.class);
 
     /**
      * 数据源
@@ -61,7 +61,7 @@ public class VipInfoTable extends TableView<VipBean> {
 
     private final TableColumn<VipBean, Number> item_frequency = new TableColumn<>("剩余次数");
 
-    private final TableColumn<VipBean, String> item_idcard = new TableColumn<>("身份证号码");
+    private final TableColumn<VipBean, String> item_idCard = new TableColumn<>("身份证号码");
 
     private final TableColumn<VipBean, String> item_birthday = new TableColumn<>("出生日期");
 
@@ -101,7 +101,7 @@ public class VipInfoTable extends TableView<VipBean> {
         item_address.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAddress())); // 联系地址
         item_integral.setCellValueFactory(param -> new SimpleIntegerProperty(param.getValue().getIntegral())); // 会员积分
         item_telephone.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTelephone())); // 联系电话
-        item_idcard.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getIdcard())); // 证件号码
+        item_idCard.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getIdcard())); // 证件号码
         item_birthday.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getBirthday())); // 出生日期
         item_career.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getCareer())); // 单位职业
         item_email.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getEmail())); // 邮箱
@@ -119,7 +119,7 @@ public class VipInfoTable extends TableView<VipBean> {
         colList.add(item_address);
         colList.add(item_integral);
         colList.add(item_telephone);
-        colList.add(item_idcard);
+        colList.add(item_idCard);
         colList.add(item_birthday);
         colList.add(item_career);
         colList.add(item_email);
