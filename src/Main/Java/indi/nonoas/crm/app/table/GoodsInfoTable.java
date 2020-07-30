@@ -61,19 +61,19 @@ public class GoodsInfoTable extends TableView<GoodsBean> {
 
         setTableMenuButtonVisible(true);
 
-        item_id.setCellValueFactory(parm -> new SimpleStringProperty(parm.getValue().getId()));
-        item_name.setCellValueFactory(parm -> new SimpleStringProperty(parm.getValue().getName()));
-        item_sell_price.setCellValueFactory(parm -> new SimpleDoubleProperty(parm.getValue().getSell_price()));
-        item_purchase_price.setCellValueFactory(parm -> new SimpleDoubleProperty(parm.getValue().getPurchase_price()));
-        item_quantity.setCellValueFactory(parm -> {
-            double quantity = parm.getValue().getQuantity(); // 数量
-            String unit = parm.getValue().getBase_unit(); // 单位
+        item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getId()));
+        item_name.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName()));
+        item_sell_price.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getSell_price()));
+        item_purchase_price.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getPurchase_price()));
+        item_quantity.setCellValueFactory(param -> {
+            double quantity = param.getValue().getQuantity(); // 数量
+            String unit = param.getValue().getBase_unit(); // 单位
             return new SimpleStringProperty(quantity + " " + unit);
         });
-        item_min_discount.setCellValueFactory(parm -> new SimpleDoubleProperty(parm.getValue().getMin_discount()));
-        item_deduction.setCellValueFactory(parm -> new SimpleDoubleProperty(parm.getValue().getDeduction()));
-        item_deduction_rate.setCellValueFactory(parm -> new SimpleDoubleProperty(parm.getValue().getDeduction_rate()));
-        item_type.setCellValueFactory(parm -> new SimpleStringProperty(parm.getValue().getType()));
+        item_min_discount.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getMin_discount()));
+        item_deduction.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getDeduction()));
+        item_deduction_rate.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getDeduction_rate()));
+        item_type.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getType()));
 
         getColumns().add(item_id);
         getColumns().add(item_name);
@@ -107,7 +107,7 @@ public class GoodsInfoTable extends TableView<GoodsBean> {
     /**
      * 添加数据
      *
-     * @param bean
+     * @param bean 要添加的商品
      */
     public void addBean(GoodsBean bean) {
         obList.add(bean);

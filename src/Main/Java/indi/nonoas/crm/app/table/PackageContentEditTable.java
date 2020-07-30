@@ -45,6 +45,8 @@ public class PackageContentEditTable extends TableView<PackageContentEditTable.D
 
     private final TableColumn<Data, String> item_total = new TableColumn<>("小计");
 
+    private final TableColumn<Data, String> item_op = new TableColumn<>("操作");
+
     public PackageContentEditTable() {
 
         initColumns();
@@ -80,7 +82,11 @@ public class PackageContentEditTable extends TableView<PackageContentEditTable.D
             return new SimpleStringProperty(show);
         });
 
+        item_op.setCellFactory(param -> new DeleteCell());
+
         item_count.setMinWidth(150);
+        item_op.setResizable(false);
+        item_op.setSortable(false);
 
         //添加所有的列
         cols.add(item_id);
@@ -88,6 +94,7 @@ public class PackageContentEditTable extends TableView<PackageContentEditTable.D
         cols.add(item_money_cost);
         cols.add(item_count);
         cols.add(item_total);
+        cols.add(item_op);
 
     }
 
@@ -173,7 +180,6 @@ public class PackageContentEditTable extends TableView<PackageContentEditTable.D
         String name = goodsBean.getName();
         double price = goodsBean.getSell_price();
         int amount = bean.getGoods_amount();
-        double sum = price * amount;
 
         Data data = new Data();
         data.setGoods_id(id);
@@ -324,6 +330,30 @@ public class PackageContentEditTable extends TableView<PackageContentEditTable.D
         }
     }
 
+
+    /**
+     * 自定义操作单元格
+     */
+    static class DeleteCell extends TableCell<PackageContentEditTable.Data, String> {
+
+        @Override
+        protected void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+            if (!empty) {
+                Hyperlink hl_delete = new Hyperlink("删除");
+                hl_delete.setStyle("-fx-text-fill: #cf4813");
+
+                hl_delete.setOnAction(event -> {
+                    PackageContentEditTable tableView = (PackageContentEditTable) getTableView();
+                    ObservableList<Data> items = tableView.getItems();
+                    items.remove(getIndex());
+                    tableView.refresh();
+                });
+
+                this.setGraphic(hl_delete);
+            }
+        }
+    }
 
 }
 
