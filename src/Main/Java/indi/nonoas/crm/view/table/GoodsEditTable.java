@@ -1,6 +1,7 @@
 package indi.nonoas.crm.view.table;
 
-import indi.nonoas.crm.app.pkg.PackageContentEditTable;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -52,7 +53,31 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
     }
 
     protected void initColumns() {
-        setColumnFactory();
+
+        setTableMenuButtonVisible(true); // 显示表格菜单按钮
+
+        item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getGoods_id()));
+        item_name.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getGoods_name()));
+        item_money_cost.setCellValueFactory(param -> {
+            double numMoney = param.getValue().getGoods_price();
+            String show = String.format("￥%.2f", numMoney);
+            return new SimpleStringProperty(show);
+        });
+
+        item_amount.setCellValueFactory(param -> new SimpleIntegerProperty(param.getValue().getGoods_amount()));
+
+        item_total.setCellValueFactory(param -> {
+            String show = String.format("￥%.2f", param.getValue().getSum_price());
+            return new SimpleStringProperty(show);
+        });
+
+        item_amount.setCellFactory(param -> new AmountCell());   //自定义数量单元格
+        item_op.setCellFactory(param -> new DeleteCell());
+
+        item_amount.setMinWidth(150);
+        item_op.setResizable(false);
+        item_op.setSortable(false);
+
         cols.add(item_id);
         cols.add(item_name);
         cols.add(item_money_cost);
@@ -60,11 +85,6 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
         cols.add(item_total);
         cols.add(item_op);
     }
-
-    /**
-     * 设置表格列工厂方法
-     */
-    protected abstract void setColumnFactory();
 
     /**
      * 获取选中的数据
@@ -181,6 +201,17 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
         public void setGoods_amount(int goods_amount) {
             this.goods_amount = goods_amount;
             this.sum_price = goods_price * goods_amount;
+        }
+
+        @Override
+        public String toString() {
+            return "Data{" +
+                    "goods_id='" + goods_id + '\'' +
+                    ", goods_name='" + goods_name + '\'' +
+                    ", goods_price=" + goods_price +
+                    ", goods_amount=" + goods_amount +
+                    ", sum_price=" + sum_price +
+                    '}';
         }
     }
 

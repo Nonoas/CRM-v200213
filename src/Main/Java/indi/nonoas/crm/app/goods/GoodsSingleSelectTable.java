@@ -10,12 +10,12 @@ import javafx.beans.value.ChangeListener;
  */
 public class GoodsSingleSelectTable extends GoodsInfoTable {
 
-    private PackageContentEditTable goodsEditTable;
+    private final GoodsConsumeTable gc_table;
 
-    public GoodsSingleSelectTable(PackageContentEditTable goodsEditTable) {
+    public GoodsSingleSelectTable(GoodsConsumeTable gc_table) {
         super();
 
-        this.goodsEditTable = goodsEditTable;
+        this.gc_table = gc_table;
 
         item_min_discount.setVisible(false);
         item_deduction.setVisible(false);
@@ -23,8 +23,8 @@ public class GoodsSingleSelectTable extends GoodsInfoTable {
         item_purchase_price.setVisible(false);
 
         ChangeListener<GoodsBean> cl_select = (observable, oldValue, newValue) -> {
-            if(newValue!=null){
-//                goodsEditTable.addBean();
+            if (newValue != null) {
+                gc_table.addBean(newValue);
             }
         };
         getSelectionModel().selectedItemProperty().addListener(cl_select);

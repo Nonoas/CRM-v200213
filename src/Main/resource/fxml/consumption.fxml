@@ -141,6 +141,13 @@
                                                             </BorderPane.margin>
                                                         </GridPane>
                                                     </bottom>
+                                       <top>
+                                          <Label style="-fx-font-weight: bold;" text="已选商品：" BorderPane.alignment="CENTER_LEFT">
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" top="5.0" />
+                                             </padding>
+                                          </Label>
+                                       </top>
                                                 </BorderPane>
                                                 <ScrollPane fx:id="pt_sp_goods" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" />
                                             </items>

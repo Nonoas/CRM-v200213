@@ -103,6 +103,10 @@
     -fx-background-color: #eee;
 }
 
+.table-view .table-column{
+    -fx-alignment: center;
+}
+
 /*************************************自定义类********************************* */
 .negative-btn {
     -fx-background-color: #cf4813;

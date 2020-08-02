@@ -36,49 +36,6 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
         obList = getItems();
     }
 
-    @Override
-    protected void setColumnFactory() {
-        setTableMenuButtonVisible(true); // 显示表格菜单按钮
-
-        item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getGoods_id()));
-        item_name.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getGoods_name()));
-        item_money_cost.setCellValueFactory(param -> {
-            double numMoney = param.getValue().getGoods_price();
-            String show = String.format("￥%.2f", numMoney);
-            return new SimpleStringProperty(show);
-        });
-
-        item_amount.setCellValueFactory(param -> new SimpleIntegerProperty(param.getValue().getGoods_amount()));
-
-        item_amount.setCellFactory(param -> new AmountCell());   //自定义数量单元格
-
-        item_total.setCellValueFactory(param -> {
-            String show = String.format("￥%.2f", param.getValue().getSum_price());
-            return new SimpleStringProperty(show);
-        });
-
-        item_op.setCellFactory(param -> new DeleteCell());
-
-        item_amount.setMinWidth(150);
-        item_op.setResizable(false);
-        item_op.setSortable(false);
-    }
-
-    /**
-     * 展示所有项目信息
-     */
-    public void showAllInfos(String id) {
-        clearData(); // 清空所有数据
-        ArrayList<PackageContentBean> listPkgContentBeans = PackageContentDao.getInstance().selectById(id);
-        ArrayList<Data> listData = new ArrayList<>();
-        if (listPkgContentBeans != null) {
-            for (PackageContentBean p : listPkgContentBeans) {
-                listData.add(beanToData(p));
-            }
-            obList.addAll(listData);
-        }
-    }
-
     /**
      * 添加不重复的数据
      *
@@ -144,6 +101,21 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
         packageContentBean.setGoods_id(data.getGoods_id());
         packageContentBean.setGoods_amount(data.getGoods_amount());
         return packageContentBean;
+    }
+
+    /**
+     * 展示所有项目信息
+     */
+    public void showAllInfos(String id) {
+        clearData(); // 清空所有数据
+        ArrayList<PackageContentBean> listPkgContentBeans = PackageContentDao.getInstance().selectById(id);
+        ArrayList<Data> listData = new ArrayList<>();
+        if (listPkgContentBeans != null) {
+            for (PackageContentBean p : listPkgContentBeans) {
+                listData.add(beanToData(p));
+            }
+            obList.addAll(listData);
+        }
     }
 
 }

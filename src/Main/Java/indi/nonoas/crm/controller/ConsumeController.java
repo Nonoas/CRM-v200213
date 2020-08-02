@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
+import indi.nonoas.crm.app.goods.GoodsConsumeTable;
 import indi.nonoas.crm.app.goods.GoodsSelectTable;
-import indi.nonoas.crm.app.pkg.PackageContentEditTable;
+import indi.nonoas.crm.app.goods.GoodsSingleSelectTable;
 import indi.nonoas.crm.view.alert.MyAlert;
 import indi.nonoas.crm.app.vip.VipInfoTable;
 import indi.nonoas.crm.app.vip.VipAddTab;
@@ -147,7 +148,7 @@ public class ConsumeController implements Initializable {
             cb_disType.getItems().add(str);
         }
         cb_disType.setValue("全部类型");
-        pt_borderPane.setCenter(pkg_edit_table);
+        pt_borderPane.setCenter(gc_table);
         pt_sp_goods.setContent(goodsSelectTable);
     }
 
@@ -155,9 +156,9 @@ public class ConsumeController implements Initializable {
     //                             普通消费
     //===========================================================================
 
-    private final PackageContentEditTable pkg_edit_table = new PackageContentEditTable();
+    private final GoodsConsumeTable gc_table = new GoodsConsumeTable();
 
-    private final GoodsSelectTable goodsSelectTable = new GoodsSelectTable();
+    private final GoodsSingleSelectTable goodsSelectTable = new GoodsSingleSelectTable(gc_table);
     @FXML
     private BorderPane pt_borderPane;
     @FXML
