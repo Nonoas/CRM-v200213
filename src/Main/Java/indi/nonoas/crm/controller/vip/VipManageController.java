@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 
 import indi.nonoas.crm.view.alert.MyAlert;
 import indi.nonoas.crm.app.vip.VipAddTab;
-import indi.nonoas.crm.app.table.VipInfoTable;
+import indi.nonoas.crm.app.vip.VipInfoTable;
 import indi.nonoas.crm.app.vip.VipModifyTab;
 import indi.nonoas.crm.bean.VipBean;
 import indi.nonoas.crm.dao.VipInfoDao;

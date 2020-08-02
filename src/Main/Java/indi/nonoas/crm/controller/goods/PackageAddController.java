@@ -62,7 +62,7 @@ public class PackageAddController extends PackageController {
         //插入套餐信息到数据库
         PackageDao.getInstance().insert(packageBean);
         //套餐内容信息
-        ArrayList<PackageContentBean> packageContentBeans = pkgGoodsTable.getAllData();
+        ArrayList<PackageContentBean> packageContentBeans = pkgGoodsTable.getAllBeans();
         for (PackageContentBean p : packageContentBeans) {
             p.setPkg_id(packageBean.getId());
         }

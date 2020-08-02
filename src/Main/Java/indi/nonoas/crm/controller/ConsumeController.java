@@ -5,16 +5,15 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
-import indi.nonoas.crm.app.table.GoodsSelectTable;
-import indi.nonoas.crm.app.table.PackageContentEditTable;
+import indi.nonoas.crm.app.goods.GoodsSelectTable;
+import indi.nonoas.crm.app.pkg.PackageContentEditTable;
 import indi.nonoas.crm.view.alert.MyAlert;
-import indi.nonoas.crm.app.table.VipInfoTable;
+import indi.nonoas.crm.app.vip.VipInfoTable;
 import indi.nonoas.crm.app.vip.VipAddTab;
 import indi.nonoas.crm.bean.VipBean;
 import indi.nonoas.crm.dao.VipInfoDao;
 import indi.nonoas.crm.dao.VipLevelDao;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
@@ -24,9 +23,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 
 public class ConsumeController implements Initializable {
 

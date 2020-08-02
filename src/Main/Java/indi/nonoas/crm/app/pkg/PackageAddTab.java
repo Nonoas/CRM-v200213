@@ -1,4 +1,4 @@
-package indi.nonoas.crm.app.goods;
+package indi.nonoas.crm.app.pkg;
 
 import java.io.IOException;
 import java.net.URL;

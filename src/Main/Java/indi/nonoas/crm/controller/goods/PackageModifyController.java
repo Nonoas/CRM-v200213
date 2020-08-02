@@ -103,7 +103,7 @@ public class PackageModifyController extends PackageController {
      * @return PackageContentBean¼¯ºÏ
      */
     private ArrayList<PackageContentBean> getPackageContentBeans(String PkgID) {
-        ArrayList<PackageContentBean> packageContentBeans = pkgGoodsTable.getAllData();
+        ArrayList<PackageContentBean> packageContentBeans = pkgGoodsTable.getAllBeans();
         for (PackageContentBean p : packageContentBeans) {
             p.setPkg_id(PkgID);
         }

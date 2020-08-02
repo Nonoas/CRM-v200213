@@ -1,4 +1,4 @@
-package indi.nonoas.crm.app.table;
+package indi.nonoas.crm.app.vip;
 
 import java.util.ArrayList;
 

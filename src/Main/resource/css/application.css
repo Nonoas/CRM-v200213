@@ -1,7 +1,7 @@
 /*root类选择器给所有的元素设置样式*/
 .root {
     -fx-focus-color: #81b25e;
-    -fx-font-size: 1.1em;
+    -fx-font-size: 1em;
     -fx-background-position: center center;
     -fx-background-color: white;
 }
@@ -33,7 +33,7 @@
     -fx-background-color: #62c292;
 }
 
-.split-pane{
+.split-pane {
     -fx-background-color: white;
 }
 
