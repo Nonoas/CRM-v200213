@@ -1,30 +1,25 @@
 package indi.nonoas.crm.controller;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.ResourceBundle;
-
 import indi.nonoas.crm.app.goods.GoodsConsumeTable;
-import indi.nonoas.crm.app.goods.GoodsSelectTable;
 import indi.nonoas.crm.app.goods.GoodsSingleSelectTable;
-import indi.nonoas.crm.view.alert.MyAlert;
-import indi.nonoas.crm.app.vip.VipInfoTable;
 import indi.nonoas.crm.app.vip.VipAddTab;
+import indi.nonoas.crm.app.vip.VipInfoTable;
 import indi.nonoas.crm.bean.VipBean;
 import indi.nonoas.crm.dao.VipInfoDao;
 import indi.nonoas.crm.dao.VipLevelDao;
+import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+
+import java.net.URL;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.ResourceBundle;
 
 public class ConsumeController implements Initializable {
 
@@ -34,8 +29,6 @@ public class ConsumeController implements Initializable {
     private final VipInfoDao vipInfoDao = VipInfoDao.getInstence();
     @FXML
     private TabPane tp_rootPane;
-    @FXML
-    private Label lb_discountType;
     @FXML
     private Label lb_cardState;
     @FXML
@@ -108,7 +101,6 @@ public class ConsumeController implements Initializable {
     @FXML // 清空展示的信息
     private void clearInfo() {
         tf_find.setText("");
-        lb_discountType.setText("--");
         lb_cardState.setText("--");
         lb_id.setText("--");
         lb_integral.setText("--");
@@ -127,7 +119,6 @@ public class ConsumeController implements Initializable {
                 tp_rootPane.getSelectionModel().select(tab); // 如果已经添加则显示该tab并返回
                 return;
             }
-
         }
         VipAddTab tab = new VipAddTab();
         tab.setUserData(DATA);
@@ -150,6 +141,22 @@ public class ConsumeController implements Initializable {
         cb_disType.setValue("全部类型");
         pt_borderPane.setCenter(gc_table);
         pt_sp_goods.setContent(goodsSelectTable);
+
+        //设置表格的监听事件
+        gc_table.getEventHandler().addEvent(() -> {
+            if (tf_orderNum.getText().equals("")) {
+                //TODO 生成订单号的方法需要额外实现
+                tf_orderNum.setText("SP131660614");
+            }
+            if (tf_orderDate.getText().equals("")) {
+                tf_orderDate.setText(String.valueOf(LocalDateTime.now()));
+
+            }
+            pt_order_price.setText(String.format("%.2f", gc_table.getSumPrice()));
+            pt_order_dis_price.setText("0.00");
+            pt_integral.setText("0");
+
+        });
     }
 
     //===========================================================================
@@ -163,5 +170,25 @@ public class ConsumeController implements Initializable {
     private BorderPane pt_borderPane;
     @FXML
     private ScrollPane pt_sp_goods;
+    @FXML
+    private Label pt_order_price;
+    @FXML
+    private Label pt_order_dis_price;
+    @FXML
+    private Label pt_integral;
+    @FXML
+    private TextField tf_orderNum;
+    @FXML
+    private TextField tf_orderDate;
+
+    @FXML
+    private void clearGoodsTable() {
+        gc_table.clearData();
+    }
+
+
+    //===========================================================================
+    //                            套餐消费
+    //===========================================================================
 
 }

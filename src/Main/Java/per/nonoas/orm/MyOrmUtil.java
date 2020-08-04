@@ -127,8 +127,8 @@ public abstract class MyOrmUtil<T> {
             for (T t : ts) {
                 Class<?> beanClass = t.getClass();
                 for (int i = 0; i < list.size(); i++) {
-                    String colnName = list.get(i);
-                    String methodName = "get" + firstUpperCase(colnName); // 方法名
+                    String colName = list.get(i);
+                    String methodName = "get" + firstUpperCase(colName); // 方法名
                     Method method = beanClass.getDeclaredMethod(methodName);
                     Object value = method.invoke(t);
                     ps.setObject(i + 1, value);
@@ -149,6 +149,7 @@ public abstract class MyOrmUtil<T> {
      * @return 执行成功返回true，否则返回false
      * @throws SQLException SQL异常
      */
+    @SuppressWarnings("unused")
     protected boolean execute(String sql, Object... params) throws SQLException {
         PreparedStatement ps = getGeneralPreparedStatement(sql, params);
         return ps.execute();

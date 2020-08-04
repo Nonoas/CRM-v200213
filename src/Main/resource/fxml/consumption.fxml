@@ -58,7 +58,7 @@
                         <Separator prefWidth="200.0" />
                         <HBox prefHeight="86.0" prefWidth="928.0">
                             <children>
-                                <GridPane hgap="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="1036.0" vgap="5.0">
+                                <GridPane hgap="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="872.0" vgap="5.0">
                                     <children>
                                         <Label text="会员卡号:" wrapText="true" GridPane.rowIndex="1" />
                                         <Label fx:id="lb_id" text="--" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -66,12 +66,10 @@
                                         <Label fx:id="lb_name" text="--" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                                         <Label minWidth="-Infinity" text="会员卡等级:" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                                         <Label fx:id="lb_cardLevel" prefHeight="20.0" prefWidth="78.0" text="--" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                                        <Label text="优惠方式:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                        <Label fx:id="lb_discountType" text="--" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                                         <Label text="会员积分:" wrapText="true" GridPane.rowIndex="2" />
                                         <Label fx:id="lb_integral" text="--" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                        <Label text="会员卡状态:" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                                        <Label fx:id="lb_cardState" text="--" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                                        <Label text="会员卡状态:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                        <Label fx:id="lb_cardState" text="--" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                                     </children>
                                     <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="156.0" minWidth="-Infinity" prefWidth="80.0" />
@@ -118,20 +116,35 @@
                                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                             </rowConstraints>
                                                             <children>
-                                                                <Label fx:id="pt_lb_order_num" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="309.0" text="订单金额：" />
-                                                                <Label fx:id="pt_lb_order_date" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="折后金额：" GridPane.columnIndex="1" />
-                                                                <Label fx:id="pt_lb_order_date1" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" prefWidth="146.0" text="获得积分：" GridPane.columnIndex="2" />
-                                                                <Button alignment="CENTER" contentDisplay="CENTER" minWidth="80.0" mnemonicParsing="false" styleClass="negative-btn" text="清空" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+                                                <HBox>
+                                                   <children>
+                                                                      <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" text="订单金额：" />
+                                                      <Label fx:id="pt_order_price" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0.00" HBox.hgrow="ALWAYS" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox GridPane.columnIndex="1">
+                                                   <children>
+                                                                      <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="折后金额：" />
+                                                      <Label fx:id="pt_order_dis_price" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0.00" HBox.hgrow="ALWAYS" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox GridPane.columnIndex="2">
+                                                   <children>
+                                                                      <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="获得积分：" />
+                                                      <Label fx:id="pt_integral" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0" HBox.hgrow="ALWAYS" />
+                                                   </children>
+                                                </HBox>
+                                                                <Button alignment="CENTER" contentDisplay="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#clearGoodsTable" styleClass="negative-btn" text="清空" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
                                                                 <HBox prefHeight="62.0" prefWidth="222.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                                                     <children>
                                                                         <Label fx:id="pt_lb_order_date11" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" text="订单号：" />
-                                                                        <TextField HBox.hgrow="ALWAYS" />
+                                                                        <TextField fx:id="tf_orderNum" editable="false" HBox.hgrow="ALWAYS" />
                                                                     </children>
                                                                 </HBox>
                                                                 <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="222.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                                                     <children>
                                                                         <Label fx:id="pt_lb_order_date111" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="订单日期：" />
-                                                      <TextField HBox.hgrow="ALWAYS" />
+                                                      <TextField fx:id="tf_orderDate" editable="false" HBox.hgrow="ALWAYS" />
                                                                     </children>
                                                                 </HBox>
                                                                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="订单结算" GridPane.columnSpan="4" GridPane.rowIndex="2" />

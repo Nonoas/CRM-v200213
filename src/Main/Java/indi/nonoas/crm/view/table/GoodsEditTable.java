@@ -7,7 +7,9 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import per.nonoas.delegate.EventHandler;
 
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -16,6 +18,7 @@ import java.util.regex.Pattern;
  * @time : 2020-08-02 12:22
  */
 public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
+
     /**
      * 数据源
      */
@@ -30,6 +33,12 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
      * 当前选中数据
      */
     private Data selectedBean;
+
+
+    /**
+     * 事件委托类
+     */
+    private final EventHandler eventHandler = new EventHandler();
 
     protected final TableColumn<Data, String> item_id = new TableColumn<>("商品编号");
 
@@ -100,6 +109,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
      */
     public void clearData() {
         obList.clear();
+        eventHandler.execute();
     }
 
     /**
@@ -110,6 +120,15 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
     public void removeData(Data bean) {
         obList.remove(bean);
         refresh();
+    }
+
+    /**
+     * 获取事件委托对象
+     *
+     * @return 事件委托对象
+     */
+    public EventHandler getEventHandler() {
+        return eventHandler;
     }
 
     //===========================================================================
@@ -162,6 +181,8 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
         private int goods_amount;
         private double sum_price;
 
+        private final PropertyChangeSupport psc = new PropertyChangeSupport(this);
+
         public Data() {
         }
 
@@ -194,13 +215,21 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
         }
 
         public void setGoods_price(double goods_price) {
+            double oldValue = this.goods_price;
             this.goods_price = goods_price;
             this.sum_price = goods_price * goods_amount;
+            psc.firePropertyChange("goods_price", oldValue, goods_price);
         }
 
         public void setGoods_amount(int goods_amount) {
+            int oldValue = this.goods_amount;
             this.goods_amount = goods_amount;
             this.sum_price = goods_price * goods_amount;
+            psc.firePropertyChange("goods_amount", oldValue, goods_amount);
+        }
+
+        public PropertyChangeSupport getPropertyChangeSupport() {
+            return psc;
         }
 
         @Override
@@ -218,7 +247,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
     /**
      * 自定义“数量”单元格
      */
-    protected static class AmountCell extends TableCell<Data, Number> {
+    protected class AmountCell extends TableCell<Data, Number> {
 
         public AmountCell() {
         }
@@ -271,7 +300,9 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
                     boolean isNumber = Pattern.matches(pattern, newValue); //判断是否为正整数
                     if (isNumber) {
                         bean.setGoods_amount(Integer.parseInt(newValue));
-                        getTableView().refresh();
+                        GoodsEditTable<S> table = (GoodsEditTable<S>) getTableView();
+                        table.refresh();
+                        table.getEventHandler().execute();
                     } else {
                         tf_number.setText(oldValue);
                     }
@@ -286,7 +317,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
     /**
      * 自定义操作单元格
      */
-    protected static class DeleteCell extends TableCell<Data, String> {
+    protected class DeleteCell extends TableCell<Data, String> {
 
         public DeleteCell() {
         }
@@ -295,17 +326,20 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
         protected void updateItem(String item, boolean empty) {
             super.updateItem(item, empty);
             if (!empty) {
-                Hyperlink hl_delete = new Hyperlink("删除");
-                hl_delete.setStyle("-fx-text-fill: #cf4813");
+                Button btn_delete = new Button("删除");
+                btn_delete.getStyleClass().add("negative-btn");
 
-                hl_delete.setOnAction(event -> {
-                    TableView<Data> tableView = getTableView();
+                btn_delete.setOnAction(event -> {
+                    GoodsEditTable<S> tableView = (GoodsEditTable<S>) getTableView();
                     ObservableList<Data> items = tableView.getItems();
                     items.remove(getIndex());
                     tableView.refresh();
+
+                    tableView.getEventHandler().execute();
+
                 });
 
-                this.setGraphic(hl_delete);
+                this.setGraphic(btn_delete);
             }
         }
     }
