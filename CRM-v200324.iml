@@ -39,5 +39,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="log4j-1.2.17" level="project" />
+    <orderEntry type="library" name="jxl-2.6.12" level="project" />
   </component>
 </module>

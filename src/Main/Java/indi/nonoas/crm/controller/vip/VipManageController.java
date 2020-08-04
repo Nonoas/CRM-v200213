@@ -1,12 +1,18 @@
 package indi.nonoas.crm.controller.vip;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import indi.nonoas.crm.utils.JXLUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
 import indi.nonoas.crm.app.vip.VipAddTab;
 import indi.nonoas.crm.app.vip.VipInfoTable;
@@ -16,14 +22,8 @@ import indi.nonoas.crm.dao.VipInfoDao;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
 
 public class VipManageController implements Initializable {
 
@@ -150,6 +150,7 @@ public class VipManageController implements Initializable {
      */
     @FXML
     private void modifyVip() {
+        //TODO 打印路径许修改
         VipBean bean = table.getSelectedData();
         if (bean == null) {
             new MyAlert(AlertType.INFORMATION, "请先选择一条数据！").show();
@@ -170,6 +171,31 @@ public class VipManageController implements Initializable {
         tab.setPreTab(tab_manage);
         obList.add(tab);
         tp_rootPane.getSelectionModel().select(tab);
+    }
+
+    @FXML
+    private void printInfo() {
+        File file = new File("D:/会员信息.xls");
+        OutputStream os = null;
+        try {
+            os = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        ObservableList<TableColumn<VipBean, ?>> columns = table.getColumns();
+        ObservableList<VipBean> items = table.getItems();
+        List<Object> contentList = new ArrayList<>(items);
+        String[] titles = new String[columns.size()];
+        String[] fieldNames = {"id", "admission_date", "name", "sex", "card_level", "balance", "frequency", "cumulative", "address", "integral", "telephone", "idcard", "birthday", "career", "email", "other"};
+        for (int i = 0; i < titles.length; i++) {
+            titles[i] = columns.get(i).getText();
+        }
+        boolean hasPrint = JXLUtil.exportExcel(titles, fieldNames, contentList, os);
+        if (hasPrint) {
+            new MyAlert(AlertType.INFORMATION, "打印成功！\n文件保存位置为：" + file.getAbsolutePath()).show();
+        } else {
+            new MyAlert(AlertType.INFORMATION, "打印失败！");
+        }
     }
 
 }

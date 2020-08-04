@@ -186,6 +186,11 @@ public class ConsumeController implements Initializable {
         gc_table.clearData();
     }
 
+    @FXML
+    private void orderPay() {
+        new MyAlert(AlertType.INFORMATION, "结算成功").show();
+    }
+
 
     //===========================================================================
     //                            套餐消费

@@ -147,7 +147,7 @@
                                                       <TextField fx:id="tf_orderDate" editable="false" HBox.hgrow="ALWAYS" />
                                                                     </children>
                                                                 </HBox>
-                                                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="订单结算" GridPane.columnSpan="4" GridPane.rowIndex="2" />
+                                                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#orderPay" text="订单结算" GridPane.columnSpan="4" GridPane.rowIndex="2" />
                                                             </children>
                                                             <BorderPane.margin>
                                                                 <Insets top="10.0" />
