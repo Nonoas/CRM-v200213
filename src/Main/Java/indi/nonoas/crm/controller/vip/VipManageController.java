@@ -30,7 +30,7 @@ public class VipManageController implements Initializable {
     /**
      * 会员信息DAO
      */
-    private final VipInfoDao vipInfoDao = VipInfoDao.getInstence();
+    private final VipInfoDao vipInfoDao = VipInfoDao.getInstance();
 
     private VipInfoTable table;
 

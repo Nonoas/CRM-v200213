@@ -2,8 +2,11 @@ package indi.nonoas.crm.controller;
 
 import indi.nonoas.crm.app.goods.GoodsConsumeTable;
 import indi.nonoas.crm.app.goods.GoodsSingleSelectTable;
+import indi.nonoas.crm.app.pkg.PackageConsumeTable;
+import indi.nonoas.crm.app.pkg.PackageSingleSelectTable;
 import indi.nonoas.crm.app.vip.VipAddTab;
 import indi.nonoas.crm.app.vip.VipInfoTable;
+import indi.nonoas.crm.bean.PackageBean;
 import indi.nonoas.crm.bean.VipBean;
 import indi.nonoas.crm.dao.VipInfoDao;
 import indi.nonoas.crm.dao.VipLevelDao;
@@ -26,7 +29,7 @@ public class ConsumeController implements Initializable {
     /**
      * 会员信息DAO
      */
-    private final VipInfoDao vipInfoDao = VipInfoDao.getInstence();
+    private final VipInfoDao vipInfoDao = VipInfoDao.getInstance();
     @FXML
     private TabPane tp_rootPane;
     @FXML
@@ -139,28 +142,13 @@ public class ConsumeController implements Initializable {
             cb_disType.getItems().add(str);
         }
         cb_disType.setValue("全部类型");
-        pt_borderPane.setCenter(gc_table);
-        pt_sp_goods.setContent(goodsSelectTable);
 
-        //设置表格的监听事件
-        gc_table.getEventHandler().addEvent(() -> {
-            if (tf_orderNum.getText().equals("")) {
-                //TODO 生成订单号的方法需要额外实现
-                tf_orderNum.setText("SP131660614");
-            }
-            if (tf_orderDate.getText().equals("")) {
-                tf_orderDate.setText(String.valueOf(LocalDateTime.now()));
-
-            }
-            pt_order_price.setText(String.format("%.2f", gc_table.getSumPrice()));
-            pt_order_dis_price.setText("0.00");
-            pt_integral.setText("0");
-
-        });
+        initGoodsTab();        //初始化商品消费面板
+        initPackageTab();       //初始化套餐消费面板
     }
 
     //===========================================================================
-    //                             普通消费
+    //                             商品消费
     //===========================================================================
 
     private final GoodsConsumeTable gc_table = new GoodsConsumeTable();
@@ -181,6 +169,28 @@ public class ConsumeController implements Initializable {
     @FXML
     private TextField tf_orderDate;
 
+    private void initGoodsTab() {
+        pt_borderPane.setCenter(gc_table);
+        pt_sp_goods.setContent(goodsSelectTable);
+
+        //设置表格的监听事件
+        gc_table.getEventHandler().addEvent(() -> {
+            if (tf_orderNum.getText().equals("")) {
+                //TODO 生成订单号的方法需要额外实现
+                tf_orderNum.setText("SP131660614");
+            }
+            if (tf_orderDate.getText().equals("")) {
+                tf_orderDate.setText(String.valueOf(LocalDateTime.now()));
+
+            }
+            pt_order_price.setText(String.format("%.2f", gc_table.getSumPrice()));
+            pt_order_dis_price.setText("0.00");
+            pt_integral.setText("0");
+
+        });
+    }
+
+
     @FXML
     private void clearGoodsTable() {
         gc_table.clearData();
@@ -196,4 +206,57 @@ public class ConsumeController implements Initializable {
     //                            套餐消费
     //===========================================================================
 
+    /**
+     * 套餐单选表格
+     */
+    private final PackageSingleSelectTable pkgSelectTable = new PackageSingleSelectTable();
+
+    /**
+     * 套餐消费表格
+     */
+    private final PackageConsumeTable pcTable = new PackageConsumeTable();
+    @FXML
+    private BorderPane tc_borderPane;
+    @FXML
+    private ScrollPane tc_sp_goods;
+    @FXML
+    private Label tc_order_price;
+    @FXML
+    private Label tc_order_dis_price;
+    @FXML
+    private Label tc_integral;
+    @FXML
+    private TextField tc_orderNum;
+    @FXML
+    private TextField tc_orderDate;
+
+    private void initPackageTab() {
+        tc_sp_goods.setContent(pkgSelectTable);
+        tc_borderPane.setCenter(pcTable);
+        //设置监听
+        pcTable.getEventHandler().addEvent(() -> {
+            if (tc_orderNum.getText().equals("")) {
+                //TODO 生成订单号的方法需要额外实现
+                tc_orderNum.setText("SP131660614");
+            }
+            if (tc_orderDate.getText().equals("")) {
+                tc_orderDate.setText(String.valueOf(LocalDateTime.now()));
+
+            }
+            tc_order_price.setText(String.format("%.2f", pcTable.getSumPrice()));
+            tc_order_dis_price.setText("0.00");
+            tc_integral.setText("0");
+        });
+
+        pkgSelectTable.getEventHandler().addEvent(() -> {
+            PackageBean bean = pkgSelectTable.getSelectedData();
+            if (bean != null)
+                pcTable.addBean(bean);
+        });
+    }
+
+    @FXML
+    private void clearPackageTable() {
+        pcTable.clearData();
+    }
 }

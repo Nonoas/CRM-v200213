@@ -65,15 +65,15 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
 
         setTableMenuButtonVisible(true); // 显示表格菜单按钮
 
-        item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getGoods_id()));
-        item_name.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getGoods_name()));
+        item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getId()));
+        item_name.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName()));
         item_money_cost.setCellValueFactory(param -> {
-            double numMoney = param.getValue().getGoods_price();
+            double numMoney = param.getValue().getPrice();
             String show = String.format("￥%.2f", numMoney);
             return new SimpleStringProperty(show);
         });
 
-        item_amount.setCellValueFactory(param -> new SimpleIntegerProperty(param.getValue().getGoods_amount()));
+        item_amount.setCellValueFactory(param -> new SimpleIntegerProperty(param.getValue().getAmount()));
 
         item_total.setCellValueFactory(param -> {
             String show = String.format("￥%.2f", param.getValue().getSum_price());
@@ -175,10 +175,10 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
      */
     protected static class Data {
 
-        private String goods_id;
-        private String goods_name;
-        private double goods_price;
-        private int goods_amount;
+        private String id;
+        private String name;
+        private double price;
+        private int amount;
         private double sum_price;
 
         private final PropertyChangeSupport psc = new PropertyChangeSupport(this);
@@ -186,46 +186,46 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
         public Data() {
         }
 
-        public String getGoods_id() {
-            return goods_id;
+        public String getId() {
+            return id;
         }
 
-        public String getGoods_name() {
-            return goods_name;
+        public String getName() {
+            return name;
         }
 
-        public double getGoods_price() {
-            return goods_price;
+        public double getPrice() {
+            return price;
         }
 
-        public int getGoods_amount() {
-            return goods_amount;
+        public int getAmount() {
+            return amount;
         }
 
         public double getSum_price() {
             return sum_price;
         }
 
-        public void setGoods_id(String goods_id) {
-            this.goods_id = goods_id;
+        public void setId(String id) {
+            this.id = id;
         }
 
-        public void setGoods_name(String goods_name) {
-            this.goods_name = goods_name;
+        public void setName(String name) {
+            this.name = name;
         }
 
-        public void setGoods_price(double goods_price) {
-            double oldValue = this.goods_price;
-            this.goods_price = goods_price;
-            this.sum_price = goods_price * goods_amount;
-            psc.firePropertyChange("goods_price", oldValue, goods_price);
+        public void setPrice(double price) {
+            double oldValue = this.price;
+            this.price = price;
+            this.sum_price = price * amount;
+            psc.firePropertyChange("goods_price", oldValue, price);
         }
 
-        public void setGoods_amount(int goods_amount) {
-            int oldValue = this.goods_amount;
-            this.goods_amount = goods_amount;
-            this.sum_price = goods_price * goods_amount;
-            psc.firePropertyChange("goods_amount", oldValue, goods_amount);
+        public void setAmount(int amount) {
+            int oldValue = this.amount;
+            this.amount = amount;
+            this.sum_price = price * amount;
+            psc.firePropertyChange("goods_amount", oldValue, amount);
         }
 
         public PropertyChangeSupport getPropertyChangeSupport() {
@@ -235,10 +235,10 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
         @Override
         public String toString() {
             return "Data{" +
-                    "goods_id='" + goods_id + '\'' +
-                    ", goods_name='" + goods_name + '\'' +
-                    ", goods_price=" + goods_price +
-                    ", goods_amount=" + goods_amount +
+                    "goods_id='" + id + '\'' +
+                    ", goods_name='" + name + '\'' +
+                    ", goods_price=" + price +
+                    ", goods_amount=" + amount +
                     ", sum_price=" + sum_price +
                     '}';
         }
@@ -299,7 +299,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
                     String pattern = "^\\d+$";
                     boolean isNumber = Pattern.matches(pattern, newValue); //判断是否为正整数
                     if (isNumber) {
-                        bean.setGoods_amount(Integer.parseInt(newValue));
+                        bean.setAmount(Integer.parseInt(newValue));
                         GoodsEditTable<S> table = (GoodsEditTable<S>) getTableView();
                         table.refresh();
                         table.getEventHandler().execute();

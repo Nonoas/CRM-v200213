@@ -116,24 +116,24 @@
                                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                             </rowConstraints>
                                                             <children>
-                                                <HBox>
-                                                   <children>
-                                                                      <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" text="订单金额：" />
-                                                      <Label fx:id="pt_order_price" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0.00" HBox.hgrow="ALWAYS" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox GridPane.columnIndex="1">
-                                                   <children>
-                                                                      <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="折后金额：" />
-                                                      <Label fx:id="pt_order_dis_price" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0.00" HBox.hgrow="ALWAYS" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox GridPane.columnIndex="2">
-                                                   <children>
-                                                                      <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="获得积分：" />
-                                                      <Label fx:id="pt_integral" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0" HBox.hgrow="ALWAYS" />
-                                                   </children>
-                                                </HBox>
+                                                                <HBox>
+                                                                    <children>
+                                                                        <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" text="订单金额：" />
+                                                                        <Label fx:id="pt_order_price" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0.00" HBox.hgrow="ALWAYS" />
+                                                                    </children>
+                                                                </HBox>
+                                                                <HBox GridPane.columnIndex="1">
+                                                                    <children>
+                                                                        <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="折后金额：" />
+                                                                        <Label fx:id="pt_order_dis_price" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0.00" HBox.hgrow="ALWAYS" />
+                                                                    </children>
+                                                                </HBox>
+                                                                <HBox GridPane.columnIndex="2">
+                                                                    <children>
+                                                                        <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="获得积分：" />
+                                                                        <Label fx:id="pt_integral" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0" HBox.hgrow="ALWAYS" />
+                                                                    </children>
+                                                                </HBox>
                                                                 <Button alignment="CENTER" contentDisplay="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#clearGoodsTable" styleClass="negative-btn" text="清空" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
                                                                 <HBox prefHeight="62.0" prefWidth="222.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                                                     <children>
@@ -144,7 +144,7 @@
                                                                 <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="222.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                                                     <children>
                                                                         <Label fx:id="pt_lb_order_date111" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="订单日期：" />
-                                                      <TextField fx:id="tf_orderDate" editable="false" HBox.hgrow="ALWAYS" />
+                                                                        <TextField fx:id="tf_orderDate" editable="false" HBox.hgrow="ALWAYS" />
                                                                     </children>
                                                                 </HBox>
                                                                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#orderPay" text="订单结算" GridPane.columnSpan="4" GridPane.rowIndex="2" />
@@ -154,13 +154,13 @@
                                                             </BorderPane.margin>
                                                         </GridPane>
                                                     </bottom>
-                                       <top>
-                                          <Label style="-fx-font-weight: bold;" text="已选商品：" BorderPane.alignment="CENTER_LEFT">
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" top="5.0" />
-                                             </padding>
-                                          </Label>
-                                       </top>
+                                                    <top>
+                                                        <Label style="-fx-font-weight: bold;" text="已选商品：" BorderPane.alignment="CENTER_LEFT">
+                                                            <padding>
+                                                                <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                            </padding>
+                                                        </Label>
+                                                    </top>
                                                 </BorderPane>
                                                 <ScrollPane fx:id="pt_sp_goods" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" />
                                             </items>
@@ -171,7 +171,7 @@
                                     <content>
                                         <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
                                             <items>
-                                                <BorderPane fx:id="pt_borderPane1" prefHeight="358.0" prefWidth="616.0">
+                                                <BorderPane fx:id="tc_borderPane" prefHeight="358.0" prefWidth="616.0">
                                                     <padding>
                                                         <Insets bottom="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -192,31 +192,53 @@
                                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                             </rowConstraints>
                                                             <children>
-                                                                <Label fx:id="pt_lb_order_num1" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="309.0" text="订单金额：" />
-                                                                <Label fx:id="pt_lb_order_date1" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="折后金额：" GridPane.columnIndex="1" />
-                                                                <Label fx:id="pt_lb_order_date11" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" prefWidth="146.0" text="获得积分：" GridPane.columnIndex="2" />
-                                                                <Button alignment="CENTER" contentDisplay="CENTER" minWidth="80.0" mnemonicParsing="false" styleClass="negative-btn" text="清空" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+                                                                <HBox>
+                                                                    <children>
+                                                                        <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" text="订单金额：" />
+                                                                        <Label fx:id="tc_order_price" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0.00" HBox.hgrow="ALWAYS" />
+                                                                    </children>
+                                                                </HBox>
+                                                                <HBox GridPane.columnIndex="1">
+                                                                    <children>
+                                                                        <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="折后金额：" />
+                                                                        <Label fx:id="tc_order_dis_price" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0.00" HBox.hgrow="ALWAYS" />
+                                                                    </children>
+                                                                </HBox>
+                                                                <HBox GridPane.columnIndex="2">
+                                                                    <children>
+                                                                        <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="获得积分：" />
+                                                                        <Label fx:id="tc_integral" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0" HBox.hgrow="ALWAYS" />
+                                                                    </children>
+                                                                </HBox>
+                                                                <Button alignment="CENTER" contentDisplay="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#clearPackageTable" styleClass="negative-btn" text="清空" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
                                                                 <HBox prefHeight="62.0" prefWidth="222.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                                                     <children>
-                                                                        <Label fx:id="pt_lb_order_date111" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" text="订单号：" />
-                                                                        <TextField HBox.hgrow="ALWAYS" />
+                                                                        <Label fx:id="pt_lb_order_date11" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" text="订单号：" />
+                                                                        <TextField fx:id="tc_orderNum" editable="false" HBox.hgrow="ALWAYS" />
                                                                     </children>
                                                                 </HBox>
-                                                                <HBox prefHeight="62.0" prefWidth="222.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                                                <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="222.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                                                     <children>
-                                                                        <Label fx:id="pt_lb_order_date1111" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" text="订单日期：" />
-                                                                        <TextField HBox.hgrow="ALWAYS" />
+                                                                        <Label fx:id="pt_lb_order_date111" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="订单日期：" />
+                                                                        <TextField fx:id="tc_orderDate" editable="false" HBox.hgrow="ALWAYS" />
                                                                     </children>
                                                                 </HBox>
-                                                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="订单结算" GridPane.columnSpan="4" GridPane.rowIndex="2" />
+                                                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#orderPay" text="订单结算" GridPane.columnSpan="4" GridPane.rowIndex="2" />
                                                             </children>
                                                             <BorderPane.margin>
                                                                 <Insets top="10.0" />
                                                             </BorderPane.margin>
                                                         </GridPane>
                                                     </bottom>
+                                                    <top>
+                                                        <Label style="-fx-font-weight: bold;" text="已选商品：" BorderPane.alignment="CENTER_LEFT">
+                                                            <padding>
+                                                                <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                            </padding>
+                                                        </Label>
+                                                    </top>
                                                 </BorderPane>
-                                                <ScrollPane fx:id="pt_sp_goods1" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" />
+                                                <ScrollPane fx:id="tc_sp_goods" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" />
                                             </items>
                                         </SplitPane>
                                     </content>
@@ -247,10 +269,10 @@
                                                             <children>
                                                                 <Button alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minWidth="80.0" mnemonicParsing="false" styleClass="negative-btn" text="清空" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                                                                 <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="222.0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                                                   <children>
+                                                                    <children>
                                                                         <Label fx:id="pt_lb_order_date1111" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" text="订单日期：" />
                                                                         <TextField HBox.hgrow="ALWAYS" />
-                                                   </children>
+                                                                    </children>
                                                                 </HBox>
                                                                 <HBox alignment="CENTER" prefHeight="62.0" prefWidth="222.0" GridPane.columnIndex="2" GridPane.columnSpan="2" />
                                                                 <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="订单结算" GridPane.columnSpan="2" GridPane.rowIndex="1" />

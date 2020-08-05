@@ -53,21 +53,27 @@ public class PackageTable extends TableView<PackageBean> {
 
     private final TableColumn<PackageBean, String> item_other = new TableColumn<>("备注信息");
 
-    public PackageTable(PackageContentTable packageContentTable) {
-
-        this.packageContentTable = packageContentTable;
-
+    public PackageTable() {
         initColumns();
         setItems(obList);
         showAllInfos();
-
         getSelectionModel().selectedItemProperty().addListener(cl_select);    //添加选中监听
+    }
+
+    public PackageTable(PackageContentTable packageContentTable) {
+        this();
+        this.packageContentTable = packageContentTable;
+        getSelectionModel().selectedItemProperty().addListener(cl_showContent);    //添加选中监听
     }
 
     //声明选中监听
     ChangeListener<PackageBean> cl_select = (observable, oldValue, newValue) -> {
         System.out.println("项目信息表格选中：" + newValue);
         selectedBean = newValue;
+    };
+
+    //声明套餐表格内容显示
+    ChangeListener<PackageBean> cl_showContent = (observable, oldValue, newValue) -> {
         if (selectedBean != null) {
             packageContentTable.showAllInfos(selectedBean.getId()); //更新选中表格的内容
         }

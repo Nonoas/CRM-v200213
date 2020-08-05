@@ -30,7 +30,7 @@ import javafx.stage.FileChooser;
 public class VipAddController implements Initializable {
 
 	/** 会员信息DAO*/
-	private VipInfoDao vipInfoDao=VipInfoDao.getInstence();
+	private VipInfoDao vipInfoDao=VipInfoDao.getInstance();
 	
 	private final ToggleGroup tGroup = new ToggleGroup();
 

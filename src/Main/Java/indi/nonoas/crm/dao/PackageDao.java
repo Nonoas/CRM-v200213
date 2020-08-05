@@ -23,12 +23,12 @@ public class PackageDao extends MyDao<PackageBean> {
 
     private static final String INSERT_ONE = "insert into " +
 
-            "package_info (id,name,integral_cost,money_cost,min_discount,other) " +
+            "package_info (id,name,integral_cost,money_cost,min_discount,type,other) " +
 
-            "values (#{id},#{name},#{integral_cost},#{money_cost},#{min_discount},#{other})";
+            "values (#{id},#{name},#{integral_cost},#{money_cost},#{min_discount},#{type},#{other})";
 
-    private static final String UPDATE_ONE="update package_info" +
-            
+    private static final String UPDATE_ONE = "update package_info" +
+
             "set id=#{id},name=#{name},integral_cost=#{integral_cost},money_cost=#{money_cost},min_discount=#{min_discount},other=#{other}";
 
     private PackageDao() {
@@ -84,18 +84,20 @@ public class PackageDao extends MyDao<PackageBean> {
 
     /**
      * 插入一条项目信息
+     *
      * @param bean PackageBean对象
      */
     public void insert(PackageBean bean) {
-        insert(INSERT_ONE,bean);
+        insert(INSERT_ONE, bean);
     }
 
     /**
      * 更新一条项目信息
+     *
      * @param bean PackageBean对象
      */
-    public void update(PackageBean bean){
-        update(UPDATE_ONE,bean);
+    public void update(PackageBean bean) {
+        update(UPDATE_ONE, bean);
     }
 
     @Override

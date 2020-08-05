@@ -5,16 +5,9 @@ import indi.nonoas.crm.bean.PackageContentBean;
 import indi.nonoas.crm.dao.GoodsDao;
 import indi.nonoas.crm.dao.PackageContentDao;
 import indi.nonoas.crm.view.table.GoodsEditTable;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 
 /**
@@ -46,8 +39,8 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
         boolean hasRepeat = false;
         Data data = beanToData(bean); //ÀàÐÍ×ª»»
         for (Data d : obList) {
-            String id1 = d.getGoods_id();
-            String id2 = data.getGoods_id();
+            String id1 = d.getId();
+            String id2 = data.getId();
             hasRepeat = hasRepeat || id1.equals(id2);
         }
         if (!hasRepeat)
@@ -82,10 +75,10 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
         int amount = bean.getGoods_amount();
 
         Data data = new Data();
-        data.setGoods_id(id);
-        data.setGoods_name(name);
-        data.setGoods_price(price);
-        data.setGoods_amount(amount);
+        data.setId(id);
+        data.setName(name);
+        data.setPrice(price);
+        data.setAmount(amount);
         return data;
     }
 
@@ -98,8 +91,8 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
     @Override
     protected PackageContentBean dataToBean(Data data) {
         PackageContentBean packageContentBean = new PackageContentBean();
-        packageContentBean.setGoods_id(data.getGoods_id());
-        packageContentBean.setGoods_amount(data.getGoods_amount());
+        packageContentBean.setGoods_id(data.getId());
+        packageContentBean.setGoods_amount(data.getAmount());
         return packageContentBean;
     }
 

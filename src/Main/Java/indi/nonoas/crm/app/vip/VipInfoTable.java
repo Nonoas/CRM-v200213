@@ -131,7 +131,7 @@ public class VipInfoTable extends TableView<VipBean> {
      */
     public void showAllInfos() {
         clearData(); // 清空所有数据
-        ArrayList<VipBean> listVipBeans = VipInfoDao.getInstence().selectAll();
+        ArrayList<VipBean> listVipBeans = VipInfoDao.getInstance().selectAll();
         if (listVipBeans != null)
             obList.addAll(listVipBeans);
     }

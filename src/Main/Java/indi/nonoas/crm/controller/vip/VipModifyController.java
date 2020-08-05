@@ -20,8 +20,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
@@ -35,7 +33,7 @@ public class VipModifyController implements Initializable {
     /**
      * 会员信息DAO
      */
-    private final VipInfoDao vipInfoDao = VipInfoDao.getInstence();
+    private final VipInfoDao vipInfoDao = VipInfoDao.getInstance();
 
     private final ToggleGroup tGroup = new ToggleGroup();
 
