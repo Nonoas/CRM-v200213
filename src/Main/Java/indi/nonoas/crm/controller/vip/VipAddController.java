@@ -9,7 +9,7 @@ import indi.nonoas.crm.view.alert.MyAlert;
 import indi.nonoas.crm.bean.VipBean;
 import indi.nonoas.crm.dao.VipInfoDao;
 import indi.nonoas.crm.dao.VipLevelDao;
-import indi.nonoas.crm.utils.ImageSrc;
+import indi.nonoas.crm.config.ImageSrc;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

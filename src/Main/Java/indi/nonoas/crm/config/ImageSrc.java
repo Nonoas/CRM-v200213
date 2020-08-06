@@ -1,4 +1,4 @@
-package indi.nonoas.crm.utils;
+package indi.nonoas.crm.config;
 
 public class ImageSrc {
 

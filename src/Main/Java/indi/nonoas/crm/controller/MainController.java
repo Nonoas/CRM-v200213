@@ -10,7 +10,7 @@ import indi.nonoas.crm.app.goods.GoodsManagePane;
 import indi.nonoas.crm.app.StaffManagePane;
 import indi.nonoas.crm.app.StatPane;
 import indi.nonoas.crm.app.vip.VipManagePane;
-import indi.nonoas.crm.utils.ImageSrc;
+import indi.nonoas.crm.config.ImageSrc;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

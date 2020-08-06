@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import indi.nonoas.crm.controller.WelcomeController;
-import indi.nonoas.crm.utils.ImageSrc;
+import indi.nonoas.crm.config.ImageSrc;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;

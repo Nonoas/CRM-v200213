@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 import indi.nonoas.crm.bean.GoodsBean;
 import indi.nonoas.crm.dao.GoodsDao;
-import indi.nonoas.crm.utils.ImageSrc;
+import indi.nonoas.crm.config.ImageSrc;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;

@@ -2,7 +2,7 @@ package indi.nonoas.crm.view.dialog;
 
 import indi.nonoas.crm.bean.GoodsBean;
 import indi.nonoas.crm.app.goods.GoodsSelectTable;
-import indi.nonoas.crm.utils.ImageSrc;
+import indi.nonoas.crm.config.ImageSrc;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;

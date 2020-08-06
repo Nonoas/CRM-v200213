@@ -10,6 +10,7 @@ import indi.nonoas.crm.bean.PackageBean;
 import indi.nonoas.crm.bean.VipBean;
 import indi.nonoas.crm.dao.VipInfoDao;
 import indi.nonoas.crm.dao.VipLevelDao;
+import indi.nonoas.crm.service.OrderService;
 import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
@@ -165,9 +167,9 @@ public class ConsumeController implements Initializable {
     @FXML
     private Label pt_integral;
     @FXML
-    private TextField tf_orderNum;
+    private TextField shp_orderNum;
     @FXML
-    private TextField tf_orderDate;
+    private TextField shp_orderDate;
 
     private void initGoodsTab() {
         pt_borderPane.setCenter(gc_table);
@@ -175,13 +177,12 @@ public class ConsumeController implements Initializable {
 
         //设置表格的监听事件
         gc_table.getEventHandler().addEvent(() -> {
-            if (tf_orderNum.getText().equals("")) {
-                //TODO 生成订单号的方法需要额外实现
-                tf_orderNum.setText("SP131660614");
+            if (shp_orderNum.getText().equals("")) {
+                shp_orderNum.setText(OrderService.goodsOrderNum());
             }
-            if (tf_orderDate.getText().equals("")) {
-                tf_orderDate.setText(String.valueOf(LocalDateTime.now()));
-
+            if (shp_orderDate.getText().equals("")) {
+                DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                shp_orderDate.setText(sdf.format(LocalDateTime.now()));
             }
             pt_order_price.setText(String.format("%.2f", gc_table.getSumPrice()));
             pt_order_dis_price.setText("0.00");
@@ -236,12 +237,11 @@ public class ConsumeController implements Initializable {
         //设置监听
         pcTable.getEventHandler().addEvent(() -> {
             if (tc_orderNum.getText().equals("")) {
-                //TODO 生成订单号的方法需要额外实现
-                tc_orderNum.setText("SP131660614");
+                tc_orderNum.setText(OrderService.packageOrderNum());
             }
             if (tc_orderDate.getText().equals("")) {
-                tc_orderDate.setText(String.valueOf(LocalDateTime.now()));
-
+                DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                tc_orderDate.setText(sdf.format(LocalDateTime.now()));
             }
             tc_order_price.setText(String.format("%.2f", pcTable.getSumPrice()));
             tc_order_dis_price.setText("0.00");
