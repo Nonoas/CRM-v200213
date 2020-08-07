@@ -3,7 +3,7 @@ package indi.nonoas.crm.dao;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import indi.nonoas.crm.bean.VipLevelBean;
+import indi.nonoas.crm.beans.VipLevelBean;
 
 /**
  * 会员等级数据库操作类

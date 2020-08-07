@@ -1,6 +1,7 @@
 package indi.nonoas.crm.app.goods;
 
-import indi.nonoas.crm.bean.GoodsBean;
+import indi.nonoas.crm.app.consume.GoodsConsumeTable;
+import indi.nonoas.crm.beans.GoodsBean;
 import javafx.beans.value.ChangeListener;
 
 /**

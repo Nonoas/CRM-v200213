@@ -1,6 +1,6 @@
 package indi.nonoas.crm.app.pkg;
 
-import indi.nonoas.crm.bean.PackageBean;
+import indi.nonoas.crm.beans.PackageBean;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.SelectionMode;
 import per.nonoas.delegate.EventHandler;

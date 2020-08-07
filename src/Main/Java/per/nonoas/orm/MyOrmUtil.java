@@ -3,16 +3,13 @@ package per.nonoas.orm;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("unused")
 public abstract class MyOrmUtil<T> {
 
     /**
@@ -83,13 +80,22 @@ public abstract class MyOrmUtil<T> {
     }
 
     /**
-     * 向数据库插入数据
+     * 向数据库插入内容
      *
      * @param sql 传入的带#{}通配符的SQL语句
      * @param t   传入的泛型Bean类
+     * @return 插入的数据条数
      */
-    final protected void insert(String sql, T t) {
-        beanToDataBase(sql, t);
+    final protected int insert(String sql, T t) {
+        PreparedStatement ps = getPrepareStatement(sql, t);
+        if (ps != null) {
+            try {
+                return ps.executeUpdate();
+            } catch (SQLException throwable) {
+                throwable.printStackTrace();
+            }
+        }
+        return 0;
     }
 
     /**
@@ -97,9 +103,18 @@ public abstract class MyOrmUtil<T> {
      *
      * @param sql 传入的带#{}通配符的SQL语句
      * @param t   传入的泛型Bean类
+     * @return 更新的数据条数
      */
-    final protected void update(String sql, T t) {
-        beanToDataBase(sql, t);
+    final protected int update(String sql, T t) {
+        PreparedStatement ps = getPrepareStatement(sql, t);
+        if (ps != null) {
+            try {
+                return ps.executeUpdate();
+            } catch (SQLException throwable) {
+                throwable.printStackTrace();
+            }
+        }
+        return 0;
     }
 
     /**
@@ -107,9 +122,15 @@ public abstract class MyOrmUtil<T> {
      *
      * @param sql 传入的带#{}通配符的SQL语句
      * @param t   传入的泛型Bean类
+     * @return 删除的数据条数
      */
-    final protected void delete(String sql, T t) {
-        beanToDataBase(sql, t);
+    final protected boolean delete(String sql, T t) {
+        try {
+            return execute(sql, t);
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return false;
     }
 
     /**
@@ -177,6 +198,22 @@ public abstract class MyOrmUtil<T> {
     }
 
     /**
+     * 通用执行方法
+     *
+     * @param sql sql语句
+     * @param t   对应的bean类
+     * @return 执行成功返回true，否则返回false
+     * @throws SQLException 数据库操作异常类
+     */
+    private boolean execute(String sql, T t) throws SQLException {
+        PreparedStatement ps = getPrepareStatement(sql, t);
+        if (ps != null) {
+            return ps.execute();
+        }
+        return false;
+    }
+
+    /**
      * 映射一条数据到Bean中
      *
      * @param rs        ResultSet对象
@@ -217,22 +254,23 @@ public abstract class MyOrmUtil<T> {
      * @param sql 带#{}通配符的SQL语句
      * @param t   泛型Bean对象
      */
-    private void beanToDataBase(String sql, T t) {
+    private PreparedStatement getPrepareStatement(String sql, T t) {
         Class<?> beanClass = t.getClass();
         List<String> list = getParams(sql);
         sql = getSql(sql); // 将SQL中的#{}占位符改为?
         try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             for (int i = 0; i < list.size(); i++) {
-                String colnName = list.get(i);
-                String methodName = "get" + firstUpperCase(colnName); // 方法名
+                String colName = list.get(i);
+                String methodName = "get" + firstUpperCase(colName); // 方法名
                 Method method = beanClass.getDeclaredMethod(methodName);
                 Object value = method.invoke(t);
                 ps.setObject(i + 1, value);
             }
-            ps.execute();
+            return ps;
         } catch (SQLException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     /**
@@ -266,7 +304,6 @@ public abstract class MyOrmUtil<T> {
      * @return 传递参数列名的List集合，不为null
      */
     private List<String> getParams(String sql) {
-
         List<String> list = new ArrayList<>(8);
         Pattern p = Pattern.compile("[#]\\{\\w*[}]");
         Matcher m = p.matcher(sql);

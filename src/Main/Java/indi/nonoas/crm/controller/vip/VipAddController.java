@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 import indi.nonoas.crm.view.alert.MyAlert;
-import indi.nonoas.crm.bean.VipBean;
+import indi.nonoas.crm.beans.VipBean;
 import indi.nonoas.crm.dao.VipInfoDao;
 import indi.nonoas.crm.dao.VipLevelDao;
 import indi.nonoas.crm.config.ImageSrc;

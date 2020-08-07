@@ -1,6 +1,6 @@
 package indi.nonoas.crm.dao;
 
-import indi.nonoas.crm.bean.LoginBean;
+import indi.nonoas.crm.beans.LoginBean;
 
 public class LoginDao extends MyDao<LoginBean> {
 	

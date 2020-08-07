@@ -3,7 +3,7 @@ package indi.nonoas.crm.app.goods;
 import java.io.IOException;
 import java.net.URL;
 
-import indi.nonoas.crm.bean.GoodsBean;
+import indi.nonoas.crm.beans.GoodsBean;
 import indi.nonoas.crm.controller.goods.GoodsModifyController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;

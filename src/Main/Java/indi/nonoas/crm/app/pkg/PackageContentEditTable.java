@@ -1,7 +1,7 @@
 package indi.nonoas.crm.app.pkg;
 
-import indi.nonoas.crm.bean.GoodsBean;
-import indi.nonoas.crm.bean.PackageContentBean;
+import indi.nonoas.crm.beans.GoodsBean;
+import indi.nonoas.crm.beans.PackageContentBean;
 import indi.nonoas.crm.dao.GoodsDao;
 import indi.nonoas.crm.dao.PackageContentDao;
 import indi.nonoas.crm.view.table.GoodsEditTable;

@@ -1,6 +1,6 @@
 package indi.nonoas.crm.app.goods;
 
-import indi.nonoas.crm.bean.GoodsBean;
+import indi.nonoas.crm.beans.GoodsBean;
 import javafx.collections.ObservableList;
 import javafx.scene.control.SelectionMode;
 

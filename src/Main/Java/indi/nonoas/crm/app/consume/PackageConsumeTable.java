@@ -1,7 +1,7 @@
-package indi.nonoas.crm.app.goods;
+package indi.nonoas.crm.app.consume;
 
-import indi.nonoas.crm.bean.GoodsBean;
-import indi.nonoas.crm.dao.GoodsDao;
+import indi.nonoas.crm.beans.PackageBean;
+import indi.nonoas.crm.dao.PackageDao;
 import indi.nonoas.crm.view.table.GoodsEditTable;
 import javafx.collections.ObservableList;
 
@@ -9,30 +9,25 @@ import java.util.ArrayList;
 
 /**
  * @author : Nonoas
- * @time : 2020-08-02 14:11
+ * @time : 2020-08-05 12:52
  */
-public class GoodsConsumeTable extends GoodsEditTable<GoodsBean> {
+public class PackageConsumeTable extends GoodsEditTable<PackageBean> {
 
     private final ObservableList<Data> obList = getItems();
 
-    public GoodsConsumeTable() {
-        super();
+    public PackageConsumeTable() {
+        item_id.setText("套餐编号");
+        item_name.setText("套餐名称");
         setTableMenuButtonVisible(false);
     }
 
     @Override
-    public ArrayList<GoodsBean> getAllBeans() {
-        if (obList == null)
-            return null;
-        ArrayList<GoodsBean> goodsBeans = new ArrayList<>();
-        for (Data d : obList) {
-            goodsBeans.add(dataToBean(d));
-        }
-        return goodsBeans;
+    public ArrayList<PackageBean> getAllBeans() {
+        return null;
     }
 
     @Override
-    public void addBean(GoodsBean bean) {
+    public void addBean(PackageBean bean) {
         String id = bean.getId();
         for (Data d : obList) {
             if (d.getId().equals(id))
@@ -46,25 +41,24 @@ public class GoodsConsumeTable extends GoodsEditTable<GoodsBean> {
     }
 
     @Override
-    protected GoodsBean dataToBean(Data data) {
-        String id = data.getId();
-        return GoodsDao.getInstance().selectById(id);
+    protected PackageBean dataToBean(Data data) {
+        return PackageDao.getInstance().selectById(data.getId());
     }
 
     @Override
-    protected Data beanToData(GoodsBean bean) {
+    protected Data beanToData(PackageBean bean) {
         Data data = new Data();
         data.setId(bean.getId());
         data.setName(bean.getName());
-        data.setPrice(bean.getSell_price());
+        data.setPrice(bean.getMoney_cost());
         data.setAmount(1);
         return data;
     }
 
     /**
-     * 获取表格内商品的总价格
+     * 获取表格内套餐的总价格
      *
-     * @return 表格内商品总价
+     * @return 表格内套餐总价
      */
     public double getSumPrice() {
         double price = 0;
@@ -74,5 +68,6 @@ public class GoodsConsumeTable extends GoodsEditTable<GoodsBean> {
         System.out.println("总价：" + price);
         return price;
     }
+
 
 }

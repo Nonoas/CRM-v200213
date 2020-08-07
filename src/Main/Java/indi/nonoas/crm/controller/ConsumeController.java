@@ -1,13 +1,15 @@
 package indi.nonoas.crm.controller;
 
-import indi.nonoas.crm.app.goods.GoodsConsumeTable;
+import indi.nonoas.crm.app.consume.CountConsumeTable;
+import indi.nonoas.crm.app.consume.GoodsConsumeTable;
 import indi.nonoas.crm.app.goods.GoodsSingleSelectTable;
-import indi.nonoas.crm.app.pkg.PackageConsumeTable;
+import indi.nonoas.crm.app.consume.PackageConsumeTable;
 import indi.nonoas.crm.app.pkg.PackageSingleSelectTable;
+import indi.nonoas.crm.app.vip.UserGoodsTable;
 import indi.nonoas.crm.app.vip.VipAddTab;
 import indi.nonoas.crm.app.vip.VipInfoTable;
-import indi.nonoas.crm.bean.PackageBean;
-import indi.nonoas.crm.bean.VipBean;
+import indi.nonoas.crm.beans.PackageBean;
+import indi.nonoas.crm.beans.VipBean;
 import indi.nonoas.crm.dao.VipInfoDao;
 import indi.nonoas.crm.dao.VipLevelDao;
 import indi.nonoas.crm.service.OrderService;
@@ -147,6 +149,7 @@ public class ConsumeController implements Initializable {
 
         initGoodsTab();        //初始化商品消费面板
         initPackageTab();       //初始化套餐消费面板
+        initCountTab();         //初始化计次消费面板
     }
 
     //===========================================================================
@@ -259,4 +262,25 @@ public class ConsumeController implements Initializable {
     private void clearPackageTable() {
         pcTable.clearData();
     }
+
+
+    //===========================================================================
+    //                            计次消费
+    //===========================================================================
+
+    private final CountConsumeTable ccTable = new CountConsumeTable();
+
+    private final UserGoodsTable userGoodsTable = new UserGoodsTable();
+
+    @FXML
+    private BorderPane jc_borderPane;
+
+    @FXML
+    private ScrollPane jc_sp_goods;
+
+    private void initCountTab() {
+        jc_borderPane.setCenter(ccTable);
+        jc_sp_goods.setContent(userGoodsTable);
+    }
+
 }

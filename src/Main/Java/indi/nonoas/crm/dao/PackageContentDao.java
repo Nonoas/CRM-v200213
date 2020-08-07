@@ -2,7 +2,7 @@ package indi.nonoas.crm.dao;
 
 import java.util.ArrayList;
 
-import indi.nonoas.crm.bean.PackageContentBean;
+import indi.nonoas.crm.beans.PackageContentBean;
 
 /**
  * 套餐项目内容数据库操作类

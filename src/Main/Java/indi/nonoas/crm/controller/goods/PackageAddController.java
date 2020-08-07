@@ -1,9 +1,9 @@
 package indi.nonoas.crm.controller.goods;
 
-import indi.nonoas.crm.bean.PackageBean;
+import indi.nonoas.crm.beans.PackageBean;
 import indi.nonoas.crm.dao.PackageContentDao;
 import indi.nonoas.crm.dao.PackageDao;
-import indi.nonoas.crm.bean.PackageContentBean;
+import indi.nonoas.crm.beans.PackageContentBean;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 

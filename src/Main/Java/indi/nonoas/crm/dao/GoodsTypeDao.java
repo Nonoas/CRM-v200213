@@ -3,7 +3,7 @@ package indi.nonoas.crm.dao;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import indi.nonoas.crm.bean.GoodsTypeBean;
+import indi.nonoas.crm.beans.GoodsTypeBean;
 
 /**
  * 商品类型数据库操作类

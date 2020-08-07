@@ -231,7 +231,7 @@
                                                         </GridPane>
                                                     </bottom>
                                                     <top>
-                                                        <Label style="-fx-font-weight: bold;" text="已选商品：" BorderPane.alignment="CENTER_LEFT">
+                                                        <Label style="-fx-font-weight: bold;" text="已选套餐：" BorderPane.alignment="CENTER_LEFT">
                                                             <padding>
                                                                 <Insets bottom="5.0" left="5.0" top="5.0" />
                                                             </padding>
@@ -247,7 +247,7 @@
                                     <content>
                                         <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
                                             <items>
-                                                <BorderPane fx:id="pt_borderPane1" prefHeight="358.0" prefWidth="616.0">
+                                                <BorderPane fx:id="jc_borderPane" prefHeight="358.0" prefWidth="616.0">
                                                     <padding>
                                                         <Insets bottom="5.0" right="5.0" top="5.0" />
                                                     </padding>
@@ -282,8 +282,15 @@
                                                             </BorderPane.margin>
                                                         </GridPane>
                                                     </bottom>
+                                       <top>
+                                          <Label style="-fx-font-weight: bold;" text="已选商品：" BorderPane.alignment="CENTER_LEFT">
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" top="5.0" />
+                                             </padding>
+                                          </Label>
+                                       </top>
                                                 </BorderPane>
-                                                <ScrollPane fx:id="pt_sp_goods1" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" />
+                                                <ScrollPane fx:id="jc_sp_goods" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" />
                                             </items>
                                         </SplitPane>
                                     </content>

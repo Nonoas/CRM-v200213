@@ -2,7 +2,7 @@ package indi.nonoas.crm.app.goods;
 
 import java.util.ArrayList;
 
-import indi.nonoas.crm.bean.GoodsBean;
+import indi.nonoas.crm.beans.GoodsBean;
 import indi.nonoas.crm.dao.GoodsDao;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;

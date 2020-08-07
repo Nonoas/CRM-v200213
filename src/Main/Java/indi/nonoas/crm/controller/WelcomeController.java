@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import indi.nonoas.crm.global.ClientSession;
 import indi.nonoas.crm.app.MainStage;
 import indi.nonoas.crm.view.alert.MyAlert;
-import indi.nonoas.crm.bean.LoginBean;
+import indi.nonoas.crm.beans.LoginBean;
 import indi.nonoas.crm.dao.LoginDao;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

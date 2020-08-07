@@ -2,7 +2,7 @@ package indi.nonoas.crm.dao;
 
 import java.util.ArrayList;
 
-import indi.nonoas.crm.bean.VipBean;
+import indi.nonoas.crm.beans.VipBean;
 
 /**
  * 会员信息的数据库操作类

@@ -3,9 +3,9 @@ package indi.nonoas.crm.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import indi.nonoas.crm.bean.LoginBean;
+import indi.nonoas.crm.beans.LoginBean;
 import indi.nonoas.crm.global.ClientSession;
-import indi.nonoas.crm.app.ConsumePane;
+import indi.nonoas.crm.app.consume.ConsumePane;
 import indi.nonoas.crm.app.goods.GoodsManagePane;
 import indi.nonoas.crm.app.StaffManagePane;
 import indi.nonoas.crm.app.StatPane;

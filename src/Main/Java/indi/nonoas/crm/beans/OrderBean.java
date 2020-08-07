@@ -1,4 +1,4 @@
-package indi.nonoas.crm.bean;
+package indi.nonoas.crm.beans;
 
 import java.math.BigDecimal;
 

@@ -2,7 +2,7 @@ package indi.nonoas.crm.app.vip;
 
 import java.util.ArrayList;
 
-import indi.nonoas.crm.bean.VipBean;
+import indi.nonoas.crm.beans.VipBean;
 import indi.nonoas.crm.dao.VipInfoDao;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
