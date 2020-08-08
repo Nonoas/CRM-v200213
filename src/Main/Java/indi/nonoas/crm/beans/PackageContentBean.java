@@ -10,47 +10,47 @@ public class PackageContentBean {
     /**
      * 项目编号
      */
-    private String pkg_id;
+    private String pkgId;
     /**
      * 商品编号
      */
-    private String goods_id;
+    private String goodsId;
     /**
      * 商品数量
      */
-    private int goods_amount;
+    private int goodsAmount;
 
 
-    public String getPkg_id() {
-        return pkg_id;
+    public String getPkgId() {
+        return pkgId;
     }
 
-    public void setPkg_id(String pkg_id) {
-        this.pkg_id = pkg_id;
+    public void setPkgId(String pkgId) {
+        this.pkgId = pkgId;
     }
 
-    public String getGoods_id() {
-        return goods_id;
+    public String getGoodsId() {
+        return goodsId;
     }
 
-    public void setGoods_id(String goods_id) {
-        this.goods_id = goods_id;
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
     }
 
-    public int getGoods_amount() {
-        return goods_amount;
+    public int getGoodsAmount() {
+        return goodsAmount;
     }
 
-    public void setGoods_amount(int goods_amount) {
-        this.goods_amount = goods_amount;
+    public void setGoodsAmount(int goodsAmount) {
+        this.goodsAmount = goodsAmount;
     }
 
     @Override
     public String toString() {
         return "PackageContentBean{" +
-                "pkg_id='" + pkg_id + '\'' +
-                ", goods_id='" + goods_id + '\'' +
-                ", goods_amount=" + goods_amount +
+                "pkg_id='" + pkgId + '\'' +
+                ", goods_id='" + goodsId + '\'' +
+                ", goods_amount=" + goodsAmount +
                 '}';
     }
 }

@@ -63,16 +63,16 @@ public class GoodsInfoTable extends TableView<GoodsBean> {
 
         item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getId()));
         item_name.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName()));
-        item_sell_price.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getSell_price()));
-        item_purchase_price.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getPurchase_price()));
+        item_sell_price.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getSellPrice()));
+        item_purchase_price.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getPurchasePrice()));
         item_quantity.setCellValueFactory(param -> {
             double quantity = param.getValue().getQuantity(); // 数量
-            String unit = param.getValue().getBase_unit(); // 单位
+            String unit = param.getValue().getBaseUnit(); // 单位
             return new SimpleStringProperty(quantity + " " + unit);
         });
-        item_min_discount.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getMin_discount()));
+        item_min_discount.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getMinDiscount()));
         item_deduction.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getDeduction()));
-        item_deduction_rate.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getDeduction_rate()));
+        item_deduction_rate.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getDeductionRate()));
         item_type.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getType()));
 
         getColumns().add(item_id);

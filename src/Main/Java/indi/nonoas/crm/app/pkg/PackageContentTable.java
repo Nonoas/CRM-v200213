@@ -46,27 +46,27 @@ public class PackageContentTable extends TableView<PackageContentBean> {
 
         setTableMenuButtonVisible(true); // 显示表格菜单按钮
 
-        item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getGoods_id()));
+        item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getGoodsId()));
         item_name.setCellValueFactory(param -> {
-            String goodsID = param.getValue().getGoods_id();
+            String goodsID = param.getValue().getGoodsId();
             GoodsBean goodsBean = GoodsDao.getInstance().selectById(goodsID);
             return new SimpleStringProperty(goodsBean.getName());
         });
 		item_money_cost.setCellValueFactory(param -> {
-            String goodsID = param.getValue().getGoods_id();
+            String goodsID = param.getValue().getGoodsId();
             GoodsBean goodsBean = GoodsDao.getInstance().selectById(goodsID);
-			double numMoney = goodsBean.getSell_price();
+			double numMoney = goodsBean.getSellPrice();
 			String show = String.format("￥%.2f", numMoney);
 			return new SimpleStringProperty(show);
 		});
 
-		item_amount.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getGoods_amount()));
+		item_amount.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getGoodsAmount()));
 
 		item_total.setCellValueFactory(param -> {
-            String goodsID = param.getValue().getGoods_id();
+            String goodsID = param.getValue().getGoodsId();
             GoodsBean goodsBean = GoodsDao.getInstance().selectById(goodsID);
-            double numMoney = goodsBean.getSell_price();
-            double amount=param.getValue().getGoods_amount();
+            double numMoney = goodsBean.getSellPrice();
+            double amount=param.getValue().getGoodsAmount();
             String show=String.format("￥%.2f", numMoney*amount);
 			return new SimpleStringProperty(show);
 		});

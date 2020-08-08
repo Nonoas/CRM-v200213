@@ -7,24 +7,24 @@ package indi.nonoas.crm.beans;
  * @time : 2020-08-07 14:03
  */
 public class UserGoods {
-    private String user_id;
-    private String goods_id;
+    private String userId;
+    private String goodsId;
     private int amount;
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getGoods_id() {
-        return goods_id;
+    public String getGoodsId() {
+        return goodsId;
     }
 
-    public void setGoods_id(String goods_id) {
-        this.goods_id = goods_id;
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId;
     }
 
     public int getAmount() {

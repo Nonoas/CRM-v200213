@@ -7,25 +7,25 @@ import java.math.BigDecimal;
  * @time : 2020-08-04 14:39
  */
 public class OrderBean {
-    private String order_id;
-    private String user_id;
+    private String orderId;
+    private String userId;
     private String datetime;
     private BigDecimal price;
 
-    public String getOrder_id() {
-        return order_id;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_id(String order_id) {
-        this.order_id = order_id;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getDatetime() {

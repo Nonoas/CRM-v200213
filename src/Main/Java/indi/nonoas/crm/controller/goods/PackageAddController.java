@@ -52,11 +52,11 @@ public class PackageAddController extends PackageController {
         PackageBean packageBean = new PackageBean();
         packageBean.setId(tf_id.getText());
         packageBean.setName(tf_name.getText());
-        packageBean.setMoney_cost(Double.parseDouble(tf_money.getText()));
-        packageBean.setIntegral_cost(Integer.parseInt(tf_integral.getText()));
+        packageBean.setMoneyCost(Double.parseDouble(tf_money.getText()));
+        packageBean.setIntegralCost(Integer.parseInt(tf_integral.getText()));
         String minDiscount = tf_min_discount.getText();
         if (!minDiscount.equals("")) {
-            packageBean.setMin_discount(Double.parseDouble(minDiscount));
+            packageBean.setMinDiscount(Double.parseDouble(minDiscount));
         }
         packageBean.setOther(tf_other.getText());
         //插入套餐信息到数据库
@@ -64,7 +64,7 @@ public class PackageAddController extends PackageController {
         //套餐内容信息
         ArrayList<PackageContentBean> packageContentBeans = pkgGoodsTable.getAllBeans();
         for (PackageContentBean p : packageContentBeans) {
-            p.setPkg_id(packageBean.getId());
+            p.setPkgId(packageBean.getId());
         }
         PackageContentDao.getInstance().insertInfos(packageContentBeans);
 

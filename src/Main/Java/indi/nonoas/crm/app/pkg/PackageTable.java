@@ -87,12 +87,12 @@ public class PackageTable extends TableView<PackageBean> {
         item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getId()));
         item_name.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName()));
         item_money_cost.setCellValueFactory(param -> {
-            double numMoney = param.getValue().getMoney_cost();
+            double numMoney = param.getValue().getMoneyCost();
             String show = String.format("гд%.2f", numMoney);
             return new SimpleStringProperty(show);
         });
-        item_integral_cost.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getIntegral_cost()));
-        item_min_discount.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getMin_discount()));
+        item_integral_cost.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getIntegralCost()));
+        item_min_discount.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getMinDiscount()));
         item_type.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getType()));
 
         item_other.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getOther()));

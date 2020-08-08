@@ -81,9 +81,9 @@ public abstract class PackageController implements Initializable {
         if (beans != null && beans.size() != 0) {
             for (GoodsBean goodsBean : beans) {
                 PackageContentBean packageContentBean = new PackageContentBean();
-                packageContentBean.setPkg_id(tf_id.getText());
-                packageContentBean.setGoods_id(goodsBean.getId());
-                packageContentBean.setGoods_amount(1);
+                packageContentBean.setPkgId(tf_id.getText());
+                packageContentBean.setGoodsId(goodsBean.getId());
+                packageContentBean.setGoodsAmount(1);
                 pkgGoodsTable.addBean(packageContentBean);
             }
         }

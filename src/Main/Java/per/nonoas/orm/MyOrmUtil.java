@@ -90,7 +90,7 @@ public abstract class MyOrmUtil<T> {
         PreparedStatement ps = getPrepareStatement(sql, t);
         if (ps != null) {
             try {
-                return ps.executeUpdate();
+                int res = ps.executeUpdate();
             } catch (SQLException throwable) {
                 throwable.printStackTrace();
             }
@@ -149,7 +149,7 @@ public abstract class MyOrmUtil<T> {
                 Class<?> beanClass = t.getClass();
                 for (int i = 0; i < list.size(); i++) {
                     String colName = list.get(i);
-                    String methodName = "get" + firstUpperCase(colName); // 方法名
+                    String methodName = "get" + underlineToBigCamel(colName); // 方法名
                     Method method = beanClass.getDeclaredMethod(methodName);
                     Object value = method.invoke(t);
                     ps.setObject(i + 1, value);
@@ -183,7 +183,7 @@ public abstract class MyOrmUtil<T> {
      * @param params 占位符参数
      * @return PrepareStatement对象
      */
-    private PreparedStatement getGeneralPreparedStatement(String sql, Object... params) {
+    protected final PreparedStatement getGeneralPreparedStatement(String sql, Object... params) {
         Connection conn = getConnection();
         PreparedStatement ps = null;
         try {
@@ -196,6 +196,34 @@ public abstract class MyOrmUtil<T> {
         }
         return ps;
     }
+
+    /**
+     * 将传入的泛型Bean中的字段赋值给SQL语句中的占位符，并执行他们
+     *
+     * @param sql 带#{}通配符的SQL语句
+     * @param t   泛型Bean对象
+     */
+    protected final PreparedStatement getPrepareStatement(String sql, T t) {
+        Class<?> beanClass = t.getClass();
+        List<String> list = getParams(sql);
+        sql = getSql(sql); // 将SQL中的#{}占位符改为?
+        Connection con = getConnection();
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            for (int i = 0; i < list.size(); i++) {
+                String colName = list.get(i);
+                String methodName = "get" + underlineToBigCamel(colName); // 方法名
+                Method method = beanClass.getDeclaredMethod(methodName);
+                Object value = method.invoke(t);
+                ps.setObject(i + 1, value);
+            }
+        } catch (SQLException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return ps;
+    }
+
 
     /**
      * 通用执行方法
@@ -226,8 +254,8 @@ public abstract class MyOrmUtil<T> {
         try {
             t = beanClass.newInstance();
             for (String colName : list) {
-                String methodName = "set" + firstUpperCase(colName); // 获取方法名
-                Field field = beanClass.getDeclaredField(colName); // 获取字段名
+                String methodName = "set" + underlineToBigCamel(colName); // 获取方法名
+                Field field = beanClass.getDeclaredField(underlineToCamel(colName)); // 获取字段名
                 Class<?> type = field.getType(); // 获取字段类型
                 Object value = rs.getObject(colName); // 获取传入值
                 Method method = beanClass.getDeclaredMethod(methodName, type);
@@ -248,30 +276,6 @@ public abstract class MyOrmUtil<T> {
         return t;
     }
 
-    /**
-     * 将传入的泛型Bean中的字段赋值给SQL语句中的占位符，并执行他们
-     *
-     * @param sql 带#{}通配符的SQL语句
-     * @param t   泛型Bean对象
-     */
-    private PreparedStatement getPrepareStatement(String sql, T t) {
-        Class<?> beanClass = t.getClass();
-        List<String> list = getParams(sql);
-        sql = getSql(sql); // 将SQL中的#{}占位符改为?
-        try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-            for (int i = 0; i < list.size(); i++) {
-                String colName = list.get(i);
-                String methodName = "get" + firstUpperCase(colName); // 方法名
-                Method method = beanClass.getDeclaredMethod(methodName);
-                Object value = method.invoke(t);
-                ps.setObject(i + 1, value);
-            }
-            return ps;
-        } catch (SQLException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     /**
      * 获取所有查询的列名
@@ -316,13 +320,35 @@ public abstract class MyOrmUtil<T> {
     }
 
     /**
-     * 首字母大写
+     * 下划线命名转大驼峰
      *
-     * @param str 传入的字符串，如“name”
-     * @return 首字母大写的字符串，如“Name”
+     * @param str 传入的字符串，如“user_name”
+     * @return 首字母大写的字符串，如“UserName”
      */
-    private String firstUpperCase(String str) {
-        return str.substring(0, 1).toUpperCase() + str.substring(1);
+    private String underlineToBigCamel(String str) {
+        String[] strs = str.split("_");
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < strs.length; i++) {
+            strs[i] = strs[i].substring(0, 1).toUpperCase() + strs[i].substring(1);
+            sb.append(strs[i]);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 下划线命名转小驼峰
+     *
+     * @param str 传入的字符串，如“user_name”
+     * @return 首字母大写的字符串，如“UserName”
+     */
+    private String underlineToCamel(String str) {
+        String[] strs = str.split("_");
+        StringBuilder sb = new StringBuilder(strs[0]);
+        for (int i = 1; i < strs.length; i++) {
+            strs[i] = strs[i].substring(0, 1).toUpperCase() + strs[i].substring(1);
+            sb.append(strs[i]);
+        }
+        return sb.toString();
     }
 
     /**

@@ -76,7 +76,7 @@ public class ConsumeController implements Initializable {
             lb_cardState.setText("可用");
             lb_id.setText(vipBean.getId());
             lb_integral.setText(String.valueOf(vipBean.getIntegral()));
-            lb_cardLevel.setText(vipBean.getCard_level());
+            lb_cardLevel.setText(vipBean.getCardLevel());
             lb_name.setText(vipBean.getName());
         } else {
             new MyAlert(AlertType.INFORMATION, "没有找到您查询的会员！").show();

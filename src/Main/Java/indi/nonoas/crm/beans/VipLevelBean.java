@@ -13,7 +13,7 @@ public class VipLevelBean {
 	/** 名称 */
 	private String name;
 	/** 每积分需要消费多少元 */
-	private double yuan_per_integral;
+	private double yuanPerIntegral;
 	/** 折扣 */
 	private double discount;
 
@@ -33,12 +33,12 @@ public class VipLevelBean {
 		this.name = name;
 	}
 
-	public double getYuan_per_integral() {
-		return yuan_per_integral;
+	public double getYuanPerIntegral() {
+		return yuanPerIntegral;
 	}
 
-	public void setYuan_per_integral(double yuan_per_integral) {
-		this.yuan_per_integral = yuan_per_integral;
+	public void setYuanPerIntegral(double yuanPerIntegral) {
+		this.yuanPerIntegral = yuanPerIntegral;
 	}
 
 	public double getDiscount() {
@@ -51,7 +51,7 @@ public class VipLevelBean {
 
 	@Override
 	public String toString() {
-		return "VipLevelBean [id=" + id + ", name=" + name + ", yuan_per_integral=" + yuan_per_integral + ", discount="
+		return "VipLevelBean [id=" + id + ", name=" + name + ", yuan_per_integral=" + yuanPerIntegral + ", discount="
 				+ discount + "]";
 	}
 

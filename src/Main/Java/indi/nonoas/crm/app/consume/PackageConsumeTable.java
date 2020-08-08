@@ -50,7 +50,7 @@ public class PackageConsumeTable extends GoodsEditTable<PackageBean> {
         Data data = new Data();
         data.setId(bean.getId());
         data.setName(bean.getName());
-        data.setPrice(bean.getMoney_cost());
+        data.setPrice(bean.getMoneyCost());
         data.setAmount(1);
         return data;
     }

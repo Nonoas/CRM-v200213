@@ -88,14 +88,14 @@ public class GoodsModifyController implements Initializable {
         double commissionRate = Double.parseDouble(tf_commissionRate.getText());
         double commission = Double.parseDouble(tf_commission.getText());
 
-        goodsBean.setSell_price(sellPrice);
+        goodsBean.setSellPrice(sellPrice);
         goodsBean.setName(name);
         goodsBean.setType(type);
         goodsBean.setQuantity(quantity);
-        goodsBean.setBase_unit(unit);
-        goodsBean.setPurchase_price(purcPrice);
-        goodsBean.setMin_discount(minDiscount);
-        goodsBean.setDeduction_rate(commissionRate);
+        goodsBean.setBaseUnit(unit);
+        goodsBean.setPurchasePrice(purcPrice);
+        goodsBean.setMinDiscount(minDiscount);
+        goodsBean.setDeductionRate(commissionRate);
         goodsBean.setDeduction(commission);
 
         goodsDao.update(goodsBean);
@@ -131,14 +131,14 @@ public class GoodsModifyController implements Initializable {
         this.goodsBean = bean;
 
         String id = goodsBean.getId();
-        double sellPrice = goodsBean.getSell_price(); // 预售单价
+        double sellPrice = goodsBean.getSellPrice(); // 预售单价
         String name = goodsBean.getName(); // 商品名称
         String type = goodsBean.getType();
         double quantity = goodsBean.getQuantity();
-        String unit = goodsBean.getBase_unit();
-        double purcPrice = goodsBean.getPurchase_price();
-        double minDiscount = goodsBean.getMin_discount();
-        double commissionRate = goodsBean.getDeduction_rate();
+        String unit = goodsBean.getBaseUnit();
+        double purcPrice = goodsBean.getPurchasePrice();
+        double minDiscount = goodsBean.getMinDiscount();
+        double commissionRate = goodsBean.getDeductionRate();
         double commission = goodsBean.getDeduction();
         // 显示goodsBean的信息
         tf_id.setText(id);

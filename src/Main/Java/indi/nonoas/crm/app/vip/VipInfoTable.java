@@ -88,10 +88,10 @@ public class VipInfoTable extends TableView<VipBean> {
         setTableMenuButtonVisible(true);
 
         item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getId())); // 会员卡号
-        item_admission.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAdmission_date())); // 入会日期
+        item_admission.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAdmissionDate())); // 入会日期
         item_name.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName())); // 姓名
         item_sex.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSex())); // 性别
-        item_card_level.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getCard_level())); // 会员等级
+        item_card_level.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getCardLevel())); // 会员等级
         item_balance.setCellValueFactory(param -> {
             String str = String.format("￥%.2f", param.getValue().getBalance());
             return new SimpleStringProperty(str);

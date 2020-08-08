@@ -27,11 +27,11 @@ public class VipBean implements Serializable {
     /**
      * 入会日期
      */
-    private String admission_date;
+    private String admissionDate;
     /**
      * 会员等级
      */
-    private String card_level;
+    private String cardLevel;
     /**
      * 积分
      */
@@ -117,20 +117,20 @@ public class VipBean implements Serializable {
         this.sex = sex;
     }
 
-    public String getAdmission_date() {
-        return admission_date;
+    public String getAdmissionDate() {
+        return admissionDate;
     }
 
-    public void setAdmission_date(String admission_date) {
-        this.admission_date = admission_date;
+    public void setAdmissionDate(String admissionDate) {
+        this.admissionDate = admissionDate;
     }
 
-    public String getCard_level() {
-        return card_level;
+    public String getCardLevel() {
+        return cardLevel;
     }
 
-    public void setCard_level(String card_level) {
-        this.card_level = card_level;
+    public void setCardLevel(String cardLevel) {
+        this.cardLevel = cardLevel;
     }
 
     public int getIntegral() {

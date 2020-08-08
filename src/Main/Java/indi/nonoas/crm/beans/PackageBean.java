@@ -17,15 +17,15 @@ public class PackageBean {
     /**
      * 积分花费
      */
-    private int integral_cost;
+    private int integralCost;
     /**
      * 金钱花费
      */
-    private double money_cost;
+    private double moneyCost;
     /**
      * 最低折扣
      */
-    private double min_discount;
+    private double minDiscount;
     /**
      * 项目类型
      */
@@ -54,28 +54,28 @@ public class PackageBean {
         this.name = name;
     }
 
-    public int getIntegral_cost() {
-        return integral_cost;
+    public int getIntegralCost() {
+        return integralCost;
     }
 
-    public void setIntegral_cost(int integral_cost) {
-        this.integral_cost = integral_cost;
+    public void setIntegralCost(int integralCost) {
+        this.integralCost = integralCost;
     }
 
-    public double getMoney_cost() {
-        return money_cost;
+    public double getMoneyCost() {
+        return moneyCost;
     }
 
-    public void setMoney_cost(double money_cost) {
-        this.money_cost = money_cost;
+    public void setMoneyCost(double moneyCost) {
+        this.moneyCost = moneyCost;
     }
 
-    public double getMin_discount() {
-        return min_discount;
+    public double getMinDiscount() {
+        return minDiscount;
     }
 
-    public void setMin_discount(double min_discount) {
-        this.min_discount = min_discount;
+    public void setMinDiscount(double minDiscount) {
+        this.minDiscount = minDiscount;
     }
 
     public String getType() {
@@ -99,9 +99,9 @@ public class PackageBean {
         return "PackageBean{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", integral_cost=" + integral_cost +
-                ", money_cost=" + money_cost +
-                ", min_discount=" + min_discount +
+                ", integral_cost=" + integralCost +
+                ", money_cost=" + moneyCost +
+                ", min_discount=" + minDiscount +
                 ", type='" + type + '\'' +
                 ", other='" + other + '\'' +
                 '}';

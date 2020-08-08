@@ -95,11 +95,11 @@ public class GoodsAddController implements Initializable {
 		bean.setName(tf_name.getText().trim());
 		
 		String sp=tf_sellPrice.getText().trim();	//预售单价
-		bean.setSell_price(Double.parseDouble(sp));
+		bean.setSellPrice(Double.parseDouble(sp));
 		
 		String pp=tf_puchasPrice.getText().trim();	//进货单价
 		double pur_price=pp.equals("")?0:Double.parseDouble(pp);
-		bean.setPurchase_price(pur_price);
+		bean.setPurchasePrice(pur_price);
 		
 		String quan=tf_quantity.getText().trim();	//初始库存
 		double quantity=quan.equals("")?0:Double.parseDouble(quan);
@@ -107,7 +107,7 @@ public class GoodsAddController implements Initializable {
 		
 		String md=tf_minDiscount.getText().trim();	//最小折扣
 		double min_dis=md.equals("")?0:Double.parseDouble(md);
-		bean.setMin_discount(min_dis);
+		bean.setMinDiscount(min_dis);
 		
 		String de=tf_commission.getText().trim();	//提成金额
 		double comison=de.equals("")?0:Double.parseDouble(de);
@@ -115,9 +115,9 @@ public class GoodsAddController implements Initializable {
 		
 		String deRate=tf_commissionRate.getText().trim();	//提成比例
 		double com_rate=deRate.equals("")?0:Double.parseDouble(deRate);
-		bean.setDeduction_rate(com_rate);
+		bean.setDeductionRate(com_rate);
 		
-		bean.setBase_unit(tf_unit.getText().trim());	//计量单位
+		bean.setBaseUnit(tf_unit.getText().trim());	//计量单位
 		
 		bean.setType(cbb_type.getValue());
 		

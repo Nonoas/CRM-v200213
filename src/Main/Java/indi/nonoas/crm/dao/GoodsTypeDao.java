@@ -11,7 +11,7 @@ import indi.nonoas.crm.beans.GoodsTypeBean;
  * @author Nonoas
  *
  */
-public class GoodsTypeDao extends MyDao<GoodsTypeBean> {
+public class GoodsTypeDao extends MySqlDao<GoodsTypeBean> {
 
 	private static final String SELECT_ALL_NAMES = "select name from goods_type";
 

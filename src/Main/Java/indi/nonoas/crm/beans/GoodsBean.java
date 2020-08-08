@@ -6,30 +6,30 @@ public class GoodsBean {
 	/** 名称 */
 	private String name;
 	/** 售价 */
-	private double sell_price;
+	private double sellPrice;
 	/** 进价 */
-	private double purchase_price;
+	private double purchasePrice;
 	/** 数量 */
 	private double quantity;
 	/** 最低折扣 */
-	private double min_discount;
+	private double minDiscount;
 	/** 提成金额 */
 	private double deduction;
 	/** 提成比率 */
-	private double deduction_rate;
+	private double deductionRate;
 	/** 商品种类 */
 	private String type;
 	/**度量单位*/
-	private String base_unit;
+	private String baseUnit;
 	/**商品图片*/
 	private String photo;
 
-	public String getBase_unit() {
-		return base_unit;
+	public String getBaseUnit() {
+		return baseUnit;
 	}
 
-	public void setBase_unit(String base_unit) {
-		this.base_unit = base_unit;
+	public void setBaseUnit(String baseUnit) {
+		this.baseUnit = baseUnit;
 	}
 
 	public String getPhoto() {
@@ -59,20 +59,20 @@ public class GoodsBean {
 		this.name = name;
 	}
 
-	public double getSell_price() {
-		return sell_price;
+	public double getSellPrice() {
+		return sellPrice;
 	}
 
-	public void setSell_price(double sell_price) {
-		this.sell_price = sell_price;
+	public void setSellPrice(double sellPrice) {
+		this.sellPrice = sellPrice;
 	}
 
-	public double getPurchase_price() {
-		return purchase_price;
+	public double getPurchasePrice() {
+		return purchasePrice;
 	}
 
-	public void setPurchase_price(double purchase_price) {
-		this.purchase_price = purchase_price;
+	public void setPurchasePrice(double purchasePrice) {
+		this.purchasePrice = purchasePrice;
 	}
 
 	public double getQuantity() {
@@ -83,12 +83,12 @@ public class GoodsBean {
 		this.quantity = quantity;
 	}
 
-	public double getMin_discount() {
-		return min_discount;
+	public double getMinDiscount() {
+		return minDiscount;
 	}
 
-	public void setMin_discount(double min_discount) {
-		this.min_discount = min_discount;
+	public void setMinDiscount(double minDiscount) {
+		this.minDiscount = minDiscount;
 	}
 
 	public double getDeduction() {
@@ -99,12 +99,12 @@ public class GoodsBean {
 		this.deduction = deduction;
 	}
 
-	public double getDeduction_rate() {
-		return deduction_rate;
+	public double getDeductionRate() {
+		return deductionRate;
 	}
 
-	public void setDeduction_rate(double deduction_rate) {
-		this.deduction_rate = deduction_rate;
+	public void setDeductionRate(double deductionRate) {
+		this.deductionRate = deductionRate;
 	}
 
 	public String getType() {

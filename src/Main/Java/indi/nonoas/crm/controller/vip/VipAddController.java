@@ -30,7 +30,7 @@ import javafx.stage.FileChooser;
 public class VipAddController implements Initializable {
 
 	/** 会员信息DAO*/
-	private VipInfoDao vipInfoDao=VipInfoDao.getInstance();
+	private VipInfoDao vipInfoDao= VipInfoDao.getInstance();
 	
 	private final ToggleGroup tGroup = new ToggleGroup();
 
@@ -152,10 +152,10 @@ public class VipAddController implements Initializable {
 		bean.setName(tf_name.getText().trim());
 		bean.setSex((String) tGroup.getSelectedToggle().getUserData());
 		if (dp_addDate.getValue() != null)
-			bean.setAdmission_date(dp_addDate.getValue().toString());
+			bean.setAdmissionDate(dp_addDate.getValue().toString());
 
 		if (cbb_level.getValue() != null)
-			bean.setCard_level(cbb_level.getValue());
+			bean.setCardLevel(cbb_level.getValue());
 
 		String strIntegral = tf_integral.getText().trim();
 		int iIntegral = strIntegral.equals("") ? 0 : Integer.parseInt(strIntegral);

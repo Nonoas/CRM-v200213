@@ -87,11 +87,11 @@ public class PackageModifyController extends PackageController {
         PackageBean packageBean = new PackageBean();
         packageBean.setId(tf_id.getText());
         packageBean.setName(tf_name.getText());
-        packageBean.setMoney_cost(Double.parseDouble(tf_money.getText()));
-        packageBean.setIntegral_cost(Integer.parseInt(tf_integral.getText()));
+        packageBean.setMoneyCost(Double.parseDouble(tf_money.getText()));
+        packageBean.setIntegralCost(Integer.parseInt(tf_integral.getText()));
         String minDiscount = tf_min_discount.getText();
         if (!minDiscount.equals("")) {
-            packageBean.setMin_discount(Double.parseDouble(minDiscount));
+            packageBean.setMinDiscount(Double.parseDouble(minDiscount));
         }
         packageBean.setOther(tf_other.getText());
         return packageBean;
@@ -105,7 +105,7 @@ public class PackageModifyController extends PackageController {
     private ArrayList<PackageContentBean> getPackageContentBeans(String PkgID) {
         ArrayList<PackageContentBean> packageContentBeans = pkgGoodsTable.getAllBeans();
         for (PackageContentBean p : packageContentBeans) {
-            p.setPkg_id(PkgID);
+            p.setPkgId(PkgID);
         }
         return packageContentBeans;
     }
@@ -119,9 +119,9 @@ public class PackageModifyController extends PackageController {
         String id = packageBean.getId();
         tf_id.setText(id);
         tf_name.setText(packageBean.getName());
-        tf_integral.setText(String.valueOf(packageBean.getIntegral_cost()));
-        tf_money.setText(String.valueOf(packageBean.getMoney_cost()));
-        tf_min_discount.setText(String.valueOf(packageBean.getMin_discount()));
+        tf_integral.setText(String.valueOf(packageBean.getIntegralCost()));
+        tf_money.setText(String.valueOf(packageBean.getMoneyCost()));
+        tf_min_discount.setText(String.valueOf(packageBean.getMinDiscount()));
         tf_other.setText(packageBean.getOther());
         pkgGoodsTable.showAllInfos(id);
     }

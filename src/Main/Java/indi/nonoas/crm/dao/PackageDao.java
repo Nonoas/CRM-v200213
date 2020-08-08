@@ -9,7 +9,7 @@ import indi.nonoas.crm.beans.PackageBean;
  *
  * @author Nonoas
  */
-public class PackageDao extends MyDao<PackageBean> {
+public class PackageDao extends MySqlDao<PackageBean> {
 
     private static final String SELECT_ALL = "select * from package_info";
 

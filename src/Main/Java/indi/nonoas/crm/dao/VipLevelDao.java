@@ -11,7 +11,7 @@ import indi.nonoas.crm.beans.VipLevelBean;
  * @author Nonoas
  *
  */
-public class VipLevelDao extends MyDao<VipLevelBean> {
+public class VipLevelDao extends MySqlDao<VipLevelBean> {
 
 	private static final String SELECT_ALL_NAMES = "select name from vip_level";
 

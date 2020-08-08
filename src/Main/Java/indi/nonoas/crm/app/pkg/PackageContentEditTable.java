@@ -68,11 +68,11 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
      */
     @Override
     protected Data beanToData(PackageContentBean bean) {
-        String id = bean.getGoods_id();
+        String id = bean.getGoodsId();
         GoodsBean goodsBean = GoodsDao.getInstance().selectById(id);
         String name = goodsBean.getName();
-        double price = goodsBean.getSell_price();
-        int amount = bean.getGoods_amount();
+        double price = goodsBean.getSellPrice();
+        int amount = bean.getGoodsAmount();
 
         Data data = new Data();
         data.setId(id);
@@ -91,8 +91,8 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
     @Override
     protected PackageContentBean dataToBean(Data data) {
         PackageContentBean packageContentBean = new PackageContentBean();
-        packageContentBean.setGoods_id(data.getId());
-        packageContentBean.setGoods_amount(data.getAmount());
+        packageContentBean.setGoodsId(data.getId());
+        packageContentBean.setGoodsAmount(data.getAmount());
         return packageContentBean;
     }
 

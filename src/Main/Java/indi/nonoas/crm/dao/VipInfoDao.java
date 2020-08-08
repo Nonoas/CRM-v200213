@@ -10,7 +10,7 @@ import indi.nonoas.crm.beans.VipBean;
  * @author Nonoas
  */
 @SuppressWarnings("unused")
-public class VipInfoDao extends MyDao<VipBean> {
+public class VipInfoDao extends MySqlDao<VipBean> {
 
     private static final String SELECT_ALL = "select * from user_info ";
     private static final String GET_INFO_BY_ID = "select * from user_info where id=#{id}";

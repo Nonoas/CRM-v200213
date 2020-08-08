@@ -56,7 +56,7 @@ public class GoodsConsumeTable extends GoodsEditTable<GoodsBean> {
         Data data = new Data();
         data.setId(bean.getId());
         data.setName(bean.getName());
-        data.setPrice(bean.getSell_price());
+        data.setPrice(bean.getSellPrice());
         data.setAmount(1);
         return data;
     }

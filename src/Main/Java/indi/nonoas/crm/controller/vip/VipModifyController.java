@@ -136,7 +136,7 @@ public class VipModifyController implements Initializable {
         vipBean.setSex((String) tGroup.getSelectedToggle().getUserData());
 
         if (cbb_level.getValue() != null)
-            vipBean.setCard_level(cbb_level.getValue());
+            vipBean.setCardLevel(cbb_level.getValue());
 
         vipBean.setAddress(tf_address.getText());
         vipBean.setTelephone(tf_tel.getText());
@@ -194,7 +194,7 @@ public class VipModifyController implements Initializable {
         tf_name.setText(vipBean.getName());
         tf_id.setText(vipBean.getId());
         tf_idcard.setText(vipBean.getIdcard());
-        cbb_level.setValue(vipBean.getCard_level());
+        cbb_level.setValue(vipBean.getCardLevel());
         // …Ë÷√œ‘ æµƒ’’∆¨
         String photoUrl = bean.getPhoto();
         Log.i(this, photoUrl);

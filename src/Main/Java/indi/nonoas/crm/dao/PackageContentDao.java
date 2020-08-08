@@ -9,7 +9,7 @@ import indi.nonoas.crm.beans.PackageContentBean;
  *
  * @author Nonoas
  */
-public class PackageContentDao extends MyDao<PackageContentBean> {
+public class PackageContentDao extends MySqlDao<PackageContentBean> {
 
     private static final String SELECT_BY_ID = "select * from package_content where pkg_id=#{pkg_id}";
 
@@ -58,7 +58,7 @@ public class PackageContentDao extends MyDao<PackageContentBean> {
      */
     public void deleteById(String id) {
         PackageContentBean packageContentBean = new PackageContentBean();
-        packageContentBean.setPkg_id(id);
+        packageContentBean.setPkgId(id);
         delete(DELETE_BY_ID, packageContentBean);
     }
 
