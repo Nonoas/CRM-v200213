@@ -45,6 +45,10 @@ public class VipBean implements Serializable {
      */
     private double balance;
     /**
+     * ฯํสÜีÛฟÛ
+     */
+    private double discount;
+    /**
      * สฃำเดฮสý
      */
     private int frequency;
@@ -155,6 +159,14 @@ public class VipBean implements Serializable {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 
     public int getFrequency() {
