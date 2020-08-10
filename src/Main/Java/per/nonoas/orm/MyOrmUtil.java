@@ -183,7 +183,7 @@ public abstract class MyOrmUtil<T> {
      * @param params 占位符参数
      * @return PrepareStatement对象
      */
-    protected final PreparedStatement getGeneralPreparedStatement(String sql, Object... params) {
+    private PreparedStatement getGeneralPreparedStatement(String sql, Object... params) {
         Connection conn = getConnection();
         PreparedStatement ps = null;
         try {
@@ -198,12 +198,28 @@ public abstract class MyOrmUtil<T> {
     }
 
     /**
+     * 通用执行方法
+     *
+     * @param sql sql语句
+     * @param t   对应的bean类
+     * @return 执行成功返回true，否则返回false
+     * @throws SQLException 数据库操作异常类
+     */
+    private boolean execute(String sql, T t) throws SQLException {
+        PreparedStatement ps = getPrepareStatement(sql, t);
+        if (ps != null) {
+            return ps.execute();
+        }
+        return false;
+    }
+
+    /**
      * 将传入的泛型Bean中的字段赋值给SQL语句中的占位符，并执行他们
      *
      * @param sql 带#{}通配符的SQL语句
      * @param t   泛型Bean对象
      */
-    protected final PreparedStatement getPrepareStatement(String sql, T t) {
+    private PreparedStatement getPrepareStatement(String sql, T t) {
         Class<?> beanClass = t.getClass();
         List<String> list = getParams(sql);
         sql = getSql(sql); // 将SQL中的#{}占位符改为?
@@ -224,22 +240,6 @@ public abstract class MyOrmUtil<T> {
         return ps;
     }
 
-
-    /**
-     * 通用执行方法
-     *
-     * @param sql sql语句
-     * @param t   对应的bean类
-     * @return 执行成功返回true，否则返回false
-     * @throws SQLException 数据库操作异常类
-     */
-    private boolean execute(String sql, T t) throws SQLException {
-        PreparedStatement ps = getPrepareStatement(sql, t);
-        if (ps != null) {
-            return ps.execute();
-        }
-        return false;
-    }
 
     /**
      * 映射一条数据到Bean中
@@ -339,7 +339,7 @@ public abstract class MyOrmUtil<T> {
      * 下划线命名转小驼峰
      *
      * @param str 传入的字符串，如“user_name”
-     * @return 首字母大写的字符串，如“UserName”
+     * @return 首字母大写的字符串，如“userName”
      */
     private String underlineToCamel(String str) {
         String[] strs = str.split("_");

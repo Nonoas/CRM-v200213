@@ -7,10 +7,12 @@ import java.math.BigDecimal;
  * @time : 2020-08-04 14:39
  */
 public class OrderBean {
+
     private String orderId;
     private String userId;
     private String datetime;
     private BigDecimal price;
+    private String transactor;
 
     public String getOrderId() {
         return orderId;
@@ -42,5 +44,13 @@ public class OrderBean {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public String getTransactor() {
+        return transactor;
+    }
+
+    public void setTransactor(String transactor) {
+        this.transactor = transactor;
     }
 }

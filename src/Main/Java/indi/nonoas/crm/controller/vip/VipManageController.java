@@ -186,7 +186,7 @@ public class VipManageController implements Initializable {
         ObservableList<VipBean> items = table.getItems();
         List<Object> contentList = new ArrayList<>(items);
         String[] titles = new String[columns.size()];
-        String[] fieldNames = {"id", "admission_date", "name", "sex", "card_level", "balance", "frequency", "cumulative", "address", "integral", "telephone", "idcard", "birthday", "career", "email", "other"};
+        String[] fieldNames = {"id", "admissionDate", "name", "sex", "cardLevel", "balance", "frequency", "cumulative", "address", "integral", "telephone", "idcard", "birthday", "career", "email", "other"};
         for (int i = 0; i < titles.length; i++) {
             titles[i] = columns.get(i).getText();
         }
@@ -194,7 +194,7 @@ public class VipManageController implements Initializable {
         if (hasPrint) {
             new MyAlert(AlertType.INFORMATION, "打印成功！\n文件保存位置为：" + file.getAbsolutePath()).show();
         } else {
-            new MyAlert(AlertType.INFORMATION, "打印失败！");
+            new MyAlert(AlertType.INFORMATION, "打印失败！").show();
         }
     }
 

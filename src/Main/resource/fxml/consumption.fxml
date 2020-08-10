@@ -131,7 +131,7 @@
                                                                 <HBox GridPane.columnIndex="2">
                                                                     <children>
                                                                         <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="获得积分：" />
-                                                                        <Label fx:id="pt_integral" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0" HBox.hgrow="ALWAYS" />
+                                                      <TextField fx:id="shp_integral" prefHeight="30.0" prefWidth="30.0" HBox.hgrow="ALWAYS" />
                                                                     </children>
                                                                 </HBox>
                                                                 <Button alignment="CENTER" contentDisplay="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#clearGoodsTable" styleClass="negative-btn" text="清空" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
@@ -207,7 +207,7 @@
                                                                 <HBox GridPane.columnIndex="2">
                                                                     <children>
                                                                         <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="获得积分：" />
-                                                                        <Label fx:id="tc_integral" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0" HBox.hgrow="ALWAYS" />
+                                                      <TextField fx:id="tc_integral" prefHeight="30.0" prefWidth="30.0" HBox.hgrow="ALWAYS" />
                                                                     </children>
                                                                 </HBox>
                                                                 <Button alignment="CENTER" contentDisplay="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#clearPackageTable" styleClass="negative-btn" text="清空" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />

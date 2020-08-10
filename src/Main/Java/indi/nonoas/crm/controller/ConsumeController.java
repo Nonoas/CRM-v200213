@@ -1,5 +1,6 @@
 package indi.nonoas.crm.controller;
 
+import indi.nonoas.crm.app.consume.ConsumeDialog;
 import indi.nonoas.crm.app.consume.CountConsumeTable;
 import indi.nonoas.crm.app.consume.GoodsConsumeTable;
 import indi.nonoas.crm.app.goods.GoodsSingleSelectTable;
@@ -168,7 +169,7 @@ public class ConsumeController implements Initializable {
     @FXML
     private Label pt_order_dis_price;
     @FXML
-    private Label pt_integral;
+    private TextField shp_integral;
     @FXML
     private TextField shp_orderNum;
     @FXML
@@ -189,7 +190,7 @@ public class ConsumeController implements Initializable {
             }
             pt_order_price.setText(String.format("%.2f", gc_table.getSumPrice()));
             pt_order_dis_price.setText("0.00");
-            pt_integral.setText("0");
+            shp_integral.setText("0");
 
         });
     }
@@ -202,7 +203,7 @@ public class ConsumeController implements Initializable {
 
     @FXML
     private void orderPay() {
-        new MyAlert(AlertType.INFORMATION, "Ω·À„≥…π¶").show();
+        new ConsumeDialog().show();
     }
 
 
@@ -228,7 +229,7 @@ public class ConsumeController implements Initializable {
     @FXML
     private Label tc_order_dis_price;
     @FXML
-    private Label tc_integral;
+    private TextField tc_integral;
     @FXML
     private TextField tc_orderNum;
     @FXML
