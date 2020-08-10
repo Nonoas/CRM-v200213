@@ -1,37 +1,15 @@
 package indi.nonoas.crm;
 
-import java.io.IOException;
-import java.net.URL;
-
-import indi.nonoas.crm.controller.WelcomeController;
-import indi.nonoas.crm.config.ImageSrc;
+import indi.nonoas.crm.app.WelcomeStage;
+import indi.nonoas.crm.view.stage.StageFactory;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.JavaFXBuilderFactory;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class WelcomeFrame extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
-        URL location = getClass().getResource("/fxml/welcome.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(location);
-        fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
-        Parent root = fxmlLoader.load();
-
-        primaryStage.setTitle("客户管理系统");
-        primaryStage.getIcons().add(new Image(ImageSrc.lOGO_PATH));
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setResizable(false);
-        primaryStage.getScene().getStylesheets().add("css/welcome.css");
-
-        WelcomeController controller = fxmlLoader.getController(); // 获取Controller的实例对象
-        controller.initialize(location, null);
-
+    public void start(Stage primaryStage) {
+        primaryStage = StageFactory.getStage(WelcomeStage.class);
         primaryStage.show();
     }
 

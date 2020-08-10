@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 public class ConsumeDialogController implements Initializable {
 
     private Stage stage;
+
     @FXML
     private GridPane gp_rootPane;
 
@@ -53,4 +54,5 @@ public class ConsumeDialogController implements Initializable {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
 }
