@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class MainController implements Initializable {
@@ -40,9 +41,6 @@ public class MainController implements Initializable {
 
     @FXML
     private Button btn_backups;
-
-    @FXML
-    private Button btn_consumption;
 
     @FXML
     private Label label_operator; // 操作员
@@ -79,40 +77,35 @@ public class MainController implements Initializable {
     @FXML // 跳转用户消费界面
     private void toConsumePane() {
         if (currentPane != CenterPane.CONSUMPTION) {
-            currentPane = CenterPane.CONSUMPTION;
-            bp_root.setCenter(new ConsumePane());
+            changePane(CenterPane.CONSUMPTION);
         }
     }
 
     @FXML // 跳转会员管理界面
     private void toVipManagerPane() {
         if (currentPane != CenterPane.VIP_MANAGER) {
-            currentPane = CenterPane.VIP_MANAGER;
-            bp_root.setCenter(new VipManagePane());
+            changePane(CenterPane.VIP_MANAGER);
         }
     }
 
     @FXML // 跳转商品管理界面
     private void toGoodsManagePane() {
         if (currentPane != CenterPane.GOODS_MANAGE) {
-            currentPane = CenterPane.GOODS_MANAGE;
-            bp_root.setCenter(new GoodsManagePane());
+            changePane(CenterPane.GOODS_MANAGE);
         }
     }
 
     @FXML // 跳转员工管理界面
     private void toStaffManagePane() {
         if (currentPane != CenterPane.STAFF_MANAGE) {
-            currentPane = CenterPane.STAFF_MANAGE;
-            bp_root.setCenter(new StaffManagePane());
+            changePane(CenterPane.STAFF_MANAGE);
         }
     }
 
     @FXML // 跳转统计报表界面
     private void toStatPane() {
         if (currentPane != CenterPane.STATISTICS) {
-            currentPane = CenterPane.STATISTICS;
-            bp_root.setCenter(new StatPane());
+            changePane(CenterPane.STATISTICS);
         }
     }
 
@@ -132,6 +125,16 @@ public class MainController implements Initializable {
     }
 
     /**
+     * 切换界面
+     *
+     * @param centerPane 中间面板枚举
+     */
+    private void changePane(CenterPane centerPane) {
+        currentPane = centerPane;
+        bp_root.setCenter(currentPane.pane());
+    }
+
+    /**
      * 枚举：界面名称
      *
      * @author Nonoas
@@ -140,22 +143,32 @@ public class MainController implements Initializable {
         /**
          * 消费界面
          */
-        CONSUMPTION,
+        CONSUMPTION(new ConsumePane()),
         /**
          * 会员管理界面
          */
-        VIP_MANAGER,
+        VIP_MANAGER(new VipManagePane()),
         /**
          * 商品管理界面
          */
-        GOODS_MANAGE,
+        GOODS_MANAGE(new GoodsManagePane()),
         /**
          * 员工管理界面
          */
-        STAFF_MANAGE,
+        STAFF_MANAGE(new StaffManagePane()),
         /**
          * 统计报表界面
          */
-        STATISTICS,
+        STATISTICS(new StatPane());
+
+        private final Pane pane;
+
+        CenterPane(Pane pane) {
+            this.pane = pane;
+        }
+
+        public Pane pane() {
+            return pane;
+        }
     }
 }

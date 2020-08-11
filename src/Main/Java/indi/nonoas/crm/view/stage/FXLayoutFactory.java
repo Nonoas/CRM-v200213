@@ -12,39 +12,35 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * Stage工厂类
+ * 界面工厂类
  *
  * @author : Nonoas
  * @time : 2020-08-10 23:00
  */
-public class StageFactory {
+public class FXLayoutFactory {
 
-    public static Stage getStage(Class<? extends Stage> clazz) {
-        Stage o = null;
-        try {
-            o = clazz.newInstance();
-        } catch (IllegalAccessException | InstantiationException e) {
-            e.printStackTrace();
-        }
+    public static Object createFXLayout(Class<? extends Parent> clazz) {
+
+        Parent parent = null;
 
         String fxml = clazz.getAnnotation(FXML.class).value();
-        String css = clazz.getAnnotation(CSS.class).value();
 
-        URL location = StageFactory.class.getResource(fxml);
+
+        URL location = FXLayoutFactory.class.getResource(fxml);
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(location);
         fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
-        Parent root = null;
+
         try {
-            root = fxmlLoader.load();
+            parent = fxmlLoader.load();
+            CSS anoCSS = clazz.getAnnotation(CSS.class);
+            if (anoCSS != null)
+                parent.getStylesheets().add(anoCSS.value());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (o != null && root != null) {
-            o.setScene(new Scene(root));
-            o.getScene().getStylesheets().add(css);
-        }
-        return o;
+
+        return parent;
 
     }
 }

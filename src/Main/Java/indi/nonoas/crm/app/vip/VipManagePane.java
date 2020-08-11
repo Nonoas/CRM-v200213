@@ -3,6 +3,8 @@ package indi.nonoas.crm.app.vip;
 import java.io.IOException;
 import java.net.URL;
 
+import indi.nonoas.crm.view.annotation.FXML;
+import indi.nonoas.crm.view.stage.FXLayoutFactory;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.control.TabPane;
@@ -10,28 +12,20 @@ import javafx.scene.layout.Pane;
 
 /**
  * VIP管理界面
- * 
- * @author Nonoas
  *
+ * @author Nonoas
  */
+@FXML("/fxml/vip_manage.fxml")
 public class VipManagePane extends Pane {
 
-	public VipManagePane() {
-		
-		URL url = getClass().getResource("/fxml/vip_manage.fxml");
-		FXMLLoader fxmlLoader = new FXMLLoader();
-		fxmlLoader.setLocation(url);
-		fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
-		TabPane pane = null;
-		try {
-			pane = fxmlLoader.load();
-			getChildren().add(pane);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		setStyle("-fx-border-color:#DDD");
-		pane.prefHeightProperty().bind(this.heightProperty());
-		pane.prefWidthProperty().bind(this.widthProperty());
-	}
-	
+    public VipManagePane() {
+        TabPane pane = (TabPane) FXLayoutFactory.createFXLayout(VipManagePane.class);
+        getChildren().add(pane);
+        setStyle("-fx-border-color:#DDD");
+        if (pane != null) {
+            pane.prefHeightProperty().bind(this.heightProperty());
+            pane.prefWidthProperty().bind(this.widthProperty());
+        }
+    }
+
 }

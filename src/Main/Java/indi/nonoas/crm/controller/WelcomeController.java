@@ -1,14 +1,10 @@
 package indi.nonoas.crm.controller;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import indi.nonoas.crm.global.ClientSession;
 import indi.nonoas.crm.app.MainStage;
-import indi.nonoas.crm.view.alert.MyAlert;
 import indi.nonoas.crm.beans.LoginBean;
 import indi.nonoas.crm.dao.LoginDao;
+import indi.nonoas.crm.global.ClientSession;
+import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
@@ -17,6 +13,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class WelcomeController implements Initializable {
 
@@ -63,16 +62,11 @@ public class WelcomeController implements Initializable {
         vTask.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.getId() != null) {
                 Stage newStage = null;
-                try {
-                    ClientSession.addAttribute("user", newValue);
-                    newStage = new MainStage();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                ClientSession.addAttribute("user", newValue);
+                newStage = new MainStage();
                 Stage oldStage = (Stage) vb_root.getScene().getWindow();
                 oldStage.close();
-                if (newStage != null)
-                    newStage.show();
+                newStage.show();
             } else {
                 btn_Login.setText("登录");
                 btn_Login.setDisable(false);
@@ -84,7 +78,7 @@ public class WelcomeController implements Initializable {
     /**
      * 子线程任务，用于验证用户名密码
      */
-    private class VerifyTask extends javafx.concurrent.Task<LoginBean> {
+    private static class VerifyTask extends javafx.concurrent.Task<LoginBean> {
 
         String username;
         String password;
