@@ -17,22 +17,22 @@ import java.util.regex.Pattern;
  * @author : Nonoas
  * @time : 2020-08-02 12:22
  */
-public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
+public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableData> {
 
     /**
      * 数据源
      */
-    private final ObservableList<GoodsEditTable.Data> obList = FXCollections.observableArrayList();
+    private final ObservableList<GoodsEditTableData> obList = FXCollections.observableArrayList();
 
     /**
      * 表格列集合
      */
-    private final ObservableList<TableColumn<GoodsEditTable.Data, ?>> cols = getColumns();
+    private final ObservableList<TableColumn<GoodsEditTableData, ?>> cols = getColumns();
 
     /**
      * 当前选中数据
      */
-    private Data selectedBean;
+    private GoodsEditTableData selectedBean;
 
 
     /**
@@ -40,17 +40,17 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
      */
     private final EventHandler eventHandler = new EventHandler();
 
-    protected final TableColumn<Data, String> item_id = new TableColumn<>("商品编号");
+    protected final TableColumn<GoodsEditTableData, String> item_id = new TableColumn<>("商品编号");
 
-    protected final TableColumn<Data, String> item_name = new TableColumn<>("商品名称");
+    protected final TableColumn<GoodsEditTableData, String> item_name = new TableColumn<>("商品名称");
 
-    protected final TableColumn<Data, String> item_money_cost = new TableColumn<>("商品单价");
+    protected final TableColumn<GoodsEditTableData, String> item_money_cost = new TableColumn<>("商品单价");
 
-    protected final TableColumn<Data, Number> item_amount = new TableColumn<>("数量");
+    protected final TableColumn<GoodsEditTableData, Number> item_amount = new TableColumn<>("数量");
 
-    protected final TableColumn<Data, String> item_total = new TableColumn<>("小计");
+    protected final TableColumn<GoodsEditTableData, String> item_total = new TableColumn<>("小计");
 
-    protected final TableColumn<Data, String> item_op = new TableColumn<>("操作");
+    protected final TableColumn<GoodsEditTableData, String> item_op = new TableColumn<>("操作");
 
     public GoodsEditTable() {
         initColumns();
@@ -100,7 +100,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
      *
      * @return 选中的PackageContentBean
      */
-    public Data getSelectedData() {
+    public GoodsEditTableData getSelectedData() {
         return selectedBean;
     }
 
@@ -117,7 +117,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
      *
      * @param bean 需要移除的PackageContentBean
      */
-    public void removeData(Data bean) {
+    public void removeData(GoodsEditTableData bean) {
         obList.remove(bean);
         refresh();
     }
@@ -155,14 +155,14 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
      *
      * @return 实体类
      */
-    protected abstract S dataToBean(Data data);
+    protected abstract S dataToBean(GoodsEditTableData data);
 
     /**
      * 将尸体类转为数据模型
      *
      * @return 数据模型
      */
-    protected abstract Data beanToData(S bean);
+    protected abstract GoodsEditTableData beanToData(S bean);
 
 
     //===========================================================================
@@ -171,83 +171,9 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
 
 
     /**
-     * 数据模型类，用于和PackageContentBean相互转换
-     */
-    protected static class Data {
-
-        private String id;
-        private String name;
-        private double price;
-        private int amount;
-        private double sum_price;
-
-        private final PropertyChangeSupport psc = new PropertyChangeSupport(this);
-
-        public Data() {
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public double getPrice() {
-            return price;
-        }
-
-        public int getAmount() {
-            return amount;
-        }
-
-        public double getSum_price() {
-            return sum_price;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public void setPrice(double price) {
-            double oldValue = this.price;
-            this.price = price;
-            this.sum_price = price * amount;
-            psc.firePropertyChange("goods_price", oldValue, price);
-        }
-
-        public void setAmount(int amount) {
-            int oldValue = this.amount;
-            this.amount = amount;
-            this.sum_price = price * amount;
-            psc.firePropertyChange("goods_amount", oldValue, amount);
-        }
-
-        public PropertyChangeSupport getPropertyChangeSupport() {
-            return psc;
-        }
-
-        @Override
-        public String toString() {
-            return "Data{" +
-                    "goods_id='" + id + '\'' +
-                    ", goods_name='" + name + '\'' +
-                    ", goods_price=" + price +
-                    ", goods_amount=" + amount +
-                    ", sum_price=" + sum_price +
-                    '}';
-        }
-    }
-
-    /**
      * 自定义“数量”单元格
      */
-    protected class AmountCell extends TableCell<Data, Number> {
+    protected class AmountCell extends TableCell<GoodsEditTableData, Number> {
 
         public AmountCell() {
         }
@@ -278,8 +204,8 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
                 hBox.getChildren().addAll(btn_add, tf_number, btn_reduce);
                 hBox.setSpacing(10);
 
-                ObservableList<Data> obList = getTableView().getItems(); //获取表格源数据
-                Data bean = obList.get(getIndex());
+                ObservableList<GoodsEditTableData> obList = getTableView().getItems(); //获取表格源数据
+                GoodsEditTableData bean = obList.get(getIndex());
 
                 //设置按钮监听
                 //加一
@@ -317,7 +243,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
     /**
      * 自定义操作单元格
      */
-    protected class DeleteCell extends TableCell<Data, String> {
+    protected class DeleteCell extends TableCell<GoodsEditTableData, String> {
 
         public DeleteCell() {
         }
@@ -331,7 +257,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTable.Data> {
 
                 btn_delete.setOnAction(event -> {
                     GoodsEditTable<S> tableView = (GoodsEditTable<S>) getTableView();
-                    ObservableList<Data> items = tableView.getItems();
+                    ObservableList<GoodsEditTableData> items = tableView.getItems();
                     items.remove(getIndex());
                     tableView.refresh();
 

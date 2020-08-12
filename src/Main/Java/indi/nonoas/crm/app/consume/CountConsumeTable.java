@@ -2,6 +2,7 @@ package indi.nonoas.crm.app.consume;
 
 import indi.nonoas.crm.beans.GoodsBean;
 import indi.nonoas.crm.view.table.GoodsEditTable;
+import indi.nonoas.crm.view.table.GoodsEditTableData;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  */
 public class CountConsumeTable extends GoodsEditTable<GoodsBean> {
 
-    private final ObservableList<Data> obList = getItems();
+    private final ObservableList<GoodsEditTableData> obList = getItems();
 
     public CountConsumeTable() {
         item_total.setVisible(false);
@@ -33,12 +34,12 @@ public class CountConsumeTable extends GoodsEditTable<GoodsBean> {
     }
 
     @Override
-    protected GoodsBean dataToBean(Data data) {
+    protected GoodsBean dataToBean(GoodsEditTableData data) {
         return null;
     }
 
     @Override
-    protected Data beanToData(GoodsBean bean) {
+    protected GoodsEditTableData beanToData(GoodsBean bean) {
         return null;
     }
 }

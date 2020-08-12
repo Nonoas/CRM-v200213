@@ -10,6 +10,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -17,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<TabPane fx:id="tp_rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="indi.nonoas.crm.controller.ConsumeController">
+<TabPane fx:id="tp_rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" tabMaxHeight="80.0" tabMaxWidth="80.0" tabMinWidth="80.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="indi.nonoas.crm.controller.consume.ConsumeController">
     <tabs>
         <Tab closable="false" text="会员消费">
             <content>
@@ -39,8 +40,11 @@
                                     <HBox.margin>
                                         <Insets />
                                     </HBox.margin>
+                           <tooltip>
+                              <Tooltip text="[Enter]" />
+                           </tooltip>
                                 </Button>
-                                <Button mnemonicParsing="false" onAction="#clearInfo" text="清空">
+                                <Button mnemonicParsing="false" onAction="#clearInfo" styleClass="negative-btn" text="清空">
                                     <HBox.margin>
                                         <Insets />
                                     </HBox.margin>
@@ -128,26 +132,35 @@
                                                                         <Label fx:id="pt_order_dis_price" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0.00" HBox.hgrow="ALWAYS" />
                                                                     </children>
                                                                 </HBox>
-                                                                <HBox GridPane.columnIndex="2">
+                                                                <HBox GridPane.columnIndex="3">
                                                                     <children>
                                                                         <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="获得积分：" />
                                                       <TextField fx:id="shp_integral" prefHeight="30.0" prefWidth="30.0" HBox.hgrow="ALWAYS" />
                                                                     </children>
                                                                 </HBox>
-                                                                <Button alignment="CENTER" contentDisplay="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#clearGoodsTable" styleClass="negative-btn" text="清空" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+                                                                <Button alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minWidth="80.0" mnemonicParsing="false" onAction="#clearGoodsTable" styleClass="negative-btn" text="清空" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                                                                 <HBox prefHeight="62.0" prefWidth="222.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                                                     <children>
                                                                         <Label fx:id="pt_lb_order_date11" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" text="订单号：" />
                                                                         <TextField fx:id="shp_orderNum" editable="false" HBox.hgrow="ALWAYS" />
                                                                     </children>
                                                                 </HBox>
-                                                                <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="222.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                                                <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="62.0" prefWidth="222.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                                                     <children>
-                                                                        <Label fx:id="pt_lb_order_date111" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="订单日期：" />
+                                                                        <Label fx:id="pt_lb_order_date111" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="订单日期：">
+                                                         <tooltip>
+                                                            <Tooltip text="订单日期" />
+                                                         </tooltip></Label>
                                                                         <TextField fx:id="shp_orderDate" editable="false" HBox.hgrow="ALWAYS" />
                                                                     </children>
                                                                 </HBox>
-                                                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#orderPay" text="订单结算" GridPane.columnSpan="4" GridPane.rowIndex="2" />
+                                                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goodsOrderPay" text="订单结算" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+                                                <HBox GridPane.columnIndex="2">
+                                                   <children>
+                                                      <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="积分消耗：" />
+                                                      <TextField fx:id="shp_integral_cost" prefHeight="30.0" prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                                                   </children>
+                                                </HBox>
                                                             </children>
                                                             <BorderPane.margin>
                                                                 <Insets top="10.0" />
@@ -223,7 +236,7 @@
                                                                         <TextField fx:id="tc_orderDate" editable="false" HBox.hgrow="ALWAYS" />
                                                                     </children>
                                                                 </HBox>
-                                                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#orderPay" text="订单结算" GridPane.columnSpan="4" GridPane.rowIndex="2" />
+                                                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goodsOrderPay" text="订单结算" GridPane.columnSpan="4" GridPane.rowIndex="2" />
                                                             </children>
                                                             <BorderPane.margin>
                                                                 <Insets top="10.0" />

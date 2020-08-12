@@ -3,6 +3,7 @@ package indi.nonoas.crm.app.consume;
 import indi.nonoas.crm.beans.GoodsBean;
 import indi.nonoas.crm.dao.GoodsDao;
 import indi.nonoas.crm.view.table.GoodsEditTable;
+import indi.nonoas.crm.view.table.GoodsEditTableData;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  */
 public class GoodsConsumeTable extends GoodsEditTable<GoodsBean> {
 
-    private final ObservableList<Data> obList = getItems();
+    private final ObservableList<GoodsEditTableData> obList = getItems();
 
     public GoodsConsumeTable() {
         super();
@@ -25,7 +26,7 @@ public class GoodsConsumeTable extends GoodsEditTable<GoodsBean> {
         if (obList == null)
             return null;
         ArrayList<GoodsBean> goodsBeans = new ArrayList<>();
-        for (Data d : obList) {
+        for (GoodsEditTableData d : obList) {
             goodsBeans.add(dataToBean(d));
         }
         return goodsBeans;
@@ -34,11 +35,11 @@ public class GoodsConsumeTable extends GoodsEditTable<GoodsBean> {
     @Override
     public void addBean(GoodsBean bean) {
         String id = bean.getId();
-        for (Data d : obList) {
+        for (GoodsEditTableData d : obList) {
             if (d.getId().equals(id))
                 return;
         }
-        Data data = beanToData(bean);
+        GoodsEditTableData data = beanToData(bean);
         obList.add(data);
         refresh();
 
@@ -46,14 +47,14 @@ public class GoodsConsumeTable extends GoodsEditTable<GoodsBean> {
     }
 
     @Override
-    protected GoodsBean dataToBean(Data data) {
+    protected GoodsBean dataToBean(GoodsEditTableData data) {
         String id = data.getId();
         return GoodsDao.getInstance().selectById(id);
     }
 
     @Override
-    protected Data beanToData(GoodsBean bean) {
-        Data data = new Data();
+    protected GoodsEditTableData beanToData(GoodsBean bean) {
+        GoodsEditTableData data = new GoodsEditTableData();
         data.setId(bean.getId());
         data.setName(bean.getName());
         data.setPrice(bean.getSellPrice());
@@ -68,10 +69,9 @@ public class GoodsConsumeTable extends GoodsEditTable<GoodsBean> {
      */
     public double getSumPrice() {
         double price = 0;
-        for (Data d : obList) {
+        for (GoodsEditTableData d : obList) {
             price += d.getSum_price();
         }
-        System.out.println("×Ü¼Û£º" + price);
         return price;
     }
 

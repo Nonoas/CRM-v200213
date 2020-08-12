@@ -5,6 +5,7 @@ import indi.nonoas.crm.beans.PackageContentBean;
 import indi.nonoas.crm.dao.GoodsDao;
 import indi.nonoas.crm.dao.PackageContentDao;
 import indi.nonoas.crm.view.table.GoodsEditTable;
+import indi.nonoas.crm.view.table.GoodsEditTableData;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
     /**
      * 数据源
      */
-    private final ObservableList<Data> obList;
+    private final ObservableList<GoodsEditTableData> obList;
 
 
     public PackageContentEditTable() {
@@ -37,8 +38,8 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
     @Override
     public void addBean(PackageContentBean bean) {
         boolean hasRepeat = false;
-        Data data = beanToData(bean); //类型转换
-        for (Data d : obList) {
+        GoodsEditTableData data = beanToData(bean); //类型转换
+        for (GoodsEditTableData d : obList) {
             String id1 = d.getId();
             String id2 = data.getId();
             hasRepeat = hasRepeat || id1.equals(id2);
@@ -55,7 +56,7 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
     @Override
     public ArrayList<PackageContentBean> getAllBeans() {
         ArrayList<PackageContentBean> packageContentBeans = new ArrayList<>();
-        for (Data d : obList) {
+        for (GoodsEditTableData d : obList) {
             packageContentBeans.add(dataToBean(d));
         }
         return packageContentBeans;
@@ -67,14 +68,14 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
      * @return Data类对象
      */
     @Override
-    protected Data beanToData(PackageContentBean bean) {
+    protected GoodsEditTableData beanToData(PackageContentBean bean) {
         String id = bean.getGoodsId();
         GoodsBean goodsBean = GoodsDao.getInstance().selectById(id);
         String name = goodsBean.getName();
         double price = goodsBean.getSellPrice();
         int amount = bean.getGoodsAmount();
 
-        Data data = new Data();
+        GoodsEditTableData data = new GoodsEditTableData();
         data.setId(id);
         data.setName(name);
         data.setPrice(price);
@@ -89,7 +90,7 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
      * @return PackageContentBean对象
      */
     @Override
-    protected PackageContentBean dataToBean(Data data) {
+    protected PackageContentBean dataToBean(GoodsEditTableData data) {
         PackageContentBean packageContentBean = new PackageContentBean();
         packageContentBean.setGoodsId(data.getId());
         packageContentBean.setGoodsAmount(data.getAmount());
@@ -102,7 +103,7 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
     public void showAllInfos(String id) {
         clearData(); // 清空所有数据
         ArrayList<PackageContentBean> listPkgContentBeans = PackageContentDao.getInstance().selectById(id);
-        ArrayList<Data> listData = new ArrayList<>();
+        ArrayList<GoodsEditTableData> listData = new ArrayList<>();
         if (listPkgContentBeans != null) {
             for (PackageContentBean p : listPkgContentBeans) {
                 listData.add(beanToData(p));

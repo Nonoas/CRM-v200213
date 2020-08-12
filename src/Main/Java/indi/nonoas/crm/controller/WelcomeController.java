@@ -34,7 +34,6 @@ public class WelcomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO 以下为测试代码
         tf_username.setValue("admin");
         pf_password.setText("admin");
     }
@@ -61,9 +60,8 @@ public class WelcomeController implements Initializable {
         new Thread(vTask).start();
         vTask.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.getId() != null) {
-                Stage newStage = null;
                 ClientSession.addAttribute("user", newValue);
-                newStage = new MainStage();
+                Stage newStage = new MainStage();
                 Stage oldStage = (Stage) vb_root.getScene().getWindow();
                 oldStage.close();
                 newStage.show();

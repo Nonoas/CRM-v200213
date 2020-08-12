@@ -32,7 +32,7 @@ public class ControllableStage extends Stage {
             setTitle(anoStage.title());
         }
 
-        URL location = FXLayoutFactory.class.getResource(fxml);
+        URL location = getClass().getResource(fxml);
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(location);
         fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());

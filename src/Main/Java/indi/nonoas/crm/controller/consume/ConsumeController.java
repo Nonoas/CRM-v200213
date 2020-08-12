@@ -1,40 +1,56 @@
-package indi.nonoas.crm.controller;
+package indi.nonoas.crm.controller.consume;
 
 import indi.nonoas.crm.app.consume.ConsumeDialog;
 import indi.nonoas.crm.app.consume.CountConsumeTable;
 import indi.nonoas.crm.app.consume.GoodsConsumeTable;
-import indi.nonoas.crm.app.goods.GoodsSingleSelectTable;
 import indi.nonoas.crm.app.consume.PackageConsumeTable;
+import indi.nonoas.crm.app.goods.GoodsSingleSelectTable;
 import indi.nonoas.crm.app.pkg.PackageSingleSelectTable;
 import indi.nonoas.crm.app.vip.UserGoodsTable;
 import indi.nonoas.crm.app.vip.VipAddTab;
 import indi.nonoas.crm.app.vip.VipInfoTable;
+import indi.nonoas.crm.beans.OrderBean;
+import indi.nonoas.crm.beans.OrderDetailBean;
 import indi.nonoas.crm.beans.PackageBean;
 import indi.nonoas.crm.beans.VipBean;
 import indi.nonoas.crm.dao.VipInfoDao;
 import indi.nonoas.crm.dao.VipLevelDao;
 import indi.nonoas.crm.service.OrderService;
 import indi.nonoas.crm.view.alert.MyAlert;
+import indi.nonoas.crm.view.table.GoodsEditTableData;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
+import org.apache.log4j.Logger;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ConsumeController implements Initializable {
+
+    private final Logger logger = Logger.getLogger(ConsumeController.class);
 
     /**
      * 会员信息DAO
      */
     private final VipInfoDao vipInfoDao = VipInfoDao.getInstance();
+
+    //TODO 需要定义一个散客
+
+    /**
+     * 会员信息
+     */
+    private VipBean vipBean;
     @FXML
     private TabPane tp_rootPane;
     @FXML
@@ -65,6 +81,11 @@ public class ConsumeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initView();
+        //设置回车查询
+        tf_find.setOnKeyPressed(keyEven -> {
+            if (keyEven.getCode().equals(KeyCode.ENTER))
+                inquireVIP();
+        });
     }
 
     @FXML // 查找信息
@@ -72,7 +93,7 @@ public class ConsumeController implements Initializable {
         String str = tf_find.getText().trim();
         if (str.equals(""))
             return;
-        VipBean vipBean = vipInfoDao.getInfoByIdOrName(str, str);
+        vipBean = vipInfoDao.getInfoByIdOrName(str, str);
         if (vipBean != null) {
             lb_cardState.setText("可用");
             lb_id.setText(vipBean.getId());
@@ -108,6 +129,7 @@ public class ConsumeController implements Initializable {
 
     @FXML // 清空展示的信息
     private void clearInfo() {
+        vipBean = null;
         tf_find.setText("");
         lb_cardState.setText("--");
         lb_id.setText("--");
@@ -153,6 +175,7 @@ public class ConsumeController implements Initializable {
         initCountTab();         //初始化计次消费面板
     }
 
+
     //===========================================================================
     //                             商品消费
     //===========================================================================
@@ -168,6 +191,8 @@ public class ConsumeController implements Initializable {
     private Label pt_order_price;
     @FXML
     private Label pt_order_dis_price;
+    @FXML
+    private TextField shp_integral_cost;
     @FXML
     private TextField shp_integral;
     @FXML
@@ -189,9 +214,19 @@ public class ConsumeController implements Initializable {
                 shp_orderDate.setText(sdf.format(LocalDateTime.now()));
             }
             pt_order_price.setText(String.format("%.2f", gc_table.getSumPrice()));
-            pt_order_dis_price.setText("0.00");
-            shp_integral.setText("0");
 
+            double discount = vipBean == null ? 1 : vipBean.getDiscount();
+            pt_order_dis_price.setText(String.format("%.2f", gc_table.getSumPrice() * discount));
+            shp_integral.setText("0");
+            shp_integral_cost.setText("0");
+
+
+        });
+
+        lb_id.textProperty().addListener((observable, oldValue, newValue) -> {
+            logger.debug("会员卡号：" + newValue);
+            double discount = vipBean == null ? 1 : vipBean.getDiscount();
+            pt_order_dis_price.setText(String.format("%.2f", gc_table.getSumPrice() * discount));
         });
     }
 
@@ -199,11 +234,56 @@ public class ConsumeController implements Initializable {
     @FXML
     private void clearGoodsTable() {
         gc_table.clearData();
+        shp_orderNum.setText("");
+        shp_orderDate.setText("");
+        shp_integral.setText("");
+        shp_integral_cost.setText("");
     }
 
     @FXML
-    private void orderPay() {
-        new ConsumeDialog().show();
+    private void goodsOrderPay() {
+        if (gc_table.getItems().size() == 0) {
+            new MyAlert(AlertType.INFORMATION, "订单内容为空！！").show();
+            return;
+        }
+        OrderBean orderBean = generateGoodsOrder();
+        List<OrderDetailBean> orderDetails = generateGoodsOrderDetails();
+        ConsumeDialog consumeDialog = new ConsumeDialog(vipBean, orderBean, orderDetails);
+        consumeDialog.showAndWait();
+    }
+
+    /**
+     * 生成订单
+     *
+     * @return 订单信息
+     */
+    private OrderBean generateGoodsOrder() {
+        OrderBean bean = new OrderBean();
+        bean.setUserId(vipBean.getId());
+        bean.setOrderId(shp_orderNum.getText());
+        bean.setDatetime(shp_orderDate.getText());
+        bean.setPrice(new BigDecimal(pt_order_dis_price.getText()));
+        bean.setIntegral_get(Integer.parseInt(shp_integral.getText()));
+        return bean;
+    }
+
+    /**
+     * 生成订单详情
+     *
+     * @return 订单详情集合
+     */
+    private List<OrderDetailBean> generateGoodsOrderDetails() {
+        List<OrderDetailBean> list = new ArrayList<>();
+        ObservableList<GoodsEditTableData> items = gc_table.getItems();
+        OrderDetailBean bean;
+        for (GoodsEditTableData data : items) {
+            bean = new OrderDetailBean();
+            bean.setOrderId(shp_orderNum.getText());
+            bean.setGoodsId(data.getId());
+            bean.setGoodsAmount(data.getAmount());
+            list.add(bean);
+        }
+        return list;
     }
 
 

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/Main/Java/indi/nonoas/crm/WelcomeFrame.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/Main/Java/indi/nonoas/crm/controller/ConsumeController.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/Main/Java/indi/nonoas/crm/controller/consume/ConsumeController.java" charset="GBK" />
     <file url="PROJECT" charset="GBK" />
   </component>
 </project>
