@@ -190,7 +190,6 @@ public abstract class MyOrmUtil<T> {
             Class<?> beanClass = bean.getClass();
             List<String> paramNames = getParams(sql);
             sql = getSql(sql);  // 将SQL中的#{}占位符改为?
-            System.out.println("sql=" + sql);
             try {
                 PreparedStatement ps = conn.prepareStatement(sql);
                 for (int i = 0; i < paramNames.size(); i++) {

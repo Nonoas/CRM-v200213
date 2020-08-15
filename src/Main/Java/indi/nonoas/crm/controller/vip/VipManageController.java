@@ -75,13 +75,6 @@ public class VipManageController implements Initializable {
         dpk_from.setValue(from);    //入会时间上限
         dpk_to.setValue(to);    //入会时间下限
 
-//        		FadeTransition ft = new FadeTransition();
-//        		ft.setNode(tp_rootPane);
-//        		ft.setDuration(Duration.seconds(1));
-//        		ft.setFromValue(0);
-//        		ft.setToValue(1);
-//        		ft.setAutoReverse(true);
-//        		ft.play();
     }
 
     private void initData() {
