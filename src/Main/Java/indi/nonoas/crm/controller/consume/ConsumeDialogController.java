@@ -83,12 +83,15 @@ public class ConsumeDialogController implements Initializable {
             switch (newValue) {
                 case CASH:
                     lb_balance.setText("已选择现金支付");
+                    tf_payValue.setText(String.valueOf(order.getPrice()));
                     break;
                 case BALANCE:
                     lb_balance.setText(String.format("￥%.2f", vipBean.getBalance()));
+                    tf_payValue.setText(String.valueOf(order.getPrice()));
                     break;
                 case INTEGRAL:
                     lb_balance.setText(String.format("%d（积分）", vipBean.getIntegral()));
+                    tf_payValue.setText(String.valueOf(order.getIntegral_cost()));
                     break;
             }
         });
@@ -106,6 +109,11 @@ public class ConsumeDialogController implements Initializable {
     private void cancel() {
         stage.close();
     }
+
+
+    //===========================================================================
+    //                           主类注入controller方法
+    //===========================================================================
 
     /**
      * 注入stage依赖
@@ -136,6 +144,11 @@ public class ConsumeDialogController implements Initializable {
     public void setFocus() {
         tf_transactor.requestFocus();
     }
+
+
+    //===========================================================================
+    //                            内部类
+    //===========================================================================
 
     /**
      * 支付模式枚举

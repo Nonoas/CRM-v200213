@@ -46,11 +46,22 @@ public class ConsumeController implements Initializable {
     private final VipInfoDao vipInfoDao = VipInfoDao.getInstance();
 
     //TODO 需要定义一个散客
+    /**
+     * 散客常量
+     */
+    private final static VipBean SANKE = new VipBean();
+
+    static {
+        SANKE.setId("0000");
+        SANKE.setName("散客");
+        SANKE.setSex("保密");
+        SANKE.setDiscount(1);
+    }
 
     /**
      * 会员信息
      */
-    private VipBean vipBean;
+    private VipBean vipBean = SANKE;
     @FXML
     private TabPane tp_rootPane;
     @FXML
@@ -95,14 +106,29 @@ public class ConsumeController implements Initializable {
             return;
         vipBean = vipInfoDao.getInfoByIdOrName(str, str);
         if (vipBean != null) {
-            lb_cardState.setText("可用");
-            lb_id.setText(vipBean.getId());
-            lb_integral.setText(String.valueOf(vipBean.getIntegral()));
-            lb_cardLevel.setText(vipBean.getCardLevel());
-            lb_name.setText(vipBean.getName());
+            showFindResult(vipBean);
         } else {
             new MyAlert(AlertType.INFORMATION, "没有找到您查询的会员！").show();
         }
+    }
+
+    /**
+     * 显示搜索结果
+     *
+     * @param bean 搜索的用户信息
+     */
+    private void showFindResult(VipBean bean) {
+        if (bean == null)
+            return;
+        lb_cardState.setText("可用");
+        lb_id.setText(bean.getId());
+        lb_integral.setText(String.valueOf(bean.getIntegral()));
+        lb_cardLevel.setText(bean.getCardLevel());
+        lb_name.setText(bean.getName());
+        if (bean == SANKE)
+            lb_name.setStyle("-fx-text-fill: #cf4813");
+        else
+            lb_name.setStyle("-fx-text-fill: black");
     }
 
     @FXML
@@ -129,13 +155,9 @@ public class ConsumeController implements Initializable {
 
     @FXML // 清空展示的信息
     private void clearInfo() {
-        vipBean = null;
         tf_find.setText("");
-        lb_cardState.setText("--");
-        lb_id.setText("--");
-        lb_integral.setText("--");
-        lb_cardLevel.setText("--");
-        lb_name.setText("--");
+        vipBean = SANKE;
+        showFindResult(vipBean);
     }
 
     @FXML // 添加会员信息
@@ -160,6 +182,7 @@ public class ConsumeController implements Initializable {
     }
 
     private void initView() {
+        showFindResult(vipBean);
         tv_vipInfo.showAllInfos();
         sp_userInfo.setContent(tv_vipInfo);
         // 从数据库读出所用会员等级，并初始化ComboBox
@@ -215,17 +238,21 @@ public class ConsumeController implements Initializable {
             }
             pt_order_price.setText(String.format("%.2f", gc_table.getSumPrice()));
 
-            double discount = vipBean == null ? 1 : vipBean.getDiscount();
+            //用户折扣
+            double discount = vipBean.getDiscount();
             pt_order_dis_price.setText(String.format("%.2f", gc_table.getSumPrice() * discount));
+            //积分获取
             shp_integral.setText("0");
+            //积分消耗
             shp_integral_cost.setText("0");
 
 
         });
 
+        //“折后价->用户ID”监听
         lb_id.textProperty().addListener((observable, oldValue, newValue) -> {
             logger.debug("会员卡号：" + newValue);
-            double discount = vipBean == null ? 1 : vipBean.getDiscount();
+            double discount = vipBean.getDiscount();
             pt_order_dis_price.setText(String.format("%.2f", gc_table.getSumPrice() * discount));
         });
     }
@@ -264,6 +291,7 @@ public class ConsumeController implements Initializable {
         bean.setDatetime(shp_orderDate.getText());
         bean.setPrice(new BigDecimal(pt_order_dis_price.getText()));
         bean.setIntegral_get(Integer.parseInt(shp_integral.getText()));
+        bean.setIntegral_cost(Integer.parseInt(shp_integral_cost.getText()));
         return bean;
     }
 

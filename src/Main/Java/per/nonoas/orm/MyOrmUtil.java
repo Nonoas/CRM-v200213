@@ -163,6 +163,63 @@ public abstract class MyOrmUtil<T> {
     }
 
     /**
+     * 事务执行，将一组数据库操作指定为事务
+     *
+     * @param transactions 事务类集合
+     */
+    final protected void executeTransaction(List<AbstractTransaction> transactions) {
+        Connection conn = getConnection();
+        //取消自动提交事务
+        try {
+            conn.setAutoCommit(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        //生成事务执行语句
+        for (AbstractTransaction transaction : transactions) {
+            //获取事务参数
+            Object bean = transaction.getParams();
+            String sql = transaction.getSQL();
+            //生成PrepareStatement对象
+            Class<?> beanClass = bean.getClass();
+            List<String> paramNames = getParams(sql);
+            sql = getSql(sql);  // 将SQL中的#{}占位符改为?
+            try {
+                PreparedStatement ps = conn.prepareStatement(sql);
+                for (int i = 0; i < paramNames.size(); i++) {
+                    String colName = paramNames.get(i);
+                    String methodName = "get" + underlineToBigCamel(colName); // 方法名
+                    Method method = beanClass.getDeclaredMethod(methodName);
+                    Object value = method.invoke(bean);
+                    ps.setObject(i + 1, value);
+                }
+                ps.execute();
+            } catch (SQLException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+        //提交事务
+        try {
+            conn.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            try {
+                conn.rollback();      //若提交出现异常则回滚事务
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    /**
      * 执行通用SQL语句
      *
      * @param sql    SQL语句
@@ -170,10 +227,25 @@ public abstract class MyOrmUtil<T> {
      * @return 执行成功返回true，否则返回false
      * @throws SQLException SQL异常
      */
-    @SuppressWarnings("unused")
-    protected boolean execute(String sql, Object... params) throws SQLException {
+    final protected boolean execute(String sql, Object... params) throws SQLException {
         PreparedStatement ps = getGeneralPreparedStatement(sql, params);
         return ps.execute();
+    }
+
+    /**
+     * 通用执行方法
+     *
+     * @param sql sql语句
+     * @param t   对应的bean类
+     * @return 执行成功返回true，否则返回false
+     * @throws SQLException 数据库操作异常类
+     */
+    private boolean execute(String sql, T t) throws SQLException {
+        PreparedStatement ps = getPrepareStatement(sql, t);
+        if (ps != null) {
+            return ps.execute();
+        }
+        return false;
     }
 
     /**
@@ -195,22 +267,6 @@ public abstract class MyOrmUtil<T> {
             e.printStackTrace();
         }
         return ps;
-    }
-
-    /**
-     * 通用执行方法
-     *
-     * @param sql sql语句
-     * @param t   对应的bean类
-     * @return 执行成功返回true，否则返回false
-     * @throws SQLException 数据库操作异常类
-     */
-    private boolean execute(String sql, T t) throws SQLException {
-        PreparedStatement ps = getPrepareStatement(sql, t);
-        if (ps != null) {
-            return ps.execute();
-        }
-        return false;
     }
 
     /**
@@ -360,6 +416,12 @@ public abstract class MyOrmUtil<T> {
     private String getSql(String sql) {
         return sql.replaceAll(("[#]\\{\\w*[}]"), "?");
     }
+
+
+    //===========================================================================
+    //                            抽象方法
+    //===========================================================================
+
 
     /**
      * 获取数据库连接对象
