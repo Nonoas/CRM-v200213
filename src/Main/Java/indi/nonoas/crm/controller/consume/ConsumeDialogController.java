@@ -4,6 +4,7 @@ package indi.nonoas.crm.controller.consume;
 import indi.nonoas.crm.beans.OrderBean;
 import indi.nonoas.crm.beans.OrderDetailBean;
 import indi.nonoas.crm.beans.VipBean;
+import indi.nonoas.crm.dao.OrderDao;
 import indi.nonoas.crm.dao.PackageDao;
 import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.beans.value.ChangeListener;
@@ -25,6 +26,8 @@ import java.util.ResourceBundle;
 public class ConsumeDialogController implements Initializable {
 
     private Stage stage;
+
+    private boolean hasSubmit = false;
 
     /**
      * 消费者
@@ -100,14 +103,31 @@ public class ConsumeDialogController implements Initializable {
 
     @FXML
     private void submit() {
-        //TODO 提交到数据库
-        new MyAlert(Alert.AlertType.INFORMATION, "结算成功！").show();
+
+        order.setTransactor(tf_transactor.getText());   //获取受理人
+
+        OrderDao orderDao = OrderDao.getInstance();
+        hasSubmit = orderDao.placeGoodsOrder(order, orderDetails);
+        if (hasSubmit) {
+            new MyAlert(Alert.AlertType.INFORMATION, "结算成功！").show();
+        } else {
+            new MyAlert(Alert.AlertType.INFORMATION, "结算失败！").show();
+        }
         stage.close();
     }
 
     @FXML
     private void cancel() {
         stage.close();
+    }
+
+    /**
+     * 判断是否成功提交
+     *
+     * @return 成功返回true，失败返回false
+     */
+    public boolean hasSubmit() {
+        return hasSubmit;
     }
 
 

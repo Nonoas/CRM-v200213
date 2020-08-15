@@ -1,5 +1,10 @@
 package per.nonoas.orm;
 
+import indi.nonoas.crm.view.alert.MyAlert;
+import javafx.scene.control.Alert;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -167,7 +172,7 @@ public abstract class MyOrmUtil<T> {
      *
      * @param transactions 事务类集合
      */
-    final protected void executeTransaction(List<AbstractTransaction> transactions) {
+    final protected boolean executeTransaction(List<AbstractTransaction> transactions) {
         Connection conn = getConnection();
         //取消自动提交事务
         try {
@@ -185,6 +190,7 @@ public abstract class MyOrmUtil<T> {
             Class<?> beanClass = bean.getClass();
             List<String> paramNames = getParams(sql);
             sql = getSql(sql);  // 将SQL中的#{}占位符改为?
+            System.out.println("sql=" + sql);
             try {
                 PreparedStatement ps = conn.prepareStatement(sql);
                 for (int i = 0; i < paramNames.size(); i++) {
@@ -197,6 +203,7 @@ public abstract class MyOrmUtil<T> {
                 ps.execute();
             } catch (SQLException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
                 e.printStackTrace();
+                return false;
             }
         }
         //提交事务
@@ -216,6 +223,7 @@ public abstract class MyOrmUtil<T> {
                 e.printStackTrace();
             }
         }
+        return true;
 
     }
 

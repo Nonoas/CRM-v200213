@@ -6,7 +6,6 @@ import per.nonoas.orm.AbstractTransaction;
 import per.nonoas.orm.BeanTransaction;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -15,14 +14,23 @@ import java.util.List;
  */
 public class OrderDao extends MySqlDao<OrderBean> {
 
-    private static final String INSERT_ORDER = "insert into order(order_id,user_id,datetime,price,transactor)" +
+    private static final String INSERT_ORDER = "insert into order_info(order_id,user_id,datetime,price,transactor) " +
 
-            "values(order_id=#{order_id},user_id=#{user_id},datetime=#{datetime},price=#{price},transactor=#{transactor})";
+            "values(#{order_id},#{user_id},#{datetime},#{price},#{transactor})";
 
-    private static final String INSERT_ORDER_DETAIL = "insert into order_details(order_id,goods_id,goods_amount)" +
+    private static final String INSERT_ORDER_DETAIL = "insert into order_details(order_id,goods_id,goods_amount) " +
 
-            "values(order_id=#{order_id},goods_id=#{goods_id},goods_amount=#{goods_amount})";
+            "values(#{order_id},#{goods_id},#{goods_amount})";
 
+
+    private OrderDao() {
+    }
+
+    private static final OrderDao INSTANCE = new OrderDao();
+
+    public static OrderDao getInstance() {
+        return INSTANCE;
+    }
 
     /**
      * 商品下单事务
@@ -30,13 +38,13 @@ public class OrderDao extends MySqlDao<OrderBean> {
      * @param order        订单
      * @param orderDetails 订单详情
      */
-    public void placeGoodsOrder(OrderBean order, List<OrderDetailBean> orderDetails) {
+    public boolean placeGoodsOrder(OrderBean order, List<OrderDetailBean> orderDetails) {
         List<AbstractTransaction> transactions = new ArrayList<>();
         transactions.add(new BeanTransaction(INSERT_ORDER, order));
         for (OrderDetailBean orderDetail : orderDetails) {
             transactions.add(new BeanTransaction(INSERT_ORDER_DETAIL, orderDetail));
         }
-        executeTransaction(transactions);
+        return executeTransaction(transactions);
     }
 
     @Override

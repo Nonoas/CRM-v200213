@@ -23,9 +23,11 @@ import java.util.List;
 @CSS("css/application.css")
 public class ConsumeDialog extends ControllableStage {
 
+    private ConsumeDialogController controller;
+
     public ConsumeDialog(VipBean vip, OrderBean order, List<OrderDetailBean> orderDetails) {
         initView();
-        ConsumeDialogController controller = (ConsumeDialogController) getController();
+        controller = (ConsumeDialogController) getController();
         controller.setStage(this);
         controller.setVipBean(vip);
         controller.setOrder(order);
@@ -37,6 +39,15 @@ public class ConsumeDialog extends ControllableStage {
         initModality(Modality.APPLICATION_MODAL);
         getIcons().add(new Image(ImageSrc.lOGO_PATH));
         setResizable(false);
+    }
+
+    /**
+     * 判断是否成功提交
+     *
+     * @return 成功返回true，失败返回false
+     */
+    public boolean hasSubmit() {
+        return controller.hasSubmit();
     }
 
 }

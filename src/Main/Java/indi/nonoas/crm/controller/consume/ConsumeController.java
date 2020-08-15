@@ -259,7 +259,7 @@ public class ConsumeController implements Initializable {
 
 
     @FXML
-    private void clearGoodsTable() {
+    private void clearGoodsOrder() {
         gc_table.clearData();
         shp_orderNum.setText("");
         shp_orderDate.setText("");
@@ -277,6 +277,9 @@ public class ConsumeController implements Initializable {
         List<OrderDetailBean> orderDetails = generateGoodsOrderDetails();
         ConsumeDialog consumeDialog = new ConsumeDialog(vipBean, orderBean, orderDetails);
         consumeDialog.showAndWait();
+        //如果成功提交，则清除订单信息
+        if (consumeDialog.hasSubmit())
+            clearGoodsOrder();
     }
 
     /**
