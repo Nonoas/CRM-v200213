@@ -9,10 +9,8 @@ import indi.nonoas.crm.app.pkg.PackageSingleSelectTable;
 import indi.nonoas.crm.app.vip.UserGoodsTable;
 import indi.nonoas.crm.app.vip.VipAddTab;
 import indi.nonoas.crm.app.vip.VipInfoTable;
-import indi.nonoas.crm.beans.OrderBean;
-import indi.nonoas.crm.beans.OrderDetailBean;
-import indi.nonoas.crm.beans.PackageBean;
-import indi.nonoas.crm.beans.VipBean;
+import indi.nonoas.crm.beans.*;
+import indi.nonoas.crm.dao.GoodsDao;
 import indi.nonoas.crm.dao.VipInfoDao;
 import indi.nonoas.crm.dao.VipLevelDao;
 import indi.nonoas.crm.service.OrderService;
@@ -27,7 +25,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import org.apache.log4j.Logger;
 
-import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -49,14 +46,7 @@ public class ConsumeController implements Initializable {
     /**
      * 散客常量
      */
-    private final static VipBean SANKE = new VipBean();
-
-    static {
-        SANKE.setId("0000");
-        SANKE.setName("散客");
-        SANKE.setSex("保密");
-        SANKE.setDiscount(1);
-    }
+    private final static VipBean SANKE = VipBean.SANKE;
 
     /**
      * 会员信息
@@ -183,7 +173,6 @@ public class ConsumeController implements Initializable {
 
     private void initView() {
         showFindResult(vipBean);
-        tv_vipInfo.showAllInfos();
         sp_userInfo.setContent(tv_vipInfo);
         // 从数据库读出所用会员等级，并初始化ComboBox
         LinkedList<String> listName = new VipLevelDao().selectAllNames();
@@ -268,7 +257,10 @@ public class ConsumeController implements Initializable {
     }
 
     @FXML
-    private void goodsOrderPay() {
+    private void payGoodsOrder() {
+        if (isGoodsOrderOutOfStock())
+            return;
+
         if (gc_table.getItems().size() == 0) {
             new MyAlert(AlertType.INFORMATION, "订单内容为空！！").show();
             return;
@@ -278,8 +270,33 @@ public class ConsumeController implements Initializable {
         ConsumeDialog consumeDialog = new ConsumeDialog(vipBean, orderBean, orderDetails);
         consumeDialog.showAndWait();
         //如果成功提交，则清除订单信息
-        if (consumeDialog.hasSubmit())
+        if (consumeDialog.hasSubmit()) {
             clearGoodsOrder();
+            goodsSelectTable.showAllInfos();
+        }
+    }
+
+    /**
+     * 判断是否超出库存
+     *
+     * @return 超出库存返回true
+     */
+    private boolean isGoodsOrderOutOfStock() {
+        ObservableList<GoodsEditTableData> items = gc_table.getItems();
+        for (GoodsEditTableData data : items) {
+            String goodsID = data.getId();
+            int costCount = data.getAmount();
+            GoodsBean goodsBean = GoodsDao.getInstance().selectById(goodsID);
+            int storeCount = (int) goodsBean.getQuantity();
+            if (costCount > storeCount) {
+                MyAlert alert = new MyAlert(AlertType.WARNING,
+                        "《(" + goodsID + ")" + data.getName() + "》库存不足 " + costCount + goodsBean.getBaseUnit() + " ！");
+                alert.setHeaderText("库存不足");
+                alert.show();
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -292,7 +309,7 @@ public class ConsumeController implements Initializable {
         bean.setUserId(vipBean.getId());
         bean.setOrderId(shp_orderNum.getText());
         bean.setDatetime(shp_orderDate.getText());
-        bean.setPrice(new BigDecimal(pt_order_dis_price.getText()));
+        bean.setPrice(Double.parseDouble(pt_order_dis_price.getText()));
         bean.setIntegral_get(Integer.parseInt(shp_integral.getText()));
         bean.setIntegral_cost(Integer.parseInt(shp_integral_cost.getText()));
         return bean;

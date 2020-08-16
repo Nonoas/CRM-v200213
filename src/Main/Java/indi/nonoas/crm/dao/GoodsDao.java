@@ -71,7 +71,7 @@ public class GoodsDao extends MySqlDao<GoodsBean> {
      * @return GoodsBean的ArrayList集合, 可以为null
      */
     public ArrayList<GoodsBean> selectByFiltrate(String id, String name, String type) {
-        ArrayList<GoodsBean> list = null;
+        ArrayList<GoodsBean> list;
         list = (ArrayList<GoodsBean>) select(SELECT_BY_FILTRATE, id, name, type);
         return list;
     }

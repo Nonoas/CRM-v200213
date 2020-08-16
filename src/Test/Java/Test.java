@@ -18,17 +18,23 @@ import java.sql.SQLException;
  */
 public class Test {
 
-    static String underlineToBigCamel(String str) {
-        String[] strs = str.split("_");
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < strs.length; i++) {
-            strs[i] = strs[i].substring(0, 1).toUpperCase() + strs[i].substring(1);
-            sb.append(strs[i]);
+    static void underlineToBigCamel() {
+        Connection connection = DBOpener.getConnection();
+        String sql = "insert into user_info (id) values(?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            for (int i = 0; i < 1000; i++) {
+                ps.setString(1, 20200816 + i + "");
+                ps.addBatch();
+                System.out.println(i);
+            }
+            ps.executeBatch();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return sb.toString();
     }
 
     public static void main(String[] args) {
-        System.out.println(underlineToBigCamel("user_id"));
+        underlineToBigCamel();
     }
 }

@@ -11,7 +11,7 @@ public class OrderBean {
     private String orderId;
     private String userId;
     private String datetime;
-    private BigDecimal price;
+    private double price;
     private int integral_cost;
     private int integral_get;
     private String transactor;
@@ -40,11 +40,11 @@ public class OrderBean {
         this.datetime = datetime;
     }
 
-    public BigDecimal getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

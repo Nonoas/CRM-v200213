@@ -239,4 +239,16 @@ public class VipBean implements Serializable {
         return getClass().getSimpleName() + "[id=" + getId() + ",name=" + getName() + ",sex=" + getSex() + "]";
     }
 
+    /**
+     * 散客常量
+     */
+    public final static VipBean SANKE = new VipBean();
+
+    static {
+        SANKE.setId("0000");
+        SANKE.setName("散客");
+        SANKE.setSex("保密");
+        SANKE.setDiscount(1);
+    }
+
 }

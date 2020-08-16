@@ -1,15 +1,23 @@
 package indi.nonoas.crm.app.vip;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
 import indi.nonoas.crm.beans.VipBean;
 import indi.nonoas.crm.dao.VipInfoDao;
+import indi.nonoas.crm.view.progress.TableProgressIndicator;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import org.apache.log4j.Logger;
@@ -131,9 +139,25 @@ public class VipInfoTable extends TableView<VipBean> {
      */
     public void showAllInfos() {
         clearData(); // 清空所有数据
-        ArrayList<VipBean> listVipBeans = VipInfoDao.getInstance().selectAll();
-        if (listVipBeans != null)
-            obList.addAll(listVipBeans);
+        setPlaceholder(new TableProgressIndicator());
+        //子线程查询数据
+        Task<List<VipBean>> task = new Task<List<VipBean>>() {
+            @Override
+            protected List<VipBean> call() {
+                List<VipBean> beans = VipInfoDao.getInstance().selectAll();
+                if (beans != null)
+                    return beans;
+                else
+                    return new ArrayList<>(0);
+            }
+        };
+        new Thread(task).start();
+        task.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.size() != 0)
+                obList.addAll(newValue);
+            else
+                setPlaceholder(new Label("表中无内容"));
+        });
     }
 
     /**
