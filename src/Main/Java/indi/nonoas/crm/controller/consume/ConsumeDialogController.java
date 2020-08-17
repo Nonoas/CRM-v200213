@@ -114,7 +114,7 @@ public class ConsumeDialogController implements Initializable {
         VipBean vipBean = vipData();
 
         OrderDao orderDao = OrderDao.getInstance();
-        hasSubmit = orderDao.placeGoodsOrder(order, orderDetails,userGoods,goodsBeans,vipBean);
+        hasSubmit = orderDao.placeGoodsOrder(order, orderDetails, userGoods, goodsBeans, vipBean);
         if (hasSubmit) {
             new MyAlert(Alert.AlertType.INFORMATION, "结算成功！").show();
         } else {
@@ -133,6 +133,12 @@ public class ConsumeDialogController implements Initializable {
         String userID = order.getUserId();
         for (OrderDetailBean od : orderDetails) {
             String gID = od.getGoodsId();
+
+            //如果商品为服务类，则不添加到用户的商品库存中
+            GoodsBean bean = GoodsDao.getInstance().selectById(gID);
+            if (!bean.getType().equals("服务类"))
+                break;
+
             int gAmount = od.getGoodsAmount();
             //查询数据库是否已经存在该主键
             UserGoods goods = UserGoodsDao.getInstance().selectByUserGoods(userID, gID);

@@ -171,6 +171,11 @@ public class GoodsManageController implements Initializable {
         }
     }
 
+    @FXML
+    private void refreshGoodsTable() {
+        table.showAllInfos();
+    }
+
     //===========================================================================
     //                            Ì×²ÍÏîÄ¿
     //===========================================================================

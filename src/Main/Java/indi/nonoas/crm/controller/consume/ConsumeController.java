@@ -357,7 +357,9 @@ public class ConsumeController implements Initializable {
     @FXML
     private Label tc_order_dis_price;
     @FXML
-    private TextField tc_integral;
+    private TextField tc_integral_get;
+    @FXML
+    private TextField tc_integral_cost;
     @FXML
     private TextField tc_orderNum;
     @FXML
@@ -377,7 +379,7 @@ public class ConsumeController implements Initializable {
             }
             tc_order_price.setText(String.format("%.2f", pcTable.getSumPrice()));
             tc_order_dis_price.setText("0.00");
-            tc_integral.setText("0");
+            tc_integral_get.setText("0");
         });
 
         pkgSelectTable.getEventHandler().addEvent(() -> {
@@ -390,6 +392,29 @@ public class ConsumeController implements Initializable {
     @FXML
     private void clearPackageTable() {
         pcTable.clearData();
+    }
+
+    @FXML
+    private void payPackageOrder() {
+
+        //TODO 套餐购买流程
+        //TODO 判断是否超出库存
+        if (isGoodsOrderOutOfStock())
+            return;
+
+        if (pcTable.getItems().size() == 0) {
+            new MyAlert(AlertType.INFORMATION, "订单内容为空！！").show();
+            return;
+        }
+        OrderBean orderBean = generateGoodsOrder();
+        List<OrderDetailBean> orderDetails = generateGoodsOrderDetails();
+        ConsumeDialog consumeDialog = new ConsumeDialog(vipBean, orderBean, orderDetails);
+        consumeDialog.showAndWait();
+        //如果成功提交，则清除订单信息
+        if (consumeDialog.hasSubmit()) {
+            clearGoodsOrder();
+            goodsSelectTable.showAllInfos();
+        }
     }
 
 

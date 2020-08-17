@@ -217,13 +217,13 @@
                                                                         <Label fx:id="tc_order_dis_price" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0.00" HBox.hgrow="ALWAYS" />
                                                                     </children>
                                                                 </HBox>
-                                                                <HBox GridPane.columnIndex="2">
+                                                                <HBox GridPane.columnIndex="3">
                                                                     <children>
                                                                         <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="获得积分：" />
-                                                      <TextField fx:id="tc_integral" prefHeight="30.0" prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                                                      <TextField fx:id="tc_integral_get" prefHeight="30.0" prefWidth="30.0" HBox.hgrow="ALWAYS" />
                                                                     </children>
                                                                 </HBox>
-                                                                <Button alignment="CENTER" contentDisplay="CENTER" minWidth="80.0" mnemonicParsing="false" onAction="#clearPackageTable" styleClass="negative-btn" text="清空" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+                                                                <Button alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minWidth="80.0" mnemonicParsing="false" onAction="#clearPackageTable" styleClass="negative-btn" text="清空" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                                                                 <HBox prefHeight="62.0" prefWidth="222.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                                                     <children>
                                                                         <Label fx:id="pt_lb_order_date11" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" text="订单号：" />
@@ -236,7 +236,13 @@
                                                                         <TextField fx:id="tc_orderDate" editable="false" HBox.hgrow="ALWAYS" />
                                                                     </children>
                                                                 </HBox>
-                                                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#payGoodsOrder" text="订单结算" GridPane.columnSpan="4" GridPane.rowIndex="2" />
+                                                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#payPackageOrder" text="订单结算" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+                                                <HBox GridPane.columnIndex="2">
+                                                   <children>
+                                                      <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="积分消耗：" />
+                                                      <TextField fx:id="tc_integral_cost" prefHeight="30.0" prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                                                   </children>
+                                                </HBox>
                                                             </children>
                                                             <BorderPane.margin>
                                                                 <Insets top="10.0" />
