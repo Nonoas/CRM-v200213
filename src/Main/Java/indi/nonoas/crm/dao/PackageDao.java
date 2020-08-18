@@ -27,9 +27,9 @@ public class PackageDao extends MySqlDao<PackageBean> {
 
             "values (#{id},#{name},#{integral_cost},#{money_cost},#{min_discount},#{type},#{other})";
 
-    private static final String UPDATE_ONE = "update package_info" +
-
-            "set id=#{id},name=#{name},integral_cost=#{integral_cost},money_cost=#{money_cost},min_discount=#{min_discount},other=#{other}";
+    private static final String UPDATE_ONE = "update package_info " +
+            "set name=#{name},integral_cost=#{integral_cost},money_cost=#{money_cost},min_discount=#{min_discount}," +
+            "type=#{type},other=#{other} where id=#{id}";
 
     private PackageDao() {
 

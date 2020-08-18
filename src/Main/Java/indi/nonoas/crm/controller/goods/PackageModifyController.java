@@ -93,6 +93,7 @@ public class PackageModifyController extends PackageController {
         if (!minDiscount.equals("")) {
             packageBean.setMinDiscount(Double.parseDouble(minDiscount));
         }
+        packageBean.setType(cb_pkgType.getValue());
         packageBean.setOther(tf_other.getText());
         return packageBean;
     }
@@ -124,5 +125,6 @@ public class PackageModifyController extends PackageController {
         tf_min_discount.setText(String.valueOf(packageBean.getMinDiscount()));
         tf_other.setText(packageBean.getOther());
         pkgGoodsTable.showAllInfos(id);
+        cb_pkgType.setValue(packageBean.getType());
     }
 }

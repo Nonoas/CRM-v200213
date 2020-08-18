@@ -1,6 +1,7 @@
 package indi.nonoas.crm.app.goods;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import indi.nonoas.crm.beans.GoodsBean;
 import indi.nonoas.crm.dao.GoodsDao;
@@ -105,12 +106,31 @@ public class GoodsInfoTable extends TableView<GoodsBean> {
     }
 
     /**
+     * 替换表格中的数据
+     *
+     * @param beans 需要替换的数据
+     */
+    public void replaceData(List<GoodsBean> beans) {
+        obList.clear();
+        obList.addAll(beans);
+    }
+
+    /**
      * 添加数据
      *
      * @param bean 要添加的商品
      */
     public void addBean(GoodsBean bean) {
         obList.add(bean);
+    }
+
+    /**
+     * 添加数据
+     *
+     * @param beans 要添加的商品集合
+     */
+    public void addAllBeans(List<GoodsBean> beans) {
+        obList.addAll(beans);
     }
 
     /**

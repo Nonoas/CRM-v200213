@@ -56,11 +56,16 @@ public abstract class PackageController implements Initializable {
     protected TextField tf_min_discount;
 
     @FXML
+    protected ComboBox<String> cb_pkgType;
+
+    @FXML
     protected ImageView img_photo;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //初始化CombBox
+        cb_pkgType.getItems().addAll("产品类","服务类");
         initView();
     }
 

@@ -94,7 +94,9 @@ public class GoodsManageController implements Initializable {
 
     }
 
-    ////////////// 商品管理 ////////////////////
+    //===========================================================================
+    //                            商品管理
+    //===========================================================================
 
     @FXML    //查询商品
     private void find() {
@@ -102,13 +104,10 @@ public class GoodsManageController implements Initializable {
         String str0 = cb_type.getValue().equals("所有类型") ? "" : cb_type.getValue();
         String type = "%" + str0 + "%";
         ArrayList<GoodsBean> listVipBeans = goodsDao.selectByFiltrate(str, str, type);
-        if (listVipBeans != null) {
-            table.clearData();
-            for (GoodsBean bean : listVipBeans)
-                table.addBean(bean);
-        } else {
+        if (listVipBeans != null)
+            table.replaceData(listVipBeans);
+        else
             new MyAlert(AlertType.INFORMATION, "没有找到您查询的商品！").show();
-        }
     }
 
     @FXML    //修改商品信息
@@ -121,9 +120,9 @@ public class GoodsManageController implements Initializable {
             return;
         }
 
-        ObservableList<Tab> obList = tp_rootPane.getTabs();
+        ObservableList<Tab> tabList = tp_rootPane.getTabs();
         final String DATA = "修改商品信息";
-        for (Tab tab : obList) { // 遍历判断该tab是否已经添加
+        for (Tab tab : tabList) { // 遍历判断该tab是否已经添加
             String userDate = (String) tab.getUserData();
             if (userDate != null && userDate.equals(DATA)) {
                 tp_rootPane.getSelectionModel().select(tab); // 如果已经添加则显示该tab并返回
@@ -132,7 +131,7 @@ public class GoodsManageController implements Initializable {
         }
         Tab tab = new GoodsModifyTab(table.getSelectedData());
         tab.setUserData(DATA);
-        obList.add(tab);
+        tabList.add(tab);
         tp_rootPane.getSelectionModel().select(tab);
     }
 
@@ -161,19 +160,15 @@ public class GoodsManageController implements Initializable {
             new MyAlert(AlertType.INFORMATION, "请先选择一条数据！").show();
             return;
         }
-        String id = "编号:" + bean.getId();
-        String name = "名称:" + bean.getName();
-        MyAlert alert = new MyAlert(AlertType.CONFIRMATION, "是否确定删除该商品的信息？\n(" + id + "，" + name + ")");
+        String id = bean.getId();      //商品编号
+        String name = bean.getName();  //商品名称
+        MyAlert alert = new MyAlert(AlertType.CONFIRMATION,
+                String.format("是否确定删除该商品的信息？\n[ 编号：%s，名称：%s ]", id, name));
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             table.removeData(bean);
             goodsDao.deleteByID(bean);
         }
-    }
-
-    @FXML
-    private void refreshGoodsTable() {
-        table.showAllInfos();
     }
 
     //===========================================================================
@@ -190,7 +185,7 @@ public class GoodsManageController implements Initializable {
         String money1 = tf_moneyLow.getText().trim();
         String money2 = tf_moneyHigh.getText().trim();
         double mLow = money1.equals("") ? 0 : Double.parseDouble(money1);
-        double mHigh = money2.equals("") ? 9999999 : Double.parseDouble(money2);
+        double mHigh = money2.equals("") ? 99999999 : Double.parseDouble(money2);
 
         ArrayList<PackageBean> list = PackageDao.getInstance().findByFilter(id, id, mLow, mHigh);
         if (list == null) {

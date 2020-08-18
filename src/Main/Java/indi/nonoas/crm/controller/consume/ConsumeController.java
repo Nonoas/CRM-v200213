@@ -11,6 +11,7 @@ import indi.nonoas.crm.app.vip.VipAddTab;
 import indi.nonoas.crm.app.vip.VipInfoTable;
 import indi.nonoas.crm.beans.*;
 import indi.nonoas.crm.dao.GoodsDao;
+import indi.nonoas.crm.dao.PackageContentDao;
 import indi.nonoas.crm.dao.VipInfoDao;
 import indi.nonoas.crm.dao.VipLevelDao;
 import indi.nonoas.crm.service.OrderService;
@@ -42,7 +43,6 @@ public class ConsumeController implements Initializable {
      */
     private final VipInfoDao vipInfoDao = VipInfoDao.getInstance();
 
-    //TODO 需要定义一个散客
     /**
      * 散客常量
      */
@@ -365,21 +365,32 @@ public class ConsumeController implements Initializable {
     @FXML
     private TextField tc_orderDate;
 
+    /**
+     * 初始化“套餐订单”界面
+     */
     private void initPackageTab() {
         tc_sp_goods.setContent(pkgSelectTable);
         tc_borderPane.setCenter(pcTable);
+        //折后价
+        tc_order_dis_price.setText("套餐不打折");
+        tc_order_dis_price.setStyle("-fx-text-fill: #cf4813");
         //设置监听
         pcTable.getEventHandler().addEvent(() -> {
+            //设置订单号
             if (tc_orderNum.getText().equals("")) {
                 tc_orderNum.setText(OrderService.packageOrderNum());
             }
+            //设置订单日期
             if (tc_orderDate.getText().equals("")) {
                 DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 tc_orderDate.setText(sdf.format(LocalDateTime.now()));
             }
+            //订单金额
             tc_order_price.setText(String.format("%.2f", pcTable.getSumPrice()));
-            tc_order_dis_price.setText("0.00");
+            //积分获取
             tc_integral_get.setText("0");
+            //积分消耗
+            tc_integral_cost.setText("0");
         });
 
         pkgSelectTable.getEventHandler().addEvent(() -> {
@@ -397,15 +408,15 @@ public class ConsumeController implements Initializable {
     @FXML
     private void payPackageOrder() {
 
-        //TODO 套餐购买流程
-        //TODO 判断是否超出库存
-        if (isGoodsOrderOutOfStock())
+        if (isPackageOrderOutOfStock())
             return;
 
         if (pcTable.getItems().size() == 0) {
             new MyAlert(AlertType.INFORMATION, "订单内容为空！！").show();
             return;
         }
+
+        //TODO
         OrderBean orderBean = generateGoodsOrder();
         List<OrderDetailBean> orderDetails = generateGoodsOrderDetails();
         ConsumeDialog consumeDialog = new ConsumeDialog(vipBean, orderBean, orderDetails);
@@ -415,6 +426,40 @@ public class ConsumeController implements Initializable {
             clearGoodsOrder();
             goodsSelectTable.showAllInfos();
         }
+    }
+
+    /**
+     * 判断套餐订单是否为空
+     *
+     * @return 空：true
+     */
+    private boolean isPackageOrderOutOfStock() {
+        PackageContentDao pcDao = PackageContentDao.getInstance();
+        ObservableList<GoodsEditTableData> pkgItems = pcTable.getItems();
+        //遍历订单内套餐列表
+        for (GoodsEditTableData data : pkgItems) {
+            String pkgID = data.getId();
+            int costPkgCount = data.getAmount();
+            //查询套餐包含的商品
+            List<PackageContentBean> packageContents = pcDao.selectById(pkgID);
+            //遍历套餐内商品列表
+            for (PackageContentBean bean : packageContents) {
+                String goodsID = bean.getGoodsId();
+                int costCount = bean.getGoodsAmount() * costPkgCount;   //消耗的商品数量
+                GoodsBean goodsBean = GoodsDao.getInstance().selectById(goodsID);
+                int storeCount = (int) goodsBean.getQuantity();     //库存商品数量
+                System.out.println("消耗：" + costCount + ",储存" + storeCount);
+                if (costCount > storeCount) {
+                    String msg = "《(" + pkgID + ")" + data.getName() + "》套餐内 " +
+                            "《(" + goodsID + ")" + goodsBean.getName() + "》库存不足 " + costCount + goodsBean.getBaseUnit() + " ！";
+                    MyAlert alert = new MyAlert(AlertType.WARNING, msg);
+                    alert.setHeaderText("库存不足");
+                    alert.show();
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 

@@ -16,6 +16,7 @@ public class PackageAddController extends PackageController {
     @Override
     protected void initView() {
         sp_goods.setContent(pkgGoodsTable);
+        cb_pkgType.setValue("²úÆ·Àà");
     }
 
     /**

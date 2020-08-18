@@ -55,11 +55,6 @@
                         <Button mnemonicParsing="false" text="商品退货" />
                         <Button mnemonicParsing="false" onAction="#updateGoods" text="修改商品" />
                         <Button mnemonicParsing="false" onAction="#deleteInfo" styleClass="negative-btn" text="删除商品" />
-                        <Button mnemonicParsing="false" onAction="#refreshGoodsTable" text="刷新">
-                           <HBox.margin>
-                              <Insets left="30.0" />
-                           </HBox.margin>
-                        </Button>
                      </children>
                   </HBox>
                   <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />

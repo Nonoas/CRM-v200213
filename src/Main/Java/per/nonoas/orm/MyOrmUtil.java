@@ -1,10 +1,5 @@
 package per.nonoas.orm;
 
-import indi.nonoas.crm.view.alert.MyAlert;
-import javafx.scene.control.Alert;
-
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

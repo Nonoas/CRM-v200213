@@ -32,8 +32,8 @@ public class GoodsAddTab extends Tab {
 			e.printStackTrace();
 		}
 		setClosable(true);
-		GoodsAddController contronller=fxmlLoader.getController();
-		contronller.setPane(this);
+		GoodsAddController controller=fxmlLoader.getController();
+		controller.setPane(this);
 	}
 
 }
