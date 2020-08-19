@@ -6,8 +6,8 @@ package indi.nonoas.crm.beans;
  */
 public class OrderDetailBean {
     private String orderId;
-    private String goodsId;
-    private int goodsAmount;
+    private String productId;
+    private int productAmount;
 
     public String getOrderId() {
         return orderId;
@@ -17,19 +17,19 @@ public class OrderDetailBean {
         this.orderId = orderId;
     }
 
-    public String getGoodsId() {
-        return goodsId;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setGoodsId(String goodsId) {
-        this.goodsId = goodsId;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
-    public int getGoodsAmount() {
-        return goodsAmount;
+    public int getProductAmount() {
+        return productAmount;
     }
 
-    public void setGoodsAmount(int goodsAmount) {
-        this.goodsAmount = goodsAmount;
+    public void setProductAmount(int productAmount) {
+        this.productAmount = productAmount;
     }
 }

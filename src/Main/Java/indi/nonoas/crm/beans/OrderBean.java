@@ -1,7 +1,5 @@
 package indi.nonoas.crm.beans;
 
-import java.math.BigDecimal;
-
 /**
  * @author : Nonoas
  * @time : 2020-08-04 14:39
@@ -12,9 +10,10 @@ public class OrderBean {
     private String userId;
     private String datetime;
     private double price;
-    private int integral_cost;
-    private int integral_get;
+    private int integralCost;
+    private int integralGet;
     private String transactor;
+    private String payMode;
 
     public String getOrderId() {
         return orderId;
@@ -56,19 +55,27 @@ public class OrderBean {
         this.transactor = transactor;
     }
 
-    public int getIntegral_cost() {
-        return integral_cost;
+    public int getIntegralCost() {
+        return integralCost;
     }
 
-    public void setIntegral_cost(int integral_cost) {
-        this.integral_cost = integral_cost;
+    public void setIntegralCost(int integralCost) {
+        this.integralCost = integralCost;
     }
 
-    public int getIntegral_get() {
-        return integral_get;
+    public int getIntegralGet() {
+        return integralGet;
     }
 
-    public void setIntegral_get(int integral_get) {
-        this.integral_get = integral_get;
+    public void setIntegralGet(int integralGet) {
+        this.integralGet = integralGet;
+    }
+
+    public String getPayMode() {
+        return payMode;
+    }
+
+    public void setPayMode(String payMode) {
+        this.payMode = payMode;
     }
 }

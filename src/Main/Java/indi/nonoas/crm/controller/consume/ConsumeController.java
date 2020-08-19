@@ -1,9 +1,6 @@
 package indi.nonoas.crm.controller.consume;
 
-import indi.nonoas.crm.app.consume.ConsumeDialog;
-import indi.nonoas.crm.app.consume.CountConsumeTable;
-import indi.nonoas.crm.app.consume.GoodsConsumeTable;
-import indi.nonoas.crm.app.consume.PackageConsumeTable;
+import indi.nonoas.crm.app.consume.*;
 import indi.nonoas.crm.app.goods.GoodsSingleSelectTable;
 import indi.nonoas.crm.app.pkg.PackageSingleSelectTable;
 import indi.nonoas.crm.app.vip.UserGoodsTable;
@@ -83,8 +80,8 @@ public class ConsumeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         initView();
         //设置回车查询
-        tf_find.setOnKeyPressed(keyEven -> {
-            if (keyEven.getCode().equals(KeyCode.ENTER))
+        tf_find.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode().equals(KeyCode.ENTER))
                 inquireVIP();
         });
     }
@@ -246,7 +243,6 @@ public class ConsumeController implements Initializable {
         });
     }
 
-
     @FXML
     private void clearGoodsOrder() {
         gc_table.clearData();
@@ -258,6 +254,7 @@ public class ConsumeController implements Initializable {
 
     @FXML
     private void payGoodsOrder() {
+
         if (isGoodsOrderOutOfStock())
             return;
 
@@ -265,6 +262,7 @@ public class ConsumeController implements Initializable {
             new MyAlert(AlertType.INFORMATION, "订单内容为空！！").show();
             return;
         }
+
         OrderBean orderBean = generateGoodsOrder();
         List<OrderDetailBean> orderDetails = generateGoodsOrderDetails();
         ConsumeDialog consumeDialog = new ConsumeDialog(vipBean, orderBean, orderDetails);
@@ -310,8 +308,8 @@ public class ConsumeController implements Initializable {
         bean.setOrderId(shp_orderNum.getText());
         bean.setDatetime(shp_orderDate.getText());
         bean.setPrice(Double.parseDouble(pt_order_dis_price.getText()));
-        bean.setIntegral_get(Integer.parseInt(shp_integral.getText()));
-        bean.setIntegral_cost(Integer.parseInt(shp_integral_cost.getText()));
+        bean.setIntegralGet(Integer.parseInt(shp_integral.getText()));
+        bean.setIntegralCost(Integer.parseInt(shp_integral_cost.getText()));
         return bean;
     }
 
@@ -327,8 +325,8 @@ public class ConsumeController implements Initializable {
         for (GoodsEditTableData data : items) {
             bean = new OrderDetailBean();
             bean.setOrderId(shp_orderNum.getText());
-            bean.setGoodsId(data.getId());
-            bean.setGoodsAmount(data.getAmount());
+            bean.setProductId(data.getId());
+            bean.setProductAmount(data.getAmount());
             list.add(bean);
         }
         return list;
@@ -400,32 +398,75 @@ public class ConsumeController implements Initializable {
         });
     }
 
+    /**
+     * 清空套餐订单
+     */
     @FXML
-    private void clearPackageTable() {
+    private void clearPackageOrder() {
         pcTable.clearData();
+        tc_orderNum.setText("");
+        tc_orderDate.setText("");
+        tc_integral_get.setText("");
+        tc_integral_cost.setText("");
     }
 
     @FXML
     private void payPackageOrder() {
-
+        //判断是否超出库存
         if (isPackageOrderOutOfStock())
             return;
-
+        //判断订单是否为空
         if (pcTable.getItems().size() == 0) {
             new MyAlert(AlertType.INFORMATION, "订单内容为空！！").show();
             return;
         }
-
-        //TODO
-        OrderBean orderBean = generateGoodsOrder();
-        List<OrderDetailBean> orderDetails = generateGoodsOrderDetails();
-        ConsumeDialog consumeDialog = new ConsumeDialog(vipBean, orderBean, orderDetails);
+        //生成订单数据
+        OrderBean orderBean = generatePackageOrder();
+        //生成订单详情数据
+        List<OrderDetailBean> orderDetails = generatePackageOrderDetails();
+        //弹出消费窗口
+        PackageConsumeDialog consumeDialog = new PackageConsumeDialog(vipBean, orderBean, orderDetails);
         consumeDialog.showAndWait();
         //如果成功提交，则清除订单信息
         if (consumeDialog.hasSubmit()) {
             clearGoodsOrder();
             goodsSelectTable.showAllInfos();
         }
+    }
+
+    /**
+     * 生成套餐订单
+     *
+     * @return 套餐订单
+     */
+    private OrderBean generatePackageOrder() {
+        OrderBean bean = new OrderBean();
+        bean.setUserId(vipBean.getId());
+        bean.setOrderId(tc_orderNum.getText());
+        bean.setDatetime(tc_orderDate.getText());
+        bean.setPrice(Double.parseDouble(tc_order_price.getText()));
+        bean.setIntegralGet(Integer.parseInt(tc_integral_get.getText()));
+        bean.setIntegralCost(Integer.parseInt(tc_integral_cost.getText()));
+        return bean;
+    }
+
+    /**
+     * 生成订单详情
+     *
+     * @return 订单详情集合
+     */
+    private List<OrderDetailBean> generatePackageOrderDetails() {
+        List<OrderDetailBean> list = new ArrayList<>();
+        ObservableList<GoodsEditTableData> pkgItems = pcTable.getItems();
+        OrderDetailBean bean;
+        for (GoodsEditTableData pkg : pkgItems) {
+            bean = new OrderDetailBean();
+            bean.setOrderId(tc_orderNum.getText());
+            bean.setProductId(pkg.getId());
+            bean.setProductAmount(pkg.getAmount());
+            list.add(bean);
+        }
+        return list;
     }
 
     /**
@@ -442,9 +483,12 @@ public class ConsumeController implements Initializable {
             int costPkgCount = data.getAmount();
             //查询套餐包含的商品
             List<PackageContentBean> packageContents = pcDao.selectById(pkgID);
+            if (packageContents == null)
+                break;
             //遍历套餐内商品列表
             for (PackageContentBean bean : packageContents) {
                 String goodsID = bean.getGoodsId();
+                System.out.println("商品ID" + goodsID);
                 int costCount = bean.getGoodsAmount() * costPkgCount;   //消耗的商品数量
                 GoodsBean goodsBean = GoodsDao.getInstance().selectById(goodsID);
                 int storeCount = (int) goodsBean.getQuantity();     //库存商品数量

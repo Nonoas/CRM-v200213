@@ -5,10 +5,11 @@ import indi.nonoas.crm.beans.OrderDetailBean;
 import indi.nonoas.crm.beans.VipBean;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.controller.consume.ConsumeDialogController;
+import indi.nonoas.crm.controller.consume.PackageConsumeDialogController;
 import indi.nonoas.crm.view.annotation.CSS;
+import indi.nonoas.crm.view.annotation.FXML;
 import indi.nonoas.crm.view.annotation.StageProperty;
 import indi.nonoas.crm.view.stage.ControllableStage;
-import indi.nonoas.crm.view.annotation.FXML;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 
@@ -16,18 +17,18 @@ import java.util.List;
 
 /**
  * @author : Nonoas
- * @time : 2020-08-10 17:39
+ * @time : 2020-08-18 15:54
  */
 @StageProperty(title = "∂©µ•Ω·À„")
-@FXML("/fxml/consume_dialog.fxml")
 @CSS("css/application.css")
-public class ConsumeDialog extends ControllableStage {
+@FXML("/fxml/package_consume_dialog.fxml")
+public class PackageConsumeDialog extends ControllableStage {
 
-    private final ConsumeDialogController controller;
+    private final PackageConsumeDialogController controller;
 
-    public ConsumeDialog(VipBean vip, OrderBean order, List<OrderDetailBean> orderDetails) {
+    public PackageConsumeDialog(VipBean vip, OrderBean order, List<OrderDetailBean> orderDetails) {
         initView();
-        controller = (ConsumeDialogController) getController();
+        controller = (PackageConsumeDialogController) getController();
         controller.setStage(this);
         controller.setVipBean(vip);
         controller.setOrder(order);

@@ -9,7 +9,7 @@ import indi.nonoas.crm.beans.GoodsBean;
  *
  * @author Nonoas
  */
-public class GoodsDao extends MySqlDao<GoodsBean> {
+public class GoodsDao extends SqliteDao<GoodsBean> {
 
     private static final String SELECT_ALL = "select * from goods_info";
 

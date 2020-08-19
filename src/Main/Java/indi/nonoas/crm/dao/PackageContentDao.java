@@ -9,7 +9,7 @@ import indi.nonoas.crm.beans.PackageContentBean;
  *
  * @author Nonoas
  */
-public class PackageContentDao extends MySqlDao<PackageContentBean> {
+public class PackageContentDao extends SqliteDao<PackageContentBean> {
 
     private static final String SELECT_BY_ID = "select * from package_content where pkg_id=#{pkg_id}";
 

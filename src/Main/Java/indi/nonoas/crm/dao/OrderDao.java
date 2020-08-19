@@ -11,15 +11,15 @@ import java.util.List;
  * @author : Nonoas
  * @time : 2020-08-15 13:46
  */
-public class OrderDao extends MySqlDao<OrderBean> {
+public class OrderDao extends SqliteDao<OrderBean> {
 
-    private static final String INSERT_ORDER = "insert into order_info(order_id,user_id,datetime,price,transactor) " +
+    private static final String INSERT_ORDER = "insert into order_info(order_id,user_id,datetime,price,transactor,integral_get,integral_cost,pay_mode) " +
 
-            "values(#{order_id},#{user_id},#{datetime},#{price},#{transactor})";
+            "values(#{order_id},#{user_id},#{datetime},#{price},#{transactor},#{integral_get},#{integral_cost},#{pay_mode})";
 
-    private static final String INSERT_ORDER_DETAIL = "insert into order_details(order_id,goods_id,goods_amount) " +
+    private static final String INSERT_ORDER_DETAIL = "insert into order_details(order_id,product_id,product_amount) " +
 
-            "values(#{order_id},#{goods_id},#{goods_amount})";
+            "values(#{order_id},#{product_id},#{product_amount})";
 
     private static final String REPLACE_USER_GOODS = "replace into user_goods(user_id,goods_id,amount) " +
 
@@ -53,6 +53,41 @@ public class OrderDao extends MySqlDao<OrderBean> {
      * @param vipBean      用户
      */
     public boolean placeGoodsOrder(OrderBean order, List<OrderDetailBean> orderDetails, List<UserGoods> userGoods, List<GoodsBean> goodsBeans, VipBean vipBean) {
+
+        List<AbstractTransaction> transactions = new ArrayList<>();
+
+        //如果是散客则不做以下事务
+        if (vipBean != VipBean.SANKE) {
+            //用户事务
+            transactions.add(new BeanTransaction(REDUCE_USER_BALANCE, vipBean));
+            //用户-商品事务
+            for (UserGoods ug : userGoods) {
+                transactions.add(new BeanTransaction(REPLACE_USER_GOODS, ug));
+            }
+        }
+        //订单事务
+        transactions.add(new BeanTransaction(INSERT_ORDER, order));
+        //订单详情事务
+        for (OrderDetailBean orderDetail : orderDetails) {
+            transactions.add(new BeanTransaction(INSERT_ORDER_DETAIL, orderDetail));
+        }
+        //商品事务
+        for (GoodsBean g : goodsBeans) {
+            transactions.add(new BeanTransaction(REDUCE_GOODS, g));
+        }
+        return executeTransaction(transactions);
+    }
+
+    /**
+     * 商品下单事务
+     *
+     * @param order        订单
+     * @param orderDetails 订单详情
+     * @param userGoods    需要更新的 用户-商品 列表
+     * @param goodsBeans   商品 列表
+     * @param vipBean      用户
+     */
+    public boolean placePackageOrder(OrderBean order, List<OrderDetailBean> orderDetails, List<UserGoods> userGoods, List<GoodsBean> goodsBeans, VipBean vipBean) {
 
         List<AbstractTransaction> transactions = new ArrayList<>();
 

@@ -4,6 +4,7 @@ import indi.nonoas.crm.app.MainStage;
 import indi.nonoas.crm.beans.LoginBean;
 import indi.nonoas.crm.dao.LoginDao;
 import indi.nonoas.crm.global.ClientSession;
+import indi.nonoas.crm.utils.SaltUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -83,7 +84,7 @@ public class WelcomeController implements Initializable {
 
         VerifyTask(String u, String p) {
             this.username = u;
-            this.password = p;
+            this.password = new SaltUtil(u, "MD5").encode(p);
         }
 
         @Override

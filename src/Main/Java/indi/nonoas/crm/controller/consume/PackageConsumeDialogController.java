@@ -2,14 +2,15 @@ package indi.nonoas.crm.controller.consume;
 
 
 import indi.nonoas.crm.beans.*;
-import indi.nonoas.crm.dao.GoodsDao;
-import indi.nonoas.crm.dao.OrderDao;
-import indi.nonoas.crm.dao.UserGoodsDao;
+import indi.nonoas.crm.dao.*;
 import indi.nonoas.crm.global.PayMode;
 import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -22,7 +23,7 @@ import java.util.ResourceBundle;
  * @author : Nonoas
  * @time : 2020-08-10 17:59
  */
-public class ConsumeDialogController implements Initializable {
+public class PackageConsumeDialogController implements Initializable {
 
     private Stage stage;
 
@@ -77,7 +78,7 @@ public class ConsumeDialogController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        cb_payMode.getItems().addAll(PayMode.INTEGRAL, PayMode.CASH, PayMode.BALANCE, PayMode.FREE);
+        cb_payMode.getItems().addAll(PayMode.INTEGRAL, PayMode.CASH, PayMode.BALANCE);
         cb_payMode.setValue(PayMode.CASH);
         lb_balance.setText("已选择现金支付");
         //添加下拉选项监听
@@ -106,6 +107,7 @@ public class ConsumeDialogController implements Initializable {
 
     @FXML
     private void submit() {
+
         order.setTransactor(tf_transactor.getText());   //获取受理人
 
         //设置即将传入数据库的 用户-商品
@@ -118,13 +120,50 @@ public class ConsumeDialogController implements Initializable {
         OrderBean orderBean = orderData();
 
         OrderDao orderDao = OrderDao.getInstance();
-        hasSubmit = orderDao.placeGoodsOrder(orderBean, orderDetails, userGoods, goodsBeans, vipBean);
+        hasSubmit = orderDao.placePackageOrder(orderBean, orderDetails, userGoods, goodsBeans, vipBean);
         if (hasSubmit) {
             new MyAlert(Alert.AlertType.INFORMATION, "结算成功！").show();
         } else {
             new MyAlert(Alert.AlertType.INFORMATION, "结算失败！").show();
         }
         stage.close();
+    }
+
+    /**
+     * 获取写入数据库的 “用户-商品” bean对象
+     *
+     * @return 用户-商品 bean集合
+     */
+    private List<UserGoods> userGoodsData() {
+
+        List<UserGoods> userGoods = new ArrayList<>(16);       //获订单中的所有套餐
+        String userID = order.getUserId();      //获取用户ID
+        for (OrderDetailBean od : orderDetails) {   //遍历订单
+            String pkgID = od.getProductId();
+            //如果套餐不为服务类，则不添加到用户的商品库存中
+            PackageBean bean = PackageDao.getInstance().selectById(pkgID);
+            if (!bean.getType().equals("服务类"))
+                break;
+            int pkgAmount = od.getProductAmount();        //获取套餐数量
+            //查询套餐包含的商品
+            List<PackageContentBean> packageContentBeans = PackageContentDao.getInstance().selectById(pkgID);
+            for (PackageContentBean pkgContBean : packageContentBeans) {
+                String gID = pkgContBean.getGoodsId();          //商品ID
+                int gAmount = pkgContBean.getGoodsAmount();     //商品数量
+                //查询数据库是否已经存在该主键
+                UserGoods user_goods = UserGoodsDao.getInstance().selectByUserGoods(userID, gID);
+                if (user_goods == null) {
+                    user_goods = new UserGoods();
+                    user_goods.setUserId(userID);
+                    user_goods.setGoodsId(gID);
+                    user_goods.setAmount(gAmount * pkgAmount);
+                } else {
+                    user_goods.setAmount(user_goods.getAmount() + pkgAmount * gAmount);
+                }
+                userGoods.add(user_goods);
+            }
+        }
+        return userGoods;
     }
 
     /**
@@ -151,38 +190,6 @@ public class ConsumeDialogController implements Initializable {
         return order;
     }
 
-    /**
-     * 获取写入数据库的 “用户-商品” bean对象
-     *
-     * @return 用户-商品 bean集合
-     */
-    private List<UserGoods> userGoodsData() {
-        List<UserGoods> userGoods = new ArrayList<>(orderDetails.size());
-        String userID = order.getUserId();
-        for (OrderDetailBean od : orderDetails) {
-            String gID = od.getProductId();
-
-            //如果商品为服务类，则不添加到用户的商品库存中
-            GoodsBean bean = GoodsDao.getInstance().selectById(gID);
-            if (!bean.getType().equals("服务类"))
-                break;
-
-            int gAmount = od.getProductAmount();
-            //查询数据库是否已经存在该主键
-            UserGoods goods = UserGoodsDao.getInstance().selectByUserGoods(userID, gID);
-            if (goods == null) {
-                goods = new UserGoods();
-                goods.setUserId(userID);
-                goods.setGoodsId(gID);
-                goods.setAmount(od.getProductAmount());
-            } else {
-                goods.setAmount(goods.getAmount() + gAmount);
-            }
-            userGoods.add(goods);
-        }
-        return userGoods;
-    }
-
 
     /**
      * 获取需要更新的 “商品” bean对象
@@ -190,11 +197,16 @@ public class ConsumeDialogController implements Initializable {
      * @return 商品 bean的集合
      */
     private List<GoodsBean> goodsData() {
-        List<GoodsBean> goodsBeans = new ArrayList<>(orderDetails.size());
+        List<GoodsBean> goodsBeans = new ArrayList<>(16);
+        //遍历套餐订单
         for (OrderDetailBean detail : orderDetails) {
-            GoodsBean bean = GoodsDao.getInstance().selectById(detail.getProductId());
-            bean.setQuantity(bean.getQuantity() - detail.getProductAmount());     //从数据库中减去购买的数量
-            goodsBeans.add(bean);
+            List<PackageContentBean> pkgContBeans = PackageContentDao.getInstance().selectById(detail.getProductId());
+            //遍历套餐内容
+            for (PackageContentBean pkgContBean : pkgContBeans) {
+                GoodsBean bean = GoodsDao.getInstance().selectById(pkgContBean.getGoodsId());
+                bean.setQuantity(bean.getQuantity() - detail.getProductAmount() * pkgContBean.getGoodsAmount());     //从数据库中减去购买的数量
+                goodsBeans.add(bean);
+            }
         }
         return goodsBeans;
     }
@@ -214,7 +226,6 @@ public class ConsumeDialogController implements Initializable {
         //需要扣除的数据：余额 || 积分
         switch (payMode) {
             case CASH:
-            case FREE:
                 break;
             case BALANCE:
                 bean.setBalance(bean.getBalance() - order.getPrice());
@@ -276,5 +287,6 @@ public class ConsumeDialogController implements Initializable {
     public void setFocus() {
         tf_transactor.requestFocus();
     }
+
 
 }

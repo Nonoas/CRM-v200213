@@ -11,7 +11,7 @@ import per.nonoas.orm.MyOrmUtil;
  * @param <T> Bean¿‡∑∫–Õ
  * @author Nonoas
  */
-public abstract class MySqlDao<T> extends MyOrmUtil<T> {
+public abstract class SqliteDao<T> extends MyOrmUtil<T> {
 
     @Override
     protected Connection getConnection() {

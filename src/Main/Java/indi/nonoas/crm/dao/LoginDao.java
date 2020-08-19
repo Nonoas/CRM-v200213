@@ -2,7 +2,7 @@ package indi.nonoas.crm.dao;
 
 import indi.nonoas.crm.beans.LoginBean;
 
-public class LoginDao extends MySqlDao<LoginBean> {
+public class LoginDao extends SqliteDao<LoginBean> {
 	
 	private static final String VERIFY = "select * from login_info where id=#{id} and password=#{password}";
 
