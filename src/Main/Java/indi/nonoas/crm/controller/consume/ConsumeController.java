@@ -7,10 +7,7 @@ import indi.nonoas.crm.app.consume.UserGoodsTable;
 import indi.nonoas.crm.app.vip.VipAddTab;
 import indi.nonoas.crm.app.vip.VipInfoTable;
 import indi.nonoas.crm.beans.*;
-import indi.nonoas.crm.dao.GoodsDao;
-import indi.nonoas.crm.dao.PackageContentDao;
-import indi.nonoas.crm.dao.VipInfoDao;
-import indi.nonoas.crm.dao.VipLevelDao;
+import indi.nonoas.crm.dao.*;
 import indi.nonoas.crm.service.OrderService;
 import indi.nonoas.crm.view.alert.MyAlert;
 import indi.nonoas.crm.beans.vo.GoodsEditTableData;
@@ -572,8 +569,12 @@ public class ConsumeController implements Initializable {
             return;
         }
         //判断是否超出用户库存
-
+        if (isContOrderOutOfStock())
+            return;
         //TODO 结算数据库操作
+        //TODO 生成订单
+        //TODO 扣除用户余量
+        //TODO 刷新表格
         //结算成功
         new MyAlert(AlertType.WARNING, "结算成功！").show();
     }
@@ -584,6 +585,29 @@ public class ConsumeController implements Initializable {
             userGoodsTable.showAllData();
     }
 
-    //TODO 判断是否超出库存
+    /**
+     * 判断计次消费是否超出库存
+     *
+     * @return 超出：true
+     */
+    private boolean isContOrderOutOfStock() {
+        String userID = vipBean.getId();
+        ObservableList<GoodsEditTableData> items = ccTable.getItems();
+        for (GoodsEditTableData data : items) {
+            UserGoods userGoods = UserGoodsDao.getInstance().selectByUserGoods(userID, data.getId());
+            GoodsBean goodsBean = GoodsDao.getInstance().selectById(userGoods.getGoodsId());
+            int amountCost = data.getAmount();
+            int amountRest = userGoods.getAmount();
+            if (amountCost > amountRest) {
+                String msg = String.format("用户账下 [%s]%s 数量不足 %d%s！",
+                        goodsBean.getId(), goodsBean.getName(), amountCost, goodsBean.getBaseUnit());
+                MyAlert alert = new MyAlert(AlertType.WARNING, msg);
+                alert.setHeaderText("余量不足");
+                alert.show();
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

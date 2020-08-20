@@ -47,21 +47,13 @@ public class GoodsEditTableData {
     }
 
     public void setPrice(double price) {
-        double oldValue = this.price;
         this.price = price;
         this.sum_price = price * amount;
-        psc.firePropertyChange("goods_price", oldValue, price);
     }
 
     public void setAmount(int amount) {
-        int oldValue = this.amount;
         this.amount = amount;
         this.sum_price = price * amount;
-        psc.firePropertyChange("goods_amount", oldValue, amount);
-    }
-
-    public PropertyChangeSupport getPropertyChangeSupport() {
-        return psc;
     }
 
     @Override

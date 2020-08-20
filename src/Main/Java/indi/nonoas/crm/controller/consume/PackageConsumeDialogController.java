@@ -142,13 +142,16 @@ public class PackageConsumeDialogController implements Initializable {
      */
     private boolean isOutOfBalance() {
         PayMode payMode = cb_payMode.getValue();
+        boolean flag;
         switch (payMode) {
             case BALANCE:
-                new MyAlert(Alert.AlertType.WARNING, "现金余额不足！").show();
-                return vipBean.getBalance() < order.getPrice();
+                flag = vipBean.getBalance() < order.getPrice();
+                if (flag) new MyAlert(Alert.AlertType.WARNING, "现金余额不足！").show();
+                return flag;
             case INTEGRAL:
-                new MyAlert(Alert.AlertType.WARNING, "积分余额不足！").show();
-                return vipBean.getIntegral() < order.getIntegralCost();
+                flag = vipBean.getBalance() < order.getPrice();
+                if (flag) new MyAlert(Alert.AlertType.WARNING, "积分余额不足！").show();
+                return flag;
             default:
                 return false;
         }

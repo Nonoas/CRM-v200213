@@ -8,9 +8,11 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.util.StringConverter;
 import per.nonoas.delegate.EventHandler;
 
 import java.util.ArrayList;
+import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 
 /**
@@ -220,6 +222,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableData> {
                         tf_number.setText(String.valueOf(amount));
                     }
                 });
+
                 //文本框变化监听
                 tf_number.textProperty().addListener((observable, oldValue, newValue) -> {
                     String pattern = "^\\d+$";
@@ -227,7 +230,6 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableData> {
                     if (isNumber) {
                         bean.setAmount(Integer.parseInt(newValue));
                         GoodsEditTable<S> table = (GoodsEditTable<S>) getTableView();
-                        table.refresh();
                         table.getEventHandler().execute();
                     } else {
                         tf_number.setText(oldValue);
