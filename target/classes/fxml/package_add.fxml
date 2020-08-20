@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<HBox fx:id="hBox_root" alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1280.0" spacing="50.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="indi.nonoas.crm.controller.goods.PackageAddController">
+   <children>
+      <GridPane alignment="CENTER" hgap="70.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="560.0" prefWidth="633.0" vgap="10.0" HBox.hgrow="ALWAYS">
+        <columnConstraints>
+          <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="280.0" percentWidth="50.0" prefWidth="280.0" />
+          <ColumnConstraints maxWidth="1.7976931348623157E308" minWidth="280.0" percentWidth="50.0" prefWidth="280.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="135.0" minHeight="0.0" prefHeight="43.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="280.0" minHeight="10.0" percentHeight="60.0" prefHeight="237.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="50.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" prefWidth="5.0" text="*" textFill="#ed5a65">
+                     <HBox.margin>
+                        <Insets left="-5.0" right="-10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" text="项目编号" />
+                  <TextField fx:id="tf_id" prefHeight="30.0" prefWidth="217.0" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.rowIndex="1">
+               <children>
+                  <Label alignment="CENTER" prefWidth="5.0" text="*" textFill="#ed5a65">
+                     <HBox.margin>
+                        <Insets left="-5.0" right="-10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label alignment="CENTER" text="套餐售价" wrapText="true" />
+                  <TextField fx:id="tf_money" prefHeight="30.0" prefWidth="209.0" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1">
+               <children>
+                  <Label minWidth="-Infinity" text="*" textFill="#ed5a65">
+                     <HBox.margin>
+                        <Insets left="-5.0" right="-10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" text="项目名称" wrapText="true" />
+                  <TextField fx:id="tf_name" prefHeight="30.0" prefWidth="217.0" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin></TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <Label text="*" textFill="#ed5a65">
+                     <HBox.margin>
+                        <Insets left="-5.0" right="-10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" text="套餐积分" wrapText="true" />
+                  <TextField fx:id="tf_integral" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="295.0" spacing="10.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
+               <children>
+                  <Label alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" text="备注信息" wrapText="true" />
+                  <TextField fx:id="tf_other" prefHeight="30.0" prefWidth="138.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_CENTER" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <children>
+                  <CheckBox fx:id="chc_isClose" mnemonicParsing="false" prefHeight="30.0" prefWidth="178.0" selected="true" text="提交后关闭选项卡" textFill="#cf4813" />
+                  <Button mnemonicParsing="false" onAction="#cancelInfo" prefWidth="80.0" text="取消" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
+                  <Button mnemonicParsing="false" onAction="#commitIfo" prefWidth="80.0" text="确认" wrapText="true" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.rowIndex="4">
+               <children>
+                  <Label alignment="CENTER" prefWidth="5.0" text="*" textFill="#ed5a65">
+                     <HBox.margin>
+                        <Insets left="-5.0" right="-10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label alignment="CENTER" text="套餐商品" wrapText="true" />
+                  <Button mnemonicParsing="false" onAction="#addGoods" text="添加商品" />
+                  <Button mnemonicParsing="false" onAction="#deleteGoods" styleClass="negative-btn" text="删除商品" />
+                  <Button mnemonicParsing="false" onAction="#clearGoods" styleClass="negative-btn" text="清空" />
+               </children>
+            </HBox>
+            <ScrollPane fx:id="sp_goods" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+            <HBox alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="295.0" spacing="10.0" GridPane.rowIndex="2">
+               <children>
+                  <Label alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" text="最低折扣" wrapText="true" />
+                  <TextField fx:id="tf_min_discount" prefHeight="30.0" prefWidth="138.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="295.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Label alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" text="套餐分类" wrapText="true" />
+                  <ComboBox fx:id="cb_pkgType" maxWidth="1.7976931348623157E308" prefWidth="150.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+         </children>
+      </GridPane>
+      <GridPane maxWidth="1.7976931348623157E308" prefHeight="560.0" prefWidth="300.0" vgap="20.0" HBox.hgrow="ALWAYS">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="359.0" minHeight="10.0" percentHeight="60.0" prefHeight="342.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="204.0" minHeight="10.0" percentHeight="40.0" prefHeight="204.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ImageView fx:id="img_photo" fitHeight="257.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+            <Button fx:id="btn_upload" mnemonicParsing="false" text="上传图片" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+         </children>
+      </GridPane>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="50.0" right="20.0" top="20.0" />
+   </padding>
+</HBox>

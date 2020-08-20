@@ -522,19 +522,38 @@ public class ConsumeController implements Initializable {
     @FXML
     private ScrollPane jc_sp_goods;
 
+    @FXML
+    private TextField jc_orderTime;
+
+    /**
+     * 受理人
+     */
+    @FXML
+    TextField jc_transactor;
+
     private void initCountTab() {
         jc_borderPane.setCenter(ccTable);
         jc_sp_goods.setContent(userGoodsTable);
 
         lb_id.textProperty().addListener((observable, oldValue, newValue) -> userGoodsTable.setVipBean(vipBean));
 
+        //添加事件委托
         userGoodsTable.addEvent(() -> {
             ccTable.addBean(userGoodsTable.getSelectBean());
-            //TODO 生成订单日期
+            //如果订单为空则设置时间
+            if (jc_orderTime.getText().equals("")) {
+                DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                jc_orderTime.setText(sdf.format(LocalDateTime.now()));
+            }
         });
     }
 
-    //TODO 清空订单
+    @FXML
+    private void clearCountOrder() {
+        ccTable.clearData();
+        jc_orderTime.setText("");
+        jc_transactor.setText("");
+    }
 
     //TODO 订单结算
 

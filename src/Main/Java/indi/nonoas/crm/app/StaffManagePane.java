@@ -3,6 +3,8 @@ package indi.nonoas.crm.app;
 import java.io.IOException;
 import java.net.URL;
 
+import indi.nonoas.crm.view.annotation.FXML;
+import indi.nonoas.crm.view.stage.FXLayoutFactory;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.layout.Pane;
@@ -13,19 +15,11 @@ import javafx.scene.layout.VBox;
  *
  * @author Nonoas
  */
+@FXML("/fxml/staff_manage.fxml")
 public class StaffManagePane extends Pane {
     public StaffManagePane() {
-        URL url = getClass().getResource("/fxml/staff_manage.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(url);
-        fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
-        VBox pane = null;
-        try {
-            pane = fxmlLoader.load();
-            getChildren().add(pane);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        VBox pane = (VBox) FXLayoutFactory.createFXLayout(StaffManagePane.class);
+        getChildren().add(pane);
         setStyle("-fx-border-color:#DDD");
         if (pane != null) {
             pane.prefHeightProperty().bind(this.heightProperty());

@@ -1,0 +1,35 @@
+/*root类选择器给所有的元素设置样式*/
+.root {
+    -fx-focus-color: #81b25e;
+    -fx-font-size: 16.0px;
+    -fx-background-position: center center;
+    -fx-background-color: white;
+}
+
+/*button类型选择器设置所有Button的背景色*/
+.combo-box {
+    -fx-background-color: transparent, transparent, transparent, #81b25e;
+    -fx-border-color: #bbb;
+    -fx-border-radius: 4px;
+}
+
+.combo-box:focused {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+.arrow-button {
+    -fx-border-color: #bbb;
+    -fx-border-width: 0.4px;
+    -fx-background-color: white
+}
+
+.button {
+    -fx-background-color: #40a070;
+    -fx-text-fill: white;
+}
+
+/*hover伪类选择器设置鼠标移过Button时的背景色*/
+.button:hover {
+    -fx-background-color: #62c292;
+}
