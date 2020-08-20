@@ -5,7 +5,7 @@ import indi.nonoas.crm.beans.PackageContentBean;
 import indi.nonoas.crm.dao.GoodsDao;
 import indi.nonoas.crm.dao.PackageContentDao;
 import indi.nonoas.crm.view.table.GoodsEditTable;
-import indi.nonoas.crm.view.table.GoodsEditTableData;
+import indi.nonoas.crm.beans.vo.GoodsEditTableData;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;

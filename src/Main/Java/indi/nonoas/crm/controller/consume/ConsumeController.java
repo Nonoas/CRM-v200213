@@ -13,7 +13,7 @@ import indi.nonoas.crm.dao.VipInfoDao;
 import indi.nonoas.crm.dao.VipLevelDao;
 import indi.nonoas.crm.service.OrderService;
 import indi.nonoas.crm.view.alert.MyAlert;
-import indi.nonoas.crm.view.table.GoodsEditTableData;
+import indi.nonoas.crm.beans.vo.GoodsEditTableData;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,7 +22,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import org.apache.log4j.Logger;
-import per.nonoas.delegate.Event;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -196,7 +195,7 @@ public class ConsumeController implements Initializable {
     @FXML
     private BorderPane pt_borderPane;
     @FXML
-    private ScrollPane pt_sp_goods;
+    private BorderPane bp_goodsTable;
     @FXML
     private Label pt_order_price;
     @FXML
@@ -212,7 +211,7 @@ public class ConsumeController implements Initializable {
 
     private void initGoodsTab() {
         pt_borderPane.setCenter(gc_table);
-        pt_sp_goods.setContent(goodsSelectTable);
+        bp_goodsTable.setCenter(goodsSelectTable);
 
         //设置表格的监听事件
         gc_table.getEventHandler().addEvent(() -> {
@@ -333,6 +332,11 @@ public class ConsumeController implements Initializable {
         return list;
     }
 
+    @FXML
+    private void refreshGoodsTable() {
+        goodsSelectTable.showAllInfos();
+    }
+
 
     //===========================================================================
     //                            套餐消费
@@ -350,7 +354,7 @@ public class ConsumeController implements Initializable {
     @FXML
     private BorderPane tc_borderPane;
     @FXML
-    private ScrollPane tc_sp_goods;
+    private BorderPane bp_pkgTable;
     @FXML
     private Label tc_order_price;
     @FXML
@@ -368,7 +372,7 @@ public class ConsumeController implements Initializable {
      * 初始化“套餐订单”界面
      */
     private void initPackageTab() {
-        tc_sp_goods.setContent(pkgSelectTable);
+        bp_pkgTable.setCenter(pkgSelectTable);
         tc_borderPane.setCenter(pcTable);
         //折后价
         tc_order_dis_price.setText("套餐不打折");
@@ -507,6 +511,11 @@ public class ConsumeController implements Initializable {
         return false;
     }
 
+    @FXML
+    private void refreshPackageTable() {
+        pkgSelectTable.showAllInfos();
+    }
+
 
     //===========================================================================
     //                            计次消费
@@ -520,7 +529,7 @@ public class ConsumeController implements Initializable {
     private BorderPane jc_borderPane;
 
     @FXML
-    private ScrollPane jc_sp_goods;
+    private BorderPane jc_goodsBorderPane;
 
     @FXML
     private TextField jc_orderTime;
@@ -533,7 +542,7 @@ public class ConsumeController implements Initializable {
 
     private void initCountTab() {
         jc_borderPane.setCenter(ccTable);
-        jc_sp_goods.setContent(userGoodsTable);
+        jc_goodsBorderPane.setCenter(userGoodsTable);
 
         lb_id.textProperty().addListener((observable, oldValue, newValue) -> userGoodsTable.setVipBean(vipBean));
 
@@ -555,7 +564,25 @@ public class ConsumeController implements Initializable {
         jc_transactor.setText("");
     }
 
-    //TODO 订单结算
+    @FXML
+    private void payCountOrder() {
+        //判断订单是否为空
+        if (ccTable.getItems().size() == 0) {
+            new MyAlert(AlertType.WARNING, "订单内容为空！").show();
+            return;
+        }
+        //判断是否超出用户库存
+
+        //TODO 结算数据库操作
+        //结算成功
+        new MyAlert(AlertType.WARNING, "结算成功！").show();
+    }
+
+    @FXML
+    private void refreshUserGoods() {
+        if (vipBean != SANKE)
+            userGoodsTable.showAllData();
+    }
 
     //TODO 判断是否超出库存
 

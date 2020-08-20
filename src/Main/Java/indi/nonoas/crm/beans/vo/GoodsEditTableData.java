@@ -1,9 +1,4 @@
-package indi.nonoas.crm.view.table;
-
-/**
- * @author : Nonoas
- * @time : 2020-08-12 15:10
- */
+package indi.nonoas.crm.beans.vo;
 
 import java.beans.PropertyChangeSupport;
 

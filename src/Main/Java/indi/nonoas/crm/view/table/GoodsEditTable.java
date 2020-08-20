@@ -1,5 +1,6 @@
 package indi.nonoas.crm.view.table;
 
+import indi.nonoas.crm.beans.vo.GoodsEditTableData;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -9,7 +10,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import per.nonoas.delegate.EventHandler;
 
-import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 

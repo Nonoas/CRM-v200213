@@ -3,7 +3,7 @@ package indi.nonoas.crm.app.consume;
 import indi.nonoas.crm.beans.PackageBean;
 import indi.nonoas.crm.dao.PackageDao;
 import indi.nonoas.crm.view.table.GoodsEditTable;
-import indi.nonoas.crm.view.table.GoodsEditTableData;
+import indi.nonoas.crm.beans.vo.GoodsEditTableData;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;

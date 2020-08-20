@@ -175,7 +175,21 @@
                                                         </Label>
                                                     </top>
                                                 </BorderPane>
-                                                <ScrollPane fx:id="pt_sp_goods" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" />
+                                    <BorderPane fx:id="bp_goodsTable" prefHeight="200.0" prefWidth="200.0">
+                                       <top>
+                                          <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#refreshGoodsTable" text="刷新" />
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="5.0" />
+                                             </padding>
+                                          </HBox>
+                                       </top>
+                                       <padding>
+                                          <Insets left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </BorderPane>
                                             </items>
                                         </SplitPane>
                                     </content>
@@ -257,7 +271,21 @@
                                                         </Label>
                                                     </top>
                                                 </BorderPane>
-                                                <ScrollPane fx:id="tc_sp_goods" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" />
+                                    <BorderPane fx:id="bp_pkgTable" prefHeight="200.0" prefWidth="200.0">
+                                       <top>
+                                          <HBox alignment="CENTER_LEFT" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#refreshPackageTable" text="刷新" />
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="5.0" />
+                                             </padding>
+                                          </HBox>
+                                       </top>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" top="5.0" />
+                                       </padding>
+                                    </BorderPane>
                                             </items>
                                         </SplitPane>
                                     </content>
@@ -293,7 +321,7 @@
                                                                         <TextField fx:id="jc_orderTime" editable="false" HBox.hgrow="ALWAYS" />
                                                                     </children>
                                                                 </HBox>
-                                                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="订单结算" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                                                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#payCountOrder" text="订单结算" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                                                 <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="222.0" GridPane.columnIndex="2" GridPane.columnSpan="2">
                                                    <children>
                                                       <Label fx:id="pt_lb_order_date11111" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="44.0" text="受理人：" />
@@ -314,7 +342,23 @@
                                           </Label>
                                        </top>
                                                 </BorderPane>
-                                                <ScrollPane fx:id="jc_sp_goods" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" />
+                                    <BorderPane fx:id="jc_goodsBorderPane" prefHeight="200.0" prefWidth="200.0">
+                                       <top>
+                                          <HBox alignment="CENTER_LEFT" prefWidth="616.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Button mnemonicParsing="false" onAction="#refreshUserGoods" text="刷新">
+                                                   <HBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </HBox.margin></Button>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="5.0" />
+                                             </padding>
+                                          </HBox>
+                                       </top>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" top="5.0" />
+                                       </padding></BorderPane>
                                             </items>
                                         </SplitPane>
                                     </content>

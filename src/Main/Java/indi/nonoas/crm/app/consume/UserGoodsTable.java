@@ -10,6 +10,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import per.nonoas.delegate.Event;
@@ -28,8 +30,10 @@ public class UserGoodsTable extends TableView<UserGoodsVO> {
     private final ObservableList<UserGoodsVO> obList = FXCollections.observableArrayList();
     private final ObservableList<TableColumn<UserGoodsVO, ?>> columns = getColumns();
     private VipBean vipBean;
-    private final EventHandler eventHandler=new EventHandler();
+    private final EventHandler eventHandler = new EventHandler();
     private UserGoods selectBean;
+    private final Label phd_noUser = new Label("尚未选择会员");
+    private final Label phd_noData = new Label("该用户没有任何商品");
 
     private final TableColumn<UserGoodsVO, String> col_goodsID = new TableColumn<>("商品编号");
     private final TableColumn<UserGoodsVO, String> col_goodsName = new TableColumn<>("商品名称");
@@ -40,6 +44,7 @@ public class UserGoodsTable extends TableView<UserGoodsVO> {
     public UserGoodsTable() {
         setItems(obList);
         setColumnResizePolicy(CONSTRAINED_RESIZE_POLICY);
+        setPlaceholder(phd_noUser);
         initColumn();
         getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             selectBean = voToBean(newValue);
@@ -71,7 +76,8 @@ public class UserGoodsTable extends TableView<UserGoodsVO> {
     public void showAllData() {
         obList.clear();
         List<UserGoodsVO> vos = getUserGoodsVOs();
-        if (vos == null) return;
+        if (vos == null)
+            return;
         obList.addAll(vos);
     }
 
@@ -134,7 +140,18 @@ public class UserGoodsTable extends TableView<UserGoodsVO> {
 
     public void setVipBean(VipBean vipBean) {
         this.vipBean = vipBean;
+        setEmptyText();
         showAllData();
+    }
+
+    /**
+     * 设置表格为空时的内容
+     */
+    private void setEmptyText() {
+        if (vipBean == VipBean.SANKE)
+            setPlaceholder(phd_noUser);
+        else
+            setPlaceholder(phd_noData);
     }
 
 
