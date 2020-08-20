@@ -67,8 +67,6 @@ public class VipInfoTable extends TableView<VipBean> {
 
     private final TableColumn<VipBean, Number> item_cumulative = new TableColumn<>("累计消费");
 
-    private final TableColumn<VipBean, Number> item_frequency = new TableColumn<>("剩余次数");
-
     private final TableColumn<VipBean, String> item_idCard = new TableColumn<>("身份证号码");
 
     private final TableColumn<VipBean, String> item_birthday = new TableColumn<>("出生日期");
@@ -104,7 +102,6 @@ public class VipInfoTable extends TableView<VipBean> {
             String str = String.format("￥%.2f", param.getValue().getBalance());
             return new SimpleStringProperty(str);
         }); // 卡内余额
-        item_frequency.setCellValueFactory(param -> new SimpleIntegerProperty(param.getValue().getFrequency())); // 剩余次数
         item_cumulative.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getCumulative())); // 累计消费
         item_address.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAddress())); // 联系地址
         item_integral.setCellValueFactory(param -> new SimpleIntegerProperty(param.getValue().getIntegral())); // 会员积分
@@ -122,7 +119,6 @@ public class VipInfoTable extends TableView<VipBean> {
         colList.add(item_sex);
         colList.add(item_card_level);
         colList.add(item_balance);
-        colList.add(item_frequency);
         colList.add(item_cumulative);
         colList.add(item_address);
         colList.add(item_integral);

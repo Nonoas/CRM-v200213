@@ -4,7 +4,6 @@ import indi.nonoas.crm.beans.OrderBean;
 import indi.nonoas.crm.beans.OrderDetailBean;
 import indi.nonoas.crm.beans.VipBean;
 import indi.nonoas.crm.config.ImageSrc;
-import indi.nonoas.crm.controller.consume.ConsumeDialogController;
 import indi.nonoas.crm.controller.consume.PackageConsumeDialogController;
 import indi.nonoas.crm.view.annotation.CSS;
 import indi.nonoas.crm.view.annotation.FXML;

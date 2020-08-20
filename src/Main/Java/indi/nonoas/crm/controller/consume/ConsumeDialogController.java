@@ -106,6 +106,13 @@ public class ConsumeDialogController implements Initializable {
 
     @FXML
     private void submit() {
+
+        //判断是否余额不足
+        if (isOutOfBalance()) {
+            stage.close();
+            return;
+        }
+
         order.setTransactor(tf_transactor.getText());   //获取受理人
 
         //设置即将传入数据库的 用户-商品
@@ -125,6 +132,25 @@ public class ConsumeDialogController implements Initializable {
             new MyAlert(Alert.AlertType.INFORMATION, "结算失败！").show();
         }
         stage.close();
+    }
+
+    /**
+     * 判断是否超出余额
+     *
+     * @return 超出：true
+     */
+    private boolean isOutOfBalance() {
+        PayMode payMode = cb_payMode.getValue();
+        switch (payMode) {
+            case BALANCE:
+                new MyAlert(Alert.AlertType.WARNING, "现金余额不足！").show();
+                return vipBean.getBalance() < order.getPrice();
+            case INTEGRAL:
+                new MyAlert(Alert.AlertType.WARNING, "积分余额不足！").show();
+                return vipBean.getIntegral() < order.getIntegralCost();
+            default:
+                return false;
+        }
     }
 
     /**

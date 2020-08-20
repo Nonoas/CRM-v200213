@@ -130,7 +130,7 @@ public class VipManageController implements Initializable {
         }
         String id = "卡号:" + bean.getId();
         String name = "姓名:" + bean.getName();
-        MyAlert alert = new MyAlert(AlertType.CONFIRMATION, "是否确定删除该用户的信息？\n(" + id + "，" + name + ")");
+        MyAlert alert = new MyAlert(AlertType.CONFIRMATION, "是否确定删除该用户的信息？\n[ " + id + "，" + name + " ]");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             table.removeData(bean);

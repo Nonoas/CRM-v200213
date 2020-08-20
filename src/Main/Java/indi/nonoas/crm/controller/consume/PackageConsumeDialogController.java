@@ -78,7 +78,7 @@ public class PackageConsumeDialogController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        cb_payMode.getItems().addAll(PayMode.INTEGRAL, PayMode.CASH, PayMode.BALANCE);
+        cb_payMode.getItems().addAll(PayMode.INTEGRAL, PayMode.CASH, PayMode.BALANCE, PayMode.FREE);
         cb_payMode.setValue(PayMode.CASH);
         lb_balance.setText("已选择现金支付");
         //添加下拉选项监听
@@ -108,6 +108,12 @@ public class PackageConsumeDialogController implements Initializable {
     @FXML
     private void submit() {
 
+        //判断是否余额不足
+        if (isOutOfBalance()) {
+            stage.close();
+            return;
+        }
+
         order.setTransactor(tf_transactor.getText());   //获取受理人
 
         //设置即将传入数据库的 用户-商品
@@ -127,6 +133,25 @@ public class PackageConsumeDialogController implements Initializable {
             new MyAlert(Alert.AlertType.INFORMATION, "结算失败！").show();
         }
         stage.close();
+    }
+
+    /**
+     * 判断是否超出余额
+     *
+     * @return 超出：true
+     */
+    private boolean isOutOfBalance() {
+        PayMode payMode = cb_payMode.getValue();
+        switch (payMode) {
+            case BALANCE:
+                new MyAlert(Alert.AlertType.WARNING, "现金余额不足！").show();
+                return vipBean.getBalance() < order.getPrice();
+            case INTEGRAL:
+                new MyAlert(Alert.AlertType.WARNING, "积分余额不足！").show();
+                return vipBean.getIntegral() < order.getIntegralCost();
+            default:
+                return false;
+        }
     }
 
     /**

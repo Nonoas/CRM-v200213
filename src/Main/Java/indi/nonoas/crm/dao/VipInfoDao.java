@@ -19,15 +19,15 @@ public class VipInfoDao extends SqliteDao<VipBean> {
     private static final String SELECT_BY_FILTRATE_2 = "select * from user_info where (id like #{id} "
             + "or name like #{name}) and card_level like #{card_level} " + "and admission_date between ? and ?";
     private static final String INSERT_INFO = "insert into "
-            + "user_info(id,name,sex,birthday,card_level,balance,frequency,cumulative,"
+            + "user_info(id,name,sex,birthday,card_level,balance,cumulative,"
             + "address,integral,telephone,idcard,career,email,other,admission_date,photo) "
             + "values(#{id},#{name},#{sex},#{birthday},#{card_level},#{balance},"
-            + "#{frequency},#{cumulative},#{address},#{integral},#{telephone},#{idcard},"
+            + "#{cumulative},#{address},#{integral},#{telephone},#{idcard},"
             + "#{career},#{email},#{other},#{admission_date},#{photo});";
     private static final String DELETE_BY_ID = "delete from user_info where id=#{id}";
     private static final String UPDATE_INFO = "update user_info set "
             + "name=#{name},sex=#{sex},birthday=#{birthday},card_level=#{card_level},"
-            + "balance=#{balance},frequency=#{frequency},"
+            + "balance=#{balance},"
             + "cumulative=#{cumulative},address=#{address},integral=#{integral},telephone=#{telephone},"
             + "idcard=#{idcard},career=#{career},email=#{email},other=#{other} " + "where id=#{id}";
     private static final String SELECT_MAX_ID = "select max(id) as id from user_info";

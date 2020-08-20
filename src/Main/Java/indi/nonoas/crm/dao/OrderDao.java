@@ -29,9 +29,10 @@ public class OrderDao extends SqliteDao<OrderBean> {
 
     private static final String REDUCE_USER_BALANCE = "update user_info set "
             + "name=#{name},sex=#{sex},birthday=#{birthday},card_level=#{card_level},"
-            + "balance=#{balance},frequency=#{frequency},"
+            + "balance=#{balance},"
             + "cumulative=#{cumulative},address=#{address},integral=#{integral},telephone=#{telephone},"
-            + "idcard=#{idcard},career=#{career},email=#{email},other=#{other} " + "where id=#{id}";
+            + "idcard=#{idcard},career=#{career},email=#{email},other=#{other} "
+            + "where id=#{id}";
 
 
     private OrderDao() {

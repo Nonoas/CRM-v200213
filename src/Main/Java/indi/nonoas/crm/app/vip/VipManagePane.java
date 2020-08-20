@@ -1,12 +1,7 @@
 package indi.nonoas.crm.app.vip;
 
-import java.io.IOException;
-import java.net.URL;
-
 import indi.nonoas.crm.view.annotation.FXML;
 import indi.nonoas.crm.view.stage.FXLayoutFactory;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 

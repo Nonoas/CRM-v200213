@@ -3,7 +3,7 @@ package indi.nonoas.crm.controller.consume;
 import indi.nonoas.crm.app.consume.*;
 import indi.nonoas.crm.app.goods.GoodsSingleSelectTable;
 import indi.nonoas.crm.app.pkg.PackageSingleSelectTable;
-import indi.nonoas.crm.app.vip.UserGoodsTable;
+import indi.nonoas.crm.app.consume.UserGoodsTable;
 import indi.nonoas.crm.app.vip.VipAddTab;
 import indi.nonoas.crm.app.vip.VipInfoTable;
 import indi.nonoas.crm.beans.*;
@@ -22,6 +22,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import org.apache.log4j.Logger;
+import per.nonoas.delegate.Event;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -429,8 +430,8 @@ public class ConsumeController implements Initializable {
         consumeDialog.showAndWait();
         //如果成功提交，则清除订单信息
         if (consumeDialog.hasSubmit()) {
-            clearGoodsOrder();
-            goodsSelectTable.showAllInfos();
+            clearPackageOrder();
+            pkgSelectTable.showAllInfos();
         }
     }
 
@@ -524,6 +525,19 @@ public class ConsumeController implements Initializable {
     private void initCountTab() {
         jc_borderPane.setCenter(ccTable);
         jc_sp_goods.setContent(userGoodsTable);
+
+        lb_id.textProperty().addListener((observable, oldValue, newValue) -> userGoodsTable.setVipBean(vipBean));
+
+        userGoodsTable.addEvent(() -> {
+            ccTable.addBean(userGoodsTable.getSelectBean());
+            //TODO 生成订单日期
+        });
     }
+
+    //TODO 清空订单
+
+    //TODO 订单结算
+
+    //TODO 判断是否超出库存
 
 }

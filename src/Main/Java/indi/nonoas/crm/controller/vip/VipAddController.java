@@ -145,7 +145,7 @@ public class VipAddController implements Initializable {
 
 	@FXML
 	private void commitIfo() {
-		if (!isCommitable())
+		if (!isCommittable())
 			return;
 		VipBean bean = new VipBean();
 		bean.setId(tf_id.getText().trim());
@@ -165,7 +165,6 @@ public class VipAddController implements Initializable {
 		double dBalance = strBalance.equals("") ? 0 : Double.parseDouble(strBalance);
 		bean.setBalance(dBalance);
 
-//TODO 		bean.setFrequency("初始次数");
 		bean.setAddress(tf_address.getText());
 		bean.setTelephone(tf_tel.getText());
 		bean.setIdcard(tf_idcard.getText());
@@ -189,7 +188,7 @@ public class VipAddController implements Initializable {
 	 * 
 	 * @return 可以为true，不可用为false
 	 */
-	private boolean isCommitable() {
+	private boolean isCommittable() {
 		String id = tf_id.getText().trim(); // 卡号
 		String name = tf_name.getText().trim(); // 姓名
 		String tel = tf_tel.getText().trim(); // 电话号码

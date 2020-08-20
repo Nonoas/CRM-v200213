@@ -49,10 +49,6 @@ public class VipBean implements Serializable {
      */
     private double discount;
     /**
-     * 剩余次数
-     */
-    private int frequency;
-    /**
      * 联系地址
      */
     private String address;
@@ -167,14 +163,6 @@ public class VipBean implements Serializable {
 
     public void setDiscount(double discount) {
         this.discount = discount;
-    }
-
-    public int getFrequency() {
-        return frequency;
-    }
-
-    public void setFrequency(int frequency) {
-        this.frequency = frequency;
     }
 
     public String getAddress() {

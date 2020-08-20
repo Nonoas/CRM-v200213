@@ -2,6 +2,8 @@ package indi.nonoas.crm.dao;
 
 import indi.nonoas.crm.beans.UserGoods;
 
+import java.util.List;
+
 /**
  * @author : Nonoas
  * @time : 2020-08-07 18:26
@@ -10,6 +12,8 @@ public class UserGoodsDao extends SqliteDao<UserGoods> {
 
     private static final String SELECT_BY_USER_GOODS = "select * from user_goods where user_id=#{user_id} " +
             "and goods_id=#{goods_id}";
+
+    private static final String SELECT_BY_USER = "select * from user_goods where user_id=#{user_id}";
 
     private UserGoodsDao() {
 
@@ -32,8 +36,20 @@ public class UserGoodsDao extends SqliteDao<UserGoods> {
         return selectOne(SELECT_BY_USER_GOODS, userID, goodsID);
     }
 
+    /**
+     * 根据用户ID查询用户商品余额
+     *
+     * @param userID 用户ID
+     * @return 用户商品列表
+     */
+    public List<UserGoods> selectByUser(String userID) {
+        return select(SELECT_BY_USER, userID);
+    }
+
     @Override
     protected Class<UserGoods> getBeanClass() {
         return UserGoods.class;
     }
+
+
 }
