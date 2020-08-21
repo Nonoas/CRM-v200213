@@ -9,7 +9,7 @@ public class ParamTransaction extends AbstractTransaction {
     private final Object[] objects;
     private final String sql;
 
-    public ParamTransaction(String sql, Object[] objects) {
+    public ParamTransaction(String sql, Object... objects) {
         this.sql = sql;
         this.objects = objects;
     }

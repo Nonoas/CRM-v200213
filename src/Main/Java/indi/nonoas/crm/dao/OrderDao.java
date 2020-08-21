@@ -3,7 +3,11 @@ package indi.nonoas.crm.dao;
 import indi.nonoas.crm.beans.*;
 import per.nonoas.orm.AbstractTransaction;
 import per.nonoas.orm.BeanTransaction;
+import per.nonoas.orm.ParamTransaction;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +16,8 @@ import java.util.List;
  * @time : 2020-08-15 13:46
  */
 public class OrderDao extends SqliteDao<OrderBean> {
+
+    private static final String SELECT_ALL = "select * from order_info";
 
     private static final String INSERT_ORDER = "insert into order_info(order_id,user_id,datetime,price,transactor,integral_get,integral_cost,pay_mode) " +
 
@@ -34,6 +40,9 @@ public class OrderDao extends SqliteDao<OrderBean> {
             + "idcard=#{idcard},career=#{career},email=#{email},other=#{other} "
             + "where id=#{id}";
 
+    private static final String DELETE_OLD_DATA = "delete from order_info" +
+            " where date('now', '-365 day') >= date(datetime)";
+
 
     private OrderDao() {
     }
@@ -42,6 +51,10 @@ public class OrderDao extends SqliteDao<OrderBean> {
 
     public static OrderDao getInstance() {
         return INSTANCE;
+    }
+
+    public List<OrderBean> selectAll() {
+        return select(SELECT_ALL);
     }
 
     /**
@@ -112,6 +125,18 @@ public class OrderDao extends SqliteDao<OrderBean> {
             transactions.add(new BeanTransaction(REDUCE_GOODS, g));
         }
         return executeTransaction(transactions);
+    }
+
+    /**
+     * 删除一年前的记录
+     */
+    public void delete365DaysAgo() {
+        //FIXME sqlite无法触发外键删除操作
+        try {
+            execute(DELETE_OLD_DATA);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

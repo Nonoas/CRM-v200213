@@ -1,4 +1,4 @@
-package indi.nonoas.crm.app;
+package indi.nonoas.crm.app.vip;
 
 import indi.nonoas.crm.view.annotation.FXML;
 import indi.nonoas.crm.view.stage.FXLayoutFactory;

@@ -8,7 +8,7 @@ import indi.nonoas.crm.global.ClientSession;
 import indi.nonoas.crm.app.consume.ConsumePane;
 import indi.nonoas.crm.app.goods.GoodsManagePane;
 import indi.nonoas.crm.app.StaffManagePane;
-import indi.nonoas.crm.app.StatPane;
+import indi.nonoas.crm.app.vip.StatPane;
 import indi.nonoas.crm.app.vip.VipManagePane;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.view.alert.MyAlert;

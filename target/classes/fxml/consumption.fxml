@@ -72,8 +72,10 @@
                                         <Label fx:id="lb_cardLevel" prefHeight="20.0" prefWidth="78.0" text="--" GridPane.columnIndex="5" GridPane.rowIndex="1" />
                                         <Label text="会员积分:" wrapText="true" GridPane.rowIndex="2" />
                                         <Label fx:id="lb_integral" text="--" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                        <Label text="会员卡状态:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                        <Label fx:id="lb_cardState" text="--" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                        <Label text="会员卡状态:" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                        <Label fx:id="lb_cardState" text="--" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                              <Label text="卡内余额:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <Label fx:id="lb_balance" text="--" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                                     </children>
                                     <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="156.0" minWidth="-Infinity" prefWidth="80.0" />

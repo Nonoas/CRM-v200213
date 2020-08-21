@@ -179,22 +179,32 @@ public abstract class MyOrmUtil<T> {
         //生成事务执行语句
         try {
             for (AbstractTransaction transaction : transactions) {
-                //获取事务参数
-                Object bean = transaction.getParams();
-                String sql = transaction.getSQL();
-                //生成PrepareStatement对象
-                Class<?> beanClass = bean.getClass();
-                List<String> paramNames = getParams(sql);
-                sql = getSql(sql);  // 将SQL中的#{}占位符改为?
-                PreparedStatement ps = conn.prepareStatement(sql);
-                for (int i = 0; i < paramNames.size(); i++) {
-                    String colName = paramNames.get(i);
-                    String methodName = "get" + underlineToBigCamel(colName); // 方法名
-                    Method method = beanClass.getDeclaredMethod(methodName);
-                    Object value = method.invoke(bean);
-                    ps.setObject(i + 1, value);
+                if (transaction instanceof BeanTransaction) {
+                    //获取事务参数
+                    Object bean = transaction.getParams();
+                    String sql = transaction.getSQL();
+                    //生成PrepareStatement对象
+                    Class<?> beanClass = bean.getClass();
+                    List<String> paramNames = getParams(sql);
+                    sql = getSql(sql);  // 将SQL中的#{}占位符改为?
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    for (int i = 0; i < paramNames.size(); i++) {
+                        String colName = paramNames.get(i);
+                        String methodName = "get" + underlineToBigCamel(colName); // 方法名
+                        Method method = beanClass.getDeclaredMethod(methodName);
+                        Object value = method.invoke(bean);
+                        ps.setObject(i + 1, value);
+                    }
+                    ps.execute();
+                } else {
+                    String sql = getSql(transaction.getSQL());
+                    Object[] params = (Object[]) transaction.getParams();
+                    PreparedStatement ps = conn.prepareStatement(getSql(sql)); // 将#{}占位符替换为?
+                    for (int i = 0; i < params.length; i++) {
+                        ps.setObject(i + 1, params[i]);
+                    }
+                    ps.execute();
                 }
-                ps.execute();
             }
         } catch (InvocationTargetException | NoSuchMethodException | SQLException | IllegalAccessException e) {
             e.printStackTrace();

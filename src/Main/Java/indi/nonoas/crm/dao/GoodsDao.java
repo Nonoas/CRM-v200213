@@ -14,7 +14,6 @@ public class GoodsDao extends SqliteDao<GoodsBean> {
     private static final String SELECT_ALL = "select * from goods_info";
 
     private static final String SELECT_BY_FILTRATE = "select * from goods_info " +
-
             "where (id like #{id} or name like #{name}) and type like #{type}";
 
     private static final String SELECT_BY_ID = "select * from goods_info where id=#{id}";
@@ -57,7 +56,7 @@ public class GoodsDao extends SqliteDao<GoodsBean> {
      * @return GoodsBean的ArrayList集合, 可为null
      */
     public ArrayList<GoodsBean> selectAll() {
-        ArrayList<GoodsBean> list = null;
+        ArrayList<GoodsBean> list;
         list = (ArrayList<GoodsBean>) select(SELECT_ALL);
         return list;
     }

@@ -1,6 +1,7 @@
 package indi.nonoas.crm.app;
 
 import indi.nonoas.crm.config.ImageSrc;
+import indi.nonoas.crm.dao.OrderDao;
 import indi.nonoas.crm.view.annotation.CSS;
 import indi.nonoas.crm.view.annotation.FXML;
 import indi.nonoas.crm.view.annotation.StageProperty;
@@ -14,6 +15,7 @@ public class MainStage extends ControllableStage {
 
     public MainStage() {
         initUI();
+        startBackgroundTask();
     }
 
     private void initUI() {
@@ -23,5 +25,12 @@ public class MainStage extends ControllableStage {
         setMinWidth(1280);
         show();
         setMaximized(true);
+    }
+
+    private void startBackgroundTask() {
+        new Thread(() -> {
+            OrderDao.getInstance().delete365DaysAgo();
+            System.out.println("删除一年前的订单");
+        }).start();
     }
 }
