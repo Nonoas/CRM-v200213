@@ -2,6 +2,7 @@ package indi.nonoas.crm.controller.vip;
 
 import java.io.File;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
@@ -44,7 +45,7 @@ public class VipAddController implements Initializable {
      * 永久按钮
      */
     @FXML
-    private CheckBox cbb_foever;
+    private CheckBox cbb_forever;
     @FXML
     private RadioButton rbtn_expiration;
     @FXML
@@ -107,7 +108,7 @@ public class VipAddController implements Initializable {
             cbb_level.getItems().add(item);
         cbb_level.setValue(cbbItems.get(0));
         // 永久选项监听
-        cbb_foever.selectedProperty().addListener(isForeverListener);
+        cbb_forever.selectedProperty().addListener(isForeverListener);
     }
 
     /**
@@ -193,9 +194,9 @@ public class VipAddController implements Initializable {
         String name = tf_name.getText().trim(); // 姓名
         String tel = tf_tel.getText().trim(); // 电话号码
         String level = cbb_level.getValue(); // 会员等级
-        // TODO 检查是否可以提交
-        if (id.equals("") || name.equals("") || tel.equals("") || level.equals("")) {
-            new MyAlert(AlertType.WARNING, "会员卡号、会员姓名、联系电话、会员等级不能为空！").show();
+        LocalDate date = dp_addDate.getValue();
+        if (id.equals("") || name.equals("") || tel.equals("") || level.equals("") || date == null) {
+            new MyAlert(AlertType.WARNING, "会员卡号、会员姓名、联系电话、会员等级、入会时间不能为空！").show();
             return false;
         }
         return true;

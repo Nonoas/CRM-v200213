@@ -2,6 +2,7 @@ package indi.nonoas.crm.dao;
 
 import indi.nonoas.crm.beans.UserGoods;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -14,6 +15,11 @@ public class UserGoodsDao extends SqliteDao<UserGoods> {
             "and goods_id=#{goods_id}";
 
     private static final String SELECT_BY_USER = "select * from user_goods where user_id=#{user_id}";
+
+    private static final String UPDATE_GOODS_AMOUNT = "update user_goods " +
+            "set amount=#{amount} where user_id=#{user_id} and goods_id=#{goods_id}";
+
+    private static final String DELETE_NULL_DATA = "delete from user_goods where amount=0";
 
     private UserGoodsDao() {
 
@@ -37,6 +43,20 @@ public class UserGoodsDao extends SqliteDao<UserGoods> {
     }
 
     /**
+     * 消费用户商品
+     *
+     * @param ugoList 消费后的用户商品数据
+     */
+    public void reduceGoods(List<UserGoods> ugoList) {
+        executeBatch(UPDATE_GOODS_AMOUNT, ugoList);
+        try {
+            execute(DELETE_NULL_DATA);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * 根据用户ID查询用户商品余额
      *
      * @param userID 用户ID
@@ -50,6 +70,5 @@ public class UserGoodsDao extends SqliteDao<UserGoods> {
     protected Class<UserGoods> getBeanClass() {
         return UserGoods.class;
     }
-
 
 }

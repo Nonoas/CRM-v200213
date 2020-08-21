@@ -325,7 +325,7 @@
                                                 <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="222.0" GridPane.columnIndex="2" GridPane.columnSpan="2">
                                                    <children>
                                                       <Label fx:id="pt_lb_order_date11111" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="44.0" text="受理人：" />
-                                                      <TextField fx:id="jc_transactor" editable="false" prefHeight="30.0" prefWidth="102.0" HBox.hgrow="ALWAYS" />
+                                                      <TextField fx:id="jc_transactor" prefHeight="30.0" prefWidth="102.0" HBox.hgrow="ALWAYS" />
                                                    </children>
                                                 </HBox>
                                                             </children>

@@ -139,7 +139,7 @@ public abstract class MyOrmUtil<T> {
      * @param sql sql语句
      * @param ts  bean类集合
      */
-    final protected void executeBatch(String sql, ArrayList<T> ts) {
+    final protected void executeBatch(String sql, List<T> ts) {
 
         List<String> list = getParams(sql);
         sql = getSql(sql); // 将SQL中的#{}占位符改为?

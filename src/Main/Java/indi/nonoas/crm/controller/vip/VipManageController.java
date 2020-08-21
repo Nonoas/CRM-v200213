@@ -143,7 +143,6 @@ public class VipManageController implements Initializable {
      */
     @FXML
     private void modifyVip() {
-        //TODO 打印路径许修改
         VipBean bean = table.getSelectedData();
         if (bean == null) {
             new MyAlert(AlertType.INFORMATION, "请先选择一条数据！").show();

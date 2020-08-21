@@ -83,7 +83,7 @@
                <children>
                   <Label alignment="CENTER" prefHeight="26.0" prefWidth="65.0" text="过期时间" wrapText="true" HBox.hgrow="ALWAYS" />
                   <DatePicker fx:id="dpick_expiration" disable="true" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="145.0" showWeekNumbers="true" HBox.hgrow="ALWAYS" />
-                  <CheckBox fx:id="cbb_foever" minWidth="-Infinity" mnemonicParsing="false" selected="true" text="永久" />
+                  <CheckBox fx:id="cbb_forever" minWidth="-Infinity" mnemonicParsing="false" selected="true" text="永久" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.rowIndex="5">

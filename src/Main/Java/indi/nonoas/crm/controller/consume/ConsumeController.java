@@ -571,18 +571,60 @@ public class ConsumeController implements Initializable {
         //判断是否超出用户库存
         if (isContOrderOutOfStock())
             return;
-        //TODO 结算数据库操作
-        //TODO 生成订单
-        //TODO 扣除用户余量
-        //TODO 刷新表格
-        //结算成功
+
+        //FIXME 需要进一步优化为-事务
+        List<UserGoodsOrderBean> ugoBeans = generateUserGoodsOrder();
+        List<UserGoods> ugoList = generateUserGoodsData(ugoBeans);
+        UserGoodsOrderDao dao = UserGoodsOrderDao.getInstance();
+        UserGoodsDao ugDao = UserGoodsDao.getInstance();
+        dao.insertOrders(ugoBeans);
+        ugDao.reduceGoods(ugoList);
         new MyAlert(AlertType.WARNING, "结算成功！").show();
+
+        clearCountOrder();      //清空计次消费订单
+        userGoodsTable.showAllData();       //刷新用户商品列表
     }
 
     @FXML
     private void refreshUserGoods() {
         if (vipBean != SANKE)
             userGoodsTable.showAllData();
+    }
+
+    /**
+     * 生成计次消费订单
+     *
+     * @return 计次消费订单
+     */
+    private List<UserGoodsOrderBean> generateUserGoodsOrder() {
+        ObservableList<GoodsEditTableData> items = ccTable.getItems();
+        List<UserGoodsOrderBean> ugoBeans = new ArrayList<>(items.size());
+        for (GoodsEditTableData data : items) {
+            UserGoodsOrderBean ugo = new UserGoodsOrderBean();
+            ugo.setGoodsId(data.getId());
+            ugo.setAmount(data.getAmount());
+            ugo.setOrderDate(jc_orderTime.getText());
+            ugo.setTransactor(jc_transactor.getText());
+            ugo.setUserId(vipBean.getId());
+            ugoBeans.add(ugo);
+        }
+        return ugoBeans;
+    }
+
+    /**
+     * 生成需要更新的 用户-商品信息
+     *
+     * @param ugoBeans 用户-商品订单信息
+     * @return 用户-商品信息列表
+     */
+    private List<UserGoods> generateUserGoodsData(List<UserGoodsOrderBean> ugoBeans) {
+        List<UserGoods> userGoods = new ArrayList<>(ugoBeans.size());
+        for (UserGoodsOrderBean ugo : ugoBeans) {
+            UserGoods ug = UserGoodsDao.getInstance().selectByUserGoods(ugo.getUserId(), ugo.getGoodsId());
+            ug.setAmount(ug.getAmount() - ugo.getAmount());
+            userGoods.add(ug);
+        }
+        return userGoods;
     }
 
     /**
