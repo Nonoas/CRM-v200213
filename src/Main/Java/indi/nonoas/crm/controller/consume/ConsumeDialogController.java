@@ -9,8 +9,10 @@ import indi.nonoas.crm.global.PayMode;
 import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -48,9 +50,6 @@ public class ConsumeDialogController implements Initializable {
      */
     @FXML
     private Label lb_consumer;
-
-    @FXML
-    private GridPane gp_rootPane;
 
     /**
      * Ö§¸¶·½Ê½

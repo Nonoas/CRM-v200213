@@ -11,9 +11,11 @@ import indi.nonoas.crm.app.StaffManagePane;
 import indi.nonoas.crm.app.StatPane;
 import indi.nonoas.crm.app.vip.VipManagePane;
 import indi.nonoas.crm.config.ImageSrc;
+import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -97,9 +99,10 @@ public class MainController implements Initializable {
 
     @FXML // 跳转员工管理界面
     private void toStaffManagePane() {
-        if (currentPane != CenterPane.STAFF_MANAGE) {
-            changePane(CenterPane.STAFF_MANAGE);
-        }
+        new MyAlert(Alert.AlertType.INFORMATION, "敬请期待！").show();
+//        if (currentPane != CenterPane.STAFF_MANAGE) {
+//            changePane(CenterPane.STAFF_MANAGE);
+//        }
     }
 
     @FXML // 跳转统计报表界面

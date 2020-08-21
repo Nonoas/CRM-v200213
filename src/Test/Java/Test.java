@@ -18,23 +18,12 @@ import java.sql.SQLException;
  */
 public class Test {
 
-    static void underlineToBigCamel() {
-        Connection connection = DBOpener.getConnection();
-        String sql = "insert into user_info (id) values(?)";
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            for (int i = 0; i < 1000; i++) {
-                ps.setString(1, 20200816 + i + "");
-                ps.addBatch();
-                System.out.println(i);
-            }
-            ps.executeBatch();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+
+    public static String change32To10(String num) {
+        int f=32;
+        int t=10;
+        return new java.math.BigInteger(num, f).toString(t);
     }
 
-    public static void main(String[] args) {
-        underlineToBigCamel();
-    }
 }
