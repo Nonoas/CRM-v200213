@@ -237,6 +237,7 @@ public class VipBean implements Serializable {
         SANKE.setName("É¢¿Í");
         SANKE.setSex("±£ÃÜ");
         SANKE.setDiscount(1);
+        SANKE.setCardLevel("ÎÞ");
     }
 
 }

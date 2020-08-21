@@ -59,6 +59,8 @@ public class ConsumeController implements Initializable {
     @FXML
     private Label lb_cardLevel;
     @FXML
+    private Label lb_balance;
+    @FXML
     private TextField tf_find;
     @FXML
     private TextField tf_findInfo;
@@ -109,6 +111,7 @@ public class ConsumeController implements Initializable {
         lb_integral.setText(String.valueOf(bean.getIntegral()));
         lb_cardLevel.setText(bean.getCardLevel());
         lb_name.setText(bean.getName());
+        lb_balance.setText(String.format("гд%.2f", bean.getBalance()));
         if (bean == SANKE)
             lb_name.setStyle("-fx-text-fill: #cf4813");
         else

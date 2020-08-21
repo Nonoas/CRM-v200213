@@ -168,6 +168,7 @@ public abstract class MyOrmUtil<T> {
      * @param transactions 事务类集合
      */
     final protected boolean executeTransaction(List<AbstractTransaction> transactions) {
+        boolean flag = true;
         Connection conn = getConnection();
         //取消自动提交事务
         try {
@@ -175,17 +176,16 @@ public abstract class MyOrmUtil<T> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         //生成事务执行语句
-        for (AbstractTransaction transaction : transactions) {
-            //获取事务参数
-            Object bean = transaction.getParams();
-            String sql = transaction.getSQL();
-            //生成PrepareStatement对象
-            Class<?> beanClass = bean.getClass();
-            List<String> paramNames = getParams(sql);
-            sql = getSql(sql);  // 将SQL中的#{}占位符改为?
-            try {
+        try {
+            for (AbstractTransaction transaction : transactions) {
+                //获取事务参数
+                Object bean = transaction.getParams();
+                String sql = transaction.getSQL();
+                //生成PrepareStatement对象
+                Class<?> beanClass = bean.getClass();
+                List<String> paramNames = getParams(sql);
+                sql = getSql(sql);  // 将SQL中的#{}占位符改为?
                 PreparedStatement ps = conn.prepareStatement(sql);
                 for (int i = 0; i < paramNames.size(); i++) {
                     String colName = paramNames.get(i);
@@ -195,30 +195,24 @@ public abstract class MyOrmUtil<T> {
                     ps.setObject(i + 1, value);
                 }
                 ps.execute();
-            } catch (SQLException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                e.printStackTrace();
-                return false;
             }
-        }
-        //提交事务
-        try {
-            conn.commit();
-        } catch (SQLException e) {
+        } catch (InvocationTargetException | NoSuchMethodException | SQLException | IllegalAccessException e) {
             e.printStackTrace();
             try {
-                conn.rollback();      //若提交出现异常则回滚事务
+                conn.rollback();    //回滚事务
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
+            flag = false;
         } finally {
             try {
-                conn.close();
+                conn.commit();  //提交事务
+                conn.close();   //关闭连接
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        return true;
-
+        return flag;
     }
 
     /**
