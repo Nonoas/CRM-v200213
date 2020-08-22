@@ -126,7 +126,8 @@ public class VipAddController implements Initializable {
             new MyAlert(AlertType.WARNING, "请先清除已经填写的会员卡号！").show();
             return;
         }
-        tf_id.setText(UserService.generateVipID());
+        String newID = UserService.generateVipID();
+        tf_id.setText(newID);
     }
 
     @FXML // 上传会员照片

@@ -6,6 +6,9 @@
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/data/mycrm.db</jdbc-url>
+      <driver-properties>
+        <property name="foreign_keys" value="true" />
+      </driver-properties>
     </data-source>
   </component>
 </project>

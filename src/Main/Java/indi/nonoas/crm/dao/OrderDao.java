@@ -40,8 +40,7 @@ public class OrderDao extends SqliteDao<OrderBean> {
             + "idcard=#{idcard},career=#{career},email=#{email},other=#{other} "
             + "where id=#{id}";
 
-    private static final String DELETE_OLD_DATA = "delete from order_info" +
-            " where date('now', '-365 day') >= date(datetime)";
+    private static final String DELETE_OLD_DATA = "delete from order_info where date('now', '-365 day') >= date(datetime)";
 
 
     private OrderDao() {
@@ -131,7 +130,6 @@ public class OrderDao extends SqliteDao<OrderBean> {
      * 删除一年前的记录
      */
     public void delete365DaysAgo() {
-        //FIXME sqlite无法触发外键删除操作
         try {
             execute(DELETE_OLD_DATA);
         } catch (SQLException e) {

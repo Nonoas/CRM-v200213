@@ -12,7 +12,7 @@ import java.util.Properties;
  */
 public class Config {
 
-    private static final String PATH = "/config.properties";
+    private static final String PATH = "/config/config.properties";
 
     private static final Properties properties;
 

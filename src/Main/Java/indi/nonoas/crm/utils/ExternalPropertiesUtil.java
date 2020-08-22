@@ -1,31 +1,28 @@
 package indi.nonoas.crm.utils;
 
-import indi.nonoas.crm.config.Config;
-
 import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.Properties;
 
 /**
  * @author : Nonoas
  * @time : 2020-08-21 12:08
  */
-public class PropertiesUtil {
+public class ExternalPropertiesUtil {
 
     private Properties properties;
 
     private final String path;
 
-    public PropertiesUtil(String path) {
+    public ExternalPropertiesUtil(String path) {
         this.path = path;
         load(path);
     }
 
     private void load(String path) {
-        InputStream in = Config.class.getResourceAsStream(path);
-        properties = new Properties();
+        InputStream in;
         try {
+            in = new FileInputStream(new File(path));
+            properties = new Properties();
             properties.load(in);
         } catch (IOException e) {
             e.printStackTrace();
@@ -39,10 +36,9 @@ public class PropertiesUtil {
     public void set(String k, String v) {
         properties.setProperty(k, v);
         try {
-            URL url=getClass().getResource(path);
-            OutputStream out=new FileOutputStream(new File(url.toURI()));
-            properties.store(out,"更新");
-        } catch (IOException | URISyntaxException e) {
+            OutputStream out = new FileOutputStream(new File(path));
+            properties.store(out, "更新");
+        } catch (IOException e) {
             e.printStackTrace();
         }
         load(path);

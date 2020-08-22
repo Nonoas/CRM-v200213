@@ -1,6 +1,10 @@
 package indi.nonoas.crm.app.stat;
 
+import indi.nonoas.crm.beans.GoodsBean;
+import indi.nonoas.crm.beans.OrderDetailBean;
 import indi.nonoas.crm.beans.vo.OrderRecordVO;
+import indi.nonoas.crm.dao.GoodsDao;
+import indi.nonoas.crm.dao.OrderDetailDao;
 import indi.nonoas.crm.dao.OrderRecordVODao;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -45,6 +49,7 @@ public class OrderTable extends TableView<OrderRecordVO> {
         userId.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getUserId()));
         userName.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getUserName()));
         datetime.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getDatetime()));
+        content.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getContent()));
         price.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getPrice()));
         integralCost.setCellValueFactory(param -> new SimpleIntegerProperty(param.getValue().getIntegralCost()));
         integralGet.setCellValueFactory(param -> new SimpleIntegerProperty(param.getValue().getIntegralGet()));
@@ -68,6 +73,22 @@ public class OrderTable extends TableView<OrderRecordVO> {
     public void showAllData() {
         items.clear();
         List<OrderRecordVO> vos = OrderRecordVODao.getInstance().selectAll();
+        if (vos == null)
+            return;
+
+        for (OrderRecordVO vo : vos) {
+            List<OrderDetailBean> details = OrderDetailDao.getInstance().selectByOrder(vo.getOrderId());
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0, size = details.size(); i < size; i++) {
+                OrderDetailBean detail = details.get(i);
+                GoodsBean goods = GoodsDao.getInstance().selectById(detail.getProductId());
+                if (goods != null)
+                    sb.append(goods.getName()).append(detail.getProductAmount()).append(goods.getBaseUnit());
+                if(i<size-1)
+                    sb.append("£¬");
+            }
+            vo.setContent(sb.toString());
+        }
         items.addAll(vos);
     }
 

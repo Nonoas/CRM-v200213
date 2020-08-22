@@ -7,11 +7,14 @@ import indi.nonoas.crm.view.annotation.FXML;
 import indi.nonoas.crm.view.annotation.StageProperty;
 import indi.nonoas.crm.view.stage.ControllableStage;
 import javafx.scene.image.Image;
+import org.apache.log4j.Logger;
 
 @StageProperty(title = "客户管理系统")
 @FXML("/fxml/main.fxml")
 @CSS("css/application.css")
 public class MainStage extends ControllableStage {
+
+    private final Logger logger = Logger.getLogger(MainStage.class);
 
     public MainStage() {
         initUI();
@@ -28,9 +31,10 @@ public class MainStage extends ControllableStage {
     }
 
     private void startBackgroundTask() {
+        //删除旧订单
         new Thread(() -> {
             OrderDao.getInstance().delete365DaysAgo();
-            System.out.println("删除一年前的订单");
+            logger.debug("删除一年前的订单");
         }).start();
     }
 }

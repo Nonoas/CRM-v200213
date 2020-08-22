@@ -1,6 +1,6 @@
 package indi.nonoas.crm.config;
 
-import indi.nonoas.crm.utils.PropertiesUtil;
+import indi.nonoas.crm.utils.ExternalPropertiesUtil;
 
 /**
  * @author : Nonoas
@@ -8,7 +8,7 @@ import indi.nonoas.crm.utils.PropertiesUtil;
  */
 public class UserConfig {
 
-    private static final PropertiesUtil util = new PropertiesUtil("/config/userConfig.properties");
+    private static final ExternalPropertiesUtil util = new ExternalPropertiesUtil("config/userConfig.properties");
 
     private final static String PREFIX = "prefix";
     private final static String LAST_ID = "lastID";

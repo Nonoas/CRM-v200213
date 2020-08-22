@@ -10,6 +10,7 @@ public class OrderRecordVO {
     private String userId;
     private String userName;
     private String datetime;
+    private String content;
     private double price;
     private int integralCost;
     private int integralGet;
@@ -86,5 +87,13 @@ public class OrderRecordVO {
 
     public void setTransactor(String transactor) {
         this.transactor = transactor;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }
