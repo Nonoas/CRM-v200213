@@ -83,7 +83,7 @@ public class VipAddController implements Initializable {
     @FXML
     private TextField tf_id;
     @FXML
-    private TextField tf_referrer;
+    private TextField tf_discount;
     @FXML
     private TextField tf_integral;
     @FXML
@@ -166,6 +166,11 @@ public class VipAddController implements Initializable {
         String strBalance = tf_balance.getText().trim();
         double dBalance = strBalance.equals("") ? 0 : Double.parseDouble(strBalance);
         bean.setBalance(dBalance);
+
+        String strDiscount = tf_discount.getText().trim();
+        double discount = strDiscount.equals("") ? Double.parseDouble(strDiscount) : 1;
+        discount = discount > 0 && discount <= 1 ? discount : 1;
+        bean.setDiscount(discount);
 
         bean.setAddress(tf_address.getText());
         bean.setTelephone(tf_tel.getText());

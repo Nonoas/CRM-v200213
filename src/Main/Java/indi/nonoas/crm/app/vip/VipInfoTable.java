@@ -63,6 +63,8 @@ public class VipInfoTable extends TableView<VipBean> {
 
     private final TableColumn<VipBean, String> item_sex = new TableColumn<>("性别");
 
+    private final TableColumn<VipBean, Number> item_discount = new TableColumn<>("享受折扣");
+
     private final TableColumn<VipBean, String> item_email = new TableColumn<>("邮箱");
 
     private final TableColumn<VipBean, Number> item_cumulative = new TableColumn<>("累计消费");
@@ -98,6 +100,7 @@ public class VipInfoTable extends TableView<VipBean> {
         item_name.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName())); // 姓名
         item_sex.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSex())); // 性别
         item_card_level.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getCardLevel())); // 会员等级
+        item_discount.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getDiscount()));
         item_balance.setCellValueFactory(param -> {
             String str = String.format("￥%.2f", param.getValue().getBalance());
             return new SimpleStringProperty(str);
@@ -118,6 +121,7 @@ public class VipInfoTable extends TableView<VipBean> {
         colList.add(item_name);
         colList.add(item_sex);
         colList.add(item_card_level);
+        colList.add(item_discount);
         colList.add(item_balance);
         colList.add(item_cumulative);
         colList.add(item_address);

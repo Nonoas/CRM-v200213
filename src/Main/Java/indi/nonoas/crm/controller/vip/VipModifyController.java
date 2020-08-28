@@ -77,7 +77,7 @@ public class VipModifyController implements Initializable {
     @FXML
     private TextField tf_id;
     @FXML
-    private TextField tf_referrer;
+    private TextField tf_discount;
     @FXML
     private ImageView img_photo;
     @FXML
@@ -113,24 +113,15 @@ public class VipModifyController implements Initializable {
     }
 
     @FXML
-    private void selectPreferred() {
-
-    }
-
-    @FXML
-    private void selectStaff() {
-
-    }
-
-    @FXML
     private void cancelInfo() {
         parentTab.close();
     }
 
     @FXML
     private void commitIfo() {
-        if (!isCommitable())
+        if (!isCommittable())
             return;
+
         vipBean.setId(tf_id.getText().trim());
         vipBean.setName(tf_name.getText().trim());
         vipBean.setSex((String) tGroup.getSelectedToggle().getUserData());
@@ -139,6 +130,12 @@ public class VipModifyController implements Initializable {
             vipBean.setCardLevel(cbb_level.getValue());
 
         vipBean.setAddress(tf_address.getText());
+
+        String strDiscount = tf_discount.getText().trim();
+        double discount = strDiscount.equals("") ? 1 : Double.parseDouble(strDiscount);
+        discount = discount > 0 && discount <= 1 ? discount : 1;
+        vipBean.setDiscount(discount);
+
         vipBean.setTelephone(tf_tel.getText());
         vipBean.setIdcard(tf_idcard.getText());
         if (dp_birthday.getValue() != null)
@@ -160,7 +157,7 @@ public class VipModifyController implements Initializable {
      *
      * @return 可以为true，不可用为false
      */
-    private boolean isCommitable() {
+    private boolean isCommittable() {
         String id = tf_id.getText().trim(); // 卡号
         String name = tf_name.getText().trim(); // 姓名
         String tel = tf_tel.getText().trim(); // 电话号码
@@ -192,6 +189,7 @@ public class VipModifyController implements Initializable {
         tf_tel.setText(vipBean.getTelephone());
         tf_address.setText(vipBean.getAddress());
         tf_name.setText(vipBean.getName());
+        tf_discount.setText(String.valueOf(vipBean.getDiscount()));
         tf_id.setText(vipBean.getId());
         tf_idcard.setText(vipBean.getIdcard());
         cbb_level.setValue(vipBean.getCardLevel());

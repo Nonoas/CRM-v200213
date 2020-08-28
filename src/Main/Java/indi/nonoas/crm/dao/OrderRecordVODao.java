@@ -10,10 +10,7 @@ import java.util.List;
  */
 public class OrderRecordVODao extends SqliteDao<OrderRecordVO> {
 
-    private static final String SELECT_ALL = "select oi.order_id,oi.user_id, ui.name user_name,oi.datetime, oi.price,oi.integral_cost," +
-            "oi.integral_get,oi.transactor, oi.pay_mode " +
-            "from order_info oi, user_info ui " +
-            "where ui.id = oi.user_id";
+    private static final String SELECT_ALL = "select * from order_record";
 
     private static final OrderRecordVODao INSTANCE = new OrderRecordVODao();
 
