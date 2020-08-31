@@ -45,7 +45,7 @@ public class VipModifyController implements Initializable {
     private VipModifyTab parentTab;
 
     @FXML
-    private HBox hbox_root;
+    private HBox HBox_root;
     @FXML
     private CheckBox chc_isClose;
     @FXML
