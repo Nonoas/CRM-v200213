@@ -19,11 +19,11 @@
     <select id="selectByFiltrate" resultType="GoodsBean">
         select *
         from goods_info
-        where (id like #{id} or name like #{name})
-          and type like #{type}
+        where (id like '%' || #{id} || '%' or name like '%' || #{name}) || '%'
+          and type like '%' || #{type} || '%'
     </select>
 
-    <delete id="deleteByID" parameterType="java.lang.String">
+    <delete id="deleteByID" parameterType="string">
         delete
         from goods_info
         where id = #{id}

@@ -10,6 +10,8 @@ import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
 import indi.nonoas.crm.dao.GoodsTypeDao;
 import indi.nonoas.crm.dao.PackageContentDao;
 import indi.nonoas.crm.dao.PackageDao;
+import indi.nonoas.crm.service.GoodsService;
+import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
 import indi.nonoas.crm.app.goods.GoodsInfoTable;
 import indi.nonoas.crm.app.pkg.PackageContentTable;
@@ -30,7 +32,7 @@ public class GoodsManageController implements Initializable {
 
     private final GoodsInfoTable table = new GoodsInfoTable(); // 商品信息表
 
-    private final GoodsDao goodsDao = GoodsDao.getInstance();
+    GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
 
     private PackageBean packageBean;
     @FXML
@@ -100,10 +102,9 @@ public class GoodsManageController implements Initializable {
 
     @FXML    //查询商品
     private void find() {
-        String str = "%" + tf_id.getText().trim() + "%";
-        String str0 = cb_type.getValue().equals("所有类型") ? "" : cb_type.getValue();
-        String type = "%" + str0 + "%";
-        ArrayList<GoodsBean> listVipBeans = goodsDao.selectByFiltrate(str, str, type);
+        String keyWord = tf_id.getText().trim();
+        String type = cb_type.getValue().equals("所有类型") ? "" : cb_type.getValue();
+        ArrayList<GoodsBean> listVipBeans = goodsService.selectByFiltrate(keyWord, keyWord, type);
         if (listVipBeans != null)
             table.replaceData(listVipBeans);
         else
@@ -167,7 +168,7 @@ public class GoodsManageController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             table.removeData(bean);
-            goodsDao.deleteByID(bean);
+            goodsService.deleteByID(id);
         }
     }
 

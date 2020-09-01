@@ -1,6 +1,7 @@
 package indi.nonoas.crm.dao;
 
 import indi.nonoas.crm.beans.GoodsBean;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public interface GoodsMapper {
      * @param type 商品种类
      * @return GoodsBean的ArrayList集合, 可以为null
      */
-    ArrayList<GoodsBean> selectByFiltrate(String id, String name, String type);
+    ArrayList<GoodsBean> selectByFiltrate(@Param("id") String id, @Param("name") String name, @Param("type") String type);
 
     /**
      * 删除一条商品信息
