@@ -12,7 +12,7 @@
 
 软件需使用maven打包，打包插件如下
 
-``` java
+``` xml
     <build>
         <plugins>
             <plugin>
