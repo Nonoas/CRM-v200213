@@ -16,5 +16,5 @@ logging:
     indi:
       nonoas:
         crm:
-          dao: warn
+          dao: error
 
