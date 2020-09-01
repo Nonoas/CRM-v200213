@@ -1,3 +1,5 @@
+[![star](https://gitee.com/nonoas/CRM-v200213/badge/star.svg?theme=dark)](https://gitee.com/nonoas/CRM-v200213/stargazers)
+
 # 软件介绍
 
 本软件是基于 JavaFX8 的一款单机的小型店铺管理系统，数据库使用sqlite3，

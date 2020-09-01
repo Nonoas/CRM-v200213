@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import javax.swing.text.html.ImageView;
 import java.util.Collection;
 import java.util.LinkedList;
 

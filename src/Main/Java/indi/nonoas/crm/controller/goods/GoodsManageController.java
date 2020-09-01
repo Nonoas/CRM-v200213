@@ -146,7 +146,6 @@ public class GoodsManageController implements Initializable {
                 tp_rootPane.getSelectionModel().select(tab); // 如果已经添加则显示该tab并返回
                 return;
             }
-
         }
         Tab tab = new GoodsAddTab();
         tab.setUserData(DATA);
