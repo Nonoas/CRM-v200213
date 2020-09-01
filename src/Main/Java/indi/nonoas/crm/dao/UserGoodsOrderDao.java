@@ -1,6 +1,7 @@
 package indi.nonoas.crm.dao;
 
 import indi.nonoas.crm.beans.UserGoodsOrderBean;
+import indi.nonoas.crm.dao.my_orm_dao.SqliteDao;
 
 import java.util.List;
 

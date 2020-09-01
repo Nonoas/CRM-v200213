@@ -52,4 +52,13 @@ public class LoginBean {
 		this.root = root;
 	}
 
+	@Override
+	public String toString() {
+		return "LoginBean{" +
+				"id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", password='" + password + '\'' +
+				", root=" + root +
+				'}';
+	}
 }

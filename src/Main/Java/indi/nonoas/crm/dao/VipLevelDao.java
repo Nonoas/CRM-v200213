@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import indi.nonoas.crm.beans.VipLevelBean;
+import indi.nonoas.crm.dao.my_orm_dao.SqliteDao;
 
 /**
  * 会员等级数据库操作类

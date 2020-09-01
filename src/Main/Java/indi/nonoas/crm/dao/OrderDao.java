@@ -1,12 +1,10 @@
 package indi.nonoas.crm.dao;
 
 import indi.nonoas.crm.beans.*;
+import indi.nonoas.crm.dao.my_orm_dao.SqliteDao;
 import per.nonoas.orm.AbstractTransaction;
 import per.nonoas.orm.BeanTransaction;
-import per.nonoas.orm.ParamTransaction;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

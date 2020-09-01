@@ -3,6 +3,7 @@ package indi.nonoas.crm.dao;
 import java.util.ArrayList;
 
 import indi.nonoas.crm.beans.GoodsBean;
+import indi.nonoas.crm.dao.my_orm_dao.SqliteDao;
 
 /**
  * 商品信息的DAO

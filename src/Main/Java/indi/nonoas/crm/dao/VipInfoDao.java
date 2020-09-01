@@ -3,6 +3,7 @@ package indi.nonoas.crm.dao;
 import java.util.ArrayList;
 
 import indi.nonoas.crm.beans.VipBean;
+import indi.nonoas.crm.dao.my_orm_dao.SqliteDao;
 
 /**
  * 会员信息的数据库操作类

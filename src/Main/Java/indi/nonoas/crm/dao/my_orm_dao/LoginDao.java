@@ -1,4 +1,4 @@
-package indi.nonoas.crm.dao;
+package indi.nonoas.crm.dao.my_orm_dao;
 
 import indi.nonoas.crm.beans.LoginBean;
 

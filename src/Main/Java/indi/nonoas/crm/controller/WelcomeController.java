@@ -2,8 +2,10 @@ package indi.nonoas.crm.controller;
 
 import indi.nonoas.crm.app.MainStage;
 import indi.nonoas.crm.beans.LoginBean;
-import indi.nonoas.crm.dao.LoginDao;
+import indi.nonoas.crm.dao.my_orm_dao.LoginDao;
 import indi.nonoas.crm.global.ClientSession;
+import indi.nonoas.crm.service.LoginService;
+import indi.nonoas.crm.service.impl.LoginServiceImpl;
 import indi.nonoas.crm.utils.SaltUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.fxml.FXML;
@@ -81,6 +83,7 @@ public class WelcomeController implements Initializable {
 
         String username;
         String password;
+        LoginService service = new LoginServiceImpl();
 
         VerifyTask(String u, String p) {
             this.username = u;
@@ -89,7 +92,7 @@ public class WelcomeController implements Initializable {
 
         @Override
         protected LoginBean call() {
-            LoginBean loginBean = new LoginDao().verify(username, password);
+            LoginBean loginBean = service.verify(username, password);
             // 如果查询结果为不为空，则返回该LoginBean对象
             if (loginBean != null)
                 return loginBean;

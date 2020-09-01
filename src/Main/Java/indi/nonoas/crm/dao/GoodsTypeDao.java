@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import indi.nonoas.crm.beans.GoodsTypeBean;
+import indi.nonoas.crm.dao.my_orm_dao.SqliteDao;
 
 /**
  * 商品类型数据库操作类
