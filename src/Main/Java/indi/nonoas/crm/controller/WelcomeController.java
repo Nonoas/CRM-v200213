@@ -1,11 +1,11 @@
 package indi.nonoas.crm.controller;
 
-import indi.nonoas.crm.app.MainStage;
+import de.felixroske.jfxsupport.FXMLController;
+import indi.nonoas.crm.app.MainStageView;
 import indi.nonoas.crm.beans.LoginBean;
-import indi.nonoas.crm.dao.my_orm_dao.LoginDao;
+import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.global.ClientSession;
 import indi.nonoas.crm.service.LoginService;
-import indi.nonoas.crm.service.impl.LoginServiceImpl;
 import indi.nonoas.crm.utils.SaltUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.fxml.FXML;
@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@FXMLController
 public class WelcomeController implements Initializable {
 
     @FXML
@@ -64,7 +65,7 @@ public class WelcomeController implements Initializable {
         vTask.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.getId() != null) {
                 ClientSession.addAttribute("user", newValue);
-                Stage newStage = new MainStage();
+                Stage newStage = new MainStageView();
                 Stage oldStage = (Stage) vb_root.getScene().getWindow();
                 oldStage.close();
                 newStage.show();
@@ -83,7 +84,6 @@ public class WelcomeController implements Initializable {
 
         String username;
         String password;
-        LoginService service = new LoginServiceImpl();
 
         VerifyTask(String u, String p) {
             this.username = u;
@@ -92,6 +92,7 @@ public class WelcomeController implements Initializable {
 
         @Override
         protected LoginBean call() {
+            LoginService service = (LoginService) SpringUtil.getBean("LoginServiceImpl");
             LoginBean loginBean = service.verify(username, password);
             // 如果查询结果为不为空，则返回该LoginBean对象
             if (loginBean != null)

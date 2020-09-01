@@ -2,11 +2,13 @@ package indi.nonoas.crm.dao;
 
 import indi.nonoas.crm.beans.LoginBean;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author : Nonoas
  * @time : 2020-09-01 11:59
  */
+@Repository
 public interface LoginMapper {
     /**
      * 验证登录信息

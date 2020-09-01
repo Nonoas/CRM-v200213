@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import indi.nonoas.crm.beans.GoodsBean;
 import indi.nonoas.crm.beans.PackageContentBean;
-import indi.nonoas.crm.dao.GoodsDao;
+import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
 import indi.nonoas.crm.dao.PackageContentDao;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;

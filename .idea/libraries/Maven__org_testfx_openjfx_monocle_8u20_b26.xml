@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.testfx:openjfx-monocle:8u20-b26">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/testfx/openjfx-monocle/8u20-b26/openjfx-monocle-8u20-b26.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/testfx/openjfx-monocle/8u20-b26/openjfx-monocle-8u20-b26-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/testfx/openjfx-monocle/8u20-b26/openjfx-monocle-8u20-b26-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -6,7 +6,7 @@ import indi.nonoas.crm.app.pkg.PackageAddTab;
 import indi.nonoas.crm.app.pkg.PackageModifyTab;
 import indi.nonoas.crm.beans.GoodsBean;
 import indi.nonoas.crm.beans.PackageBean;
-import indi.nonoas.crm.dao.GoodsDao;
+import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
 import indi.nonoas.crm.dao.GoodsTypeDao;
 import indi.nonoas.crm.dao.PackageContentDao;
 import indi.nonoas.crm.dao.PackageDao;

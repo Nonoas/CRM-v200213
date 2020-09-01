@@ -3,7 +3,7 @@ package indi.nonoas.crm.app.stat;
 import indi.nonoas.crm.beans.GoodsBean;
 import indi.nonoas.crm.beans.OrderDetailBean;
 import indi.nonoas.crm.beans.vo.OrderRecordVO;
-import indi.nonoas.crm.dao.GoodsDao;
+import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
 import indi.nonoas.crm.dao.OrderDetailDao;
 import indi.nonoas.crm.dao.OrderRecordVODao;
 import javafx.beans.property.SimpleDoubleProperty;

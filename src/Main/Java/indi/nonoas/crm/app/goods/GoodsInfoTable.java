@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import indi.nonoas.crm.beans.GoodsBean;
-import indi.nonoas.crm.dao.GoodsDao;
+import indi.nonoas.crm.utils.SpringUtil;
+import indi.nonoas.crm.service.GoodsService;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -93,7 +94,8 @@ public class GoodsInfoTable extends TableView<GoodsBean> {
      */
     public void showAllInfos() {
         clearData(); // 清空所有数据
-        ArrayList<GoodsBean> listVipBeans = GoodsDao.getInstance().selectAll();
+        GoodsService service = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
+        ArrayList<GoodsBean> listVipBeans = service.selectAll();
         if (listVipBeans != null)
             obList.addAll(listVipBeans);
     }

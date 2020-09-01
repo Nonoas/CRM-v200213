@@ -12,11 +12,11 @@ import org.apache.log4j.Logger;
 @StageProperty(title = "客户管理系统")
 @FXML("/fxml/main.fxml")
 @CSS("css/application.css")
-public class MainStage extends ControllableStage {
+public class MainStageView extends ControllableStage {
 
-    private final Logger logger = Logger.getLogger(MainStage.class);
+    private final Logger logger = Logger.getLogger(MainStageView.class);
 
-    public MainStage() {
+    public MainStageView() {
         initUI();
         startBackgroundTask();
     }

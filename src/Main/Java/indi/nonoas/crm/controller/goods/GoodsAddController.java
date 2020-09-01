@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import indi.nonoas.crm.view.alert.MyAlert;
 import indi.nonoas.crm.beans.GoodsBean;
-import indi.nonoas.crm.dao.GoodsDao;
+import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
 import indi.nonoas.crm.config.ImageSrc;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

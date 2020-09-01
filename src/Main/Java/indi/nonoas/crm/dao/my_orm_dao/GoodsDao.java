@@ -1,15 +1,15 @@
-package indi.nonoas.crm.dao;
+package indi.nonoas.crm.dao.my_orm_dao;
 
 import java.util.ArrayList;
 
 import indi.nonoas.crm.beans.GoodsBean;
-import indi.nonoas.crm.dao.my_orm_dao.SqliteDao;
 
 /**
  * 商品信息的DAO
  *
  * @author Nonoas
  */
+@Deprecated
 public class GoodsDao extends SqliteDao<GoodsBean> {
 
     private static final String SELECT_ALL = "select * from goods_info";
