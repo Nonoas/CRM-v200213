@@ -96,14 +96,14 @@
 }
 
 .column-header-background .filler {
-    -fx-background-color: #eee;
+    -fx-background-color: #eeeeee;
 }
 
 .column-header-background .show-hide-columns-button {
     -fx-background-color: #eee;
 }
 
-.table-view .table-column{
+.table-view .table-column {
     -fx-alignment: center;
 }
 

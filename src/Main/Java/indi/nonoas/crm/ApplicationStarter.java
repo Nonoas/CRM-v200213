@@ -44,11 +44,11 @@ public class ApplicationStarter extends AbstractJavaFxApplicationSupport {
      */
     public static void toMainStageView() {
         Stage stage = getStage();
-        showView(MainStageView.class);
+        stage.close();
         stage.setMaximized(true);
         stage.setMinWidth(1280);
-        stage.setMinHeight(720);
+        stage.setMinHeight(820);
         stage.setResizable(true);
-
+        showView(MainStageView.class);
     }
 }
