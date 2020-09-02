@@ -1,13 +1,14 @@
 package indi.nonoas.crm.service.impl;
 
+import indi.nonoas.crm.beans.vo.OrderRecordVO;
 import indi.nonoas.crm.dao.OrderMapper;
 import indi.nonoas.crm.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * @author : Nonoas
@@ -19,9 +20,15 @@ public class OrderServiceImpl implements OrderService {
     private OrderMapper odrMapper;
 
     @Override
+    public List<OrderRecordVO> selectGdsOrds() {
+        return odrMapper.selectGdsOrds();
+    }
+
+    @Override
     public void delete365dAgo() {
         odrMapper.delete365dAgo();
     }
+
 
     /**
      * 生成商品订单号

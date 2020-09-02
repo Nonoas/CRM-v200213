@@ -17,7 +17,6 @@ import java.io.File;
 public class CustomSplash extends SplashScreen {
 
     private static final String DEFAULT_IMAGE = "config/splash/Splash.png";
-    private final ImageView imageView = new ImageView("file:" + DEFAULT_IMAGE);
     private final boolean flag;
 
     public CustomSplash() {
@@ -35,6 +34,7 @@ public class CustomSplash extends SplashScreen {
         if (!flag)
             return super.getParent();
 
+        ImageView imageView = new ImageView("file:" + DEFAULT_IMAGE);
         final ProgressBar splashProgressBar = new ProgressBar();
         splashProgressBar.setPrefWidth(imageView.getImage().getWidth());
         final VBox vbox = new VBox();

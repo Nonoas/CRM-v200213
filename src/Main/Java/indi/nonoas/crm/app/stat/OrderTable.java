@@ -3,9 +3,10 @@ package indi.nonoas.crm.app.stat;
 import indi.nonoas.crm.beans.GoodsBean;
 import indi.nonoas.crm.beans.OrderDetailBean;
 import indi.nonoas.crm.beans.vo.OrderRecordVO;
-import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
 import indi.nonoas.crm.dao.OrderDetailDao;
-import indi.nonoas.crm.dao.OrderRecordVODao;
+import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
+import indi.nonoas.crm.service.OrderService;
+import indi.nonoas.crm.utils.SpringUtil;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -22,6 +23,8 @@ import java.util.List;
  * @time : 2020-08-21 20:37
  */
 public class OrderTable extends TableView<OrderRecordVO> {
+
+    private final OrderService orderService = (OrderService) SpringUtil.getBean("OrderServiceImpl");
 
     private final ObservableList<OrderRecordVO> items = FXCollections.observableArrayList();
 
@@ -72,7 +75,7 @@ public class OrderTable extends TableView<OrderRecordVO> {
 
     public void showAllData() {
         items.clear();
-        List<OrderRecordVO> vos = OrderRecordVODao.getInstance().selectAll();
+        List<OrderRecordVO> vos = orderService.selectGdsOrds();
         if (vos == null)
             return;
 
@@ -84,7 +87,7 @@ public class OrderTable extends TableView<OrderRecordVO> {
                 GoodsBean goods = GoodsDao.getInstance().selectById(detail.getProductId());
                 if (goods != null)
                     sb.append(goods.getName()).append(detail.getProductAmount()).append(goods.getBaseUnit());
-                if(i<size-1)
+                if (i < size - 1)
                     sb.append("£¬");
             }
             vo.setContent(sb.toString());

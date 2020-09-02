@@ -1,11 +1,9 @@
-package indi.nonoas.crm.dao;
+package indi.nonoas.crm.dao.my_orm_dao;
 
 import indi.nonoas.crm.beans.*;
-import indi.nonoas.crm.dao.my_orm_dao.SqliteDao;
 import per.nonoas.orm.AbstractTransaction;
 import per.nonoas.orm.BeanTransaction;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +11,7 @@ import java.util.List;
  * @author : Nonoas
  * @time : 2020-08-15 13:46
  */
+@Deprecated
 public class OrderDao extends SqliteDao<OrderBean> {
 
     private static final String SELECT_ALL = "select * from order_info";
@@ -37,9 +36,6 @@ public class OrderDao extends SqliteDao<OrderBean> {
             + "cumulative=#{cumulative},address=#{address},integral=#{integral},telephone=#{telephone},"
             + "idcard=#{idcard},career=#{career},email=#{email},other=#{other} "
             + "where id=#{id}";
-
-    private static final String DELETE_OLD_DATA = "delete from order_info where date('now', '-365 day') >= date(datetime)";
-
 
     private OrderDao() {
     }
@@ -122,17 +118,6 @@ public class OrderDao extends SqliteDao<OrderBean> {
             transactions.add(new BeanTransaction(REDUCE_GOODS, g));
         }
         return executeTransaction(transactions);
-    }
-
-    /**
-     * 删除一年前的记录
-     */
-    public void delete365DaysAgo() {
-        try {
-            execute(DELETE_OLD_DATA);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

@@ -10,6 +10,7 @@ import indi.nonoas.crm.dao.my_orm_dao.SqliteDao;
  *
  * @author Nonoas
  */
+@Deprecated
 public class PackageDao extends SqliteDao<PackageBean> {
 
     private static final String SELECT_ALL = "select * from package_info";

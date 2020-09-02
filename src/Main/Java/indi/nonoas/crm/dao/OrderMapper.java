@@ -1,6 +1,7 @@
 package indi.nonoas.crm.dao;
 
 import indi.nonoas.crm.beans.OrderBean;
+import indi.nonoas.crm.beans.vo.OrderRecordVO;
 import indi.nonoas.crm.beans.vo.UsrOdrRecordVO;
 import indi.nonoas.crm.service.UsrGdsOdrService;
 import org.springframework.stereotype.Repository;
@@ -18,7 +19,14 @@ public interface OrderMapper {
      *
      * @return 消费记录列表
      */
+    //FIXME 需要移动到别的Mapper
     List<UsrOdrRecordVO> selectUserGoodsOrder();
+
+    /**
+     * 查询所有商品订单
+     * @return 商品订单列表
+     */
+    List<OrderRecordVO> selectGdsOrds();
 
     /**
      * 插入一条订单
@@ -31,4 +39,6 @@ public interface OrderMapper {
      * 删除一年前的订单记录
      */
     void delete365dAgo();
+
+
 }

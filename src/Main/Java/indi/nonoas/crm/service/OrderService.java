@@ -1,6 +1,9 @@
 package indi.nonoas.crm.service;
 
+import indi.nonoas.crm.beans.vo.OrderRecordVO;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @author : Nonoas
@@ -8,6 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public interface OrderService {
+
+    /**
+     * 查询所有商品订单
+     * @return 商品订单列表
+     */
+    List<OrderRecordVO> selectGdsOrds();
 
     /**
      * 删除一年前的记录

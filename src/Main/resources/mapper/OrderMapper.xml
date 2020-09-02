@@ -4,12 +4,18 @@
 
 <mapper namespace="indi.nonoas.crm.dao.OrderMapper">
     <resultMap id="UgOrderRecordVO" type="indi.nonoas.crm.beans.vo.UsrOdrRecordVO"/>
+    <resultMap id="OrderRecordVO" type="indi.nonoas.crm.beans.vo.OrderRecordVO"/>
 
     <parameterMap id="OrderBean" type="indi.nonoas.crm.beans.OrderBean"/>
 
     <select id="selectUserGoodsOrder" resultMap="UgOrderRecordVO">
         select *
         from ug_order_record
+    </select>
+
+    <select id="selectGdsOrds" resultMap="OrderRecordVO">
+        select *
+        from order_record
     </select>
 
     <insert id="insertOrder" parameterMap="OrderBean">

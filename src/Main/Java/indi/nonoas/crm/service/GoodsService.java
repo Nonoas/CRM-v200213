@@ -4,6 +4,7 @@ import indi.nonoas.crm.beans.GoodsBean;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * @author : Nonoas
@@ -56,4 +57,10 @@ public interface GoodsService{
      * @param goodsBean GoodsBean对象
      */
     void update(GoodsBean goodsBean);
+
+    /**
+     * 查询所有商品分类名称
+     * @return 所有商品分类名称，可以为null
+     */
+    LinkedList<String> selectGoodsTypes();
 }

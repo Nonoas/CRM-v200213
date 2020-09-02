@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * @author : Nonoas
@@ -45,6 +46,11 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public void update(GoodsBean goodsBean) {
         goodsMapper.update(goodsBean);
+    }
+
+    @Override
+    public LinkedList<String> selectGoodsTypes() {
+        return goodsMapper.selectGoodsTypes();
     }
 
     //===========================================================================

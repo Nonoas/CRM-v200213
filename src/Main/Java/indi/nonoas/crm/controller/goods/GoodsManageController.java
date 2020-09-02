@@ -9,7 +9,6 @@ import indi.nonoas.crm.app.pkg.PackageModifyTab;
 import indi.nonoas.crm.app.pkg.PackageTable;
 import indi.nonoas.crm.beans.GoodsBean;
 import indi.nonoas.crm.beans.PackageBean;
-import indi.nonoas.crm.dao.GoodsTypeDao;
 import indi.nonoas.crm.dao.PackageContentDao;
 import indi.nonoas.crm.dao.PackageDao;
 import indi.nonoas.crm.service.GoodsService;
@@ -73,7 +72,7 @@ public class GoodsManageController implements Initializable {
         scrollPane.setContent(table);
 
         // 初始化“商品分类”下拉列表框
-        LinkedList<String> goodsTypes = new GoodsTypeDao().selectAllNames();
+        LinkedList<String> goodsTypes = goodsService.selectGoodsTypes();
         cb_type.getItems().addAll("所有类型", "产品类", "服务类");
         if (goodsTypes != null) {
             for (String str : goodsTypes)

@@ -9,6 +9,7 @@ import indi.nonoas.crm.app.vip.VipInfoTable;
 import indi.nonoas.crm.beans.*;
 import indi.nonoas.crm.dao.*;
 import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
+import indi.nonoas.crm.dao.my_orm_dao.UserGoodsDao;
 import indi.nonoas.crm.service.impl.OrderServiceImpl;
 import indi.nonoas.crm.view.alert.MyAlert;
 import indi.nonoas.crm.beans.vo.GoodsEditTableData;
