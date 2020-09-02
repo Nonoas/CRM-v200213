@@ -3,6 +3,7 @@ package indi.nonoas.crm.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import de.felixroske.jfxsupport.FXMLController;
 import indi.nonoas.crm.beans.LoginBean;
 import indi.nonoas.crm.global.ClientSession;
 import indi.nonoas.crm.app.consume.ConsumePane;
@@ -23,6 +24,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+@FXMLController
 public class MainController implements Initializable {
 
     private static final double IMG_SIZE = 30; // °´Í¼±ê³ß´ç

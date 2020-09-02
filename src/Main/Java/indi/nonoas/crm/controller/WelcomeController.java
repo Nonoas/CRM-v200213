@@ -1,6 +1,7 @@
 package indi.nonoas.crm.controller;
 
 import de.felixroske.jfxsupport.FXMLController;
+import indi.nonoas.crm.ApplicationStarter;
 import indi.nonoas.crm.app.MainStageView;
 import indi.nonoas.crm.beans.LoginBean;
 import indi.nonoas.crm.utils.SpringUtil;
@@ -15,7 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -65,10 +65,7 @@ public class WelcomeController implements Initializable {
         vTask.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.getId() != null) {
                 ClientSession.addAttribute("user", newValue);
-                Stage newStage = new MainStageView();
-                Stage oldStage = (Stage) vb_root.getScene().getWindow();
-                oldStage.close();
-                newStage.show();
+                ApplicationStarter.toMainStageView();
             } else {
                 btn_Login.setText("µÇÂ¼");
                 btn_Login.setDisable(false);

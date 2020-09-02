@@ -70,7 +70,6 @@ public class GoodsInfoTable extends TableView<GoodsBean> {
         item_quantity.setCellValueFactory(param -> {
             double quantity = param.getValue().getQuantity(); // 数量
             String unit = param.getValue().getBaseUnit(); // 单位
-            System.out.println("单位"+unit);
             return new SimpleStringProperty(quantity + " " + unit);
         });
         item_min_discount.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getMinDiscount()));

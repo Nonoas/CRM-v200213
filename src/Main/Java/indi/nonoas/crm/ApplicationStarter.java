@@ -1,6 +1,7 @@
 package indi.nonoas.crm;
 
 import de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport;
+import indi.nonoas.crm.app.MainStageView;
 import indi.nonoas.crm.app.WelcomeView;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.view.CustomSplash;
@@ -27,6 +28,7 @@ public class ApplicationStarter extends AbstractJavaFxApplicationSupport {
     @Override
     public void start(Stage stage) throws Exception {
         stage.setTitle("客户管理系统");
+        stage.setResizable(false);
         super.start(stage);
     }
 
@@ -35,5 +37,18 @@ public class ApplicationStarter extends AbstractJavaFxApplicationSupport {
         LinkedList<Image> images = new LinkedList<>();
         images.add(new Image(ImageSrc.lOGO_PATH));
         return images;
+    }
+
+    /**
+     * 跳转到主界面
+     */
+    public static void toMainStageView() {
+        Stage stage = getStage();
+        showView(MainStageView.class);
+        stage.setMaximized(true);
+        stage.setMinWidth(1280);
+        stage.setMinHeight(720);
+        stage.setResizable(true);
+
     }
 }
