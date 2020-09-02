@@ -1,6 +1,5 @@
 import indi.nonoas.crm.service.UsrGdsOdrService;
 import indi.nonoas.crm.utils.SpringUtil;
-import indi.nonoas.crm.service.impl.LoginServiceImpl;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**

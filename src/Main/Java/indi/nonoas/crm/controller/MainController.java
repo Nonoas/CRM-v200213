@@ -12,6 +12,9 @@ import indi.nonoas.crm.app.StaffManagePane;
 import indi.nonoas.crm.app.vip.StatPane;
 import indi.nonoas.crm.app.vip.VipManagePane;
 import indi.nonoas.crm.config.ImageSrc;
+import indi.nonoas.crm.service.OrderService;
+import indi.nonoas.crm.service.impl.OrderServiceImpl;
+import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -23,9 +26,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.apache.log4j.Logger;
 
 @FXMLController
 public class MainController implements Initializable {
+
+    private final Logger logger = Logger.getLogger(MainController.class);
 
     private static final double IMG_SIZE = 30; // 按图标尺寸
 
@@ -50,10 +56,13 @@ public class MainController implements Initializable {
     private Label label_operator; // 操作员
 
     public MainController() {
+
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //启动后台任务
+        startBackgroundTask();
 
         LoginBean loginBean = (LoginBean) ClientSession.getAttribute("user");
 
@@ -137,6 +146,17 @@ public class MainController implements Initializable {
     private void changePane(CenterPane centerPane) {
         currentPane = centerPane;
         bp_root.setCenter(currentPane.pane());
+    }
+
+    private void startBackgroundTask() {
+        OrderService odrService = (OrderService) SpringUtil.getBean("OrderServiceImpl");
+        //删除旧订单
+        new Thread(() -> {
+            odrService.delete365dAgo();
+            logger.debug("==================\n" +
+                    "删除一年前的订单" +
+                    "\n===================");
+        }).start();
     }
 
     /**

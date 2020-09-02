@@ -124,6 +124,8 @@ public class ConsumeDialogController implements Initializable {
         OrderBean orderBean = orderData();
 
         OrderDao orderDao = OrderDao.getInstance();
+
+        //FIXME 使用springboot事务进行处理
         hasSubmit = orderDao.placeGoodsOrder(orderBean, orderDetails, userGoods, goodsBeans, vipBean);
         if (hasSubmit) {
             new MyAlert(Alert.AlertType.INFORMATION, "结算成功！").show();

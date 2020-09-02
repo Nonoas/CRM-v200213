@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
  * @author : Nonoas
  * @time : 2020-08-10 17:59
  */
-public class PackageConsumeDialogController implements Initializable {
+public class PkgCnsDialogController implements Initializable {
 
     private Stage stage;
 

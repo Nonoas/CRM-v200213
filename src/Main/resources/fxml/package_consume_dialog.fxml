@@ -13,7 +13,7 @@
 <GridPane fx:id="gp_rootPane" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
           minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0"
           xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="indi.nonoas.crm.controller.consume.PackageConsumeDialogController">
+          fx:controller="indi.nonoas.crm.controller.consume.PkgCnsDialogController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="85.0"/>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="475.0"/>

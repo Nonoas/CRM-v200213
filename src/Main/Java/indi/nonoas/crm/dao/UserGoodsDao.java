@@ -10,6 +10,7 @@ import java.util.List;
  * @author : Nonoas
  * @time : 2020-08-07 18:26
  */
+@Deprecated
 public class UserGoodsDao extends SqliteDao<UserGoods> {
 
     private static final String SELECT_BY_USER_GOODS = "select * from user_goods where user_id=#{user_id} " +

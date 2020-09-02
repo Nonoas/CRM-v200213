@@ -1,46 +1,16 @@
 package indi.nonoas.crm.service;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author : Nonoas
- * @time : 2020-08-06 12:00
+ * @time : 2020-09-02 15:43
  */
-public class OrderService {
+@Transactional
+public interface OrderService {
 
     /**
-     * 生成商品订单号
-     *
-     * @return 商品订单号
+     * 删除一年前的记录
      */
-    public static synchronized String goodsOrderNum() {
-        final String prefix = "SP";
-        LocalDateTime dateTime = LocalDateTime.now();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
-        try {
-            Thread.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return prefix + dtf.format(dateTime);
-    }
-
-    /**
-     * 生成商品订单号
-     *
-     * @return 商品订单号
-     */
-    public static synchronized String packageOrderNum() {
-        final String prefix = "TC";
-        LocalDateTime dateTime = LocalDateTime.now();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
-        try {
-            Thread.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return prefix + dtf.format(dateTime);
-    }
-
+    void delete365dAgo();
 }

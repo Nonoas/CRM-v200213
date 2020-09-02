@@ -4,7 +4,7 @@ import indi.nonoas.crm.beans.OrderBean;
 import indi.nonoas.crm.beans.OrderDetailBean;
 import indi.nonoas.crm.beans.VipBean;
 import indi.nonoas.crm.config.ImageSrc;
-import indi.nonoas.crm.controller.consume.PackageConsumeDialogController;
+import indi.nonoas.crm.controller.consume.PkgCnsDialogController;
 import indi.nonoas.crm.view.annotation.CSS;
 import indi.nonoas.crm.view.annotation.FXML;
 import indi.nonoas.crm.view.annotation.StageProperty;
@@ -23,11 +23,11 @@ import java.util.List;
 @FXML("/fxml/package_consume_dialog.fxml")
 public class PackageConsumeDialog extends ControllableStage {
 
-    private final PackageConsumeDialogController controller;
+    private final PkgCnsDialogController controller;
 
     public PackageConsumeDialog(VipBean vip, OrderBean order, List<OrderDetailBean> orderDetails) {
         initView();
-        controller = (PackageConsumeDialogController) getController();
+        controller = (PkgCnsDialogController) getController();
         controller.setStage(this);
         controller.setVipBean(vip);
         controller.setOrder(order);

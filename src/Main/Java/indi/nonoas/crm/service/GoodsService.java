@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author : Nonoas
  * @time : 2020-08-19 22:05
  */
-public interface GoodsService {
+public interface GoodsService{
 
     /**
      * 通过商品id查询对应商品的所有信息

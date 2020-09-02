@@ -6,6 +6,8 @@ import indi.nonoas.crm.beans.VipBean;
 import indi.nonoas.crm.beans.vo.UserGoodsVO;
 import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
 import indi.nonoas.crm.dao.UserGoodsDao;
+import indi.nonoas.crm.service.UsrGdsService;
+import indi.nonoas.crm.utils.SpringUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
@@ -24,6 +26,7 @@ import java.util.List;
  */
 public class UserGoodsTable extends TableView<UserGoodsVO> {
 
+    private final UsrGdsService usrGdsService = (UsrGdsService) SpringUtil.getBean("UsrGdsServiceImpl");
     private final ObservableList<UserGoodsVO> obList = FXCollections.observableArrayList();
     private final ObservableList<TableColumn<UserGoodsVO, ?>> columns = getColumns();
     private VipBean vipBean;
@@ -85,7 +88,7 @@ public class UserGoodsTable extends TableView<UserGoodsVO> {
      */
     private List<UserGoods> getUserGoods() {
         String userID = vipBean.getId();
-        return UserGoodsDao.getInstance().selectByUser(userID);
+        return usrGdsService.selectByUser(userID);
     }
 
     /**

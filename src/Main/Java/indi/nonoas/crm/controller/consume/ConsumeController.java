@@ -9,7 +9,7 @@ import indi.nonoas.crm.app.vip.VipInfoTable;
 import indi.nonoas.crm.beans.*;
 import indi.nonoas.crm.dao.*;
 import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
-import indi.nonoas.crm.service.OrderService;
+import indi.nonoas.crm.service.impl.OrderServiceImpl;
 import indi.nonoas.crm.view.alert.MyAlert;
 import indi.nonoas.crm.beans.vo.GoodsEditTableData;
 import javafx.collections.ObservableList;
@@ -217,7 +217,7 @@ public class ConsumeController implements Initializable {
         //设置表格的监听事件
         gc_table.getEventHandler().addEvent(() -> {
             if (shp_orderNum.getText().equals("")) {
-                shp_orderNum.setText(OrderService.goodsOrderNum());
+                shp_orderNum.setText(OrderServiceImpl.goodsOrderNum());
             }
             if (shp_orderDate.getText().equals("")) {
                 DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -382,7 +382,7 @@ public class ConsumeController implements Initializable {
         pcTable.getEventHandler().addEvent(() -> {
             //设置订单号
             if (tc_orderNum.getText().equals("")) {
-                tc_orderNum.setText(OrderService.packageOrderNum());
+                tc_orderNum.setText(OrderServiceImpl.packageOrderNum());
             }
             //设置订单日期
             if (tc_orderDate.getText().equals("")) {

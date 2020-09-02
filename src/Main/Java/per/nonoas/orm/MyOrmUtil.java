@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @SuppressWarnings("unused")
+@Deprecated
 public abstract class MyOrmUtil<T> {
 
     /**
