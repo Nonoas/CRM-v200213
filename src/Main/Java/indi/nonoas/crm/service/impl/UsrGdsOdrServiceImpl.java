@@ -2,6 +2,7 @@ package indi.nonoas.crm.service.impl;
 
 import indi.nonoas.crm.beans.vo.UsrOdrRecordVO;
 import indi.nonoas.crm.dao.OrderMapper;
+import indi.nonoas.crm.dao.UsrGdsOdrMapper;
 import indi.nonoas.crm.service.UsrGdsOdrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,17 +16,19 @@ import java.util.List;
 @Service("UsrGdsOdrServiceImpl")
 public class UsrGdsOdrServiceImpl implements UsrGdsOdrService {
 
-    private OrderMapper odrMapper;
+    private UsrGdsOdrMapper usrGdsOdrMapper;
 
     @Override
     public List<UsrOdrRecordVO> selectUserGoodsOrder() {
-        return odrMapper.selectUserGoodsOrder();
+        return usrGdsOdrMapper.selectUserGoodsOrder();
     }
 
+    //===========================================================================
+    //                            setter×¢Èë
+    //===========================================================================
     @Autowired
-    public void setOdrMapper(OrderMapper odrMapper) {
-        this.odrMapper = odrMapper;
+    public void setUsrGdsOdrMapper(UsrGdsOdrMapper usrGdsOdrMapper) {
+        this.usrGdsOdrMapper = usrGdsOdrMapper;
     }
-
 
 }

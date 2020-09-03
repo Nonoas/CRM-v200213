@@ -14,13 +14,6 @@ import java.util.List;
  */
 @Repository
 public interface OrderMapper {
-    /**
-     * 查询所有用户库存商品消费记录
-     *
-     * @return 消费记录列表
-     */
-    //FIXME 需要移动到别的Mapper
-    List<UsrOdrRecordVO> selectUserGoodsOrder();
 
     /**
      * 查询所有商品订单
