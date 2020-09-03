@@ -2,7 +2,7 @@ package indi.nonoas.crm.app.consume;
 
 import indi.nonoas.crm.beans.GoodsBean;
 import indi.nonoas.crm.beans.UserGoods;
-import indi.nonoas.crm.beans.VipBean;
+import indi.nonoas.crm.beans.UserBean;
 import indi.nonoas.crm.beans.vo.UserGoodsVO;
 import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
 import indi.nonoas.crm.service.UsrGdsService;
@@ -28,7 +28,7 @@ public class UserGoodsTable extends TableView<UserGoodsVO> {
     private final UsrGdsService usrGdsService = (UsrGdsService) SpringUtil.getBean("UsrGdsServiceImpl");
     private final ObservableList<UserGoodsVO> obList = FXCollections.observableArrayList();
     private final ObservableList<TableColumn<UserGoodsVO, ?>> columns = getColumns();
-    private VipBean vipBean;
+    private UserBean vipBean;
     private final EventHandler eventHandler = new EventHandler();
     private UserGoods selectBean;
     private final Label phd_noUser = new Label("尚未选择会员");
@@ -137,7 +137,7 @@ public class UserGoodsTable extends TableView<UserGoodsVO> {
     }
 
 
-    public void setVipBean(VipBean vipBean) {
+    public void setVipBean(UserBean vipBean) {
         this.vipBean = vipBean;
         setEmptyText();
         showAllData();
@@ -147,7 +147,7 @@ public class UserGoodsTable extends TableView<UserGoodsVO> {
      * 设置表格为空时的内容
      */
     private void setEmptyText() {
-        if (vipBean == VipBean.SANKE)
+        if (vipBean == UserBean.SANKE)
             setPlaceholder(phd_noUser);
         else
             setPlaceholder(phd_noData);

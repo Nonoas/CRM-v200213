@@ -7,8 +7,9 @@ import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 import indi.nonoas.crm.service.UserService;
+import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
-import indi.nonoas.crm.beans.VipBean;
+import indi.nonoas.crm.beans.UserBean;
 import indi.nonoas.crm.dao.VipInfoDao;
 import indi.nonoas.crm.dao.VipLevelDao;
 import indi.nonoas.crm.config.ImageSrc;
@@ -32,6 +33,8 @@ public class VipAddController implements Initializable {
     private final ToggleGroup tGroup = new ToggleGroup();
 
     private Tab parentTab;
+
+    private final UserService userService = (UserService) SpringUtil.getBean("UserServiceImpl");
 
     /**
      * 会员照片绝对路径
@@ -126,7 +129,7 @@ public class VipAddController implements Initializable {
             new MyAlert(AlertType.WARNING, "请先清除已经填写的会员卡号！").show();
             return;
         }
-        String newID = UserService.generateVipID();
+        String newID = userService.generateVipID();
         tf_id.setText(newID);
     }
 
@@ -149,7 +152,7 @@ public class VipAddController implements Initializable {
     private void commitIfo() {
         if (!isCommittable())
             return;
-        VipBean bean = new VipBean();
+        UserBean bean = new UserBean();
         bean.setId(tf_id.getText().trim());
         bean.setName(tf_name.getText().trim());
         bean.setSex((String) tGroup.getSelectedToggle().getUserData());

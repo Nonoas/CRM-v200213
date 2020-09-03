@@ -59,12 +59,12 @@ public class OrderDao extends SqliteDao<OrderBean> {
      * @param goodsBeans   商品 列表
      * @param vipBean      用户
      */
-    public boolean placeGoodsOrder(OrderBean order, List<OrderDetailBean> orderDetails, List<UserGoods> userGoods, List<GoodsBean> goodsBeans, VipBean vipBean) {
+    public boolean placeGoodsOrder(OrderBean order, List<OrderDetailBean> orderDetails, List<UserGoods> userGoods, List<GoodsBean> goodsBeans, UserBean vipBean) {
 
         List<AbstractTransaction> transactions = new ArrayList<>();
 
         //如果是散客则不做以下事务
-        if (vipBean != VipBean.SANKE) {
+        if (vipBean != UserBean.SANKE) {
             //用户事务
             transactions.add(new BeanTransaction(REDUCE_USER_BALANCE, vipBean));
             //用户-商品事务
@@ -94,12 +94,12 @@ public class OrderDao extends SqliteDao<OrderBean> {
      * @param goodsBeans   商品 列表
      * @param vipBean      用户
      */
-    public boolean placePackageOrder(OrderBean order, List<OrderDetailBean> orderDetails, List<UserGoods> userGoods, List<GoodsBean> goodsBeans, VipBean vipBean) {
+    public boolean placePackageOrder(OrderBean order, List<OrderDetailBean> orderDetails, List<UserGoods> userGoods, List<GoodsBean> goodsBeans, UserBean vipBean) {
 
         List<AbstractTransaction> transactions = new ArrayList<>();
 
         //如果是散客则不做以下事务
-        if (vipBean != VipBean.SANKE) {
+        if (vipBean != UserBean.SANKE) {
             //用户事务
             transactions.add(new BeanTransaction(REDUCE_USER_BALANCE, vipBean));
             //用户-商品事务

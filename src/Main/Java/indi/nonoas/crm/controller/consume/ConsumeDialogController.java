@@ -33,7 +33,7 @@ public class ConsumeDialogController implements Initializable {
     /**
      * 消费者
      */
-    private VipBean vipBean;
+    private UserBean vipBean;
 
     /**
      * 订单
@@ -119,7 +119,7 @@ public class ConsumeDialogController implements Initializable {
         //设置即将减少数量的 商品
         List<GoodsBean> goodsBeans = goodsData();
         //设置需要更新的消费者信息
-        VipBean vipBean = vipData();
+        UserBean vipBean = vipData();
         //设置最终订单信息
         OrderBean orderBean = orderData();
 
@@ -234,12 +234,12 @@ public class ConsumeDialogController implements Initializable {
      *
      * @return 消费者
      */
-    private VipBean vipData() {
+    private UserBean vipData() {
         //如果消费者为散客，则不进行数据处理
-        if (vipBean == VipBean.SANKE)
+        if (vipBean == UserBean.SANKE)
             return vipBean;
 
-        VipBean bean = this.vipBean;
+        UserBean bean = this.vipBean;
         PayMode payMode = cb_payMode.getValue();
         //需要扣除的数据：余额 || 积分
         switch (payMode) {
@@ -286,7 +286,7 @@ public class ConsumeDialogController implements Initializable {
         this.stage = stage;
     }
 
-    public void setVipBean(VipBean vipBean) {
+    public void setVipBean(UserBean vipBean) {
         this.vipBean = vipBean;
         lb_consumer.setText("[" + vipBean.getId() + "] " + vipBean.getName());
     }

@@ -2,22 +2,20 @@ package indi.nonoas.crm.app.vip;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.FutureTask;
 
-import indi.nonoas.crm.beans.VipBean;
+import indi.nonoas.crm.beans.UserBean;
 import indi.nonoas.crm.dao.VipInfoDao;
+import indi.nonoas.crm.service.UserService;
+import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.progress.TableProgressIndicator;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import org.apache.log4j.Logger;
@@ -27,61 +25,63 @@ import org.apache.log4j.Logger;
  *
  * @author Nonoas
  */
-public class VipInfoTable extends TableView<VipBean> {
+public class VipInfoTable extends TableView<UserBean> {
 
     private final Logger logger = Logger.getLogger(VipInfoTable.class);
+
+    private final UserService userService = (UserService) SpringUtil.getBean("UserServiceImpl");
 
     /**
      * 数据源
      */
-    private final ObservableList<VipBean> obList = FXCollections.observableArrayList();
+    private final ObservableList<UserBean> obList = FXCollections.observableArrayList();
 
     /**
      * 列数组
      */
-    private final ObservableList<TableColumn<VipBean, ?>> colList = getColumns();
+    private final ObservableList<TableColumn<UserBean, ?>> colList = getColumns();
     /**
      * 当前选中数据
      */
-    private VipBean selectedBean;
+    private UserBean selectedBean;
 
-    private final TableColumn<VipBean, String> item_balance = new TableColumn<>("卡内余额");
+    private final TableColumn<UserBean, String> item_balance = new TableColumn<>("卡内余额");
 
-    private final TableColumn<VipBean, Number> item_integral = new TableColumn<>("会员积分");
+    private final TableColumn<UserBean, Number> item_integral = new TableColumn<>("会员积分");
 
-    private final TableColumn<VipBean, String> item_telephone = new TableColumn<>("联系电话");
+    private final TableColumn<UserBean, String> item_telephone = new TableColumn<>("联系电话");
 
-    private final TableColumn<VipBean, String> item_id = new TableColumn<>("会员卡号");
+    private final TableColumn<UserBean, String> item_id = new TableColumn<>("会员卡号");
 
-    private final TableColumn<VipBean, String> item_address = new TableColumn<>("联系地址");
+    private final TableColumn<UserBean, String> item_address = new TableColumn<>("联系地址");
 
-    private final TableColumn<VipBean, String> item_name = new TableColumn<>("会员姓名");
+    private final TableColumn<UserBean, String> item_name = new TableColumn<>("会员姓名");
 
-    private final TableColumn<VipBean, String> item_career = new TableColumn<>("单位职业");
+    private final TableColumn<UserBean, String> item_career = new TableColumn<>("单位职业");
 
-    private final TableColumn<VipBean, String> item_admission = new TableColumn<>("入会时间");
+    private final TableColumn<UserBean, String> item_admission = new TableColumn<>("入会时间");
 
-    private final TableColumn<VipBean, String> item_sex = new TableColumn<>("性别");
+    private final TableColumn<UserBean, String> item_sex = new TableColumn<>("性别");
 
-    private final TableColumn<VipBean, Number> item_discount = new TableColumn<>("享受折扣");
+    private final TableColumn<UserBean, Number> item_discount = new TableColumn<>("享受折扣");
 
-    private final TableColumn<VipBean, String> item_email = new TableColumn<>("邮箱");
+    private final TableColumn<UserBean, String> item_email = new TableColumn<>("邮箱");
 
-    private final TableColumn<VipBean, Number> item_cumulative = new TableColumn<>("累计消费");
+    private final TableColumn<UserBean, Number> item_cumulative = new TableColumn<>("累计消费");
 
-    private final TableColumn<VipBean, String> item_idCard = new TableColumn<>("身份证号码");
+    private final TableColumn<UserBean, String> item_idCard = new TableColumn<>("身份证号码");
 
-    private final TableColumn<VipBean, String> item_birthday = new TableColumn<>("出生日期");
+    private final TableColumn<UserBean, String> item_birthday = new TableColumn<>("出生日期");
 
-    private final TableColumn<VipBean, String> item_card_level = new TableColumn<>("会员等级");
+    private final TableColumn<UserBean, String> item_card_level = new TableColumn<>("会员等级");
 
-    private final TableColumn<VipBean, String> item_other = new TableColumn<>("其他信息");
+    private final TableColumn<UserBean, String> item_other = new TableColumn<>("其他信息");
 
     public VipInfoTable() {
         initColumns();
         setItems(obList);
         showAllInfos();
-        ChangeListener<VipBean> cl_select = (observable, oldValue, newValue) -> {
+        ChangeListener<UserBean> cl_select = (observable, oldValue, newValue) -> {
             logger.debug(newValue);
             selectedBean = newValue;
         };
@@ -141,10 +141,10 @@ public class VipInfoTable extends TableView<VipBean> {
         clearData(); // 清空所有数据
         setPlaceholder(new TableProgressIndicator());
         //子线程查询数据
-        Task<List<VipBean>> task = new Task<List<VipBean>>() {
+        Task<List<UserBean>> task = new Task<List<UserBean>>() {
             @Override
-            protected List<VipBean> call() {
-                List<VipBean> beans = VipInfoDao.getInstance().selectAll();
+            protected List<UserBean> call() {
+                List<UserBean> beans = userService.selectAllUser();
                 if (beans != null)
                     return beans;
                 else
@@ -172,7 +172,7 @@ public class VipInfoTable extends TableView<VipBean> {
      *
      * @param bean 需要添加的VIPBean
      */
-    public void addBean(VipBean bean) {
+    public void addBean(UserBean bean) {
         obList.add(bean);
     }
 
@@ -181,7 +181,7 @@ public class VipInfoTable extends TableView<VipBean> {
      *
      * @return 选中的VIPBean
      */
-    public VipBean getSelectedData() {
+    public UserBean getSelectedData() {
         return this.selectedBean;
     }
 
@@ -190,7 +190,7 @@ public class VipInfoTable extends TableView<VipBean> {
      *
      * @param bean 需要移除的VIPBean
      */
-    public void removeData(VipBean bean) {
+    public void removeData(UserBean bean) {
         this.obList.remove(bean);
     }
 }

@@ -17,7 +17,7 @@ import indi.nonoas.crm.view.alert.MyAlert;
 import indi.nonoas.crm.app.vip.VipAddTab;
 import indi.nonoas.crm.app.vip.VipInfoTable;
 import indi.nonoas.crm.app.vip.VipModifyTab;
-import indi.nonoas.crm.beans.VipBean;
+import indi.nonoas.crm.beans.UserBean;
 import indi.nonoas.crm.dao.VipInfoDao;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -90,10 +90,10 @@ public class VipManageController implements Initializable {
         String dateFrom = dpk_from.getValue().toString();    //时间上限
         String dateTo = dpk_to.getValue().toString();    //时间下限
 
-        ArrayList<VipBean> listVipBeans = vipInfoDao.selectByFiltrate(idOrName, idOrName, level, dateFrom, dateTo);
+        ArrayList<UserBean> listVipBeans = vipInfoDao.selectByFiltrate(idOrName, idOrName, level, dateFrom, dateTo);
         if (listVipBeans != null) {
             table.clearData();
-            for (VipBean bean : listVipBeans)
+            for (UserBean bean : listVipBeans)
                 table.addBean(bean);
         } else {
             new MyAlert(AlertType.INFORMATION, "没有找到您查询的会员！").show();
@@ -123,7 +123,7 @@ public class VipManageController implements Initializable {
      */
     @FXML
     private void deleteVip() {
-        VipBean bean = table.getSelectedData();
+        UserBean bean = table.getSelectedData();
         if (bean == null) {
             new MyAlert(AlertType.INFORMATION, "请先选择一条数据！").show();
             return;
@@ -143,7 +143,7 @@ public class VipManageController implements Initializable {
      */
     @FXML
     private void modifyVip() {
-        VipBean bean = table.getSelectedData();
+        UserBean bean = table.getSelectedData();
         if (bean == null) {
             new MyAlert(AlertType.INFORMATION, "请先选择一条数据！").show();
             return;
@@ -174,8 +174,8 @@ public class VipManageController implements Initializable {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        ObservableList<TableColumn<VipBean, ?>> columns = table.getColumns();
-        ObservableList<VipBean> items = table.getItems();
+        ObservableList<TableColumn<UserBean, ?>> columns = table.getColumns();
+        ObservableList<UserBean> items = table.getItems();
         List<Object> contentList = new ArrayList<>(items);
         String[] titles = new String[columns.size()];
         String[] fieldNames = {"id", "admissionDate", "name", "sex", "cardLevel", "balance", "frequency", "cumulative", "address", "integral", "telephone", "idcard", "birthday", "career", "email", "other"};

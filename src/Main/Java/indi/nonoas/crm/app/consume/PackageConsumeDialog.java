@@ -2,7 +2,7 @@ package indi.nonoas.crm.app.consume;
 
 import indi.nonoas.crm.beans.OrderBean;
 import indi.nonoas.crm.beans.OrderDetailBean;
-import indi.nonoas.crm.beans.VipBean;
+import indi.nonoas.crm.beans.UserBean;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.controller.consume.PkgCnsDialogController;
 import indi.nonoas.crm.view.annotation.CSS;
@@ -25,7 +25,7 @@ public class PackageConsumeDialog extends ControllableStage {
 
     private final PkgCnsDialogController controller;
 
-    public PackageConsumeDialog(VipBean vip, OrderBean order, List<OrderDetailBean> orderDetails) {
+    public PackageConsumeDialog(UserBean vip, OrderBean order, List<OrderDetailBean> orderDetails) {
         initView();
         controller = (PkgCnsDialogController) getController();
         controller.setStage(this);

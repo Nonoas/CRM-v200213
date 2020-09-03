@@ -7,7 +7,7 @@ import java.io.Serializable;
  *
  * @author Nonoas
  */
-public class VipBean implements Serializable {
+public class UserBean implements Serializable {
     /**
      * 串行版本
      */
@@ -89,7 +89,7 @@ public class VipBean implements Serializable {
         this.photo = photo;
     }
 
-    public VipBean() {
+    public UserBean() {
 
     }
 
@@ -230,7 +230,7 @@ public class VipBean implements Serializable {
     /**
      * 散客常量
      */
-    public final static VipBean SANKE = new VipBean();
+    public final static UserBean SANKE = new UserBean();
 
     static {
         SANKE.setId("0000");

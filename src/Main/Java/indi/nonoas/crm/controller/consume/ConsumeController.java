@@ -10,7 +10,9 @@ import indi.nonoas.crm.beans.*;
 import indi.nonoas.crm.dao.*;
 import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
 import indi.nonoas.crm.dao.my_orm_dao.UserGoodsDao;
+import indi.nonoas.crm.service.UserService;
 import indi.nonoas.crm.service.impl.OrderServiceImpl;
+import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
 import indi.nonoas.crm.beans.vo.GoodsEditTableData;
 import javafx.collections.ObservableList;
@@ -34,6 +36,9 @@ public class ConsumeController implements Initializable {
 
     private final Logger logger = Logger.getLogger(ConsumeController.class);
 
+
+    private final UserService userService = (UserService) SpringUtil.getBean("UserServiceImpl");
+
     /**
      * 会员信息DAO
      */
@@ -42,12 +47,12 @@ public class ConsumeController implements Initializable {
     /**
      * 散客常量
      */
-    private final static VipBean SANKE = VipBean.SANKE;
+    private final static UserBean SANKE = UserBean.SANKE;
 
     /**
      * 会员信息
      */
-    private VipBean vipBean = SANKE;
+    private UserBean vipBean = SANKE;
     @FXML
     private TabPane tp_rootPane;
     @FXML
@@ -89,10 +94,10 @@ public class ConsumeController implements Initializable {
 
     @FXML // 查找信息
     private void inquireVIP() {
-        String str = tf_find.getText().trim();
-        if (str.equals(""))
+        String keyWord = tf_find.getText().trim();
+        if (keyWord.equals(""))
             return;
-        vipBean = vipInfoDao.getInfoByIdOrName(str, str);
+        vipBean = userService.getInfoByIdOrName(keyWord, keyWord);
         if (vipBean != null) {
             showFindResult(vipBean);
         } else {
@@ -105,7 +110,7 @@ public class ConsumeController implements Initializable {
      *
      * @param bean 搜索的用户信息
      */
-    private void showFindResult(VipBean bean) {
+    private void showFindResult(UserBean bean) {
         if (bean == null)
             return;
         lb_cardState.setText("可用");
@@ -127,10 +132,10 @@ public class ConsumeController implements Initializable {
         String disType = str0 + "%";
         if (str.equals("%%"))
             return;
-        ArrayList<VipBean> listVipBeans = vipInfoDao.selectByFiltrate(str, str, disType);
+        ArrayList<UserBean> listVipBeans = userService.selectByFiltrate(str, str, disType);
         if (listVipBeans != null) {
             tv_vipInfo.clearData();
-            for (VipBean bean : listVipBeans)
+            for (UserBean bean : listVipBeans)
                 tv_vipInfo.addBean(bean);
         } else {
             new MyAlert(AlertType.INFORMATION, "没有找到您查询的会员！").show();

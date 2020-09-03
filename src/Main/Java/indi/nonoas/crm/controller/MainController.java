@@ -13,6 +13,7 @@ import indi.nonoas.crm.app.vip.StatPane;
 import indi.nonoas.crm.app.vip.VipManagePane;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.service.OrderService;
+import indi.nonoas.crm.service.impl.OrderServiceImpl;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.application.Application;
@@ -26,6 +27,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @FXMLController
 public class MainController implements Initializable {
@@ -33,6 +35,9 @@ public class MainController implements Initializable {
     private final Logger logger = Logger.getLogger(MainController.class);
 
     private static final double IMG_SIZE = 30; // 按图标尺寸
+
+    @Autowired
+    private OrderService odrService;
 
     private CenterPane currentPane; // 当前界面名称
 
@@ -148,7 +153,7 @@ public class MainController implements Initializable {
     }
 
     private void startBackgroundTask() {
-        OrderService odrService = (OrderService) SpringUtil.getBean("OrderServiceImpl");
+//        OrderService odrService = (OrderService) SpringUtil.getBean("OrderServiceImpl");
         //删除旧订单
         new Thread(() -> {
             odrService.delete365dAgo();

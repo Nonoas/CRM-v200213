@@ -1,6 +1,6 @@
 package indi.nonoas.crm.app.vip;
 
-import indi.nonoas.crm.beans.VipBean;
+import indi.nonoas.crm.beans.UserBean;
 import indi.nonoas.crm.controller.vip.VipModifyController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
@@ -13,15 +13,15 @@ import java.net.URL;
 
 public class VipModifyTab extends Tab {
 
-    private final VipBean bean;
+    private final UserBean bean;
     private VipModifyController controller;
     private Tab preTab;
 
-    public VipModifyTab(VipBean bean) {
+    public VipModifyTab(UserBean bean) {
         this("修改会员信息", bean);
     }
 
-    public VipModifyTab(String str, VipBean bean) {
+    public VipModifyTab(String str, UserBean bean) {
         super(str);
         this.bean = bean;
         initView();
@@ -63,7 +63,7 @@ public class VipModifyTab extends Tab {
         }
     }
 
-    public void setBean(VipBean vipBean) {
+    public void setBean(UserBean vipBean) {
         controller.setBean(vipBean);
     }
 

@@ -1,23 +1,24 @@
-package indi.nonoas.crm.service;
+package indi.nonoas.crm.dao;
 
 import indi.nonoas.crm.beans.UserBean;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 
 /**
  * @author : Nonoas
- * @time : 2020-09-04 1:34
+ * @time : 2020-09-03 21:30
  */
-@Transactional
-public interface UserService {
+@Repository
+public interface UserMapper {
     /**
-     * 自动生成会员卡号
+     * 通过会员卡号查询会员信息
      *
-     * @return 32进制数 会员卡号
+     * @param id 会员卡号
+     * @return VIPBean对象
      */
-    String generateVipID();
+    UserBean getUserById(String id);
 
     /**
      * 通过卡号或姓名精确查询
@@ -26,7 +27,8 @@ public interface UserService {
      * @param name 会员姓名
      * @return VipBean
      */
-    UserBean getInfoByIdOrName(String id, String name);
+    UserBean getInfoByIdOrName(@Param("id") String id,
+                               @Param("name") String name);
 
     /**
      * 查询所有会员信息
@@ -43,7 +45,9 @@ public interface UserService {
      * @param card_level 会员等级
      * @return VIPBean的ArrayList对象, 没有查询结果时为null
      */
-    ArrayList<UserBean> selectByFiltrate(String id, String name, String card_level);
+    ArrayList<UserBean> selectByFiltrate(@Param("id") String id,
+                                         @Param("name") String name,
+                                         @Param("card_level") String card_level);
 
     /**
      * 过滤器查找
@@ -55,7 +59,11 @@ public interface UserService {
      * @param dateTo   加入时间范围（结束）
      * @return VIPBean的ArrayList对象, 没有查询结果时为null
      */
-    ArrayList<UserBean> selectByDateFiltrate(String id, String name, String level, String dateFrom, String dateTo);
+    ArrayList<UserBean> selectByDateFiltrate(@Param("id") String id,
+                                             @Param("name") String name,
+                                             @Param("level") String level,
+                                             @Param("dateFrom") String dateFrom,
+                                             @Param("dateTo") String dateTo);
 
 
     /**
@@ -78,4 +86,5 @@ public interface UserService {
      * @param vipBean VIPBean对象
      */
     void updateInfo(UserBean vipBean);
+
 }
