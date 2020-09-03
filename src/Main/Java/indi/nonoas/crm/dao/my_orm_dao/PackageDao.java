@@ -1,9 +1,8 @@
-package indi.nonoas.crm.dao;
+package indi.nonoas.crm.dao.my_orm_dao;
 
 import java.util.ArrayList;
 
 import indi.nonoas.crm.beans.PackageBean;
-import indi.nonoas.crm.dao.my_orm_dao.SqliteDao;
 
 /**
  * 套餐项目数据库操作类

@@ -1,7 +1,7 @@
 package indi.nonoas.crm.app.pkg;
 
 import indi.nonoas.crm.beans.PackageBean;
-import indi.nonoas.crm.dao.PackageDao;
+import indi.nonoas.crm.dao.my_orm_dao.PackageDao;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;

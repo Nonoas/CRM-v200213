@@ -4,9 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="indi.nonoas.crm.dao.UsrGdsOdrMapper">
-    <resultMap id="UsrOdrRecordVO" type="indi.nonoas.crm.beans.vo.UsrOdrRecordVO"/>
+    <resultMap id="UsrGdsOdrRecordVO" type="indi.nonoas.crm.beans.vo.UsrGdsOdrRecordVO"/>
 
-    <select id="selectUserGoodsOrder" resultMap="UsrOdrRecordVO">
+    <select id="selectUserGoodsOrder" resultMap="UsrGdsOdrRecordVO">
         select *
         from ug_order_record
     </select>

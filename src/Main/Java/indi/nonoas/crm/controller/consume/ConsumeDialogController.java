@@ -5,7 +5,7 @@ import indi.nonoas.crm.beans.*;
 import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
 import indi.nonoas.crm.dao.my_orm_dao.OrderDao;
 import indi.nonoas.crm.dao.my_orm_dao.UserGoodsDao;
-import indi.nonoas.crm.global.PayMode;
+import indi.nonoas.crm.common.PayMode;
 import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

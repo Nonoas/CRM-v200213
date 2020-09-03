@@ -21,8 +21,8 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
     <Button alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goodsOrderRecord" text="商品消费记录" GridPane.halignment="CENTER" />
-    <Button alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pkgPurchaseRecord" text="套餐消费记录" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-    <Button alignment="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pkgConsumeRecord" text="会员开户记录" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+    <Button alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pkgConsumeRecord" text="套餐消费记录" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+    <Button alignment="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="会员开户记录" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
     <Button alignment="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="兑换商品统计" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
     <Button alignment="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="库存商品统计" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
     <Button alignment="CENTER" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="商品进出统计" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />

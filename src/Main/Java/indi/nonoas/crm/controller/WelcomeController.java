@@ -2,10 +2,9 @@ package indi.nonoas.crm.controller;
 
 import de.felixroske.jfxsupport.FXMLController;
 import indi.nonoas.crm.ApplicationStarter;
-import indi.nonoas.crm.app.MainStageView;
 import indi.nonoas.crm.beans.LoginBean;
 import indi.nonoas.crm.utils.SpringUtil;
-import indi.nonoas.crm.global.ClientSession;
+import indi.nonoas.crm.common.ClientSession;
 import indi.nonoas.crm.service.LoginService;
 import indi.nonoas.crm.utils.SaltUtil;
 import indi.nonoas.crm.view.alert.MyAlert;

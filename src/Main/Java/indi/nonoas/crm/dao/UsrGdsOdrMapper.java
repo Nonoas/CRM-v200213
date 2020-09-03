@@ -1,6 +1,6 @@
 package indi.nonoas.crm.dao;
 
-import indi.nonoas.crm.beans.vo.UsrOdrRecordVO;
+import indi.nonoas.crm.beans.vo.UsrGdsOdrRecordVO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,6 +16,5 @@ public interface UsrGdsOdrMapper {
      *
      * @return 消费记录列表
      */
-    //FIXME 需要移动到别的Mapper
-    List<UsrOdrRecordVO> selectUserGoodsOrder();
+    List<UsrGdsOdrRecordVO> selectUserGoodsOrder();
 }

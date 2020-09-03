@@ -1,4 +1,4 @@
-package indi.nonoas.crm.global;
+package indi.nonoas.crm.common;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package indi.nonoas.crm.global;
+package indi.nonoas.crm.common;
 
 /**
  * 支付方式枚举
