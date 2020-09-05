@@ -31,7 +31,7 @@ public class VipInfoTable extends TableView<UserBean> {
     private final UserService userService = (UserService) SpringUtil.getBean("UserServiceImpl");
 
     /**
-     * 数据源
+     * 数据源列表
      */
     private final ObservableList<UserBean> obList = FXCollections.observableArrayList();
 
