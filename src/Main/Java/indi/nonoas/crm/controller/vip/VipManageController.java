@@ -18,7 +18,7 @@ import indi.nonoas.crm.app.vip.VipAddTab;
 import indi.nonoas.crm.app.vip.VipInfoTable;
 import indi.nonoas.crm.app.vip.VipModifyTab;
 import indi.nonoas.crm.beans.UserBean;
-import indi.nonoas.crm.dao.VipInfoDao;
+import indi.nonoas.crm.dao.my_orm_dao.VipInfoDao;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

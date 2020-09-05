@@ -15,12 +15,15 @@ import java.util.ArrayList;
  * @time : 2020-08-15 22:35
  */
 @Service("UserServiceImpl")
-//TODO 方法实现
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private UserMapper userMapper;
 
+    /**
+     * 从配置文件取出最新会员卡号的下一位的36进制表示
+     *
+     * @return 36进制会员卡号
+     */
     public String generateVipID() {
         String prefix;
         BigInteger bigInteger;
@@ -30,7 +33,7 @@ public class UserServiceImpl implements UserService {
             bigInteger = new BigInteger(lastID).add(new BigInteger("1"));
             UserConfig.setLastID(bigInteger.toString());
         }
-        String suffix = bigInteger.toString(32).toUpperCase();
+        String suffix = bigInteger.toString(36).toUpperCase();
         return prefix + suffix;
     }
 
@@ -69,4 +72,9 @@ public class UserServiceImpl implements UserService {
         userMapper.updateInfo(vipBean);
     }
 
+
+    @Autowired
+    public void setUserMapper(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 }

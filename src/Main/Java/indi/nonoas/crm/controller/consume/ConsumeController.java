@@ -3,18 +3,15 @@ package indi.nonoas.crm.controller.consume;
 import indi.nonoas.crm.app.consume.*;
 import indi.nonoas.crm.app.goods.GoodsSingleSelectTable;
 import indi.nonoas.crm.app.pkg.PackageSingleSelectTable;
-import indi.nonoas.crm.app.consume.UserGoodsTable;
 import indi.nonoas.crm.app.vip.VipAddTab;
 import indi.nonoas.crm.app.vip.VipInfoTable;
 import indi.nonoas.crm.beans.*;
-import indi.nonoas.crm.dao.*;
-import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
-import indi.nonoas.crm.dao.my_orm_dao.UserGoodsDao;
+import indi.nonoas.crm.beans.vo.GoodsEditTableData;
+import indi.nonoas.crm.dao.my_orm_dao.*;
 import indi.nonoas.crm.service.UserService;
 import indi.nonoas.crm.service.impl.OrderServiceImpl;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
-import indi.nonoas.crm.beans.vo.GoodsEditTableData;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,27 +29,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static indi.nonoas.crm.beans.UserBean.SANKE;
+
 public class ConsumeController implements Initializable {
 
     private final Logger logger = Logger.getLogger(ConsumeController.class);
 
-
+    /**
+     * 会员服务
+     */
     private final UserService userService = (UserService) SpringUtil.getBean("UserServiceImpl");
-
-    /**
-     * 会员信息DAO
-     */
-    private final VipInfoDao vipInfoDao = VipInfoDao.getInstance();
-
-    /**
-     * 散客常量
-     */
-    private final static UserBean SANKE = UserBean.SANKE;
 
     /**
      * 会员信息
      */
-    private UserBean vipBean = SANKE;
+    private UserBean vipBean = UserBean.SANKE;
     @FXML
     private TabPane tp_rootPane;
     @FXML

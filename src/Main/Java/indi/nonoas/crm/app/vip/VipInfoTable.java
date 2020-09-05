@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import indi.nonoas.crm.beans.UserBean;
-import indi.nonoas.crm.dao.VipInfoDao;
 import indi.nonoas.crm.service.UserService;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.progress.TableProgressIndicator;

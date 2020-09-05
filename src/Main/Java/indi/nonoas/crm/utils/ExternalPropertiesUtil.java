@@ -1,6 +1,7 @@
 package indi.nonoas.crm.utils;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 /**

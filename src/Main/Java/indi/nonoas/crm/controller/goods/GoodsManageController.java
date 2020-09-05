@@ -9,7 +9,7 @@ import indi.nonoas.crm.app.pkg.PackageModifyTab;
 import indi.nonoas.crm.app.pkg.PackageTable;
 import indi.nonoas.crm.beans.GoodsBean;
 import indi.nonoas.crm.beans.PackageBean;
-import indi.nonoas.crm.dao.PackageContentDao;
+import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.dao.my_orm_dao.PackageDao;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.utils.SpringUtil;

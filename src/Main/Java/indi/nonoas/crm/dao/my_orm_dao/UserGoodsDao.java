@@ -15,8 +15,6 @@ public class UserGoodsDao extends SqliteDao<UserGoods> {
     private static final String SELECT_BY_USER_GOODS = "select * from user_goods where user_id=#{user_id} " +
             "and goods_id=#{goods_id}";
 
-    private static final String SELECT_BY_USER = "select * from user_goods where user_id=#{user_id}";
-
     private static final String UPDATE_GOODS_AMOUNT = "update user_goods " +
             "set amount=#{amount} where user_id=#{user_id} and goods_id=#{goods_id}";
 
@@ -55,16 +53,6 @@ public class UserGoodsDao extends SqliteDao<UserGoods> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * 根据用户ID查询用户商品余额
-     *
-     * @param userID 用户ID
-     * @return 用户商品列表
-     */
-    public List<UserGoods> selectByUser(String userID) {
-        return select(SELECT_BY_USER, userID);
     }
 
     @Override
