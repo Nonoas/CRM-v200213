@@ -1,6 +1,9 @@
 
 # 店铺管理系统
 
+---
+
+
 [![star](https://gitee.com/nonoas/CRM-v200213/badge/star.svg?theme=dark)](https://gitee.com/nonoas/CRM-v200213/stargazers)
 
 ## 软件介绍
