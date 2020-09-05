@@ -1,2 +1,6 @@
 # Project exclude paths
 /bin/
+.idea
+target
+.gitignore
+*.iml

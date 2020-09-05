@@ -26,6 +26,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/Test/Java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/Main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/Test/resources" type="java-test-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
