@@ -14,9 +14,17 @@
 
     <insert id="insertOrder" parameterMap="OrderBean">
         insert into order_info
-                (order_id, user_id, datetime, price, transactor, integral_get, integral_cost, pay_mode)
+        (order_id, user_id, datetime, price, transactor, integral_get, integral_cost, pay_mode)
         values (#{order_id}, #{user_id}, #{datetime}, #{price}, #{transactor}, #{integral_get}, #{integral_cost},
                 #{pay_mode});
+    </insert>
+
+    <insert id="insertOrderDetails" parameterType="list">
+        insert into order_details(order_id, product_id, product_amount)
+        values
+        <foreach collection="orderDetails" index="index" item="od" separator=",">
+            (#{od.order_id}, #{od.product_id}, #{od.product_amount})
+        </foreach>
     </insert>
 
     <delete id="delete365dAgo">

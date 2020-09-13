@@ -1,6 +1,7 @@
 package indi.nonoas.crm.dao;
 
 import indi.nonoas.crm.beans.UserGoods;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,4 +19,11 @@ public interface UsrGdsMapper {
      * @return 用户商品列表
      */
      List<UserGoods> selectByUser(String userID);
+
+    /**
+     * 批量插入替换某一列
+     * @param userGoodsList 用户-商品集合
+     * @return 成功：true
+     */
+     boolean replaceUserGoods(@Param("userGoodsList") List<UserGoods> userGoodsList);
 }

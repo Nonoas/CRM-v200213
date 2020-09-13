@@ -34,5 +34,9 @@ public interface OrderService {
      * @param goodsBeans   商品 列表
      * @param vipBean      用户
      */
-    boolean placeGoodsOrder(OrderBean order, List<OrderDetailBean> orderDetails, List<UserGoods> userGoods, List<GoodsBean> goodsBeans, UserBean vipBean);
+    boolean placeGoodsOrder(OrderBean order,
+                            List<OrderDetailBean> orderDetails,
+                            List<UserGoods> userGoods,
+                            List<GoodsBean> goodsBeans,
+                            UserBean vipBean);
 }

@@ -53,6 +53,14 @@
         where id = #{id}
     </update>
 
+    <update id="replaceGoodsList" parameterType="list">
+        replace into user_goods(user_id, goods_id, amount)
+        values
+        <foreach collection="goodsBeans" item="goods" separator=",">
+            (#{goods.user_id}, #{goods.goods_id}, #{goods.amount})
+        </foreach>
+    </update>
+
     <select id="selectGoodsTypes" resultType="string">
         select name
         from goods_type;

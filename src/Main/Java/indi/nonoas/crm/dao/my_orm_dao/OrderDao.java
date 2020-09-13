@@ -14,8 +14,6 @@ import java.util.List;
 @Deprecated
 public class OrderDao extends SqliteDao<OrderBean> {
 
-    private static final String SELECT_ALL = "select * from order_info";
-
     private static final String INSERT_ORDER = "insert into order_info(order_id,user_id,datetime,price,transactor,integral_get,integral_cost,pay_mode) " +
 
             "values(#{order_id},#{user_id},#{datetime},#{price},#{transactor},#{integral_get},#{integral_cost},#{pay_mode})";

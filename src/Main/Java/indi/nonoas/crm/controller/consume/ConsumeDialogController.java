@@ -7,6 +7,7 @@ import indi.nonoas.crm.dao.my_orm_dao.OrderDao;
 import indi.nonoas.crm.dao.my_orm_dao.UserGoodsDao;
 import indi.nonoas.crm.common.PayMode;
 import indi.nonoas.crm.service.GoodsService;
+import indi.nonoas.crm.service.OrderService;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.fxml.FXML;
@@ -33,6 +34,8 @@ public class ConsumeDialogController implements Initializable {
     private boolean hasSubmit = false;
 
     private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
+
+    private final OrderService orderService = (OrderService) SpringUtil.getBean("OrderServiceImpl");
 
     /**
      * 消费者
@@ -127,10 +130,12 @@ public class ConsumeDialogController implements Initializable {
         //设置最终订单信息
         OrderBean orderBean = orderData();
 
-        OrderDao orderDao = OrderDao.getInstance();
+//        OrderDao orderDao = OrderDao.getInstance();
 
         //FIXME 使用springboot事务进行处理
-        hasSubmit = orderDao.placeGoodsOrder(orderBean, orderDetails, userGoods, goodsBeans, vipBean);
+//        hasSubmit = orderDao.placeGoodsOrder(orderBean, orderDetails, userGoods, goodsBeans, vipBean);
+        hasSubmit = orderService.placeGoodsOrder(orderBean, orderDetails, userGoods, goodsBeans, vipBean);
+
         if (hasSubmit) {
             new MyAlert(Alert.AlertType.INFORMATION, "结算成功！").show();
         } else {

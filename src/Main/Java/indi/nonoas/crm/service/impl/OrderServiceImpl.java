@@ -2,11 +2,14 @@ package indi.nonoas.crm.service.impl;
 
 import indi.nonoas.crm.beans.*;
 import indi.nonoas.crm.beans.vo.OrderRecordVO;
+import indi.nonoas.crm.dao.GoodsMapper;
 import indi.nonoas.crm.dao.OrderMapper;
+import indi.nonoas.crm.dao.UserMapper;
 import indi.nonoas.crm.dao.UsrGdsMapper;
 import indi.nonoas.crm.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import per.nonoas.orm.BeanTransaction;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -22,6 +25,10 @@ public class OrderServiceImpl implements OrderService {
     private OrderMapper odrMapper;
 
     private UsrGdsMapper ugMapper;
+
+    private UserMapper userMapper;
+
+    private GoodsMapper goodsMapper;
 
     @Override
     public List<OrderRecordVO> selectGdsOrds() {
@@ -39,8 +46,23 @@ public class OrderServiceImpl implements OrderService {
                                    List<UserGoods> userGoods,
                                    List<GoodsBean> goodsBeans,
                                    UserBean vipBean) {
-        //TODO 商品订单DAO调用
-        return false;
+        //TODO 捕获异常判断是否提交成功
+        //订单事务
+        odrMapper.insertOrder(order);
+        //订单详情事务
+        odrMapper.insertOrderDetails(orderDetails);
+
+        //如果是散客则不做以下事务
+        if (vipBean != UserBean.SANKE) {
+            //用户事务
+            userMapper.updateInfo(vipBean);
+            //用户商品
+            ugMapper.replaceUserGoods(userGoods);
+        }
+        //商品事务
+        goodsMapper.replaceGoodsList(goodsBeans);
+
+        return true;
     }
 
 
@@ -91,5 +113,15 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     public void setUgMapper(UsrGdsMapper ugMapper) {
         this.ugMapper = ugMapper;
+    }
+
+    @Autowired
+    public void setUserMapper(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
+
+    @Autowired
+    public void setGoodsMapper(GoodsMapper goodsMapper) {
+        this.goodsMapper = goodsMapper;
     }
 }

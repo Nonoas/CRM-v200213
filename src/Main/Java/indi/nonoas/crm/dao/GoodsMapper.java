@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author : Nonoas
@@ -68,5 +69,12 @@ public interface GoodsMapper {
      * @return 所有商品分类名称，可以为null
      */
     LinkedList<String> selectGoodsTypes();
+
+    /**
+     * 批量插入修改商品信息
+     *
+     * @return 影响的行数
+     */
+    long replaceGoodsList(@Param("goodsBeans") List<GoodsBean> goodsBeans);
 
 }

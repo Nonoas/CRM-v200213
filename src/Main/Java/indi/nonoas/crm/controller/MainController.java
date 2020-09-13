@@ -1,20 +1,15 @@
 package indi.nonoas.crm.controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import de.felixroske.jfxsupport.FXMLController;
-import indi.nonoas.crm.beans.LoginBean;
-import indi.nonoas.crm.common.ClientSession;
+import indi.nonoas.crm.app.StaffManagePane;
 import indi.nonoas.crm.app.consume.ConsumePane;
 import indi.nonoas.crm.app.goods.GoodsManagePane;
-import indi.nonoas.crm.app.StaffManagePane;
 import indi.nonoas.crm.app.vip.StatPane;
 import indi.nonoas.crm.app.vip.VipManagePane;
+import indi.nonoas.crm.beans.LoginBean;
+import indi.nonoas.crm.common.ClientSession;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.service.OrderService;
-import indi.nonoas.crm.service.impl.OrderServiceImpl;
-import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -28,6 +23,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 @FXMLController
 public class MainController implements Initializable {

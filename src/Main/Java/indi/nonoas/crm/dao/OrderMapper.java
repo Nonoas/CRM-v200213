@@ -1,9 +1,11 @@
 package indi.nonoas.crm.dao;
 
 import indi.nonoas.crm.beans.OrderBean;
+import indi.nonoas.crm.beans.OrderDetailBean;
 import indi.nonoas.crm.beans.vo.OrderRecordVO;
 import indi.nonoas.crm.beans.vo.UsrOdrRecordVO;
 import indi.nonoas.crm.service.UsrGdsOdrService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,6 +19,7 @@ public interface OrderMapper {
 
     /**
      * 查询所有商品订单
+     *
      * @return 商品订单列表
      */
     List<OrderRecordVO> selectGdsOrds();
@@ -33,5 +36,12 @@ public interface OrderMapper {
      */
     void delete365dAgo();
 
+    /**
+     * 批量插入订单详情
+     *
+     * @param orderDetails 订单详情集合
+     * @return 成功：true
+     */
+    boolean insertOrderDetails(@Param("orderDetails") List<OrderDetailBean> orderDetails);
 
 }
