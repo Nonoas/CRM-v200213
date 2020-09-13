@@ -6,8 +6,9 @@ import indi.nonoas.crm.app.pkg.PackageSingleSelectTable;
 import indi.nonoas.crm.app.vip.VipAddTab;
 import indi.nonoas.crm.app.vip.VipInfoTable;
 import indi.nonoas.crm.beans.*;
-import indi.nonoas.crm.beans.vo.GoodsEditTableData;
+import indi.nonoas.crm.beans.vo.GoodsEditTableVO;
 import indi.nonoas.crm.dao.my_orm_dao.*;
+import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.service.UserService;
 import indi.nonoas.crm.service.impl.OrderServiceImpl;
 import indi.nonoas.crm.utils.SpringUtil;
@@ -39,6 +40,11 @@ public class ConsumeController implements Initializable {
      * 会员服务
      */
     private final UserService userService = (UserService) SpringUtil.getBean("UserServiceImpl");
+
+    /**
+     * 商品服务
+     */
+    private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
 
     /**
      * 会员信息
@@ -118,10 +124,9 @@ public class ConsumeController implements Initializable {
 
     @FXML
     private void inquireVIPInfo() {
-        String str = "%" + tf_findInfo.getText().trim() + "%";
-        String str0 = cb_disType.getValue().equals("全部类型") ? "" : cb_disType.getValue();
-        String disType = str0 + "%";
-        if (str.equals("%%"))
+        String str = tf_findInfo.getText().trim();
+        String disType = cb_disType.getValue().equals("全部类型") ? "" : cb_disType.getValue();
+        if (str.equals(""))
             return;
         ArrayList<UserBean> listVipBeans = userService.selectByFiltrate(str, str, disType);
         if (listVipBeans != null) {
@@ -256,7 +261,7 @@ public class ConsumeController implements Initializable {
         if (isGoodsOrderOutOfStock())
             return;
 
-        if (gc_table.getItems().size() == 0) {
+        if (gc_table.getItems().isEmpty()) {
             new MyAlert(AlertType.INFORMATION, "订单内容为空！！").show();
             return;
         }
@@ -278,11 +283,11 @@ public class ConsumeController implements Initializable {
      * @return 超出库存返回true
      */
     private boolean isGoodsOrderOutOfStock() {
-        ObservableList<GoodsEditTableData> items = gc_table.getItems();
-        for (GoodsEditTableData data : items) {
+        ObservableList<GoodsEditTableVO> items = gc_table.getItems();
+        for (GoodsEditTableVO data : items) {
             String goodsID = data.getId();
             int costCount = data.getAmount();
-            GoodsBean goodsBean = GoodsDao.getInstance().selectById(goodsID);
+            GoodsBean goodsBean = goodsService.selectById(goodsID);
             int storeCount = (int) goodsBean.getQuantity();
             if (costCount > storeCount) {
                 MyAlert alert = new MyAlert(AlertType.WARNING,
@@ -318,9 +323,9 @@ public class ConsumeController implements Initializable {
      */
     private List<OrderDetailBean> generateGoodsOrderDetails() {
         List<OrderDetailBean> list = new ArrayList<>();
-        ObservableList<GoodsEditTableData> items = gc_table.getItems();
+        ObservableList<GoodsEditTableVO> items = gc_table.getItems();
         OrderDetailBean bean;
-        for (GoodsEditTableData data : items) {
+        for (GoodsEditTableVO data : items) {
             bean = new OrderDetailBean();
             bean.setOrderId(shp_orderNum.getText());
             bean.setProductId(data.getId());
@@ -460,9 +465,9 @@ public class ConsumeController implements Initializable {
      */
     private List<OrderDetailBean> generatePackageOrderDetails() {
         List<OrderDetailBean> list = new ArrayList<>();
-        ObservableList<GoodsEditTableData> pkgItems = pcTable.getItems();
+        ObservableList<GoodsEditTableVO> pkgItems = pcTable.getItems();
         OrderDetailBean bean;
-        for (GoodsEditTableData pkg : pkgItems) {
+        for (GoodsEditTableVO pkg : pkgItems) {
             bean = new OrderDetailBean();
             bean.setOrderId(tc_orderNum.getText());
             bean.setProductId(pkg.getId());
@@ -479,9 +484,9 @@ public class ConsumeController implements Initializable {
      */
     private boolean isPackageOrderOutOfStock() {
         PackageContentDao pcDao = PackageContentDao.getInstance();
-        ObservableList<GoodsEditTableData> pkgItems = pcTable.getItems();
+        ObservableList<GoodsEditTableVO> pkgItems = pcTable.getItems();
         //遍历订单内套餐列表
-        for (GoodsEditTableData data : pkgItems) {
+        for (GoodsEditTableVO data : pkgItems) {
             String pkgID = data.getId();
             int costPkgCount = data.getAmount();
             //查询套餐包含的商品
@@ -493,7 +498,7 @@ public class ConsumeController implements Initializable {
                 String goodsID = bean.getGoodsId();
                 System.out.println("商品ID" + goodsID);
                 int costCount = bean.getGoodsAmount() * costPkgCount;   //消耗的商品数量
-                GoodsBean goodsBean = GoodsDao.getInstance().selectById(goodsID);
+                GoodsBean goodsBean = goodsService.selectById(goodsID);
                 int storeCount = (int) goodsBean.getQuantity();     //库存商品数量
                 System.out.println("消耗：" + costCount + ",储存" + storeCount);
                 if (costCount > storeCount) {
@@ -598,9 +603,9 @@ public class ConsumeController implements Initializable {
      * @return 计次消费订单
      */
     private List<UserGoodsOrderBean> generateUserGoodsOrder() {
-        ObservableList<GoodsEditTableData> items = ccTable.getItems();
+        ObservableList<GoodsEditTableVO> items = ccTable.getItems();
         List<UserGoodsOrderBean> ugoBeans = new ArrayList<>(items.size());
-        for (GoodsEditTableData data : items) {
+        for (GoodsEditTableVO data : items) {
             UserGoodsOrderBean ugo = new UserGoodsOrderBean();
             ugo.setGoodsId(data.getId());
             ugo.setAmount(data.getAmount());
@@ -635,10 +640,10 @@ public class ConsumeController implements Initializable {
      */
     private boolean isContOrderOutOfStock() {
         String userID = vipBean.getId();
-        ObservableList<GoodsEditTableData> items = ccTable.getItems();
-        for (GoodsEditTableData data : items) {
+        ObservableList<GoodsEditTableVO> items = ccTable.getItems();
+        for (GoodsEditTableVO data : items) {
             UserGoods userGoods = UserGoodsDao.getInstance().selectByUserGoods(userID, data.getId());
-            GoodsBean goodsBean = GoodsDao.getInstance().selectById(userGoods.getGoodsId());
+            GoodsBean goodsBean = goodsService.selectById(userGoods.getGoodsId());
             int amountCost = data.getAmount();
             int amountRest = userGoods.getAmount();
             if (amountCost > amountRest) {

@@ -1,7 +1,7 @@
 package indi.nonoas.crm.service;
 
 import indi.nonoas.crm.beans.GoodsBean;
-import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -10,6 +10,7 @@ import java.util.LinkedList;
  * @author : Nonoas
  * @time : 2020-08-19 22:05
  */
+@Transactional
 public interface GoodsService{
 
     /**

@@ -46,10 +46,6 @@ public class OrderDao extends SqliteDao<OrderBean> {
         return INSTANCE;
     }
 
-    public List<OrderBean> selectAll() {
-        return select(SELECT_ALL);
-    }
-
     /**
      * 商品下单事务
      *

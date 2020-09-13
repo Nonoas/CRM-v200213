@@ -22,7 +22,7 @@
         select *
         from goods_info
         where (id like '%' || #{id} || '%' or name like '%' || #{name}) || '%'
-          and type like '%' || #{type} || '%'
+          and type like #{type} || '%'
     </select>
 
     <delete id="deleteByID" parameterType="string">

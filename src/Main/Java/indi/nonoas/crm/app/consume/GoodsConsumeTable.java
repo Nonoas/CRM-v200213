@@ -3,7 +3,7 @@ package indi.nonoas.crm.app.consume;
 import indi.nonoas.crm.beans.GoodsBean;
 import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
 import indi.nonoas.crm.view.table.GoodsEditTable;
-import indi.nonoas.crm.beans.vo.GoodsEditTableData;
+import indi.nonoas.crm.beans.vo.GoodsEditTableVO;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class GoodsConsumeTable extends GoodsEditTable<GoodsBean> {
 
-    private final ObservableList<GoodsEditTableData> obList = getItems();
+    private final ObservableList<GoodsEditTableVO> obList = getItems();
 
     public GoodsConsumeTable() {
         super();
@@ -26,7 +26,7 @@ public class GoodsConsumeTable extends GoodsEditTable<GoodsBean> {
         if (obList == null)
             return null;
         ArrayList<GoodsBean> goodsBeans = new ArrayList<>();
-        for (GoodsEditTableData d : obList) {
+        for (GoodsEditTableVO d : obList) {
             goodsBeans.add(dataToBean(d));
         }
         return goodsBeans;
@@ -35,11 +35,11 @@ public class GoodsConsumeTable extends GoodsEditTable<GoodsBean> {
     @Override
     public void addBean(GoodsBean bean) {
         String id = bean.getId();
-        for (GoodsEditTableData d : obList) {
+        for (GoodsEditTableVO d : obList) {
             if (d.getId().equals(id))
                 return;
         }
-        GoodsEditTableData data = beanToData(bean);
+        GoodsEditTableVO data = beanToData(bean);
         obList.add(data);
         refresh();
 
@@ -47,14 +47,14 @@ public class GoodsConsumeTable extends GoodsEditTable<GoodsBean> {
     }
 
     @Override
-    protected GoodsBean dataToBean(GoodsEditTableData data) {
+    protected GoodsBean dataToBean(GoodsEditTableVO data) {
         String id = data.getId();
         return GoodsDao.getInstance().selectById(id);
     }
 
     @Override
-    protected GoodsEditTableData beanToData(GoodsBean bean) {
-        GoodsEditTableData data = new GoodsEditTableData();
+    protected GoodsEditTableVO beanToData(GoodsBean bean) {
+        GoodsEditTableVO data = new GoodsEditTableVO();
         data.setId(bean.getId());
         data.setName(bean.getName());
         data.setPrice(bean.getSellPrice());
@@ -69,7 +69,7 @@ public class GoodsConsumeTable extends GoodsEditTable<GoodsBean> {
      */
     public double getSumPrice() {
         double price = 0;
-        for (GoodsEditTableData d : obList) {
+        for (GoodsEditTableVO d : obList) {
             price += d.getSum_price();
         }
         return price;

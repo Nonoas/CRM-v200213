@@ -1,7 +1,9 @@
 package indi.nonoas.crm.service.impl;
 
+import indi.nonoas.crm.beans.*;
 import indi.nonoas.crm.beans.vo.OrderRecordVO;
 import indi.nonoas.crm.dao.OrderMapper;
+import indi.nonoas.crm.dao.UsrGdsMapper;
 import indi.nonoas.crm.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +19,9 @@ import java.util.List;
 @Service("OrderServiceImpl")
 public class OrderServiceImpl implements OrderService {
 
-    @Autowired
     private OrderMapper odrMapper;
+
+    private UsrGdsMapper ugMapper;
 
     @Override
     public List<OrderRecordVO> selectGdsOrds() {
@@ -28,6 +31,16 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void delete365dAgo() {
         odrMapper.delete365dAgo();
+    }
+
+    @Override
+    public boolean placeGoodsOrder(OrderBean order,
+                                   List<OrderDetailBean> orderDetails,
+                                   List<UserGoods> userGoods,
+                                   List<GoodsBean> goodsBeans,
+                                   UserBean vipBean) {
+        //TODO 商品订单DAO调用
+        return false;
     }
 
 
@@ -66,9 +79,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
+    //===========================================================================
+    //                            setter注入
+    //===========================================================================
+
     @Autowired
     public void setOdrMapper(OrderMapper odrMapper) {
         this.odrMapper = odrMapper;
     }
 
+    @Autowired
+    public void setUgMapper(UsrGdsMapper ugMapper) {
+        this.ugMapper = ugMapper;
+    }
 }

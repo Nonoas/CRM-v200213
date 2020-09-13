@@ -37,7 +37,9 @@ public interface GoodsMapper {
      * @param type 商品种类
      * @return GoodsBean的ArrayList集合, 可以为null
      */
-    ArrayList<GoodsBean> selectByFiltrate(@Param("id") String id, @Param("name") String name, @Param("type") String type);
+    ArrayList<GoodsBean> selectByFiltrate(@Param("id") String id,
+                                          @Param("name") String name,
+                                          @Param("type") String type);
 
     /**
      * 删除一条商品信息
@@ -62,8 +64,9 @@ public interface GoodsMapper {
 
     /**
      * 查询所有商品分类名称
+     *
      * @return 所有商品分类名称，可以为null
      */
-     LinkedList<String> selectGoodsTypes();
+    LinkedList<String> selectGoodsTypes();
 
 }

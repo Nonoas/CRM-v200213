@@ -6,6 +6,8 @@ import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
 import indi.nonoas.crm.dao.my_orm_dao.OrderDao;
 import indi.nonoas.crm.dao.my_orm_dao.UserGoodsDao;
 import indi.nonoas.crm.common.PayMode;
+import indi.nonoas.crm.service.GoodsService;
+import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,6 +31,8 @@ public class ConsumeDialogController implements Initializable {
     private Stage stage;
 
     private boolean hasSubmit = false;
+
+    private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
 
     /**
      * 消费者
@@ -193,7 +197,7 @@ public class ConsumeDialogController implements Initializable {
             String gID = od.getProductId();
 
             //如果商品为服务类，则不添加到用户的商品库存中
-            GoodsBean bean = GoodsDao.getInstance().selectById(gID);
+            GoodsBean bean = goodsService.selectById(gID);
             if (!bean.getType().equals("服务类"))
                 break;
 

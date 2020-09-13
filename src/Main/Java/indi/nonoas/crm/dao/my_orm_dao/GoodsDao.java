@@ -1,7 +1,5 @@
 package indi.nonoas.crm.dao.my_orm_dao;
 
-import java.util.ArrayList;
-
 import indi.nonoas.crm.beans.GoodsBean;
 
 /**
@@ -11,11 +9,6 @@ import indi.nonoas.crm.beans.GoodsBean;
  */
 @Deprecated
 public class GoodsDao extends SqliteDao<GoodsBean> {
-
-    private static final String SELECT_ALL = "select * from goods_info";
-
-    private static final String SELECT_BY_FILTRATE = "select * from goods_info " +
-            "where (id like #{id} or name like #{name}) and type like #{type}";
 
     private static final String SELECT_BY_ID = "select * from goods_info where id=#{id}";
 
@@ -51,30 +44,6 @@ public class GoodsDao extends SqliteDao<GoodsBean> {
         return selectOne(SELECT_BY_ID, id);
     }
 
-    /**
-     * 查询所有的商品信息
-     *
-     * @return GoodsBean的ArrayList集合, 可为null
-     */
-    public ArrayList<GoodsBean> selectAll() {
-        ArrayList<GoodsBean> list;
-        list = (ArrayList<GoodsBean>) select(SELECT_ALL);
-        return list;
-    }
-
-    /**
-     * 按条件筛选模糊查询
-     *
-     * @param id   商品编号
-     * @param name 商品名称
-     * @param type 商品种类
-     * @return GoodsBean的ArrayList集合, 可以为null
-     */
-    public ArrayList<GoodsBean> selectByFiltrate(String id, String name, String type) {
-        ArrayList<GoodsBean> list;
-        list = (ArrayList<GoodsBean>) select(SELECT_BY_FILTRATE, id, name, type);
-        return list;
-    }
 
     /**
      * 删除一条商品信息

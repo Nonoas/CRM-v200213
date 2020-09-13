@@ -4,7 +4,7 @@ import indi.nonoas.crm.beans.GoodsBean;
 import indi.nonoas.crm.beans.UserGoods;
 import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
 import indi.nonoas.crm.view.table.GoodsEditTable;
-import indi.nonoas.crm.beans.vo.GoodsEditTableData;
+import indi.nonoas.crm.beans.vo.GoodsEditTableVO;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class CountConsumeTable extends GoodsEditTable<UserGoods> {
 
-    private final ObservableList<GoodsEditTableData> obList = getItems();
+    private final ObservableList<GoodsEditTableVO> obList = getItems();
 
     public CountConsumeTable() {
         item_total.setVisible(false);
@@ -34,7 +34,7 @@ public class CountConsumeTable extends GoodsEditTable<UserGoods> {
     @Override
     public void addBean(UserGoods bean) {
 
-        for (GoodsEditTableData data : obList) {
+        for (GoodsEditTableVO data : obList) {
             if (data.getId().equals(bean.getGoodsId()))
                 return;
         }
@@ -44,13 +44,13 @@ public class CountConsumeTable extends GoodsEditTable<UserGoods> {
     }
 
     @Override
-    protected UserGoods dataToBean(GoodsEditTableData data) {
+    protected UserGoods dataToBean(GoodsEditTableVO data) {
         return null;
     }
 
     @Override
-    protected GoodsEditTableData beanToData(UserGoods bean) {
-        GoodsEditTableData data = new GoodsEditTableData();
+    protected GoodsEditTableVO beanToData(UserGoods bean) {
+        GoodsEditTableVO data = new GoodsEditTableVO();
         GoodsBean goodsBean = GoodsDao.getInstance().selectById(bean.getGoodsId());
         data.setId(bean.getGoodsId());
         data.setName(goodsBean.getName());

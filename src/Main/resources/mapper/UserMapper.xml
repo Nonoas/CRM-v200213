@@ -30,8 +30,8 @@
     <select id="selectByFiltrate" resultMap="UserBean">
         select *
         from user_info
-        where (id like #{id} or name like #{name})
-          and card_level like #{card_level}
+        where (id like '%' || #{id} || '%' or name like #{name})
+          and card_level like #{card_level} || '%'
     </select>
 
     <select id="selectByDateFiltrate" resultMap="UserBean">

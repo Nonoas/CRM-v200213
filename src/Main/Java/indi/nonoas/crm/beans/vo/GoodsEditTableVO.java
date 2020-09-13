@@ -1,11 +1,9 @@
 package indi.nonoas.crm.beans.vo;
 
-import java.beans.PropertyChangeSupport;
-
 /**
  * 数据模型类，用于和PackageContentBean相互转换
  */
-public class GoodsEditTableData {
+public class GoodsEditTableVO {
 
     private String id;
     private String name;
@@ -13,9 +11,7 @@ public class GoodsEditTableData {
     private int amount;
     private double sum_price;
 
-    private final PropertyChangeSupport psc = new PropertyChangeSupport(this);
-
-    public GoodsEditTableData() {
+    public GoodsEditTableVO() {
     }
 
     public String getId() {
