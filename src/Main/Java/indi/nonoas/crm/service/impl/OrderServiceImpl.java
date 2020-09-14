@@ -10,6 +10,7 @@ import indi.nonoas.crm.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -40,12 +41,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean placeGoodsOrder(OrderBean order,
-                                   List<OrderDetailBean> orderDetails,
-                                   List<UserGoods> userGoods,
-                                   List<GoodsBean> goodsBeans,
-                                   UserBean vipBean) {
-        //TODO 捕获异常判断是否提交成功
+    public void placeGoodsOrder(OrderBean order,
+                                List<OrderDetailBean> orderDetails,
+                                List<UserGoods> userGoods,
+                                List<GoodsBean> goodsBeans,
+                                UserBean vipBean) {
         //订单事务
         odrMapper.insertOrder(order);
         //订单详情事务
@@ -59,10 +59,7 @@ public class OrderServiceImpl implements OrderService {
             ugMapper.replaceUserGoods(userGoods);
         }
         //商品事务
-        //TODO 数量有问题
         goodsMapper.updateGoodsAmount(goodsBeans);
-
-        return true;
     }
 
 

@@ -53,41 +53,6 @@ public class OrderDao extends SqliteDao<OrderBean> {
      * @param goodsBeans   商品 列表
      * @param vipBean      用户
      */
-    public boolean placeGoodsOrder(OrderBean order, List<OrderDetailBean> orderDetails, List<UserGoods> userGoods, List<GoodsBean> goodsBeans, UserBean vipBean) {
-
-        List<AbstractTransaction> transactions = new ArrayList<>();
-
-        //如果是散客则不做以下事务
-        if (vipBean != UserBean.SANKE) {
-            //用户事务
-            transactions.add(new BeanTransaction(REDUCE_USER_BALANCE, vipBean));
-            //用户-商品事务
-            for (UserGoods ug : userGoods) {
-                transactions.add(new BeanTransaction(REPLACE_USER_GOODS, ug));
-            }
-        }
-        //订单事务
-        transactions.add(new BeanTransaction(INSERT_ORDER, order));
-        //订单详情事务
-        for (OrderDetailBean orderDetail : orderDetails) {
-            transactions.add(new BeanTransaction(INSERT_ORDER_DETAIL, orderDetail));
-        }
-        //商品事务
-        for (GoodsBean g : goodsBeans) {
-            transactions.add(new BeanTransaction(REDUCE_GOODS, g));
-        }
-        return executeTransaction(transactions);
-    }
-
-    /**
-     * 商品下单事务
-     *
-     * @param order        订单
-     * @param orderDetails 订单详情
-     * @param userGoods    需要更新的 用户-商品 列表
-     * @param goodsBeans   商品 列表
-     * @param vipBean      用户
-     */
     public boolean placePackageOrder(OrderBean order, List<OrderDetailBean> orderDetails, List<UserGoods> userGoods, List<GoodsBean> goodsBeans, UserBean vipBean) {
 
         List<AbstractTransaction> transactions = new ArrayList<>();

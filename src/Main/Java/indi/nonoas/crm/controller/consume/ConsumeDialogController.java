@@ -118,9 +118,7 @@ public class ConsumeDialogController implements Initializable {
             stage.close();
             return;
         }
-
         order.setTransactor(tf_transactor.getText());   //获取受理人
-
         //设置即将传入数据库的 用户-商品
         List<UserGoods> userGoods = userGoodsData();
         //设置即将减少数量的 商品
@@ -130,16 +128,19 @@ public class ConsumeDialogController implements Initializable {
         //设置最终订单信息
         OrderBean orderBean = orderData();
 
-//        OrderDao orderDao = OrderDao.getInstance();
-
-        //FIXME 使用springboot事务进行处理
-//        hasSubmit = orderDao.placeGoodsOrder(orderBean, orderDetails, userGoods, goodsBeans, vipBean);
-        hasSubmit = orderService.placeGoodsOrder(orderBean, orderDetails, userGoods, goodsBeans, vipBean);
-
+        String msg = null;
+        try {
+            orderService.placeGoodsOrder(orderBean, orderDetails, userGoods, goodsBeans, vipBean);
+            hasSubmit = true;
+        } catch (Exception e) {
+            msg = e.getMessage();
+            e.printStackTrace();
+            hasSubmit = false;
+        }
         if (hasSubmit) {
             new MyAlert(Alert.AlertType.INFORMATION, "结算成功！").show();
         } else {
-            new MyAlert(Alert.AlertType.INFORMATION, "结算失败！").show();
+            new MyAlert(Alert.AlertType.ERROR, "结算失败！\n错误信息：" + msg).show();
         }
         stage.close();
     }
@@ -231,7 +232,7 @@ public class ConsumeDialogController implements Initializable {
     private List<GoodsBean> goodsData() {
         List<GoodsBean> goodsBeans = new ArrayList<>(orderDetails.size());
         for (OrderDetailBean detail : orderDetails) {
-            GoodsBean bean = GoodsDao.getInstance().selectById(detail.getProductId());
+            GoodsBean bean = goodsService.selectById(detail.getProductId());
             bean.setQuantity(bean.getQuantity() - detail.getProductAmount());     //从数据库中减去购买的数量
             goodsBeans.add(bean);
         }

@@ -32,8 +32,8 @@
     </delete>
 
     <insert id="insertInfo" parameterMap="GoodsBean">
-        insert into goods_info(id, name, sell_price, purchase_price, quantity, min_discount, deduction, deduction_rate,
-                               base_unit, type, photo)
+        insert into goods_info(id, name, sell_price, purchase_price, quantity, min_discount, deduction,
+                               deduction_rate, base_unit, type, photo)
         values (#{id}, #{name}, #{sell_price}, #{purchase_price}, #{quantity}, #{min_discount}, #{deduction},
                 #{deduction_rate}, #{base_unit}, #{type}, #{photo})
     </insert>
@@ -57,7 +57,7 @@
         update goods_info
         set quantity=case id
         <foreach collection="goodsBeans" item="item" separator=" ">
-            when #{item.id} then #{item.quantity}
+            when #{item.id} then #{item.quantity_l}
         </foreach>
         end
         where id in
@@ -68,6 +68,6 @@
 
     <select id="selectGoodsTypes" resultType="string">
         select name
-        from goods_type;
+        from goods_type
     </select>
 </mapper>
