@@ -75,6 +75,6 @@ public interface GoodsMapper {
      *
      * @return 影响的行数
      */
-    long replaceGoodsList(@Param("goodsBeans") List<GoodsBean> goodsBeans);
+    long updateGoodsAmount(@Param("goodsBeans") List<GoodsBean> goodsBeans);
 
 }

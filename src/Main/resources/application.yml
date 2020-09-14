@@ -17,5 +17,4 @@ logging:
       nonoas:
         crm:
           dao: error
-          controller: error
 

@@ -46,9 +46,9 @@
         insert into user_info(id, name, sex, birthday, card_level, balance, cumulative,
                               address, integral, telephone, idcard, career, email, other, admission_date, photo,
                               discount)
-        values (#{id}, #{name}, #{sex}, #{birthday}, #{card_level}, #{balance},
+        values (#{id}, #{name}, #{sex}, #{birthday}, #{cardLevel}, #{balance},
                 #{cumulative}, #{address}, #{integral}, #{telephone}, #{idcard},
-                #{career}, #{email}, #{other}, #{admission_date}, #{photo}, #{discount})
+                #{career}, #{email}, #{other}, #{admissionDate}, #{photo}, #{discount})
     </insert>
 
     <delete id="deleteByID" parameterType="string">
@@ -62,7 +62,7 @@
         set name=#{name},
             sex=#{sex},
             birthday=#{birthday},
-            card_level=#{card_level},
+            card_level=#{cardLevel},
             balance=#{balance},
             discount=#{discount},
             cumulative=#{cumulative},

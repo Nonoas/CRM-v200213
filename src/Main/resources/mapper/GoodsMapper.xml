@@ -53,11 +53,16 @@
         where id = #{id}
     </update>
 
-    <update id="replaceGoodsList" parameterType="list">
-        replace into user_goods(user_id, goods_id, amount)
-        values
-        <foreach collection="goodsBeans" item="goods" separator=",">
-            (#{goods.user_id}, #{goods.goods_id}, #{goods.amount})
+    <update id="updateGoodsAmount" parameterType="list">
+        update goods_info
+        set quantity=case id
+        <foreach collection="goodsBeans" item="item" separator=" ">
+            when #{item.id} then #{item.quantity}
+        </foreach>
+        end
+        where id in
+        <foreach collection="goodsBeans" item="item" separator="," open="(" close=")">
+            #{item.id,jdbcType=VARCHAR}
         </foreach>
     </update>
 

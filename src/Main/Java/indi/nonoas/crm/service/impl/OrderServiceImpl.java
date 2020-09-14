@@ -9,7 +9,6 @@ import indi.nonoas.crm.dao.UsrGdsMapper;
 import indi.nonoas.crm.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import per.nonoas.orm.BeanTransaction;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -60,7 +59,8 @@ public class OrderServiceImpl implements OrderService {
             ugMapper.replaceUserGoods(userGoods);
         }
         //商品事务
-        goodsMapper.replaceGoodsList(goodsBeans);
+        //TODO 数量有问题
+        goodsMapper.updateGoodsAmount(goodsBeans);
 
         return true;
     }
