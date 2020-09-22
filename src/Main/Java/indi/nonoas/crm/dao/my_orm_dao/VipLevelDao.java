@@ -1,10 +1,9 @@
 package indi.nonoas.crm.dao.my_orm_dao;
 
+import indi.nonoas.crm.beans.VipLevelBean;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
-
-import indi.nonoas.crm.beans.VipLevelBean;
-import indi.nonoas.crm.dao.my_orm_dao.SqliteDao;
 
 /**
  * 会员等级数据库操作类
@@ -24,7 +23,7 @@ public class VipLevelDao extends SqliteDao<VipLevelBean> {
         ArrayList<VipLevelBean> a_listBean = (ArrayList<VipLevelBean>) select(SELECT_ALL_NAMES);
         if (a_listBean == null)
             return null;
-        LinkedList<String> l_listName = new LinkedList<String>();
+        LinkedList<String> l_listName = new LinkedList<>();
         for (VipLevelBean bean : a_listBean) {
             l_listName.add(bean.getName());
         }
