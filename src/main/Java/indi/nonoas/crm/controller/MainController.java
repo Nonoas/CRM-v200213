@@ -14,12 +14,16 @@ import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +78,7 @@ public class MainController implements Initializable {
         ImageView img_backups = new ImageView(ImageSrc.BACKUPS_PATH); // 换班图标
         ImageView img_setting = new ImageView(ImageSrc.SETTING_PATH); // 设置图标
         ImageView img_exit = new ImageView(ImageSrc.EXIT_PATH); // 退出图标
+
         img_shift.setFitHeight(IMG_SIZE);
         img_shift.setFitWidth(IMG_SIZE);
         img_backups.setFitHeight(IMG_SIZE);
@@ -82,6 +87,7 @@ public class MainController implements Initializable {
         img_setting.setFitWidth(IMG_SIZE);
         img_exit.setFitHeight(IMG_SIZE - 1);
         img_exit.setFitWidth(IMG_SIZE - 1);
+
         btn_shift.setGraphic(img_shift);
         btn_backups.setGraphic(img_backups);
         btn_setting.setGraphic(img_setting);

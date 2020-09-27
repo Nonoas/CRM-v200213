@@ -56,7 +56,6 @@ public interface UserService {
      */
     ArrayList<UserBean> selectByDateFiltrate(String id, String name, String level, String dateFrom, String dateTo);
 
-
     /**
      * 插入会员信息
      *

@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService {
      *
      * @return 36进制会员卡号
      */
+    @Override
     public String generateVipID() {
         String prefix;
         BigInteger bigInteger;

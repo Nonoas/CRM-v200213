@@ -4,6 +4,8 @@ package indi.nonoas.crm.controller.consume;
 import indi.nonoas.crm.beans.*;
 import indi.nonoas.crm.dao.my_orm_dao.*;
 import indi.nonoas.crm.common.PayMode;
+import indi.nonoas.crm.service.GoodsService;
+import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,6 +30,8 @@ public class PkgCnsDialogController implements Initializable {
     private Stage stage;
 
     private boolean hasSubmit = false;
+
+    private GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
 
     /**
      * 消费者
@@ -231,7 +235,8 @@ public class PkgCnsDialogController implements Initializable {
             List<PackageContentBean> pkgContBeans = PackageContentDao.getInstance().selectById(detail.getProductId());
             //遍历套餐内容
             for (PackageContentBean pkgContBean : pkgContBeans) {
-                GoodsBean bean = GoodsDao.getInstance().selectById(pkgContBean.getGoodsId());
+                GoodsBean bean = goodsService.selectById(pkgContBean.getGoodsId());
+                //商品数量 -> 库存数量 - 套餐数量 * 套餐内商品数量
                 bean.setQuantity(bean.getQuantity() - detail.getProductAmount() * pkgContBean.getGoodsAmount());     //从数据库中减去购买的数量
                 goodsBeans.add(bean);
             }

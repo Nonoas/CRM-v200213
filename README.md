@@ -16,6 +16,14 @@
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200818150254854.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1NTExNQ==,size_16,color_FFFFFF,t_70#pic_center)
 
+## 会员管理
+
+![image-20200927165852160](https://gitee.com/nonoas/picture-bed/raw/master/img/20200927170030.png)
+
+## 商品管理
+
+![image-20200927170128464](https://gitee.com/nonoas/picture-bed/raw/master/img/20200927170128.png)
+
 ## 提示
 
 软件需使用maven打包，打包插件如下

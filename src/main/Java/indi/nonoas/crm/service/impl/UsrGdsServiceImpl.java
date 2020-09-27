@@ -22,6 +22,9 @@ public class UsrGdsServiceImpl implements UsrGdsService {
         return usrGdsMapper.selectByUser(userID);
     }
 
+    //===========================================================================
+    //                            setter×¢Èë
+    //===========================================================================
     @Autowired
     public void setUsrGdsMapper(UsrGdsMapper usrGdsMapper) {
         this.usrGdsMapper = usrGdsMapper;

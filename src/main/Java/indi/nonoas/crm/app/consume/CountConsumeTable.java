@@ -33,12 +33,10 @@ public class CountConsumeTable extends GoodsEditTable<UserGoods> {
 
     @Override
     public void addBean(UserGoods bean) {
-
         for (GoodsEditTableVO data : obList) {
             if (data.getId().equals(bean.getGoodsId()))
                 return;
         }
-
         obList.add(beanToData(bean));
         refresh();
     }

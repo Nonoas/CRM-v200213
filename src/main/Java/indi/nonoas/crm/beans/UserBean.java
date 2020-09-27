@@ -230,14 +230,14 @@ public class UserBean implements Serializable {
     /**
      * 散客常量
      */
-    public final static UserBean SANKE = new UserBean();
-
-    static {
-        SANKE.setId("0000");
-        SANKE.setName("散客");
-        SANKE.setSex("保密");
-        SANKE.setDiscount(1);
-        SANKE.setCardLevel("无");
-    }
+    public final static UserBean SANKE = new UserBean() {
+        {
+            setId("0000");
+            setName("散客");
+            setSex("保密");
+            setDiscount(1);
+            setCardLevel("无");
+        }
+    };
 
 }
