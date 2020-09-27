@@ -12,7 +12,6 @@ public class OrderDetailDao extends SqliteDao<OrderDetailBean> {
 
     private static final String SELECT_BY_ORDER = "select * from order_details where order_id=#{order_id}";
 
-
     /**
      * µ¥Àý
      */

@@ -2,10 +2,8 @@ package indi.nonoas.crm.controller.consume;
 
 
 import indi.nonoas.crm.beans.*;
-import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
-import indi.nonoas.crm.dao.my_orm_dao.OrderDao;
-import indi.nonoas.crm.dao.my_orm_dao.UserGoodsDao;
 import indi.nonoas.crm.common.PayMode;
+import indi.nonoas.crm.dao.my_orm_dao.UserGoodsDao;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.service.OrderService;
 import indi.nonoas.crm.utils.SpringUtil;
@@ -22,6 +20,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 /**
  * @author : Nonoas
@@ -119,13 +118,14 @@ public class ConsumeDialogController implements Initializable {
             return;
         }
         order.setTransactor(tf_transactor.getText());   //获取受理人
-        //设置即将传入数据库的 用户-商品
+
+        //即将传入数据库的 用户-商品
         List<UserGoods> userGoods = userGoodsData();
-        //设置即将减少数量的 商品
+        //即将减少数量的 商品
         List<GoodsBean> goodsBeans = goodsData();
-        //设置需要更新的消费者信息
+        //需要更新的消费者信息
         UserBean vipBean = vipData();
-        //设置最终订单信息
+        //最终订单信息
         OrderBean orderBean = orderData();
 
         String msg = null;
@@ -137,6 +137,7 @@ public class ConsumeDialogController implements Initializable {
             e.printStackTrace();
             hasSubmit = false;
         }
+
         if (hasSubmit) {
             new MyAlert(Alert.AlertType.INFORMATION, "结算成功！").show();
         } else {
@@ -230,13 +231,17 @@ public class ConsumeDialogController implements Initializable {
      * @return 商品 bean的集合
      */
     private List<GoodsBean> goodsData() {
-        List<GoodsBean> goodsBeans = new ArrayList<>(orderDetails.size());
-        for (OrderDetailBean detail : orderDetails) {
-            GoodsBean bean = goodsService.selectById(detail.getProductId());
-            bean.setQuantity(bean.getQuantity() - detail.getProductAmount());     //从数据库中减去购买的数量
-            goodsBeans.add(bean);
-        }
-        return goodsBeans;
+
+        //订单详情列表的-流对象
+        return orderDetails.stream()
+                .map(odrDtlBean -> {
+                    GoodsBean bean = goodsService.selectById(odrDtlBean.getProductId());
+                    //从数据库中减去购买的数量
+                    bean.setQuantity(bean.getQuantity() - odrDtlBean.getProductAmount());
+                    return bean;
+                })
+                .collect(Collectors.toList());
+
     }
 
     /**

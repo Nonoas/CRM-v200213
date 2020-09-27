@@ -7,6 +7,7 @@ import indi.nonoas.crm.beans.vo.GoodsEditTableVO;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * @author : Nonoas
@@ -25,11 +26,10 @@ public class GoodsConsumeTable extends GoodsEditTable<GoodsBean> {
     public ArrayList<GoodsBean> getAllBeans() {
         if (obList == null)
             return null;
-        ArrayList<GoodsBean> goodsBeans = new ArrayList<>();
-        for (GoodsEditTableVO d : obList) {
-            goodsBeans.add(dataToBean(d));
-        }
-        return goodsBeans;
+        return (ArrayList<GoodsBean>) obList.stream()
+                .map(this::dataToBean)
+                .collect(Collectors.toList());
+
     }
 
     @Override

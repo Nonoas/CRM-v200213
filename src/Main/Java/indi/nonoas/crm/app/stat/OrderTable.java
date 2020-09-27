@@ -4,7 +4,6 @@ import indi.nonoas.crm.beans.GoodsBean;
 import indi.nonoas.crm.beans.OrderDetailBean;
 import indi.nonoas.crm.beans.vo.OrderRecordVO;
 import indi.nonoas.crm.dao.my_orm_dao.OrderDetailDao;
-import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.service.OrderService;
 import indi.nonoas.crm.utils.SpringUtil;
