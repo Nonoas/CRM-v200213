@@ -19,7 +19,6 @@ import java.util.List;
  * @time : 2020-08-18 15:54
  */
 @StageProperty(title = "∂©µ•Ω·À„")
-@CSS("css/application.css")
 @FXML("/fxml/package_consume_dialog.fxml")
 public class PackageConsumeDialog extends ControllableStage {
 

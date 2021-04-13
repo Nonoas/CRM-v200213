@@ -20,7 +20,6 @@ import java.util.List;
  */
 @StageProperty(title = "∂©µ•Ω·À„")
 @FXML("/fxml/consume_dialog.fxml")
-@CSS("css/application.css")
 public class ConsumeDialog extends ControllableStage {
 
     private final ConsumeDialogController controller;

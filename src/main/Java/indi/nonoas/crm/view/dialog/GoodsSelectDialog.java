@@ -51,7 +51,6 @@ public class GoodsSelectDialog extends Dialog<GoodsBean> {
      */
     private void setStyle(){
         Scene scene=getDialogPane().getScene();
-        scene.getStylesheets().add("css/application.css");
     }
 
 }

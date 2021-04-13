@@ -27,7 +27,6 @@ public class StatController implements Initializable {
         dialog.setTitle("商品订单记录");
         dialog.setResizable(true);
         DialogPane pane = dialog.getDialogPane();
-        pane.getStylesheets().add("css/application.css");
         Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
         stage.getIcons().add(new Image(ImageSrc.lOGO_PATH));
         pane.getButtonTypes().add(ButtonType.OK);
@@ -41,7 +40,6 @@ public class StatController implements Initializable {
         dialog.setTitle("用户库存消费记录");
         dialog.setResizable(true);
         DialogPane pane = dialog.getDialogPane();
-        pane.getStylesheets().add("css/application.css");
         Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
         stage.getIcons().add(new Image(ImageSrc.lOGO_PATH));
         pane.getButtonTypes().add(ButtonType.OK);
