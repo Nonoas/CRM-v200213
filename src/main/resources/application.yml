@@ -13,8 +13,6 @@ mybatis-plus:
 
 logging:
   level:
-    indi:
-      nonoas:
-        crm:
-          dao: error
+    indi.nonoas.crm:
+      dao: error
 
