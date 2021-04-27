@@ -5,8 +5,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import indi.nonoas.crm.pojo.GoodsBean;
-import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
 import indi.nonoas.crm.config.ImageSrc;
+import indi.nonoas.crm.service.GoodsService;
+import indi.nonoas.crm.utils.SpringUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -24,7 +25,7 @@ public class GoodsModifyController implements Initializable {
 
     private GoodsBean goodsBean = new GoodsBean();
 
-    private GoodsDao goodsDao = GoodsDao.getInstance();
+    private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
 
     /**
      * 会员照片绝对路径
@@ -98,7 +99,7 @@ public class GoodsModifyController implements Initializable {
         goodsBean.setDeductionRate(commissionRate);
         goodsBean.setDeduction(commission);
 
-        goodsDao.update(goodsBean);
+        goodsService.update(goodsBean);
 
         if (chc_isClose.isSelected()) { // 如果选择了提交后关闭，则关闭当前tab
             cancelInfo();

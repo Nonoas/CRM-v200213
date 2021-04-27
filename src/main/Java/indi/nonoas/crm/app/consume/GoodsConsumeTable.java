@@ -1,7 +1,8 @@
 package indi.nonoas.crm.app.consume;
 
 import indi.nonoas.crm.pojo.GoodsBean;
-import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
+import indi.nonoas.crm.service.GoodsService;
+import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.table.GoodsEditTable;
 import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
 import javafx.collections.ObservableList;
@@ -16,6 +17,8 @@ import java.util.stream.Collectors;
 public class GoodsConsumeTable extends GoodsEditTable<GoodsBean> {
 
     private final ObservableList<GoodsEditTableVO> obList = getItems();
+
+    private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
 
     public GoodsConsumeTable() {
         super();
@@ -49,7 +52,7 @@ public class GoodsConsumeTable extends GoodsEditTable<GoodsBean> {
     @Override
     protected GoodsBean dataToBean(GoodsEditTableVO data) {
         String id = data.getId();
-        return GoodsDao.getInstance().selectById(id);
+        return goodsService.selectById(id);
     }
 
     @Override

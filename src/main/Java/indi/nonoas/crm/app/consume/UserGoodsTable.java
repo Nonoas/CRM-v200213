@@ -4,7 +4,7 @@ import indi.nonoas.crm.pojo.GoodsBean;
 import indi.nonoas.crm.pojo.UserGoods;
 import indi.nonoas.crm.pojo.UserBean;
 import indi.nonoas.crm.pojo.vo.UserGoodsVO;
-import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
+import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.service.UsrGdsService;
 import indi.nonoas.crm.utils.SpringUtil;
 import javafx.collections.FXCollections;
@@ -26,6 +26,7 @@ import java.util.List;
 public class UserGoodsTable extends TableView<UserGoodsVO> {
 
     private final UsrGdsService usrGdsService = (UsrGdsService) SpringUtil.getBean("UsrGdsServiceImpl");
+    private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
     private final ObservableList<UserGoodsVO> obList = FXCollections.observableArrayList();
     private final ObservableList<TableColumn<UserGoodsVO, ?>> columns = getColumns();
     private UserBean vipBean;
@@ -98,7 +99,7 @@ public class UserGoodsTable extends TableView<UserGoodsVO> {
      */
     private UserGoodsVO beanToVO(UserGoods bean) {
         if (bean == null) return null;
-        GoodsBean goodsBean = GoodsDao.getInstance().selectById(bean.getGoodsId());
+        GoodsBean goodsBean = goodsService.selectById(bean.getGoodsId());
         UserGoodsVO vo = new UserGoodsVO();
         vo.setId(goodsBean.getId());
         vo.setName(goodsBean.getName());

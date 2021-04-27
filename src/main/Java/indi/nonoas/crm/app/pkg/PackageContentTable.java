@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 import indi.nonoas.crm.pojo.GoodsBean;
 import indi.nonoas.crm.pojo.PackageContentBean;
-import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
 import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
+import indi.nonoas.crm.service.GoodsService;
+import indi.nonoas.crm.utils.SpringUtil;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -33,6 +34,8 @@ public class PackageContentTable extends TableView<PackageContentBean> {
 
     private final TableColumn<PackageContentBean, String> item_total = new TableColumn<>("╨б╝╞");
 
+    private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
+
     public PackageContentTable() {
         initColumns();
         setItems(obList);
@@ -49,27 +52,27 @@ public class PackageContentTable extends TableView<PackageContentBean> {
         item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getGoodsId()));
         item_name.setCellValueFactory(param -> {
             String goodsID = param.getValue().getGoodsId();
-            GoodsBean goodsBean = GoodsDao.getInstance().selectById(goodsID);
+            GoodsBean goodsBean = goodsService.selectById(goodsID);
             return new SimpleStringProperty(goodsBean.getName());
         });
-		item_money_cost.setCellValueFactory(param -> {
+        item_money_cost.setCellValueFactory(param -> {
             String goodsID = param.getValue().getGoodsId();
-            GoodsBean goodsBean = GoodsDao.getInstance().selectById(goodsID);
-			double numMoney = goodsBean.getSellPrice();
-			String show = String.format("гд%.2f", numMoney);
-			return new SimpleStringProperty(show);
-		});
-
-		item_amount.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getGoodsAmount()));
-
-		item_total.setCellValueFactory(param -> {
-            String goodsID = param.getValue().getGoodsId();
-            GoodsBean goodsBean = GoodsDao.getInstance().selectById(goodsID);
+            GoodsBean goodsBean = goodsService.selectById(goodsID);
             double numMoney = goodsBean.getSellPrice();
-            double amount=param.getValue().getGoodsAmount();
-            String show=String.format("гд%.2f", numMoney*amount);
-			return new SimpleStringProperty(show);
-		});
+            String show = String.format("гд%.2f", numMoney);
+            return new SimpleStringProperty(show);
+        });
+
+        item_amount.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getGoodsAmount()));
+
+        item_total.setCellValueFactory(param -> {
+            String goodsID = param.getValue().getGoodsId();
+            GoodsBean goodsBean = goodsService.selectById(goodsID);
+            double numMoney = goodsBean.getSellPrice();
+            double amount = param.getValue().getGoodsAmount();
+            String show = String.format("гд%.2f", numMoney * amount);
+            return new SimpleStringProperty(show);
+        });
 
         getColumns().add(item_id);
         getColumns().add(item_name);

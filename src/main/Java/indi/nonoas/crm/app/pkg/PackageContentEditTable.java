@@ -1,11 +1,12 @@
 package indi.nonoas.crm.app.pkg;
 
+import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.pojo.GoodsBean;
 import indi.nonoas.crm.pojo.PackageContentBean;
-import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
-import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
-import indi.nonoas.crm.view.table.GoodsEditTable;
 import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
+import indi.nonoas.crm.service.GoodsService;
+import indi.nonoas.crm.utils.SpringUtil;
+import indi.nonoas.crm.view.table.GoodsEditTable;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
      * สýพÝิด
      */
     private final ObservableList<GoodsEditTableVO> obList;
+
+    private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
 
 
     public PackageContentEditTable() {
@@ -70,7 +73,7 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
     @Override
     protected GoodsEditTableVO beanToData(PackageContentBean bean) {
         String id = bean.getGoodsId();
-        GoodsBean goodsBean = GoodsDao.getInstance().selectById(id);
+        GoodsBean goodsBean = goodsService.selectById(id);
         String name = goodsBean.getName();
         double price = goodsBean.getSellPrice();
         int amount = bean.getGoodsAmount();

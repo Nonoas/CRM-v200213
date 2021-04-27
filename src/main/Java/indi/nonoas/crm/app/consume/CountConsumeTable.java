@@ -2,7 +2,8 @@ package indi.nonoas.crm.app.consume;
 
 import indi.nonoas.crm.pojo.GoodsBean;
 import indi.nonoas.crm.pojo.UserGoods;
-import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
+import indi.nonoas.crm.service.GoodsService;
+import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.table.GoodsEditTable;
 import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
 import javafx.collections.ObservableList;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 public class CountConsumeTable extends GoodsEditTable<UserGoods> {
 
     private final ObservableList<GoodsEditTableVO> obList = getItems();
+
+    private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
 
     public CountConsumeTable() {
         item_total.setVisible(false);
@@ -49,7 +52,7 @@ public class CountConsumeTable extends GoodsEditTable<UserGoods> {
     @Override
     protected GoodsEditTableVO beanToData(UserGoods bean) {
         GoodsEditTableVO data = new GoodsEditTableVO();
-        GoodsBean goodsBean = GoodsDao.getInstance().selectById(bean.getGoodsId());
+        GoodsBean goodsBean = goodsService.selectById(bean.getGoodsId());
         data.setId(bean.getGoodsId());
         data.setName(goodsBean.getName());
         data.setAmount(1);
