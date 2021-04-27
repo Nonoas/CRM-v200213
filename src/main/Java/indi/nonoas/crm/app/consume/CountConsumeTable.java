@@ -1,10 +1,10 @@
 package indi.nonoas.crm.app.consume;
 
-import indi.nonoas.crm.beans.GoodsBean;
-import indi.nonoas.crm.beans.UserGoods;
+import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.UserGoods;
 import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
 import indi.nonoas.crm.view.table.GoodsEditTable;
-import indi.nonoas.crm.beans.vo.GoodsEditTableVO;
+import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;

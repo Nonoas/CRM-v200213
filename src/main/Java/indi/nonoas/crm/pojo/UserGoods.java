@@ -1,16 +1,15 @@
-package indi.nonoas.crm.beans;
+package indi.nonoas.crm.pojo;
 
 /**
+ * 用户的服务类商品
+ *
  * @author : Nonoas
- * @time : 2020-08-21 14:01
+ * @time : 2020-08-07 14:03
  */
-public class UserGoodsOrderBean {
-
+public class UserGoods {
     private String userId;
     private String goodsId;
     private int amount;
-    private String orderDate;
-    private String transactor;
 
     public String getUserId() {
         return userId;
@@ -34,21 +33,5 @@ public class UserGoodsOrderBean {
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    public String getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(String orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public String getTransactor() {
-        return transactor;
-    }
-
-    public void setTransactor(String transactor) {
-        this.transactor = transactor;
     }
 }

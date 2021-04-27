@@ -1,6 +1,6 @@
 package indi.nonoas.crm.app.vip;
 
-import indi.nonoas.crm.beans.UserBean;
+import indi.nonoas.crm.pojo.UserBean;
 import indi.nonoas.crm.controller.vip.VipModifyController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;

@@ -1,6 +1,6 @@
 package indi.nonoas.crm.dao.my_orm_dao;
 
-import indi.nonoas.crm.beans.OrderDetailBean;
+import indi.nonoas.crm.pojo.OrderDetailBean;
 
 import java.util.List;
 

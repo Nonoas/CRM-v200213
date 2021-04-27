@@ -2,8 +2,8 @@ package indi.nonoas.crm.app.pkg;
 
 import java.util.ArrayList;
 
-import indi.nonoas.crm.beans.GoodsBean;
-import indi.nonoas.crm.beans.PackageContentBean;
+import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.PackageContentBean;
 import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
 import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import javafx.beans.property.SimpleDoubleProperty;

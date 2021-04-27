@@ -1,4 +1,4 @@
-package indi.nonoas.crm.beans;
+package indi.nonoas.crm.pojo;
 
 /**
  * 项目内容信息Bean

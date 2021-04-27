@@ -2,7 +2,7 @@ package indi.nonoas.crm.dao.my_orm_dao;
 
 import java.util.ArrayList;
 
-import indi.nonoas.crm.beans.UserBean;
+import indi.nonoas.crm.pojo.UserBean;
 
 /**
  * 会员信息的数据库操作类

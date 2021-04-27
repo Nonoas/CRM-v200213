@@ -1,6 +1,6 @@
 package indi.nonoas.crm.service;
 
-import indi.nonoas.crm.beans.vo.UsrGdsOdrRecordVO;
+import indi.nonoas.crm.pojo.vo.UsrGdsOdrRecordVO;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

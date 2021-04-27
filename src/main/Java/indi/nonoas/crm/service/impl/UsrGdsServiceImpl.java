@@ -1,6 +1,6 @@
 package indi.nonoas.crm.service.impl;
 
-import indi.nonoas.crm.beans.UserGoods;
+import indi.nonoas.crm.pojo.UserGoods;
 import indi.nonoas.crm.dao.UsrGdsMapper;
 import indi.nonoas.crm.service.UsrGdsService;
 import org.springframework.beans.factory.annotation.Autowired;

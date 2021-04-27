@@ -1,4 +1,4 @@
-package indi.nonoas.crm.beans;
+package indi.nonoas.crm.pojo;
 
 /**
  * 商品类别Bean

@@ -1,11 +1,10 @@
 package indi.nonoas.crm.app.consume;
 
-import indi.nonoas.crm.beans.OrderBean;
-import indi.nonoas.crm.beans.OrderDetailBean;
-import indi.nonoas.crm.beans.UserBean;
+import indi.nonoas.crm.pojo.OrderBean;
+import indi.nonoas.crm.pojo.OrderDetailBean;
+import indi.nonoas.crm.pojo.UserBean;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.controller.consume.PkgCnsDialogController;
-import indi.nonoas.crm.view.annotation.CSS;
 import indi.nonoas.crm.view.annotation.FXML;
 import indi.nonoas.crm.view.annotation.StageProperty;
 import indi.nonoas.crm.view.stage.ControllableStage;

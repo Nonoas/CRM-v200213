@@ -1,10 +1,8 @@
 package indi.nonoas.crm.dao;
 
-import indi.nonoas.crm.beans.OrderBean;
-import indi.nonoas.crm.beans.OrderDetailBean;
-import indi.nonoas.crm.beans.vo.OrderRecordVO;
-import indi.nonoas.crm.beans.vo.UsrOdrRecordVO;
-import indi.nonoas.crm.service.UsrGdsOdrService;
+import indi.nonoas.crm.pojo.OrderBean;
+import indi.nonoas.crm.pojo.OrderDetailBean;
+import indi.nonoas.crm.pojo.vo.OrderRecordVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

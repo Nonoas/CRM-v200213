@@ -1,6 +1,6 @@
 package indi.nonoas.crm.app.stat;
 
-import indi.nonoas.crm.beans.vo.UsrGdsOdrRecordVO;
+import indi.nonoas.crm.pojo.vo.UsrGdsOdrRecordVO;
 import indi.nonoas.crm.service.UsrGdsOdrService;
 import indi.nonoas.crm.service.impl.UsrGdsOdrServiceImpl;
 import indi.nonoas.crm.utils.SpringUtil;

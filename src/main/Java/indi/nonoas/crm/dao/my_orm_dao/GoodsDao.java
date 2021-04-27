@@ -1,6 +1,6 @@
 package indi.nonoas.crm.dao.my_orm_dao;
 
-import indi.nonoas.crm.beans.GoodsBean;
+import indi.nonoas.crm.pojo.GoodsBean;
 
 /**
  * 商品信息的DAO

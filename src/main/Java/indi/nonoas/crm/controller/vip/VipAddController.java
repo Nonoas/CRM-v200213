@@ -7,11 +7,11 @@ import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 import indi.nonoas.crm.service.UserService;
+import indi.nonoas.crm.service.VipLvService;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
-import indi.nonoas.crm.beans.UserBean;
+import indi.nonoas.crm.pojo.UserBean;
 import indi.nonoas.crm.dao.my_orm_dao.VipInfoDao;
-import indi.nonoas.crm.dao.my_orm_dao.VipLevelDao;
 import indi.nonoas.crm.config.ImageSrc;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
@@ -35,6 +35,8 @@ public class VipAddController implements Initializable {
     private Tab parentTab;
 
     private final UserService userService = (UserService) SpringUtil.getBean("UserServiceImpl");
+
+    private final VipLvService vipLvService = (VipLvService) SpringUtil.getBean("VipLvServiceImpl");
 
     /**
      * 会员照片绝对路径
@@ -106,9 +108,10 @@ public class VipAddController implements Initializable {
         // 设置初始图片
         img_photo.setImage(new Image(ImageSrc.PHOTO_PATH));
         // 初始化CombBox
-        LinkedList<String> cbbItems = new VipLevelDao().selectAllNames();
-        for (String item : cbbItems)
+        LinkedList<String> cbbItems = (LinkedList<String>) vipLvService.listAllNames();
+        for (String item : cbbItems) {
             cbb_level.getItems().add(item);
+        }
         cbb_level.setValue(cbbItems.get(0));
         // 永久选项监听
         cbb_forever.selectedProperty().addListener(isForeverListener);
@@ -119,8 +122,9 @@ public class VipAddController implements Initializable {
      */
     private final ChangeListener<Boolean> isForeverListener = (observable, oldValue, newValue) -> {
         dpick_expiration.setDisable(newValue);
-        if (newValue)
+        if (newValue) {
             dpick_expiration.setValue(null);
+        }
     };
 
     @FXML // 自动生成会员卡号
@@ -150,8 +154,9 @@ public class VipAddController implements Initializable {
 
     @FXML
     private void commitIfo() {
-        if (!isCommittable())
+        if (!isCommittable()) {
             return;
+        }
         UserBean bean = new UserBean();
         bean.setId(tf_id.getText().trim());
         bean.setName(tf_name.getText().trim());

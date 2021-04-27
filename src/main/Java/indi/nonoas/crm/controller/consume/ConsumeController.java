@@ -5,11 +5,12 @@ import indi.nonoas.crm.app.goods.GoodsSingleSelectTable;
 import indi.nonoas.crm.app.pkg.PackageSingleSelectTable;
 import indi.nonoas.crm.app.vip.VipAddTab;
 import indi.nonoas.crm.app.vip.VipInfoTable;
-import indi.nonoas.crm.beans.*;
-import indi.nonoas.crm.beans.vo.GoodsEditTableVO;
+import indi.nonoas.crm.pojo.*;
+import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
 import indi.nonoas.crm.dao.my_orm_dao.*;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.service.UserService;
+import indi.nonoas.crm.service.VipLvService;
 import indi.nonoas.crm.service.impl.OrderServiceImpl;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
@@ -21,6 +22,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import org.apache.log4j.Logger;
+import org.sqlite.util.StringUtils;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -30,21 +32,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static indi.nonoas.crm.beans.UserBean.SANKE;
+import static indi.nonoas.crm.pojo.UserBean.SANKE;
 
 public class ConsumeController implements Initializable {
 
     private final Logger logger = Logger.getLogger(ConsumeController.class);
 
-    /**
-     * 会员服务
-     */
     private final UserService userService = (UserService) SpringUtil.getBean("UserServiceImpl");
 
-    /**
-     * 商品服务
-     */
     private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
+
+    private final VipLvService vipLvService = (VipLvService) SpringUtil.getBean("VipLvServiceImpl");
 
     /**
      * 会员信息
@@ -175,7 +173,7 @@ public class ConsumeController implements Initializable {
         showFindResult(vipBean);
         sp_userInfo.setContent(tv_vipInfo);
         // 从数据库读出所用会员等级，并初始化ComboBox
-        LinkedList<String> listName = new VipLevelDao().selectAllNames();
+        LinkedList<String> listName = (LinkedList<String>) vipLvService.listAllNames();
         cb_disType.getItems().add("全部类型");
         for (String str : listName) {
             cb_disType.getItems().add(str);

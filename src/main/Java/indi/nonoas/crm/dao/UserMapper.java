@@ -1,6 +1,6 @@
 package indi.nonoas.crm.dao;
 
-import indi.nonoas.crm.beans.UserBean;
+import indi.nonoas.crm.pojo.UserBean;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

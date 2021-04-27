@@ -5,9 +5,9 @@
 
 <mapper namespace="indi.nonoas.crm.dao.UserMapper">
 
-    <resultMap id="UserBean" type="indi.nonoas.crm.beans.UserBean"/>
+    <resultMap id="UserBean" type="indi.nonoas.crm.pojo.UserBean"/>
 
-    <parameterMap id="UserBean" type="indi.nonoas.crm.beans.UserBean"/>
+    <parameterMap id="UserBean" type="indi.nonoas.crm.pojo.UserBean"/>
 
     <select id="getUserById" resultMap="UserBean">
         select *

@@ -1,7 +1,7 @@
 package indi.nonoas.crm.service.impl;
 
-import indi.nonoas.crm.beans.*;
-import indi.nonoas.crm.beans.vo.OrderRecordVO;
+import indi.nonoas.crm.pojo.*;
+import indi.nonoas.crm.pojo.vo.OrderRecordVO;
 import indi.nonoas.crm.dao.GoodsMapper;
 import indi.nonoas.crm.dao.OrderMapper;
 import indi.nonoas.crm.dao.UserMapper;
@@ -10,7 +10,6 @@ import indi.nonoas.crm.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;

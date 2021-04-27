@@ -1,6 +1,6 @@
 package indi.nonoas.crm.view.table;
 
-import indi.nonoas.crm.beans.vo.GoodsEditTableVO;
+import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;

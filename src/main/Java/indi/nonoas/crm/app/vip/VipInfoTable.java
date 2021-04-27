@@ -3,7 +3,7 @@ package indi.nonoas.crm.app.vip;
 import java.util.ArrayList;
 import java.util.List;
 
-import indi.nonoas.crm.beans.UserBean;
+import indi.nonoas.crm.pojo.UserBean;
 import indi.nonoas.crm.service.UserService;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.progress.TableProgressIndicator;

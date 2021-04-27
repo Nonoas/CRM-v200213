@@ -1,6 +1,6 @@
 package indi.nonoas.crm.dao;
 
-import indi.nonoas.crm.beans.vo.UsrGdsOdrRecordVO;
+import indi.nonoas.crm.pojo.vo.UsrGdsOdrRecordVO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

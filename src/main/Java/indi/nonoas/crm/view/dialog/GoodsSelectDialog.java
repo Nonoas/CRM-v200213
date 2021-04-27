@@ -1,6 +1,6 @@
 package indi.nonoas.crm.view.dialog;
 
-import indi.nonoas.crm.beans.GoodsBean;
+import indi.nonoas.crm.pojo.GoodsBean;
 import indi.nonoas.crm.app.goods.GoodsSelectTable;
 import indi.nonoas.crm.config.ImageSrc;
 import javafx.collections.ObservableList;

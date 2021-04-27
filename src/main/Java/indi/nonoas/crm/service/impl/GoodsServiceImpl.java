@@ -1,6 +1,6 @@
 package indi.nonoas.crm.service.impl;
 
-import indi.nonoas.crm.beans.GoodsBean;
+import indi.nonoas.crm.pojo.GoodsBean;
 import indi.nonoas.crm.dao.GoodsMapper;
 import indi.nonoas.crm.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;

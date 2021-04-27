@@ -1,7 +1,7 @@
 package indi.nonoas.crm.controller.goods;
 
-import indi.nonoas.crm.beans.PackageBean;
-import indi.nonoas.crm.beans.PackageContentBean;
+import indi.nonoas.crm.pojo.PackageBean;
+import indi.nonoas.crm.pojo.PackageContentBean;
 import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.dao.my_orm_dao.PackageDao;
 import javafx.fxml.FXML;

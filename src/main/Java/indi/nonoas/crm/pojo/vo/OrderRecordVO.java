@@ -1,14 +1,16 @@
-package indi.nonoas.crm.beans;
+package indi.nonoas.crm.pojo.vo;
 
 /**
  * @author : Nonoas
- * @time : 2020-08-04 14:39
+ * @time : 2020-08-21 20:07
  */
-public class OrderBean {
+public class OrderRecordVO {
 
     private String orderId;
     private String userId;
+    private String userName;
     private String datetime;
+    private String content;
     private double price;
     private int integralCost;
     private int integralGet;
@@ -31,6 +33,14 @@ public class OrderBean {
         this.userId = userId;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public String getDatetime() {
         return datetime;
     }
@@ -45,14 +55,6 @@ public class OrderBean {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public String getTransactor() {
-        return transactor;
-    }
-
-    public void setTransactor(String transactor) {
-        this.transactor = transactor;
     }
 
     public int getIntegralCost() {
@@ -77,5 +79,21 @@ public class OrderBean {
 
     public void setPayMode(String payMode) {
         this.payMode = payMode;
+    }
+
+    public String getTransactor() {
+        return transactor;
+    }
+
+    public void setTransactor(String transactor) {
+        this.transactor = transactor;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

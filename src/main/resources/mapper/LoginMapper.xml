@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="indi.nonoas.crm.dao.LoginMapper">
-    <resultMap id="LoginBean" type="indi.nonoas.crm.beans.LoginBean"/>
+    <resultMap id="LoginBean" type="indi.nonoas.crm.pojo.LoginBean"/>
     <select id="verifySelect" resultMap="LoginBean">
         select *
         from login_info

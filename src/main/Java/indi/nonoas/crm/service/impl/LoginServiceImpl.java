@@ -1,6 +1,6 @@
 package indi.nonoas.crm.service.impl;
 
-import indi.nonoas.crm.beans.LoginBean;
+import indi.nonoas.crm.pojo.LoginBean;
 import indi.nonoas.crm.dao.LoginMapper;
 import indi.nonoas.crm.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;

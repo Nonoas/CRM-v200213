@@ -1,4 +1,4 @@
-package indi.nonoas.crm.beans.vo;
+package indi.nonoas.crm.pojo.vo;
 
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;

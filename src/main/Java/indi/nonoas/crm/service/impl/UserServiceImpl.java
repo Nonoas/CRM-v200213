@@ -1,6 +1,6 @@
 package indi.nonoas.crm.service.impl;
 
-import indi.nonoas.crm.beans.UserBean;
+import indi.nonoas.crm.pojo.UserBean;
 import indi.nonoas.crm.config.UserConfig;
 import indi.nonoas.crm.dao.UserMapper;
 import indi.nonoas.crm.service.UserService;

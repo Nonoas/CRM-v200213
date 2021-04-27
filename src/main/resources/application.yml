@@ -14,5 +14,5 @@ mybatis-plus:
 logging:
   level:
     indi.nonoas.crm:
-      dao: error
+      dao: warn
 

@@ -1,6 +1,6 @@
 package indi.nonoas.crm.dao.my_orm_dao;
 
-import indi.nonoas.crm.beans.*;
+import indi.nonoas.crm.pojo.*;
 import per.nonoas.orm.AbstractTransaction;
 import per.nonoas.orm.BeanTransaction;
 

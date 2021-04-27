@@ -1,6 +1,6 @@
 package indi.nonoas.crm.service;
 
-import indi.nonoas.crm.beans.LoginBean;
+import indi.nonoas.crm.pojo.LoginBean;
 
 /**
  * @author : Nonoas

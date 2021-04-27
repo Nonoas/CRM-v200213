@@ -1,8 +1,8 @@
 package indi.nonoas.crm.app.stat;
 
-import indi.nonoas.crm.beans.GoodsBean;
-import indi.nonoas.crm.beans.OrderDetailBean;
-import indi.nonoas.crm.beans.vo.OrderRecordVO;
+import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.OrderDetailBean;
+import indi.nonoas.crm.pojo.vo.OrderRecordVO;
 import indi.nonoas.crm.dao.my_orm_dao.OrderDetailDao;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.service.OrderService;

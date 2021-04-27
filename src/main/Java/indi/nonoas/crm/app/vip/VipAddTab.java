@@ -31,8 +31,8 @@ public class VipAddTab extends Tab {
 			e.printStackTrace();
 		}
 		setClosable(true);
-		VipAddController contronller=fxmlLoader.getController();
-		contronller.setPane(this);
+		VipAddController controller=fxmlLoader.getController();
+		controller.setPane(this);
 	}
 
 }

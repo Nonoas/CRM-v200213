@@ -1,6 +1,6 @@
 package indi.nonoas.crm.service;
 
-import indi.nonoas.crm.beans.UserBean;
+import indi.nonoas.crm.pojo.UserBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;

@@ -3,7 +3,7 @@ package indi.nonoas.crm.app.goods;
 import java.util.ArrayList;
 import java.util.List;
 
-import indi.nonoas.crm.beans.GoodsBean;
+import indi.nonoas.crm.pojo.GoodsBean;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.service.GoodsService;
 import javafx.beans.property.SimpleDoubleProperty;

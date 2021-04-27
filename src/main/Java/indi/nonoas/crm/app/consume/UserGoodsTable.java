@@ -1,9 +1,9 @@
 package indi.nonoas.crm.app.consume;
 
-import indi.nonoas.crm.beans.GoodsBean;
-import indi.nonoas.crm.beans.UserGoods;
-import indi.nonoas.crm.beans.UserBean;
-import indi.nonoas.crm.beans.vo.UserGoodsVO;
+import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.UserGoods;
+import indi.nonoas.crm.pojo.UserBean;
+import indi.nonoas.crm.pojo.vo.UserGoodsVO;
 import indi.nonoas.crm.dao.my_orm_dao.GoodsDao;
 import indi.nonoas.crm.service.UsrGdsService;
 import indi.nonoas.crm.utils.SpringUtil;

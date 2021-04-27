@@ -1,7 +1,7 @@
 package indi.nonoas.crm.controller.goods;
 
-import indi.nonoas.crm.beans.GoodsBean;
-import indi.nonoas.crm.beans.PackageContentBean;
+import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.PackageContentBean;
 import indi.nonoas.crm.view.dialog.GoodsSelectDialog;
 import indi.nonoas.crm.view.alert.MyAlert;
 import indi.nonoas.crm.app.pkg.PackageContentEditTable;

@@ -1,4 +1,4 @@
-package indi.nonoas.crm.beans.vo;
+package indi.nonoas.crm.pojo.vo;
 
 
 public class UsrOdrRecordVO {

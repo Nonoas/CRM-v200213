@@ -1,7 +1,7 @@
 package indi.nonoas.crm.controller.consume;
 
 
-import indi.nonoas.crm.beans.*;
+import indi.nonoas.crm.pojo.*;
 import indi.nonoas.crm.common.PayMode;
 import indi.nonoas.crm.dao.my_orm_dao.UserGoodsDao;
 import indi.nonoas.crm.service.GoodsService;
