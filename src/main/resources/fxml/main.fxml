@@ -24,15 +24,10 @@
         </ToolBar>
     </top>
     <left>
-        <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="472.0" prefWidth="110.0" spacing="15.0" BorderPane.alignment="CENTER">
+        <VBox fx:id="leftMenuVb" alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="472.0" prefWidth="110.0" BorderPane.alignment="CENTER">
             <BorderPane.margin>
-                <Insets left="5.0" top="5.0" />
+                <Insets left="5.0" />
             </BorderPane.margin>
-            <Button fx:id="btn_consumption" contentDisplay="TOP" mnemonicParsing="false" onAction="#toConsumePane" text="用户消费" />
-            <Button mnemonicParsing="false" onAction="#toVipManagerPane" text="会员管理" />
-            <Button mnemonicParsing="false" onAction="#toGoodsManagePane" text="商品管理" />
-            <Button mnemonicParsing="false" onAction="#toStaffManagePane" text="员工管理" />
-            <Button mnemonicParsing="false" onAction="#toStatPane" text="统计报表" />
          <padding>
             <Insets top="10.0" />
          </padding>

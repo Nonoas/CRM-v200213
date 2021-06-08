@@ -1,7 +1,7 @@
 package indi.nonoas.crm.app.pkg;
 
 import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
-import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.PackageContentBean;
 import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
 import indi.nonoas.crm.service.GoodsService;
@@ -73,7 +73,7 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
     @Override
     protected GoodsEditTableVO beanToData(PackageContentBean bean) {
         String id = bean.getGoodsId();
-        GoodsBean goodsBean = goodsService.selectById(id);
+        GoodsDto goodsBean = goodsService.selectById(id);
         String name = goodsBean.getName();
         double price = goodsBean.getSellPrice();
         int amount = bean.getGoodsAmount();

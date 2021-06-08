@@ -7,7 +7,7 @@ import indi.nonoas.crm.app.pkg.PackageAddTab;
 import indi.nonoas.crm.app.pkg.PackageContentTable;
 import indi.nonoas.crm.app.pkg.PackageModifyTab;
 import indi.nonoas.crm.app.pkg.PackageTable;
-import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.PackageBean;
 import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.dao.my_orm_dao.PackageDao;
@@ -102,7 +102,7 @@ public class GoodsManageController implements Initializable {
     private void find() {
         String keyWord = tf_id.getText().trim();
         String type = cb_type.getValue().equals("所有类型") ? "" : cb_type.getValue();
-        ArrayList<GoodsBean> listVipBeans = goodsService.selectByFiltrate(keyWord, keyWord, type);
+        ArrayList<GoodsDto> listVipBeans = goodsService.selectByFiltrate(keyWord, keyWord, type);
         if (listVipBeans != null)
             table.replaceData(listVipBeans);
         else
@@ -112,7 +112,7 @@ public class GoodsManageController implements Initializable {
     @FXML    //修改商品信息
     private void updateGoods() {
 
-        GoodsBean bean = table.getSelectedData();
+        GoodsDto bean = table.getSelectedData();
 
         if (bean == null) {
             new MyAlert(AlertType.INFORMATION, "请先选择一条数据！").show();
@@ -153,7 +153,7 @@ public class GoodsManageController implements Initializable {
 
     @FXML    //删除商品信息
     private void deleteInfo() {
-        GoodsBean bean = table.getSelectedData();
+        GoodsDto bean = table.getSelectedData();
         if (bean == null) {
             new MyAlert(AlertType.INFORMATION, "请先选择一条数据！").show();
             return;

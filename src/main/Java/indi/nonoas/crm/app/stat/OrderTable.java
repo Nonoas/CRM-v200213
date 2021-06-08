@@ -1,6 +1,6 @@
 package indi.nonoas.crm.app.stat;
 
-import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.OrderDetailBean;
 import indi.nonoas.crm.pojo.vo.OrderRecordVO;
 import indi.nonoas.crm.dao.my_orm_dao.OrderDetailDao;
@@ -86,7 +86,7 @@ public class OrderTable extends TableView<OrderRecordVO> {
             StringBuilder sb = new StringBuilder();
             for (int i = 0, size = details.size(); i < size; i++) {
                 OrderDetailBean detail = details.get(i);
-                GoodsBean goods = goodsService.selectById(detail.getProductId());
+                GoodsDto goods = goodsService.selectById(detail.getProductId());
                 if (goods != null)
                     sb.append(goods.getName()).append(detail.getProductAmount()).append(goods.getBaseUnit());
                 if (i < size - 1)

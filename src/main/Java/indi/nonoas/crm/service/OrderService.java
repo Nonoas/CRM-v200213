@@ -1,6 +1,7 @@
 package indi.nonoas.crm.service;
 
 import indi.nonoas.crm.pojo.*;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.vo.OrderRecordVO;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +38,6 @@ public interface OrderService {
     void placeGoodsOrder(OrderBean order,
                          List<OrderDetailBean> orderDetails,
                          List<UserGoods> userGoods,
-                         List<GoodsBean> goodsBeans,
+                         List<GoodsDto> goodsBeans,
                          UserBean vipBean) throws Exception;
 }

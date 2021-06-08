@@ -4,7 +4,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.utils.SpringUtil;
@@ -23,7 +23,7 @@ import javafx.stage.FileChooser;
 
 public class GoodsModifyController implements Initializable {
 
-    private GoodsBean goodsBean = new GoodsBean();
+    private GoodsDto goodsBean = new GoodsDto();
 
     private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
 
@@ -128,7 +128,7 @@ public class GoodsModifyController implements Initializable {
     /**
      * 传递当前修改的Bean
      */
-    public void setBean(GoodsBean bean) {
+    public void setBean(GoodsDto bean) {
         this.goodsBean = bean;
 
         String id = goodsBean.getId();

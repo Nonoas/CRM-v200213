@@ -3,7 +3,7 @@ package indi.nonoas.crm.app.goods;
 import java.io.IOException;
 import java.net.URL;
 
-import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.controller.goods.GoodsModifyController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
@@ -17,12 +17,12 @@ import javafx.scene.layout.Pane;
  */
 public class GoodsModifyTab extends Tab {
 
-	private final GoodsBean bean;
+	private final GoodsDto bean;
 	
-	public GoodsModifyTab(GoodsBean bean) {
+	public GoodsModifyTab(GoodsDto bean) {
 		this("修改商品信息",bean);
 	}
-	public GoodsModifyTab(String str,GoodsBean bean) {
+	public GoodsModifyTab(String str, GoodsDto bean) {
 		super(str);
 		this.bean=bean;
 		initView();

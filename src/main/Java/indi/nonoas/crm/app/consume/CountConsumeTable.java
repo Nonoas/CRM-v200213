@@ -1,6 +1,6 @@
 package indi.nonoas.crm.app.consume;
 
-import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.UserGoods;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.utils.SpringUtil;
@@ -52,7 +52,7 @@ public class CountConsumeTable extends GoodsEditTable<UserGoods> {
     @Override
     protected GoodsEditTableVO beanToData(UserGoods bean) {
         GoodsEditTableVO data = new GoodsEditTableVO();
-        GoodsBean goodsBean = goodsService.selectById(bean.getGoodsId());
+        GoodsDto goodsBean = goodsService.selectById(bean.getGoodsId());
         data.setId(bean.getGoodsId());
         data.setName(goodsBean.getName());
         data.setAmount(1);

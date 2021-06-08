@@ -1,6 +1,6 @@
-package indi.nonoas.crm.pojo;
+package indi.nonoas.crm.pojo.dto;
 
-public class GoodsBean {
+public class GoodsDto {
     /**
      * ±àºÅ
      */
@@ -62,7 +62,7 @@ public class GoodsBean {
         this.photo = photo;
     }
 
-    public GoodsBean() {
+    public GoodsDto() {
     }
 
     public String getId() {

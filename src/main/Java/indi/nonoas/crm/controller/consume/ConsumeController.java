@@ -9,6 +9,7 @@ import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.dao.my_orm_dao.UserGoodsDao;
 import indi.nonoas.crm.dao.my_orm_dao.UserGoodsOrderDao;
 import indi.nonoas.crm.pojo.*;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.service.UserService;
@@ -29,7 +30,6 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -174,7 +174,7 @@ public class ConsumeController implements Initializable {
         showFindResult(vipBean);
         sp_userInfo.setContent(tv_vipInfo);
         // 从数据库读出所用会员等级，并初始化ComboBox
-        LinkedList<String> listName = (LinkedList<String>) vipLvService.listAllNames();
+        List<String> listName = vipLvService.listAllNames();
         cb_disType.getItems().add("全部类型");
         for (String str : listName) {
             cb_disType.getItems().add(str);
@@ -286,11 +286,11 @@ public class ConsumeController implements Initializable {
         for (GoodsEditTableVO data : items) {
             String goodsID = data.getId();
             int costCount = data.getAmount();
-            GoodsBean goodsBean = goodsService.selectById(goodsID);
+            GoodsDto goodsBean = goodsService.selectById(goodsID);
             int storeCount = (int) goodsBean.getQuantity();
             if (costCount > storeCount) {
                 MyAlert alert = new MyAlert(AlertType.WARNING,
-                        "《(" + goodsID + ")" + data.getName() + "》库存不足 " + costCount + goodsBean.getBaseUnit() + " ！");
+                        String.format("《(%s)%s》库存不足 %d%s ！", goodsID, data.getName(), costCount, goodsBean.getBaseUnit()));
                 alert.setHeaderText("库存不足");
                 alert.show();
                 return true;
@@ -497,7 +497,7 @@ public class ConsumeController implements Initializable {
                 String goodsID = bean.getGoodsId();
                 System.out.println("商品ID" + goodsID);
                 int costCount = bean.getGoodsAmount() * costPkgCount;   //消耗的商品数量
-                GoodsBean goodsBean = goodsService.selectById(goodsID);
+                GoodsDto goodsBean = goodsService.selectById(goodsID);
                 int storeCount = (int) goodsBean.getQuantity();     //库存商品数量
                 System.out.println("消耗：" + costCount + ",储存" + storeCount);
                 if (costCount > storeCount) {
@@ -642,7 +642,7 @@ public class ConsumeController implements Initializable {
         ObservableList<GoodsEditTableVO> items = ccTable.getItems();
         for (GoodsEditTableVO data : items) {
             UserGoods userGoods = UserGoodsDao.getInstance().selectByUserGoods(userID, data.getId());
-            GoodsBean goodsBean = goodsService.selectById(userGoods.getGoodsId());
+            GoodsDto goodsBean = goodsService.selectById(userGoods.getGoodsId());
             int amountCost = data.getAmount();
             int amountRest = userGoods.getAmount();
             if (amountCost > amountRest) {

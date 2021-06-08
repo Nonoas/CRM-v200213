@@ -1,6 +1,6 @@
 package indi.nonoas.crm.app.goods;
 
-import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import javafx.collections.ObservableList;
 import javafx.scene.control.SelectionMode;
 
@@ -19,7 +19,7 @@ public class GoodsSelectTable extends GoodsInfoTable {
      *
      * @return 选中所有商品信息
      */
-    public ObservableList<GoodsBean> getSelectedItems() {
+    public ObservableList<GoodsDto> getSelectedItems() {
         return getSelectionModel().getSelectedItems();
     }
 }

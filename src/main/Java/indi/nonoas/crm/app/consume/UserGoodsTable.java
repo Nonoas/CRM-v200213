@@ -1,6 +1,6 @@
 package indi.nonoas.crm.app.consume;
 
-import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.UserGoods;
 import indi.nonoas.crm.pojo.UserBean;
 import indi.nonoas.crm.pojo.vo.UserGoodsVO;
@@ -99,7 +99,7 @@ public class UserGoodsTable extends TableView<UserGoodsVO> {
      */
     private UserGoodsVO beanToVO(UserGoods bean) {
         if (bean == null) return null;
-        GoodsBean goodsBean = goodsService.selectById(bean.getGoodsId());
+        GoodsDto goodsBean = goodsService.selectById(bean.getGoodsId());
         UserGoodsVO vo = new UserGoodsVO();
         vo.setId(goodsBean.getId());
         vo.setName(goodsBean.getName());

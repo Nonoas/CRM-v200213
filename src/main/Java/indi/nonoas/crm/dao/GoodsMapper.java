@@ -1,6 +1,6 @@
 package indi.nonoas.crm.dao;
 
-import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -21,14 +21,14 @@ public interface GoodsMapper {
      * @param id 商品id
      * @return id对应的商品信息bean类
      */
-    GoodsBean selectById(String id);
+    GoodsDto selectById(String id);
 
     /**
      * 查询所有的商品信息
      *
      * @return GoodsBean的ArrayList集合, 可为null
      */
-    ArrayList<GoodsBean> selectAll();
+    ArrayList<GoodsDto> selectAll();
 
     /**
      * 按条件筛选模糊查询
@@ -38,9 +38,9 @@ public interface GoodsMapper {
      * @param type 商品种类
      * @return GoodsBean的ArrayList集合, 可以为null
      */
-    ArrayList<GoodsBean> selectByFiltrate(@Param("id") String id,
-                                          @Param("name") String name,
-                                          @Param("type") String type);
+    ArrayList<GoodsDto> selectByFiltrate(@Param("id") String id,
+                                         @Param("name") String name,
+                                         @Param("type") String type);
 
     /**
      * 删除一条商品信息
@@ -54,14 +54,14 @@ public interface GoodsMapper {
      *
      * @param bean GoodsBean对象
      */
-    void insertInfo(GoodsBean bean);
+    void insertInfo(GoodsDto bean);
 
     /**
      * 更新商品信息
      *
      * @param goodsBean GoodsBean对象
      */
-    void update(GoodsBean goodsBean);
+    void update(GoodsDto goodsBean);
 
     /**
      * 查询所有商品分类名称
@@ -75,6 +75,6 @@ public interface GoodsMapper {
      *
      * @return 影响的行数
      */
-    long updateGoodsAmount(@Param("goodsBeans") List<GoodsBean> goodsBeans);
+    long updateGoodsAmount(@Param("goodsBeans") List<GoodsDto> goodsBeans);
 
 }

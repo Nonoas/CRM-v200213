@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
-import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.config.ImageSrc;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -91,7 +91,7 @@ public class GoodsAddController implements Initializable {
     private void commitIfo() {
         if (!isCommitable())
             return;
-        GoodsBean bean = new GoodsBean();
+        GoodsDto bean = new GoodsDto();
         bean.setId(tf_id.getText().trim());
         bean.setName(tf_name.getText().trim());
 

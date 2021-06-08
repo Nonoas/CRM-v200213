@@ -1,6 +1,7 @@
 package indi.nonoas.crm.service.impl;
 
 import indi.nonoas.crm.pojo.*;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.vo.OrderRecordVO;
 import indi.nonoas.crm.dao.GoodsMapper;
 import indi.nonoas.crm.dao.OrderMapper;
@@ -43,7 +44,7 @@ public class OrderServiceImpl implements OrderService {
     public void placeGoodsOrder(OrderBean order,
                                 List<OrderDetailBean> orderDetails,
                                 List<UserGoods> userGoods,
-                                List<GoodsBean> goodsBeans,
+                                List<GoodsDto> goodsBeans,
                                 UserBean vipBean) {
         //¶©µ¥ÊÂÎñ
         odrMapper.insertOrder(order);

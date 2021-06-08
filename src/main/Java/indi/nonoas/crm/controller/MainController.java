@@ -6,20 +6,22 @@ import indi.nonoas.crm.app.consume.ConsumePane;
 import indi.nonoas.crm.app.goods.GoodsManagePane;
 import indi.nonoas.crm.app.vip.StatPane;
 import indi.nonoas.crm.app.vip.VipManagePane;
-import indi.nonoas.crm.pojo.LoginBean;
 import indi.nonoas.crm.common.ClientSession;
 import indi.nonoas.crm.config.ImageSrc;
+import indi.nonoas.crm.pojo.LoginBean;
 import indi.nonoas.crm.service.OrderService;
 import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,7 @@ public class MainController implements Initializable {
     private final Logger logger = Logger.getLogger(MainController.class);
 
     private static final double IMG_SIZE = 30; // 按图标尺寸
+
 
     @Autowired
     private OrderService odrService;
@@ -57,14 +60,23 @@ public class MainController implements Initializable {
     @FXML
     private Label label_operator; // 操作员
 
+    /**
+     * 左侧菜单VBox
+     */
+    @FXML
+    private VBox leftMenuVb;
+
     public MainController() {
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         //启动后台任务
         startBackgroundTask();
+
+        initLeftMenu();
 
         LoginBean loginBean = (LoginBean) ClientSession.getAttribute("user");
 
@@ -91,21 +103,163 @@ public class MainController implements Initializable {
         toConsumePane();
     }
 
-    @FXML // 跳转用户消费界面
+    /**
+     * 初始化左侧菜单
+     */
+    private void initLeftMenu() {
+        leftMenuVb.getStylesheets().add("/css/leftmenu.css");
+        ObservableList<Node> menuList = leftMenuVb.getChildren();
+        menuList.add(this.consumeLeftMenu());
+        menuList.add(this.vipManageLeftMenu());
+        menuList.add(this.goodsManageLeftMenu());
+        menuList.add(this.staffManageLeftMenu());
+        menuList.add(this.statLeftMenu());
+
+    }
+
+    /**
+     * 会员消费菜单
+     *
+     * @return Node节点
+     */
+    private Node consumeLeftMenu() {
+        ListView<Label> lv = new ListView<>();
+        Label vipConsumeLb = new LeftMenuItemLabel("会员消费");
+        Label vipQueryLb = new LeftMenuItemLabel("会员查询");
+
+        lv.getItems().add(vipConsumeLb);
+        lv.getItems().add(vipQueryLb);
+
+        lv.setPrefHeight(2 * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
+
+        vipConsumeLb.setOnMouseClicked(event -> toConsumePane());
+
+        TitledPane titledPane = new TitledPane("用户消费", lv);
+        titledPane.setExpanded(false);
+        return titledPane;
+    }
+
+    /**
+     * 会员管理菜单
+     *
+     * @return Node节点
+     */
+    private Node vipManageLeftMenu() {
+        ListView<Label> lv = new ListView<>();
+        Label vipManageLb = new LeftMenuItemLabel("会员管理");
+        vipManageLb.setPrefHeight(LeftMenuItemLabel.LEFT_MENUITEM_SIZE);
+
+        lv.getItems().add(vipManageLb);
+
+        lv.setPrefHeight(1 * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
+
+        vipManageLb.setOnMouseClicked(event -> toVipManagerPane());
+
+        TitledPane titledPane = new TitledPane("会员管理", lv);
+        titledPane.setExpanded(false);
+        return titledPane;
+    }
+
+    /**
+     * 商品管理菜单
+     *
+     * @return Node节点
+     */
+    private Node goodsManageLeftMenu() {
+        ListView<Label> lv = new ListView<>();
+        Label goodsInfoLb = new LeftMenuItemLabel("商品信息");
+        Label goodsTypeLb = new LeftMenuItemLabel("商品类别");
+        Label pkgLb = new LeftMenuItemLabel("套餐项目");
+
+        lv.getItems().add(goodsInfoLb);
+        lv.getItems().add(goodsTypeLb);
+        lv.getItems().add(pkgLb);
+
+        lv.setPrefHeight(3 * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
+
+        goodsInfoLb.setOnMouseClicked(event -> toGoodsManagePane());
+
+        TitledPane titledPane = new TitledPane("商品管理", lv);
+        titledPane.setExpanded(false);
+        return titledPane;
+    }
+
+    /**
+     * 员工管理菜单
+     *
+     * @return Node节点
+     */
+    @SuppressWarnings("all")
+    private Node staffManageLeftMenu() {
+        ListView<Label> lv = new ListView<>();
+        Label yggl = new LeftMenuItemLabel("员工管理");
+
+        lv.getItems().add(yggl);
+
+        lv.setPrefHeight(lv.getItems().size() * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
+
+        yggl.setOnMouseClicked(event -> toStaffManagePane());
+
+        TitledPane titledPane = new TitledPane("员工管理", lv);
+        titledPane.setExpanded(false);
+        return titledPane;
+    }
+
+    /**
+     * 统计报表菜单
+     *
+     * @return Node节点
+     */
+    @SuppressWarnings("all")
+    private Node statLeftMenu() {
+        ListView<Label> lv = new ListView<>();
+        Label spxfjl = new LeftMenuItemLabel("商品消费记录");
+        Label tcxfjl = new LeftMenuItemLabel("套餐消费记录");
+        Label hykhjl = new LeftMenuItemLabel("会员开户记录");
+        Label spdhjl = new LeftMenuItemLabel("商品兑换记录");
+        Label spkcjl = new LeftMenuItemLabel("商品库存统计");
+        Label sjjcjl = new LeftMenuItemLabel("商品进出记录");
+        Label ygtcjl = new LeftMenuItemLabel("员工提成记录");
+
+        lv.getItems().add(spxfjl);
+        lv.getItems().add(tcxfjl);
+        lv.getItems().add(hykhjl);
+        lv.getItems().add(spdhjl);
+        lv.getItems().add(spkcjl);
+        lv.getItems().add(sjjcjl);
+        lv.getItems().add(ygtcjl);
+
+        lv.setPrefHeight(7 * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
+
+        spxfjl.setOnMouseClicked(event -> toStatPane());
+
+        TitledPane titledPane = new TitledPane("统计报表", lv);
+        titledPane.setExpanded(false);
+        return titledPane;
+    }
+
+    /**
+     * 跳转用户消费界面
+     */
     private void toConsumePane() {
         if (currentPane != CenterPane.CONSUMPTION) {
             changePane(CenterPane.CONSUMPTION);
         }
     }
 
-    @FXML // 跳转会员管理界面
+    /**
+     * 跳转会员管理界面
+     */
     private void toVipManagerPane() {
         if (currentPane != CenterPane.VIP_MANAGER) {
             changePane(CenterPane.VIP_MANAGER);
         }
     }
 
-    @FXML // 跳转商品管理界面
+    /**
+     * 跳转商品管理界面
+     */
+    @FXML
     private void toGoodsManagePane() {
         if (currentPane != CenterPane.GOODS_MANAGE) {
             changePane(CenterPane.GOODS_MANAGE);
@@ -115,9 +269,6 @@ public class MainController implements Initializable {
     @FXML // 跳转员工管理界面
     private void toStaffManagePane() {
         new MyAlert(Alert.AlertType.INFORMATION, "敬请期待！").show();
-//        if (currentPane != CenterPane.STAFF_MANAGE) {
-//            changePane(CenterPane.STAFF_MANAGE);
-//        }
     }
 
     @FXML // 跳转统计报表界面
@@ -161,6 +312,29 @@ public class MainController implements Initializable {
                     "删除一年前的订单" +
                     "\n===================");
         }).start();
+    }
+
+    /**
+     * 左侧菜单按钮Label，事先设置好通用样式
+     */
+    private static class LeftMenuItemLabel extends Label {
+
+        /**
+         * 左侧按钮高度
+         */
+        private static final double LEFT_MENUITEM_SIZE = 30;
+
+        /**
+         * 最大尺寸数值
+         */
+        private static final double MAX_VALUE = 9999999;
+
+        private LeftMenuItemLabel(String text) {
+            super(text);
+            setPrefHeight(LEFT_MENUITEM_SIZE);
+            setMaxWidth(MAX_VALUE);
+            setAlignment(Pos.CENTER);
+        }
     }
 
     /**

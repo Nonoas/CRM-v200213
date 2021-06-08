@@ -4,6 +4,7 @@ package indi.nonoas.crm.controller.consume;
 import indi.nonoas.crm.pojo.*;
 import indi.nonoas.crm.dao.my_orm_dao.*;
 import indi.nonoas.crm.common.PayMode;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
@@ -31,7 +32,7 @@ public class PkgCnsDialogController implements Initializable {
 
     private boolean hasSubmit = false;
 
-    private GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
+    private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
 
     /**
      * 消费者
@@ -123,7 +124,7 @@ public class PkgCnsDialogController implements Initializable {
         //设置即将传入数据库的 用户-商品
         List<UserGoods> userGoods = userGoodsData();
         //设置即将减少数量的 商品
-        List<GoodsBean> goodsBeans = goodsData();
+        List<GoodsDto> goodsBeans = goodsData();
         //设置需要更新的消费者信息
         UserBean vipBean = vipData();
         //设置最终订单信息
@@ -228,14 +229,14 @@ public class PkgCnsDialogController implements Initializable {
      *
      * @return 商品 bean的集合
      */
-    private List<GoodsBean> goodsData() {
-        List<GoodsBean> goodsBeans = new ArrayList<>(16);
+    private List<GoodsDto> goodsData() {
+        List<GoodsDto> goodsBeans = new ArrayList<>(16);
         //遍历套餐订单
         for (OrderDetailBean detail : orderDetails) {
             List<PackageContentBean> pkgContBeans = PackageContentDao.getInstance().selectById(detail.getProductId());
             //遍历套餐内容
             for (PackageContentBean pkgContBean : pkgContBeans) {
-                GoodsBean bean = goodsService.selectById(pkgContBean.getGoodsId());
+                GoodsDto bean = goodsService.selectById(pkgContBean.getGoodsId());
                 //商品数量 -> 库存数量 - 套餐数量 * 套餐内商品数量
                 bean.setQuantity(bean.getQuantity() - detail.getProductAmount() * pkgContBean.getGoodsAmount());     //从数据库中减去购买的数量
                 goodsBeans.add(bean);

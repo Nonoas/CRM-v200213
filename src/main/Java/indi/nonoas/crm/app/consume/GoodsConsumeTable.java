@@ -1,6 +1,6 @@
 package indi.nonoas.crm.app.consume;
 
-import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.table.GoodsEditTable;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * @author : Nonoas
  * @time : 2020-08-02 14:11
  */
-public class GoodsConsumeTable extends GoodsEditTable<GoodsBean> {
+public class GoodsConsumeTable extends GoodsEditTable<GoodsDto> {
 
     private final ObservableList<GoodsEditTableVO> obList = getItems();
 
@@ -26,17 +26,17 @@ public class GoodsConsumeTable extends GoodsEditTable<GoodsBean> {
     }
 
     @Override
-    public ArrayList<GoodsBean> getAllBeans() {
+    public ArrayList<GoodsDto> getAllBeans() {
         if (obList == null)
             return null;
-        return (ArrayList<GoodsBean>) obList.stream()
+        return (ArrayList<GoodsDto>) obList.stream()
                 .map(this::dataToBean)
                 .collect(Collectors.toList());
 
     }
 
     @Override
-    public void addBean(GoodsBean bean) {
+    public void addBean(GoodsDto bean) {
         String id = bean.getId();
         for (GoodsEditTableVO d : obList) {
             if (d.getId().equals(id))
@@ -50,13 +50,13 @@ public class GoodsConsumeTable extends GoodsEditTable<GoodsBean> {
     }
 
     @Override
-    protected GoodsBean dataToBean(GoodsEditTableVO data) {
+    protected GoodsDto dataToBean(GoodsEditTableVO data) {
         String id = data.getId();
         return goodsService.selectById(id);
     }
 
     @Override
-    protected GoodsEditTableVO beanToData(GoodsBean bean) {
+    protected GoodsEditTableVO beanToData(GoodsDto bean) {
         GoodsEditTableVO data = new GoodsEditTableVO();
         data.setId(bean.getId());
         data.setName(bean.getName());

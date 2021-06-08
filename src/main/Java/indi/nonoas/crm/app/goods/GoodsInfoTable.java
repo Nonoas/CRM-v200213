@@ -3,7 +3,7 @@ package indi.nonoas.crm.app.goods;
 import java.util.ArrayList;
 import java.util.List;
 
-import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.service.GoodsService;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -19,40 +19,40 @@ import javafx.scene.control.TableView;
  *
  * @author Nonoas
  */
-public class GoodsInfoTable extends TableView<GoodsBean> {
+public class GoodsInfoTable extends TableView<GoodsDto> {
 
     /**
      * 数据源
      */
-    private final ObservableList<GoodsBean> obList = FXCollections.observableArrayList();
+    private final ObservableList<GoodsDto> obList = FXCollections.observableArrayList();
     /**
      * 当前选中数据
      */
-    private GoodsBean selectedBean;
+    private GoodsDto selectedBean;
 
-    protected final TableColumn<GoodsBean, String> item_id = new TableColumn<>("编号");
+    protected final TableColumn<GoodsDto, String> item_id = new TableColumn<>("编号");
 
-    protected final TableColumn<GoodsBean, String> item_name = new TableColumn<>("商品名称");
+    protected final TableColumn<GoodsDto, String> item_name = new TableColumn<>("商品名称");
 
-    protected final TableColumn<GoodsBean, Number> item_sell_price = new TableColumn<>("预售单价");
+    protected final TableColumn<GoodsDto, Number> item_sell_price = new TableColumn<>("预售单价");
 
-    protected final TableColumn<GoodsBean, Number> item_purchase_price = new TableColumn<>("进货单价");
+    protected final TableColumn<GoodsDto, Number> item_purchase_price = new TableColumn<>("进货单价");
 
-    protected final TableColumn<GoodsBean, String> item_quantity = new TableColumn<>("剩余数量");
+    protected final TableColumn<GoodsDto, String> item_quantity = new TableColumn<>("剩余数量");
 
-    protected final TableColumn<GoodsBean, Number> item_min_discount = new TableColumn<>("最低折扣");
+    protected final TableColumn<GoodsDto, Number> item_min_discount = new TableColumn<>("最低折扣");
 
-    protected final TableColumn<GoodsBean, Number> item_deduction = new TableColumn<>("提成金额");
+    protected final TableColumn<GoodsDto, Number> item_deduction = new TableColumn<>("提成金额");
 
-    protected final TableColumn<GoodsBean, Number> item_deduction_rate = new TableColumn<>("提成比例");
+    protected final TableColumn<GoodsDto, Number> item_deduction_rate = new TableColumn<>("提成比例");
 
-    protected final TableColumn<GoodsBean, String> item_type = new TableColumn<>("所属类别");
+    protected final TableColumn<GoodsDto, String> item_type = new TableColumn<>("所属类别");
 
     public GoodsInfoTable() {
         initColumns();
         setItems(obList);
         showAllInfos();
-        ChangeListener<GoodsBean> cl_select = (observable, oldValue, newValue) -> {
+        ChangeListener<GoodsDto> cl_select = (observable, oldValue, newValue) -> {
             System.out.println(newValue);
             selectedBean = newValue;
         };
@@ -95,7 +95,7 @@ public class GoodsInfoTable extends TableView<GoodsBean> {
     public void showAllInfos() {
         clearData(); // 清空所有数据
         GoodsService service = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
-        ArrayList<GoodsBean> listVipBeans = service.selectAll();
+        ArrayList<GoodsDto> listVipBeans = service.selectAll();
         if (listVipBeans != null)
             obList.addAll(listVipBeans);
     }
@@ -112,7 +112,7 @@ public class GoodsInfoTable extends TableView<GoodsBean> {
      *
      * @param beans 需要替换的数据
      */
-    public void replaceData(List<GoodsBean> beans) {
+    public void replaceData(List<GoodsDto> beans) {
         obList.clear();
         obList.addAll(beans);
     }
@@ -122,7 +122,7 @@ public class GoodsInfoTable extends TableView<GoodsBean> {
      *
      * @param bean 要添加的商品
      */
-    public void addBean(GoodsBean bean) {
+    public void addBean(GoodsDto bean) {
         obList.add(bean);
     }
 
@@ -131,7 +131,7 @@ public class GoodsInfoTable extends TableView<GoodsBean> {
      *
      * @param beans 要添加的商品集合
      */
-    public void addAllBeans(List<GoodsBean> beans) {
+    public void addAllBeans(List<GoodsDto> beans) {
         obList.addAll(beans);
     }
 
@@ -140,7 +140,7 @@ public class GoodsInfoTable extends TableView<GoodsBean> {
      *
      * @return 选中的GoodsBean
      */
-    public GoodsBean getSelectedData() {
+    public GoodsDto getSelectedData() {
         return this.selectedBean;
     }
 
@@ -149,7 +149,7 @@ public class GoodsInfoTable extends TableView<GoodsBean> {
      *
      * @param bean 需要移除的GoodsBean
      */
-    public void removeData(GoodsBean bean) {
+    public void removeData(GoodsDto bean) {
         this.obList.remove(bean);
     }
 }

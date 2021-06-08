@@ -4,6 +4,7 @@ package indi.nonoas.crm.controller.consume;
 import indi.nonoas.crm.pojo.*;
 import indi.nonoas.crm.common.PayMode;
 import indi.nonoas.crm.dao.my_orm_dao.UserGoodsDao;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.service.OrderService;
 import indi.nonoas.crm.utils.SpringUtil;
@@ -122,7 +123,7 @@ public class ConsumeDialogController implements Initializable {
         //即将传入数据库的 用户-商品
         List<UserGoods> userGoods = userGoodsData();
         //即将减少数量的 商品
-        List<GoodsBean> goodsBeans = goodsData();
+        List<GoodsDto> goodsBeans = goodsData();
         //需要更新的消费者信息
         UserBean vipBean = vipData();
         //最终订单信息
@@ -204,7 +205,7 @@ public class ConsumeDialogController implements Initializable {
             String gID = od.getProductId();
 
             //如果商品为服务类，则不添加到用户的商品库存中
-            GoodsBean bean = goodsService.selectById(gID);
+            GoodsDto bean = goodsService.selectById(gID);
             if (!bean.getType().equals("服务类"))
                 break;
 
@@ -230,12 +231,12 @@ public class ConsumeDialogController implements Initializable {
      *
      * @return 商品 bean的集合
      */
-    private List<GoodsBean> goodsData() {
+    private List<GoodsDto> goodsData() {
 
         //订单详情列表的-流对象
         return orderDetails.stream()
                 .map(odrDtlBean -> {
-                    GoodsBean bean = goodsService.selectById(odrDtlBean.getProductId());
+                    GoodsDto bean = goodsService.selectById(odrDtlBean.getProductId());
                     //从数据库中减去购买的数量
                     bean.setQuantity(bean.getQuantity() - odrDtlBean.getProductAmount());
                     return bean;

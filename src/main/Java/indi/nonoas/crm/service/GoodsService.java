@@ -1,6 +1,6 @@
 package indi.nonoas.crm.service;
 
-import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -19,14 +19,14 @@ public interface GoodsService{
      * @param id 商品id
      * @return id对应的商品信息bean类
      */
-    GoodsBean selectById(String id);
+    GoodsDto selectById(String id);
 
     /**
      * 查询所有的商品信息
      *
      * @return GoodsBean的ArrayList集合, 可为null
      */
-    ArrayList<GoodsBean> selectAll();
+    ArrayList<GoodsDto> selectAll();
 
     /**
      * 按条件筛选模糊查询
@@ -36,7 +36,7 @@ public interface GoodsService{
      * @param type 商品种类
      * @return GoodsBean的ArrayList集合, 可以为null
      */
-    ArrayList<GoodsBean> selectByFiltrate(String id, String name, String type);
+    ArrayList<GoodsDto> selectByFiltrate(String id, String name, String type);
 
     /**
      * 删除一条商品信息
@@ -50,14 +50,14 @@ public interface GoodsService{
      *
      * @param bean GoodsBean对象
      */
-    void insertInfo(GoodsBean bean);
+    void insertInfo(GoodsDto bean);
 
     /**
      * 更新商品信息
      *
      * @param goodsBean GoodsBean对象
      */
-    void update(GoodsBean goodsBean);
+    void update(GoodsDto goodsBean);
 
     /**
      * 查询所有商品分类名称

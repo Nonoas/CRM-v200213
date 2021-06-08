@@ -1,6 +1,6 @@
 package indi.nonoas.crm.service.impl;
 
-import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.dao.GoodsMapper;
 import indi.nonoas.crm.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +19,17 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsMapper goodsMapper;
 
     @Override
-    public GoodsBean selectById(String id) {
+    public GoodsDto selectById(String id) {
         return goodsMapper.selectById(id);
     }
 
     @Override
-    public ArrayList<GoodsBean> selectAll() {
+    public ArrayList<GoodsDto> selectAll() {
         return goodsMapper.selectAll();
     }
 
     @Override
-    public ArrayList<GoodsBean> selectByFiltrate(String id, String name, String type) {
+    public ArrayList<GoodsDto> selectByFiltrate(String id, String name, String type) {
         return goodsMapper.selectByFiltrate(id, name, type);
     }
 
@@ -39,12 +39,12 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public void insertInfo(GoodsBean bean) {
+    public void insertInfo(GoodsDto bean) {
         goodsMapper.insertInfo(bean);
     }
 
     @Override
-    public void update(GoodsBean goodsBean) {
+    public void update(GoodsDto goodsBean) {
         goodsMapper.update(goodsBean);
     }
 

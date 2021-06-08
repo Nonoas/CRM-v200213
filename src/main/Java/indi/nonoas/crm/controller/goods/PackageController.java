@@ -1,6 +1,6 @@
 package indi.nonoas.crm.controller.goods;
 
-import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.PackageContentBean;
 import indi.nonoas.crm.view.dialog.GoodsSelectDialog;
 import indi.nonoas.crm.view.alert.MyAlert;
@@ -82,9 +82,9 @@ public abstract class PackageController implements Initializable {
         //添加套餐项目的商品
         GoodsSelectDialog dialog = new GoodsSelectDialog();
         dialog.showAndWait();
-        ObservableList<GoodsBean> beans = dialog.getSelectGoods();
+        ObservableList<GoodsDto> beans = dialog.getSelectGoods();
         if (beans != null && beans.size() != 0) {
-            for (GoodsBean goodsBean : beans) {
+            for (GoodsDto goodsBean : beans) {
                 PackageContentBean packageContentBean = new PackageContentBean();
                 packageContentBean.setPkgId(tf_id.getText());
                 packageContentBean.setGoodsId(goodsBean.getId());

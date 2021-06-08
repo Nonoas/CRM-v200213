@@ -2,7 +2,7 @@ package indi.nonoas.crm.app.pkg;
 
 import java.util.ArrayList;
 
-import indi.nonoas.crm.pojo.GoodsBean;
+import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.PackageContentBean;
 import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.service.GoodsService;
@@ -52,12 +52,12 @@ public class PackageContentTable extends TableView<PackageContentBean> {
         item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getGoodsId()));
         item_name.setCellValueFactory(param -> {
             String goodsID = param.getValue().getGoodsId();
-            GoodsBean goodsBean = goodsService.selectById(goodsID);
+            GoodsDto goodsBean = goodsService.selectById(goodsID);
             return new SimpleStringProperty(goodsBean.getName());
         });
         item_money_cost.setCellValueFactory(param -> {
             String goodsID = param.getValue().getGoodsId();
-            GoodsBean goodsBean = goodsService.selectById(goodsID);
+            GoodsDto goodsBean = goodsService.selectById(goodsID);
             double numMoney = goodsBean.getSellPrice();
             String show = String.format("гд%.2f", numMoney);
             return new SimpleStringProperty(show);
@@ -67,7 +67,7 @@ public class PackageContentTable extends TableView<PackageContentBean> {
 
         item_total.setCellValueFactory(param -> {
             String goodsID = param.getValue().getGoodsId();
-            GoodsBean goodsBean = goodsService.selectById(goodsID);
+            GoodsDto goodsBean = goodsService.selectById(goodsID);
             double numMoney = goodsBean.getSellPrice();
             double amount = param.getValue().getGoodsAmount();
             String show = String.format("гд%.2f", numMoney * amount);
