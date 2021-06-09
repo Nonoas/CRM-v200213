@@ -1,18 +1,13 @@
 package indi.nonoas.crm.controller;
 
 import de.felixroske.jfxsupport.FXMLController;
-import indi.nonoas.crm.app.StaffManagePane;
-import indi.nonoas.crm.app.consume.ConsumePane;
 import indi.nonoas.crm.app.consume.ConsumeTab;
 import indi.nonoas.crm.app.consume.VipQueryTab;
-import indi.nonoas.crm.app.goods.GoodsManagePane;
-import indi.nonoas.crm.app.vip.StatPane;
-import indi.nonoas.crm.app.vip.VipManagePane;
+import indi.nonoas.crm.app.vip.VipManageTab;
 import indi.nonoas.crm.common.ClientSession;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.pojo.LoginBean;
 import indi.nonoas.crm.service.OrderService;
-import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,7 +17,6 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
@@ -93,6 +87,7 @@ public class MainController implements Initializable {
 
         label_operator.setText("操作员：" + loginBean.getName());
 
+        // 初始化顶部菜单图标
         ImageView img_shift = new ImageView(ImageSrc.SHIFT_PATH); // 换班图标
         ImageView img_backups = new ImageView(ImageSrc.BACKUPS_PATH); // 换班图标
         ImageView img_setting = new ImageView(ImageSrc.SETTING_PATH); // 设置图标
@@ -111,7 +106,6 @@ public class MainController implements Initializable {
         btn_backups.setGraphic(img_backups);
         btn_setting.setGraphic(img_setting);
         btn_exit.setGraphic(img_exit);
-//        toConsumePane();
     }
 
     /**
@@ -156,12 +150,8 @@ public class MainController implements Initializable {
         lv.setPrefHeight(2 * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
 
         //点击事件定义 beg
-        vipConsumeLb.setOnMouseClicked(event -> {
-            addTab(ConsumeTab.getInstance());
-        });
-        vipQueryLb.setOnMouseClicked(event -> {
-            addTab(VipQueryTab.getInstance());
-        });
+        vipConsumeLb.setOnMouseClicked(event -> addTab(ConsumeTab.getInstance()));
+        vipQueryLb.setOnMouseClicked(event -> addTab(VipQueryTab.getInstance()));
         //点击事件定义 end
         TitledPane titledPane = new TitledPane("用户消费", lv);
         titledPane.setExpanded(false);
@@ -182,7 +172,7 @@ public class MainController implements Initializable {
 
         lv.setPrefHeight(1 * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
 
-//        vipManageLb.setOnMouseClicked(event -> toVipManagerPane());
+        vipManageLb.setOnMouseClicked(event -> addTab(VipManageTab.getInstance()));
 
         TitledPane titledPane = new TitledPane("会员管理", lv);
         titledPane.setExpanded(false);
