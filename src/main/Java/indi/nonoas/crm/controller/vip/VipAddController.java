@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import indi.nonoas.crm.service.UserService;
@@ -108,7 +109,7 @@ public class VipAddController implements Initializable {
         // 设置初始图片
         img_photo.setImage(new Image(ImageSrc.PHOTO_PATH));
         // 初始化CombBox
-        LinkedList<String> cbbItems = (LinkedList<String>) vipLvService.listAllNames();
+        List<String> cbbItems = vipLvService.listAllNames();
         for (String item : cbbItems) {
             cbb_level.getItems().add(item);
         }

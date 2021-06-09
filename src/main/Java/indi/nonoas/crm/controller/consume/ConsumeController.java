@@ -5,6 +5,7 @@ import indi.nonoas.crm.app.goods.GoodsSingleSelectTable;
 import indi.nonoas.crm.app.pkg.PackageSingleSelectTable;
 import indi.nonoas.crm.app.vip.VipAddTab;
 import indi.nonoas.crm.app.vip.VipInfoTable;
+import indi.nonoas.crm.controller.MainController;
 import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.dao.my_orm_dao.UserGoodsDao;
 import indi.nonoas.crm.dao.my_orm_dao.UserGoodsOrderDao;
@@ -43,14 +44,11 @@ public class ConsumeController implements Initializable {
 
     private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
 
-    private final VipLvService vipLvService = (VipLvService) SpringUtil.getBean("VipLvServiceImpl");
 
     /**
      * 会员信息
      */
     private UserBean vipBean = UserBean.SANKE;
-    @FXML
-    private TabPane tp_rootPane;
     @FXML
     private Label lb_cardState;
     @FXML
@@ -65,14 +63,7 @@ public class ConsumeController implements Initializable {
     private Label lb_balance;
     @FXML
     private TextField tf_find;
-    @FXML
-    private TextField tf_findInfo;
-    @FXML
-    private ScrollPane sp_userInfo;
-    @FXML
-    private ComboBox<String> cb_disType;
 
-    private final VipInfoTable tv_vipInfo = new VipInfoTable(); // 会员信息表
 
     public ConsumeController() {
         initData();
@@ -86,6 +77,13 @@ public class ConsumeController implements Initializable {
             if (keyEvent.getCode().equals(KeyCode.ENTER))
                 inquireVIP();
         });
+    }
+
+    @FXML // 清空展示的信息
+    private void clearInfo() {
+        tf_find.setText("");
+        vipBean = SANKE;
+        showFindResult(vipBean);
     }
 
     @FXML // 查找信息
@@ -121,69 +119,21 @@ public class ConsumeController implements Initializable {
             lb_name.setStyle("-fx-text-fill: black");
     }
 
-    @FXML
-    private void inquireVIPInfo() {
-        String str = tf_findInfo.getText().trim();
-        String disType = cb_disType.getValue().equals("全部类型") ? "" : cb_disType.getValue();
-        if (str.equals(""))
-            return;
-        ArrayList<UserBean> listVipBeans = userService.selectByFiltrate(str, str, disType);
-        if (listVipBeans != null) {
-            tv_vipInfo.clearData();
-            for (UserBean bean : listVipBeans)
-                tv_vipInfo.addBean(bean);
-        } else {
-            new MyAlert(AlertType.INFORMATION, "没有找到您查询的会员！").show();
-        }
-    }
-
-    @FXML // 显示全部信息
-    private void showAll() {
-        tv_vipInfo.showAllInfos();
-    }
-
-    @FXML // 清空展示的信息
-    private void clearInfo() {
-        tf_find.setText("");
-        vipBean = SANKE;
-        showFindResult(vipBean);
-    }
-
-    @FXML // 添加会员信息
-    private void addVip() {
-        ObservableList<Tab> obList = tp_rootPane.getTabs();
-        final String DATA = "添加会员";
-        for (Tab tab : obList) { // 遍历判断该tab是否已经添加
-            String userDate = (String) tab.getUserData();
-            if (userDate != null && userDate.equals(DATA)) {
-                tab.setClosable(true);
-                tp_rootPane.getSelectionModel().select(tab); // 如果已经添加则显示该tab并返回
-                return;
-            }
-        }
-        VipAddTab tab = new VipAddTab();
-        tab.setUserData(DATA);
-        tp_rootPane.getTabs().add(tab);
-        tp_rootPane.getSelectionModel().select(tab);
-    }
 
     private void initData() {
     }
 
     private void initView() {
         showFindResult(vipBean);
-        sp_userInfo.setContent(tv_vipInfo);
-        // 从数据库读出所用会员等级，并初始化ComboBox
-        List<String> listName = vipLvService.listAllNames();
-        cb_disType.getItems().add("全部类型");
-        for (String str : listName) {
-            cb_disType.getItems().add(str);
-        }
-        cb_disType.setValue("全部类型");
 
         initGoodsTab();        //初始化商品消费面板
         initPackageTab();       //初始化套餐消费面板
         initCountTab();         //初始化计次消费面板
+    }
+
+    @FXML // 添加会员信息
+    private void addVip() {
+        MainController.addTab(new VipAddTab());
     }
 
 

@@ -3,6 +3,8 @@ package indi.nonoas.crm.controller;
 import de.felixroske.jfxsupport.FXMLController;
 import indi.nonoas.crm.app.StaffManagePane;
 import indi.nonoas.crm.app.consume.ConsumePane;
+import indi.nonoas.crm.app.consume.ConsumeTab;
+import indi.nonoas.crm.app.consume.VipQueryTab;
 import indi.nonoas.crm.app.goods.GoodsManagePane;
 import indi.nonoas.crm.app.vip.StatPane;
 import indi.nonoas.crm.app.vip.VipManagePane;
@@ -40,7 +42,12 @@ public class MainController implements Initializable {
     @Autowired
     private OrderService odrService;
 
-    private CenterPane currentPane; // 当前界面名称
+    private static final TabPane rootTabPane;
+
+    static {
+        rootTabPane = new TabPane();
+        rootTabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
+    }
 
     @FXML
     private BorderPane bp_root;
@@ -78,6 +85,10 @@ public class MainController implements Initializable {
 
         initLeftMenu();
 
+        bp_root.setCenter(rootTabPane);
+
+        MainController.addTab(ConsumeTab.getInstance());
+
         LoginBean loginBean = (LoginBean) ClientSession.getAttribute("user");
 
         label_operator.setText("操作员：" + loginBean.getName());
@@ -100,7 +111,20 @@ public class MainController implements Initializable {
         btn_backups.setGraphic(img_backups);
         btn_setting.setGraphic(img_setting);
         btn_exit.setGraphic(img_exit);
-        toConsumePane();
+//        toConsumePane();
+    }
+
+    /**
+     * 添加Tab到主TabPane
+     *
+     * @param tab tab面板
+     */
+    public static void addTab(Tab tab) {
+        ObservableList<Tab> tabs = rootTabPane.getTabs();
+        if (!tabs.contains(tab)) {
+            tabs.add(tab);
+        }
+        rootTabPane.getSelectionModel().select(tab);
     }
 
     /**
@@ -114,7 +138,6 @@ public class MainController implements Initializable {
         menuList.add(this.goodsManageLeftMenu());
         menuList.add(this.staffManageLeftMenu());
         menuList.add(this.statLeftMenu());
-
     }
 
     /**
@@ -124,7 +147,7 @@ public class MainController implements Initializable {
      */
     private Node consumeLeftMenu() {
         ListView<Label> lv = new ListView<>();
-        Label vipConsumeLb = new LeftMenuItemLabel("会员消费");
+        Label vipConsumeLb = new LeftMenuItemLabel("商品消费");
         Label vipQueryLb = new LeftMenuItemLabel("会员查询");
 
         lv.getItems().add(vipConsumeLb);
@@ -132,8 +155,14 @@ public class MainController implements Initializable {
 
         lv.setPrefHeight(2 * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
 
-        vipConsumeLb.setOnMouseClicked(event -> toConsumePane());
-
+        //点击事件定义 beg
+        vipConsumeLb.setOnMouseClicked(event -> {
+            MainController.addTab(ConsumeTab.getInstance());
+        });
+        vipQueryLb.setOnMouseClicked(event -> {
+            MainController.addTab(VipQueryTab.getInstance());
+        });
+        //点击事件定义 end
         TitledPane titledPane = new TitledPane("用户消费", lv);
         titledPane.setExpanded(false);
         return titledPane;
@@ -153,7 +182,7 @@ public class MainController implements Initializable {
 
         lv.setPrefHeight(1 * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
 
-        vipManageLb.setOnMouseClicked(event -> toVipManagerPane());
+//        vipManageLb.setOnMouseClicked(event -> toVipManagerPane());
 
         TitledPane titledPane = new TitledPane("会员管理", lv);
         titledPane.setExpanded(false);
@@ -177,7 +206,7 @@ public class MainController implements Initializable {
 
         lv.setPrefHeight(3 * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
 
-        goodsInfoLb.setOnMouseClicked(event -> toGoodsManagePane());
+//        goodsInfoLb.setOnMouseClicked(event -> toGoodsManagePane());
 
         TitledPane titledPane = new TitledPane("商品管理", lv);
         titledPane.setExpanded(false);
@@ -198,7 +227,7 @@ public class MainController implements Initializable {
 
         lv.setPrefHeight(lv.getItems().size() * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
 
-        yggl.setOnMouseClicked(event -> toStaffManagePane());
+//        yggl.setOnMouseClicked(event -> toStaffManagePane());
 
         TitledPane titledPane = new TitledPane("员工管理", lv);
         titledPane.setExpanded(false);
@@ -231,52 +260,13 @@ public class MainController implements Initializable {
 
         lv.setPrefHeight(7 * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
 
-        spxfjl.setOnMouseClicked(event -> toStatPane());
+//        spxfjl.setOnMouseClicked(event -> toStatPane());
 
         TitledPane titledPane = new TitledPane("统计报表", lv);
         titledPane.setExpanded(false);
         return titledPane;
     }
 
-    /**
-     * 跳转用户消费界面
-     */
-    private void toConsumePane() {
-        if (currentPane != CenterPane.CONSUMPTION) {
-            changePane(CenterPane.CONSUMPTION);
-        }
-    }
-
-    /**
-     * 跳转会员管理界面
-     */
-    private void toVipManagerPane() {
-        if (currentPane != CenterPane.VIP_MANAGER) {
-            changePane(CenterPane.VIP_MANAGER);
-        }
-    }
-
-    /**
-     * 跳转商品管理界面
-     */
-    @FXML
-    private void toGoodsManagePane() {
-        if (currentPane != CenterPane.GOODS_MANAGE) {
-            changePane(CenterPane.GOODS_MANAGE);
-        }
-    }
-
-    @FXML // 跳转员工管理界面
-    private void toStaffManagePane() {
-        new MyAlert(Alert.AlertType.INFORMATION, "敬请期待！").show();
-    }
-
-    @FXML // 跳转统计报表界面
-    private void toStatPane() {
-        if (currentPane != CenterPane.STATISTICS) {
-            changePane(CenterPane.STATISTICS);
-        }
-    }
 
     @FXML
     private void linkAuthor() {
@@ -293,15 +283,6 @@ public class MainController implements Initializable {
         }
     }
 
-    /**
-     * 切换界面
-     *
-     * @param centerPane 中间面板枚举
-     */
-    private void changePane(CenterPane centerPane) {
-        currentPane = centerPane;
-        bp_root.setCenter(currentPane.pane());
-    }
 
     private void startBackgroundTask() {
 //        OrderService odrService = (OrderService) SpringUtil.getBean("OrderServiceImpl");
@@ -334,44 +315,6 @@ public class MainController implements Initializable {
             setPrefHeight(LEFT_MENUITEM_SIZE);
             setMaxWidth(MAX_VALUE);
             setAlignment(Pos.CENTER);
-        }
-    }
-
-    /**
-     * 枚举：界面名称
-     *
-     * @author Nonoas
-     */
-    private enum CenterPane {
-        /**
-         * 消费界面
-         */
-        CONSUMPTION(new ConsumePane()),
-        /**
-         * 会员管理界面
-         */
-        VIP_MANAGER(new VipManagePane()),
-        /**
-         * 商品管理界面
-         */
-        GOODS_MANAGE(new GoodsManagePane()),
-        /**
-         * 员工管理界面
-         */
-        STAFF_MANAGE(new StaffManagePane()),
-        /**
-         * 统计报表界面
-         */
-        STATISTICS(new StatPane());
-
-        private final Pane pane;
-
-        CenterPane(Pane pane) {
-            this.pane = pane;
-        }
-
-        public Pane pane() {
-            return pane;
         }
     }
 }

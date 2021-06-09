@@ -1,6 +1,5 @@
 package indi.nonoas.crm.service;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
