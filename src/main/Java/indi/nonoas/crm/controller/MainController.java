@@ -157,10 +157,10 @@ public class MainController implements Initializable {
 
         //点击事件定义 beg
         vipConsumeLb.setOnMouseClicked(event -> {
-            MainController.addTab(ConsumeTab.getInstance());
+            addTab(ConsumeTab.getInstance());
         });
         vipQueryLb.setOnMouseClicked(event -> {
-            MainController.addTab(VipQueryTab.getInstance());
+            addTab(VipQueryTab.getInstance());
         });
         //点击事件定义 end
         TitledPane titledPane = new TitledPane("用户消费", lv);
