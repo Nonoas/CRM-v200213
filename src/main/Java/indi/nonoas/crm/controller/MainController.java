@@ -81,15 +81,31 @@ public class MainController implements Initializable {
         startBackgroundTask();
 
         initLeftMenu();
+        initTopMenu();
 
         bp_root.setCenter(rootTabPane);
-
-        MainController.addTab(ConsumeTab.getInstance());
+        addTab(ConsumeTab.getInstance());
 
         LoginBean loginBean = (LoginBean) ClientSession.getAttribute("user");
 
         label_operator.setText("操作员：" + loginBean.getName());
 
+    }
+
+    /**
+     * 添加Tab到主TabPane
+     *
+     * @param tab tab面板
+     */
+    public static void addTab(Tab tab) {
+        ObservableList<Tab> tabs = rootTabPane.getTabs();
+        if (!tabs.contains(tab)) {
+            tabs.add(tab);
+        }
+        rootTabPane.getSelectionModel().select(tab);
+    }
+
+    private void initTopMenu() {
         // 初始化顶部菜单图标
         ImageView img_shift = new ImageView(ImageSrc.SHIFT_PATH); // 换班图标
         ImageView img_backups = new ImageView(ImageSrc.BACKUPS_PATH); // 换班图标
@@ -109,19 +125,6 @@ public class MainController implements Initializable {
         btn_backups.setGraphic(img_backups);
         btn_setting.setGraphic(img_setting);
         btn_exit.setGraphic(img_exit);
-    }
-
-    /**
-     * 添加Tab到主TabPane
-     *
-     * @param tab tab面板
-     */
-    public static void addTab(Tab tab) {
-        ObservableList<Tab> tabs = rootTabPane.getTabs();
-        if (!tabs.contains(tab)) {
-            tabs.add(tab);
-        }
-        rootTabPane.getSelectionModel().select(tab);
     }
 
     /**
