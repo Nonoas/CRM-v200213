@@ -3,6 +3,7 @@ package indi.nonoas.crm.controller;
 import de.felixroske.jfxsupport.FXMLController;
 import indi.nonoas.crm.app.consume.ConsumeTab;
 import indi.nonoas.crm.app.consume.VipQueryTab;
+import indi.nonoas.crm.app.goods.GoodsInfoTab;
 import indi.nonoas.crm.app.vip.VipManageTab;
 import indi.nonoas.crm.common.ClientSession;
 import indi.nonoas.crm.config.ImageSrc;
@@ -190,13 +191,16 @@ public class MainController implements Initializable {
         Label goodsTypeLb = new LeftMenuItemLabel("商品类别");
         Label pkgLb = new LeftMenuItemLabel("套餐项目");
 
-        lv.getItems().add(goodsInfoLb);
-        lv.getItems().add(goodsTypeLb);
-        lv.getItems().add(pkgLb);
+        ObservableList<Label> items = lv.getItems();
+        items.add(goodsInfoLb);
+        items.add(goodsTypeLb);
+        items.add(pkgLb);
 
-        lv.setPrefHeight(3 * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
+        lv.setPrefHeight(items.size() * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
 
-//        goodsInfoLb.setOnMouseClicked(event -> toGoodsManagePane());
+        goodsInfoLb.setOnMouseClicked(event -> addTab(GoodsInfoTab.getInstance()));
+//        goodsTypeLb.setOnMouseClicked(event -> toGoodsManagePane());
+//        pkgLb.setOnMouseClicked(event -> toGoodsManagePane());
 
         TitledPane titledPane = new TitledPane("商品管理", lv);
         titledPane.setExpanded(false);
