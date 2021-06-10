@@ -4,6 +4,8 @@ import de.felixroske.jfxsupport.FXMLController;
 import indi.nonoas.crm.app.consume.ConsumeTab;
 import indi.nonoas.crm.app.consume.VipQueryTab;
 import indi.nonoas.crm.app.goods.GoodsInfoTab;
+import indi.nonoas.crm.app.goods.GoodsTypeTab;
+import indi.nonoas.crm.app.goods.PackageInfoTab;
 import indi.nonoas.crm.app.vip.VipManageTab;
 import indi.nonoas.crm.common.ClientSession;
 import indi.nonoas.crm.config.ImageSrc;
@@ -31,7 +33,7 @@ public class MainController implements Initializable {
 
     private final Logger logger = Logger.getLogger(MainController.class);
 
-    private static final double IMG_SIZE = 30; // 按图标尺寸
+    private static final double IMG_SIZE = 30;
 
 
     @Autowired
@@ -199,8 +201,8 @@ public class MainController implements Initializable {
         lv.setPrefHeight(items.size() * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
 
         goodsInfoLb.setOnMouseClicked(event -> addTab(GoodsInfoTab.getInstance()));
-//        goodsTypeLb.setOnMouseClicked(event -> toGoodsManagePane());
-//        pkgLb.setOnMouseClicked(event -> toGoodsManagePane());
+        goodsTypeLb.setOnMouseClicked(event -> addTab(GoodsTypeTab.getInstance()));
+        pkgLb.setOnMouseClicked(event -> addTab(PackageInfoTab.getInstance()));
 
         TitledPane titledPane = new TitledPane("商品管理", lv);
         titledPane.setExpanded(false);
