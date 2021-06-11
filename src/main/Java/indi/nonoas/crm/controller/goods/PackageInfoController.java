@@ -52,13 +52,13 @@ public class PackageInfoController implements Initializable {
 
     @FXML
     private void findPackage() {
-        String id = "%" + tf_pkgID.getText().trim() + "%";
+        String keywords = tf_pkgID.getText().trim();
         String money1 = tf_moneyLow.getText().trim();
         String money2 = tf_moneyHigh.getText().trim();
         double mLow = "".equals(money1) ? 0 : Double.parseDouble(money1);
         double mHigh = "".equals(money2) ? 99999999 : Double.parseDouble(money2);
 
-        List<PackageDto> list = pkgService.findByFilter(id, id, mLow, mHigh);
+        List<PackageDto> list = pkgService.findByFilter(keywords, keywords, mLow, mHigh);
         if (list == null) {
             new MyAlert(Alert.AlertType.INFORMATION, "没有找到您查询的项目信息！").show();
         } else {
