@@ -16,199 +16,156 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="717.0" prefWidth="1133.0"
-      xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="indi.nonoas.crm.controller.consume.ConsumeController">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="717.0" prefWidth="1133.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="indi.nonoas.crm.controller.consume.ConsumeController">
     <padding>
-        <Insets bottom="10.0" left="20.0" right="20.0"/>
+        <Insets bottom="10.0" left="20.0" right="20.0" />
     </padding>
     <HBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="60.0" prefWidth="1180.0" spacing="10.0">
         <VBox.margin>
-            <Insets/>
+            <Insets />
         </VBox.margin>
         <Label text="输入会员编号或姓名">
             <HBox.margin>
-                <Insets/>
+                <Insets />
             </HBox.margin>
         </Label>
         <TextField fx:id="tf_find" prefHeight="30.0" prefWidth="213.0">
             <HBox.margin>
-                <Insets/>
+                <Insets />
             </HBox.margin>
         </TextField>
         <Button mnemonicParsing="false" onAction="#inquireVIP" text="查询">
             <HBox.margin>
-                <Insets/>
+                <Insets />
             </HBox.margin>
             <tooltip>
-                <Tooltip text="[Enter]"/>
+                <Tooltip text="[Enter]" />
             </tooltip>
         </Button>
-        <Button mnemonicParsing="false" onAction="#clearInfo" styleClass="negative-btn" text="清空">
+        <Button mnemonicParsing="false" onAction="#clearInfo" styleClass="danger" text="清空">
             <HBox.margin>
-                <Insets/>
+                <Insets />
             </HBox.margin>
         </Button>
         <Button mnemonicParsing="false" onAction="#addVip" text="新增会员">
             <HBox.margin>
-                <Insets left="50.0"/>
+                <Insets left="50.0" />
             </HBox.margin>
         </Button>
     </HBox>
-    <Separator prefWidth="200.0"/>
+    <Separator prefWidth="200.0" />
     <HBox prefHeight="86.0" prefWidth="928.0">
         <children>
-            <GridPane hgap="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="872.0"
-                      vgap="5.0">
+            <GridPane hgap="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="872.0" vgap="5.0">
                 <children>
-                    <Label text="会员卡号:" wrapText="true" GridPane.rowIndex="1"/>
-                    <Label fx:id="lb_id" text="--" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                    <Label text="会员姓名:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-                    <Label fx:id="lb_name" text="--" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
-                    <Label minWidth="-Infinity" text="会员卡等级:" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
-                    <Label fx:id="lb_cardLevel" prefHeight="20.0" prefWidth="78.0" text="--"
-                           GridPane.columnIndex="5" GridPane.rowIndex="1"/>
-                    <Label text="会员积分:" wrapText="true" GridPane.rowIndex="2"/>
-                    <Label fx:id="lb_integral" text="--" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                    <Label text="会员卡状态:" GridPane.columnIndex="4" GridPane.rowIndex="2"/>
-                    <Label fx:id="lb_cardState" text="--" GridPane.columnIndex="5" GridPane.rowIndex="2"/>
-                    <Label text="卡内余额:" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
-                    <Label fx:id="lb_balance" text="--" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                    <Label text="会员卡号:" wrapText="true" GridPane.rowIndex="1" />
+                    <Label fx:id="lb_id" text="--" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Label text="会员姓名:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                    <Label fx:id="lb_name" text="--" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                    <Label minWidth="-Infinity" text="会员卡等级:" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                    <Label fx:id="lb_cardLevel" prefHeight="20.0" prefWidth="78.0" text="--" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                    <Label text="会员积分:" wrapText="true" GridPane.rowIndex="2" />
+                    <Label fx:id="lb_integral" text="--" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Label text="会员卡状态:" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                    <Label fx:id="lb_cardState" text="--" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                    <Label text="卡内余额:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                    <Label fx:id="lb_balance" text="--" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                 </children>
                 <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="156.0" minWidth="-Infinity" prefWidth="80.0"/>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.0" minWidth="160.0" prefWidth="160.0"/>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="382.0" minWidth="-Infinity" prefWidth="106.0"/>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="552.0" minWidth="134.0" prefWidth="134.0"/>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="599.0" minWidth="-Infinity" prefWidth="110.0"/>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="632.0" minWidth="160.0" prefWidth="160.0"/>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity"
-                                       prefWidth="91.0"/>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="156.0" minWidth="-Infinity" prefWidth="80.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="302.0" minWidth="160.0" prefWidth="160.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="382.0" minWidth="-Infinity" prefWidth="106.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="552.0" minWidth="134.0" prefWidth="134.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="599.0" minWidth="-Infinity" prefWidth="110.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="632.0" minWidth="160.0" prefWidth="160.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="91.0" />
                 </columnConstraints>
                 <rowConstraints>
-                    <RowConstraints/>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    <RowConstraints />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 </rowConstraints>
             </GridPane>
         </children>
     </HBox>
-    <Separator prefHeight="20.0" prefWidth="1133.0"/>
-    <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="567.0"
-             prefWidth="1093.0" tabMinWidth="80.0" VBox.vgrow="ALWAYS">
+    <Separator prefHeight="20.0" prefWidth="1133.0" />
+    <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="567.0" prefWidth="1093.0" tabMinWidth="80.0" VBox.vgrow="ALWAYS">
         <Tab closable="false" text="商品购买">
             <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
                 <BorderPane fx:id="pt_borderPane" prefHeight="358.0" prefWidth="616.0">
                     <padding>
-                        <Insets bottom="5.0" right="5.0" top="5.0"/>
+                        <Insets bottom="5.0" right="5.0" top="5.0" />
                     </padding>
                     <opaqueInsets>
-                        <Insets/>
+                        <Insets />
                     </opaqueInsets>
                     <bottom>
-                        <GridPane alignment="CENTER" hgap="10.0" prefHeight="98.0" prefWidth="606.0"
-                                  vgap="10.0" BorderPane.alignment="CENTER">
+                        <GridPane alignment="CENTER" hgap="10.0" prefHeight="98.0" prefWidth="606.0" vgap="10.0" BorderPane.alignment="CENTER">
                             <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             </columnConstraints>
                             <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <BorderPane.margin>
-                                <Insets top="10.0"/>
+                                <Insets top="10.0" />
                             </BorderPane.margin>
                             <HBox>
-                                <Label contentDisplay="CENTER"
-                                       maxHeight="1.7976931348623157E308"
-                                       maxWidth="1.7976931348623157E308" prefHeight="46.0"
-                                       text="订单金额："/>
-                                <Label fx:id="pt_order_price" maxHeight="1.7976931348623157E308"
-                                       maxWidth="1.7976931348623157E308" text="0.00"
-                                       HBox.hgrow="ALWAYS"/>
+                                <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" text="订单金额：" />
+                                <Label fx:id="pt_order_price" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0.00" HBox.hgrow="ALWAYS" />
                             </HBox>
                             <HBox GridPane.columnIndex="1">
-                                <Label contentDisplay="CENTER"
-                                       maxHeight="1.7976931348623157E308"
-                                       maxWidth="1.7976931348623157E308" text="折后金额："/>
-                                <Label fx:id="pt_order_dis_price"
-                                       maxHeight="1.7976931348623157E308"
-                                       maxWidth="1.7976931348623157E308" text="0.00"
-                                       HBox.hgrow="ALWAYS"/>
+                                <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="折后金额：" />
+                                <Label fx:id="pt_order_dis_price" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0.00" HBox.hgrow="ALWAYS" />
                             </HBox>
                             <HBox GridPane.columnIndex="3">
-                                <Label contentDisplay="CENTER"
-                                       maxHeight="1.7976931348623157E308"
-                                       maxWidth="1.7976931348623157E308" text="获得积分："/>
-                                <TextField fx:id="shp_integral" prefHeight="30.0"
-                                           prefWidth="30.0" HBox.hgrow="ALWAYS"/>
+                                <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="获得积分：" />
+                                <TextField fx:id="shp_integral" prefHeight="30.0" prefWidth="30.0" HBox.hgrow="ALWAYS" />
                             </HBox>
-                            <Button alignment="CENTER" contentDisplay="CENTER"
-                                    maxWidth="1.7976931348623157E308" minWidth="80.0"
-                                    mnemonicParsing="false" onAction="#clearGoodsOrder"
-                                    styleClass="negative-btn" text="清空" GridPane.columnSpan="2"
-                                    GridPane.halignment="RIGHT" GridPane.rowIndex="2"
-                                    GridPane.valignment="CENTER"/>
-                            <HBox prefHeight="62.0" prefWidth="222.0" GridPane.columnSpan="2"
-                                  GridPane.rowIndex="1">
-                                <Label fx:id="pt_lb_order_date11" contentDisplay="CENTER"
-                                       maxHeight="1.7976931348623157E308"
-                                       maxWidth="1.7976931348623157E308" prefHeight="54.0"
-                                       text="订单号："/>
-                                <TextField fx:id="shp_orderNum" editable="false"
-                                           HBox.hgrow="ALWAYS"/>
+                            <Button alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minWidth="80.0" mnemonicParsing="false" onAction="#clearGoodsOrder" styleClass="danger" text="清空" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                            <HBox prefHeight="62.0" prefWidth="222.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                <Label fx:id="pt_lb_order_date11" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" text="订单号：" />
+                                <TextField fx:id="shp_orderNum" editable="false" HBox.hgrow="ALWAYS" />
                             </HBox>
-                            <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT"
-                                  prefHeight="62.0" prefWidth="222.0" GridPane.columnIndex="2"
-                                  GridPane.columnSpan="2" GridPane.rowIndex="1">
-                                <Label fx:id="pt_lb_order_date111" contentDisplay="CENTER"
-                                       maxHeight="1.7976931348623157E308"
-                                       maxWidth="1.7976931348623157E308" text="订单日期：">
+                            <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="62.0" prefWidth="222.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                <Label fx:id="pt_lb_order_date111" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="订单日期：">
                                     <tooltip>
-                                        <Tooltip text="订单日期"/>
+                                        <Tooltip text="订单日期" />
                                     </tooltip>
                                 </Label>
-                                <TextField fx:id="shp_orderDate" editable="false"
-                                           HBox.hgrow="ALWAYS"/>
+                                <TextField fx:id="shp_orderDate" editable="false" HBox.hgrow="ALWAYS" />
                             </HBox>
-                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-                                    onAction="#payGoodsOrder" text="订单结算" GridPane.columnIndex="2"
-                                    GridPane.columnSpan="2" GridPane.rowIndex="2"/>
+                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#payGoodsOrder" text="订单结算" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
                             <HBox GridPane.columnIndex="2">
-                                <Label contentDisplay="CENTER"
-                                       maxHeight="1.7976931348623157E308"
-                                       maxWidth="1.7976931348623157E308" text="积分消耗："/>
-                                <TextField fx:id="shp_integral_cost" prefHeight="30.0"
-                                           prefWidth="30.0" HBox.hgrow="ALWAYS"/>
+                                <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="积分消耗：" />
+                                <TextField fx:id="shp_integral_cost" prefHeight="30.0" prefWidth="30.0" HBox.hgrow="ALWAYS" />
                             </HBox>
                         </GridPane>
                     </bottom>
                     <top>
-                        <Label style="-fx-font-weight: bold;" text="已选商品："
-                               BorderPane.alignment="CENTER_LEFT">
+                        <Label style="-fx-font-weight: bold;" text="已选商品：" BorderPane.alignment="CENTER_LEFT">
                             <padding>
-                                <Insets bottom="5.0" left="5.0" top="5.0"/>
+                                <Insets bottom="5.0" left="5.0" top="5.0" />
                             </padding>
                         </Label>
                     </top>
                 </BorderPane>
                 <BorderPane fx:id="bp_goodsTable" prefHeight="200.0" prefWidth="200.0">
                     <top>
-                        <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308"
-                              BorderPane.alignment="CENTER">
+                        <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
                             <padding>
-                                <Insets bottom="5.0"/>
+                                <Insets bottom="5.0" />
                             </padding>
-                            <Button mnemonicParsing="false" onAction="#refreshGoodsTable"
-                                    text="刷新"/>
+                            <Button mnemonicParsing="false" onAction="#refreshGoodsTable" text="刷新" />
                         </HBox>
                     </top>
                     <padding>
-                        <Insets left="5.0" right="5.0" top="5.0"/>
+                        <Insets left="5.0" right="5.0" top="5.0" />
                     </padding>
                 </BorderPane>
             </SplitPane>
@@ -217,96 +174,61 @@
             <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
                 <BorderPane fx:id="tc_borderPane" prefHeight="358.0" prefWidth="616.0">
                     <padding>
-                        <Insets bottom="5.0" right="5.0" top="5.0"/>
+                        <Insets bottom="5.0" right="5.0" top="5.0" />
                     </padding>
                     <opaqueInsets>
-                        <Insets/>
+                        <Insets />
                     </opaqueInsets>
                     <bottom>
-                        <GridPane alignment="CENTER" hgap="10.0" prefHeight="98.0" prefWidth="606.0"
-                                  vgap="10.0" BorderPane.alignment="CENTER">
+                        <GridPane alignment="CENTER" hgap="10.0" prefHeight="98.0" prefWidth="606.0" vgap="10.0" BorderPane.alignment="CENTER">
                             <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             </columnConstraints>
                             <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <BorderPane.margin>
-                                <Insets top="10.0"/>
+                                <Insets top="10.0" />
                             </BorderPane.margin>
                             <HBox>
-                                <Label contentDisplay="CENTER"
-                                       maxHeight="1.7976931348623157E308"
-                                       maxWidth="1.7976931348623157E308" prefHeight="46.0"
-                                       text="订单金额："/>
-                                <Label fx:id="tc_order_price" maxHeight="1.7976931348623157E308"
-                                       maxWidth="1.7976931348623157E308" text="0.00"
-                                       HBox.hgrow="ALWAYS"/>
+                                <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" text="订单金额：" />
+                                <Label fx:id="tc_order_price" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0.00" HBox.hgrow="ALWAYS" />
                             </HBox>
                             <HBox GridPane.columnIndex="1">
-                                <Label contentDisplay="CENTER"
-                                       maxHeight="1.7976931348623157E308"
-                                       maxWidth="1.7976931348623157E308" text="折后金额："/>
-                                <Label fx:id="tc_order_dis_price"
-                                       maxHeight="1.7976931348623157E308"
-                                       maxWidth="1.7976931348623157E308" text="0.00"
-                                       HBox.hgrow="ALWAYS"/>
+                                <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="折后金额：" />
+                                <Label fx:id="tc_order_dis_price" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="0.00" HBox.hgrow="ALWAYS" />
                             </HBox>
                             <HBox GridPane.columnIndex="3">
-                                <Label contentDisplay="CENTER"
-                                       maxHeight="1.7976931348623157E308"
-                                       maxWidth="1.7976931348623157E308" text="获得积分："/>
-                                <TextField fx:id="tc_integral_get" prefHeight="30.0"
-                                           prefWidth="30.0" HBox.hgrow="ALWAYS"/>
+                                <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="获得积分：" />
+                                <TextField fx:id="tc_integral_get" prefHeight="30.0" prefWidth="30.0" HBox.hgrow="ALWAYS" />
                             </HBox>
-                            <Button alignment="CENTER" contentDisplay="CENTER"
-                                    maxWidth="1.7976931348623157E308" minWidth="80.0"
-                                    mnemonicParsing="false" onAction="#clearPackageOrder"
-                                    styleClass="negative-btn" text="清空" GridPane.columnSpan="2"
-                                    GridPane.halignment="RIGHT" GridPane.rowIndex="2"
-                                    GridPane.valignment="CENTER"/>
-                            <HBox prefHeight="62.0" prefWidth="222.0" GridPane.columnSpan="2"
-                                  GridPane.rowIndex="1">
-                                <Label fx:id="pt_lb_order_date11" contentDisplay="CENTER"
-                                       maxHeight="1.7976931348623157E308"
-                                       maxWidth="1.7976931348623157E308" prefHeight="54.0"
-                                       text="订单号："/>
-                                <TextField fx:id="tc_orderNum" editable="false"
-                                           HBox.hgrow="ALWAYS"/>
+                            <Button alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minWidth="80.0" mnemonicParsing="false" onAction="#clearPackageOrder" styleClass="danger" text="清空" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                            <HBox prefHeight="62.0" prefWidth="222.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                <Label fx:id="pt_lb_order_date11" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" text="订单号：" />
+                                <TextField fx:id="tc_orderNum" editable="false" HBox.hgrow="ALWAYS" />
                             </HBox>
-                            <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="222.0"
-                                  GridPane.columnIndex="2" GridPane.columnSpan="2"
-                                  GridPane.rowIndex="1">
-                                <Label fx:id="pt_lb_order_date111" contentDisplay="CENTER"
-                                       maxHeight="1.7976931348623157E308"
-                                       maxWidth="1.7976931348623157E308" text="订单日期："/>
-                                <TextField fx:id="tc_orderDate" editable="false"
-                                           HBox.hgrow="ALWAYS"/>
+                            <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="222.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                <Label fx:id="pt_lb_order_date111" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="订单日期：" />
+                                <TextField fx:id="tc_orderDate" editable="false" HBox.hgrow="ALWAYS" />
                             </HBox>
-                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-                                    onAction="#payPackageOrder" text="订单结算" GridPane.columnIndex="2"
-                                    GridPane.columnSpan="2" GridPane.rowIndex="2"/>
+                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#payPackageOrder" text="订单结算" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
                             <HBox GridPane.columnIndex="2">
                                 <children>
-                                    <Label contentDisplay="CENTER"
-                                           maxHeight="1.7976931348623157E308"
-                                           maxWidth="1.7976931348623157E308" text="积分消耗："/>
-                                    <TextField fx:id="tc_integral_cost" prefHeight="30.0"
-                                               prefWidth="30.0" HBox.hgrow="ALWAYS"/>
+                                    <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="积分消耗：" />
+                                    <TextField fx:id="tc_integral_cost" prefHeight="30.0" prefWidth="30.0" HBox.hgrow="ALWAYS" />
                                 </children>
                             </HBox>
                         </GridPane>
                     </bottom>
                     <top>
-                        <Label style="-fx-font-weight: bold;" text="已选套餐："
-                               BorderPane.alignment="CENTER_LEFT">
+                        <Label style="-fx-font-weight: bold;" text="已选套餐：" BorderPane.alignment="CENTER_LEFT">
                             <padding>
-                                <Insets bottom="5.0" left="5.0" top="5.0"/>
+                                <Insets bottom="5.0" left="5.0" top="5.0" />
                             </padding>
                         </Label>
                     </top>
@@ -315,14 +237,13 @@
                     <top>
                         <HBox alignment="CENTER_LEFT" prefWidth="200.0" BorderPane.alignment="CENTER">
                             <padding>
-                                <Insets bottom="5.0"/>
+                                <Insets bottom="5.0" />
                             </padding>
-                            <Button mnemonicParsing="false" onAction="#refreshPackageTable"
-                                    text="刷新"/>
+                            <Button mnemonicParsing="false" onAction="#refreshPackageTable" text="刷新" />
                         </HBox>
                     </top>
                     <padding>
-                        <Insets bottom="5.0" left="5.0" top="5.0"/>
+                        <Insets bottom="5.0" left="5.0" top="5.0" />
                     </padding>
                 </BorderPane>
             </SplitPane>
@@ -331,64 +252,44 @@
             <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
                 <BorderPane fx:id="jc_borderPane" prefHeight="358.0" prefWidth="616.0">
                     <padding>
-                        <Insets bottom="5.0" right="5.0" top="5.0"/>
+                        <Insets bottom="5.0" right="5.0" top="5.0" />
                     </padding>
                     <opaqueInsets>
-                        <Insets/>
+                        <Insets />
                     </opaqueInsets>
                     <bottom>
-                        <GridPane alignment="CENTER" hgap="10.0" prefHeight="98.0" prefWidth="606.0"
-                                  vgap="10.0" BorderPane.alignment="CENTER">
+                        <GridPane alignment="CENTER" hgap="10.0" prefHeight="98.0" prefWidth="606.0" vgap="10.0" BorderPane.alignment="CENTER">
                             <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             </columnConstraints>
                             <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <BorderPane.margin>
-                                <Insets top="10.0"/>
+                                <Insets top="10.0" />
                             </BorderPane.margin>
-                            <Button alignment="CENTER" contentDisplay="CENTER"
-                                    maxWidth="1.7976931348623157E308" minWidth="80.0"
-                                    mnemonicParsing="false" onAction="#clearCountOrder"
-                                    styleClass="negative-btn" text="清空" GridPane.columnSpan="2"
-                                    GridPane.halignment="RIGHT" GridPane.rowIndex="1"
-                                    GridPane.valignment="CENTER"/>
-                            <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="222.0"
-                                  GridPane.columnSpan="2" GridPane.halignment="CENTER"
-                                  GridPane.valignment="CENTER">
+                            <Button alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minWidth="80.0" mnemonicParsing="false" onAction="#clearCountOrder" styleClass="danger" text="清空" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                            <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="222.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                 <children>
-                                    <Label fx:id="pt_lb_order_date1111" contentDisplay="CENTER"
-                                           maxHeight="1.7976931348623157E308"
-                                           maxWidth="1.7976931348623157E308" prefHeight="54.0"
-                                           text="订单日期："/>
-                                    <TextField fx:id="jc_orderTime" editable="false"
-                                               HBox.hgrow="ALWAYS"/>
+                                    <Label fx:id="pt_lb_order_date1111" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" text="订单日期：" />
+                                    <TextField fx:id="jc_orderTime" editable="false" HBox.hgrow="ALWAYS" />
                                 </children>
                             </HBox>
-                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-                                    onAction="#payCountOrder" text="订单结算" GridPane.columnIndex="2"
-                                    GridPane.columnSpan="2" GridPane.rowIndex="1"/>
-                            <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="222.0"
-                                  GridPane.columnIndex="2" GridPane.columnSpan="2">
-                                <Label fx:id="pt_lb_order_date11111" contentDisplay="CENTER"
-                                       maxHeight="1.7976931348623157E308"
-                                       maxWidth="1.7976931348623157E308" prefHeight="44.0"
-                                       text="受理人："/>
-                                <TextField fx:id="jc_transactor" prefHeight="30.0"
-                                           prefWidth="102.0" HBox.hgrow="ALWAYS"/>
+                            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#payCountOrder" text="订单结算" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                            <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="222.0" GridPane.columnIndex="2" GridPane.columnSpan="2">
+                                <Label fx:id="pt_lb_order_date11111" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="44.0" text="受理人：" />
+                                <TextField fx:id="jc_transactor" prefHeight="30.0" prefWidth="102.0" HBox.hgrow="ALWAYS" />
                             </HBox>
                         </GridPane>
                     </bottom>
                     <top>
-                        <Label style="-fx-font-weight: bold;" text="已选商品："
-                               BorderPane.alignment="CENTER_LEFT">
+                        <Label style="-fx-font-weight: bold;" text="已选商品：" BorderPane.alignment="CENTER_LEFT">
                             <padding>
-                                <Insets bottom="5.0" left="5.0" top="5.0"/>
+                                <Insets bottom="5.0" left="5.0" top="5.0" />
                             </padding>
                         </Label>
                     </top>
@@ -397,17 +298,17 @@
                     <top>
                         <HBox alignment="CENTER_LEFT" prefWidth="616.0" BorderPane.alignment="CENTER">
                             <padding>
-                                <Insets bottom="5.0"/>
+                                <Insets bottom="5.0" />
                             </padding>
                             <Button mnemonicParsing="false" onAction="#refreshUserGoods" text="刷新">
                                 <HBox.margin>
-                                    <Insets bottom="5.0"/>
+                                    <Insets bottom="5.0" />
                                 </HBox.margin>
                             </Button>
                         </HBox>
                     </top>
                     <padding>
-                        <Insets bottom="5.0" left="5.0" top="5.0"/>
+                        <Insets bottom="5.0" left="5.0" top="5.0" />
                     </padding>
                 </BorderPane>
             </SplitPane>

@@ -199,6 +199,9 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
                 btn_reduce.setMinWidth(35);
                 tf_number.setMinWidth(50);
 
+                //设置按钮样式
+                btn_reduce.getStyleClass().add("danger");
+
                 HBox.setHgrow(tf_number, Priority.ALWAYS);
 
                 hBox.getChildren().addAll(btn_add, tf_number, btn_reduce);

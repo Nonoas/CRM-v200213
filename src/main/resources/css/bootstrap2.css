@@ -7,7 +7,7 @@
 .number-button:focused,
 .combo-box:focused .text-field, .choice-box:focused, .color-picker:focused, .date-picker:focused .text-field
 {
-	-fx-effect: dropshadow(gaussian, #b4d1f3, 3, 3, 0, 0);
+	-fx-effect: dropshadow(gaussian, #b4d1f3, 2, 2, 0, 0);
 }
 .button,.menu-button,.toggle-button,.split-menu-button {
 	-fx-font-size: 14;
@@ -339,7 +339,7 @@ VBox > .split-menu-button.last > .arrow-button {
 ,.toggle-button.danger:pressed,.toggle-button.danger:selected,
 .split-menu-button.danger:pressed > .label, .split-menu-button.danger > .arrow-button:pressed {
 	-fx-border-color: #aa302a #aa302a #8e2823 #aa302a;
-	-fx-background-color: #bd362f;
+	-fx-background-color: #c7473f;
 	-fx-effect: innershadow(gaussian, #aa302a, 10, 0, 0, 3);
 }
 
