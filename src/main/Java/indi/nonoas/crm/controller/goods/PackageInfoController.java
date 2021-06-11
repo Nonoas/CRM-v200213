@@ -6,7 +6,6 @@ import indi.nonoas.crm.app.pkg.PackageModifyTab;
 import indi.nonoas.crm.app.pkg.PackageTable;
 import indi.nonoas.crm.controller.MainController;
 import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
-import indi.nonoas.crm.dao.my_orm_dao.PackageDao;
 import indi.nonoas.crm.pojo.PackageDto;
 import indi.nonoas.crm.service.PackageService;
 import indi.nonoas.crm.utils.SpringUtil;
@@ -19,7 +18,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -59,7 +58,7 @@ public class PackageInfoController implements Initializable {
         double mLow = "".equals(money1) ? 0 : Double.parseDouble(money1);
         double mHigh = "".equals(money2) ? 99999999 : Double.parseDouble(money2);
 
-        ArrayList<PackageDto> list = PackageDao.getInstance().findByFilter(id, id, mLow, mHigh);
+        List<PackageDto> list = pkgService.findByFilter(id, id, mLow, mHigh);
         if (list == null) {
             new MyAlert(Alert.AlertType.INFORMATION, "没有找到您查询的项目信息！").show();
         } else {

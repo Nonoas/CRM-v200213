@@ -21,7 +21,7 @@ public class GoodsAddTab extends Tab {
 	}
 
 	private void initView() {
-		URL url = getClass().getResource("/fxml/goods_add.fxml");
+		URL url = getClass().getResource("/fxml/goods/goods_add.fxml");
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		fxmlLoader.setLocation(url);
 		fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());

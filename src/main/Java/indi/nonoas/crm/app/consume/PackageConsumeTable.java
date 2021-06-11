@@ -1,7 +1,8 @@
 package indi.nonoas.crm.app.consume;
 
 import indi.nonoas.crm.pojo.PackageDto;
-import indi.nonoas.crm.dao.my_orm_dao.PackageDao;
+import indi.nonoas.crm.service.PackageService;
+import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.table.GoodsEditTable;
 import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
 import javafx.collections.ObservableList;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 public class PackageConsumeTable extends GoodsEditTable<PackageDto> {
 
     private final ObservableList<GoodsEditTableVO> obList = getItems();
+
+    private final PackageService pkgService = (PackageService) SpringUtil.getBean("PackageServiceImpl");
 
     public PackageConsumeTable() {
         item_id.setText("Ì×²Í±àºÅ");
@@ -43,7 +46,7 @@ public class PackageConsumeTable extends GoodsEditTable<PackageDto> {
 
     @Override
     protected PackageDto dataToBean(GoodsEditTableVO data) {
-        return PackageDao.getInstance().selectById(data.getId());
+        return pkgService.selectById(data.getId());
     }
 
     @Override

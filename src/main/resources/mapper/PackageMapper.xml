@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="indi.nonoas.crm.dao.PackageMapper">
+
+    <resultMap id="PackageDto" type="indi.nonoas.crm.pojo.PackageDto"/>
+
+    <select id="findByFilter" resultMap="PackageDto">
+        select *
+        from package_info
+        where (id like #{id} or name like #{name})
+          and (money_cost between #{money1} and #{money2});
+    </select>
+</mapper>

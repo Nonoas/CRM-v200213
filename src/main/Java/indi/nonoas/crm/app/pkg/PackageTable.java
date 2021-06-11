@@ -1,7 +1,8 @@
 package indi.nonoas.crm.app.pkg;
 
 import indi.nonoas.crm.pojo.PackageDto;
-import indi.nonoas.crm.dao.my_orm_dao.PackageDao;
+import indi.nonoas.crm.service.PackageService;
+import indi.nonoas.crm.utils.SpringUtil;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -10,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 项目信息表格
@@ -18,6 +19,8 @@ import java.util.ArrayList;
  * @author Nonoas
  */
 public class PackageTable extends TableView<PackageDto> {
+
+    private final PackageService pkgService = (PackageService) SpringUtil.getBean("PackageServiceImpl");
 
     /**
      * 数据源
@@ -112,9 +115,10 @@ public class PackageTable extends TableView<PackageDto> {
      */
     public void showAllInfos() {
         clearData(); // 清空所有数据
-        ArrayList<PackageDto> listVipBeans = PackageDao.getInstance().selectAll();
-        if (listVipBeans != null)
-            obList.addAll(listVipBeans);
+        List<PackageDto> pkgDtoList = pkgService.selectAll();
+        if (pkgDtoList != null) {
+            obList.addAll(pkgDtoList);
+        }
     }
 
     /**

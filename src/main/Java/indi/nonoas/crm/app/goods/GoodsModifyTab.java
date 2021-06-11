@@ -29,7 +29,7 @@ public class GoodsModifyTab extends Tab {
 	}
 
 	private void initView() {
-		URL url = getClass().getResource("/fxml/goods_modify.fxml");
+		URL url = getClass().getResource("/fxml/goods/goods_modify.fxml");
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		fxmlLoader.setLocation(url);
 		fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());

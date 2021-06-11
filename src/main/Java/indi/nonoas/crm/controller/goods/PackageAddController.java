@@ -2,8 +2,9 @@ package indi.nonoas.crm.controller.goods;
 
 import indi.nonoas.crm.pojo.PackageDto;
 import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
-import indi.nonoas.crm.dao.my_orm_dao.PackageDao;
 import indi.nonoas.crm.pojo.PackageContentBean;
+import indi.nonoas.crm.service.PackageService;
+import indi.nonoas.crm.utils.SpringUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -12,6 +13,8 @@ import java.util.ArrayList;
 public class PackageAddController extends PackageController {
 
     private Tab parentTab;  //当前tab的引用
+
+    private final PackageService pkgService = (PackageService) SpringUtil.getBean("PackageServiceImpl");
 
     @Override
     protected void initView() {
@@ -61,7 +64,7 @@ public class PackageAddController extends PackageController {
         }
         packageBean.setOther(tf_other.getText());
         //插入套餐信息到数据库
-        PackageDao.getInstance().insert(packageBean);
+        pkgService.insert(packageBean);
         //套餐内容信息
         ArrayList<PackageContentBean> packageContentBeans = pkgGoodsTable.getAllBeans();
         for (PackageContentBean p : packageContentBeans) {

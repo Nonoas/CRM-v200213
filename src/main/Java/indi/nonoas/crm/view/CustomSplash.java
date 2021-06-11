@@ -59,8 +59,9 @@ public class CustomSplash extends SplashScreen {
      */
     @Override
     public String getImagePath() {
-        if (!flag)
+        if (!flag) {
             return super.getImagePath();
+        }
         return DEFAULT_IMAGE;
     }
 }

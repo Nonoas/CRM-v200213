@@ -6,6 +6,7 @@ import indi.nonoas.crm.dao.my_orm_dao.*;
 import indi.nonoas.crm.common.PayMode;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.service.GoodsService;
+import indi.nonoas.crm.service.PackageService;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.fxml.FXML;
@@ -33,6 +34,8 @@ public class PkgCnsDialogController implements Initializable {
     private boolean hasSubmit = false;
 
     private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
+
+    private final PackageService pkgService = (PackageService) SpringUtil.getBean("PackageServiceImpl");
 
     /**
      * 消费者
@@ -174,8 +177,8 @@ public class PkgCnsDialogController implements Initializable {
         for (OrderDetailBean od : orderDetails) {   //遍历订单
             String pkgID = od.getProductId();
             //如果套餐不为服务类，则不添加到用户的商品库存中
-            PackageDto bean = PackageDao.getInstance().selectById(pkgID);
-            if (!bean.getType().equals("服务类"))
+            PackageDto packageDto = pkgService.selectById(pkgID);
+            if (!"服务类".equals(packageDto.getType()))
                 break;
             int pkgAmount = od.getProductAmount();        //获取套餐数量
             //查询套餐包含的商品

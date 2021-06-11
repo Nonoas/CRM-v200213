@@ -3,7 +3,8 @@ package indi.nonoas.crm.controller.goods;
 import indi.nonoas.crm.pojo.PackageDto;
 import indi.nonoas.crm.pojo.PackageContentBean;
 import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
-import indi.nonoas.crm.dao.my_orm_dao.PackageDao;
+import indi.nonoas.crm.service.PackageService;
+import indi.nonoas.crm.utils.SpringUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 public class PackageModifyController extends PackageController {
 
     private Tab parentTab;
+
+    private final PackageService pkgService = (PackageService) SpringUtil.getBean("PackageServiceImpl");
 
     /**
      * 界面初始化
@@ -55,7 +58,7 @@ public class PackageModifyController extends PackageController {
         //套餐信息
         PackageDto packageBean = getPackageBean();
         //插入套餐信息到数据库
-        PackageDao.getInstance().update(packageBean);
+        pkgService.update(packageBean);
 
         //删除之前的商品内容
         PackageContentDao packageContentDao = PackageContentDao.getInstance();
