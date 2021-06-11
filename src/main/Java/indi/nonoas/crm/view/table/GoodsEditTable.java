@@ -215,6 +215,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
                 btn_add.setOnAction(event -> {
                     int amount = Integer.parseInt(tf_number.getText()) + 1;
                     tf_number.setText(String.valueOf(amount));
+
                 });
                 //¼õÒ»
                 btn_reduce.setOnAction(event -> {
@@ -232,6 +233,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
                         bean.setAmount(Integer.parseInt(newValue));
                         GoodsEditTable<S> table = (GoodsEditTable<S>) getTableView();
                         table.getEventHandler().execute();
+                        refresh();
                     } else {
                         tf_number.setText(oldValue);
                     }
