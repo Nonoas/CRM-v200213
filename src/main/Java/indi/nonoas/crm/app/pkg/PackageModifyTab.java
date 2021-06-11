@@ -3,7 +3,7 @@ package indi.nonoas.crm.app.pkg;
 import java.io.IOException;
 import java.net.URL;
 
-import indi.nonoas.crm.pojo.PackageBean;
+import indi.nonoas.crm.pojo.PackageDto;
 import indi.nonoas.crm.controller.goods.PackageModifyController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
@@ -17,13 +17,13 @@ import javafx.scene.layout.Pane;
  */
 public class PackageModifyTab extends Tab {
 
-    private final PackageBean packageBean;
+    private final PackageDto packageBean;
 
-    public PackageModifyTab(PackageBean packageBean) {
+    public PackageModifyTab(PackageDto packageBean) {
         this("修改项目信息", packageBean);
     }
 
-    public PackageModifyTab(String str, PackageBean packageBean) {
+    public PackageModifyTab(String str, PackageDto packageBean) {
         super(str);
         this.packageBean = packageBean;
         initView();

@@ -2,7 +2,7 @@ package indi.nonoas.crm.dao.my_orm_dao;
 
 import java.util.ArrayList;
 
-import indi.nonoas.crm.pojo.PackageBean;
+import indi.nonoas.crm.pojo.PackageDto;
 
 /**
  * 套餐项目数据库操作类
@@ -10,7 +10,7 @@ import indi.nonoas.crm.pojo.PackageBean;
  * @author Nonoas
  */
 @Deprecated
-public class PackageDao extends SqliteDao<PackageBean> {
+public class PackageDao extends SqliteDao<PackageDto> {
 
     private static final String SELECT_ALL = "select * from package_info";
 
@@ -19,8 +19,6 @@ public class PackageDao extends SqliteDao<PackageBean> {
     private static final String FIND_BY_FILTER = "select * from package_info " +
 
             "where (id like #{id} or name like #{name}) and (money_cost between #{money1} and #{money2})";
-
-    private static final String DELETE_BY_ID = "delete from package_info where id=#{id}";
 
     private static final String INSERT_ONE = "insert into " +
 
@@ -47,8 +45,8 @@ public class PackageDao extends SqliteDao<PackageBean> {
      *
      * @return 所有项目信息
      */
-    public ArrayList<PackageBean> selectAll() {
-        return (ArrayList<PackageBean>) select(SELECT_ALL);
+    public ArrayList<PackageDto> selectAll() {
+        return (ArrayList<PackageDto>) select(SELECT_ALL);
     }
 
     /**
@@ -57,7 +55,7 @@ public class PackageDao extends SqliteDao<PackageBean> {
      * @param id 项目id
      * @return 对应的项目信息bean类对象
      */
-    public PackageBean selectById(String id) {
+    public PackageDto selectById(String id) {
         return selectOne(SELECT_BY_ID, id);
     }
 
@@ -70,17 +68,8 @@ public class PackageDao extends SqliteDao<PackageBean> {
      * @param money2 金钱上限
      * @return 所有满足过滤条件的项目信息, 可以为null
      */
-    public ArrayList<PackageBean> findByFilter(String id, String name, double money1, double money2) {
-        return (ArrayList<PackageBean>) select(FIND_BY_FILTER, id, name, money1, money2);
-    }
-
-    /**
-     * 删除一条项目信息
-     *
-     * @param bean PackageBean对象
-     */
-    public void deleteByID(PackageBean bean) {
-        delete(DELETE_BY_ID, bean);
+    public ArrayList<PackageDto> findByFilter(String id, String name, double money1, double money2) {
+        return (ArrayList<PackageDto>) select(FIND_BY_FILTER, id, name, money1, money2);
     }
 
     /**
@@ -88,7 +77,7 @@ public class PackageDao extends SqliteDao<PackageBean> {
      *
      * @param bean PackageBean对象
      */
-    public void insert(PackageBean bean) {
+    public void insert(PackageDto bean) {
         insert(INSERT_ONE, bean);
     }
 
@@ -97,13 +86,13 @@ public class PackageDao extends SqliteDao<PackageBean> {
      *
      * @param bean PackageBean对象
      */
-    public void update(PackageBean bean) {
+    public void update(PackageDto bean) {
         update(UPDATE_ONE, bean);
     }
 
     @Override
-    protected Class<PackageBean> getBeanClass() {
-        return PackageBean.class;
+    protected Class<PackageDto> getBeanClass() {
+        return PackageDto.class;
     }
 
 }

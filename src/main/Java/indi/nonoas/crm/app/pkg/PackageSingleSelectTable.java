@@ -1,6 +1,6 @@
 package indi.nonoas.crm.app.pkg;
 
-import indi.nonoas.crm.pojo.PackageBean;
+import indi.nonoas.crm.pojo.PackageDto;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.SelectionMode;
 import per.nonoas.delegate.EventHandler;
@@ -15,7 +15,7 @@ public class PackageSingleSelectTable extends PackageTable {
 
     public PackageSingleSelectTable() {
         getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        ChangeListener<PackageBean> listener = (observable, oldValue, newValue) -> eventHandler.execute();
+        ChangeListener<PackageDto> listener = (observable, oldValue, newValue) -> eventHandler.execute();
         getSelectionModel().selectedItemProperty().addListener(listener);
     }
 

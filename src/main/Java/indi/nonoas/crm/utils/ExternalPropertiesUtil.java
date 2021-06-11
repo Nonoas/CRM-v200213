@@ -22,7 +22,7 @@ public class ExternalPropertiesUtil {
     private void load(String path) {
         InputStream in;
         try {
-            in = new FileInputStream(new File(path));
+            in = new FileInputStream(path);
             properties = new Properties();
             properties.load(in);
         } catch (IOException e) {
@@ -37,7 +37,7 @@ public class ExternalPropertiesUtil {
     public void set(String k, String v) {
         properties.setProperty(k, v);
         try {
-            OutputStream out = new FileOutputStream(new File(path));
+            OutputStream out = new FileOutputStream(path);
             properties.store(out, "¸üÐÂ");
         } catch (IOException e) {
             e.printStackTrace();

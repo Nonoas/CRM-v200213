@@ -1,6 +1,6 @@
 package indi.nonoas.crm.controller.goods;
 
-import indi.nonoas.crm.pojo.PackageBean;
+import indi.nonoas.crm.pojo.PackageDto;
 import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.dao.my_orm_dao.PackageDao;
 import indi.nonoas.crm.pojo.PackageContentBean;
@@ -50,7 +50,7 @@ public class PackageAddController extends PackageController {
             return;
 
         //Ì×²ÍÐÅÏ¢
-        PackageBean packageBean = new PackageBean();
+        PackageDto packageBean = new PackageDto();
         packageBean.setId(tf_id.getText());
         packageBean.setName(tf_name.getText());
         packageBean.setMoneyCost(Double.parseDouble(tf_money.getText()));

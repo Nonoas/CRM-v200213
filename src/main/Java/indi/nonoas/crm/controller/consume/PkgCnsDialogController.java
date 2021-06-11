@@ -174,7 +174,7 @@ public class PkgCnsDialogController implements Initializable {
         for (OrderDetailBean od : orderDetails) {   //遍历订单
             String pkgID = od.getProductId();
             //如果套餐不为服务类，则不添加到用户的商品库存中
-            PackageBean bean = PackageDao.getInstance().selectById(pkgID);
+            PackageDto bean = PackageDao.getInstance().selectById(pkgID);
             if (!bean.getType().equals("服务类"))
                 break;
             int pkgAmount = od.getProductAmount();        //获取套餐数量

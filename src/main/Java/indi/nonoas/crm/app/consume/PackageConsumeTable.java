@@ -1,6 +1,6 @@
 package indi.nonoas.crm.app.consume;
 
-import indi.nonoas.crm.pojo.PackageBean;
+import indi.nonoas.crm.pojo.PackageDto;
 import indi.nonoas.crm.dao.my_orm_dao.PackageDao;
 import indi.nonoas.crm.view.table.GoodsEditTable;
 import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author : Nonoas
  * @time : 2020-08-05 12:52
  */
-public class PackageConsumeTable extends GoodsEditTable<PackageBean> {
+public class PackageConsumeTable extends GoodsEditTable<PackageDto> {
 
     private final ObservableList<GoodsEditTableVO> obList = getItems();
 
@@ -23,12 +23,12 @@ public class PackageConsumeTable extends GoodsEditTable<PackageBean> {
     }
 
     @Override
-    public ArrayList<PackageBean> getAllBeans() {
+    public ArrayList<PackageDto> getAllBeans() {
         return null;
     }
 
     @Override
-    public void addBean(PackageBean bean) {
+    public void addBean(PackageDto bean) {
         String id = bean.getId();
         for (GoodsEditTableVO d : obList) {
             if (d.getId().equals(id))
@@ -42,12 +42,12 @@ public class PackageConsumeTable extends GoodsEditTable<PackageBean> {
     }
 
     @Override
-    protected PackageBean dataToBean(GoodsEditTableVO data) {
+    protected PackageDto dataToBean(GoodsEditTableVO data) {
         return PackageDao.getInstance().selectById(data.getId());
     }
 
     @Override
-    protected GoodsEditTableVO beanToData(PackageBean bean) {
+    protected GoodsEditTableVO beanToData(PackageDto bean) {
         GoodsEditTableVO data = new GoodsEditTableVO();
         data.setId(bean.getId());
         data.setName(bean.getName());

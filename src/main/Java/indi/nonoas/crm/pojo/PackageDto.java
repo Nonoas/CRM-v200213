@@ -1,14 +1,19 @@
 package indi.nonoas.crm.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 /**
  * 套餐项目类
  *
  * @author Nonoas
  */
-public class PackageBean {
+@TableName("package_info")
+public class PackageDto {
     /**
      * 编号
      */
+    @TableId("id")
     private String id;
     /**
      * 名称
@@ -35,7 +40,7 @@ public class PackageBean {
      */
     private String other;
 
-    public PackageBean() {
+    public PackageDto() {
     }
 
     public String getId() {

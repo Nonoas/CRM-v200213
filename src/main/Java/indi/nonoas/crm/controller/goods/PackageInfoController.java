@@ -1,10 +1,15 @@
 package indi.nonoas.crm.controller.goods;
 
+import indi.nonoas.crm.app.pkg.PackageAddTab;
 import indi.nonoas.crm.app.pkg.PackageContentTable;
+import indi.nonoas.crm.app.pkg.PackageModifyTab;
 import indi.nonoas.crm.app.pkg.PackageTable;
+import indi.nonoas.crm.controller.MainController;
 import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.dao.my_orm_dao.PackageDao;
-import indi.nonoas.crm.pojo.PackageBean;
+import indi.nonoas.crm.pojo.PackageDto;
+import indi.nonoas.crm.service.PackageService;
+import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,6 +25,7 @@ import java.util.ResourceBundle;
 
 public class PackageInfoController implements Initializable {
 
+    private final PackageService pkgService = (PackageService) SpringUtil.getBean("PackageServiceImpl");
 
     @FXML
     private TextField tf_pkgID;
@@ -50,22 +56,22 @@ public class PackageInfoController implements Initializable {
         String id = "%" + tf_pkgID.getText().trim() + "%";
         String money1 = tf_moneyLow.getText().trim();
         String money2 = tf_moneyHigh.getText().trim();
-        double mLow = money1.equals("") ? 0 : Double.parseDouble(money1);
-        double mHigh = money2.equals("") ? 99999999 : Double.parseDouble(money2);
+        double mLow = "".equals(money1) ? 0 : Double.parseDouble(money1);
+        double mHigh = "".equals(money2) ? 99999999 : Double.parseDouble(money2);
 
-        ArrayList<PackageBean> list = PackageDao.getInstance().findByFilter(id, id, mLow, mHigh);
+        ArrayList<PackageDto> list = PackageDao.getInstance().findByFilter(id, id, mLow, mHigh);
         if (list == null) {
             new MyAlert(Alert.AlertType.INFORMATION, "没有找到您查询的项目信息！").show();
         } else {
             pkgTable.clearData();
-            for (PackageBean bean : list)
+            for (PackageDto bean : list)
                 pkgTable.addBean(bean);
         }
     }
 
     @FXML
     private void deletePackage() {
-        PackageBean bean = pkgTable.getSelectedData();
+        PackageDto bean = pkgTable.getSelectedData();
         if (bean == null) {
             new MyAlert(Alert.AlertType.INFORMATION, "请先选择一条数据！").show();
             return;
@@ -76,55 +82,22 @@ public class PackageInfoController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             pkgTable.removeData(bean);
-            PackageDao.getInstance().deleteByID(bean);
+            pkgService.deleteById(bean.getId());
             PackageContentDao.getInstance().deleteById(bean.getId());
         }
     }
 
     @FXML
     private void addPackage() {
-//        ObservableList<Tab> obList = tp_rootPane.getTabs();
-//        // 遍历判断该Tab是否已经添加,如果已添加，则直接切换到该Tab
-//        final String DATA = "添加项目";
-//        for (Tab tab : obList) {
-//            String userDate = (String) tab.getUserData();
-//            if (userDate != null && userDate.equals(DATA)) {
-//                tp_rootPane.getSelectionModel().select(tab); // 如果已经添加则显示该tab并返回
-//                return;
-//            }
-//        }
-//
-//        PackageAddTab tab = new PackageAddTab();
-//        tab.setUserData(DATA);
-//        tp_rootPane.getTabs().add(tab);
-//        tp_rootPane.getSelectionModel().select(tab);
-
+        MainController.addTab(new PackageAddTab());
     }
 
-    //修改套餐信息
+    /**
+     * 修改套餐信息
+     */
     @FXML
     private void modifyPackage() {
-//        PackageBean bean = pkgTable.getSelectedData();
-//        if (bean == null) {
-//            new MyAlert(Alert.AlertType.INFORMATION, "请先选择一条套餐项目信息！").show();
-//            return;
-//        }
-//
-//        ObservableList<Tab> obList = tp_rootPane.getTabs();
-//        // 遍历判断该Tab是否已经添加,如果已添加，则直接切换到该Tab
-//        final String DATA = "修改项目信息";
-//        for (Tab tab : obList) {
-//            String userDate = (String) tab.getUserData();
-//            if (userDate != null && userDate.equals(DATA)) {
-//                tp_rootPane.getSelectionModel().select(tab); // 如果已经添加则显示该tab并返回
-//                return;
-//            }
-//        }
-//
-//        PackageModifyTab tab = new PackageModifyTab(pkgTable.getSelectedData());
-//        tab.setUserData(DATA);
-//        obList.add(tab);
-//        tp_rootPane.getSelectionModel().select(tab);
+        MainController.addTab(new PackageModifyTab(pkgTable.getSelectedData()));
     }
 
     /**

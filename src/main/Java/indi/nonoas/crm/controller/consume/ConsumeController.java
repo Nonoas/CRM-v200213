@@ -4,7 +4,6 @@ import indi.nonoas.crm.app.consume.*;
 import indi.nonoas.crm.app.goods.GoodsSingleSelectTable;
 import indi.nonoas.crm.app.pkg.PackageSingleSelectTable;
 import indi.nonoas.crm.app.vip.VipAddTab;
-import indi.nonoas.crm.app.vip.VipInfoTable;
 import indi.nonoas.crm.controller.MainController;
 import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.dao.my_orm_dao.UserGoodsDao;
@@ -14,7 +13,6 @@ import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.service.UserService;
-import indi.nonoas.crm.service.VipLvService;
 import indi.nonoas.crm.service.impl.OrderServiceImpl;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.alert.MyAlert;
@@ -349,7 +347,7 @@ public class ConsumeController implements Initializable {
         });
 
         pkgSelectTable.getEventHandler().addEvent(() -> {
-            PackageBean bean = pkgSelectTable.getSelectedData();
+            PackageDto bean = pkgSelectTable.getSelectedData();
             if (bean != null)
                 pcTable.addBean(bean);
         });

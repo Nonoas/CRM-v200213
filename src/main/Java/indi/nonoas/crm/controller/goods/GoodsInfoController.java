@@ -1,6 +1,9 @@
 package indi.nonoas.crm.controller.goods;
 
+import indi.nonoas.crm.app.goods.GoodsAddTab;
 import indi.nonoas.crm.app.goods.GoodsInfoTable;
+import indi.nonoas.crm.app.goods.GoodsModifyTab;
+import indi.nonoas.crm.controller.MainController;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.utils.SpringUtil;
@@ -59,19 +62,7 @@ public class GoodsInfoController implements Initializable {
 
     @FXML    //添加商品事件
     private void addGoods() {
-//        ObservableList<Tab> obList = tp_rootPane.getTabs();
-//        final String DATA = "添加商品";
-//        for (Tab tab : obList) { // 遍历判断该tab是否已经添加
-//            String userDate = (String) tab.getUserData();
-//            if (userDate != null && userDate.equals(DATA)) {
-//                tp_rootPane.getSelectionModel().select(tab); // 如果已经添加则显示该tab并返回
-//                return;
-//            }
-//        }
-//        Tab tab = new GoodsAddTab();
-//        tab.setUserData(DATA);
-//        obList.add(tab);
-//        tp_rootPane.getSelectionModel().select(tab);
+        MainController.addTab(new GoodsAddTab());
     }
 
     @FXML    //删除商品信息
@@ -105,27 +96,7 @@ public class GoodsInfoController implements Initializable {
 
     @FXML    //修改商品信息
     private void updateGoods() {
-
-//        GoodsDto bean = table.getSelectedData();
-//
-//        if (bean == null) {
-//            new MyAlert(Alert.AlertType.INFORMATION, "请先选择一条数据！").show();
-//            return;
-//        }
-//
-//        ObservableList<Tab> tabList = tp_rootPane.getTabs();
-//        final String DATA = "修改商品信息";
-//        for (Tab tab : tabList) { // 遍历判断该tab是否已经添加
-//            String userDate = (String) tab.getUserData();
-//            if (userDate != null && userDate.equals(DATA)) {
-//                tp_rootPane.getSelectionModel().select(tab); // 如果已经添加则显示该tab并返回
-//                return;
-//            }
-//        }
-//        Tab tab = new GoodsModifyTab(table.getSelectedData());
-//        tab.setUserData(DATA);
-//        tabList.add(tab);
-//        tp_rootPane.getSelectionModel().select(tab);
+        MainController.addTab(new GoodsModifyTab(table.getSelectedData()));
     }
 
 

@@ -1,6 +1,6 @@
 package indi.nonoas.crm.app.pkg;
 
-import indi.nonoas.crm.pojo.PackageBean;
+import indi.nonoas.crm.pojo.PackageDto;
 import indi.nonoas.crm.dao.my_orm_dao.PackageDao;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -17,41 +17,41 @@ import java.util.ArrayList;
  *
  * @author Nonoas
  */
-public class PackageTable extends TableView<PackageBean> {
+public class PackageTable extends TableView<PackageDto> {
 
     /**
      * 数据源
      */
-    private final ObservableList<PackageBean> obList = FXCollections.observableArrayList();
+    private final ObservableList<PackageDto> obList = FXCollections.observableArrayList();
 
     /**
      * 列集合
      */
-    private final ObservableList<TableColumn<PackageBean, ?>> colList = getColumns();
+    private final ObservableList<TableColumn<PackageDto, ?>> colList = getColumns();
 
     /**
      * 当前选中数据
      */
-    private PackageBean selectedBean;
+    private PackageDto selectedBean;
 
     /**
      * 绑定的套餐内容表格
      */
     private PackageContentTable packageContentTable;
 
-    private final TableColumn<PackageBean, String> item_id = new TableColumn<>("编号");
+    private final TableColumn<PackageDto, String> item_id = new TableColumn<>("编号");
 
-    private final TableColumn<PackageBean, String> item_name = new TableColumn<>("项目名称");
+    private final TableColumn<PackageDto, String> item_name = new TableColumn<>("项目名称");
 
-    private final TableColumn<PackageBean, String> item_money_cost = new TableColumn<>("金额消费");
+    private final TableColumn<PackageDto, String> item_money_cost = new TableColumn<>("金额消费");
 
-    private final TableColumn<PackageBean, Number> item_integral_cost = new TableColumn<>("积分消费");
+    private final TableColumn<PackageDto, Number> item_integral_cost = new TableColumn<>("积分消费");
 
-    private final TableColumn<PackageBean, Number> item_min_discount = new TableColumn<>("最低折扣");
+    private final TableColumn<PackageDto, Number> item_min_discount = new TableColumn<>("最低折扣");
 
-    private final TableColumn<PackageBean, String> item_type = new TableColumn<>("项目类型");
+    private final TableColumn<PackageDto, String> item_type = new TableColumn<>("项目类型");
 
-    private final TableColumn<PackageBean, String> item_other = new TableColumn<>("备注信息");
+    private final TableColumn<PackageDto, String> item_other = new TableColumn<>("备注信息");
 
     public PackageTable() {
         initColumns();
@@ -67,13 +67,13 @@ public class PackageTable extends TableView<PackageBean> {
     }
 
     //声明选中监听
-    ChangeListener<PackageBean> cl_select = (observable, oldValue, newValue) -> {
+    ChangeListener<PackageDto> cl_select = (observable, oldValue, newValue) -> {
         System.out.println("项目信息表格选中：" + newValue);
         selectedBean = newValue;
     };
 
     //声明套餐表格内容显示
-    ChangeListener<PackageBean> cl_showContent = (observable, oldValue, newValue) -> {
+    ChangeListener<PackageDto> cl_showContent = (observable, oldValue, newValue) -> {
         if (selectedBean != null) {
             packageContentTable.showAllInfos(selectedBean.getId()); //更新选中表格的内容
         }
@@ -112,7 +112,7 @@ public class PackageTable extends TableView<PackageBean> {
      */
     public void showAllInfos() {
         clearData(); // 清空所有数据
-        ArrayList<PackageBean> listVipBeans = PackageDao.getInstance().selectAll();
+        ArrayList<PackageDto> listVipBeans = PackageDao.getInstance().selectAll();
         if (listVipBeans != null)
             obList.addAll(listVipBeans);
     }
@@ -129,7 +129,7 @@ public class PackageTable extends TableView<PackageBean> {
      *
      * @param bean 套餐项目bean类
      */
-    public void addBean(PackageBean bean) {
+    public void addBean(PackageDto bean) {
         obList.add(bean);
     }
 
@@ -138,7 +138,7 @@ public class PackageTable extends TableView<PackageBean> {
      *
      * @return 选中的PackageBean
      */
-    public PackageBean getSelectedData() {
+    public PackageDto getSelectedData() {
         return this.selectedBean;
     }
 
@@ -147,7 +147,7 @@ public class PackageTable extends TableView<PackageBean> {
      *
      * @param bean 需要移除的PackageBean
      */
-    public void removeData(PackageBean bean) {
+    public void removeData(PackageDto bean) {
         this.obList.remove(bean);
     }
 }

@@ -1,6 +1,6 @@
 package indi.nonoas.crm.controller.goods;
 
-import indi.nonoas.crm.pojo.PackageBean;
+import indi.nonoas.crm.pojo.PackageDto;
 import indi.nonoas.crm.pojo.PackageContentBean;
 import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.dao.my_orm_dao.PackageDao;
@@ -53,7 +53,7 @@ public class PackageModifyController extends PackageController {
             return;
 
         //套餐信息
-        PackageBean packageBean = getPackageBean();
+        PackageDto packageBean = getPackageBean();
         //插入套餐信息到数据库
         PackageDao.getInstance().update(packageBean);
 
@@ -83,8 +83,8 @@ public class PackageModifyController extends PackageController {
      *
      * @return PackageBean实例
      */
-    private PackageBean getPackageBean() {
-        PackageBean packageBean = new PackageBean();
+    private PackageDto getPackageBean() {
+        PackageDto packageBean = new PackageDto();
         packageBean.setId(tf_id.getText());
         packageBean.setName(tf_name.getText());
         packageBean.setMoneyCost(Double.parseDouble(tf_money.getText()));
@@ -116,7 +116,7 @@ public class PackageModifyController extends PackageController {
      *
      * @param packageBean 需要修改的PackageBean实例
      */
-    public void setBean(PackageBean packageBean) {
+    public void setBean(PackageDto packageBean) {
         String id = packageBean.getId();
         tf_id.setText(id);
         tf_name.setText(packageBean.getName());
