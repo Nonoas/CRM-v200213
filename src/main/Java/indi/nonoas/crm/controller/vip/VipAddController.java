@@ -3,15 +3,14 @@ package indi.nonoas.crm.controller.vip;
 import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import indi.nonoas.crm.service.UserService;
 import indi.nonoas.crm.service.VipLvService;
 import indi.nonoas.crm.utils.SpringUtil;
-import indi.nonoas.crm.view.alert.MyAlert;
-import indi.nonoas.crm.pojo.UserBean;
+import indi.nonoas.crm.component.alert.MyAlert;
+import indi.nonoas.crm.pojo.dto.VipInfo;
 import indi.nonoas.crm.dao.my_orm_dao.VipInfoDao;
 import indi.nonoas.crm.config.ImageSrc;
 import javafx.beans.value.ChangeListener;
@@ -158,7 +157,7 @@ public class VipAddController implements Initializable {
         if (!isCommittable()) {
             return;
         }
-        UserBean bean = new UserBean();
+        VipInfo bean = new VipInfo();
         bean.setId(tf_id.getText().trim());
         bean.setName(tf_name.getText().trim());
         bean.setSex((String) tGroup.getSelectedToggle().getUserData());

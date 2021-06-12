@@ -12,12 +12,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import indi.nonoas.crm.controller.MainController;
 import indi.nonoas.crm.utils.JXLUtil;
-import indi.nonoas.crm.view.alert.MyAlert;
-import indi.nonoas.crm.app.vip.VipAddTab;
-import indi.nonoas.crm.app.vip.VipInfoTable;
-import indi.nonoas.crm.app.vip.VipModifyTab;
-import indi.nonoas.crm.pojo.UserBean;
+import indi.nonoas.crm.component.alert.MyAlert;
+import indi.nonoas.crm.view.vip.VipAddTab;
+import indi.nonoas.crm.view.vip.VipInfoTable;
+import indi.nonoas.crm.view.vip.VipModifyTab;
+import indi.nonoas.crm.pojo.dto.VipInfo;
 import indi.nonoas.crm.dao.my_orm_dao.VipInfoDao;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -35,11 +36,7 @@ public class VipManageController implements Initializable {
     private VipInfoTable table;
 
     @FXML
-    private Tab tab_manage;
-    @FXML
     private ScrollPane scrollPane;
-    @FXML
-    private TabPane tp_rootPane;
     @FXML
     private TextField tf_findInfo;
     @FXML
@@ -90,10 +87,10 @@ public class VipManageController implements Initializable {
         String dateFrom = dpk_from.getValue().toString();    //时间上限
         String dateTo = dpk_to.getValue().toString();    //时间下限
 
-        ArrayList<UserBean> listVipBeans = vipInfoDao.selectByFiltrate(idOrName, idOrName, level, dateFrom, dateTo);
+        ArrayList<VipInfo> listVipBeans = vipInfoDao.selectByFiltrate(idOrName, idOrName, level, dateFrom, dateTo);
         if (listVipBeans != null) {
             table.clearData();
-            for (UserBean bean : listVipBeans)
+            for (VipInfo bean : listVipBeans)
                 table.addBean(bean);
         } else {
             new MyAlert(AlertType.INFORMATION, "没有找到您查询的会员！").show();
@@ -102,20 +99,7 @@ public class VipManageController implements Initializable {
 
     @FXML // 添加会员信息
     private void addVip() {
-        ObservableList<Tab> obList = tp_rootPane.getTabs();
-        final String DATA = "添加会员";
-        for (Tab tab : obList) { // 遍历判断该tab是否已经添加
-            String userDate = (String) tab.getUserData();
-            if (userDate != null && userDate.equals(DATA)) {
-                tp_rootPane.getSelectionModel().select(tab); // 如果已经添加则显示该tab并返回
-                return;
-            }
-
-        }
-        Tab tab = new VipAddTab();
-        tab.setUserData(DATA);
-        obList.add(tab);
-        tp_rootPane.getSelectionModel().select(tab);
+        MainController.addTab(new VipAddTab());
     }
 
     /**
@@ -123,7 +107,7 @@ public class VipManageController implements Initializable {
      */
     @FXML
     private void deleteVip() {
-        UserBean bean = table.getSelectedData();
+        VipInfo bean = table.getSelectedData();
         if (bean == null) {
             new MyAlert(AlertType.INFORMATION, "请先选择一条数据！").show();
             return;
@@ -143,26 +127,12 @@ public class VipManageController implements Initializable {
      */
     @FXML
     private void modifyVip() {
-        UserBean bean = table.getSelectedData();
+        VipInfo bean = table.getSelectedData();
         if (bean == null) {
             new MyAlert(AlertType.INFORMATION, "请先选择一条数据！").show();
             return;
         }
-        ObservableList<Tab> obList = tp_rootPane.getTabs();
-        final String DATA = "修改会员信息";
-        for (Tab tab : obList) { // 遍历判断该tab是否已经添加
-            String userDate = (String) tab.getUserData();
-            if (userDate != null && userDate.equals(DATA)) {
-                tp_rootPane.getSelectionModel().select(tab); // 如果已经添加则显示该tab并返回
-                return;
-            }
-
-        }
-        VipModifyTab tab = new VipModifyTab(bean);
-        tab.setUserData(DATA);
-        tab.setPreTab(tab_manage);
-        obList.add(tab);
-        tp_rootPane.getSelectionModel().select(tab);
+        MainController.addTab(new VipModifyTab(bean));
     }
 
     @FXML
@@ -174,11 +144,11 @@ public class VipManageController implements Initializable {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        ObservableList<TableColumn<UserBean, ?>> columns = table.getColumns();
-        ObservableList<UserBean> items = table.getItems();
+        ObservableList<TableColumn<VipInfo, ?>> columns = table.getColumns();
+        ObservableList<VipInfo> items = table.getItems();
         List<Object> contentList = new ArrayList<>(items);
         String[] titles = new String[columns.size()];
-        String[] fieldNames = {"id", "admissionDate", "name", "sex", "cardLevel", "balance", "frequency", "cumulative", "address", "integral", "telephone", "idcard", "birthday", "career", "email", "other"};
+        String[] fieldNames = {"id", "admissionDate", "name", "sex", "cardLevel", "balance", "cumulative", "address", "integral", "telephone", "idcard", "birthday", "career", "email", "other"};
         for (int i = 0; i < titles.length; i++) {
             titles[i] = columns.get(i).getText();
         }

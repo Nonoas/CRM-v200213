@@ -1,9 +1,10 @@
 package indi.nonoas.crm.controller.consume;
 
-import indi.nonoas.crm.app.consume.*;
-import indi.nonoas.crm.app.goods.GoodsSingleSelectTable;
-import indi.nonoas.crm.app.pkg.PackageSingleSelectTable;
-import indi.nonoas.crm.app.vip.VipAddTab;
+import indi.nonoas.crm.pojo.dto.VipInfo;
+import indi.nonoas.crm.view.consume.*;
+import indi.nonoas.crm.view.goods.GoodsSingleSelectTable;
+import indi.nonoas.crm.view.pkg.PackageSingleSelectTable;
+import indi.nonoas.crm.view.vip.VipAddTab;
 import indi.nonoas.crm.controller.MainController;
 import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.dao.my_orm_dao.UserGoodsDao;
@@ -15,7 +16,7 @@ import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.service.UserService;
 import indi.nonoas.crm.service.impl.OrderServiceImpl;
 import indi.nonoas.crm.utils.SpringUtil;
-import indi.nonoas.crm.view.alert.MyAlert;
+import indi.nonoas.crm.component.alert.MyAlert;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static indi.nonoas.crm.pojo.UserBean.SANKE;
+import static indi.nonoas.crm.pojo.dto.VipInfo.SANKE;
 
 public class ConsumeController implements Initializable {
 
@@ -46,7 +47,7 @@ public class ConsumeController implements Initializable {
     /**
      * 会员信息
      */
-    private UserBean vipBean = UserBean.SANKE;
+    private VipInfo vipBean = VipInfo.SANKE;
     @FXML
     private Label lb_cardState;
     @FXML
@@ -102,7 +103,7 @@ public class ConsumeController implements Initializable {
      *
      * @param bean 搜索的用户信息
      */
-    private void showFindResult(UserBean bean) {
+    private void showFindResult(VipInfo bean) {
         if (bean == null)
             return;
         lb_cardState.setText("可用");

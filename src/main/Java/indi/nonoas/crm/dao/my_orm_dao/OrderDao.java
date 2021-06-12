@@ -2,6 +2,7 @@ package indi.nonoas.crm.dao.my_orm_dao;
 
 import indi.nonoas.crm.pojo.*;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
+import indi.nonoas.crm.pojo.dto.VipInfo;
 import per.nonoas.orm.AbstractTransaction;
 import per.nonoas.orm.BeanTransaction;
 
@@ -54,12 +55,12 @@ public class OrderDao extends SqliteDao<OrderBean> {
      * @param goodsBeans   商品 列表
      * @param vipBean      用户
      */
-    public boolean placePackageOrder(OrderBean order, List<OrderDetailBean> orderDetails, List<UserGoods> userGoods, List<GoodsDto> goodsBeans, UserBean vipBean) {
+    public boolean placePackageOrder(OrderBean order, List<OrderDetailBean> orderDetails, List<UserGoods> userGoods, List<GoodsDto> goodsBeans, VipInfo vipBean) {
 
         List<AbstractTransaction> transactions = new ArrayList<>();
 
         //如果是散客则不做以下事务
-        if (vipBean != UserBean.SANKE) {
+        if (vipBean != VipInfo.SANKE) {
             //用户事务
             transactions.add(new BeanTransaction(REDUCE_USER_BALANCE, vipBean));
             //用户-商品事务

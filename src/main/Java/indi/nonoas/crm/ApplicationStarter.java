@@ -1,10 +1,10 @@
 package indi.nonoas.crm;
 
 import de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport;
-import indi.nonoas.crm.app.MainStageView;
-import indi.nonoas.crm.app.WelcomeView;
+import indi.nonoas.crm.view.MainStageView;
+import indi.nonoas.crm.view.WelcomeView;
 import indi.nonoas.crm.config.ImageSrc;
-import indi.nonoas.crm.view.CustomSplash;
+import indi.nonoas.crm.component.CustomSplash;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.mybatis.spring.annotation.MapperScan;

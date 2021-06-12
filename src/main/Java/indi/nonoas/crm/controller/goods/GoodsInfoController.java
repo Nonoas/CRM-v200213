@@ -1,13 +1,13 @@
 package indi.nonoas.crm.controller.goods;
 
-import indi.nonoas.crm.app.goods.GoodsAddTab;
-import indi.nonoas.crm.app.goods.GoodsInfoTable;
-import indi.nonoas.crm.app.goods.GoodsModifyTab;
+import indi.nonoas.crm.view.goods.GoodsAddTab;
+import indi.nonoas.crm.view.goods.GoodsInfoTable;
+import indi.nonoas.crm.view.goods.GoodsModifyTab;
 import indi.nonoas.crm.controller.MainController;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.utils.SpringUtil;
-import indi.nonoas.crm.view.alert.MyAlert;
+import indi.nonoas.crm.component.alert.MyAlert;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;

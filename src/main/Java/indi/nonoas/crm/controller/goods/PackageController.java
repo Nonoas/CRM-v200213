@@ -2,9 +2,9 @@ package indi.nonoas.crm.controller.goods;
 
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.PackageContentBean;
-import indi.nonoas.crm.view.dialog.GoodsSelectDialog;
-import indi.nonoas.crm.view.alert.MyAlert;
-import indi.nonoas.crm.app.pkg.PackageContentEditTable;
+import indi.nonoas.crm.component.dialog.GoodsSelectDialog;
+import indi.nonoas.crm.component.alert.MyAlert;
+import indi.nonoas.crm.view.pkg.PackageContentEditTable;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

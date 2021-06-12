@@ -7,7 +7,7 @@ import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.common.ClientSession;
 import indi.nonoas.crm.service.LoginService;
 import indi.nonoas.crm.utils.SaltUtil;
-import indi.nonoas.crm.view.alert.MyAlert;
+import indi.nonoas.crm.component.alert.MyAlert;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;

@@ -2,7 +2,7 @@ package indi.nonoas.crm.dao.my_orm_dao;
 
 import java.util.ArrayList;
 
-import indi.nonoas.crm.pojo.UserBean;
+import indi.nonoas.crm.pojo.dto.VipInfo;
 
 /**
  * 会员信息的数据库操作类
@@ -10,7 +10,7 @@ import indi.nonoas.crm.pojo.UserBean;
  * @author Nonoas
  */
 @Deprecated
-public class VipInfoDao extends SqliteDao<UserBean> {
+public class VipInfoDao extends SqliteDao<VipInfo> {
 
     private static final String SELECT_BY_FILTRATE_2 = "select * from user_info where (id like #{id} "
             + "or name like #{name}) and card_level like #{card_level} " + "and admission_date between ? and ?";
@@ -59,8 +59,8 @@ public class VipInfoDao extends SqliteDao<UserBean> {
      * @param dateTo   加入时间范围（结束）
      * @return VIPBean的ArrayList对象, 没有查询结果时为null
      */
-    public ArrayList<UserBean> selectByFiltrate(String id, String name, String level, String dateFrom, String dateTo) {
-        return (ArrayList<UserBean>) select(SELECT_BY_FILTRATE_2, id, name, level, dateFrom, dateTo);
+    public ArrayList<VipInfo> selectByFiltrate(String id, String name, String level, String dateFrom, String dateTo) {
+        return (ArrayList<VipInfo>) select(SELECT_BY_FILTRATE_2, id, name, level, dateFrom, dateTo);
     }
 
 
@@ -69,7 +69,7 @@ public class VipInfoDao extends SqliteDao<UserBean> {
      *
      * @param vipBean VIPBean对象
      */
-    public void insertInfo(UserBean vipBean) {
+    public void insertInfo(VipInfo vipBean) {
         insert(INSERT_INFO, vipBean);
     }
 
@@ -78,7 +78,7 @@ public class VipInfoDao extends SqliteDao<UserBean> {
      *
      * @param bean VIPBean对象
      */
-    public void deleteByID(UserBean bean) {
+    public void deleteByID(VipInfo bean) {
         delete(DELETE_BY_ID, bean);
     }
 
@@ -87,13 +87,13 @@ public class VipInfoDao extends SqliteDao<UserBean> {
      *
      * @param vipBean VIPBean对象
      */
-    public void updateInfo(UserBean vipBean) {
+    public void updateInfo(VipInfo vipBean) {
         update(UPDATE_INFO, vipBean);
     }
 
     @Override
-    public Class<UserBean> getBeanClass() {
-        return UserBean.class;
+    public Class<VipInfo> getBeanClass() {
+        return VipInfo.class;
     }
 
 }

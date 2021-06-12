@@ -1,12 +1,14 @@
 package indi.nonoas.crm.controller;
 
 import de.felixroske.jfxsupport.FXMLController;
-import indi.nonoas.crm.app.consume.ConsumeTab;
-import indi.nonoas.crm.app.consume.VipQueryTab;
-import indi.nonoas.crm.app.goods.GoodsInfoTab;
-import indi.nonoas.crm.app.goods.GoodsTypeTab;
-import indi.nonoas.crm.app.goods.PackageInfoTab;
-import indi.nonoas.crm.app.vip.VipManageTab;
+import indi.nonoas.crm.view.consume.ConsumeTab;
+import indi.nonoas.crm.view.consume.VipQueryTab;
+import indi.nonoas.crm.view.goods.GoodsInfoTab;
+import indi.nonoas.crm.view.goods.GoodsTypeTab;
+import indi.nonoas.crm.view.goods.PackageInfoTab;
+import indi.nonoas.crm.view.stat.OrderTable;
+import indi.nonoas.crm.view.stat.UsrGdsOdrTable;
+import indi.nonoas.crm.view.vip.VipManageTab;
 import indi.nonoas.crm.common.ClientSession;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.pojo.LoginBean;
@@ -18,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -259,7 +262,29 @@ public class MainController implements Initializable {
 
         lv.setPrefHeight(7 * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
 
-//        spxfjl.setOnMouseClicked(event -> toStatPane());
+        spxfjl.setOnMouseClicked(event -> {
+            Dialog<String> dialog = new Dialog<>();
+            dialog.setTitle("商品订单记录");
+            dialog.setResizable(true);
+            DialogPane pane = dialog.getDialogPane();
+            Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image(ImageSrc.lOGO_PATH));
+            pane.getButtonTypes().add(ButtonType.OK);
+            pane.setContent(new OrderTable());
+            dialog.show();
+        });
+
+        tcxfjl.setOnMouseClicked(event -> {
+            Dialog<String> dialog = new Dialog<>();
+            dialog.setTitle("用户库存消费记录");
+            dialog.setResizable(true);
+            DialogPane pane = dialog.getDialogPane();
+            Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image(ImageSrc.lOGO_PATH));
+            pane.getButtonTypes().add(ButtonType.OK);
+            pane.setContent(new UsrGdsOdrTable());
+            dialog.show();
+        });
 
         TitledPane titledPane = new TitledPane("统计报表", lv);
         titledPane.setExpanded(false);

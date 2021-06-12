@@ -1,6 +1,6 @@
 package indi.nonoas.crm.dao;
 
-import indi.nonoas.crm.pojo.UserBean;
+import indi.nonoas.crm.pojo.dto.VipInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -18,7 +18,7 @@ public interface UserMapper {
      * @param id 会员卡号
      * @return VIPBean对象
      */
-    UserBean getUserById(String id);
+    VipInfo getUserById(String id);
 
     /**
      * 通过卡号或姓名精确查询
@@ -27,15 +27,15 @@ public interface UserMapper {
      * @param name 会员姓名
      * @return VipBean
      */
-    UserBean getInfoByIdOrName(@Param("id") String id,
-                               @Param("name") String name);
+    VipInfo getInfoByIdOrName(@Param("id") String id,
+                              @Param("name") String name);
 
     /**
      * 查询所有会员信息
      *
      * @return VIPBean的ArrayList集合
      */
-    ArrayList<UserBean> selectAllUser();
+    ArrayList<VipInfo> selectAllUser();
 
     /**
      * 多条件筛选信息
@@ -45,9 +45,9 @@ public interface UserMapper {
      * @param card_level 会员等级
      * @return VIPBean的ArrayList对象, 没有查询结果时为null
      */
-    ArrayList<UserBean> selectByFiltrate(@Param("id") String id,
-                                         @Param("name") String name,
-                                         @Param("card_level") String card_level);
+    ArrayList<VipInfo> selectByFiltrate(@Param("id") String id,
+                                        @Param("name") String name,
+                                        @Param("card_level") String card_level);
 
     /**
      * 过滤器查找
@@ -59,11 +59,11 @@ public interface UserMapper {
      * @param dateTo   加入时间范围（结束）
      * @return VIPBean的ArrayList对象, 没有查询结果时为null
      */
-    ArrayList<UserBean> selectByDateFiltrate(@Param("id") String id,
-                                             @Param("name") String name,
-                                             @Param("level") String level,
-                                             @Param("dateFrom") String dateFrom,
-                                             @Param("dateTo") String dateTo);
+    ArrayList<VipInfo> selectByDateFiltrate(@Param("id") String id,
+                                            @Param("name") String name,
+                                            @Param("level") String level,
+                                            @Param("dateFrom") String dateFrom,
+                                            @Param("dateTo") String dateTo);
 
 
     /**
@@ -71,7 +71,7 @@ public interface UserMapper {
      *
      * @param vipBean VIPBean对象
      */
-    void insertInfo(UserBean vipBean);
+    void insertInfo(VipInfo vipBean);
 
     /**
      * 通过卡号删除会员信息
@@ -85,6 +85,6 @@ public interface UserMapper {
      *
      * @param vipBean VIPBean对象
      */
-    void updateInfo(UserBean vipBean);
+    void updateInfo(VipInfo vipBean);
 
 }

@@ -6,9 +6,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-import indi.nonoas.crm.app.vip.VipModifyTab;
-import indi.nonoas.crm.view.alert.MyAlert;
-import indi.nonoas.crm.pojo.UserBean;
+import indi.nonoas.crm.view.vip.VipModifyTab;
+import indi.nonoas.crm.component.alert.MyAlert;
+import indi.nonoas.crm.pojo.dto.VipInfo;
 import indi.nonoas.crm.dao.my_orm_dao.VipInfoDao;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.utils.Log;
@@ -40,7 +40,7 @@ public class VipModifyController implements Initializable {
     /**
      * 当前操作的bean
      */
-    private UserBean vipBean;
+    private VipInfo vipBean;
 
     private VipModifyTab parentTab;
 
@@ -181,7 +181,7 @@ public class VipModifyController implements Initializable {
      *
      * @param bean 当前用户信息的VipBean
      */
-    public void setBean(UserBean bean) {
+    public void setBean(VipInfo bean) {
         this.vipBean = bean;
         tf_mail.setText(vipBean.getEmail());
         tf_career.setText(vipBean.getCareer());

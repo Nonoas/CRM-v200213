@@ -11,10 +11,17 @@
         where user_id = #{user_id}
     </select>
 
+    <select id="selectByUserGoods" resultMap="UserGoods">
+        select *
+        from user_goods
+        where user_id = #{userId}
+          and goods_id = #{goodsId};
+    </select>
+
     <update id="replaceUserGoods" parameterType="list">
         replace into user_goods(user_id, goods_id, amount)
         values
-        <foreach collection="userGoodsList" item="ug" separator="," >
+        <foreach collection="userGoodsList" item="ug" separator=",">
             (#{ug.userId}, #{ug.goodsId}, #{ug.amount})
         </foreach>
     </update>

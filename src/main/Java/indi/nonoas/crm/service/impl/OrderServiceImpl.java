@@ -2,6 +2,7 @@ package indi.nonoas.crm.service.impl;
 
 import indi.nonoas.crm.pojo.*;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
+import indi.nonoas.crm.pojo.dto.VipInfo;
 import indi.nonoas.crm.pojo.vo.OrderRecordVO;
 import indi.nonoas.crm.dao.GoodsMapper;
 import indi.nonoas.crm.dao.OrderMapper;
@@ -45,14 +46,14 @@ public class OrderServiceImpl implements OrderService {
                                 List<OrderDetailBean> orderDetails,
                                 List<UserGoods> userGoods,
                                 List<GoodsDto> goodsBeans,
-                                UserBean vipBean) {
+                                VipInfo vipBean) {
         //订单事务
         odrMapper.insertOrder(order);
         //订单详情事务
         odrMapper.insertOrderDetails(orderDetails);
 
         //如果是散客则不做以下事务
-        if (vipBean != UserBean.SANKE) {
+        if (vipBean != VipInfo.SANKE) {
             //用户事务
             userMapper.updateInfo(vipBean);
             //用户商品

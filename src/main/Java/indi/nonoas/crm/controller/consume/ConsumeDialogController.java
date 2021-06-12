@@ -5,10 +5,11 @@ import indi.nonoas.crm.pojo.*;
 import indi.nonoas.crm.common.PayMode;
 import indi.nonoas.crm.dao.my_orm_dao.UserGoodsDao;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
+import indi.nonoas.crm.pojo.dto.VipInfo;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.service.OrderService;
 import indi.nonoas.crm.utils.SpringUtil;
-import indi.nonoas.crm.view.alert.MyAlert;
+import indi.nonoas.crm.component.alert.MyAlert;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -40,7 +41,7 @@ public class ConsumeDialogController implements Initializable {
     /**
      * 消费者
      */
-    private UserBean vipBean;
+    private VipInfo vipBean;
 
     /**
      * 订单
@@ -125,7 +126,7 @@ public class ConsumeDialogController implements Initializable {
         //即将减少数量的 商品
         List<GoodsDto> goodsBeans = goodsData();
         //需要更新的消费者信息
-        UserBean vipBean = vipData();
+        VipInfo vipBean = vipData();
         //最终订单信息
         OrderBean orderBean = orderData();
 
@@ -250,12 +251,12 @@ public class ConsumeDialogController implements Initializable {
      *
      * @return 消费者
      */
-    private UserBean vipData() {
+    private VipInfo vipData() {
         //如果消费者为散客，则不进行数据处理
-        if (vipBean == UserBean.SANKE)
+        if (vipBean == VipInfo.SANKE)
             return vipBean;
 
-        UserBean bean = this.vipBean;
+        VipInfo bean = this.vipBean;
         PayMode payMode = cb_payMode.getValue();
         //需要扣除的数据：余额 || 积分
         switch (payMode) {
@@ -302,7 +303,7 @@ public class ConsumeDialogController implements Initializable {
         this.stage = stage;
     }
 
-    public void setVipBean(UserBean vipBean) {
+    public void setVipBean(VipInfo vipBean) {
         this.vipBean = vipBean;
         lb_consumer.setText("[" + vipBean.getId() + "] " + vipBean.getName());
     }

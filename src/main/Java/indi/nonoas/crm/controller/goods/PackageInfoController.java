@@ -1,15 +1,15 @@
 package indi.nonoas.crm.controller.goods;
 
-import indi.nonoas.crm.app.pkg.PackageAddTab;
-import indi.nonoas.crm.app.pkg.PackageContentTable;
-import indi.nonoas.crm.app.pkg.PackageModifyTab;
-import indi.nonoas.crm.app.pkg.PackageTable;
+import indi.nonoas.crm.view.pkg.PackageAddTab;
+import indi.nonoas.crm.view.pkg.PackageContentTable;
+import indi.nonoas.crm.view.pkg.PackageModifyTab;
+import indi.nonoas.crm.view.pkg.PackageTable;
 import indi.nonoas.crm.controller.MainController;
 import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.pojo.PackageDto;
 import indi.nonoas.crm.service.PackageService;
 import indi.nonoas.crm.utils.SpringUtil;
-import indi.nonoas.crm.view.alert.MyAlert;
+import indi.nonoas.crm.component.alert.MyAlert;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;

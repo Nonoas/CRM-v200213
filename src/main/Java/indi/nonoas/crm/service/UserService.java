@@ -1,6 +1,6 @@
 package indi.nonoas.crm.service;
 
-import indi.nonoas.crm.pojo.UserBean;
+import indi.nonoas.crm.pojo.dto.VipInfo;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -25,14 +25,14 @@ public interface UserService {
      * @param name 会员姓名
      * @return VipBean
      */
-    UserBean getInfoByIdOrName(String id, String name);
+    VipInfo getInfoByIdOrName(String id, String name);
 
     /**
      * 查询所有会员信息
      *
      * @return VIPBean的ArrayList集合
      */
-    ArrayList<UserBean> selectAllUser();
+    ArrayList<VipInfo> selectAllUser();
 
     /**
      * 多条件筛选信息
@@ -42,7 +42,7 @@ public interface UserService {
      * @param card_level 会员等级
      * @return VIPBean的ArrayList对象, 没有查询结果时为null
      */
-    ArrayList<UserBean> selectByFiltrate(String id, String name, String card_level);
+    ArrayList<VipInfo> selectByFiltrate(String id, String name, String card_level);
 
     /**
      * 过滤器查找
@@ -54,14 +54,14 @@ public interface UserService {
      * @param dateTo   加入时间范围（结束）
      * @return VIPBean的ArrayList对象, 没有查询结果时为null
      */
-    ArrayList<UserBean> selectByDateFiltrate(String id, String name, String level, String dateFrom, String dateTo);
+    ArrayList<VipInfo> selectByDateFiltrate(String id, String name, String level, String dateFrom, String dateTo);
 
     /**
      * 插入会员信息
      *
      * @param vipBean VIPBean对象
      */
-    void insertInfo(UserBean vipBean);
+    void insertInfo(VipInfo vipBean);
 
     /**
      * 通过卡号删除会员信息
@@ -75,5 +75,5 @@ public interface UserService {
      *
      * @param vipBean VIPBean对象
      */
-    void updateInfo(UserBean vipBean);
+    void updateInfo(VipInfo vipBean);
 }

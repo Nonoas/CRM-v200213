@@ -1,7 +1,7 @@
 package indi.nonoas.crm.controller;
 
-import indi.nonoas.crm.app.stat.OrderTable;
-import indi.nonoas.crm.app.stat.UsrGdsOdrTable;
+import indi.nonoas.crm.view.stat.OrderTable;
+import indi.nonoas.crm.view.stat.UsrGdsOdrTable;
 import indi.nonoas.crm.config.ImageSrc;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

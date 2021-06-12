@@ -1,6 +1,6 @@
 package indi.nonoas.crm.service.impl;
 
-import indi.nonoas.crm.pojo.UserBean;
+import indi.nonoas.crm.pojo.dto.VipInfo;
 import indi.nonoas.crm.config.UserConfig;
 import indi.nonoas.crm.dao.UserMapper;
 import indi.nonoas.crm.service.UserService;
@@ -39,27 +39,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserBean getInfoByIdOrName(String id, String name) {
+    public VipInfo getInfoByIdOrName(String id, String name) {
         return userMapper.getInfoByIdOrName(id, name);
     }
 
     @Override
-    public ArrayList<UserBean> selectAllUser() {
+    public ArrayList<VipInfo> selectAllUser() {
         return userMapper.selectAllUser();
     }
 
     @Override
-    public ArrayList<UserBean> selectByFiltrate(String id, String name, String card_level) {
+    public ArrayList<VipInfo> selectByFiltrate(String id, String name, String card_level) {
         return userMapper.selectByFiltrate(id, name, card_level);
     }
 
     @Override
-    public ArrayList<UserBean> selectByDateFiltrate(String id, String name, String level, String dateFrom, String dateTo) {
+    public ArrayList<VipInfo> selectByDateFiltrate(String id, String name, String level, String dateFrom, String dateTo) {
         return userMapper.selectByDateFiltrate(id, name, level, dateFrom, dateTo);
     }
 
     @Override
-    public void insertInfo(UserBean vipBean) {
+    public void insertInfo(VipInfo vipBean) {
         userMapper.insertInfo(vipBean);
     }
 
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateInfo(UserBean vipBean) {
+    public void updateInfo(VipInfo vipBean) {
         userMapper.updateInfo(vipBean);
     }
 

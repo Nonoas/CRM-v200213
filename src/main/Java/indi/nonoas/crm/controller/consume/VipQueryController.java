@@ -1,11 +1,11 @@
 package indi.nonoas.crm.controller.consume;
 
-import indi.nonoas.crm.app.vip.VipInfoTable;
-import indi.nonoas.crm.pojo.UserBean;
+import indi.nonoas.crm.view.vip.VipInfoTable;
+import indi.nonoas.crm.pojo.dto.VipInfo;
 import indi.nonoas.crm.service.UserService;
 import indi.nonoas.crm.service.VipLvService;
 import indi.nonoas.crm.utils.SpringUtil;
-import indi.nonoas.crm.view.alert.MyAlert;
+import indi.nonoas.crm.component.alert.MyAlert;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -58,10 +58,10 @@ public class VipQueryController implements Initializable {
         String disType = cb_disType.getValue().equals("全部类型") ? "" : cb_disType.getValue();
         if (str.equals(""))
             return;
-        ArrayList<UserBean> listVipBeans = userService.selectByFiltrate(str, str, disType);
+        ArrayList<VipInfo> listVipBeans = userService.selectByFiltrate(str, str, disType);
         if (listVipBeans != null) {
             tv_vipInfo.clearData();
-            for (UserBean bean : listVipBeans)
+            for (VipInfo bean : listVipBeans)
                 tv_vipInfo.addBean(bean);
         } else {
             new MyAlert(Alert.AlertType.INFORMATION, "没有找到您查询的会员！").show();
