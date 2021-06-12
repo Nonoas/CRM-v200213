@@ -6,7 +6,7 @@ import indi.nonoas.crm.pojo.dto.VipInfo;
 import indi.nonoas.crm.pojo.vo.OrderRecordVO;
 import indi.nonoas.crm.dao.GoodsMapper;
 import indi.nonoas.crm.dao.OrderMapper;
-import indi.nonoas.crm.dao.UserMapper;
+import indi.nonoas.crm.dao.VipMapper;
 import indi.nonoas.crm.dao.UsrGdsMapper;
 import indi.nonoas.crm.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class OrderServiceImpl implements OrderService {
 
     private UsrGdsMapper ugMapper;
 
-    private UserMapper userMapper;
+    private VipMapper vipMapper;
 
     private GoodsMapper goodsMapper;
 
@@ -55,7 +55,7 @@ public class OrderServiceImpl implements OrderService {
         //如果是散客则不做以下事务
         if (vipBean != VipInfo.SANKE) {
             //用户事务
-            userMapper.updateInfo(vipBean);
+            vipMapper.updateInfo(vipBean);
             //用户商品
             ugMapper.replaceUserGoods(userGoods);
         }
@@ -114,8 +114,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Autowired
-    public void setUserMapper(UserMapper userMapper) {
-        this.userMapper = userMapper;
+    public void setUserMapper(VipMapper vipMapper) {
+        this.vipMapper = vipMapper;
     }
 
     @Autowired

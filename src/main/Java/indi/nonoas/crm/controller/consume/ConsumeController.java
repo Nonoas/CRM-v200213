@@ -13,7 +13,7 @@ import indi.nonoas.crm.pojo.*;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
 import indi.nonoas.crm.service.GoodsService;
-import indi.nonoas.crm.service.UserService;
+import indi.nonoas.crm.service.VipService;
 import indi.nonoas.crm.service.impl.OrderServiceImpl;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.component.alert.MyAlert;
@@ -39,7 +39,7 @@ public class ConsumeController implements Initializable {
 
     private final Logger logger = Logger.getLogger(ConsumeController.class);
 
-    private final UserService userService = (UserService) SpringUtil.getBean("UserServiceImpl");
+    private final VipService vipService = (VipService) SpringUtil.getBean("UserServiceImpl");
 
     private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
 
@@ -90,7 +90,7 @@ public class ConsumeController implements Initializable {
         String keyWord = tf_find.getText().trim();
         if (keyWord.equals(""))
             return;
-        vipBean = userService.getInfoByIdOrName(keyWord, keyWord);
+        vipBean = vipService.getInfoByIdOrName(keyWord, keyWord);
         if (vipBean != null) {
             showFindResult(vipBean);
         } else {

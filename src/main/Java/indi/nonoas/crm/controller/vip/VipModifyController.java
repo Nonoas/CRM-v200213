@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+import indi.nonoas.crm.service.VipService;
+import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.vip.VipModifyTab;
 import indi.nonoas.crm.component.alert.MyAlert;
 import indi.nonoas.crm.pojo.dto.VipInfo;
@@ -30,10 +32,7 @@ import javafx.stage.FileChooser;
 
 public class VipModifyController implements Initializable {
 
-    /**
-     * 会员信息DAO
-     */
-    private final VipInfoDao vipInfoDao = VipInfoDao.getInstance();
+    private final VipService vipService = (VipService) SpringUtil.getBean("UserServiceImpl");
 
     private final ToggleGroup tGroup = new ToggleGroup();
 
@@ -145,7 +144,7 @@ public class VipModifyController implements Initializable {
         vipBean.setOther(tf_other.getText());
 //		vipBean.setPhoto("照片");
 
-        vipInfoDao.updateInfo(vipBean);    //更新数据库
+        vipService.updateInfo(vipBean);    //更新数据库
 
         if (chc_isClose.isSelected()) { // 如果选择了提交后关闭，则关闭当前tab
             cancelInfo();

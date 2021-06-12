@@ -2,7 +2,7 @@ package indi.nonoas.crm.controller.consume;
 
 import indi.nonoas.crm.view.vip.VipInfoTable;
 import indi.nonoas.crm.pojo.dto.VipInfo;
-import indi.nonoas.crm.service.UserService;
+import indi.nonoas.crm.service.VipService;
 import indi.nonoas.crm.service.VipLvService;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.component.alert.MyAlert;
@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
  */
 public class VipQueryController implements Initializable {
 
-    private final UserService userService = (UserService) SpringUtil.getBean("UserServiceImpl");
+    private final VipService vipService = (VipService) SpringUtil.getBean("UserServiceImpl");
 
     private final VipInfoTable tv_vipInfo = new VipInfoTable(); // 会员信息表
 
@@ -58,7 +58,7 @@ public class VipQueryController implements Initializable {
         String disType = cb_disType.getValue().equals("全部类型") ? "" : cb_disType.getValue();
         if (str.equals(""))
             return;
-        ArrayList<VipInfo> listVipBeans = userService.selectByFiltrate(str, str, disType);
+        ArrayList<VipInfo> listVipBeans = vipService.selectByFiltrate(str, str, disType);
         if (listVipBeans != null) {
             tv_vipInfo.clearData();
             for (VipInfo bean : listVipBeans)

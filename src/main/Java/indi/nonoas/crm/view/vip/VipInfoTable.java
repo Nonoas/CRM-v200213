@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import indi.nonoas.crm.pojo.dto.VipInfo;
-import indi.nonoas.crm.service.UserService;
+import indi.nonoas.crm.service.VipService;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.component.progress.TableProgressIndicator;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -28,7 +28,7 @@ public class VipInfoTable extends TableView<VipInfo> {
 
     private final Logger logger = Logger.getLogger(VipInfoTable.class);
 
-    private final UserService userService = (UserService) SpringUtil.getBean("UserServiceImpl");
+    private final VipService vipService = (VipService) SpringUtil.getBean("UserServiceImpl");
 
     /**
      * 数据源列表
@@ -143,7 +143,7 @@ public class VipInfoTable extends TableView<VipInfo> {
         Task<List<VipInfo>> task = new Task<List<VipInfo>>() {
             @Override
             protected List<VipInfo> call() {
-                List<VipInfo> beans = userService.selectAllUser();
+                List<VipInfo> beans = vipService.selectAllUser();
                 if (beans != null)
                     return beans;
                 else

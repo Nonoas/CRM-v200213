@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @time : 2020-09-03 21:30
  */
 @Repository
-public interface UserMapper {
+public interface VipMapper {
     /**
      * 通过会员卡号查询会员信息
      *

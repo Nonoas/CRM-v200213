@@ -4,13 +4,14 @@ import indi.nonoas.crm.pojo.dto.VipInfo;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author : Nonoas
  * @time : 2020-09-04 1:34
  */
 @Transactional
-public interface UserService {
+public interface VipService {
     /**
      * 自动生成会员卡号
      *
@@ -54,7 +55,7 @@ public interface UserService {
      * @param dateTo   加入时间范围（结束）
      * @return VIPBean的ArrayList对象, 没有查询结果时为null
      */
-    ArrayList<VipInfo> selectByDateFiltrate(String id, String name, String level, String dateFrom, String dateTo);
+    List<VipInfo> selectByDateFiltrate(String id, String name, String level, String dateFrom, String dateTo);
 
     /**
      * 插入会员信息

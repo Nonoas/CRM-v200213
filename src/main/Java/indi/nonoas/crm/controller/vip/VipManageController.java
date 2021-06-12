@@ -13,8 +13,10 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import indi.nonoas.crm.controller.MainController;
+import indi.nonoas.crm.service.VipService;
 import indi.nonoas.crm.utils.JXLUtil;
 import indi.nonoas.crm.component.alert.MyAlert;
+import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.vip.VipAddTab;
 import indi.nonoas.crm.view.vip.VipInfoTable;
 import indi.nonoas.crm.view.vip.VipModifyTab;
@@ -28,6 +30,7 @@ import javafx.scene.control.Alert.AlertType;
 
 public class VipManageController implements Initializable {
 
+    private final VipService vipService = (VipService) SpringUtil.getBean("UserServiceImpl");
     /**
      * 会员信息DAO
      */
@@ -87,7 +90,7 @@ public class VipManageController implements Initializable {
         String dateFrom = dpk_from.getValue().toString();    //时间上限
         String dateTo = dpk_to.getValue().toString();    //时间下限
 
-        ArrayList<VipInfo> listVipBeans = vipInfoDao.selectByFiltrate(idOrName, idOrName, level, dateFrom, dateTo);
+        List<VipInfo> listVipBeans = vipService.selectByDateFiltrate(idOrName, idOrName, level, dateFrom, dateTo);
         if (listVipBeans != null) {
             table.clearData();
             for (VipInfo bean : listVipBeans)
@@ -118,7 +121,7 @@ public class VipManageController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             table.removeData(bean);
-            vipInfoDao.deleteByID(bean);
+            vipService.deleteByID(bean.getId());
         }
     }
 

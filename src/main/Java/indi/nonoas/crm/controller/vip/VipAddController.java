@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import indi.nonoas.crm.service.UserService;
+import indi.nonoas.crm.service.VipService;
 import indi.nonoas.crm.service.VipLvService;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.component.alert.MyAlert;
@@ -25,16 +25,11 @@ import javafx.stage.FileChooser;
 
 public class VipAddController implements Initializable {
 
-    /**
-     * 会员信息DAO
-     */
-    private final VipInfoDao vipInfoDao = VipInfoDao.getInstance();
-
     private final ToggleGroup tGroup = new ToggleGroup();
 
     private Tab parentTab;
 
-    private final UserService userService = (UserService) SpringUtil.getBean("UserServiceImpl");
+    private final VipService vipService = (VipService) SpringUtil.getBean("UserServiceImpl");
 
     private final VipLvService vipLvService = (VipLvService) SpringUtil.getBean("VipLvServiceImpl");
 
@@ -133,7 +128,7 @@ public class VipAddController implements Initializable {
             new MyAlert(AlertType.WARNING, "请先清除已经填写的会员卡号！").show();
             return;
         }
-        String newID = userService.generateVipID();
+        String newID = vipService.generateVipID();
         tf_id.setText(newID);
     }
 
@@ -190,7 +185,7 @@ public class VipAddController implements Initializable {
         bean.setOther(tf_other.getText());
         bean.setPhoto(photoUrl); // 照片
 
-        vipInfoDao.insertInfo(bean);
+        vipService.insertInfo(bean);
 
         new MyAlert(AlertType.CONFIRMATION, "会员信息添加成功！").showAndWait();
         if (chc_isClose.isSelected()) { // 如果选择了提交后关闭，则关闭当前tab
