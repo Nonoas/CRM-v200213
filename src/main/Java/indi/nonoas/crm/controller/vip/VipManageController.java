@@ -1,5 +1,20 @@
 package indi.nonoas.crm.controller.vip;
 
+import indi.nonoas.crm.component.alert.MyAlert;
+import indi.nonoas.crm.controller.MainController;
+import indi.nonoas.crm.pojo.dto.VipInfo;
+import indi.nonoas.crm.service.VipService;
+import indi.nonoas.crm.utils.JXLUtil;
+import indi.nonoas.crm.utils.SpringUtil;
+import indi.nonoas.crm.view.vip.VipAddTab;
+import indi.nonoas.crm.view.vip.VipInfoTable;
+import indi.nonoas.crm.view.vip.VipModifyTab;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -12,29 +27,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import indi.nonoas.crm.controller.MainController;
-import indi.nonoas.crm.service.VipService;
-import indi.nonoas.crm.utils.JXLUtil;
-import indi.nonoas.crm.component.alert.MyAlert;
-import indi.nonoas.crm.utils.SpringUtil;
-import indi.nonoas.crm.view.vip.VipAddTab;
-import indi.nonoas.crm.view.vip.VipInfoTable;
-import indi.nonoas.crm.view.vip.VipModifyTab;
-import indi.nonoas.crm.pojo.dto.VipInfo;
-import indi.nonoas.crm.dao.my_orm_dao.VipInfoDao;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
-
 public class VipManageController implements Initializable {
 
     private final VipService vipService = (VipService) SpringUtil.getBean("UserServiceImpl");
-    /**
-     * 会员信息DAO
-     */
-    private final VipInfoDao vipInfoDao = VipInfoDao.getInstance();
 
     private VipInfoTable table;
 

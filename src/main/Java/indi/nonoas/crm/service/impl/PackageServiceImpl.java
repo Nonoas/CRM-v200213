@@ -35,7 +35,7 @@ public class PackageServiceImpl implements PackageService {
 
     @Override
     public void update(PackageDto dto) {
-        pkgMapper.update(dto, null);
+        pkgMapper.updateById(dto);
     }
 
     @Override

@@ -52,6 +52,8 @@ public class PackageModifyController extends PackageController {
     @FXML
     private void commitIfo() {
 
+        //fixme 更新数据操作会更新所有
+
         if (hasEmpty())  //检查是否有未填写的必填项目
             return;
 
