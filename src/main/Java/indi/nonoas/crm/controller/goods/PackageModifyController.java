@@ -1,7 +1,7 @@
 package indi.nonoas.crm.controller.goods;
 
 import indi.nonoas.crm.pojo.PackageDto;
-import indi.nonoas.crm.pojo.PackageContentBean;
+import indi.nonoas.crm.pojo.PackageContentDto;
 import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.service.PackageService;
 import indi.nonoas.crm.utils.SpringUtil;
@@ -51,26 +51,18 @@ public class PackageModifyController extends PackageController {
      */
     @FXML
     private void commitIfo() {
-
-        //fixme 更新数据操作会更新所有
-
-        if (hasEmpty())  //检查是否有未填写的必填项目
+        // 非空判断
+        if (hasEmpty()) {
             return;
-
-        //套餐信息
+        }
+        // 套餐信息
         PackageDto packageBean = getPackageBean();
-        //插入套餐信息到数据库
-        pkgService.update(packageBean);
+        // 套餐下商品信息
+        ArrayList<PackageContentDto> pkgContents = getPackageContentBeans(packageBean.getId());
 
-        //删除之前的商品内容
-        PackageContentDao packageContentDao = PackageContentDao.getInstance();
-        packageContentDao.deleteById(packageBean.getId());
-
-        //重新提交商品内容
-        ArrayList<PackageContentBean> packageContentBeans = getPackageContentBeans(packageBean.getId());
-        packageContentDao.insertInfos(packageContentBeans);
-
-        if (chc_isClose.isSelected()) { // 如果选择了提交后关闭，则关闭当前tab
+        pkgService.update(packageBean, pkgContents);
+        // 如果选择了提交后关闭，则关闭当前tab
+        if (chc_isClose.isSelected()) {
             TabPane tabPane = parentTab.getTabPane();
             tabPane.getTabs().remove(parentTab);
         }
@@ -108,12 +100,12 @@ public class PackageModifyController extends PackageController {
      *
      * @return PackageContentBean集合
      */
-    private ArrayList<PackageContentBean> getPackageContentBeans(String PkgID) {
-        ArrayList<PackageContentBean> packageContentBeans = pkgGoodsTable.getAllBeans();
-        for (PackageContentBean p : packageContentBeans) {
+    private ArrayList<PackageContentDto> getPackageContentBeans(String PkgID) {
+        ArrayList<PackageContentDto> packageContentDtos = pkgGoodsTable.getAllBeans();
+        for (PackageContentDto p : packageContentDtos) {
             p.setPkgId(PkgID);
         }
-        return packageContentBeans;
+        return packageContentDtos;
     }
 
     /**

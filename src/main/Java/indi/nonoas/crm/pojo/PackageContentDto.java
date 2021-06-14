@@ -5,7 +5,7 @@ package indi.nonoas.crm.pojo;
  *
  * @author Nonoas
  */
-public class PackageContentBean {
+public class PackageContentDto {
 
     /**
      * ÏîÄ¿±àºÅ

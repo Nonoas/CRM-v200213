@@ -1,6 +1,7 @@
 package indi.nonoas.crm.controller;
 
 import de.felixroske.jfxsupport.FXMLController;
+import indi.nonoas.crm.component.alert.MyAlert;
 import indi.nonoas.crm.view.consume.ConsumeTab;
 import indi.nonoas.crm.view.consume.VipQueryTab;
 import indi.nonoas.crm.view.goods.GoodsInfoTab;
@@ -229,7 +230,9 @@ public class MainController implements Initializable {
 
         lv.setPrefHeight(lv.getItems().size() * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
 
-//        yggl.setOnMouseClicked(event -> toStaffManagePane());
+        yggl.setOnMouseClicked(event -> {
+            new MyAlert(Alert.AlertType.INFORMATION, "暂未开发，敬请期待！").show();
+        });
 
         TitledPane titledPane = new TitledPane("员工管理", lv);
         titledPane.setExpanded(false);

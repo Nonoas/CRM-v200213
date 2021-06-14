@@ -4,6 +4,7 @@ import indi.nonoas.crm.config.ImageSrc;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -32,8 +33,10 @@ public class MyAlert extends Alert {
 
     private void init() {
         setHeaderText(null);
-        Stage stage = (Stage) getDialogPane().getScene().getWindow();
+        Pane pane = getDialogPane();
+        Stage stage = (Stage) pane.getScene().getWindow();
         stage.getIcons().add(new Image(ImageSrc.lOGO_PATH));
+        pane.getStylesheets().add("/css/bootstrap2.css");
     }
 
 }

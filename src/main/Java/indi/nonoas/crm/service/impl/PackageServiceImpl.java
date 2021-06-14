@@ -1,10 +1,13 @@
 package indi.nonoas.crm.service.impl;
 
 import indi.nonoas.crm.dao.PackageMapper;
+import indi.nonoas.crm.dao.PkgContentMapper;
+import indi.nonoas.crm.pojo.PackageContentDto;
 import indi.nonoas.crm.pojo.PackageDto;
 import indi.nonoas.crm.service.PackageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +21,9 @@ public class PackageServiceImpl implements PackageService {
     @Autowired
     private PackageMapper pkgMapper;
 
+    @Autowired
+    private PkgContentMapper pkgContentMapper;
+
     @Override
     public List<PackageDto> selectAll() {
         return pkgMapper.selectList(null);
@@ -28,14 +34,19 @@ public class PackageServiceImpl implements PackageService {
         return pkgMapper.selectById(id);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public void insert(PackageDto dto) {
+    public void insert(PackageDto dto, List<PackageContentDto> pkgContents) {
         pkgMapper.insert(dto);
+        pkgContentMapper.insertInfos(pkgContents);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public void update(PackageDto dto) {
+    public void update(PackageDto dto, List<PackageContentDto> pkgGoods) {
         pkgMapper.updateById(dto);
+        pkgContentMapper.deleteById(dto.getId());
+        pkgContentMapper.insertInfos(pkgGoods);
     }
 
     @Override

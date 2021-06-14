@@ -183,8 +183,8 @@ public class PkgCnsDialogController implements Initializable {
                 break;
             int pkgAmount = od.getProductAmount();        //获取套餐数量
             //查询套餐包含的商品
-            List<PackageContentBean> packageContentBeans = PackageContentDao.getInstance().selectById(pkgID);
-            for (PackageContentBean pkgContBean : packageContentBeans) {
+            List<PackageContentDto> packageContentDtos = PackageContentDao.getInstance().selectById(pkgID);
+            for (PackageContentDto pkgContBean : packageContentDtos) {
                 String gID = pkgContBean.getGoodsId();          //商品ID
                 int gAmount = pkgContBean.getGoodsAmount();     //商品数量
                 //查询数据库是否已经存在该主键
@@ -237,9 +237,9 @@ public class PkgCnsDialogController implements Initializable {
         List<GoodsDto> goodsBeans = new ArrayList<>(16);
         //遍历套餐订单
         for (OrderDetailBean detail : orderDetails) {
-            List<PackageContentBean> pkgContBeans = PackageContentDao.getInstance().selectById(detail.getProductId());
+            List<PackageContentDto> pkgContBeans = PackageContentDao.getInstance().selectById(detail.getProductId());
             //遍历套餐内容
-            for (PackageContentBean pkgContBean : pkgContBeans) {
+            for (PackageContentDto pkgContBean : pkgContBeans) {
                 GoodsDto bean = goodsService.selectById(pkgContBean.getGoodsId());
                 //商品数量 -> 库存数量 - 套餐数量 * 套餐内商品数量
                 bean.setQuantity(bean.getQuantity() - detail.getProductAmount() * pkgContBean.getGoodsAmount());     //从数据库中减去购买的数量

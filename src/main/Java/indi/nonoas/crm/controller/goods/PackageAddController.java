@@ -1,8 +1,7 @@
 package indi.nonoas.crm.controller.goods;
 
 import indi.nonoas.crm.pojo.PackageDto;
-import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
-import indi.nonoas.crm.pojo.PackageContentBean;
+import indi.nonoas.crm.pojo.PackageContentDto;
 import indi.nonoas.crm.service.PackageService;
 import indi.nonoas.crm.utils.SpringUtil;
 import javafx.fxml.FXML;
@@ -63,14 +62,14 @@ public class PackageAddController extends PackageController {
             packageBean.setMinDiscount(Double.parseDouble(minDiscount));
         }
         packageBean.setOther(tf_other.getText());
-        //插入套餐信息到数据库
-        pkgService.insert(packageBean);
+
         //套餐内容信息
-        ArrayList<PackageContentBean> packageContentBeans = pkgGoodsTable.getAllBeans();
-        for (PackageContentBean p : packageContentBeans) {
+        ArrayList<PackageContentDto> packageContentDtos = pkgGoodsTable.getAllBeans();
+        for (PackageContentDto p : packageContentDtos) {
             p.setPkgId(packageBean.getId());
         }
-        PackageContentDao.getInstance().insertInfos(packageContentBeans);
+        //插入套餐信息到数据库
+        pkgService.insert(packageBean, packageContentDtos);
 
         if (chc_isClose.isSelected()) { // 如果选择了提交后关闭，则关闭当前tab
             TabPane tabPane = parentTab.getTabPane();

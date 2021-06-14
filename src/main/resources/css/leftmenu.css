@@ -8,5 +8,5 @@
 }
 
 .list-view .list-cell:focused {
-    -fx-background-color: #AAA;
+    -fx-background-color: #ccc;
 }

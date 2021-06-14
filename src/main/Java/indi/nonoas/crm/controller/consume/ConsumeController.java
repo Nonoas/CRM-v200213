@@ -438,11 +438,11 @@ public class ConsumeController implements Initializable {
             String pkgID = data.getId();
             int costPkgCount = data.getAmount();
             //查询套餐包含的商品
-            List<PackageContentBean> packageContents = pcDao.selectById(pkgID);
+            List<PackageContentDto> packageContents = pcDao.selectById(pkgID);
             if (packageContents == null)
                 break;
             //遍历套餐内商品列表
-            for (PackageContentBean bean : packageContents) {
+            for (PackageContentDto bean : packageContents) {
                 String goodsID = bean.getGoodsId();
                 System.out.println("商品ID" + goodsID);
                 int costCount = bean.getGoodsAmount() * costPkgCount;   //消耗的商品数量

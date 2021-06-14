@@ -2,7 +2,7 @@ package indi.nonoas.crm.view.pkg;
 
 import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
-import indi.nonoas.crm.pojo.PackageContentBean;
+import indi.nonoas.crm.pojo.PackageContentDto;
 import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.utils.SpringUtil;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * @Date: 2020/4/4 18:19
  * @Description: 可以编辑内容的“套餐内容”表格
  */
-public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> {
+public class PackageContentEditTable extends GoodsEditTable<PackageContentDto> {
     /**
      * 数据源
      */
@@ -39,7 +39,7 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
      * @param bean 需要添加的数据
      */
     @Override
-    public void addBean(PackageContentBean bean) {
+    public void addBean(PackageContentDto bean) {
         boolean hasRepeat = false;
         GoodsEditTableVO data = beanToData(bean); //类型转换
         for (GoodsEditTableVO d : obList) {
@@ -47,8 +47,10 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
             String id2 = data.getId();
             hasRepeat = hasRepeat || id1.equals(id2);
         }
-        if (!hasRepeat)
+        if (!hasRepeat) {
             obList.add(data);
+        }
+//        refresh();
     }
 
     /**
@@ -57,12 +59,12 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
      * @return PackageContentBean的集合
      */
     @Override
-    public ArrayList<PackageContentBean> getAllBeans() {
-        ArrayList<PackageContentBean> packageContentBeans = new ArrayList<>();
+    public ArrayList<PackageContentDto> getAllBeans() {
+        ArrayList<PackageContentDto> packageContentDtos = new ArrayList<>();
         for (GoodsEditTableVO d : obList) {
-            packageContentBeans.add(dataToBean(d));
+            packageContentDtos.add(dataToBean(d));
         }
-        return packageContentBeans;
+        return packageContentDtos;
     }
 
     /**
@@ -71,7 +73,7 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
      * @return Data类对象
      */
     @Override
-    protected GoodsEditTableVO beanToData(PackageContentBean bean) {
+    protected GoodsEditTableVO beanToData(PackageContentDto bean) {
         String id = bean.getGoodsId();
         GoodsDto goodsBean = goodsService.selectById(id);
         String name = goodsBean.getName();
@@ -93,11 +95,11 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
      * @return PackageContentBean对象
      */
     @Override
-    protected PackageContentBean dataToBean(GoodsEditTableVO data) {
-        PackageContentBean packageContentBean = new PackageContentBean();
-        packageContentBean.setGoodsId(data.getId());
-        packageContentBean.setGoodsAmount(data.getAmount());
-        return packageContentBean;
+    protected PackageContentDto dataToBean(GoodsEditTableVO data) {
+        PackageContentDto packageContentDto = new PackageContentDto();
+        packageContentDto.setGoodsId(data.getId());
+        packageContentDto.setGoodsAmount(data.getAmount());
+        return packageContentDto;
     }
 
     /**
@@ -105,10 +107,10 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentBean> 
      */
     public void showAllInfos(String id) {
         clearData(); // 清空所有数据
-        ArrayList<PackageContentBean> listPkgContentBeans = PackageContentDao.getInstance().selectById(id);
+        ArrayList<PackageContentDto> listPkgContentBeans = PackageContentDao.getInstance().selectById(id);
         ArrayList<GoodsEditTableVO> listData = new ArrayList<>();
         if (listPkgContentBeans != null) {
-            for (PackageContentBean p : listPkgContentBeans) {
+            for (PackageContentDto p : listPkgContentBeans) {
                 listData.add(beanToData(p));
             }
             obList.addAll(listData);

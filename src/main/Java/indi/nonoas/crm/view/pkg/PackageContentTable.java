@@ -3,7 +3,7 @@ package indi.nonoas.crm.view.pkg;
 import java.util.ArrayList;
 
 import indi.nonoas.crm.pojo.dto.GoodsDto;
-import indi.nonoas.crm.pojo.PackageContentBean;
+import indi.nonoas.crm.pojo.PackageContentDto;
 import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.utils.SpringUtil;
@@ -14,25 +14,25 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class PackageContentTable extends TableView<PackageContentBean> {
+public class PackageContentTable extends TableView<PackageContentDto> {
     /**
      * 数据源
      */
-    private final ObservableList<PackageContentBean> obList = FXCollections.observableArrayList();
+    private final ObservableList<PackageContentDto> obList = FXCollections.observableArrayList();
     /**
      * 当前选中数据
      */
-    private PackageContentBean selectedBean;
+    private PackageContentDto selectedBean;
 
-    private final TableColumn<PackageContentBean, String> item_id = new TableColumn<>("商品编号");
+    private final TableColumn<PackageContentDto, String> item_id = new TableColumn<>("商品编号");
 
-    private final TableColumn<PackageContentBean, String> item_name = new TableColumn<>("商品名称");
+    private final TableColumn<PackageContentDto, String> item_name = new TableColumn<>("商品名称");
 
-    private final TableColumn<PackageContentBean, String> item_money_cost = new TableColumn<>("商品单价");
+    private final TableColumn<PackageContentDto, String> item_money_cost = new TableColumn<>("商品单价");
 
-    private final TableColumn<PackageContentBean, Number> item_amount = new TableColumn<>("数量");
+    private final TableColumn<PackageContentDto, Number> item_amount = new TableColumn<>("数量");
 
-    private final TableColumn<PackageContentBean, String> item_total = new TableColumn<>("小计");
+    private final TableColumn<PackageContentDto, String> item_total = new TableColumn<>("小计");
 
     private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
 
@@ -86,7 +86,7 @@ public class PackageContentTable extends TableView<PackageContentBean> {
      */
     public void showAllInfos(String id) {
         clearData(); // 清空所有数据
-        ArrayList<PackageContentBean> listVipBeans = PackageContentDao.getInstance().selectById(id);
+        ArrayList<PackageContentDto> listVipBeans = PackageContentDao.getInstance().selectById(id);
         if (listVipBeans != null)
             obList.addAll(listVipBeans);
     }
@@ -103,7 +103,7 @@ public class PackageContentTable extends TableView<PackageContentBean> {
      *
      * @param bean 需要添加的数据
      */
-    public void addBean(PackageContentBean bean) {
+    public void addBean(PackageContentDto bean) {
         obList.add(bean);
     }
 
@@ -112,7 +112,7 @@ public class PackageContentTable extends TableView<PackageContentBean> {
      *
      * @return 选中的PackageContentBean
      */
-    public PackageContentBean getSelectedData() {
+    public PackageContentDto getSelectedData() {
         return this.selectedBean;
     }
 
@@ -121,7 +121,7 @@ public class PackageContentTable extends TableView<PackageContentBean> {
      *
      * @param bean 需要移除的PackageContentBean
      */
-    public void removeData(PackageContentBean bean) {
+    public void removeData(PackageContentDto bean) {
         this.obList.remove(bean);
     }
 

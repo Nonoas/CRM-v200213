@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="indi.nonoas.crm.dao.PkgContentMapper">
+
+    <resultMap id="PackageContentDto" type="indi.nonoas.crm.pojo.PackageContentDto"/>
+
+    <insert id="insertInfos">
+        insert into package_content (pkg_id, goods_id, goods_amount)
+        values
+        <foreach collection="dtoList" index="index" item="pkg" separator=",">
+            (#{pkg.pkgId}, #{pkg.goodsId}, #{pkg.goodsAmount})
+        </foreach>
+    </insert>
+
+    <delete id="deleteById">
+        delete
+        from package_content
+        where pkg_id = #{pkgId}
+    </delete>
+
+</mapper>

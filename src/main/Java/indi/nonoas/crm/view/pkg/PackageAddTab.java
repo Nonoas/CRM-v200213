@@ -35,7 +35,7 @@ public class PackageAddTab extends Tab{
 			e.printStackTrace();
 		}
 		setClosable(true);
-		PackageAddController contronller=fxmlLoader.getController();
-		contronller.setPane(this);
+		PackageAddController controller=fxmlLoader.getController();
+		controller.setPane(this);
 	}
 }

@@ -1,5 +1,6 @@
 package indi.nonoas.crm.service;
 
+import indi.nonoas.crm.pojo.PackageContentDto;
 import indi.nonoas.crm.pojo.PackageDto;
 
 import java.util.List;
@@ -30,14 +31,15 @@ public interface PackageService {
      *
      * @param bean PackageBean对象
      */
-    void insert(PackageDto bean);
+    void insert(PackageDto bean, List<PackageContentDto> pkgContents);
 
     /**
-     * 更新一条项目信息
+     * 更新套餐信息
      *
-     * @param bean PackageBean对象
+     * @param bean     套餐类
+     * @param pkgGoods 套餐下的商品信息
      */
-    void update(PackageDto bean);
+    void update(PackageDto bean, List<PackageContentDto> pkgGoods);
 
     void deleteById(String id);
 

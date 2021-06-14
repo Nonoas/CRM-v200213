@@ -2,14 +2,14 @@ package indi.nonoas.crm.dao.my_orm_dao;
 
 import java.util.ArrayList;
 
-import indi.nonoas.crm.pojo.PackageContentBean;
+import indi.nonoas.crm.pojo.PackageContentDto;
 
 /**
  * 套餐项目内容数据库操作类
  *
  * @author Nonoas
  */
-public class PackageContentDao extends SqliteDao<PackageContentBean> {
+public class PackageContentDao extends SqliteDao<PackageContentDto> {
 
     private static final String SELECT_BY_ID = "select * from package_content where pkg_id=#{pkg_id}";
 
@@ -38,8 +38,8 @@ public class PackageContentDao extends SqliteDao<PackageContentBean> {
      * @param pkg_id 项目id
      * @return 项目id包含的商品信息，可以为null
      */
-    public ArrayList<PackageContentBean> selectById(String pkg_id) {
-        return (ArrayList<PackageContentBean>) select(SELECT_BY_ID, pkg_id);
+    public ArrayList<PackageContentDto> selectById(String pkg_id) {
+        return (ArrayList<PackageContentDto>) select(SELECT_BY_ID, pkg_id);
     }
 
     /**
@@ -47,7 +47,7 @@ public class PackageContentDao extends SqliteDao<PackageContentBean> {
      *
      * @param beans 商品信息集合
      */
-    public void insertInfos(ArrayList<PackageContentBean> beans) {
+    public void insertInfos(ArrayList<PackageContentDto> beans) {
         executeBatch(INSERT_INFO, beans);
     }
 
@@ -57,13 +57,13 @@ public class PackageContentDao extends SqliteDao<PackageContentBean> {
      * @param id 编号
      */
     public void deleteById(String id) {
-        PackageContentBean packageContentBean = new PackageContentBean();
-        packageContentBean.setPkgId(id);
-        delete(DELETE_BY_ID, packageContentBean);
+        PackageContentDto packageContentDto = new PackageContentDto();
+        packageContentDto.setPkgId(id);
+        delete(DELETE_BY_ID, packageContentDto);
     }
 
     @Override
-    protected Class<PackageContentBean> getBeanClass() {
-        return PackageContentBean.class;
+    protected Class<PackageContentDto> getBeanClass() {
+        return PackageContentDto.class;
     }
 }

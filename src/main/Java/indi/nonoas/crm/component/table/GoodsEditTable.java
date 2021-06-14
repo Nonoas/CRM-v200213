@@ -1,6 +1,8 @@
 package indi.nonoas.crm.component.table;
 
 import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -32,7 +34,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
     /**
      * 当前选中数据
      */
-    private GoodsEditTableVO selectedBean;
+    private GoodsEditTableVO selectedData;
 
 
     /**
@@ -57,7 +59,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
         setItems(obList);
         getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println(newValue);
-            selectedBean = newValue;
+            selectedData = newValue;
         });
     }
 
@@ -101,7 +103,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
      * @return 选中的PackageContentBean
      */
     public GoodsEditTableVO getSelectedData() {
-        return selectedBean;
+        return selectedData;
     }
 
     /**
@@ -186,7 +188,6 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
 
             if (!empty && item != null) {
 
-                HBox hBox = new HBox();
                 Button btn_add = new Button("+");
                 Button btn_reduce = new Button("-");
                 TextField tf_number = new TextField(item.toString());
@@ -194,18 +195,10 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
                 btn_add.setPrefWidth(35);
                 btn_reduce.setPrefWidth(35);
                 tf_number.setPrefWidth(50);
-                //设置最小尺寸
-                btn_add.setMinWidth(35);
-                btn_reduce.setMinWidth(35);
-                tf_number.setMinWidth(50);
-
-                //设置按钮样式
-                btn_reduce.getStyleClass().add("danger");
 
                 HBox.setHgrow(tf_number, Priority.ALWAYS);
 
-                hBox.getChildren().addAll(btn_add, tf_number, btn_reduce);
-                hBox.setSpacing(10);
+                HBox hBox = new HBox(10, btn_add, tf_number, btn_reduce);
 
                 ObservableList<GoodsEditTableVO> obList = getTableView().getItems(); //获取表格源数据
                 GoodsEditTableVO bean = obList.get(getIndex());
@@ -238,8 +231,9 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
                         tf_number.setText(oldValue);
                     }
                 });
-
                 this.setGraphic(hBox);
+            } else {
+                setGraphic(null);
             }
         }
     }
@@ -258,19 +252,17 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
             super.updateItem(item, empty);
             if (!empty) {
                 Button btn_delete = new Button("删除");
-                btn_delete.getStyleClass().add("negative-btn");
+                btn_delete.getStyleClass().add("danger");
 
                 btn_delete.setOnAction(event -> {
                     GoodsEditTable<S> tableView = (GoodsEditTable<S>) getTableView();
                     ObservableList<GoodsEditTableVO> items = tableView.getItems();
                     items.remove(getIndex());
-                    tableView.refresh();
-
                     tableView.getEventHandler().execute();
-
                 });
-
                 this.setGraphic(btn_delete);
+            } else {
+                setGraphic(null);
             }
         }
     }

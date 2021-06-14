@@ -1,7 +1,7 @@
 package indi.nonoas.crm.controller.goods;
 
 import indi.nonoas.crm.pojo.dto.GoodsDto;
-import indi.nonoas.crm.pojo.PackageContentBean;
+import indi.nonoas.crm.pojo.PackageContentDto;
 import indi.nonoas.crm.component.dialog.GoodsSelectDialog;
 import indi.nonoas.crm.component.alert.MyAlert;
 import indi.nonoas.crm.view.pkg.PackageContentEditTable;
@@ -65,7 +65,7 @@ public abstract class PackageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //初始化CombBox
-        cb_pkgType.getItems().addAll("产品类","服务类");
+        cb_pkgType.getItems().addAll("产品类", "服务类");
         initView();
     }
 
@@ -83,13 +83,13 @@ public abstract class PackageController implements Initializable {
         GoodsSelectDialog dialog = new GoodsSelectDialog();
         dialog.showAndWait();
         ObservableList<GoodsDto> beans = dialog.getSelectGoods();
-        if (beans != null && beans.size() != 0) {
+        if (beans != null && !beans.isEmpty()) {
             for (GoodsDto goodsBean : beans) {
-                PackageContentBean packageContentBean = new PackageContentBean();
-                packageContentBean.setPkgId(tf_id.getText());
-                packageContentBean.setGoodsId(goodsBean.getId());
-                packageContentBean.setGoodsAmount(1);
-                pkgGoodsTable.addBean(packageContentBean);
+                PackageContentDto packageContentDto = new PackageContentDto();
+                packageContentDto.setPkgId(tf_id.getText());
+                packageContentDto.setGoodsId(goodsBean.getId());
+                packageContentDto.setGoodsAmount(1);
+                pkgGoodsTable.addBean(packageContentDto);
             }
         }
     }
