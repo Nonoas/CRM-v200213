@@ -1,6 +1,7 @@
 package indi.nonoas.crm.service;
 
 import indi.nonoas.crm.pojo.UserGoods;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -18,4 +19,13 @@ public interface UsrGdsService {
      * @return 用户商品列表
      */
     List<UserGoods> selectByUser(String userID);
+
+    /**
+     * 根据用户ID和商品ID查询
+     *
+     * @param userId  用户ID
+     * @param goodsId 商品ID
+     * @return 用户-商品Bean类
+     */
+    UserGoods selectByUserGoods(String userId,  String goodsId);
 }

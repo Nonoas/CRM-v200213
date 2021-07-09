@@ -19,5 +19,10 @@
         from package_content
         where pkg_id = #{pkgId}
     </delete>
+    <select id="selectById" resultMap="PackageContentDto">
+        select *
+        from package_content
+        where pkg_id = #{pkgId}
+    </select>
 
 </mapper>

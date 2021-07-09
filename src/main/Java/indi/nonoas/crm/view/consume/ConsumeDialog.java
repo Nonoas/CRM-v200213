@@ -1,5 +1,6 @@
 package indi.nonoas.crm.view.consume;
 
+import indi.nonoas.crm.component.annotation.CSS;
 import indi.nonoas.crm.pojo.OrderBean;
 import indi.nonoas.crm.pojo.OrderDetailBean;
 import indi.nonoas.crm.pojo.dto.VipInfo;

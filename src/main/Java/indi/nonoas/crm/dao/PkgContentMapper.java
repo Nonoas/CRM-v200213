@@ -1,6 +1,5 @@
 package indi.nonoas.crm.dao;
 
-import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.pojo.PackageContentDto;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -13,6 +12,14 @@ import java.util.List;
  */
 @Repository
 public interface PkgContentMapper {
+
+    /**
+     * 通过项目id查询项目内容
+     *
+     * @param pkgId 项目id
+     * @return 项目id包含的商品信息，可以为null
+     */
+    List<PackageContentDto> selectById(String pkgId);
 
     /**
      * 批量插入套餐内商品信息

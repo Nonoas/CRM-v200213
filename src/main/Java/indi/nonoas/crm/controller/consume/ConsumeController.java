@@ -1,6 +1,7 @@
 package indi.nonoas.crm.controller.consume;
 
 import indi.nonoas.crm.pojo.dto.VipInfo;
+import indi.nonoas.crm.service.PackageService;
 import indi.nonoas.crm.view.consume.*;
 import indi.nonoas.crm.view.goods.GoodsSingleSelectTable;
 import indi.nonoas.crm.view.pkg.PackageSingleSelectTable;
@@ -73,8 +74,9 @@ public class ConsumeController implements Initializable {
         initView();
         //设置回车查询
         tf_find.setOnKeyPressed(keyEvent -> {
-            if (keyEvent.getCode().equals(KeyCode.ENTER))
+            if (keyEvent.getCode().equals(KeyCode.ENTER)) {
                 inquireVIP();
+            }
         });
     }
 
@@ -88,8 +90,9 @@ public class ConsumeController implements Initializable {
     @FXML // 查找信息
     private void inquireVIP() {
         String keyWord = tf_find.getText().trim();
-        if (keyWord.equals(""))
+        if ("".equals(keyWord)) {
             return;
+        }
         vipBean = vipService.getInfoByIdOrName(keyWord, keyWord);
         if (vipBean != null) {
             showFindResult(vipBean);
@@ -104,18 +107,20 @@ public class ConsumeController implements Initializable {
      * @param bean 搜索的用户信息
      */
     private void showFindResult(VipInfo bean) {
-        if (bean == null)
+        if (bean == null) {
             return;
+        }
         lb_cardState.setText("可用");
         lb_id.setText(bean.getId());
         lb_integral.setText(String.valueOf(bean.getIntegral()));
         lb_cardLevel.setText(bean.getCardLevel());
         lb_name.setText(bean.getName());
         lb_balance.setText(String.format("￥%.2f", bean.getBalance()));
-        if (bean == SANKE)
-            lb_name.setStyle("-fx-text-fill: #cf4813");
-        else
+        if (bean == SANKE) {
+            lb_name.setStyle("-fx-text-fill: #d9534f");
+        } else {
             lb_name.setStyle("-fx-text-fill: black");
+        }
     }
 
 
@@ -166,10 +171,10 @@ public class ConsumeController implements Initializable {
 
         //设置表格的监听事件
         gc_table.getEventHandler().addEvent(() -> {
-            if (shp_orderNum.getText().equals("")) {
+            if ("".equals(shp_orderNum.getText())) {
                 shp_orderNum.setText(OrderServiceImpl.goodsOrderNum());
             }
-            if (shp_orderDate.getText().equals("")) {
+            if ("".equals(shp_orderDate.getText())) {
                 DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 shp_orderDate.setText(sdf.format(LocalDateTime.now()));
             }
@@ -206,8 +211,9 @@ public class ConsumeController implements Initializable {
     @FXML
     private void payGoodsOrder() {
 
-        if (isGoodsOrderOutOfStock())
+        if (isGoodsOrderOutOfStock()) {
             return;
+        }
 
         if (gc_table.getItems().isEmpty()) {
             new MyAlert(AlertType.INFORMATION, "订单内容为空！！").show();
@@ -231,12 +237,15 @@ public class ConsumeController implements Initializable {
      * @return 超出库存返回true
      */
     private boolean isGoodsOrderOutOfStock() {
+
         ObservableList<GoodsEditTableVO> items = gc_table.getItems();
         for (GoodsEditTableVO data : items) {
             String goodsID = data.getId();
             int costCount = data.getAmount();
             GoodsDto goodsBean = goodsService.selectById(goodsID);
             int storeCount = (int) goodsBean.getQuantity();
+
+            // 如果消费数量超出库存，提示数量不足
             if (costCount > storeCount) {
                 MyAlert alert = new MyAlert(AlertType.WARNING,
                         String.format("《(%s)%s》库存不足 %d%s ！", goodsID, data.getName(), costCount, goodsBean.getBaseUnit()));
@@ -298,6 +307,8 @@ public class ConsumeController implements Initializable {
      */
     private final PackageSingleSelectTable pkgSelectTable = new PackageSingleSelectTable();
 
+    private final PackageService pkgService= (PackageService) SpringUtil.getBean("PackageServiceImpl");
+
     /**
      * 套餐消费表格
      */
@@ -331,11 +342,11 @@ public class ConsumeController implements Initializable {
         //设置监听
         pcTable.getEventHandler().addEvent(() -> {
             //设置订单号
-            if (tc_orderNum.getText().equals("")) {
+            if ("".equals(tc_orderNum.getText())) {
                 tc_orderNum.setText(OrderServiceImpl.packageOrderNum());
             }
             //设置订单日期
-            if (tc_orderDate.getText().equals("")) {
+            if ("".equals(tc_orderDate.getText())) {
                 DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 tc_orderDate.setText(sdf.format(LocalDateTime.now()));
             }
@@ -349,8 +360,9 @@ public class ConsumeController implements Initializable {
 
         pkgSelectTable.getEventHandler().addEvent(() -> {
             PackageDto bean = pkgSelectTable.getSelectedData();
-            if (bean != null)
+            if (bean != null) {
                 pcTable.addBean(bean);
+            }
         });
     }
 
@@ -369,8 +381,9 @@ public class ConsumeController implements Initializable {
     @FXML
     private void payPackageOrder() {
         //判断是否超出库存
-        if (isPackageOrderOutOfStock())
+        if (isPackageOrderOutOfStock()) {
             return;
+        }
         //判断订单是否为空
         if (pcTable.getItems().size() == 0) {
             new MyAlert(AlertType.INFORMATION, "订单内容为空！！").show();
@@ -431,27 +444,28 @@ public class ConsumeController implements Initializable {
      * @return 空：true
      */
     private boolean isPackageOrderOutOfStock() {
-        PackageContentDao pcDao = PackageContentDao.getInstance();
+
         ObservableList<GoodsEditTableVO> pkgItems = pcTable.getItems();
         //遍历订单内套餐列表
         for (GoodsEditTableVO data : pkgItems) {
             String pkgID = data.getId();
             int costPkgCount = data.getAmount();
             //查询套餐包含的商品
-            List<PackageContentDto> packageContents = pcDao.selectById(pkgID);
-            if (packageContents == null)
+            List<PackageContentDto> packageContents = pkgService.listPkgContentByPkgId(pkgID);
+            if (packageContents == null) {
                 break;
+            }
             //遍历套餐内商品列表
             for (PackageContentDto bean : packageContents) {
                 String goodsID = bean.getGoodsId();
-                System.out.println("商品ID" + goodsID);
-                int costCount = bean.getGoodsAmount() * costPkgCount;   //消耗的商品数量
+                //消耗的商品数量
+                int costCount = bean.getGoodsAmount() * costPkgCount;
                 GoodsDto goodsBean = goodsService.selectById(goodsID);
-                int storeCount = (int) goodsBean.getQuantity();     //库存商品数量
-                System.out.println("消耗：" + costCount + ",储存" + storeCount);
+                //库存商品数量
+                int storeCount = (int) goodsBean.getQuantity();
                 if (costCount > storeCount) {
-                    String msg = "《(" + pkgID + ")" + data.getName() + "》套餐内 " +
-                            "《(" + goodsID + ")" + goodsBean.getName() + "》库存不足 " + costCount + goodsBean.getBaseUnit() + " ！";
+                    String msg = String.format("《(%s)%s》套餐内 《(%s)%s》库存不足 %d%s ！",
+                            pkgID, data.getName(), goodsID, goodsBean.getName(), costCount, goodsBean.getBaseUnit());
                     MyAlert alert = new MyAlert(AlertType.WARNING, msg);
                     alert.setHeaderText("库存不足");
                     alert.show();
@@ -501,7 +515,7 @@ public class ConsumeController implements Initializable {
         userGoodsTable.addEvent(() -> {
             ccTable.addBean(userGoodsTable.getSelectBean());
             //如果订单为空则设置时间
-            if (jc_orderTime.getText().equals("")) {
+            if ("".equals(jc_orderTime.getText())) {
                 DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 jc_orderTime.setText(sdf.format(LocalDateTime.now()));
             }
@@ -523,8 +537,9 @@ public class ConsumeController implements Initializable {
             return;
         }
         //判断是否超出用户库存
-        if (isContOrderOutOfStock())
+        if (isContOrderOutOfStock()) {
             return;
+        }
 
         //FIXME 需要进一步优化为-事务
         List<UserGoodsOrderBean> ugoBeans = generateUserGoodsOrder();
@@ -541,8 +556,9 @@ public class ConsumeController implements Initializable {
 
     @FXML
     private void refreshUserGoods() {
-        if (vipBean != SANKE)
+        if (vipBean != SANKE) {
             userGoodsTable.showAllData();
+        }
     }
 
     /**

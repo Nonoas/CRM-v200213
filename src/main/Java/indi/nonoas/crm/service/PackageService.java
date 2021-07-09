@@ -54,4 +54,11 @@ public interface PackageService {
      */
     List<PackageDto> findByFilter(String id, String name, double money1, double money2);
 
+    /**
+     * 通过套餐id查询套餐内容
+     * @param pkgId 套餐id
+     * @return 套餐内容，可空
+     */
+    List<PackageContentDto> listPkgContentByPkgId(String pkgId);
+
 }

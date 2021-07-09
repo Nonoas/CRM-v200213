@@ -9,17 +9,10 @@ import indi.nonoas.crm.pojo.PackageContentDto;
  *
  * @author Nonoas
  */
+@Deprecated
 public class PackageContentDao extends SqliteDao<PackageContentDto> {
 
     private static final String SELECT_BY_ID = "select * from package_content where pkg_id=#{pkg_id}";
-
-    private static final String INSERT_INFO = "insert into " +
-
-            "package_content (pkg_id,goods_id,goods_amount)" +
-
-            "values (#{pkg_id},#{goods_id},#{goods_amount})";
-
-    private static final String DELETE_BY_ID = "delete from package_content where pkg_id=#{pkg_id}";
 
     private PackageContentDao() {
 
@@ -42,25 +35,6 @@ public class PackageContentDao extends SqliteDao<PackageContentDto> {
         return (ArrayList<PackageContentDto>) select(SELECT_BY_ID, pkg_id);
     }
 
-    /**
-     * 批量插入套餐内商品信息
-     *
-     * @param beans 商品信息集合
-     */
-    public void insertInfos(ArrayList<PackageContentDto> beans) {
-        executeBatch(INSERT_INFO, beans);
-    }
-
-    /**
-     * 根据id删除信息
-     *
-     * @param id 编号
-     */
-    public void deleteById(String id) {
-        PackageContentDto packageContentDto = new PackageContentDto();
-        packageContentDto.setPkgId(id);
-        delete(DELETE_BY_ID, packageContentDto);
-    }
 
     @Override
     protected Class<PackageContentDto> getBeanClass() {

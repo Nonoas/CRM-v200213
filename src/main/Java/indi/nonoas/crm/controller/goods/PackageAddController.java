@@ -11,7 +11,8 @@ import java.util.ArrayList;
 
 public class PackageAddController extends PackageController {
 
-    private Tab parentTab;  //当前tab的引用
+    //当前tab的引用
+    private Tab parentTab;
 
     private final PackageService pkgService = (PackageService) SpringUtil.getBean("PackageServiceImpl");
 
@@ -64,12 +65,12 @@ public class PackageAddController extends PackageController {
         packageBean.setOther(tf_other.getText());
 
         //套餐内容信息
-        ArrayList<PackageContentDto> packageContentDtos = pkgGoodsTable.getAllBeans();
-        for (PackageContentDto p : packageContentDtos) {
+        ArrayList<PackageContentDto> packageContents = pkgGoodsTable.getAllBeans();
+        for (PackageContentDto p : packageContents) {
             p.setPkgId(packageBean.getId());
         }
         //插入套餐信息到数据库
-        pkgService.insert(packageBean, packageContentDtos);
+        pkgService.insert(packageBean, packageContents);
 
         if (chc_isClose.isSelected()) { // 如果选择了提交后关闭，则关闭当前tab
             TabPane tabPane = parentTab.getTabPane();

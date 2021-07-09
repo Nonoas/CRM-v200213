@@ -7,7 +7,9 @@ import indi.nonoas.crm.common.PayMode;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.dto.VipInfo;
 import indi.nonoas.crm.service.GoodsService;
+import indi.nonoas.crm.service.OrderService;
 import indi.nonoas.crm.service.PackageService;
+import indi.nonoas.crm.service.UsrGdsService;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.component.alert.MyAlert;
 import javafx.fxml.FXML;
@@ -20,6 +22,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -37,6 +40,10 @@ public class PkgCnsDialogController implements Initializable {
     private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
 
     private final PackageService pkgService = (PackageService) SpringUtil.getBean("PackageServiceImpl");
+
+    private final UsrGdsService usrGdsService = (UsrGdsService) SpringUtil.getBean("UsrGdsServiceImpl");
+
+    private final OrderService orderService = (OrderService) SpringUtil.getBean("OrderServiceImpl");
 
     /**
      * 消费者
@@ -130,15 +137,18 @@ public class PkgCnsDialogController implements Initializable {
         //设置即将减少数量的 商品
         List<GoodsDto> goodsBeans = goodsData();
         //设置需要更新的消费者信息
+
+        // TODO 可能存在消费不成功，但是用户Bean数据被修改的情况
         VipInfo vipBean = vipData();
         //设置最终订单信息
         OrderBean orderBean = orderData();
 
-        OrderDao orderDao = OrderDao.getInstance();
-        hasSubmit = orderDao.placePackageOrder(orderBean, orderDetails, userGoods, goodsBeans, vipBean);
-        if (hasSubmit) {
+        try {
+            orderService.placePackageOrder(orderBean, orderDetails, userGoods, goodsBeans, vipBean);
+            hasSubmit = true;
             new MyAlert(Alert.AlertType.INFORMATION, "结算成功！").show();
-        } else {
+        } catch (Exception e) {
+            hasSubmit = false;
             new MyAlert(Alert.AlertType.INFORMATION, "结算失败！").show();
         }
         stage.close();
@@ -167,40 +177,57 @@ public class PkgCnsDialogController implements Initializable {
     }
 
     /**
-     * 获取写入数据库的 “用户-商品” bean对象
+     * 获取写入数据库的 “用户-商品” bean对象集合
      *
      * @return 用户-商品 bean集合
      */
     private List<UserGoods> userGoodsData() {
 
-        List<UserGoods> userGoods = new ArrayList<>(16);       //获订单中的所有套餐
+        List<UserGoods> userGoods = new ArrayList<>(16);
         String userID = order.getUserId();      //获取用户ID
+
         for (OrderDetailBean od : orderDetails) {   //遍历订单
             String pkgID = od.getProductId();
             //如果套餐不为服务类，则不添加到用户的商品库存中
             PackageDto packageDto = pkgService.selectById(pkgID);
-            if (!"服务类".equals(packageDto.getType()))
+            if (!"服务类".equals(packageDto.getType())) {
                 break;
+            }
             int pkgAmount = od.getProductAmount();        //获取套餐数量
             //查询套餐包含的商品
-            List<PackageContentDto> packageContentDtos = PackageContentDao.getInstance().selectById(pkgID);
-            for (PackageContentDto pkgContBean : packageContentDtos) {
-                String gID = pkgContBean.getGoodsId();          //商品ID
-                int gAmount = pkgContBean.getGoodsAmount();     //商品数量
-                //查询数据库是否已经存在该主键
-                UserGoods user_goods = UserGoodsDao.getInstance().selectByUserGoods(userID, gID);
-                if (user_goods == null) {
-                    user_goods = new UserGoods();
-                    user_goods.setUserId(userID);
-                    user_goods.setGoodsId(gID);
-                    user_goods.setAmount(gAmount * pkgAmount);
-                } else {
-                    user_goods.setAmount(user_goods.getAmount() + pkgAmount * gAmount);
-                }
-                userGoods.add(user_goods);
+            List<PackageContentDto> pkgContList = pkgService.listPkgContentByPkgId(pkgID);
+            for (PackageContentDto pkgContBean : pkgContList) {
+
+                UserGoods usrGoods = getUsrGoodsByPkgCont(userID, pkgAmount, pkgContBean);
+                userGoods.add(usrGoods);
             }
         }
         return userGoods;
+    }
+
+    /**
+     * 通过套餐内容来生成要插入数据库的 用户-商品 数据
+     *
+     * @param userId    用户id
+     * @param pkgAmount 套餐数量
+     * @param pkgCont   套餐内容
+     * @return UserGoods 非空
+     */
+    private UserGoods getUsrGoodsByPkgCont(String userId, int pkgAmount, PackageContentDto pkgCont) {
+        String gID = pkgCont.getGoodsId();          //商品ID
+        int gAmount = pkgCont.getGoodsAmount();     //商品数量
+        //查询数据库是否已经存在该主键对应的数据
+        UserGoods usrGoods = usrGdsService.selectByUserGoods(userId, gID);
+        if (usrGoods == null) {
+            usrGoods = new UserGoods();
+            usrGoods.setUserId(userId);
+            usrGoods.setGoodsId(gID);
+            usrGoods.setAmount(gAmount * pkgAmount);
+        } else {
+            // 如果存在则直接加上购买数量
+            usrGoods.setAmount(usrGoods.getAmount() + pkgAmount * gAmount);
+        }
+        return usrGoods;
     }
 
     /**

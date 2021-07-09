@@ -36,7 +36,7 @@ public class MyAlert extends Alert {
         Pane pane = getDialogPane();
         Stage stage = (Stage) pane.getScene().getWindow();
         stage.getIcons().add(new Image(ImageSrc.lOGO_PATH));
-        pane.getStylesheets().add("/css/bootstrap2.css");
+        pane.getStylesheets().add("/css/bootstrap3.css");
     }
 
 }

@@ -7,7 +7,7 @@
 .number-button:focused,
 .combo-box:focused .text-field, .choice-box:focused, .color-picker:focused, .date-picker:focused .text-field
 {
-	-fx-effect: dropshadow(gaussian, #b4d1f3, 3, 3, 0, 0);
+	-fx-effect: dropshadow(gaussian, #b4d1f3, 3, 1, 0, 0);
 }
 .combo-box:focused * {
 	-fx-effect: none;
@@ -927,4 +927,13 @@ VBox > .split-menu-button.last > .arrow-button {
 }
 .slider:vertical .track {
 	-fx-pref-width: 5;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * custom                                                                      *
+ *                                                                             *
+ ******************************************************************************/
+.dialog-pane .content{
+	-fx-text-fill: #111;
 }

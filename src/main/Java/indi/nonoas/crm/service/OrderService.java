@@ -5,7 +5,11 @@ import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.dto.VipInfo;
 import indi.nonoas.crm.pojo.vo.OrderRecordVO;
 import org.springframework.transaction.annotation.Transactional;
+import per.nonoas.orm.AbstractTransaction;
+import per.nonoas.orm.BeanTransaction;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,4 +45,19 @@ public interface OrderService {
                          List<UserGoods> userGoods,
                          List<GoodsDto> goodsBeans,
                          VipInfo vipBean) throws Exception;
+
+    /**
+     * 商品下单事务
+     *
+     * @param order        订单
+     * @param orderDetails 订单详情
+     * @param userGoods    需要更新的 用户-商品 列表
+     * @param goodsBeans   商品 列表
+     * @param vipBean      用户
+     */
+    void placePackageOrder(OrderBean order,
+                              List<OrderDetailBean> orderDetails,
+                              List<UserGoods> userGoods,
+                              List<GoodsDto> goodsBeans,
+                              VipInfo vipBean) ;
 }

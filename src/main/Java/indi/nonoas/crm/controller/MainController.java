@@ -312,7 +312,6 @@ public class MainController implements Initializable {
 
 
     private void startBackgroundTask() {
-//        OrderService odrService = (OrderService) SpringUtil.getBean("OrderServiceImpl");
         //É¾³ý¾É¶©µ¥
         new Thread(() -> {
             odrService.delete365dAgo();

@@ -60,11 +60,11 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentDto> {
      */
     @Override
     public ArrayList<PackageContentDto> getAllBeans() {
-        ArrayList<PackageContentDto> packageContentDtos = new ArrayList<>();
+        ArrayList<PackageContentDto> packageContents = new ArrayList<>();
         for (GoodsEditTableVO d : obList) {
-            packageContentDtos.add(dataToBean(d));
+            packageContents.add(dataToBean(d));
         }
-        return packageContentDtos;
+        return packageContents;
     }
 
     /**

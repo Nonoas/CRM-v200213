@@ -82,7 +82,6 @@ public class PackageInfoController implements Initializable {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             pkgTable.removeData(bean);
             pkgService.deleteById(bean.getId());
-            PackageContentDao.getInstance().deleteById(bean.getId());
         }
     }
 

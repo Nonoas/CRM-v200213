@@ -11,9 +11,14 @@ import indi.nonoas.crm.dao.UsrGdsMapper;
 import indi.nonoas.crm.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import per.nonoas.orm.AbstractTransaction;
+import per.nonoas.orm.BeanTransaction;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,6 +46,7 @@ public class OrderServiceImpl implements OrderService {
         odrMapper.delete365dAgo();
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void placeGoodsOrder(OrderBean order,
                                 List<OrderDetailBean> orderDetails,
@@ -59,6 +65,39 @@ public class OrderServiceImpl implements OrderService {
             //用户商品
             ugMapper.replaceUserGoods(userGoods);
         }
+        //商品事务
+        goodsMapper.updateGoodsAmount(goodsBeans);
+    }
+
+
+    /**
+     * 商品下单事务
+     *
+     * @param order        订单
+     * @param orderDetails 订单详情
+     * @param userGoods    需要更新的 用户-商品 列表
+     * @param goodsBeans   商品 列表
+     * @param vipBean      用户
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void placePackageOrder(OrderBean order,
+                                     List<OrderDetailBean> orderDetails,
+                                     List<UserGoods> userGoods,
+                                     List<GoodsDto> goodsBeans,
+                                     VipInfo vipBean) {
+
+        //如果是散客则不做以下事务
+        if (vipBean != VipInfo.SANKE) {
+            //用户事务
+            vipMapper.updateInfo(vipBean);
+            //用户-商品事务
+            ugMapper.replaceUserGoods(userGoods);
+        }
+        //订单事务
+        odrMapper.insertOrder(order);
+        //订单详情事务
+        odrMapper.insertOrderDetails(orderDetails);
         //商品事务
         goodsMapper.updateGoodsAmount(goodsBeans);
     }

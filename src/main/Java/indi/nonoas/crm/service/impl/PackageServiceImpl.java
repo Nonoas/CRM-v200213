@@ -52,10 +52,22 @@ public class PackageServiceImpl implements PackageService {
     @Override
     public void deleteById(String id) {
         pkgMapper.deleteById(id);
+        pkgContentMapper.deleteById(id);
     }
 
     @Override
     public List<PackageDto> findByFilter(String id, String name, double money1, double money2) {
         return pkgMapper.findByFilter(id, name, money1, money2);
+    }
+
+    /**
+     * 通过套餐id查询套餐内容
+     *
+     * @param pkgId 套餐id
+     * @return 套餐内容，可空
+     */
+    @Override
+    public List<PackageContentDto> listPkgContentByPkgId(String pkgId) {
+        return pkgContentMapper.selectById(pkgId);
     }
 }
