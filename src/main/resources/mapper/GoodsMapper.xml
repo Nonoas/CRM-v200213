@@ -71,13 +71,13 @@
     <update id="update" parameterMap="GoodsBean">
         update goods_info
         set name=#{name},
-            sell_price=#{sell_price},
-            purchase_price=#{purchase_price},
+            sell_price=#{sellPrice},
+            purchase_price=#{purchasePrice},
             quantity=#{quantity},
-            min_discount=#{min_discount},
+            min_discount=#{minDiscount},
             deduction=#{deduction},
-            deduction_rate=#{deduction_rate},
-            base_unit=#{base_unit},
+            deduction_rate=#{deductionRate},
+            base_unit=#{baseUnit},
             type=#{type},
             photo=#{photo}
         where id = #{id}

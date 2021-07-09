@@ -1,9 +1,10 @@
 package indi.nonoas.crm.controller.consume;
 
 
-import indi.nonoas.crm.pojo.*;
-import indi.nonoas.crm.dao.my_orm_dao.*;
 import indi.nonoas.crm.common.PayMode;
+import indi.nonoas.crm.component.alert.MyAlert;
+import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
+import indi.nonoas.crm.pojo.*;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.dto.VipInfo;
 import indi.nonoas.crm.service.GoodsService;
@@ -11,7 +12,6 @@ import indi.nonoas.crm.service.OrderService;
 import indi.nonoas.crm.service.PackageService;
 import indi.nonoas.crm.service.UsrGdsService;
 import indi.nonoas.crm.utils.SpringUtil;
-import indi.nonoas.crm.component.alert.MyAlert;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -22,7 +22,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
