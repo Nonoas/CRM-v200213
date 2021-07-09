@@ -70,6 +70,8 @@
 ©¦          
 ©À©¤data (Êý¾Ý¿â)
 ©¦      mycrm.db
+©¦      mycrm.mv.db
+©¦      mycrm.trace.db
 ©¦      
 ©¸©¤photo (ÕÕÆ¬)
     ©À©¤goods
