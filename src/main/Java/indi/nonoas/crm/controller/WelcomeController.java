@@ -2,7 +2,7 @@ package indi.nonoas.crm.controller;
 
 import de.felixroske.jfxsupport.FXMLController;
 import indi.nonoas.crm.ApplicationStarter;
-import indi.nonoas.crm.pojo.LoginBean;
+import indi.nonoas.crm.pojo.LoginDto;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.common.ClientSession;
 import indi.nonoas.crm.service.LoginService;
@@ -62,7 +62,7 @@ public class WelcomeController implements Initializable {
         VerifyTask vTask = new VerifyTask(username, password); // 新建线程，用于验证密码并更新UI
         new Thread(vTask).start();
         vTask.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.getId() != null) {
+            if (newValue.getUserId() != null) {
                 ClientSession.addAttribute("user", newValue);
                 ApplicationStarter.toMainStageView();
             } else {
@@ -76,7 +76,7 @@ public class WelcomeController implements Initializable {
     /**
      * 子线程任务，用于验证用户名密码
      */
-    private static class VerifyTask extends javafx.concurrent.Task<LoginBean> {
+    private static class VerifyTask extends javafx.concurrent.Task<LoginDto> {
 
         String username;
         String password;
@@ -87,16 +87,16 @@ public class WelcomeController implements Initializable {
         }
 
         @Override
-        protected LoginBean call() {
+        protected LoginDto call() {
             LoginService service = (LoginService) SpringUtil.getBean("LoginServiceImpl");
-            LoginBean loginBean = service.verify(username, password);
+            LoginDto loginDto = service.verify(username, password);
             // 如果查询结果为不为空，则返回该LoginBean对象
-            if (loginBean != null)
-                return loginBean;
+            if (loginDto != null)
+                return loginDto;
                 // 否则返回一个空的LoginBean()对象
                 // 如果直接返回null，则ChangeListener不会回调，因为old值为null
             else
-                return new LoginBean();
+                return new LoginDto();
         }
 
     }

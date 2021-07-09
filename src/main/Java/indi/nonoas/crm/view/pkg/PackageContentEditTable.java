@@ -1,15 +1,16 @@
 package indi.nonoas.crm.view.pkg;
 
-import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.PackageContentDto;
 import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
 import indi.nonoas.crm.service.GoodsService;
+import indi.nonoas.crm.service.PackageService;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.component.table.GoodsEditTable;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -26,6 +27,7 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentDto> {
     private final ObservableList<GoodsEditTableVO> obList;
 
     private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
+    private final PackageService pkgService = (PackageService) SpringUtil.getBean("PackageServiceImpl");
 
 
     public PackageContentEditTable() {
@@ -107,7 +109,7 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentDto> {
      */
     public void showAllInfos(String id) {
         clearData(); // 清空所有数据
-        ArrayList<PackageContentDto> listPkgContentBeans = PackageContentDao.getInstance().selectById(id);
+        List<PackageContentDto> listPkgContentBeans = pkgService.listPkgContentByPkgId(id);
         ArrayList<GoodsEditTableVO> listData = new ArrayList<>();
         if (listPkgContentBeans != null) {
             for (PackageContentDto p : listPkgContentBeans) {

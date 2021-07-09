@@ -3,7 +3,6 @@ package indi.nonoas.crm.controller.consume;
 
 import indi.nonoas.crm.common.PayMode;
 import indi.nonoas.crm.component.alert.MyAlert;
-import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.pojo.*;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.dto.VipInfo;
@@ -263,7 +262,7 @@ public class PkgCnsDialogController implements Initializable {
         List<GoodsDto> goodsBeans = new ArrayList<>(16);
         //±éÀúÌ×²Í¶©µ¥
         for (OrderDetailBean detail : orderDetails) {
-            List<PackageContentDto> pkgContBeans = PackageContentDao.getInstance().selectById(detail.getProductId());
+            List<PackageContentDto> pkgContBeans = pkgService.listPkgContentByPkgId(detail.getProductId());
             //±éÀúÌ×²ÍÄÚÈÝ
             for (PackageContentDto pkgContBean : pkgContBeans) {
                 GoodsDto bean = goodsService.selectById(pkgContBean.getGoodsId());

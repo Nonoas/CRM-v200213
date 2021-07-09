@@ -8,6 +8,7 @@ import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.dto.VipInfo;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.service.OrderService;
+import indi.nonoas.crm.service.UsrGdsService;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.component.alert.MyAlert;
 import javafx.fxml.FXML;
@@ -37,6 +38,8 @@ public class ConsumeDialogController implements Initializable {
     private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
 
     private final OrderService orderService = (OrderService) SpringUtil.getBean("OrderServiceImpl");
+
+    private final UsrGdsService ugService = (UsrGdsService) SpringUtil.getBean("UsrGdsServiceImpl");
 
     /**
      * 消费者
@@ -212,7 +215,7 @@ public class ConsumeDialogController implements Initializable {
 
             int gAmount = od.getProductAmount();
             //查询数据库是否已经存在该主键
-            UserGoods goods = UserGoodsDao.getInstance().selectByUserGoods(userID, gID);
+            UserGoods goods = ugService.selectByUserGoods(userID, gID);
             if (goods == null) {
                 goods = new UserGoods();
                 goods.setUserId(userID);

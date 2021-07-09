@@ -1,6 +1,6 @@
 package indi.nonoas.crm.dao;
 
-import indi.nonoas.crm.pojo.LoginBean;
+import indi.nonoas.crm.pojo.LoginDto;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -17,5 +17,5 @@ public interface LoginMapper {
      * @param password 密码
      * @return 成功返回bean，失败返回null
      */
-    LoginBean verifySelect(@Param("id") String username, @Param("password") String password);
+    LoginDto verifySelect(@Param("id") String username, @Param("password") String password);
 }

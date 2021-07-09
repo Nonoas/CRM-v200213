@@ -2,7 +2,6 @@ package indi.nonoas.crm.controller.goods;
 
 import indi.nonoas.crm.pojo.PackageDto;
 import indi.nonoas.crm.pojo.PackageContentDto;
-import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.service.PackageService;
 import indi.nonoas.crm.utils.SpringUtil;
 import javafx.fxml.FXML;

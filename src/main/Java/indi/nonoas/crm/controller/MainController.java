@@ -12,7 +12,7 @@ import indi.nonoas.crm.view.stat.UsrGdsOdrTable;
 import indi.nonoas.crm.view.vip.VipManageTab;
 import indi.nonoas.crm.common.ClientSession;
 import indi.nonoas.crm.config.ImageSrc;
-import indi.nonoas.crm.pojo.LoginBean;
+import indi.nonoas.crm.pojo.LoginDto;
 import indi.nonoas.crm.service.OrderService;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -90,9 +90,9 @@ public class MainController implements Initializable {
         bp_root.setCenter(rootTabPane);
         addTab(ConsumeTab.getInstance());
 
-        LoginBean loginBean = (LoginBean) ClientSession.getAttribute("user");
+        LoginDto loginDto = (LoginDto) ClientSession.getAttribute("user");
 
-        label_operator.setText("操作员：" + loginBean.getName());
+        label_operator.setText("操作员：" + loginDto.getUserName());
 
     }
 

@@ -6,34 +6,34 @@ package indi.nonoas.crm.pojo;
  * @author Nonoas
  *
  */
-public class LoginBean {
+public class LoginDto {
 
 	/** ’À∫≈ */
-	private String id;
+	private String userId;
 	/** –’√˚ */
-	private String name;
+	private String userName;
 	/** √‹¬Î */
 	private String password;
 	/** »®œﬁ */
 	private int root;
 
-	public LoginBean() {
+	public LoginDto() {
 	}
 
-	public String getId() {
-		return id;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getPassword() {
@@ -55,8 +55,8 @@ public class LoginBean {
 	@Override
 	public String toString() {
 		return "LoginBean{" +
-				"id='" + id + '\'' +
-				", name='" + name + '\'' +
+				"id='" + userId + '\'' +
+				", name='" + userName + '\'' +
 				", password='" + password + '\'' +
 				", root=" + root +
 				'}';

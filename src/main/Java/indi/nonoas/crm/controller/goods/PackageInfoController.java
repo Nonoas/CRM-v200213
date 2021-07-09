@@ -5,7 +5,6 @@ import indi.nonoas.crm.view.pkg.PackageContentTable;
 import indi.nonoas.crm.view.pkg.PackageModifyTab;
 import indi.nonoas.crm.view.pkg.PackageTable;
 import indi.nonoas.crm.controller.MainController;
-import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.pojo.PackageDto;
 import indi.nonoas.crm.service.PackageService;
 import indi.nonoas.crm.utils.SpringUtil;

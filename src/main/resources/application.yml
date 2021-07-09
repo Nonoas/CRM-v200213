@@ -1,7 +1,9 @@
 spring:
   datasource:
-    driver-class-name: org.sqlite.JDBC
-    url: jdbc:sqlite:data/mycrm.db
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:./data/mycrm
+    username: root
+    password: 20210710mycrm
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml

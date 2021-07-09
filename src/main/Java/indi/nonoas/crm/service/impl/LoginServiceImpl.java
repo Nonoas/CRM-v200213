@@ -1,6 +1,6 @@
 package indi.nonoas.crm.service.impl;
 
-import indi.nonoas.crm.pojo.LoginBean;
+import indi.nonoas.crm.pojo.LoginDto;
 import indi.nonoas.crm.dao.LoginMapper;
 import indi.nonoas.crm.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class LoginServiceImpl implements LoginService {
     private LoginMapper loginMapper;
 
     @Override
-    public LoginBean verify(String username, String password) {
+    public LoginDto verify(String username, String password) {
         return loginMapper.verifySelect(username, password);
     }
 

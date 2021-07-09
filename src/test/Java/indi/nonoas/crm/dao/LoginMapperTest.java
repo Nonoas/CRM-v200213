@@ -1,6 +1,6 @@
 package indi.nonoas.crm.dao;
 
-import indi.nonoas.crm.pojo.LoginBean;
+import indi.nonoas.crm.pojo.LoginDto;
 
 /**
  * @author : Nonoas
@@ -14,5 +14,5 @@ public interface LoginMapperTest {
      * @param password 密码
      * @return 成功返回bean，失败返回null
      */
-    LoginBean verify(String username, String password);
+    LoginDto verify(String username, String password);
 }

@@ -1,11 +1,11 @@
 package indi.nonoas.crm.view.pkg;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.PackageContentDto;
-import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.service.GoodsService;
+import indi.nonoas.crm.service.PackageService;
 import indi.nonoas.crm.utils.SpringUtil;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -35,6 +35,7 @@ public class PackageContentTable extends TableView<PackageContentDto> {
     private final TableColumn<PackageContentDto, String> item_total = new TableColumn<>("小计");
 
     private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
+    private final PackageService pkgService = (PackageService) SpringUtil.getBean("PackageServiceImpl");
 
     public PackageContentTable() {
         initColumns();
@@ -86,7 +87,7 @@ public class PackageContentTable extends TableView<PackageContentDto> {
      */
     public void showAllInfos(String id) {
         clearData(); // 清空所有数据
-        ArrayList<PackageContentDto> listVipBeans = PackageContentDao.getInstance().selectById(id);
+        List<PackageContentDto> listVipBeans = pkgService.listPkgContentByPkgId(id);
         if (listVipBeans != null)
             obList.addAll(listVipBeans);
     }

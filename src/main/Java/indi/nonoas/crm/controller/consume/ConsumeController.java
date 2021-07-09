@@ -1,28 +1,29 @@
 package indi.nonoas.crm.controller.consume;
 
-import indi.nonoas.crm.pojo.dto.VipInfo;
-import indi.nonoas.crm.service.PackageService;
-import indi.nonoas.crm.view.consume.*;
-import indi.nonoas.crm.view.goods.GoodsSingleSelectTable;
-import indi.nonoas.crm.view.pkg.PackageSingleSelectTable;
-import indi.nonoas.crm.view.vip.VipAddTab;
+import indi.nonoas.crm.component.alert.MyAlert;
 import indi.nonoas.crm.controller.MainController;
-import indi.nonoas.crm.dao.my_orm_dao.PackageContentDao;
 import indi.nonoas.crm.dao.my_orm_dao.UserGoodsDao;
 import indi.nonoas.crm.dao.my_orm_dao.UserGoodsOrderDao;
 import indi.nonoas.crm.pojo.*;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
+import indi.nonoas.crm.pojo.dto.VipInfo;
 import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
 import indi.nonoas.crm.service.GoodsService;
+import indi.nonoas.crm.service.PackageService;
+import indi.nonoas.crm.service.UsrGdsService;
 import indi.nonoas.crm.service.VipService;
 import indi.nonoas.crm.service.impl.OrderServiceImpl;
 import indi.nonoas.crm.utils.SpringUtil;
-import indi.nonoas.crm.component.alert.MyAlert;
+import indi.nonoas.crm.view.consume.*;
+import indi.nonoas.crm.view.goods.GoodsSingleSelectTable;
+import indi.nonoas.crm.view.pkg.PackageSingleSelectTable;
+import indi.nonoas.crm.view.vip.VipAddTab;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import org.apache.log4j.Logger;
@@ -43,6 +44,8 @@ public class ConsumeController implements Initializable {
     private final VipService vipService = (VipService) SpringUtil.getBean("UserServiceImpl");
 
     private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
+
+    private final UsrGdsService ugService= (UsrGdsService) SpringUtil.getBean("UsrGdsServiceImpl");
 
 
     /**
@@ -590,7 +593,7 @@ public class ConsumeController implements Initializable {
     private List<UserGoods> generateUserGoodsData(List<UserGoodsOrderBean> ugoBeans) {
         List<UserGoods> userGoods = new ArrayList<>(ugoBeans.size());
         for (UserGoodsOrderBean ugo : ugoBeans) {
-            UserGoods ug = UserGoodsDao.getInstance().selectByUserGoods(ugo.getUserId(), ugo.getGoodsId());
+            UserGoods ug = ugService.selectByUserGoods(ugo.getUserId(), ugo.getGoodsId());
             ug.setAmount(ug.getAmount() - ugo.getAmount());
             userGoods.add(ug);
         }
@@ -606,7 +609,7 @@ public class ConsumeController implements Initializable {
         String userID = vipBean.getId();
         ObservableList<GoodsEditTableVO> items = ccTable.getItems();
         for (GoodsEditTableVO data : items) {
-            UserGoods userGoods = UserGoodsDao.getInstance().selectByUserGoods(userID, data.getId());
+            UserGoods userGoods = ugService.selectByUserGoods(userID, data.getId());
             GoodsDto goodsBean = goodsService.selectById(userGoods.getGoodsId());
             int amountCost = data.getAmount();
             int amountRest = userGoods.getAmount();
