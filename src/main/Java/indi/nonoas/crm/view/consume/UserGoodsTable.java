@@ -32,13 +32,13 @@ public class UserGoodsTable extends TableView<UserGoodsVO> {
     private VipInfoDto vipBean;
     private final EventHandler eventHandler = new EventHandler();
     private UserGoods selectBean;
-    private final Label phd_noUser = new Label("��δѡ���Ա");
-    private final Label phd_noData = new Label("���û�û���κ���Ʒ");
+    private final Label phd_noUser = new Label("尚未选择会员");
+    private final Label phd_noData = new Label("该用户没有任何商品");
 
-    private final TableColumn<UserGoodsVO, String> col_goodsID = new TableColumn<>("��Ʒ���");
-    private final TableColumn<UserGoodsVO, String> col_goodsName = new TableColumn<>("��Ʒ����");
-    private final TableColumn<UserGoodsVO, Number> col_amount = new TableColumn<>("ʣ������");
-    private final TableColumn<UserGoodsVO, String> col_type = new TableColumn<>("��Ʒ����");
+    private final TableColumn<UserGoodsVO, String> col_goodsID = new TableColumn<>("商品编号");
+    private final TableColumn<UserGoodsVO, String> col_goodsName = new TableColumn<>("商品名称");
+    private final TableColumn<UserGoodsVO, Number> col_amount = new TableColumn<>("剩余数量");
+    private final TableColumn<UserGoodsVO, String> col_type = new TableColumn<>("商品类型");
 
 
     public UserGoodsTable() {
@@ -82,9 +82,9 @@ public class UserGoodsTable extends TableView<UserGoodsVO> {
     }
 
     /**
-     * ��ѯ���� �û�-��Ʒ
+     * 查询所有 用户-商品
      *
-     * @return �û�-��Ʒ�б�,��ѯΪ����Ϊnull
+     * @return 用户-商品列表,查询为空则为null
      */
     private List<UserGoods> getUserGoods() {
         String userID = vipBean.getId();
@@ -92,9 +92,9 @@ public class UserGoodsTable extends TableView<UserGoodsVO> {
     }
 
     /**
-     * ��beanתΪVO
+     * 将bean转为VO
      *
-     * @param bean ��beanתΪVO
+     * @param bean 将bean转为VO
      * @return VO
      */
     private UserGoodsVO beanToVO(UserGoods bean) {
@@ -109,7 +109,7 @@ public class UserGoodsTable extends TableView<UserGoodsVO> {
     }
 
     /**
-     * ��voתΪbean
+     * 将vo转为bean
      *
      * @param vo vo
      * @return bean
@@ -145,7 +145,7 @@ public class UserGoodsTable extends TableView<UserGoodsVO> {
     }
 
     /**
-     * ���ñ��Ϊ��ʱ������
+     * 设置表格为空时的内容
      */
     private void setEmptyText() {
         if (vipBean == VipInfoDto.SANKE)
