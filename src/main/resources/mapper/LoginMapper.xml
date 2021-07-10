@@ -8,7 +8,7 @@
     <select id="verifySelect" resultMap="LoginBean">
         select *
         from LOGIN_INFO
-        where USER_ID = #{id}
+        where ID = #{id}
           and  PASSWORD= #{password}
     </select>
 </mapper>

@@ -92,7 +92,7 @@ public class MainController implements Initializable {
 
         LoginDto loginDto = (LoginDto) ClientSession.getAttribute("user");
 
-        label_operator.setText("操作员：" + loginDto.getUserName());
+        label_operator.setText("操作员：" + loginDto.getName());
 
     }
 

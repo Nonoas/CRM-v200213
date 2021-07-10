@@ -22,13 +22,7 @@ public class UsrGdsServiceImpl implements UsrGdsService {
         return usrGdsMapper.selectByUser(userID);
     }
 
-    /**
-     * �����û�ID����ƷID��ѯ
-     *
-     * @param userId  �û�ID
-     * @param goodsId ��ƷID
-     * @return �û�-��ƷBean��
-     */
+
     @Override
     public UserGoods selectByUserGoods(String userId, String goodsId) {
         return usrGdsMapper.selectByUserGoods(userId, goodsId);

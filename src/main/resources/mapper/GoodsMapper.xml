@@ -51,7 +51,7 @@
                type,
                photo
         from goods_info
-        where (id like '%' || #{id} || '%' or name like '%' || #{name}) || '%'
+        where (id like '%' || #{id} || '%' or name like '%' || #{name} || '%')
           and type like #{type} || '%'
     </select>
 

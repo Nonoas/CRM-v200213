@@ -43,7 +43,7 @@ public class GoodsInfoController implements Initializable {
         scrollPane.setContent(table);
 
         List<String> goodsTypes = goodsService.selectGoodsTypes();
-        cb_type.getItems().addAll("全部类型", "商品类", "服务类");
+        cb_type.getItems().addAll("全部类型", "产品类", "服务类");
         if (goodsTypes != null) {
             for (String str : goodsTypes)
                 cb_type.getItems().add(str);

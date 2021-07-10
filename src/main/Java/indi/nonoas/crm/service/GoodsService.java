@@ -14,54 +14,54 @@ import java.util.LinkedList;
 public interface GoodsService{
 
     /**
-     * ͨ����Ʒid��ѯ��Ӧ��Ʒ进价Ϣ
+     * 通过商品id查询对应商品的所有信息
      *
-     * @param id ��Ʒid
-     * @return id��Ӧ����Ʒ��Ϣbean��
+     * @param id 商品id
+     * @return id对应的商品信息bean类
      */
     GoodsDto selectById(String id);
 
     /**
-     * ��ѯ���е���Ʒ��Ϣ
+     * 查询所有的商品信息
      *
-     * @return GoodsBean��ArrayList����, ��Ϊnull
+     * @return GoodsBean的ArrayList集合, 可为null
      */
     ArrayList<GoodsDto> selectAll();
 
     /**
-     * ������ɸѡģ����ѯ
+     * 按条件筛选模糊查询
      *
-     * @param id   ��Ʒ���
-     * @param name ��Ʒ����
-     * @param type ��Ʒ����
-     * @return GoodsBean��ArrayList����, ����Ϊnull
+     * @param id   商品编号
+     * @param name 商品名称
+     * @param type 商品种类
+     * @return GoodsBean的ArrayList集合, 可以为null
      */
     ArrayList<GoodsDto> selectByFiltrate(String id, String name, String type);
 
     /**
-     * ɾ��һ����Ʒ��Ϣ
+     * 删除一条商品信息
      *
-     * @param id ��Ʒid
+     * @param id 商品id
      */
     void deleteByID(String id);
 
     /**
-     * ����һ����Ʒ��Ϣ
+     * 插入一条商品信息
      *
-     * @param bean GoodsBean����
+     * @param bean GoodsBean对象
      */
     void insertInfo(GoodsDto bean);
 
     /**
-     * ������Ʒ��Ϣ
+     * 更新商品信息
      *
-     * @param goodsBean GoodsBean����
+     * @param goodsBean GoodsBean对象
      */
     void update(GoodsDto goodsBean);
 
     /**
-     * ��ѯ������Ʒ进价
-     * @return ������Ʒ�������ƣ�����Ϊnull
+     * 查询所有商品分类名称
+     * @return 所有商品分类名称，可以为null
      */
     LinkedList<String> selectGoodsTypes();
 }

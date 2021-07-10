@@ -12,9 +12,9 @@ import java.util.List;
 @Transactional
 public interface UsrGdsOdrService {
     /**
-     * ��ѯ�����û������Ʒ���Ѽ�¼
+     * 查询所有用户库存商品消费记录
      *
-     * @return ���Ѽ�¼�б�
+     * @return 消费记录列表
      */
     List<UsrGdsOdrRecordVO> selectUserGoodsOrder();
 }

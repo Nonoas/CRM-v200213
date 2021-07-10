@@ -13,68 +13,68 @@ import java.util.List;
 @Transactional
 public interface VipService {
     /**
-     * �Զ����ɻ�Ա����
+     * 自动生成会员卡号
      *
-     * @return 32������ ��Ա����
+     * @return 32进制数 会员卡号
      */
     String generateVipID();
 
     /**
-     * ͨ�����Ż�������ȷ��ѯ
+     * 通过卡号或姓名精确查询
      *
-     * @param id   ��Ա����
-     * @param name ��Ա����
+     * @param id   会员卡号
+     * @param name 会员姓名
      * @return VipBean
      */
     VipInfoDto getInfoByIdOrName(String id, String name);
 
     /**
-     * ��ѯ���л�Ա��Ϣ
+     * 查询所有会员信息
      *
-     * @return VIPBean��ArrayList����
+     * @return VIPBean的ArrayList集合
      */
     ArrayList<VipInfoDto> selectAllUser();
 
     /**
-     * ������ɸѡ��Ϣ
+     * 多条件筛选信息
      *
-     * @param id         ��Ա����
-     * @param name       ����
-     * @param card_level ��Ա�ȼ�
-     * @return VIPBean��ArrayList����, û�в�ѯ���ʱΪnull
+     * @param id         会员卡号
+     * @param name       姓名
+     * @param card_level 会员等级
+     * @return VIPBean的ArrayList对象, 没有查询结果时为null
      */
     ArrayList<VipInfoDto> selectByFiltrate(String id, String name, String card_level);
 
     /**
-     * 进价��
+     * 过滤器查找
      *
-     * @param id       ����
-     * @param name     ����
-     * @param level    ��Ա�ȼ�
-     * @param dateFrom ����ʱ�䷶Χ����ʼ��
-     * @param dateTo   ����ʱ�䷶Χ进价
-     * @return VIPBean��ArrayList����, û�в�ѯ���ʱΪnull
+     * @param id       卡号
+     * @param name     姓名
+     * @param level    会员等级
+     * @param dateFrom 加入时间范围（起始）
+     * @param dateTo   加入时间范围（结束）
+     * @return VIPBean的ArrayList对象, 没有查询结果时为null
      */
     List<VipInfoDto> selectByDateFiltrate(String id, String name, String level, String dateFrom, String dateTo);
 
     /**
-     * �����Ա��Ϣ
+     * 插入会员信息
      *
-     * @param vipBean VIPBean����
+     * @param vipBean VIPBean对象
      */
     void insertInfo(VipInfoDto vipBean);
 
     /**
-     * ͨ������ɾ����Ա��Ϣ
+     * 通过卡号删除会员信息
      *
-     * @param id ��Ա����
+     * @param id 会员卡号
      */
     void deleteByID(String id);
 
     /**
-     * �����û���Ϣ
+     * 更新用户信息
      *
-     * @param vipBean VIPBean����
+     * @param vipBean VIPBean对象
      */
     void updateInfo(VipInfoDto vipBean);
 }

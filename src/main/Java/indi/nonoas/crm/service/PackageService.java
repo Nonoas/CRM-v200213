@@ -12,53 +12,47 @@ import java.util.List;
 public interface PackageService {
 
     /**
-     * ��ѯ������Ŀ��Ϣ
+     * 查询所有项目信息
      *
-     * @return ������Ŀ��Ϣ
+     * @return 所有项目信息
      */
     List<PackageDto> selectAll();
 
     /**
-     * ͨ��id������Ŀ��Ϣ
+     * 通过id查找项目信息
      *
-     * @param id ��Ŀid
-     * @return ��Ӧ����Ŀ��Ϣbean�����
+     * @param id 项目id
+     * @return 对应的项目信息bean类对象
      */
     PackageDto selectById(String id);
 
     /**
-     * ����һ����Ŀ��Ϣ
+     * 插入一条项目信息
      *
-     * @param bean PackageBean����
+     * @param bean PackageBean对象
      */
     void insert(PackageDto bean, List<PackageContentDto> pkgContents);
 
     /**
-     * �����ײ���Ϣ
+     * 更新套餐信息
      *
-     * @param bean     �ײ���
-     * @param pkgGoods �ײ��µ���Ʒ��Ϣ
+     * @param bean     套餐类
+     * @param pkgGoods 套餐下的商品信息
      */
     void update(PackageDto bean, List<PackageContentDto> pkgGoods);
 
     void deleteById(String id);
 
     /**
-     * ͨ�����˲�����Ŀ��Ϣ
+     * 通过过滤查找项目信息
      *
-     * @param id     ���
-     * @param name   ����
-     * @param money1 ��Ǯ����
-     * @param money2 ��Ǯ����
-     * @return 进价进价���Ŀ��Ϣ, ����Ϊnull
+     * @param id     编号
+     * @param name   名称
+     * @param money1 金钱下限
+     * @param money2 金钱上限
+     * @return 所有满足过滤条件的项目信息, 可以为null
      */
     List<PackageDto> findByFilter(String id, String name, double money1, double money2);
 
-    /**
-     * ͨ���ײ�id��ѯ�ײ�����
-     * @param pkgId �ײ�id
-     * @return �ײ����ݣ��ɿ�
-     */
     List<PackageContentDto> listPkgContentByPkgId(String pkgId);
-
 }

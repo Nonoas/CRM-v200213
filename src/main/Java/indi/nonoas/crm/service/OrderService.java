@@ -1,6 +1,8 @@
 package indi.nonoas.crm.service;
 
-import indi.nonoas.crm.pojo.*;
+import indi.nonoas.crm.pojo.OrderDetailBean;
+import indi.nonoas.crm.pojo.OrderDto;
+import indi.nonoas.crm.pojo.UserGoods;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.pojo.vo.OrderRecordVO;
@@ -16,44 +18,36 @@ import java.util.List;
 public interface OrderService {
 
     /**
-     * ��ѯ������Ʒ����
+     * 查询所有商品订单
      *
-     * @return ��Ʒ�����б�
+     * @return 商品订单列表
      */
     List<OrderRecordVO> selectGdsOrds();
 
     /**
-     * ɾ��һ��ǰ�ļ�¼
+     * 删除一年前的记录
      */
     void delete365dAgo();
 
     /**
-     * ��Ʒ�µ�����
+     * 商品下单事务
      *
-     * @param order        ����
-     * @param orderDetails 进价
-     * @param userGoods    ��Ҫ���µ� �û�-��Ʒ �б�
-     * @param goodsBeans   ��Ʒ �б�
-     * @param vipBean      �û�
+     * @param order        订单
+     * @param orderDetails 订单详情
+     * @param userGoods    需要更新的 用户-商品 列表
+     * @param goodsBeans   商品 列表
+     * @param vipBean      用户
      */
     void placeGoodsOrder(OrderDto order,
                          List<OrderDetailBean> orderDetails,
                          List<UserGoods> userGoods,
                          List<GoodsDto> goodsBeans,
-                         VipInfoDto vipBean) throws Exception;
+                         VipInfoDto vipBean) ;
 
-    /**
-     * ��Ʒ�µ�����
-     *
-     * @param order        ����
-     * @param orderDetails 进价
-     * @param userGoods    ��Ҫ���µ� �û�-��Ʒ �б�
-     * @param goodsBeans   ��Ʒ �б�
-     * @param vipBean      �û�
-     */
+
     void placePackageOrder(OrderDto order,
                            List<OrderDetailBean> orderDetails,
                            List<UserGoods> userGoods,
                            List<GoodsDto> goodsBeans,
-                           VipInfoDto vipBean) ;
+                           VipInfoDto vipBean);
 }

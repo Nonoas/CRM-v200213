@@ -59,10 +59,10 @@ public class WelcomeController implements Initializable {
         btn_Login.setDisable(true);
         btn_Login.setText("登录验证中...");
 
-        VerifyTask vTask = new VerifyTask(username, password); // �½��̣߳�������֤���벢����UI
+        VerifyTask vTask = new VerifyTask(username, password);
         new Thread(vTask).start();
         vTask.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.getUserId() != null) {
+            if (newValue.getId() != null) {
                 ClientSession.addAttribute("user", newValue);
                 ApplicationStarter.toMainStageView();
             } else {
