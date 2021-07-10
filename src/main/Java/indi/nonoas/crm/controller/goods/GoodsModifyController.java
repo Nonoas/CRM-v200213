@@ -28,11 +28,11 @@ public class GoodsModifyController implements Initializable {
     private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
 
     /**
-     * 会员照片绝对路径
+     * 锟斤拷员锟斤拷片锟斤拷锟斤拷路锟斤拷
      */
     private String photoUrl;
 
-    private Tab parentTab; // 当前Tab
+    private Tab parentTab; // 锟斤拷前Tab
     @FXML
     private TextField tf_unit;
     @FXML
@@ -64,23 +64,23 @@ public class GoodsModifyController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // 设置初始图片
+        // 锟斤拷锟矫筹拷始图片
         img_photo.setImage(new Image(ImageSrc.PHOTO_PATH));
-        // 初始化CombBox
-        cbb_type.getItems().addAll("产品类", "服务类");
-        cbb_type.setValue("产品类");
+        // 锟斤拷始锟斤拷CombBox
+        cbb_type.getItems().addAll("锟斤拷品锟斤拷", "锟斤拷锟斤拷锟斤拷");
+        cbb_type.setValue("锟斤拷品锟斤拷");
     }
 
-    @FXML // 关闭当前tab
+    @FXML // 锟截闭碉拷前tab
     private void cancelInfo() {
         TabPane tabPane = parentTab.getTabPane();
         tabPane.getTabs().remove(parentTab);
     }
 
-    @FXML // 提交信息
+    @FXML // 锟结交锟斤拷息
     private void commitIfo() {
-        double sellPrice = Double.parseDouble(tf_sellPrice.getText()); // 预售单价
-        String name = tf_name.getText(); // 商品名称
+        double sellPrice = Double.parseDouble(tf_sellPrice.getText()); // 鍗曚环
+        String name = tf_name.getText(); // 锟斤拷品锟斤拷锟斤拷
         String type = cbb_type.getValue();
         double quantity = Double.parseDouble(tf_quantity.getText());
         String unit = tf_unit.getText();
@@ -101,15 +101,15 @@ public class GoodsModifyController implements Initializable {
 
         goodsService.update(goodsBean);
 
-        if (chc_isClose.isSelected()) { // 如果选择了提交后关闭，则关闭当前tab
+        if (chc_isClose.isSelected()) { // 锟斤拷锟窖★拷锟斤拷锟斤拷峤伙拷锟截闭ｏ拷锟斤拷乇盏锟角皌ab
             cancelInfo();
         }
     }
 
-    @FXML // 上传照片
+    @FXML // 锟较达拷锟斤拷片
     private void uploadPhoto() {
         FileChooser chooser = new FileChooser();
-        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("图片文件", "*.png", "*.jpg"));
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("图片锟侥硷拷", "*.png", "*.jpg"));
         File photoFile = chooser.showOpenDialog(null);
         if (photoFile != null) {
             photoUrl = photoFile.getAbsolutePath();
@@ -119,21 +119,21 @@ public class GoodsModifyController implements Initializable {
     }
 
     /**
-     * 传递当前tab的引用
+     * 锟斤拷锟捷碉拷前tab锟斤拷锟斤拷锟斤拷
      */
     public void setPane(Tab tab) {
         this.parentTab = tab;
     }
 
     /**
-     * 传递当前修改的Bean
+     * 锟斤拷锟捷碉拷前锟睫改碉拷Bean
      */
     public void setBean(GoodsDto bean) {
         this.goodsBean = bean;
 
         String id = goodsBean.getId();
-        double sellPrice = goodsBean.getSellPrice(); // 预售单价
-        String name = goodsBean.getName(); // 商品名称
+        double sellPrice = goodsBean.getSellPrice(); // 鍗曚环
+        String name = goodsBean.getName(); // 锟斤拷品锟斤拷锟斤拷
         String type = goodsBean.getType();
         double quantity = goodsBean.getQuantity();
         String unit = goodsBean.getBaseUnit();
@@ -141,7 +141,7 @@ public class GoodsModifyController implements Initializable {
         double minDiscount = goodsBean.getMinDiscount();
         double commissionRate = goodsBean.getDeductionRate();
         double commission = goodsBean.getDeduction();
-        // 显示goodsBean的信息
+        // 锟斤拷示goodsBean锟斤拷锟斤拷息
         tf_id.setText(id);
         tf_sellPrice.setText(String.valueOf(sellPrice));
         tf_name.setText(name);

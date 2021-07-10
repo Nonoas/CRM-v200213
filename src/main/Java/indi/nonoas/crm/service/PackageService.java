@@ -12,52 +12,52 @@ import java.util.List;
 public interface PackageService {
 
     /**
-     * ╡Ия╞кЫспоНд©пео╒
+     * О©╫О©╫я╞О©╫О©╫О©╫О©╫О©╫О©╫д©О©╫О©╫о╒
      *
-     * @return кЫспоНд©пео╒
+     * @return О©╫О©╫О©╫О©╫О©╫О©╫д©О©╫О©╫о╒
      */
     List<PackageDto> selectAll();
 
     /**
-     * м╗╧Щid╡ИуроНд©пео╒
+     * м╗О©╫О©╫idО©╫О©╫О©╫О©╫О©╫О©╫д©О©╫О©╫о╒
      *
-     * @param id оНд©id
-     * @return ╤тс╕╣доНд©пео╒beanюЮ╤тоС
+     * @param id О©╫О©╫д©id
+     * @return О©╫О©╫с╕О©╫О©╫О©╫О©╫д©О©╫О©╫о╒beanО©╫О©╫О©╫О©╫О©╫
      */
     PackageDto selectById(String id);
 
     /**
-     * ╡ЕхКр╩лУоНд©пео╒
+     * О©╫О©╫О©╫О©╫р╩О©╫О©╫О©╫О©╫д©О©╫О©╫о╒
      *
-     * @param bean PackageBean╤тоС
+     * @param bean PackageBeanО©╫О©╫О©╫О©╫
      */
     void insert(PackageDto bean, List<PackageContentDto> pkgContents);
 
     /**
-     * ╦Эпблв╡мпео╒
+     * О©╫О©╫О©╫О©╫О©╫в╡О©╫О©╫О©╫о╒
      *
-     * @param bean     лв╡мюЮ
-     * @param pkgGoods лв╡моб╣дилф╥пео╒
+     * @param bean     О©╫в╡О©╫О©╫О©╫
+     * @param pkgGoods О©╫в╡О©╫О©╫б╣О©╫О©╫О©╫ф╥О©╫О©╫о╒
      */
     void update(PackageDto bean, List<PackageContentDto> pkgGoods);
 
     void deleteById(String id);
 
     /**
-     * м╗╧Щ╧Щбк╡ИуроНд©пео╒
+     * м╗О©╫О©╫О©╫О©╫О©╫к╡О©╫О©╫О©╫О©╫О©╫д©О©╫О©╫о╒
      *
-     * @param id     ╠Ю╨е
-     * @param name   цШЁф
-     * @param money1 ╫Пг╝обоч
-     * @param money2 ╫Пг╝иооч
-     * @return кЫспбЗвЦ╧ЩбклУ╪Ч╣доНд©пео╒, ©иртн╙null
+     * @param id     О©╫О©╫О©╫
+     * @param name   О©╫О©╫О©╫О©╫
+     * @param money1 О©╫О©╫г╝О©╫О©╫О©╫О©╫
+     * @param money2 О©╫О©╫г╝О©╫О©╫О©╫О©╫
+     * @return Х©⌡Д╩╥Х©⌡Д╩╥О©╫О©╫О©╫д©О©╫О©╫о╒, О©╫О©╫О©╫О©╫н╙null
      */
     List<PackageDto> findByFilter(String id, String name, double money1, double money2);
 
     /**
-     * м╗╧Щлв╡мid╡Ия╞лв╡мдзхщ
-     * @param pkgId лв╡мid
-     * @return лв╡мдзхщё╛©и©у
+     * м╗О©╫О©╫О©╫в╡О©╫idО©╫О©╫я╞О©╫в╡О©╫О©╫О©╫О©╫О©╫
+     * @param pkgId О©╫в╡О©╫id
+     * @return О©╫в╡О©╫О©╫О©╫О©╫щёО©╫О©╫и©О©╫
      */
     List<PackageContentDto> listPkgContentByPkgId(String pkgId);
 

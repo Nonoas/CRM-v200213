@@ -2,47 +2,47 @@ package indi.nonoas.crm.pojo.dto;
 
 public class GoodsDto {
     /**
-     * ±àºÅ
+     * ï¿½ï¿½ï¿½
      */
     private String id;
     /**
-     * Ãû³Æ
+     * ï¿½ï¿½ï¿½ï¿½
      */
     private String name;
     /**
-     * ÊÛ¼Û
+     * ï¿½Û¼ï¿½
      */
     private double sellPrice;
     /**
-     * ½ø¼Û
+     * ï¿½ï¿½ï¿½ï¿½
      */
     private double purchasePrice;
     /**
-     * ÊýÁ¿
+     * ï¿½ï¿½ï¿½ï¿½
      */
     private double quantity;
     /**
-     * ×îµÍÕÛ¿Û
+     * ï¿½ï¿½ï¿½ï¿½Û¿ï¿½
      */
     private double minDiscount;
     /**
-     * Ìá³É½ð¶î
+     * ï¿½ï¿½É½ï¿½ï¿½
      */
     private double deduction;
     /**
-     * Ìá³É±ÈÂÊ
+     * ï¿½ï¿½É±ï¿½ï¿½ï¿½
      */
     private double deductionRate;
     /**
-     * ÉÌÆ·ÖÖÀà
+     * ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
      */
     private String type;
     /**
-     * ¶ÈÁ¿µ¥Î»
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»
      */
     private String baseUnit;
     /**
-     * ÉÌÆ·Í¼Æ¬
+     * ï¿½ï¿½Æ·Í¼Æ¬
      */
     private String photo;
 

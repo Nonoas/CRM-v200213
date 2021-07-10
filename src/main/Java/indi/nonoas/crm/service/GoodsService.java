@@ -14,54 +14,54 @@ import java.util.LinkedList;
 public interface GoodsService{
 
     /**
-     * м╗╧Щилф╥id╡Ия╞╤тс╕илф╥╣дкЫсппео╒
+     * м╗О©╫О©╫О©╫О©╫ф╥idО©╫О©╫я╞О©╫О©╫с╕О©╫О©╫ф╥Х©⌡Д╩╥о╒
      *
-     * @param id илф╥id
-     * @return id╤тс╕╣дилф╥пео╒beanюЮ
+     * @param id О©╫О©╫ф╥id
+     * @return idО©╫О©╫с╕О©╫О©╫О©╫О©╫ф╥О©╫О©╫о╒beanО©╫О©╫
      */
     GoodsDto selectById(String id);
 
     /**
-     * ╡Ия╞кЫсп╣дилф╥пео╒
+     * О©╫О©╫я╞О©╫О©╫О©╫п╣О©╫О©╫О©╫ф╥О©╫О©╫о╒
      *
-     * @return GoodsBean╣дArrayList╪╞╨о, ©ин╙null
+     * @return GoodsBeanО©╫О©╫ArrayListО©╫О©╫О©╫О©╫, О©╫О©╫н╙null
      */
     ArrayList<GoodsDto> selectAll();
 
     /**
-     * ╟╢лУ╪Чи╦я║дё╨Щ╡Ия╞
+     * О©╫О©╫О©╫О©╫О©╫О©╫и╦я║дёО©╫О©╫О©╫О©╫я╞
      *
-     * @param id   илф╥╠Ю╨е
-     * @param name илф╥цШЁф
-     * @param type илф╥жжюЮ
-     * @return GoodsBean╣дArrayList╪╞╨о, ©иртн╙null
+     * @param id   О©╫О©╫ф╥О©╫О©╫О©╫
+     * @param name О©╫О©╫ф╥О©╫О©╫О©╫О©╫
+     * @param type О©╫О©╫ф╥О©╫О©╫О©╫О©╫
+     * @return GoodsBeanО©╫О©╫ArrayListО©╫О©╫О©╫О©╫, О©╫О©╫О©╫О©╫н╙null
      */
     ArrayList<GoodsDto> selectByFiltrate(String id, String name, String type);
 
     /**
-     * и╬ЁЩр╩лУилф╥пео╒
+     * и╬О©╫О©╫р╩О©╫О©╫О©╫О©╫ф╥О©╫О©╫о╒
      *
-     * @param id илф╥id
+     * @param id О©╫О©╫ф╥id
      */
     void deleteByID(String id);
 
     /**
-     * ╡ЕхКр╩лУилф╥пео╒
+     * О©╫О©╫О©╫О©╫р╩О©╫О©╫О©╫О©╫ф╥О©╫О©╫о╒
      *
-     * @param bean GoodsBean╤тоС
+     * @param bean GoodsBeanО©╫О©╫О©╫О©╫
      */
     void insertInfo(GoodsDto bean);
 
     /**
-     * ╦Эпбилф╥пео╒
+     * О©╫О©╫О©╫О©╫О©╫О©╫ф╥О©╫О©╫о╒
      *
-     * @param goodsBean GoodsBean╤тоС
+     * @param goodsBean GoodsBeanО©╫О©╫О©╫О©╫
      */
     void update(GoodsDto goodsBean);
 
     /**
-     * ╡Ия╞кЫспилф╥╥жюЮцШЁф
-     * @return кЫспилф╥╥жюЮцШЁфё╛©иртн╙null
+     * О©╫О©╫я╞О©╫О©╫О©╫О©╫О©╫О©╫ф╥Х©⌡Д╩╥
+     * @return О©╫О©╫О©╫О©╫О©╫О©╫ф╥О©╫О©╫О©╫О©╫О©╫О©╫О©╫фёО©╫О©╫О©╫О©╫О©╫н╙null
      */
     LinkedList<String> selectGoodsTypes();
 }

@@ -12,7 +12,7 @@ import javafx.scene.layout.Pane;
 public class VipAddTab extends Tab {
 	
 	public VipAddTab() {
-		this("Ìí¼Ó»áÔ±");
+		this("ï¿½ï¿½Ó»ï¿½Ô±");
 	}
 	public VipAddTab(String str) {
 		super(str);

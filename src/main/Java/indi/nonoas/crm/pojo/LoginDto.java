@@ -1,20 +1,20 @@
 package indi.nonoas.crm.pojo;
 
 /**
- * µÇÂ¼ÐÅÏ¢
+ * ï¿½ï¿½Â¼ï¿½ï¿½Ï¢
  * 
  * @author Nonoas
  *
  */
 public class LoginDto {
 
-	/** ÕËºÅ */
+	/** ï¿½Ëºï¿½ */
 	private String userId;
-	/** ÐÕÃû */
+	/** ï¿½ï¿½ï¿½ï¿½ */
 	private String userName;
-	/** ÃÜÂë */
+	/** ï¿½ï¿½ï¿½ï¿½ */
 	private String password;
-	/** È¨ÏÞ */
+	/** È¨ï¿½ï¿½ */
 	private int root;
 
 	public LoginDto() {

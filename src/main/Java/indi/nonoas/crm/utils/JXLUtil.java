@@ -18,50 +18,50 @@ import java.util.List;
 public class JXLUtil {
 
     /**
-     * @param title       ±í¸ñ±êÌâ
-     * @param listContent ÁÐ±íÄÚÈÝ
-     * @param os          Êä³öÁ÷
-     * @return ³É¹¦Ôò·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+     * @param title       ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @param listContent ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @param os          ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @return ï¿½É¹ï¿½ï¿½ò·µ»ï¿½trueï¿½ï¿½Ê§ï¿½Ü·ï¿½ï¿½ï¿½false
      */
     public static boolean exportExcel(String[] title, String[] fieldNames, List<Object> listContent, OutputStream os) {
 
-        // ÒÔÏÂ¿ªÊ¼Êä³öµ½EXCEL
+        // ï¿½ï¿½ï¿½Â¿ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½EXCEL
         try {
 
-            /* **********´´½¨¹¤×÷²¾************ */
+            /* **********è¿›ä»·ï¿½ï¿½************ */
             WritableWorkbook workbook = Workbook.createWorkbook(os);
 
-            /* * **********´´½¨¹¤×÷±í************ */
+            /* * **********è¿›ä»·ï¿½ï¿½************ */
 
             WritableSheet sheet = workbook.createSheet("Sheet1", 0);
 
-            /* * **********ÉèÖÃ×Ýºá´òÓ¡£¨Ä¬ÈÏÎª×Ý´ò£©¡¢´òÓ¡Ö½***************** */
+            /* * **********ï¿½ï¿½ï¿½ï¿½ï¿½Ýºï¿½ï¿½Ó¡ï¿½ï¿½Ä¬ï¿½ï¿½Îªï¿½Ý´ò£©¡ï¿½ï¿½ï¿½Ó¡Ö½***************** */
             jxl.SheetSettings sheetSet = sheet.getSettings();
             sheetSet.setProtected(false);
 
-            /* * ************ÉèÖÃµ¥Ôª¸ñ×ÖÌå************** */
+            /* * ************ï¿½ï¿½ï¿½Ãµï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½************** */
             WritableFont NormalFont = new WritableFont(WritableFont.ARIAL, 10);
             WritableFont BoldFont = new WritableFont(WritableFont.ARIAL, 10, WritableFont.BOLD);
 
-            // ÓÃÓÚ±êÌâ¾ÓÖÐ
+            // ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             WritableCellFormat wcf_title = new WritableCellFormat(BoldFont);
-            wcf_title.setBorder(Border.ALL, BorderLineStyle.THIN); // ÏßÌõ
-            wcf_title.setVerticalAlignment(VerticalAlignment.CENTRE); // ÎÄ×Ö´¹Ö±¶ÔÆë
-            wcf_title.setAlignment(Alignment.CENTRE); // ÎÄ×ÖË®Æ½¶ÔÆë
-            wcf_title.setWrap(false); // ÎÄ×ÖÊÇ·ñ»»ÐÐ
+            wcf_title.setBorder(Border.ALL, BorderLineStyle.THIN); // ï¿½ï¿½ï¿½ï¿½
+            wcf_title.setVerticalAlignment(VerticalAlignment.CENTRE); // ï¿½ï¿½ï¿½Ö´ï¿½Ö±ï¿½ï¿½ï¿½ï¿½
+            wcf_title.setAlignment(Alignment.CENTRE); // ï¿½ï¿½ï¿½ï¿½Ë®Æ½ï¿½ï¿½ï¿½ï¿½
+            wcf_title.setWrap(false); // ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½
 
-            // ÓÃÓÚÕýÎÄ¾Ó×ó
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½
             WritableCellFormat wcf_text = new WritableCellFormat(NormalFont);
-            wcf_text.setBorder(Border.NONE, BorderLineStyle.THIN); // ÏßÌõ
-            wcf_text.setVerticalAlignment(VerticalAlignment.CENTRE); // ÎÄ×Ö´¹Ö±¶ÔÆë
-            wcf_text.setAlignment(Alignment.CENTRE); // ÎÄ×ÖË®Æ½¶ÔÆë
-            wcf_text.setWrap(false); // ÎÄ×ÖÊÇ·ñ»»ÐÐ
+            wcf_text.setBorder(Border.NONE, BorderLineStyle.THIN); // ï¿½ï¿½ï¿½ï¿½
+            wcf_text.setVerticalAlignment(VerticalAlignment.CENTRE); // ï¿½ï¿½ï¿½Ö´ï¿½Ö±ï¿½ï¿½ï¿½ï¿½
+            wcf_text.setAlignment(Alignment.CENTRE); // ï¿½ï¿½ï¿½ï¿½Ë®Æ½ï¿½ï¿½ï¿½ï¿½
+            wcf_text.setWrap(false); // ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½
 
-            /* * ***************EXCELµÚÒ»ÐÐÁÐ±êÌâ********************* */
+            /* * ***************EXCELï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½********************* */
             for (int i = 0; i < title.length; i++) {
                 sheet.addCell(new Label(i, 0, title[i], wcf_title));
             }
-            /* * ***************EXCELÕýÎÄÊý¾Ý********************* */
+            /* * ***************EXCELè¿›ä»·********************* */
             int rIndex = 1;
             for (Object obj : listContent) {
                 int cIndex = 0;
@@ -76,9 +76,9 @@ public class JXLUtil {
                 }
                 rIndex++;
             }
-            /* * **********½«ÒÔÉÏ»º´æÖÐµÄÄÚÈÝÐ´µ½EXCELÎÄ¼þÖÐ******** */
+            /* * **********ï¿½ï¿½ï¿½ï¿½ï¿½Ï»ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½EXCELï¿½Ä¼ï¿½ï¿½ï¿½******** */
             workbook.write();
-            /* * *********¹Ø±ÕÎÄ¼þ************* */
+            /* * *********ï¿½Ø±ï¿½ï¿½Ä¼ï¿½************* */
             workbook.close();
         } catch (Exception e) {
             e.printStackTrace();

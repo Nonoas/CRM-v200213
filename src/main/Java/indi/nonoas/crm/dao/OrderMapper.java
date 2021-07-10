@@ -16,29 +16,29 @@ import java.util.List;
 public interface OrderMapper {
 
     /**
-     * ²éÑ¯ËùÓÐÉÌÆ·¶©µ¥
+     * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
      *
-     * @return ÉÌÆ·¶©µ¥ÁÐ±í
+     * @return ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
      */
     List<OrderRecordVO> selectGdsOrds();
 
     /**
-     * ²åÈëÒ»Ìõ¶©µ¥
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param order ¶©µ¥pojo
+     * @param order ï¿½ï¿½ï¿½ï¿½pojo
      */
     void insertOrder(OrderBean order);
 
     /**
-     * É¾³ýÒ»ÄêÇ°µÄ¶©µ¥¼ÇÂ¼
+     * É¾ï¿½ï¿½Ò»ï¿½ï¿½Ç°ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½Â¼
      */
     void delete365dAgo();
 
     /**
-     * ÅúÁ¿²åÈë¶©µ¥ÏêÇé
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¶©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param orderDetails ¶©µ¥ÏêÇé¼¯ºÏ
-     * @return ³É¹¦£ºtrue
+     * @param orderDetails ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é¼¯ï¿½ï¿½
+     * @return ï¿½É¹ï¿½ï¿½ï¿½true
      */
     boolean insertOrderDetails(@Param("orderDetails") List<OrderDetailBean> orderDetails);
 

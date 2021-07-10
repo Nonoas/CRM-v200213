@@ -13,18 +13,18 @@ import java.util.regex.Pattern;
 public abstract class MyOrmUtil<T> {
 
     /**
-     * ²éÑ¯Ò»ÌõÊý¾Ý
+     * ï¿½ï¿½Ñ¯Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param sql    Ö´ÐÐµÄSQLÓï¾ä
-     * @param params SQLÓï¾äÕ¼Î»·ûÖµ
-     * @return Class &lt;T> µÄÊµÀý¶ÔÏó,Ã»ÓÐ²éÑ¯½á¹ûÊ±·µ»Ønull
+     * @param sql    Ö´ï¿½Ðµï¿½SQLï¿½ï¿½ï¿½
+     * @param params SQLï¿½ï¿½ï¿½Õ¼Î»ï¿½ï¿½Öµ
+     * @return Class &lt;T> ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Ã»ï¿½Ð²ï¿½Ñ¯ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½null
      */
     final protected T selectOne(String sql, Object... params) {
         T t = null;
         PreparedStatement ps = null;
         ResultSet rs;
         try {
-            ps = getGeneralPreparedStatement(sql, params); // ½«#{}Õ¼Î»·ûÌæ»»Îª?
+            ps = getGeneralPreparedStatement(sql, params); // ï¿½ï¿½#{}Õ¼Î»ï¿½ï¿½ï¿½æ»»Îª?
             rs = ps.executeQuery();
             if (rs.next())
                 t = mapToBean(rs, getBeanClass());
@@ -47,20 +47,20 @@ public abstract class MyOrmUtil<T> {
     }
 
     /**
-     * ²éÑ¯¶àÌõÊý¾Ý
+     * ï¿½ï¿½Ñ¯è¿›ä»·
      *
-     * @param sql    Ö´ÐÐµÄSQLÓï¾ä
-     * @param params SQLÓï¾äÕ¼Î»·ûÖµ
-     * @return Bean¶ÔÏóµÄList¼¯ºÏ, ÎÞ²éÑ¯½á¹ûÊ±·µ»Ønull
+     * @param sql    Ö´ï¿½Ðµï¿½SQLï¿½ï¿½ï¿½
+     * @param params SQLï¿½ï¿½ï¿½Õ¼Î»ï¿½ï¿½Öµ
+     * @return Beanï¿½ï¿½ï¿½ï¿½ï¿½Listï¿½ï¿½ï¿½ï¿½, ï¿½Þ²ï¿½Ñ¯ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½null
      */
     final protected List<T> select(String sql, Object... params) {
         List<T> list = new ArrayList<>(8);
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = getGeneralPreparedStatement(sql, params); // »ñÈ¡´ø²ÎÊýµÄPreparedStatement¶ÔÏó
+            ps = getGeneralPreparedStatement(sql, params); // ï¿½ï¿½È¡è¿›ä»·PreparedStatementï¿½ï¿½ï¿½ï¿½
             rs = ps.executeQuery();
-            while (rs.next()) // ½«²éÑ¯½á¹û¼ÓÈëlist
+            while (rs.next()) // ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½list
                 list.add(mapToBean(rs, getBeanClass()));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -80,11 +80,11 @@ public abstract class MyOrmUtil<T> {
     }
 
     /**
-     * ÏòÊý¾Ý¿â²åÈëÄÚÈÝ
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿è¿›ä»·
      *
-     * @param sql ´«ÈëµÄ´ø#{}Í¨Åä·ûµÄSQLÓï¾ä
-     * @param t   ´«ÈëµÄ·ºÐÍBeanÀà
-     * @return ²åÈëµÄÊý¾ÝÌõÊý
+     * @param sql ï¿½ï¿½ï¿½ï¿½Ä´ï¿½#{}Í¨ï¿½ï¿½ï¿½ï¿½ï¿½SQLï¿½ï¿½ï¿½
+     * @param t   ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½Beanï¿½ï¿½
+     * @return è¿›ä»·ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     final protected int insert(String sql, T t) {
         PreparedStatement ps = getPrepareStatement(sql, t);
@@ -99,11 +99,11 @@ public abstract class MyOrmUtil<T> {
     }
 
     /**
-     * ÏòÊý¾Ý¿â¸üÐÂÄÚÈÝ
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿è¿›ä»·
      *
-     * @param sql ´«ÈëµÄ´ø#{}Í¨Åä·ûµÄSQLÓï¾ä
-     * @param t   ´«ÈëµÄ·ºÐÍBeanÀà
-     * @return ¸üÐÂµÄÊý¾ÝÌõÊý
+     * @param sql ï¿½ï¿½ï¿½ï¿½Ä´ï¿½#{}Í¨ï¿½ï¿½ï¿½ï¿½ï¿½SQLï¿½ï¿½ï¿½
+     * @param t   ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½Beanï¿½ï¿½
+     * @return ï¿½ï¿½ï¿½Âµè¿›ä»·ï¿½
      */
     final protected int update(String sql, T t) {
         PreparedStatement ps = getPrepareStatement(sql, t);
@@ -118,11 +118,11 @@ public abstract class MyOrmUtil<T> {
     }
 
     /**
-     * ÏòÊý¾Ý¿âÉ¾³ýÄÚÈÝ
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param sql ´«ÈëµÄ´ø#{}Í¨Åä·ûµÄSQLÓï¾ä
-     * @param t   ´«ÈëµÄ·ºÐÍBeanÀà
-     * @return É¾³ýµÄÊý¾ÝÌõÊý
+     * @param sql ï¿½ï¿½ï¿½ï¿½Ä´ï¿½#{}Í¨ï¿½ï¿½ï¿½ï¿½ï¿½SQLï¿½ï¿½ï¿½
+     * @param t   ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½Beanï¿½ï¿½
+     * @return É¾è¿›ä»·ï¿½ï¿½ï¿½ï¿½
      */
     final protected boolean delete(String sql, T t) {
         try {
@@ -134,22 +134,22 @@ public abstract class MyOrmUtil<T> {
     }
 
     /**
-     * SQLÅú´¦Àí
+     * SQLï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param sql sqlÓï¾ä
-     * @param ts  beanÀà¼¯ºÏ
+     * @param sql sqlï¿½ï¿½ï¿½
+     * @param ts  beanï¿½à¼¯ï¿½ï¿½
      */
     final protected void executeBatch(String sql, List<T> ts) {
 
         List<String> list = getParams(sql);
-        sql = getSql(sql); // ½«SQLÖÐµÄ#{}Õ¼Î»·û¸ÄÎª?
+        sql = getSql(sql); // ï¿½ï¿½SQLï¿½Ðµï¿½#{}Õ¼Î»ï¿½ï¿½ï¿½ï¿½Îª?
 
         try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             for (T t : ts) {
                 Class<?> beanClass = t.getClass();
                 for (int i = 0; i < list.size(); i++) {
                     String colName = list.get(i);
-                    String methodName = "get" + underlineToBigCamel(colName); // ·½·¨Ãû
+                    String methodName = "get" + underlineToBigCamel(colName); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                     Method method = beanClass.getDeclaredMethod(methodName);
                     Object value = method.invoke(t);
                     ps.setObject(i + 1, value);
@@ -163,34 +163,34 @@ public abstract class MyOrmUtil<T> {
     }
 
     /**
-     * ÊÂÎñÖ´ÐÐ£¬½«Ò»×éÊý¾Ý¿â²Ù×÷Ö¸¶¨ÎªÊÂÎñ
+     * ï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ð£ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½
      *
-     * @param transactions ÊÂÎñÀà¼¯ºÏ
+     * @param transactions ï¿½ï¿½ï¿½ï¿½ï¿½à¼¯ï¿½ï¿½
      */
     final protected boolean executeTransaction(List<AbstractTransaction> transactions) {
         boolean flag = true;
         Connection conn = getConnection();
-        //È¡Ïû×Ô¶¯Ìá½»ÊÂÎñ
+        //È¡ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½á½»ï¿½ï¿½ï¿½ï¿½
         try {
             conn.setAutoCommit(false);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //Éú³ÉÊÂÎñÖ´ÐÐÓï¾ä
+        //è¿›ä»·Ö´ï¿½ï¿½ï¿½ï¿½ï¿½
         try {
             for (AbstractTransaction transaction : transactions) {
                 if (transaction instanceof BeanTransaction) {
-                    //»ñÈ¡ÊÂÎñ²ÎÊý
+                    //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                     Object bean = transaction.getParams();
                     String sql = transaction.getSQL();
-                    //Éú³ÉPrepareStatement¶ÔÏó
+                    //ï¿½ï¿½ï¿½ï¿½PrepareStatementï¿½ï¿½ï¿½ï¿½
                     Class<?> beanClass = bean.getClass();
                     List<String> paramNames = getParams(sql);
-                    sql = getSql(sql);  // ½«SQLÖÐµÄ#{}Õ¼Î»·û¸ÄÎª?
+                    sql = getSql(sql);  // ï¿½ï¿½SQLï¿½Ðµï¿½#{}Õ¼Î»ï¿½ï¿½ï¿½ï¿½Îª?
                     PreparedStatement ps = conn.prepareStatement(sql);
                     for (int i = 0; i < paramNames.size(); i++) {
                         String colName = paramNames.get(i);
-                        String methodName = "get" + underlineToBigCamel(colName); // ·½·¨Ãû
+                        String methodName = "get" + underlineToBigCamel(colName); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                         Method method = beanClass.getDeclaredMethod(methodName);
                         Object value = method.invoke(bean);
                         ps.setObject(i + 1, value);
@@ -199,7 +199,7 @@ public abstract class MyOrmUtil<T> {
                 } else {
                     String sql = getSql(transaction.getSQL());
                     Object[] params = (Object[]) transaction.getParams();
-                    PreparedStatement ps = conn.prepareStatement(getSql(sql)); // ½«#{}Õ¼Î»·ûÌæ»»Îª?
+                    PreparedStatement ps = conn.prepareStatement(getSql(sql)); // ï¿½ï¿½#{}Õ¼Î»ï¿½ï¿½ï¿½æ»»Îª?
                     for (int i = 0; i < params.length; i++) {
                         ps.setObject(i + 1, params[i]);
                     }
@@ -209,15 +209,15 @@ public abstract class MyOrmUtil<T> {
         } catch (InvocationTargetException | NoSuchMethodException | SQLException | IllegalAccessException e) {
             e.printStackTrace();
             try {
-                conn.rollback();    //»Ø¹öÊÂÎñ
+                conn.rollback();    //ï¿½Ø¹ï¿½ï¿½ï¿½ï¿½ï¿½
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
             flag = false;
         } finally {
             try {
-                conn.commit();  //Ìá½»ÊÂÎñ
-                conn.close();   //¹Ø±ÕÁ¬½Ó
+                conn.commit();  //ï¿½á½»ï¿½ï¿½ï¿½ï¿½
+                conn.close();   //ï¿½Ø±ï¿½ï¿½ï¿½ï¿½ï¿½
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -226,12 +226,12 @@ public abstract class MyOrmUtil<T> {
     }
 
     /**
-     * Ö´ÐÐÍ¨ÓÃSQLÓï¾ä
+     * Ö´ï¿½ï¿½Í¨ï¿½ï¿½SQLï¿½ï¿½ï¿½
      *
-     * @param sql    SQLÓï¾ä
-     * @param params Õ¼Î»·û²ÎÊý
-     * @return Ö´ÐÐ³É¹¦·µ»Øtrue£¬·ñÔò·µ»Øfalse
-     * @throws SQLException SQLÒì³£
+     * @param sql    SQLï¿½ï¿½ï¿½
+     * @param params Õ¼Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @return Ö´ï¿½Ð³É¹ï¿½ï¿½ï¿½ï¿½ï¿½trueï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½false
+     * @throws SQLException SQLï¿½ì³£
      */
     final protected boolean execute(String sql, Object... params) throws SQLException {
         PreparedStatement ps = getGeneralPreparedStatement(sql, params);
@@ -239,12 +239,12 @@ public abstract class MyOrmUtil<T> {
     }
 
     /**
-     * Í¨ÓÃÖ´ÐÐ·½·¨
+     * Í¨ï¿½ï¿½Ö´ï¿½Ð·ï¿½ï¿½ï¿½
      *
-     * @param sql sqlÓï¾ä
-     * @param t   ¶ÔÓ¦µÄbeanÀà
-     * @return Ö´ÐÐ³É¹¦·µ»Øtrue£¬·ñÔò·µ»Øfalse
-     * @throws SQLException Êý¾Ý¿â²Ù×÷Òì³£Àà
+     * @param sql sqlï¿½ï¿½ï¿½
+     * @param t   ï¿½ï¿½Ó¦ï¿½ï¿½beanï¿½ï¿½
+     * @return Ö´ï¿½Ð³É¹ï¿½ï¿½ï¿½ï¿½ï¿½trueï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»ï¿½false
+     * @throws SQLException ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½
      */
     private boolean execute(String sql, T t) throws SQLException {
         PreparedStatement ps = getPrepareStatement(sql, t);
@@ -255,17 +255,17 @@ public abstract class MyOrmUtil<T> {
     }
 
     /**
-     * »ñµÃÍ¨ÓÃµÄPrepareStatement¶ÔÏó
+     * ï¿½ï¿½ï¿½Í¨ï¿½Ãµï¿½PrepareStatementï¿½ï¿½ï¿½ï¿½
      *
-     * @param sql    SQLÓï¾ä
-     * @param params Õ¼Î»·û²ÎÊý
-     * @return PrepareStatement¶ÔÏó
+     * @param sql    SQLï¿½ï¿½ï¿½
+     * @param params Õ¼Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @return PrepareStatementï¿½ï¿½ï¿½ï¿½
      */
     private PreparedStatement getGeneralPreparedStatement(String sql, Object... params) {
         Connection conn = getConnection();
         PreparedStatement ps = null;
         try {
-            ps = conn.prepareStatement(getSql(sql)); // ½«#{}Õ¼Î»·ûÌæ»»Îª?
+            ps = conn.prepareStatement(getSql(sql)); // ï¿½ï¿½#{}Õ¼Î»ï¿½ï¿½ï¿½æ»»Îª?
             for (int i = 0; i < params.length; i++) {
                 ps.setObject(i + 1, params[i]);
             }
@@ -276,22 +276,22 @@ public abstract class MyOrmUtil<T> {
     }
 
     /**
-     * ½«´«ÈëµÄ·ºÐÍBeanÖÐµÄ×Ö¶Î¸³Öµ¸øSQLÓï¾äÖÐµÄÕ¼Î»·û£¬²¢Ö´ÐÐËûÃÇ
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½Beanï¿½Ðµï¿½ï¿½Ö¶Î¸ï¿½Öµï¿½ï¿½SQLï¿½ï¿½ï¿½ï¿½Ðµï¿½Õ¼Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param sql ´ø#{}Í¨Åä·ûµÄSQLÓï¾ä
-     * @param t   ·ºÐÍBean¶ÔÏó
+     * @param sql ï¿½ï¿½#{}Í¨ï¿½ï¿½ï¿½ï¿½ï¿½SQLï¿½ï¿½ï¿½
+     * @param t   ï¿½ï¿½ï¿½ï¿½Beanï¿½ï¿½ï¿½ï¿½
      */
     private PreparedStatement getPrepareStatement(String sql, T t) {
         Class<?> beanClass = t.getClass();
         List<String> list = getParams(sql);
-        sql = getSql(sql); // ½«SQLÖÐµÄ#{}Õ¼Î»·û¸ÄÎª?
+        sql = getSql(sql); // ï¿½ï¿½SQLï¿½Ðµï¿½#{}Õ¼Î»ï¿½ï¿½ï¿½ï¿½Îª?
         Connection con = getConnection();
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
             for (int i = 0; i < list.size(); i++) {
                 String colName = list.get(i);
-                String methodName = "get" + underlineToBigCamel(colName); // ·½·¨Ãû
+                String methodName = "get" + underlineToBigCamel(colName); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 Method method = beanClass.getDeclaredMethod(methodName);
                 Object value = method.invoke(t);
                 ps.setObject(i + 1, value);
@@ -304,33 +304,33 @@ public abstract class MyOrmUtil<T> {
 
 
     /**
-     * Ó³ÉäÒ»ÌõÊý¾Ýµ½BeanÖÐ
+     * Ó³ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½Beanï¿½ï¿½
      *
-     * @param rs        ResultSet¶ÔÏó
-     * @param beanClass Bean¶ÔÏó
-     * @return ·µ»ØÒ»¸ö²»Îª¿ÕµÄBean¶ÔÏó
+     * @param rs        ResultSetï¿½ï¿½ï¿½ï¿½
+     * @param beanClass Beanï¿½ï¿½ï¿½ï¿½
+     * @return ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Îªï¿½Õµï¿½Beanï¿½ï¿½ï¿½ï¿½
      */
     private T mapToBean(ResultSet rs, Class<T> beanClass) {
-        List<String> list = getColumnNames(rs); // ½á¹û¼¯ÖÐËùÓÐ±íÃû
-        T t = null; // ´´½¨·ºÐÍÊµÀý¶ÔÏó
+        List<String> list = getColumnNames(rs); // è¿›ä»·ï¿½ï¿½Ð±ï¿½ï¿½ï¿½
+        T t = null; // è¿›ä»·Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         try {
             t = beanClass.newInstance();
             for (String colName : list) {
-                String methodName = "set" + underlineToBigCamel(colName); // »ñÈ¡·½·¨Ãû
-                Field field = beanClass.getDeclaredField(underlineToCamel(colName)); // »ñÈ¡×Ö¶ÎÃû
-                Class<?> type = field.getType(); // »ñÈ¡×Ö¶ÎÀàÐÍ
-                Object value = rs.getObject(colName); // »ñÈ¡´«ÈëÖµ
+                String methodName = "set" + underlineToBigCamel(colName); // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                Field field = beanClass.getDeclaredField(underlineToCamel(colName)); // ï¿½ï¿½È¡ï¿½Ö¶ï¿½ï¿½ï¿½
+                Class<?> type = field.getType(); // ï¿½ï¿½È¡ï¿½Ö¶ï¿½ï¿½ï¿½ï¿½ï¿½
+                Object value = rs.getObject(colName); // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Öµ
                 Method method = beanClass.getDeclaredMethod(methodName, type);
-                // ÀàÐÍ×ª»»
+                // ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
                 if (value != "" && value != null) {
-                    if (value.getClass().getSimpleName().equals("BigDecimal") // Öµ²»Îª¿ÕÊ±£¬×ª»»BigDecimalÎªIntegerÀàÐÍ
+                    if (value.getClass().getSimpleName().equals("BigDecimal") // Öµï¿½ï¿½Îªï¿½ï¿½Ê±ï¿½ï¿½×ªï¿½ï¿½BigDecimalÎªIntegerï¿½ï¿½ï¿½ï¿½
                             && type.toString().equals("class java.lang.Integer")) {
                         value = Integer.parseInt(value.toString());
                     }
                 } else {
-                    field.getType().cast(value);// Èç¹ûÎª¿Õ£¬Ö±½Ó×ª»»ÀàÐÍ
+                    field.getType().cast(value);// ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½Ö±ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 }
-                method.invoke(t, value); // µ÷ÓÃset·½·¨
+                method.invoke(t, value); // ï¿½ï¿½ï¿½ï¿½setï¿½ï¿½ï¿½ï¿½
             }
         } catch (InstantiationException | IllegalAccessException | NoSuchFieldException | SecurityException | SQLException | NoSuchMethodException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();
@@ -340,10 +340,10 @@ public abstract class MyOrmUtil<T> {
 
 
     /**
-     * »ñÈ¡ËùÓÐ²éÑ¯µÄÁÐÃû
+     * ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ð²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param rs ResultSet¶ÔÏó
-     * @return ÁÐÃûµÄList¼¯ºÏ
+     * @param rs ResultSetï¿½ï¿½ï¿½ï¿½
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Listï¿½ï¿½ï¿½ï¿½
      */
     private List<String> getColumnNames(ResultSet rs) {
         List<String> list = new ArrayList<>(8);
@@ -353,7 +353,7 @@ public abstract class MyOrmUtil<T> {
             rsm = rs.getMetaData();
             columnCount = rsm.getColumnCount();
             for (int i = 0; i < columnCount; i++) {
-                list.add(rsm.getColumnName(i + 1)); // »ñÈ¡ÁÐÃû£¬²¢Ìí¼Óµ½list¼¯ºÏ
+                list.add(rsm.getColumnName(i + 1)); // ï¿½ï¿½È¡è¿›ä»·ï¿½ï¿½Óµï¿½listï¿½ï¿½ï¿½ï¿½
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -362,12 +362,12 @@ public abstract class MyOrmUtil<T> {
     }
 
     /**
-     * »ñÈ¡ËùÓÐÐèÒª´«µÝµÄ²ÎÊýÁÐÃû<br>
-     * ÀýÈçÊäÈë:"insert into user(id,name) value(#{id},#{name})"<br>
-     * ·µ»Ø:"[id,name]"
+     * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ÝµÄ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½<br>
+     * è¿›ä»·:"insert into user(id,name) value(#{id},#{name})"<br>
+     * ï¿½ï¿½ï¿½ï¿½:"[id,name]"
      *
-     * @param sql ´«ÈëµÄSQLÓï¾ä£¨´ø#{}Í¨Åä·û£©
-     * @return ´«µÝ²ÎÊýÁÐÃûµÄList¼¯ºÏ£¬²»Îªnull
+     * @param sql ï¿½ï¿½ï¿½ï¿½ï¿½SQLï¿½ï¿½ä£¨ï¿½ï¿½#{}Í¨ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @return ï¿½ï¿½ï¿½Ý²è¿›ä»·ï¿½Listï¿½ï¿½ï¿½Ï£ï¿½ï¿½ï¿½Îªnull
      */
     private List<String> getParams(String sql) {
         List<String> list = new ArrayList<>(8);
@@ -375,17 +375,17 @@ public abstract class MyOrmUtil<T> {
         Matcher m = p.matcher(sql);
         while (m.find()) {
             String str = m.group();
-            String column = str.substring(2, m.group().length() - 1); // »ñÈ¡ÁÐÃû
+            String column = str.substring(2, m.group().length() - 1); // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
             list.add(column);
         }
         return list;
     }
 
     /**
-     * ÏÂ»®ÏßÃüÃû×ª´óÍÕ·å
+     * ï¿½Â»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½Õ·ï¿½
      *
-     * @param str ´«ÈëµÄ×Ö·û´®£¬Èç¡°user_name¡±
-     * @return Ê××ÖÄ¸´óÐ´µÄ×Ö·û´®£¬Èç¡°UserName¡±
+     * @param str ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç¡°user_nameï¿½ï¿½
+     * @return ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½Ð´ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç¡°UserNameï¿½ï¿½
      */
     private String underlineToBigCamel(String str) {
         String[] strs = str.split("_");
@@ -398,10 +398,10 @@ public abstract class MyOrmUtil<T> {
     }
 
     /**
-     * ÏÂ»®ÏßÃüÃû×ªÐ¡ÍÕ·å
+     * ï¿½Â»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªÐ¡ï¿½Õ·ï¿½
      *
-     * @param str ´«ÈëµÄ×Ö·û´®£¬Èç¡°user_name¡±
-     * @return Ê××ÖÄ¸´óÐ´µÄ×Ö·û´®£¬Èç¡°userName¡±
+     * @param str ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç¡°user_nameï¿½ï¿½
+     * @return ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½Ð´ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç¡°userNameï¿½ï¿½
      */
     private String underlineToCamel(String str) {
         String[] strs = str.split("_");
@@ -414,10 +414,10 @@ public abstract class MyOrmUtil<T> {
     }
 
     /**
-     * ½«SQLÓï¾äÖÐµÄ#{}Ìæ»»³É"?"
+     * ï¿½ï¿½SQLï¿½ï¿½ï¿½ï¿½Ðµï¿½#{}ï¿½æ»»ï¿½ï¿½"?"
      *
-     * @param sql ´ø#{}µÄSQLÓï¾ä
-     * @return ´ø?µÄSQLÓï¾ä
+     * @param sql ï¿½ï¿½#{}ï¿½ï¿½SQLï¿½ï¿½ï¿½
+     * @return ï¿½ï¿½?ï¿½ï¿½SQLï¿½ï¿½ï¿½
      */
     private String getSql(String sql) {
         return sql.replaceAll(("[#]\\{\\w*[}]"), "?");
@@ -425,19 +425,19 @@ public abstract class MyOrmUtil<T> {
 
 
     //===========================================================================
-    //                            ³éÏó·½·¨
+    //                            ï¿½ï¿½ï¿½ó·½·ï¿½
     //===========================================================================
 
 
     /**
-     * »ñÈ¡Êý¾Ý¿âÁ¬½Ó¶ÔÏó
+     * ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½
      *
-     * @return Connection¶ÔÏó
+     * @return Connectionï¿½ï¿½ï¿½ï¿½
      */
     protected abstract Connection getConnection();
 
     /**
-     * @return TµÄclassÊôÐÔ
+     * @return Tï¿½ï¿½classï¿½ï¿½ï¿½ï¿½
      */
     protected abstract Class<T> getBeanClass();
 }

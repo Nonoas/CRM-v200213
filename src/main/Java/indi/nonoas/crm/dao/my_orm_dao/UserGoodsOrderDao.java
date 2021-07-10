@@ -14,7 +14,7 @@ public class UserGoodsOrderDao extends SqliteDao<UserGoodsOrderBean> {
             "values(#{user_id},#{goods_id},#{amount},#{order_date},#{transactor})";
 
     /**
-     * µ¥Àý
+     * ï¿½ï¿½ï¿½ï¿½
      */
     private static volatile UserGoodsOrderDao INSTANCE;
 
@@ -22,18 +22,18 @@ public class UserGoodsOrderDao extends SqliteDao<UserGoodsOrderBean> {
     }
 
     /**
-     * ÅúÁ¿²åÈë¶©µ¥ÄÚÈÝ
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¶©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param orders ¶©µ¥ÁÐ±í
+     * @param orders ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
      */
     public void insertOrders(List<UserGoodsOrderBean> orders) {
         executeBatch(INSERT_INFOS, orders);
     }
 
     /**
-     * »ñÈ¡µ¥ÀýÊµÀý
+     * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
      *
-     * @return µ¥Àý
+     * @return ï¿½ï¿½ï¿½ï¿½
      */
     public static UserGoodsOrderDao getInstance() {
         if (INSTANCE == null) {

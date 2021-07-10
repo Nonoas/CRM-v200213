@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 public class GoodsInfoController implements Initializable {
 
     /**
-     * ÉÌÆ·ÐÅÏ¢±í
+     * ï¿½ï¿½Æ·ï¿½ï¿½Ï¢ï¿½ï¿½
      */
     private final GoodsInfoTable table = new GoodsInfoTable();
 
@@ -43,39 +43,39 @@ public class GoodsInfoController implements Initializable {
     }
 
     /**
-     * ³õÊ¼»¯½çÃæ
+     * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     private void initView() {
-        // ³õÊ¼»¯±í¸ñ
+        // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½
         scrollPane.setContent(table);
 
-        // ³õÊ¼»¯¡°ÉÌÆ··ÖÀà¡±ÏÂÀ­ÁÐ±í¿ò
+        // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½à¡±ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½
         LinkedList<String> goodsTypes = goodsService.selectGoodsTypes();
-        cb_type.getItems().addAll("ËùÓÐÀàÐÍ", "²úÆ·Àà", "·þÎñÀà");
+        cb_type.getItems().addAll("è¿›ä»·", "ï¿½ï¿½Æ·ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
         if (goodsTypes != null) {
             for (String str : goodsTypes)
                 cb_type.getItems().add(str);
         }
-        cb_type.setValue("ËùÓÐÀàÐÍ");
+        cb_type.setValue("è¿›ä»·");
     }
 
 
-    @FXML    //Ìí¼ÓÉÌÆ·ÊÂ¼þ
+    @FXML    //ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Â¼ï¿½
     private void addGoods() {
         MainController.addTab(new GoodsAddTab());
     }
 
-    @FXML    //É¾³ýÉÌÆ·ÐÅÏ¢
+    @FXML    //É¾ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
     private void deleteInfo() {
         GoodsDto bean = table.getSelectedData();
         if (bean == null) {
-            new MyAlert(Alert.AlertType.INFORMATION, "ÇëÏÈÑ¡ÔñÒ»ÌõÊý¾Ý£¡").show();
+            new MyAlert(Alert.AlertType.INFORMATION, "ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½").show();
             return;
         }
-        String id = bean.getId();      //ÉÌÆ·±àºÅ
-        String name = bean.getName();  //ÉÌÆ·Ãû³Æ
+        String id = bean.getId();      //ï¿½ï¿½Æ·ï¿½ï¿½ï¿½
+        String name = bean.getName();  //ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
         MyAlert alert = new MyAlert(Alert.AlertType.CONFIRMATION,
-                String.format("ÊÇ·ñÈ·¶¨É¾³ý¸ÃÉÌÆ·µÄÐÅÏ¢£¿\n[ ±àºÅ£º%s£¬Ãû³Æ£º%s ]", id, name));
+                String.format("ï¿½Ç·ï¿½È·ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½\n[ ï¿½ï¿½Å£ï¿½%sï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½%s ]", id, name));
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             table.removeData(bean);
@@ -83,18 +83,18 @@ public class GoodsInfoController implements Initializable {
         }
     }
 
-    @FXML    //²éÑ¯ÉÌÆ·
+    @FXML    //ï¿½ï¿½Ñ¯ï¿½ï¿½Æ·
     private void find() {
         String keyWord = tf_id.getText().trim();
-        String type = cb_type.getValue().equals("ËùÓÐÀàÐÍ") ? "" : cb_type.getValue();
+        String type = cb_type.getValue().equals("è¿›ä»·") ? "" : cb_type.getValue();
         ArrayList<GoodsDto> listVipBeans = goodsService.selectByFiltrate(keyWord, keyWord, type);
         if (listVipBeans != null)
             table.replaceData(listVipBeans);
         else
-            new MyAlert(Alert.AlertType.INFORMATION, "Ã»ÓÐÕÒµ½Äú²éÑ¯µÄÉÌÆ·£¡").show();
+            new MyAlert(Alert.AlertType.INFORMATION, "Ã»ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½").show();
     }
 
-    @FXML    //ÐÞ¸ÄÉÌÆ·ÐÅÏ¢
+    @FXML    //ï¿½Þ¸ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
     private void updateGoods() {
         MainController.addTab(new GoodsModifyTab(table.getSelectedData()));
     }

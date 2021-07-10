@@ -1,5 +1,6 @@
 package indi.nonoas.crm.view.consume;
 
+import indi.nonoas.crm.pojo.PackageContentDto;
 import indi.nonoas.crm.pojo.PackageDto;
 import indi.nonoas.crm.service.PackageService;
 import indi.nonoas.crm.utils.SpringUtil;
@@ -7,7 +8,7 @@ import indi.nonoas.crm.component.table.GoodsEditTable;
 import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author : Nonoas
@@ -20,13 +21,13 @@ public class PackageConsumeTable extends GoodsEditTable<PackageDto> {
     private final PackageService pkgService = (PackageService) SpringUtil.getBean("PackageServiceImpl");
 
     public PackageConsumeTable() {
-        item_id.setText("Ì×²Í±àºÅ");
-        item_name.setText("Ì×²ÍÃû³Æ");
+        item_id.setText("å¥—é¤ç¼–å·");
+        item_name.setText("å¥—é¤åç§°");
         setTableMenuButtonVisible(false);
     }
 
     @Override
-    public ArrayList<PackageDto> getAllBeans() {
+    public List<PackageDto> getAllBeans() {
         return null;
     }
 
@@ -60,16 +61,16 @@ public class PackageConsumeTable extends GoodsEditTable<PackageDto> {
     }
 
     /**
-     * »ñÈ¡±í¸ñÄÚÌ×²ÍµÄ×Ü¼Û¸ñ
+     * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²Íµï¿½ï¿½Ü¼Û¸ï¿½
      *
-     * @return ±í¸ñÄÚÌ×²Í×Ü¼Û
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½Ü¼ï¿½
      */
     public double getSumPrice() {
         double price = 0;
         for (GoodsEditTableVO d : obList) {
             price += d.getSum_price();
         }
-        System.out.println("×Ü¼Û£º" + price);
+        System.out.println("ï¿½Ü¼Û£ï¿½" + price);
         return price;
     }
 

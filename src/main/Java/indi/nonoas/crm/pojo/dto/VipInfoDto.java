@@ -3,81 +3,79 @@ package indi.nonoas.crm.pojo.dto;
 import java.io.Serializable;
 
 /**
- * »áÔ±ĞÅÏ¢Bean
+ * ï¿½ï¿½Ô±ï¿½ï¿½Ï¢Bean
  *
  * @author Nonoas
  */
-public class VipInfo implements Serializable {
-    /**
-     * ´®ĞĞ°æ±¾
-     */
+public class VipInfoDto implements Serializable {
+
     private static final long serialVersionUID = 1L;
     /**
-     * »áÔ±¿¨ºÅ
+     * ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
      */
     private String id;
     /**
-     * »áÔ±ĞÕÃû
+     * ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
      */
     private String name;
     /**
-     * »áÔ±ĞÔ±ğ
+     * ï¿½ï¿½Ô±ï¿½Ô±ï¿½
      */
     private String sex;
     /**
-     * Èë»áÈÕÆÚ
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     private String admissionDate;
     /**
-     * »áÔ±µÈ¼¶
+     * ï¿½ï¿½Ô±ï¿½È¼ï¿½
      */
     private String cardLevel;
     /**
-     * »ı·Ö
+     * ï¿½ï¿½ï¿½ï¿½
      */
     private int integral;
     /**
-     * Ïû·Ñ½ğ¶î
+     * ï¿½ï¿½ï¿½Ñ½ï¿½ï¿½
      */
     private double cumulative;
     /**
-     * ¿¨ÄÚÓà¶î
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     private double balance;
     /**
-     * ÏíÊÜÕÛ¿Û
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Û¿ï¿½
      */
     private double discount;
     /**
-     * ÁªÏµµØÖ·
+     * ï¿½ï¿½Ïµï¿½ï¿½Ö·
      */
     private String address;
     /**
-     * ÁªÏµµç»°
+     * ï¿½ï¿½Ïµï¿½ç»°
      */
     private String telephone;
     /**
-     * Ö¤¼şºÅÂë
+     * Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     private String idcard;
     /**
-     * ³öÉúÈÕÆÚ
+     * è¿›ä»·
      */
     private String birthday;
     /**
-     * µ¥Î»Ö°Òµ
+     * ï¿½ï¿½Î»Ö°Òµ
      */
     private String career;
     /**
-     * µç×ÓÓÊ¼ş
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½
      */
     private String email;
     /**
-     * ÆäËû
+     * ï¿½ï¿½ï¿½ï¿½
      */
     private String other;
     /**
-     * ÕÕÆ¬
+     * ï¿½ï¿½Æ¬
      */
     private String photo;
 
@@ -89,7 +87,7 @@ public class VipInfo implements Serializable {
         this.photo = photo;
     }
 
-    public VipInfo() {
+    public VipInfoDto() {
 
     }
 
@@ -228,15 +226,15 @@ public class VipInfo implements Serializable {
     }
 
     /**
-     * É¢¿Í³£Á¿
+     * æ•£å®¢å¸¸é‡
      */
-    public final static VipInfo SANKE = new VipInfo() {
+    public final static VipInfoDto SANKE = new VipInfoDto() {
         {
             setId("0000");
-            setName("É¢¿Í");
-            setSex("±£ÃÜ");
+            setName("æ•£å®¢");
+            setSex("ä¿å¯†");
             setDiscount(1);
-            setCardLevel("ÎŞ");
+            setCardLevel("æ— ");
         }
     };
 

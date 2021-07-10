@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 /**
- * »áÔ±µÈ¼¶bean
+ * ï¿½ï¿½Ô±ï¿½È¼ï¿½bean
  *
  * @author Nonoas
  */
@@ -12,20 +12,20 @@ import com.baomidou.mybatisplus.annotation.TableName;
 public class VipLevelDto {
 
     /**
-     * ±àºÅ
+     * ï¿½ï¿½ï¿½
      */
     @TableId("id")
     private String id;
     /**
-     * Ãû³Æ
+     * ï¿½ï¿½ï¿½ï¿½
      */
     private String name;
     /**
-     * Ã¿»ý·ÖÐèÒªÏû·Ñ¶àÉÙÔª
+     * Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Ñ¶ï¿½ï¿½ï¿½Ôª
      */
     private double yuanPerIntegral;
     /**
-     * ÕÛ¿Û
+     * ï¿½Û¿ï¿½
      */
     private double discount;
 

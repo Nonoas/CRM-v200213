@@ -15,9 +15,9 @@ public class GoodsSelectTable extends GoodsInfoTable {
     }
 
     /**
-     * 获取选中所有商品
+     * 锟斤拷取选杩涗环品
      *
-     * @return 选中所有商品信息
+     * @return 选杩涗环品锟斤拷息
      */
     public ObservableList<GoodsDto> getSelectedItems() {
         return getSelectionModel().getSelectedItems();

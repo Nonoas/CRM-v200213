@@ -4,14 +4,14 @@ import java.sql.Connection;
 import java.util.LinkedList;
 
 public class MyDataSource {
-    //链表 --- 实现栈结构
+    //锟斤拷锟斤拷 --- 实锟斤拷栈锟结构
     private final LinkedList<Connection> dataSources = new LinkedList<>();
 
     private final int MAX_SIZE = 10;
 
-    //初始化连接数量
+    //锟斤拷始杩涗环锟斤拷
     public MyDataSource() {
-        //一次性创建10个连接
+        //一锟斤拷锟皆达拷锟斤拷10锟斤拷锟斤拷锟斤拷
         for (int i = 0; i < MAX_SIZE; i++) {
             try {
                 Connection con = DBOpener.getConnection();
@@ -23,13 +23,13 @@ public class MyDataSource {
     }
 
     public Connection getConnection() {
-        //取出连接池中一个连接
+        //取锟斤拷锟斤拷锟接筹拷锟斤拷一锟斤拷锟斤拷锟斤拷
         if (dataSources.size() == 0)
             return DBOpener.getConnection();
         return dataSources.removeFirst();
     }
 
-    //将连接放回连接池
+    //锟斤拷锟斤拷锟接放伙拷锟斤拷锟接筹拷
     public void releaseConnection(Connection conn) {
         if (dataSources.size() >= MAX_SIZE)
             return;

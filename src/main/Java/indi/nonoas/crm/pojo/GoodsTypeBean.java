@@ -1,14 +1,14 @@
 package indi.nonoas.crm.pojo;
 
 /**
- * ÉÌÆ·Àà±ðBean
+ * ï¿½ï¿½Æ·ï¿½ï¿½ï¿½Bean
  * @author Nonoas
  *
  */
 public class GoodsTypeBean {
-	/**±àºÅ*/
+	/**ï¿½ï¿½ï¿½*/
 	private String id;
-	/**Ãû³Æ*/
+	/**ï¿½ï¿½ï¿½ï¿½*/
 	private String name;
 	
 	public String getId() {

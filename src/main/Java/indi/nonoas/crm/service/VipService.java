@@ -1,6 +1,6 @@
 package indi.nonoas.crm.service;
 
-import indi.nonoas.crm.pojo.dto.VipInfo;
+import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -13,68 +13,68 @@ import java.util.List;
 @Transactional
 public interface VipService {
     /**
-     * ×Ô¶¯Éú³É»áÔ±¿¨ºÅ
+     * ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½É»ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
      *
-     * @return 32½øÖÆÊý »áÔ±¿¨ºÅ
+     * @return 32ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
      */
     String generateVipID();
 
     /**
-     * Í¨¹ý¿¨ºÅ»òÐÕÃû¾«È·²éÑ¯
+     * Í¨ï¿½ï¿½ï¿½ï¿½ï¿½Å»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½Ñ¯
      *
-     * @param id   »áÔ±¿¨ºÅ
-     * @param name »áÔ±ÐÕÃû
+     * @param id   ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
+     * @param name ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
      * @return VipBean
      */
-    VipInfo getInfoByIdOrName(String id, String name);
+    VipInfoDto getInfoByIdOrName(String id, String name);
 
     /**
-     * ²éÑ¯ËùÓÐ»áÔ±ÐÅÏ¢
+     * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ð»ï¿½Ô±ï¿½ï¿½Ï¢
      *
-     * @return VIPBeanµÄArrayList¼¯ºÏ
+     * @return VIPBeanï¿½ï¿½ArrayListï¿½ï¿½ï¿½ï¿½
      */
-    ArrayList<VipInfo> selectAllUser();
+    ArrayList<VipInfoDto> selectAllUser();
 
     /**
-     * ¶àÌõ¼þÉ¸Ñ¡ÐÅÏ¢
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¸Ñ¡ï¿½ï¿½Ï¢
      *
-     * @param id         »áÔ±¿¨ºÅ
-     * @param name       ÐÕÃû
-     * @param card_level »áÔ±µÈ¼¶
-     * @return VIPBeanµÄArrayList¶ÔÏó, Ã»ÓÐ²éÑ¯½á¹ûÊ±Îªnull
+     * @param id         ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
+     * @param name       ï¿½ï¿½ï¿½ï¿½
+     * @param card_level ï¿½ï¿½Ô±ï¿½È¼ï¿½
+     * @return VIPBeanï¿½ï¿½ArrayListï¿½ï¿½ï¿½ï¿½, Ã»ï¿½Ð²ï¿½Ñ¯ï¿½ï¿½ï¿½Ê±Îªnull
      */
-    ArrayList<VipInfo> selectByFiltrate(String id, String name, String card_level);
+    ArrayList<VipInfoDto> selectByFiltrate(String id, String name, String card_level);
 
     /**
-     * ¹ýÂËÆ÷²éÕÒ
+     * è¿›ä»·ï¿½ï¿½
      *
-     * @param id       ¿¨ºÅ
-     * @param name     ÐÕÃû
-     * @param level    »áÔ±µÈ¼¶
-     * @param dateFrom ¼ÓÈëÊ±¼ä·¶Î§£¨ÆðÊ¼£©
-     * @param dateTo   ¼ÓÈëÊ±¼ä·¶Î§£¨½áÊø£©
-     * @return VIPBeanµÄArrayList¶ÔÏó, Ã»ÓÐ²éÑ¯½á¹ûÊ±Îªnull
+     * @param id       ï¿½ï¿½ï¿½ï¿½
+     * @param name     ï¿½ï¿½ï¿½ï¿½
+     * @param level    ï¿½ï¿½Ô±ï¿½È¼ï¿½
+     * @param dateFrom ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä·¶Î§ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½
+     * @param dateTo   ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä·¶Î§è¿›ä»·
+     * @return VIPBeanï¿½ï¿½ArrayListï¿½ï¿½ï¿½ï¿½, Ã»ï¿½Ð²ï¿½Ñ¯ï¿½ï¿½ï¿½Ê±Îªnull
      */
-    List<VipInfo> selectByDateFiltrate(String id, String name, String level, String dateFrom, String dateTo);
+    List<VipInfoDto> selectByDateFiltrate(String id, String name, String level, String dateFrom, String dateTo);
 
     /**
-     * ²åÈë»áÔ±ÐÅÏ¢
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ï¢
      *
-     * @param vipBean VIPBean¶ÔÏó
+     * @param vipBean VIPBeanï¿½ï¿½ï¿½ï¿½
      */
-    void insertInfo(VipInfo vipBean);
+    void insertInfo(VipInfoDto vipBean);
 
     /**
-     * Í¨¹ý¿¨ºÅÉ¾³ý»áÔ±ÐÅÏ¢
+     * Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ï¢
      *
-     * @param id »áÔ±¿¨ºÅ
+     * @param id ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
      */
     void deleteByID(String id);
 
     /**
-     * ¸üÐÂÓÃ»§ÐÅÏ¢
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ï¢
      *
-     * @param vipBean VIPBean¶ÔÏó
+     * @param vipBean VIPBeanï¿½ï¿½ï¿½ï¿½
      */
-    void updateInfo(VipInfo vipBean);
+    void updateInfo(VipInfoDto vipBean);
 }

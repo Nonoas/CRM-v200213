@@ -28,9 +28,9 @@ public class UserGoodsDao extends SqliteDao<UserGoods> {
     }
 
     /**
-     * Ïû·ÑÓÃ»§ÉÌÆ·
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Æ·
      *
-     * @param ugoList Ïû·ÑºóµÄÓÃ»§ÉÌÆ·Êý¾Ý
+     * @param ugoList ï¿½ï¿½ï¿½Ñºï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
      */
     public void reduceGoods(List<UserGoods> ugoList) {
         executeBatch(UPDATE_GOODS_AMOUNT, ugoList);

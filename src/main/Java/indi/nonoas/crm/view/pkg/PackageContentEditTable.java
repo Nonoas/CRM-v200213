@@ -14,15 +14,15 @@ import java.util.List;
 
 
 /**
- * ¿ÉÒÔ±à¼­ÄÚÈÝµÄ¡°Ì×²ÍÄÚÈÝ¡±±í¸ñ
+ * ï¿½ï¿½ï¿½Ô±à¼­ï¿½ï¿½ï¿½ÝµÄ¡ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½Ý¡ï¿½ï¿½ï¿½ï¿½
  *
  * @author: Nonoas
  * @Date: 2020/4/4 18:19
- * @Description: ¿ÉÒÔ±à¼­ÄÚÈÝµÄ¡°Ì×²ÍÄÚÈÝ¡±±í¸ñ
+ * @Description: ï¿½ï¿½ï¿½Ô±à¼­ï¿½ï¿½ï¿½ÝµÄ¡ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½Ý¡ï¿½ï¿½ï¿½ï¿½
  */
 public class PackageContentEditTable extends GoodsEditTable<PackageContentDto> {
     /**
-     * Êý¾ÝÔ´
+     * ï¿½ï¿½ï¿½ï¿½Ô´
      */
     private final ObservableList<GoodsEditTableVO> obList;
 
@@ -36,14 +36,14 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentDto> {
     }
 
     /**
-     * Ìí¼Ó²»ÖØ¸´µÄÊý¾Ý
+     * ï¿½ï¿½Ó²ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param bean ÐèÒªÌí¼ÓµÄÊý¾Ý
+     * @param bean ï¿½ï¿½Òªï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @Override
     public void addBean(PackageContentDto bean) {
         boolean hasRepeat = false;
-        GoodsEditTableVO data = beanToData(bean); //ÀàÐÍ×ª»»
+        GoodsEditTableVO data = beanToData(bean); //ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
         for (GoodsEditTableVO d : obList) {
             String id1 = d.getId();
             String id2 = data.getId();
@@ -56,13 +56,13 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentDto> {
     }
 
     /**
-     * »ñÈ¡±í¸ñÄÚËùÓÐÉÌÆ·ÐÅÏ¢
+     * ï¿½ï¿½È¡è¿›ä»·ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
      *
-     * @return PackageContentBeanµÄ¼¯ºÏ
+     * @return PackageContentBeanï¿½Ä¼ï¿½ï¿½ï¿½
      */
     @Override
-    public ArrayList<PackageContentDto> getAllBeans() {
-        ArrayList<PackageContentDto> packageContents = new ArrayList<>();
+    public List<PackageContentDto> getAllBeans() {
+        List<PackageContentDto> packageContents = new ArrayList<>();
         for (GoodsEditTableVO d : obList) {
             packageContents.add(dataToBean(d));
         }
@@ -70,9 +70,9 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentDto> {
     }
 
     /**
-     * ½«beanÀà×ª»»ÎªÊý¾ÝÄ£ÐÍ
+     * ï¿½ï¿½beanï¿½ï¿½×ªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
      *
-     * @return DataÀà¶ÔÏó
+     * @return Dataï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @Override
     protected GoodsEditTableVO beanToData(PackageContentDto bean) {
@@ -91,10 +91,10 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentDto> {
     }
 
     /**
-     * ½«Êý¾ÝÄ£ÐÍ×ª»»ÎªbeanÀà
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½×ªï¿½ï¿½Îªbeanï¿½ï¿½
      *
-     * @param data ±í¸ñÊý¾ÝÄ£ÐÍ
-     * @return PackageContentBean¶ÔÏó
+     * @param data ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
+     * @return PackageContentBeanï¿½ï¿½ï¿½ï¿½
      */
     @Override
     protected PackageContentDto dataToBean(GoodsEditTableVO data) {
@@ -105,10 +105,10 @@ public class PackageContentEditTable extends GoodsEditTable<PackageContentDto> {
     }
 
     /**
-     * Õ¹Ê¾ËùÓÐÏîÄ¿ÐÅÏ¢
+     * Õ¹Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Ï¢
      */
     public void showAllInfos(String id) {
-        clearData(); // Çå¿ÕËùÓÐÊý¾Ý
+        clearData(); // è¿›ä»·ï¿½ï¿½ï¿½
         List<PackageContentDto> listPkgContentBeans = pkgService.listPkgContentByPkgId(id);
         ArrayList<GoodsEditTableVO> listData = new ArrayList<>();
         if (listPkgContentBeans != null) {

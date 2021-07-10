@@ -6,7 +6,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 /**
- * Ô±¹¤¹ÜÀí½çÃæ
+ * Ô±è¿›ä»·ï¿½
  *
  * @author Nonoas
  */

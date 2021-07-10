@@ -30,16 +30,16 @@ public class OrderTable extends TableView<OrderRecordVO> {
 
     private final ObservableList<OrderRecordVO> items = FXCollections.observableArrayList();
 
-    private final TableColumn<OrderRecordVO, String> orderId = new TableColumn<>("¶©µ¥ºÅ");
-    private final TableColumn<OrderRecordVO, String> userId = new TableColumn<>("»áÔ±¿¨ºÅ");
-    private final TableColumn<OrderRecordVO, String> userName = new TableColumn<>("»áÔ±ÐÕÃû");
-    private final TableColumn<OrderRecordVO, String> datetime = new TableColumn<>("Ïû·ÑÈÕÆÚ");
-    private final TableColumn<OrderRecordVO, Number> price = new TableColumn<>("¶©µ¥½ð¶î");
-    private final TableColumn<OrderRecordVO, Number> integralCost = new TableColumn<>("»ý·ÖÏûºÄ");
-    private final TableColumn<OrderRecordVO, Number> integralGet = new TableColumn<>("»ý·Ö»ñÈ¡");
-    private final TableColumn<OrderRecordVO, String> transactor = new TableColumn<>("ÊÜÀíÈË");
-    private final TableColumn<OrderRecordVO, String> payMode = new TableColumn<>("Ö§¸¶·½Ê½");
-    private final TableColumn<OrderRecordVO, String> content = new TableColumn<>("¶©µ¥ÄÚÈÝ");
+    private final TableColumn<OrderRecordVO, String> orderId = new TableColumn<>("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+    private final TableColumn<OrderRecordVO, String> userId = new TableColumn<>("ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½");
+    private final TableColumn<OrderRecordVO, String> userName = new TableColumn<>("ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½");
+    private final TableColumn<OrderRecordVO, String> datetime = new TableColumn<>("è¿›ä»·");
+    private final TableColumn<OrderRecordVO, Number> price = new TableColumn<>("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+    private final TableColumn<OrderRecordVO, Number> integralCost = new TableColumn<>("è¿›ä»·");
+    private final TableColumn<OrderRecordVO, Number> integralGet = new TableColumn<>("ï¿½ï¿½ï¿½Ö»ï¿½È¡");
+    private final TableColumn<OrderRecordVO, String> transactor = new TableColumn<>("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+    private final TableColumn<OrderRecordVO, String> payMode = new TableColumn<>("Ö§ï¿½ï¿½ï¿½ï¿½Ê½");
+    private final TableColumn<OrderRecordVO, String> content = new TableColumn<>("è¿›ä»·");
 
 
     public OrderTable() {
@@ -90,7 +90,7 @@ public class OrderTable extends TableView<OrderRecordVO> {
                 if (goods != null)
                     sb.append(goods.getName()).append(detail.getProductAmount()).append(goods.getBaseUnit());
                 if (i < size - 1)
-                    sb.append("£¬");
+                    sb.append("ï¿½ï¿½");
             }
             vo.setContent(sb.toString());
         }

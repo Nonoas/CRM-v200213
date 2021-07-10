@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ¿Í»§¶Ë»á»°Àà
+ * ï¿½Í»ï¿½ï¿½Ë»á»°ï¿½ï¿½
  */
 public class ClientSession {
 
@@ -19,10 +19,10 @@ public class ClientSession {
     }
 
     /**
-     * Ò»´ÎĞÔµØÊ¹ÓÃÒ»¸öÊôĞÔ£¬Ê¹ÓÃÖ®ºó½«ÆäÇå³ı
+     * Ò»ï¿½ï¿½ï¿½Ôµï¿½Ê¹ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ô£ï¿½Ê¹ï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param key ÊôĞÔÃû
-     * @return ÊôĞÔÖµ
+     * @param key ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @return ï¿½ï¿½ï¿½ï¿½Öµ
      */
     public static Object singleUse(String key) {
         Object obj = session.get(key);

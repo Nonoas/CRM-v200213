@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
- * 自定义的弹窗，设置了图标和头文字
+ * 锟皆讹拷锟斤拷牡杩涗环锟斤拷锟酵硷拷锟斤拷头锟斤拷锟斤拷
  *
  * @author Nonoas
  */

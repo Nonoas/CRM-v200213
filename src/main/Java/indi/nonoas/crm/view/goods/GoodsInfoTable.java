@@ -15,38 +15,35 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 /**
- * ÉÌÆ·ĞÅÏ¢±í¸ñ
+ * ï¿½ï¿½Æ·ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½
  *
  * @author Nonoas
  */
 public class GoodsInfoTable extends TableView<GoodsDto> {
 
-    /**
-     * Êı¾İÔ´
-     */
     private final ObservableList<GoodsDto> obList = FXCollections.observableArrayList();
     /**
-     * µ±Ç°Ñ¡ÖĞÊı¾İ
+     * å½“å‰é€‰ä¸­çš„æ•°æ®
      */
     private GoodsDto selectedBean;
 
-    protected final TableColumn<GoodsDto, String> item_id = new TableColumn<>("±àºÅ");
+    protected final TableColumn<GoodsDto, String> item_id = new TableColumn<>("å•†å“ç¼–å·");
 
-    protected final TableColumn<GoodsDto, String> item_name = new TableColumn<>("ÉÌÆ·Ãû³Æ");
+    protected final TableColumn<GoodsDto, String> item_name = new TableColumn<>("å•†å“åç§°");
 
-    protected final TableColumn<GoodsDto, Number> item_sell_price = new TableColumn<>("Ô¤ÊÛµ¥¼Û");
+    protected final TableColumn<GoodsDto, Number> item_sell_price = new TableColumn<>("å•ä»·");
 
-    protected final TableColumn<GoodsDto, Number> item_purchase_price = new TableColumn<>("½ø»õµ¥¼Û");
+    protected final TableColumn<GoodsDto, Number> item_purchase_price = new TableColumn<>("è¿›ä»·");
 
-    protected final TableColumn<GoodsDto, String> item_quantity = new TableColumn<>("Ê£ÓàÊıÁ¿");
+    protected final TableColumn<GoodsDto, String> item_quantity = new TableColumn<>("åº“å­˜æ•°é‡");
 
-    protected final TableColumn<GoodsDto, Number> item_min_discount = new TableColumn<>("×îµÍÕÛ¿Û");
+    protected final TableColumn<GoodsDto, Number> item_min_discount = new TableColumn<>("æœ€ä½æŠ˜æ‰£");
 
-    protected final TableColumn<GoodsDto, Number> item_deduction = new TableColumn<>("Ìá³É½ğ¶î");
+    protected final TableColumn<GoodsDto, Number> item_deduction = new TableColumn<>("ææˆé‡‘é¢");
 
-    protected final TableColumn<GoodsDto, Number> item_deduction_rate = new TableColumn<>("Ìá³É±ÈÀı");
+    protected final TableColumn<GoodsDto, Number> item_deduction_rate = new TableColumn<>("ææˆæ¯”ç‡");
 
-    protected final TableColumn<GoodsDto, String> item_type = new TableColumn<>("ËùÊôÀà±ğ");
+    protected final TableColumn<GoodsDto, String> item_type = new TableColumn<>("å•†å“ç±»å‹");
 
     public GoodsInfoTable() {
         initColumns();
@@ -68,8 +65,8 @@ public class GoodsInfoTable extends TableView<GoodsDto> {
         item_sell_price.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getSellPrice()));
         item_purchase_price.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getPurchasePrice()));
         item_quantity.setCellValueFactory(param -> {
-            double quantity = param.getValue().getQuantity(); // ÊıÁ¿
-            String unit = param.getValue().getBaseUnit(); // µ¥Î»
+            double quantity = param.getValue().getQuantity(); // ï¿½ï¿½ï¿½ï¿½
+            String unit = param.getValue().getBaseUnit(); // ï¿½ï¿½Î»
             return new SimpleStringProperty(quantity + " " + unit);
         });
         item_min_discount.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getMinDiscount()));
@@ -90,10 +87,10 @@ public class GoodsInfoTable extends TableView<GoodsDto> {
     }
 
     /**
-     * Õ¹Ê¾ËùÓĞÓÃ»§ĞÅÏ¢
+     * Õ¹Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ï¢
      */
     public void showAllInfos() {
-        clearData(); // Çå¿ÕËùÓĞÊı¾İ
+        clearData(); // è¿›ä»·ï¿½ï¿½ï¿½
         GoodsService service = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
         ArrayList<GoodsDto> listVipBeans = service.selectAll();
         if (listVipBeans != null)
@@ -101,16 +98,16 @@ public class GoodsInfoTable extends TableView<GoodsDto> {
     }
 
     /**
-     * Çå¿ÕÊı¾İÔ´
+     * æ¸…ç©º
      */
     public void clearData() {
         obList.clear();
     }
 
     /**
-     * Ìæ»»±í¸ñÖĞµÄÊı¾İ
+     * ï¿½æ»»ï¿½ï¿½ï¿½ï¿½Ğµï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param beans ĞèÒªÌæ»»µÄÊı¾İ
+     * @param beans ï¿½ï¿½Òªï¿½æ»»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public void replaceData(List<GoodsDto> beans) {
         obList.clear();
@@ -118,36 +115,36 @@ public class GoodsInfoTable extends TableView<GoodsDto> {
     }
 
     /**
-     * Ìí¼ÓÊı¾İ
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param bean ÒªÌí¼ÓµÄÉÌÆ·
+     * @param bean Òªï¿½ï¿½Óµï¿½ï¿½ï¿½Æ·
      */
     public void addBean(GoodsDto bean) {
         obList.add(bean);
     }
 
     /**
-     * Ìí¼ÓÊı¾İ
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param beans ÒªÌí¼ÓµÄÉÌÆ·¼¯ºÏ
+     * @param beans Òªï¿½ï¿½Óµï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
      */
     public void addAllBeans(List<GoodsDto> beans) {
         obList.addAll(beans);
     }
 
     /**
-     * »ñÈ¡Ñ¡ÖĞµÄÊı¾İ
+     * ï¿½ï¿½È¡Ñ¡ï¿½Ğµï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return Ñ¡ÖĞµÄGoodsBean
+     * @return Ñ¡ï¿½Ğµï¿½GoodsBean
      */
     public GoodsDto getSelectedData() {
         return this.selectedBean;
     }
 
     /**
-     * ÒÆ³ıÊı¾İ
+     * ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param bean ĞèÒªÒÆ³ıµÄGoodsBean
+     * @param bean ï¿½ï¿½Òªï¿½Æ³ï¿½ï¿½ï¿½GoodsBean
      */
     public void removeData(GoodsDto bean) {
         this.obList.remove(bean);

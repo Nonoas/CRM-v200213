@@ -17,7 +17,7 @@ public class ConsumeTab extends Tab {
     private static volatile ConsumeTab instance;
 
     private ConsumeTab() {
-        this("商品消费");
+        this("浼氬憳娑堣垂");
     }
 
     private ConsumeTab(String str) {

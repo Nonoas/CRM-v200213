@@ -16,64 +16,64 @@ import java.util.List;
 public interface GoodsMapper {
 
     /**
-     * Í¨¹ıÉÌÆ·id²éÑ¯¶ÔÓ¦ÉÌÆ·µÄËùÓĞĞÅÏ¢
+     * é€šè¿‡å•†å“idæŸ¥è¯¢
      *
-     * @param id ÉÌÆ·id
-     * @return id¶ÔÓ¦µÄÉÌÆ·ĞÅÏ¢beanÀà
+     * @param id å•†å“id
+     * @return GoodsDto å¯null
      */
     GoodsDto selectById(String id);
 
     /**
-     * ²éÑ¯ËùÓĞµÄÉÌÆ·ĞÅÏ¢
+     * æŸ¥è¯¢æ‰€æœ‰å•†å“
      *
-     * @return GoodsBeanµÄArrayList¼¯ºÏ, ¿ÉÎªnull
+     * @return GoodsBeanï¿½ï¿½ArrayListï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Îªnull
      */
     ArrayList<GoodsDto> selectAll();
 
     /**
-     * °´Ìõ¼şÉ¸Ñ¡Ä£ºı²éÑ¯
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¸Ñ¡Ä£ï¿½ï¿½ï¿½ï¿½Ñ¯
      *
-     * @param id   ÉÌÆ·±àºÅ
-     * @param name ÉÌÆ·Ãû³Æ
-     * @param type ÉÌÆ·ÖÖÀà
-     * @return GoodsBeanµÄArrayList¼¯ºÏ, ¿ÉÒÔÎªnull
+     * @param id   ï¿½ï¿½Æ·ï¿½ï¿½ï¿½
+     * @param name ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
+     * @param type ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
+     * @return GoodsBeanï¿½ï¿½ArrayListï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½Îªnull
      */
     ArrayList<GoodsDto> selectByFiltrate(@Param("id") String id,
                                          @Param("name") String name,
                                          @Param("type") String type);
 
     /**
-     * É¾³ıÒ»ÌõÉÌÆ·ĞÅÏ¢
+     * é€šè¿‡idåˆ é™¤å•†å“
      *
-     * @param id ÉÌÆ·id
+     * @param id ï¿½ï¿½Æ·id
      */
     void deleteByID(String id);
 
     /**
-     * ²åÈëÒ»ÌõÉÌÆ·ĞÅÏ¢
+     * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
      *
-     * @param bean GoodsBean¶ÔÏó
+     * @param bean GoodsBeanï¿½ï¿½ï¿½ï¿½
      */
     void insertInfo(GoodsDto bean);
 
     /**
-     * ¸üĞÂÉÌÆ·ĞÅÏ¢
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
      *
-     * @param goodsBean GoodsBean¶ÔÏó
+     * @param goodsBean GoodsBeanï¿½ï¿½ï¿½ï¿½
      */
     void update(GoodsDto goodsBean);
 
     /**
-     * ²éÑ¯ËùÓĞÉÌÆ··ÖÀàÃû³Æ
+     * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·è¿›ä»·
      *
-     * @return ËùÓĞÉÌÆ··ÖÀàÃû³Æ£¬¿ÉÒÔÎªnull
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ï¿½ï¿½ï¿½ï¿½Îªnull
      */
     LinkedList<String> selectGoodsTypes();
 
     /**
-     * ÅúÁ¿²åÈëĞŞ¸ÄÉÌÆ·ĞÅÏ¢
+     * è¿›ä»·ï¿½Ş¸ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
      *
-     * @return Ó°ÏìµÄĞĞÊı
+     * @return Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     long updateGoodsAmount(@Param("goodsBeans") List<GoodsDto> goodsBeans);
 

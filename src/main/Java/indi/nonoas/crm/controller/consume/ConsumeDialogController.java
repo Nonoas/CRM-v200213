@@ -3,9 +3,8 @@ package indi.nonoas.crm.controller.consume;
 
 import indi.nonoas.crm.pojo.*;
 import indi.nonoas.crm.common.PayMode;
-import indi.nonoas.crm.dao.my_orm_dao.UserGoodsDao;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
-import indi.nonoas.crm.pojo.dto.VipInfo;
+import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.service.OrderService;
 import indi.nonoas.crm.service.UsrGdsService;
@@ -42,45 +41,45 @@ public class ConsumeDialogController implements Initializable {
     private final UsrGdsService ugService = (UsrGdsService) SpringUtil.getBean("UsrGdsServiceImpl");
 
     /**
-     * Ïû·ÑÕß
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
-    private VipInfo vipBean;
+    private VipInfoDto vipBean;
 
     /**
-     * ¶©µ¥
+     * ï¿½ï¿½ï¿½ï¿½
      */
     private OrderBean order;
 
     /**
-     * ¶©µ¥ÏêÇé
+     * è¿›ä»·
      */
     private List<OrderDetailBean> orderDetails;
 
     /**
-     * Ïû·ÑÕßÐÕÃû
+     * è¿›ä»·ï¿½ï¿½
      */
     @FXML
     private Label lb_consumer;
 
     /**
-     * Ö§¸¶·½Ê½
+     * Ö§ï¿½ï¿½ï¿½ï¿½Ê½
      */
     @FXML
     private ComboBox<PayMode> cb_payMode;
 
     /**
-     * ÊÜÀíÈË
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @FXML
     private TextField tf_transactor;
 
     /**
-     * Ö§¸¶Êý¶î
+     * Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @FXML
     private TextField tf_payValue;
     /**
-     * Óà¶î
+     * ï¿½ï¿½ï¿½
      */
     @FXML
     private Label lb_balance;
@@ -89,25 +88,25 @@ public class ConsumeDialogController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         cb_payMode.getItems().addAll(PayMode.INTEGRAL, PayMode.CASH, PayMode.BALANCE, PayMode.FREE);
         cb_payMode.setValue(PayMode.CASH);
-        lb_balance.setText("ÒÑÑ¡ÔñÏÖ½ðÖ§¸¶");
-        //Ìí¼ÓÏÂÀ­Ñ¡Ïî¼àÌý
+        lb_balance.setText("ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Ö½ï¿½Ö§ï¿½ï¿½");
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½
         cb_payMode.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             switch (newValue) {
                 case CASH:
-                    lb_balance.setText("ÒÑÑ¡ÔñÏÖ½ðÖ§¸¶");
+                    lb_balance.setText("ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Ö½ï¿½Ö§ï¿½ï¿½");
                     tf_payValue.setText(String.valueOf(order.getPrice()));
                     break;
                 case BALANCE:
-                    lb_balance.setText(String.format("£¤%.2f", vipBean.getBalance()));
+                    lb_balance.setText(String.format("ï¿¥%.2f", vipBean.getBalance()));
                     tf_payValue.setText(String.valueOf(order.getPrice()));
                     break;
                 case INTEGRAL:
-                    lb_balance.setText(String.format("%d£¨»ý·Ö£©", vipBean.getIntegral()));
+                    lb_balance.setText(String.format("%dï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½", vipBean.getIntegral()));
                     tf_payValue.setText(String.valueOf(order.getIntegralCost()));
                     break;
                 case FREE:
-                    lb_balance.setText("ÒÑÑ¡ÔñÔùËÍ");
-                    tf_payValue.setText(String.format("£¤%.2f", 0.00));
+                    lb_balance.setText("ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+                    tf_payValue.setText(String.format("ï¿¥%.2f", 0.00));
                     break;
             }
         });
@@ -117,20 +116,20 @@ public class ConsumeDialogController implements Initializable {
     @FXML
     private void submit() {
 
-        //ÅÐ¶ÏÊÇ·ñÓà¶î²»×ã
+        //ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½î²»ï¿½ï¿½
         if (isOutOfBalance()) {
             stage.close();
             return;
         }
-        order.setTransactor(tf_transactor.getText());   //»ñÈ¡ÊÜÀíÈË
+        order.setTransactor(tf_transactor.getText());   //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-        //¼´½«´«ÈëÊý¾Ý¿âµÄ ÓÃ»§-ÉÌÆ·
+        //è¿›ä»·ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ ï¿½Ã»ï¿½-ï¿½ï¿½Æ·
         List<UserGoods> userGoods = userGoodsData();
-        //¼´½«¼õÉÙÊýÁ¿µÄ ÉÌÆ·
+        //è¿›ä»·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ·
         List<GoodsDto> goodsBeans = goodsData();
-        //ÐèÒª¸üÐÂµÄÏû·ÑÕßÐÅÏ¢
-        VipInfo vipBean = vipData();
-        //×îÖÕ¶©µ¥ÐÅÏ¢
+        //ï¿½ï¿½Òªï¿½ï¿½ï¿½Âµè¿›ä»·ï¿½Ï¢
+        VipInfoDto vipBean = vipData();
+        //ï¿½ï¿½ï¿½Õ¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
         OrderBean orderBean = orderData();
 
         String msg = null;
@@ -144,17 +143,17 @@ public class ConsumeDialogController implements Initializable {
         }
 
         if (hasSubmit) {
-            new MyAlert(Alert.AlertType.INFORMATION, "½áËã³É¹¦£¡").show();
+            new MyAlert(Alert.AlertType.INFORMATION, "ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½").show();
         } else {
-            new MyAlert(Alert.AlertType.ERROR, "½áËãÊ§°Ü£¡\n´íÎóÐÅÏ¢£º" + msg).show();
+            new MyAlert(Alert.AlertType.ERROR, "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½" + msg).show();
         }
         stage.close();
     }
 
     /**
-     * ÅÐ¶ÏÊÇ·ñ³¬³öÓà¶î
+     * ï¿½Ð¶ï¿½ï¿½Ç·ñ³¬³ï¿½ï¿½ï¿½ï¿½
      *
-     * @return ³¬³ö£ºtrue
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½true
      */
     private boolean isOutOfBalance() {
         PayMode payMode = cb_payMode.getValue();
@@ -162,11 +161,11 @@ public class ConsumeDialogController implements Initializable {
         switch (payMode) {
             case BALANCE:
                 flag = vipBean.getBalance() < order.getPrice();
-                if (flag) new MyAlert(Alert.AlertType.WARNING, "ÏÖ½ðÓà¶î²»×ã£¡").show();
+                if (flag) new MyAlert(Alert.AlertType.WARNING, "ï¿½Ö½ï¿½ï¿½ï¿½î²»ï¿½ã£¡").show();
                 return flag;
             case INTEGRAL:
                 flag = vipBean.getBalance() < order.getPrice();
-                if (flag) new MyAlert(Alert.AlertType.WARNING, "»ý·ÖÓà¶î²»×ã£¡").show();
+                if (flag) new MyAlert(Alert.AlertType.WARNING, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î²»ï¿½ã£¡").show();
                 return flag;
             default:
                 return false;
@@ -174,9 +173,9 @@ public class ConsumeDialogController implements Initializable {
     }
 
     /**
-     * »ñÈ¡×îÖÕ¶©µ¥ÐÅÏ¢
+     * ï¿½ï¿½È¡ï¿½ï¿½ï¿½Õ¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
      *
-     * @return ×îÖÕ¶©µ¥ÐÅÏ¢
+     * @return ï¿½ï¿½ï¿½Õ¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
      */
     private OrderBean orderData() {
         PayMode payMode = cb_payMode.getValue();
@@ -198,9 +197,9 @@ public class ConsumeDialogController implements Initializable {
     }
 
     /**
-     * »ñÈ¡Ð´ÈëÊý¾Ý¿âµÄ ¡°ÓÃ»§-ÉÌÆ·¡± bean¶ÔÏó
+     * ï¿½ï¿½È¡Ð´ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ ï¿½ï¿½ï¿½Ã»ï¿½-ï¿½ï¿½Æ·ï¿½ï¿½ beanï¿½ï¿½ï¿½ï¿½
      *
-     * @return ÓÃ»§-ÉÌÆ· bean¼¯ºÏ
+     * @return ï¿½Ã»ï¿½-ï¿½ï¿½Æ· beanï¿½ï¿½ï¿½ï¿½
      */
     private List<UserGoods> userGoodsData() {
         List<UserGoods> userGoods = new ArrayList<>(orderDetails.size());
@@ -208,13 +207,13 @@ public class ConsumeDialogController implements Initializable {
         for (OrderDetailBean od : orderDetails) {
             String gID = od.getProductId();
 
-            //Èç¹ûÉÌÆ·Îª·þÎñÀà£¬Ôò²»Ìí¼Óµ½ÓÃ»§µÄÉÌÆ·¿â´æÖÐ
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Æ·Îªï¿½ï¿½ï¿½ï¿½ï¿½à£¬ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½
             GoodsDto bean = goodsService.selectById(gID);
-            if (!bean.getType().equals("·þÎñÀà"))
+            if (!bean.getType().equals("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"))
                 break;
 
             int gAmount = od.getProductAmount();
-            //²éÑ¯Êý¾Ý¿âÊÇ·ñÒÑ¾­´æÔÚ¸ÃÖ÷¼ü
+            //ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½Ç·ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½ï¿½ï¿½
             UserGoods goods = ugService.selectByUserGoods(userID, gID);
             if (goods == null) {
                 goods = new UserGoods();
@@ -231,17 +230,17 @@ public class ConsumeDialogController implements Initializable {
 
 
     /**
-     * »ñÈ¡ÐèÒª¸üÐÂµÄ ¡°ÉÌÆ·¡± bean¶ÔÏó
+     * ï¿½ï¿½È¡ï¿½ï¿½Òªï¿½ï¿½ï¿½Âµï¿½ ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ beanï¿½ï¿½ï¿½ï¿½
      *
-     * @return ÉÌÆ· beanµÄ¼¯ºÏ
+     * @return ï¿½ï¿½Æ· beanï¿½Ä¼ï¿½ï¿½ï¿½
      */
     private List<GoodsDto> goodsData() {
 
-        //¶©µ¥ÏêÇéÁÐ±íµÄ-Á÷¶ÔÏó
+        //è¿›ä»·ï¿½Ð±ï¿½ï¿½-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         return orderDetails.stream()
                 .map(odrDtlBean -> {
                     GoodsDto bean = goodsService.selectById(odrDtlBean.getProductId());
-                    //´ÓÊý¾Ý¿âÖÐ¼õÈ¥¹ºÂòµÄÊýÁ¿
+                    //ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½Ð¼ï¿½È¥è¿›ä»·ï¿½
                     bean.setQuantity(bean.getQuantity() - odrDtlBean.getProductAmount());
                     return bean;
                 })
@@ -250,18 +249,18 @@ public class ConsumeDialogController implements Initializable {
     }
 
     /**
-     * »ñÈ¡ÐèÒª¸üÐÂµÄ ¡°ÓÃ»§¡± ¶ÔÏó
+     * ï¿½ï¿½È¡ï¿½ï¿½Òªï¿½ï¿½ï¿½Âµï¿½ ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
      *
-     * @return Ïû·ÑÕß
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
-    private VipInfo vipData() {
-        //Èç¹ûÏû·ÑÕßÎªÉ¢¿Í£¬Ôò²»½øÐÐÊý¾Ý´¦Àí
-        if (vipBean == VipInfo.SANKE)
+    private VipInfoDto vipData() {
+        //è¿›ä»·ï¿½ÎªÉ¢ï¿½Í£ï¿½ï¿½ò²»½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½
+        if (vipBean == VipInfoDto.SANKE)
             return vipBean;
 
-        VipInfo bean = this.vipBean;
+        VipInfoDto bean = this.vipBean;
         PayMode payMode = cb_payMode.getValue();
-        //ÐèÒª¿Û³ýµÄÊý¾Ý£ºÓà¶î || »ý·Ö
+        //ï¿½ï¿½Òªï¿½Û³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ || ï¿½ï¿½ï¿½ï¿½
         switch (payMode) {
             case CASH:
             case FREE:
@@ -273,7 +272,7 @@ public class ConsumeDialogController implements Initializable {
                 bean.setIntegral(bean.getIntegral() - order.getIntegralCost());
                 break;
         }
-        //ÐèÒªÔö¼ÓµÄ£º»ý·Ö
+        //ï¿½ï¿½Òªï¿½ï¿½ï¿½ÓµÄ£ï¿½ï¿½ï¿½ï¿½ï¿½
         bean.setIntegral(bean.getIntegral() + order.getIntegralGet());
         return bean;
     }
@@ -284,9 +283,9 @@ public class ConsumeDialogController implements Initializable {
     }
 
     /**
-     * ÅÐ¶ÏÊÇ·ñ³É¹¦Ìá½»
+     * ï¿½Ð¶ï¿½ï¿½Ç·ï¿½É¹ï¿½ï¿½á½»
      *
-     * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+     * @return ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½trueï¿½ï¿½Ê§ï¿½Ü·ï¿½ï¿½ï¿½false
      */
     public boolean hasSubmit() {
         return hasSubmit;
@@ -294,19 +293,19 @@ public class ConsumeDialogController implements Initializable {
 
 
     //===========================================================================
-    //                           Ö÷Àà×¢Èëcontroller·½·¨
+    //                           ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½controllerï¿½ï¿½ï¿½ï¿½
     //===========================================================================
 
     /**
-     * ×¢ÈëstageÒÀÀµ
+     * ×¢ï¿½ï¿½stageï¿½ï¿½ï¿½ï¿½
      *
-     * @param stage ¿ØÖÆµÄ´°¿Ú
+     * @param stage ï¿½ï¿½ï¿½ÆµÄ´ï¿½ï¿½ï¿½
      */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    public void setVipBean(VipInfo vipBean) {
+    public void setVipBean(VipInfoDto vipBean) {
         this.vipBean = vipBean;
         lb_consumer.setText("[" + vipBean.getId() + "] " + vipBean.getName());
     }
@@ -321,7 +320,7 @@ public class ConsumeDialogController implements Initializable {
     }
 
     /**
-     * ÉèÖÃ½¹µã
+     * ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½
      */
     public void setFocus() {
         tf_transactor.requestFocus();

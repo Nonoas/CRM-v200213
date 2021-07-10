@@ -11,7 +11,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.Pane;
 
 /**
- * 修改商品界面
+ * 锟睫革拷锟斤拷品锟斤拷锟斤拷
  * @author Nonoas
  *
  */
@@ -20,7 +20,7 @@ public class GoodsModifyTab extends Tab {
 	private final GoodsDto bean;
 	
 	public GoodsModifyTab(GoodsDto bean) {
-		this("修改商品信息",bean);
+		this("锟睫革拷锟斤拷品锟斤拷息",bean);
 	}
 	public GoodsModifyTab(String str, GoodsDto bean) {
 		super(str);

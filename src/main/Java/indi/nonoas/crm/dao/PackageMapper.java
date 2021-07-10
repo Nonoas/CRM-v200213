@@ -15,13 +15,13 @@ import java.util.List;
 public interface PackageMapper extends BaseMapper<PackageDto> {
 
     /**
-     * м╗╧Щ╧Щбк╡ИуроНд©пео╒
+     * м╗О©╫О©╫О©╫О©╫О©╫к╡О©╫О©╫О©╫О©╫О©╫д©О©╫О©╫о╒
      *
-     * @param id     ╠Ю╨е
-     * @param name   цШЁф
-     * @param money1 ╫Пг╝обоч
-     * @param money2 ╫Пг╝иооч
-     * @return кЫспбЗвЦ╧ЩбклУ╪Ч╣доНд©пео╒, ©иртн╙null
+     * @param id     О©╫О©╫О©╫
+     * @param name   О©╫О©╫О©╫О©╫
+     * @param money1 О©╫О©╫г╝О©╫О©╫О©╫О©╫
+     * @param money2 О©╫О©╫г╝О©╫О©╫О©╫О©╫
+     * @return Х©⌡Д╩╥Х©⌡Д╩╥О©╫О©╫О©╫д©О©╫О©╫о╒, О©╫О©╫О©╫О©╫н╙null
      */
     List<PackageDto> findByFilter(@Param("id") String id,
                                   @Param("name") String name,

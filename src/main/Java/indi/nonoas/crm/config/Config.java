@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * 全局配置类
+ * 全杩涗环
  *
  * @author : Nonoas
  * @time : 2020-08-06 14:28

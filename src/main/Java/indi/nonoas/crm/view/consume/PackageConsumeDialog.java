@@ -2,7 +2,7 @@ package indi.nonoas.crm.view.consume;
 
 import indi.nonoas.crm.pojo.OrderBean;
 import indi.nonoas.crm.pojo.OrderDetailBean;
-import indi.nonoas.crm.pojo.dto.VipInfo;
+import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.controller.consume.PkgCnsDialogController;
 import indi.nonoas.crm.component.annotation.FXML;
@@ -17,13 +17,13 @@ import java.util.List;
  * @author : Nonoas
  * @time : 2020-08-18 15:54
  */
-@StageProperty(title = "¶©µ¥½áËã")
+@StageProperty(title = "è¿›ä»·")
 @FXML("/fxml/package_consume_dialog.fxml")
 public class PackageConsumeDialog extends ControllableStage {
 
     private final PkgCnsDialogController controller;
 
-    public PackageConsumeDialog(VipInfo vip, OrderBean order, List<OrderDetailBean> orderDetails) {
+    public PackageConsumeDialog(VipInfoDto vip, OrderBean order, List<OrderDetailBean> orderDetails) {
         initView();
         controller = (PkgCnsDialogController) getController();
         controller.setStage(this);
@@ -40,9 +40,9 @@ public class PackageConsumeDialog extends ControllableStage {
     }
 
     /**
-     * ÅÐ¶ÏÊÇ·ñ³É¹¦Ìá½»
+     * ï¿½Ð¶ï¿½ï¿½Ç·ï¿½É¹ï¿½ï¿½á½»
      *
-     * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+     * @return ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½trueï¿½ï¿½Ê§ï¿½Ü·ï¿½ï¿½ï¿½false
      */
     public boolean hasSubmit() {
         return controller.hasSubmit();

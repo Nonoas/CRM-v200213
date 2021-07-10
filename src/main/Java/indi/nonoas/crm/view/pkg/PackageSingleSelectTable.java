@@ -20,9 +20,9 @@ public class PackageSingleSelectTable extends PackageTable {
     }
 
     /**
-     * 获取事件委托类
+     * 锟斤拷取锟铰硷拷委锟斤拷锟斤拷
      *
-     * @return 事件委托类
+     * @return 锟铰硷拷委锟斤拷锟斤拷
      */
     public EventHandler getEventHandler() {
         return eventHandler;

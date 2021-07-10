@@ -1,5 +1,6 @@
 package indi.nonoas.crm.view.consume;
 
+import indi.nonoas.crm.pojo.PackageContentDto;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.UserGoods;
 import indi.nonoas.crm.service.GoodsService;
@@ -8,10 +9,10 @@ import indi.nonoas.crm.component.table.GoodsEditTable;
 import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
- * 计次消费表格
+ * 璁℃娑堣垂琛ㄦ牸
  *
  * @author : Nonoas
  * @time : 2020-08-07 12:31
@@ -30,7 +31,7 @@ public class CountConsumeTable extends GoodsEditTable<UserGoods> {
     }
 
     @Override
-    public ArrayList<UserGoods> getAllBeans() {
+    public List<UserGoods> getAllBeans() {
         return null;
     }
 

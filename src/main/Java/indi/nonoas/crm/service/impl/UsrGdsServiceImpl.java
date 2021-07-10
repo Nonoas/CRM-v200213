@@ -23,11 +23,11 @@ public class UsrGdsServiceImpl implements UsrGdsService {
     }
 
     /**
-     * ¸ù¾ÝÓÃ»§IDºÍÉÌÆ·ID²éÑ¯
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½IDï¿½ï¿½ï¿½ï¿½Æ·IDï¿½ï¿½Ñ¯
      *
-     * @param userId  ÓÃ»§ID
-     * @param goodsId ÉÌÆ·ID
-     * @return ÓÃ»§-ÉÌÆ·BeanÀà
+     * @param userId  ï¿½Ã»ï¿½ID
+     * @param goodsId ï¿½ï¿½Æ·ID
+     * @return ï¿½Ã»ï¿½-ï¿½ï¿½Æ·Beanï¿½ï¿½
      */
     @Override
     public UserGoods selectByUserGoods(String userId, String goodsId) {
@@ -35,7 +35,7 @@ public class UsrGdsServiceImpl implements UsrGdsService {
     }
 
     //===========================================================================
-    //                            setter×¢Èë
+    //                            setter×¢ï¿½ï¿½
     //===========================================================================
     @Autowired
     public void setUsrGdsMapper(UsrGdsMapper usrGdsMapper) {

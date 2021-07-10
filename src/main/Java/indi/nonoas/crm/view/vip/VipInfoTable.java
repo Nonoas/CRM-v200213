@@ -3,7 +3,7 @@ package indi.nonoas.crm.view.vip;
 import java.util.ArrayList;
 import java.util.List;
 
-import indi.nonoas.crm.pojo.dto.VipInfo;
+import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.service.VipService;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.component.progress.TableProgressIndicator;
@@ -20,67 +20,61 @@ import javafx.scene.control.TableView;
 import org.apache.log4j.Logger;
 
 /**
- * »áÔ±ĞÅÏ¢µÄTableView
+ * ï¿½ï¿½Ô±ï¿½ï¿½Ï¢ï¿½ï¿½TableView
  *
  * @author Nonoas
  */
-public class VipInfoTable extends TableView<VipInfo> {
+public class VipInfoTable extends TableView<VipInfoDto> {
 
     private final Logger logger = Logger.getLogger(VipInfoTable.class);
 
     private final VipService vipService = (VipService) SpringUtil.getBean("UserServiceImpl");
 
+    private final ObservableList<VipInfoDto> obList = FXCollections.observableArrayList();
+
+    private final ObservableList<TableColumn<VipInfoDto, ?>> colList = getColumns();
     /**
-     * Êı¾İÔ´ÁĞ±í
+     * ï¿½ï¿½Ç°Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
-    private final ObservableList<VipInfo> obList = FXCollections.observableArrayList();
+    private VipInfoDto selectedBean;
 
-    /**
-     * ÁĞÊı×é
-     */
-    private final ObservableList<TableColumn<VipInfo, ?>> colList = getColumns();
-    /**
-     * µ±Ç°Ñ¡ÖĞÊı¾İ
-     */
-    private VipInfo selectedBean;
+    private final TableColumn<VipInfoDto, String> item_balance = new TableColumn<>("ä½™é¢");
 
-    private final TableColumn<VipInfo, String> item_balance = new TableColumn<>("¿¨ÄÚÓà¶î");
+    private final TableColumn<VipInfoDto, Number> item_integral = new TableColumn<>("ç§¯åˆ†");
 
-    private final TableColumn<VipInfo, Number> item_integral = new TableColumn<>("»áÔ±»ı·Ö");
+    private final TableColumn<VipInfoDto, String> item_telephone = new TableColumn<>("ç”µè¯");
 
-    private final TableColumn<VipInfo, String> item_telephone = new TableColumn<>("ÁªÏµµç»°");
+    private final TableColumn<VipInfoDto, String> item_id = new TableColumn<>("ä¼šå‘˜å¡å·");
 
-    private final TableColumn<VipInfo, String> item_id = new TableColumn<>("»áÔ±¿¨ºÅ");
+    private final TableColumn<VipInfoDto, String> item_address = new TableColumn<>("ä½å€Ö·");
 
-    private final TableColumn<VipInfo, String> item_address = new TableColumn<>("ÁªÏµµØÖ·");
+    private final TableColumn<VipInfoDto, String> item_name = new TableColumn<>("å§“å");
 
-    private final TableColumn<VipInfo, String> item_name = new TableColumn<>("»áÔ±ĞÕÃû");
+    private final TableColumn<VipInfoDto, String> item_career = new TableColumn<>("èŒä¸š");
 
-    private final TableColumn<VipInfo, String> item_career = new TableColumn<>("µ¥Î»Ö°Òµ");
+    private final TableColumn<VipInfoDto, String> item_admission = new TableColumn<>("å…¥ä¼šæ—¶é—´");
 
-    private final TableColumn<VipInfo, String> item_admission = new TableColumn<>("Èë»áÊ±¼ä");
+    private final TableColumn<VipInfoDto, String> item_sex = new TableColumn<>("æ€§åˆ«");
 
-    private final TableColumn<VipInfo, String> item_sex = new TableColumn<>("ĞÔ±ğ");
+    private final TableColumn<VipInfoDto, Number> item_discount = new TableColumn<>("ä¼˜æƒ æŠ˜æ‰£");
 
-    private final TableColumn<VipInfo, Number> item_discount = new TableColumn<>("ÏíÊÜÕÛ¿Û");
+    private final TableColumn<VipInfoDto, String> item_email = new TableColumn<>("é‚®ç®±");
 
-    private final TableColumn<VipInfo, String> item_email = new TableColumn<>("ÓÊÏä");
+    private final TableColumn<VipInfoDto, Number> item_cumulative = new TableColumn<>("ç´¯ç§¯æ¶ˆè´¹");
 
-    private final TableColumn<VipInfo, Number> item_cumulative = new TableColumn<>("ÀÛ¼ÆÏû·Ñ");
+    private final TableColumn<VipInfoDto, String> item_idCard = new TableColumn<>("èº«ä»½è¯å·");
 
-    private final TableColumn<VipInfo, String> item_idCard = new TableColumn<>("Éí·İÖ¤ºÅÂë");
+    private final TableColumn<VipInfoDto, String> item_birthday = new TableColumn<>("ç”Ÿæ—¥");
 
-    private final TableColumn<VipInfo, String> item_birthday = new TableColumn<>("³öÉúÈÕÆÚ");
+    private final TableColumn<VipInfoDto, String> item_card_level = new TableColumn<>("ä¼šå‘˜ç­‰çº§");
 
-    private final TableColumn<VipInfo, String> item_card_level = new TableColumn<>("»áÔ±µÈ¼¶");
-
-    private final TableColumn<VipInfo, String> item_other = new TableColumn<>("ÆäËûĞÅÏ¢");
+    private final TableColumn<VipInfoDto, String> item_other = new TableColumn<>("å¤‡æ³¨");
 
     public VipInfoTable() {
         initColumns();
         setItems(obList);
         showAllInfos();
-        ChangeListener<VipInfo> cl_select = (observable, oldValue, newValue) -> {
+        ChangeListener<VipInfoDto> cl_select = (observable, oldValue, newValue) -> {
             logger.debug(newValue);
             selectedBean = newValue;
         };
@@ -88,31 +82,31 @@ public class VipInfoTable extends TableView<VipInfo> {
     }
 
     /**
-     * ³õÊ¼»¯±í¸ñÁĞ
+     * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     private void initColumns() {
 
         setTableMenuButtonVisible(true);
 
-        item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getId())); // »áÔ±¿¨ºÅ
-        item_admission.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAdmissionDate())); // Èë»áÈÕÆÚ
-        item_name.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName())); // ĞÕÃû
-        item_sex.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSex())); // ĞÔ±ğ
-        item_card_level.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getCardLevel())); // »áÔ±µÈ¼¶
+        item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getId())); // ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
+        item_admission.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAdmissionDate())); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        item_name.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName())); // ï¿½ï¿½ï¿½ï¿½
+        item_sex.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSex())); // ï¿½Ô±ï¿½
+        item_card_level.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getCardLevel())); // ï¿½ï¿½Ô±ï¿½È¼ï¿½
         item_discount.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getDiscount()));
         item_balance.setCellValueFactory(param -> {
-            String str = String.format("£¤%.2f", param.getValue().getBalance());
+            String str = String.format("ï¿¥%.2f", param.getValue().getBalance());
             return new SimpleStringProperty(str);
-        }); // ¿¨ÄÚÓà¶î
-        item_cumulative.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getCumulative())); // ÀÛ¼ÆÏû·Ñ
-        item_address.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAddress())); // ÁªÏµµØÖ·
-        item_integral.setCellValueFactory(param -> new SimpleIntegerProperty(param.getValue().getIntegral())); // »áÔ±»ı·Ö
-        item_telephone.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTelephone())); // ÁªÏµµç»°
-        item_idCard.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getIdcard())); // Ö¤¼şºÅÂë
-        item_birthday.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getBirthday())); // ³öÉúÈÕÆÚ
-        item_career.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getCareer())); // µ¥Î»Ö°Òµ
-        item_email.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getEmail())); // ÓÊÏä
-        item_other.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getOther())); // ÓÊÏä
+        });
+        item_cumulative.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getCumulative())); // ï¿½Û¼ï¿½ï¿½ï¿½ï¿½ï¿½
+        item_address.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAddress())); // ï¿½ï¿½Ïµï¿½ï¿½Ö·
+        item_integral.setCellValueFactory(param -> new SimpleIntegerProperty(param.getValue().getIntegral())); // ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
+        item_telephone.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTelephone())); // ï¿½ï¿½Ïµï¿½ç»°
+        item_idCard.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getIdcard())); // Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        item_birthday.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getBirthday())); // è¿›ä»·
+        item_career.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getCareer())); // ï¿½ï¿½Î»Ö°Òµ
+        item_email.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getEmail())); // ï¿½ï¿½ï¿½ï¿½
+        item_other.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getOther())); // ï¿½ï¿½ï¿½ï¿½
 
 
         colList.add(item_id);
@@ -134,16 +128,16 @@ public class VipInfoTable extends TableView<VipInfo> {
     }
 
     /**
-     * Õ¹Ê¾ËùÓĞÓÃ»§ĞÅÏ¢
+     * Õ¹Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ï¢
      */
     public void showAllInfos() {
-        clearData(); // Çå¿ÕËùÓĞÊı¾İ
+        clearData(); // è¿›ä»·ï¿½ï¿½ï¿½
         setPlaceholder(new TableProgressIndicator());
-        //×ÓÏß³Ì²éÑ¯Êı¾İ
-        Task<List<VipInfo>> task = new Task<List<VipInfo>>() {
+        //ï¿½ï¿½ï¿½ß³Ì²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½
+        Task<List<VipInfoDto>> task = new Task<List<VipInfoDto>>() {
             @Override
-            protected List<VipInfo> call() {
-                List<VipInfo> beans = vipService.selectAllUser();
+            protected List<VipInfoDto> call() {
+                List<VipInfoDto> beans = vipService.selectAllUser();
                 if (beans != null)
                     return beans;
                 else
@@ -155,41 +149,41 @@ public class VipInfoTable extends TableView<VipInfo> {
             if (newValue.size() != 0)
                 obList.addAll(newValue);
             else
-                setPlaceholder(new Label("±íÖĞÎŞÄÚÈİ"));
+                setPlaceholder(new Label("æ²¡æœ‰æ•°æ®"));
         });
     }
 
     /**
-     * Çå¿ÕÊı¾İÔ´
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´
      */
     public void clearData() {
         obList.clear();
     }
 
     /**
-     * Ìí¼ÓÊı¾İ
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param bean ĞèÒªÌí¼ÓµÄVIPBean
+     * @param bean ï¿½ï¿½Òªï¿½ï¿½Óµï¿½VIPBean
      */
-    public void addBean(VipInfo bean) {
+    public void addBean(VipInfoDto bean) {
         obList.add(bean);
     }
 
     /**
-     * »ñÈ¡Ñ¡ÖĞµÄÊı¾İ
+     * ï¿½ï¿½È¡Ñ¡ï¿½Ğµï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return Ñ¡ÖĞµÄVIPBean
+     * @return Ñ¡ï¿½Ğµï¿½VIPBean
      */
-    public VipInfo getSelectedData() {
+    public VipInfoDto getSelectedData() {
         return this.selectedBean;
     }
 
     /**
-     * ÒÆ³ıÊı¾İ
+     * ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param bean ĞèÒªÒÆ³ıµÄVIPBean
+     * @param bean ï¿½ï¿½Òªï¿½Æ³ï¿½ï¿½ï¿½VIPBean
      */
-    public void removeData(VipInfo bean) {
+    public void removeData(VipInfoDto bean) {
         this.obList.remove(bean);
     }
 }

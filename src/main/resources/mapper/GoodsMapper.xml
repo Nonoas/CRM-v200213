@@ -97,7 +97,7 @@
     </update>
 
     <select id="selectGoodsTypes" resultType="string">
-        select name
+        select GT_NAME
         from goods_type
     </select>
 </mapper>

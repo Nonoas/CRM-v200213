@@ -6,7 +6,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 /**
- * Í³¼Æ±¨±íÃæ°å
+ * Í³ï¿½Æ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  *
  * @author Nonoas
  */

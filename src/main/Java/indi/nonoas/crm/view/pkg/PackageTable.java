@@ -14,7 +14,7 @@ import javafx.scene.control.TableView;
 import java.util.List;
 
 /**
- * ÏîÄ¿ĞÅÏ¢±í¸ñ
+ * ï¿½ï¿½Ä¿ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½
  *
  * @author Nonoas
  */
@@ -23,75 +23,72 @@ public class PackageTable extends TableView<PackageDto> {
     private final PackageService pkgService = (PackageService) SpringUtil.getBean("PackageServiceImpl");
 
     /**
-     * Êı¾İÔ´
+     * ï¿½ï¿½ï¿½ï¿½Ô´
      */
     private final ObservableList<PackageDto> obList = FXCollections.observableArrayList();
 
     /**
-     * ÁĞ¼¯ºÏ
+     * ï¿½Ğ¼ï¿½ï¿½ï¿½
      */
     private final ObservableList<TableColumn<PackageDto, ?>> colList = getColumns();
 
     /**
-     * µ±Ç°Ñ¡ÖĞÊı¾İ
+     * ï¿½ï¿½Ç°Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     private PackageDto selectedBean;
 
     /**
-     * °ó¶¨µÄÌ×²ÍÄÚÈİ±í¸ñ
+     * ï¿½ó¶¨µï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½İ±ï¿½ï¿½
      */
     private PackageContentTable packageContentTable;
 
-    private final TableColumn<PackageDto, String> item_id = new TableColumn<>("±àºÅ");
+    private final TableColumn<PackageDto, String> item_id = new TableColumn<>("å¥—é¤ç¼–å·");
 
-    private final TableColumn<PackageDto, String> item_name = new TableColumn<>("ÏîÄ¿Ãû³Æ");
+    private final TableColumn<PackageDto, String> item_name = new TableColumn<>("å¥—é¤åç§°");
 
-    private final TableColumn<PackageDto, String> item_money_cost = new TableColumn<>("½ğ¶îÏû·Ñ");
+    private final TableColumn<PackageDto, String> item_money_cost = new TableColumn<>("å•ä»·");
 
-    private final TableColumn<PackageDto, Number> item_integral_cost = new TableColumn<>("»ı·ÖÏû·Ñ");
+    private final TableColumn<PackageDto, Number> item_integral_cost = new TableColumn<>("è¿›ä»·");
 
-    private final TableColumn<PackageDto, Number> item_min_discount = new TableColumn<>("×îµÍÕÛ¿Û");
+    private final TableColumn<PackageDto, Number> item_min_discount = new TableColumn<>("æœ€ä½æŠ˜æ‰£");
 
-    private final TableColumn<PackageDto, String> item_type = new TableColumn<>("ÏîÄ¿ÀàĞÍ");
+    private final TableColumn<PackageDto, String> item_type = new TableColumn<>("å¥—é¤ç±»å‹");
 
-    private final TableColumn<PackageDto, String> item_other = new TableColumn<>("±¸×¢ĞÅÏ¢");
+    private final TableColumn<PackageDto, String> item_other = new TableColumn<>("å¤‡æ³¨");
 
     public PackageTable() {
         initColumns();
         setItems(obList);
         showAllInfos();
-        getSelectionModel().selectedItemProperty().addListener(cl_select);    //Ìí¼ÓÑ¡ÖĞ¼àÌı
+        getSelectionModel().selectedItemProperty().addListener(cl_select);    //ï¿½ï¿½ï¿½Ñ¡ï¿½Ğ¼ï¿½ï¿½ï¿½
     }
 
     public PackageTable(PackageContentTable packageContentTable) {
         this();
         this.packageContentTable = packageContentTable;
-        getSelectionModel().selectedItemProperty().addListener(cl_showContent);    //Ìí¼ÓÑ¡ÖĞ¼àÌı
+        getSelectionModel().selectedItemProperty().addListener(cl_showContent);    //ï¿½ï¿½ï¿½Ñ¡ï¿½Ğ¼ï¿½ï¿½ï¿½
     }
 
-    //ÉùÃ÷Ñ¡ÖĞ¼àÌı
     ChangeListener<PackageDto> cl_select = (observable, oldValue, newValue) -> {
-        System.out.println("ÏîÄ¿ĞÅÏ¢±í¸ñÑ¡ÖĞ£º" + newValue);
         selectedBean = newValue;
     };
 
-    //ÉùÃ÷Ì×²Í±í¸ñÄÚÈİÏÔÊ¾
     ChangeListener<PackageDto> cl_showContent = (observable, oldValue, newValue) -> {
         if (selectedBean != null) {
-            packageContentTable.showAllInfos(selectedBean.getId()); //¸üĞÂÑ¡ÖĞ±í¸ñµÄÄÚÈİ
+            packageContentTable.showAllInfos(selectedBean.getId()); //ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½Ğ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         }
     };
 
 
     private void initColumns() {
 
-        setTableMenuButtonVisible(true); // ÏÔÊ¾±í¸ñ²Ëµ¥°´Å¥
+        setTableMenuButtonVisible(true);
 
         item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getId()));
         item_name.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName()));
         item_money_cost.setCellValueFactory(param -> {
             double numMoney = param.getValue().getMoneyCost();
-            String show = String.format("£¤%.2f", numMoney);
+            String show = String.format("ï¿¥%.2f", numMoney);
             return new SimpleStringProperty(show);
         });
         item_integral_cost.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getIntegralCost()));
@@ -111,10 +108,10 @@ public class PackageTable extends TableView<PackageDto> {
     }
 
     /**
-     * Õ¹Ê¾ËùÓĞÏîÄ¿ĞÅÏ¢
+     * Õ¹Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Ï¢
      */
     public void showAllInfos() {
-        clearData(); // Çå¿ÕËùÓĞÊı¾İ
+        clearData(); // è¿›ä»·ï¿½ï¿½ï¿½
         List<PackageDto> pkgDtoList = pkgService.selectAll();
         if (pkgDtoList != null) {
             obList.addAll(pkgDtoList);
@@ -122,34 +119,34 @@ public class PackageTable extends TableView<PackageDto> {
     }
 
     /**
-     * Çå¿ÕÊı¾İÔ´
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´
      */
     public void clearData() {
         obList.clear();
     }
 
     /**
-     * Ìí¼ÓÊı¾İ
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param bean Ì×²ÍÏîÄ¿beanÀà
+     * @param bean ï¿½×²ï¿½ï¿½ï¿½Ä¿beanï¿½ï¿½
      */
     public void addBean(PackageDto bean) {
         obList.add(bean);
     }
 
     /**
-     * »ñÈ¡Ñ¡ÖĞµÄÊı¾İ
+     * ï¿½ï¿½È¡Ñ¡ï¿½Ğµï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return Ñ¡ÖĞµÄPackageBean
+     * @return Ñ¡ï¿½Ğµï¿½PackageBean
      */
     public PackageDto getSelectedData() {
         return this.selectedBean;
     }
 
     /**
-     * ÒÆ³ıÊı¾İ
+     * ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param bean ĞèÒªÒÆ³ıµÄPackageBean
+     * @param bean ï¿½ï¿½Òªï¿½Æ³ï¿½ï¿½ï¿½PackageBean
      */
     public void removeData(PackageDto bean) {
         this.obList.remove(bean);

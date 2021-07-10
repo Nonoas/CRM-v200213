@@ -11,7 +11,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.Pane;
 
 /**
- * 项目信息修改面板
+ * 濂楅淇敼Tab
  *
  * @author Nonoas
  */
@@ -20,7 +20,7 @@ public class PackageModifyTab extends Tab {
     private final PackageDto packageBean;
 
     public PackageModifyTab(PackageDto packageBean) {
-        this("修改项目信息", packageBean);
+        this("濂楅淇敼", packageBean);
     }
 
     public PackageModifyTab(String str, PackageDto packageBean) {

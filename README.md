@@ -1,32 +1,32 @@
 
-# µêÆÌ¹ÜÀíÏµÍ³
+# ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ÏµÍ³
 
 ---
 
 [![star](https://gitee.com/nonoas/CRM-v200213/badge/star.svg?theme=dark)](https://gitee.com/nonoas/CRM-v200213/stargazers)
 [![fork](https://gitee.com/nonoas/CRM-v200213/badge/fork.svg?theme=dark)](https://gitee.com/nonoas/CRM-v200213/members)
 
-## Èí¼þ½éÉÜ
+## ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-±¾Èí¼þÊÇ±¾Èí¼þÊÇ»ùÓÚ JavaFX8 µÄÒ»¿îµ¥»úµÄÐ¡ÐÍµêÆÌ¹ÜÀíÏµÍ³£¬Êý¾Ý¿âÊ¹ÓÃÄÚÇ¶Ê½µÄ [H2Êý¾Ý¿â](https://baike.baidu.com/item/H2%E6%95%B0%E6%8D%AE%E5%BA%93/23316077?fr=aladdin) £¬
-ÎÞÐèÓÃ»§°²×°Êý¾Ý¿âÈí¼þ£¬Ò²ÎÞÐèÈí¼þ·½Ìá¹©Ô¶³ÌÊý¾Ý¿â¡£¹¦ÄÜ°üÀ¨ ÉÌÆ·¹ÜÀí¡¢ÓÃ»§¹ÜÀí¡¢Ô±¹¤¹ÜÀí¡¢Ì×²Í¹ÜÀí¡£±¨±íÍ³¼ÆµÈ¹¦ÄÜ¡£
-±¾Èí¼þ½«³ÖÐø¸üÐÂÎ¬»¤¡£
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç±ï¿½ï¿½ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ JavaFX8 ï¿½ï¿½Ò»ï¿½îµ¥ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½Íµï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½Ç¶Ê½ï¿½ï¿½ [H2ï¿½ï¿½ï¿½Ý¿ï¿½](https://baike.baidu.com/item/H2%E6%95%B0%E6%8D%AE%E5%BA%93/23316077?fr=aladdin) ï¿½ï¿½
+ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½×°ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò²è¿›ä»·ï¿½ï¿½á¹©Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿â¡£ï¿½ï¿½ï¿½Ü°ï¿½ï¿½ï¿½ ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²Í¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í³ï¿½ÆµÈ¹ï¿½ï¿½Ü¡ï¿½
+è¿›ä»·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½
 
-## Èí¼þÊ×Ò³
+## ï¿½ï¿½ï¿½ï¿½ï¿½Ò³
 
-![Èí¼þÊ×Ò³](https://img-blog.csdnimg.cn/20210610175826650.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1NTExNQ==,size_16,color_FFFFFF,t_70)
+![ï¿½ï¿½ï¿½ï¿½ï¿½Ò³](https://img-blog.csdnimg.cn/20210610175826650.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1NTExNQ==,size_16,color_FFFFFF,t_70)
 
-## »áÔ±¹ÜÀí
+## ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
 
-![»áÔ±¹ÜÀí](https://img-blog.csdnimg.cn/20210610175957872.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1NTExNQ==,size_16,color_FFFFFF,t_70)
+![ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½](https://img-blog.csdnimg.cn/20210610175957872.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1NTExNQ==,size_16,color_FFFFFF,t_70)
 
-## ÉÌÆ·¹ÜÀí
+## ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
 
-![ÉÌÆ·¹ÜÀí](https://img-blog.csdnimg.cn/20210610180046752.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1NTExNQ==,size_16,color_FFFFFF,t_70)
+![ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½](https://img-blog.csdnimg.cn/20210610180046752.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1NTExNQ==,size_16,color_FFFFFF,t_70)
 
-## ÌáÊ¾
+## ï¿½ï¿½Ê¾
 
-Èí¼þÐèÊ¹ÓÃmaven´ò°ü£¬´ò°ü²å¼þÈçÏÂ
+ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½mavenè¿›ä»·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 ``` xml
     <build>
@@ -56,27 +56,27 @@
     </build>
 
 ```
-´ò°üºóÈí¼þ¸ùÄ¿Â¼Ðè°üº¬ÒÔÏÂÎÄ¼þ£º
+è¿›ä»·ï¿½ï¿½Ä¿Â¼è¿›ä»·ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
 ```
-¸ùÄ¿Â¼
+ï¿½ï¿½Ä¿Â¼
 |
-©¦  CRM-v200324.jar (Ö÷³ÌÐò)
-©¦  
-©À©¤config (ÅäÖÃÎÄ¼þ)
-©¦  ©¦  userConfig.properties
-©¦  ©¦  
-©¦  ©¸©¤splash (Æô¶¯½çÃæÍ¼Æ¬)
-©¦          Splash.png
-©¦          
-©À©¤data (Êý¾Ý¿â)
-©¦      mycrm.db
-©¦      mycrm.mv.db
-©¦      mycrm.trace.db
-©¦      
-©¸©¤photo (ÕÕÆ¬)
-    ©À©¤goods
-    ©¸©¤user
+ï¿½ï¿½  CRM-v200324.jar (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+ï¿½ï¿½  
+ï¿½ï¿½ï¿½ï¿½config (ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½)
+ï¿½ï¿½  ï¿½ï¿½  userConfig.properties
+ï¿½ï¿½  ï¿½ï¿½  
+ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½splash (è¿›ä»·Í¼Æ¬)
+ï¿½ï¿½          Splash.png
+ï¿½ï¿½          
+ï¿½ï¿½ï¿½ï¿½data (ï¿½ï¿½ï¿½Ý¿ï¿½)
+ï¿½ï¿½      mycrm.db
+ï¿½ï¿½      mycrm.mv.db
+ï¿½ï¿½      mycrm.trace.db
+ï¿½ï¿½      
+ï¿½ï¿½ï¿½ï¿½photo (ï¿½ï¿½Æ¬)
+    ï¿½ï¿½ï¿½ï¿½goods
+    ï¿½ï¿½ï¿½ï¿½user
 ```
 
-## ¸ÐÐ»
-JavaFXÑùÊ½£º[https://github.com/dicolar/jbootx](https://github.com/dicolar/jbootx)
+## ï¿½ï¿½Ð»
+JavaFXï¿½ï¿½Ê½ï¿½ï¿½[https://github.com/dicolar/jbootx](https://github.com/dicolar/jbootx)

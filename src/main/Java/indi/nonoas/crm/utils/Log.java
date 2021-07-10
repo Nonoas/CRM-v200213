@@ -2,9 +2,9 @@ package indi.nonoas.crm.utils;
 
 public class Log {
 	/**
-	 * Êä³öÏûÏ¢ÈÕÖ¾
-	 * @param tag ±êÖ¾
-	 * @param message ÈÕÖ¾ÄÚÈİ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Ö¾
+	 * @param tag ï¿½ï¿½Ö¾
+	 * @param message ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½
 	 */
 	public static void i(Object tag,String message) {
 		System.out.println(tag.getClass().getSimpleName()+":"+message);

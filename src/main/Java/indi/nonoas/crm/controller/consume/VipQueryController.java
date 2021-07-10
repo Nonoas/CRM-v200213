@@ -1,7 +1,7 @@
 package indi.nonoas.crm.controller.consume;
 
 import indi.nonoas.crm.view.vip.VipInfoTable;
-import indi.nonoas.crm.pojo.dto.VipInfo;
+import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.service.VipService;
 import indi.nonoas.crm.service.VipLvService;
 import indi.nonoas.crm.utils.SpringUtil;
@@ -26,7 +26,7 @@ public class VipQueryController implements Initializable {
 
     private final VipService vipService = (VipService) SpringUtil.getBean("UserServiceImpl");
 
-    private final VipInfoTable tv_vipInfo = new VipInfoTable(); // »áÔ±ÐÅÏ¢±í
+    private final VipInfoTable tv_vipInfo = new VipInfoTable(); // ï¿½ï¿½Ô±ï¿½ï¿½Ï¢ï¿½ï¿½
 
     private final VipLvService vipLvService = (VipLvService) SpringUtil.getBean("VipLvServiceImpl");
 
@@ -43,32 +43,32 @@ public class VipQueryController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         sp_userInfo.setContent(new VipInfoTable());
-        cb_disType.getItems().add("È«²¿ÀàÐÍ");
-        // ´ÓÊý¾Ý¿â¶Á³öËùÓÃ»áÔ±µÈ¼¶£¬²¢³õÊ¼»¯ComboBox
+        cb_disType.getItems().add("È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ô±ï¿½È¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ComboBox
         List<String> listName = vipLvService.listAllNames();
         for (String str : listName) {
             cb_disType.getItems().add(str);
         }
-        cb_disType.setValue("È«²¿ÀàÐÍ");
+        cb_disType.setValue("È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
     }
 
     @FXML
     private void inquireVIPInfo() {
         String str = tf_findInfo.getText().trim();
-        String disType = cb_disType.getValue().equals("È«²¿ÀàÐÍ") ? "" : cb_disType.getValue();
+        String disType = cb_disType.getValue().equals("È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½") ? "" : cb_disType.getValue();
         if (str.equals(""))
             return;
-        ArrayList<VipInfo> listVipBeans = vipService.selectByFiltrate(str, str, disType);
+        ArrayList<VipInfoDto> listVipBeans = vipService.selectByFiltrate(str, str, disType);
         if (listVipBeans != null) {
             tv_vipInfo.clearData();
-            for (VipInfo bean : listVipBeans)
+            for (VipInfoDto bean : listVipBeans)
                 tv_vipInfo.addBean(bean);
         } else {
-            new MyAlert(Alert.AlertType.INFORMATION, "Ã»ÓÐÕÒµ½Äú²éÑ¯µÄ»áÔ±£¡").show();
+            new MyAlert(Alert.AlertType.INFORMATION, "Ã»ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½Ä»ï¿½Ô±ï¿½ï¿½").show();
         }
     }
 
-    @FXML // ÏÔÊ¾È«²¿ÐÅÏ¢
+    @FXML // ï¿½ï¿½Ê¾È«ï¿½ï¿½ï¿½ï¿½Ï¢
     private void showAll() {
         tv_vipInfo.showAllInfos();
     }

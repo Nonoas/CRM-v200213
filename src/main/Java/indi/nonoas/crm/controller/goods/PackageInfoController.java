@@ -45,9 +45,9 @@ public class PackageInfoController implements Initializable {
         initPkgView();
     }
 
-    private final PackageContentTable pkgContTable = new PackageContentTable(); //Ì×²ÍÉÌÆ·±í¸ñ
+    private final PackageContentTable pkgContTable = new PackageContentTable(); //ï¿½×²ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½
 
-    private final PackageTable pkgTable = new PackageTable(pkgContTable);   //Ì×²Í±í¸ñ
+    private final PackageTable pkgTable = new PackageTable(pkgContTable);   //ï¿½×²Í±ï¿½ï¿½
 
     @FXML
     private void findPackage() {
@@ -59,7 +59,7 @@ public class PackageInfoController implements Initializable {
 
         List<PackageDto> list = pkgService.findByFilter(keywords, keywords, mLow, mHigh);
         if (list == null) {
-            new MyAlert(Alert.AlertType.INFORMATION, "Ã»ÓÐÕÒµ½Äú²éÑ¯µÄÏîÄ¿ÐÅÏ¢£¡").show();
+            new MyAlert(Alert.AlertType.INFORMATION, "Ã»ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Ï¢ï¿½ï¿½").show();
         } else {
             pkgTable.clearData();
             for (PackageDto bean : list)
@@ -71,12 +71,12 @@ public class PackageInfoController implements Initializable {
     private void deletePackage() {
         PackageDto bean = pkgTable.getSelectedData();
         if (bean == null) {
-            new MyAlert(Alert.AlertType.INFORMATION, "ÇëÏÈÑ¡ÔñÒ»ÌõÊý¾Ý£¡").show();
+            new MyAlert(Alert.AlertType.INFORMATION, "ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½").show();
             return;
         }
-        String id = "±àºÅ:" + bean.getId();
-        String name = "Ãû³Æ:" + bean.getName();
-        MyAlert alert = new MyAlert(Alert.AlertType.CONFIRMATION, "ÊÇ·ñÈ·¶¨É¾³ý¸ÃÏîÄ¿µÄÐÅÏ¢£¿\n(" + id + "£¬" + name + ")");
+        String id = "ï¿½ï¿½ï¿½:" + bean.getId();
+        String name = "ï¿½ï¿½ï¿½ï¿½:" + bean.getName();
+        MyAlert alert = new MyAlert(Alert.AlertType.CONFIRMATION, "ï¿½Ç·ï¿½È·ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½\n(" + id + "ï¿½ï¿½" + name + ")");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             pkgTable.removeData(bean);
@@ -90,7 +90,7 @@ public class PackageInfoController implements Initializable {
     }
 
     /**
-     * ÐÞ¸ÄÌ×²ÍÐÅÏ¢
+     * ï¿½Þ¸ï¿½ï¿½×²ï¿½ï¿½ï¿½Ï¢
      */
     @FXML
     private void modifyPackage() {
@@ -98,10 +98,10 @@ public class PackageInfoController implements Initializable {
     }
 
     /**
-     * ³õÊ¼»¯Ì×²Í½çÃæ
+     * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½×²Í½ï¿½ï¿½ï¿½
      */
     private void initPkgView() {
-        // ³õÊ¼»¯±í¸ñÄÚÈÝ
+        // ï¿½ï¿½Ê¼è¿›ä»·ï¿½
         sp_package.setContent(pkgTable);
         sp_pkg_content.setContent(pkgContTable);
     }

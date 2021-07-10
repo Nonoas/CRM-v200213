@@ -1,13 +1,13 @@
 package indi.nonoas.crm.common;
 
 /**
- * Ö§¸¶·½Ê½Ã¶¾Ù
+ * Ö§ï¿½ï¿½ï¿½ï¿½Ê½Ã¶ï¿½ï¿½
  */
 public enum PayMode {
-    INTEGRAL("»ý·Ö"),
-    CASH("ÏÖ½ð"),
-    BALANCE("Óà¶î"),
-    FREE("Ãâ·Ñ");
+    INTEGRAL("ï¿½ï¿½ï¿½ï¿½"),
+    CASH("ï¿½Ö½ï¿½"),
+    BALANCE("ï¿½ï¿½ï¿½"),
+    FREE("ï¿½ï¿½ï¿½");
 
     private final String val;
 

@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * 获取数据库连接的类
+ * 锟斤拷取锟斤拷锟捷匡拷锟斤拷锟接碉拷锟斤拷
  *
  * @author Nonoas
  */
@@ -16,7 +16,7 @@ public class DBOpener {
     private static final String url = "jdbc:sqlite:data/mycrm.db";
 
     /**
-     * 私有构造器
+     * 私锟叫癸拷锟斤拷锟斤拷
      */
     private DBOpener() {
     }
@@ -30,9 +30,9 @@ public class DBOpener {
     }
 
     /**
-     * 获取数据库连接对象
+     * 锟斤拷取锟斤拷锟捷匡拷锟斤拷锟接讹拷锟斤拷
      *
-     * @return Connection对象
+     * @return Connection锟斤拷锟斤拷
      */
     public static Connection getConnection() {
         Connection connection = null;

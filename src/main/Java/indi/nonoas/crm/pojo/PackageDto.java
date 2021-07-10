@@ -4,39 +4,39 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 /**
- * Ì×²ÍÏîÄ¿Àà
+ * ï¿½×²ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½
  *
  * @author Nonoas
  */
 @TableName("package_info")
 public class PackageDto {
     /**
-     * ±àºÅ
+     * ï¿½ï¿½ï¿½
      */
     @TableId("id")
     private String id;
     /**
-     * Ãû³Æ
+     * ï¿½ï¿½ï¿½ï¿½
      */
     private String name;
     /**
-     * »ý·Ö»¨·Ñ
+     * ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½
      */
     private int integralCost;
     /**
-     * ½ðÇ®»¨·Ñ
+     * ï¿½ï¿½Ç®ï¿½ï¿½ï¿½ï¿½
      */
     private double moneyCost;
     /**
-     * ×îµÍÕÛ¿Û
+     * ï¿½ï¿½ï¿½ï¿½Û¿ï¿½
      */
     private double minDiscount;
     /**
-     * ÏîÄ¿ÀàÐÍ
+     * ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½
      */
     private String type;
     /**
-     * ±¸×¢ÐÅÏ¢
+     * ï¿½ï¿½×¢ï¿½ï¿½Ï¢
      */
     private String other;
 

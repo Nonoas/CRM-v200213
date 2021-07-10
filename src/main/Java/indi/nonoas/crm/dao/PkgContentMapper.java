@@ -14,25 +14,25 @@ import java.util.List;
 public interface PkgContentMapper {
 
     /**
-     * 通过项目id查询项目内容
+     * 通锟斤拷锟斤拷目id锟斤拷询锟斤拷目锟斤拷锟斤拷
      *
-     * @param pkgId 项目id
-     * @return 项目id包含的商品信息，可以为null
+     * @param pkgId 锟斤拷目id
+     * @return 锟斤拷目id杩涗环品锟斤拷息锟斤拷锟斤拷锟斤拷为null
      */
     List<PackageContentDto> selectById(String pkgId);
 
     /**
-     * 批量插入套餐内商品信息
+     * 杩涗环锟阶诧拷锟斤拷锟斤拷品锟斤拷息
      *
-     * @param dtoList 商品信息集合
+     * @param dtoList 锟斤拷品锟斤拷息锟斤拷锟斤拷
      */
     void insertInfos(@Param("dtoList") List<PackageContentDto> dtoList);
 
     /**
      * '
-     * 通过id删除套餐内的商品
+     * 通锟斤拷id删锟斤拷锟阶诧拷锟节碉拷锟斤拷品
      *
-     * @param pkgId 套餐id
+     * @param pkgId 锟阶诧拷id
      */
     void deleteById(String pkgId);
 

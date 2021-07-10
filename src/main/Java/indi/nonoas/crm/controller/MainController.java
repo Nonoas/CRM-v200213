@@ -66,10 +66,10 @@ public class MainController implements Initializable {
     private Button btn_backups;
 
     @FXML
-    private Label label_operator; // ²Ù×÷Ô±
+    private Label label_operator; // æ“ä½œå‘˜
 
     /**
-     * ×ó²à²Ëµ¥VBox
+     * å·¦ä¾§èœå•VBox
      */
     @FXML
     private VBox leftMenuVb;
@@ -81,7 +81,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        //Æô¶¯ºóÌ¨ÈÎÎñ
+        //å¯åŠ¨åå°ä»»åŠ¡
         startBackgroundTask();
 
         initLeftMenu();
@@ -92,14 +92,14 @@ public class MainController implements Initializable {
 
         LoginDto loginDto = (LoginDto) ClientSession.getAttribute("user");
 
-        label_operator.setText("²Ù×÷Ô±£º" + loginDto.getUserName());
+        label_operator.setText("æ“ä½œå‘˜ï¼š" + loginDto.getUserName());
 
     }
 
     /**
-     * Ìí¼ÓTabµ½Ö÷TabPane
+     * æ·»åŠ Tabåˆ°ä¸»TabPane
      *
-     * @param tab tabÃæ°å
+     * @param tab tabé¢æ¿
      */
     public static void addTab(Tab tab) {
         ObservableList<Tab> tabs = rootTabPane.getTabs();
@@ -110,11 +110,11 @@ public class MainController implements Initializable {
     }
 
     private void initTopMenu() {
-        // ³õÊ¼»¯¶¥²¿²Ëµ¥Í¼±ê
-        ImageView img_shift = new ImageView(ImageSrc.SHIFT_PATH); // »»°àÍ¼±ê
-        ImageView img_backups = new ImageView(ImageSrc.BACKUPS_PATH); // »»°àÍ¼±ê
-        ImageView img_setting = new ImageView(ImageSrc.SETTING_PATH); // ÉèÖÃÍ¼±ê
-        ImageView img_exit = new ImageView(ImageSrc.EXIT_PATH); // ÍË³öÍ¼±ê
+        // åˆå§‹åŒ–é¡¶éƒ¨èœå•å›¾æ ‡
+        ImageView img_shift = new ImageView(ImageSrc.SHIFT_PATH); // æ¢ç­å›¾æ ‡
+        ImageView img_backups = new ImageView(ImageSrc.BACKUPS_PATH); // æ¢ç­å›¾æ ‡
+        ImageView img_setting = new ImageView(ImageSrc.SETTING_PATH); // è®¾ç½®å›¾æ ‡
+        ImageView img_exit = new ImageView(ImageSrc.EXIT_PATH); // é€€å‡ºå›¾æ ‡
 
         img_shift.setFitHeight(IMG_SIZE);
         img_shift.setFitWidth(IMG_SIZE);
@@ -132,7 +132,7 @@ public class MainController implements Initializable {
     }
 
     /**
-     * ³õÊ¼»¯×ó²à²Ëµ¥
+     * åˆå§‹åŒ–å·¦ä¾§èœå•
      */
     private void initLeftMenu() {
         leftMenuVb.getStylesheets().add("/css/leftmenu.css");
@@ -145,37 +145,37 @@ public class MainController implements Initializable {
     }
 
     /**
-     * »áÔ±Ïû·Ñ²Ëµ¥
+     * ä¼šå‘˜æ¶ˆè´¹èœå•
      *
-     * @return Node½Úµã
+     * @return NodeèŠ‚ç‚¹
      */
     private Node consumeLeftMenu() {
         ListView<Label> lv = new ListView<>();
-        Label vipConsumeLb = new LeftMenuItemLabel("ÉÌÆ·Ïû·Ñ");
-        Label vipQueryLb = new LeftMenuItemLabel("»áÔ±²éÑ¯");
+        Label vipConsumeLb = new LeftMenuItemLabel("å•†å“æ¶ˆè´¹");
+        Label vipQueryLb = new LeftMenuItemLabel("ä¼šå‘˜æŸ¥è¯¢");
 
         lv.getItems().add(vipConsumeLb);
         lv.getItems().add(vipQueryLb);
 
         lv.setPrefHeight(2 * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
 
-        //µã»÷ÊÂ¼ş¶¨Òå beg
+        //ç‚¹å‡»äº‹ä»¶å®šä¹‰ beg
         vipConsumeLb.setOnMouseClicked(event -> addTab(ConsumeTab.getInstance()));
         vipQueryLb.setOnMouseClicked(event -> addTab(VipQueryTab.getInstance()));
-        //µã»÷ÊÂ¼ş¶¨Òå end
-        TitledPane titledPane = new TitledPane("ÓÃ»§Ïû·Ñ", lv);
+        //ç‚¹å‡»äº‹ä»¶å®šä¹‰ end
+        TitledPane titledPane = new TitledPane("ç”¨æˆ·æ¶ˆè´¹", lv);
         titledPane.setExpanded(false);
         return titledPane;
     }
 
     /**
-     * »áÔ±¹ÜÀí²Ëµ¥
+     * ä¼šå‘˜ç®¡ç†èœå•
      *
-     * @return Node½Úµã
+     * @return NodeèŠ‚ç‚¹
      */
     private Node vipManageLeftMenu() {
         ListView<Label> lv = new ListView<>();
-        Label vipManageLb = new LeftMenuItemLabel("»áÔ±¹ÜÀí");
+        Label vipManageLb = new LeftMenuItemLabel("ä¼šå‘˜ç®¡ç†");
         vipManageLb.setPrefHeight(LeftMenuItemLabel.LEFT_MENUITEM_SIZE);
 
         lv.getItems().add(vipManageLb);
@@ -184,21 +184,21 @@ public class MainController implements Initializable {
 
         vipManageLb.setOnMouseClicked(event -> addTab(VipManageTab.getInstance()));
 
-        TitledPane titledPane = new TitledPane("»áÔ±¹ÜÀí", lv);
+        TitledPane titledPane = new TitledPane("ä¼šå‘˜ç®¡ç†", lv);
         titledPane.setExpanded(false);
         return titledPane;
     }
 
     /**
-     * ÉÌÆ·¹ÜÀí²Ëµ¥
+     * å•†å“ç®¡ç†èœå•
      *
-     * @return Node½Úµã
+     * @return NodeèŠ‚ç‚¹
      */
     private Node goodsManageLeftMenu() {
         ListView<Label> lv = new ListView<>();
-        Label goodsInfoLb = new LeftMenuItemLabel("ÉÌÆ·ĞÅÏ¢");
-        Label goodsTypeLb = new LeftMenuItemLabel("ÉÌÆ·Àà±ğ");
-        Label pkgLb = new LeftMenuItemLabel("Ì×²ÍÏîÄ¿");
+        Label goodsInfoLb = new LeftMenuItemLabel("å•†å“ä¿¡æ¯");
+        Label goodsTypeLb = new LeftMenuItemLabel("å•†å“ç±»åˆ«");
+        Label pkgLb = new LeftMenuItemLabel("å¥—é¤é¡¹ç›®");
 
         ObservableList<Label> items = lv.getItems();
         items.add(goodsInfoLb);
@@ -211,49 +211,49 @@ public class MainController implements Initializable {
         goodsTypeLb.setOnMouseClicked(event -> addTab(GoodsTypeTab.getInstance()));
         pkgLb.setOnMouseClicked(event -> addTab(PackageInfoTab.getInstance()));
 
-        TitledPane titledPane = new TitledPane("ÉÌÆ·¹ÜÀí", lv);
+        TitledPane titledPane = new TitledPane("å•†å“ç®¡ç†", lv);
         titledPane.setExpanded(false);
         return titledPane;
     }
 
     /**
-     * Ô±¹¤¹ÜÀí²Ëµ¥
+     * å‘˜å·¥ç®¡ç†èœå•
      *
-     * @return Node½Úµã
+     * @return NodeèŠ‚ç‚¹
      */
     @SuppressWarnings("all")
     private Node staffManageLeftMenu() {
         ListView<Label> lv = new ListView<>();
-        Label yggl = new LeftMenuItemLabel("Ô±¹¤¹ÜÀí");
+        Label yggl = new LeftMenuItemLabel("å‘˜å·¥ç®¡ç†");
 
         lv.getItems().add(yggl);
 
         lv.setPrefHeight(lv.getItems().size() * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
 
         yggl.setOnMouseClicked(event -> {
-            new MyAlert(Alert.AlertType.INFORMATION, "ÔİÎ´¿ª·¢£¬¾´ÇëÆÚ´ı£¡").show();
+            new MyAlert(Alert.AlertType.INFORMATION, "æš‚æœªå¼€å‘ï¼Œæ•¬è¯·æœŸå¾…ï¼").show();
         });
 
-        TitledPane titledPane = new TitledPane("Ô±¹¤¹ÜÀí", lv);
+        TitledPane titledPane = new TitledPane("å‘˜å·¥ç®¡ç†", lv);
         titledPane.setExpanded(false);
         return titledPane;
     }
 
     /**
-     * Í³¼Æ±¨±í²Ëµ¥
+     * ç»Ÿè®¡æŠ¥è¡¨èœå•
      *
-     * @return Node½Úµã
+     * @return NodeèŠ‚ç‚¹
      */
     @SuppressWarnings("all")
     private Node statLeftMenu() {
         ListView<Label> lv = new ListView<>();
-        Label spxfjl = new LeftMenuItemLabel("ÉÌÆ·Ïû·Ñ¼ÇÂ¼");
-        Label tcxfjl = new LeftMenuItemLabel("Ì×²ÍÏû·Ñ¼ÇÂ¼");
-        Label hykhjl = new LeftMenuItemLabel("»áÔ±¿ª»§¼ÇÂ¼");
-        Label spdhjl = new LeftMenuItemLabel("ÉÌÆ·¶Ò»»¼ÇÂ¼");
-        Label spkcjl = new LeftMenuItemLabel("ÉÌÆ·¿â´æÍ³¼Æ");
-        Label sjjcjl = new LeftMenuItemLabel("ÉÌÆ·½ø³ö¼ÇÂ¼");
-        Label ygtcjl = new LeftMenuItemLabel("Ô±¹¤Ìá³É¼ÇÂ¼");
+        Label spxfjl = new LeftMenuItemLabel("å•†å“æ¶ˆè´¹è®°å½•");
+        Label tcxfjl = new LeftMenuItemLabel("å¥—é¤æ¶ˆè´¹è®°å½•");
+        Label hykhjl = new LeftMenuItemLabel("ä¼šå‘˜å¼€æˆ·è®°å½•");
+        Label spdhjl = new LeftMenuItemLabel("å•†å“å…‘æ¢è®°å½•");
+        Label spkcjl = new LeftMenuItemLabel("å•†å“åº“å­˜ç»Ÿè®¡");
+        Label sjjcjl = new LeftMenuItemLabel("å•†å“è¿›å‡ºè®°å½•");
+        Label ygtcjl = new LeftMenuItemLabel("å‘˜å·¥ææˆè®°å½•");
 
         lv.getItems().add(spxfjl);
         lv.getItems().add(tcxfjl);
@@ -267,7 +267,7 @@ public class MainController implements Initializable {
 
         spxfjl.setOnMouseClicked(event -> {
             Dialog<String> dialog = new Dialog<>();
-            dialog.setTitle("ÉÌÆ·¶©µ¥¼ÇÂ¼");
+            dialog.setTitle("å•†å“è®¢å•è®°å½•");
             dialog.setResizable(true);
             DialogPane pane = dialog.getDialogPane();
             Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
@@ -279,7 +279,7 @@ public class MainController implements Initializable {
 
         tcxfjl.setOnMouseClicked(event -> {
             Dialog<String> dialog = new Dialog<>();
-            dialog.setTitle("ÓÃ»§¿â´æÏû·Ñ¼ÇÂ¼");
+            dialog.setTitle("ç”¨æˆ·åº“å­˜æ¶ˆè´¹è®°å½•");
             dialog.setResizable(true);
             DialogPane pane = dialog.getDialogPane();
             Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
@@ -289,7 +289,7 @@ public class MainController implements Initializable {
             dialog.show();
         });
 
-        TitledPane titledPane = new TitledPane("Í³¼Æ±¨±í", lv);
+        TitledPane titledPane = new TitledPane("ç»Ÿè®¡æŠ¥è¡¨", lv);
         titledPane.setExpanded(false);
         return titledPane;
     }
@@ -312,27 +312,27 @@ public class MainController implements Initializable {
 
 
     private void startBackgroundTask() {
-        //É¾³ı¾É¶©µ¥
+        //åˆ é™¤æ—§è®¢å•
         new Thread(() -> {
             odrService.delete365dAgo();
             logger.debug("==================\n" +
-                    "É¾³ıÒ»ÄêÇ°µÄ¶©µ¥" +
+                    "åˆ é™¤ä¸€å¹´å‰çš„è®¢å•" +
                     "\n===================");
         }).start();
     }
 
     /**
-     * ×ó²à²Ëµ¥°´Å¥Label£¬ÊÂÏÈÉèÖÃºÃÍ¨ÓÃÑùÊ½
+     * å·¦ä¾§èœå•æŒ‰é’®Labelï¼Œäº‹å…ˆè®¾ç½®å¥½é€šç”¨æ ·å¼
      */
     private static class LeftMenuItemLabel extends Label {
 
         /**
-         * ×ó²à°´Å¥¸ß¶È
+         * å·¦ä¾§æŒ‰é’®é«˜åº¦
          */
         private static final double LEFT_MENUITEM_SIZE = 30;
 
         /**
-         * ×î´ó³ß´çÊıÖµ
+         * æœ€å¤§å°ºå¯¸æ•°å€¼
          */
         private static final double MAX_VALUE = 9999999;
 

@@ -1,8 +1,6 @@
 package indi.nonoas.crm.pojo.vo;
 
-/**
- * 数据模型类，用于和PackageContentBean相互转换
- */
+
 public class GoodsEditTableVO {
 
     private String id;

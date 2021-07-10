@@ -4,27 +4,27 @@ public class ImageSrc {
 
     private final static String PREFIX = "images/";
     /**
-     * Èí¼þÍ¼±ê
+     * ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
      */
     public final static String lOGO_PATH = PREFIX + "logo.png";
     /**
-     * ÕÕÆ¬Õ¼Î»Í¼Æ¬
+     * ï¿½ï¿½Æ¬Õ¼Î»Í¼Æ¬
      */
     public final static String PHOTO_PATH = PREFIX + "photo.png";
     /**
-     * ½»°à
+     * ï¿½ï¿½ï¿½ï¿½
      */
     public final static String SHIFT_PATH = PREFIX + "shift.png";
     /**
-     * ÏµÍ³ÉèÖÃ
+     * ÏµÍ³ï¿½ï¿½ï¿½ï¿½
      */
     public final static String SETTING_PATH = PREFIX + "setting.png";
     /**
-     * ÍË³öÏµÍ³
+     * ï¿½Ë³ï¿½ÏµÍ³
      */
     public final static String EXIT_PATH = PREFIX + "exit.png";
     /**
-     * ±¸·ÝÍ¼±ê
+     * ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
      */
     public final static String BACKUPS_PATH = PREFIX + "backups.png";
 }

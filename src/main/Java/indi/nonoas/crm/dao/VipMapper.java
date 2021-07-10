@@ -1,6 +1,6 @@
 package indi.nonoas.crm.dao;
 
-import indi.nonoas.crm.pojo.dto.VipInfo;
+import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -13,78 +13,78 @@ import java.util.ArrayList;
 @Repository
 public interface VipMapper {
     /**
-     * Í¨¹ý»áÔ±¿¨ºÅ²éÑ¯»áÔ±ÐÅÏ¢
+     * Í¨ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½Å²ï¿½Ñ¯ï¿½ï¿½Ô±ï¿½ï¿½Ï¢
      *
-     * @param id »áÔ±¿¨ºÅ
-     * @return VIPBean¶ÔÏó
+     * @param id ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
+     * @return VIPBeanï¿½ï¿½ï¿½ï¿½
      */
-    VipInfo getUserById(String id);
+    VipInfoDto getUserById(String id);
 
     /**
-     * Í¨¹ý¿¨ºÅ»òÐÕÃû¾«È·²éÑ¯
+     * Í¨ï¿½ï¿½ï¿½ï¿½ï¿½Å»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½Ñ¯
      *
-     * @param id   »áÔ±¿¨ºÅ
-     * @param name »áÔ±ÐÕÃû
+     * @param id   ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
+     * @param name ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
      * @return VipBean
      */
-    VipInfo getInfoByIdOrName(@Param("id") String id,
-                              @Param("name") String name);
+    VipInfoDto getInfoByIdOrName(@Param("id") String id,
+                                 @Param("name") String name);
 
     /**
-     * ²éÑ¯ËùÓÐ»áÔ±ÐÅÏ¢
+     * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ð»ï¿½Ô±ï¿½ï¿½Ï¢
      *
-     * @return VIPBeanµÄArrayList¼¯ºÏ
+     * @return VIPBeanï¿½ï¿½ArrayListï¿½ï¿½ï¿½ï¿½
      */
-    ArrayList<VipInfo> selectAllUser();
+    ArrayList<VipInfoDto> selectAllUser();
 
     /**
-     * ¶àÌõ¼þÉ¸Ñ¡ÐÅÏ¢
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¸Ñ¡ï¿½ï¿½Ï¢
      *
-     * @param id         »áÔ±¿¨ºÅ
-     * @param name       ÐÕÃû
-     * @param card_level »áÔ±µÈ¼¶
-     * @return VIPBeanµÄArrayList¶ÔÏó, Ã»ÓÐ²éÑ¯½á¹ûÊ±Îªnull
+     * @param id         ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
+     * @param name       ï¿½ï¿½ï¿½ï¿½
+     * @param card_level ï¿½ï¿½Ô±ï¿½È¼ï¿½
+     * @return VIPBeanï¿½ï¿½ArrayListï¿½ï¿½ï¿½ï¿½, Ã»ï¿½Ð²ï¿½Ñ¯ï¿½ï¿½ï¿½Ê±Îªnull
      */
-    ArrayList<VipInfo> selectByFiltrate(@Param("id") String id,
-                                        @Param("name") String name,
-                                        @Param("card_level") String card_level);
+    ArrayList<VipInfoDto> selectByFiltrate(@Param("id") String id,
+                                           @Param("name") String name,
+                                           @Param("card_level") String card_level);
 
     /**
-     * ¹ýÂËÆ÷²éÕÒ
+     * è¿›ä»·ï¿½ï¿½
      *
-     * @param id       ¿¨ºÅ
-     * @param name     ÐÕÃû
-     * @param level    »áÔ±µÈ¼¶
-     * @param dateFrom ¼ÓÈëÊ±¼ä·¶Î§£¨ÆðÊ¼£©
-     * @param dateTo   ¼ÓÈëÊ±¼ä·¶Î§£¨½áÊø£©
-     * @return VIPBeanµÄArrayList¶ÔÏó, Ã»ÓÐ²éÑ¯½á¹ûÊ±Îªnull
+     * @param id       ï¿½ï¿½ï¿½ï¿½
+     * @param name     ï¿½ï¿½ï¿½ï¿½
+     * @param level    ï¿½ï¿½Ô±ï¿½È¼ï¿½
+     * @param dateFrom ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä·¶Î§ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½
+     * @param dateTo   ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä·¶Î§è¿›ä»·
+     * @return VIPBeanï¿½ï¿½ArrayListï¿½ï¿½ï¿½ï¿½, Ã»ï¿½Ð²ï¿½Ñ¯ï¿½ï¿½ï¿½Ê±Îªnull
      */
-    ArrayList<VipInfo> selectByDateFiltrate(@Param("id") String id,
-                                            @Param("name") String name,
-                                            @Param("level") String level,
-                                            @Param("dateFrom") String dateFrom,
-                                            @Param("dateTo") String dateTo);
+    ArrayList<VipInfoDto> selectByDateFiltrate(@Param("id") String id,
+                                               @Param("name") String name,
+                                               @Param("level") String level,
+                                               @Param("dateFrom") String dateFrom,
+                                               @Param("dateTo") String dateTo);
 
 
     /**
-     * ²åÈë»áÔ±ÐÅÏ¢
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ï¢
      *
-     * @param vipBean VIPBean¶ÔÏó
+     * @param vipBean VIPBeanï¿½ï¿½ï¿½ï¿½
      */
-    void insertInfo(VipInfo vipBean);
+    void insertInfo(VipInfoDto vipBean);
 
     /**
-     * Í¨¹ý¿¨ºÅÉ¾³ý»áÔ±ÐÅÏ¢
+     * Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ï¢
      *
-     * @param id »áÔ±¿¨ºÅ
+     * @param id ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
      */
     void deleteByID(String id);
 
     /**
-     * ¸üÐÂÓÃ»§ÐÅÏ¢
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ï¢
      *
-     * @param vipBean VIPBean¶ÔÏó
+     * @param vipBean VIPBeanï¿½ï¿½ï¿½ï¿½
      */
-    void updateInfo(VipInfo vipBean);
+    void updateInfo(VipInfoDto vipBean);
 
 }

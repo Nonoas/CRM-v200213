@@ -54,7 +54,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     //===========================================================================
-    //                            setter×¢Èë
+    //                            setter×¢ï¿½ï¿½
     //===========================================================================
     @Autowired
     public void setGoodsMapper(GoodsMapper goodsMapper) {

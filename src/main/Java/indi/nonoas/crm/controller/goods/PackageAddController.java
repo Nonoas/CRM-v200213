@@ -8,10 +8,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PackageAddController extends PackageController {
 
-    //µ±Ç°tabµÄÒıÓÃ
+    //ï¿½ï¿½Ç°tabï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private Tab parentTab;
 
     private final PackageService pkgService = (PackageService) SpringUtil.getBean("PackageServiceImpl");
@@ -19,16 +20,16 @@ public class PackageAddController extends PackageController {
     @Override
     protected void initView() {
         sp_goods.setContent(pkgGoodsTable);
-        cb_pkgType.setValue("²úÆ·Àà");
+        cb_pkgType.setValue("ï¿½ï¿½Æ·ï¿½ï¿½");
     }
 
     /**
-     * È¡Ïûµ±Ç°ÌîĞ´µÄĞÅÏ¢
+     * å–æ¶ˆæ·»åŠ 
      */
     @FXML
     private void cancelInfo() {
 
-        if (chc_isClose.isSelected()) { // Èç¹ûÑ¡ÔñÁËÌá½»ºó¹Ø±Õ£¬Ôò¹Ø±Õµ±Ç°tab
+        if (chc_isClose.isSelected()) { // ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½á½»ï¿½ï¿½Ø±Õ£ï¿½ï¿½ï¿½Ø±Õµï¿½Ç°tab
             TabPane tabPane = parentTab.getTabPane();
             tabPane.getTabs().remove(parentTab);
         }
@@ -44,15 +45,15 @@ public class PackageAddController extends PackageController {
 
 
     /**
-     * Ìá½»ĞÅÏ¢
+     * ï¿½á½»ï¿½ï¿½Ï¢
      */
     @FXML
     private void commitIfo() {
 
-        if (hasEmpty())  //¼ì²éÊÇ·ñÓĞÎ´ÌîĞ´µÄ±ØÌîÏîÄ¿
+        if (hasEmpty())  //ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Î´ï¿½ï¿½Ğ´ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
             return;
 
-        //Ì×²ÍĞÅÏ¢
+        //ï¿½×²ï¿½ï¿½ï¿½Ï¢
         PackageDto packageBean = new PackageDto();
         packageBean.setId(tf_id.getText());
         packageBean.setName(tf_name.getText());
@@ -64,15 +65,15 @@ public class PackageAddController extends PackageController {
         }
         packageBean.setOther(tf_other.getText());
 
-        //Ì×²ÍÄÚÈİĞÅÏ¢
-        ArrayList<PackageContentDto> packageContents = pkgGoodsTable.getAllBeans();
+        //ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+        List<PackageContentDto> packageContents = pkgGoodsTable.getAllBeans();
         for (PackageContentDto p : packageContents) {
             p.setPkgId(packageBean.getId());
         }
-        //²åÈëÌ×²ÍĞÅÏ¢µ½Êı¾İ¿â
+        //ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½İ¿ï¿½
         pkgService.insert(packageBean, packageContents);
 
-        if (chc_isClose.isSelected()) { // Èç¹ûÑ¡ÔñÁËÌá½»ºó¹Ø±Õ£¬Ôò¹Ø±Õµ±Ç°tab
+        if (chc_isClose.isSelected()) { // ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½á½»ï¿½ï¿½Ø±Õ£ï¿½ï¿½ï¿½Ø±Õµï¿½Ç°tab
             TabPane tabPane = parentTab.getTabPane();
             tabPane.getTabs().remove(parentTab);
         }
@@ -80,7 +81,7 @@ public class PackageAddController extends PackageController {
 
 
     /**
-     * ´«µİµ±Ç°tabµÄÒıÓÃ
+     * ï¿½ï¿½ï¿½İµï¿½Ç°tabï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public void setPane(Tab tab) {
         this.parentTab = tab;

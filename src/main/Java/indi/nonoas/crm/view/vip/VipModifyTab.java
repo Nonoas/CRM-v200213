@@ -1,6 +1,6 @@
 package indi.nonoas.crm.view.vip;
 
-import indi.nonoas.crm.pojo.dto.VipInfo;
+import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.controller.vip.VipModifyController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
@@ -13,15 +13,15 @@ import java.net.URL;
 
 public class VipModifyTab extends Tab {
 
-    private final VipInfo bean;
+    private final VipInfoDto bean;
     private VipModifyController controller;
     private Tab preTab;
 
-    public VipModifyTab(VipInfo bean) {
-        this("修改会员信息", bean);
+    public VipModifyTab(VipInfoDto bean) {
+        this("锟睫改伙拷员锟斤拷息", bean);
     }
 
-    public VipModifyTab(String str, VipInfo bean) {
+    public VipModifyTab(String str, VipInfoDto bean) {
         super(str);
         this.bean = bean;
         initView();
@@ -53,7 +53,7 @@ public class VipModifyTab extends Tab {
     }
 
     /**
-     * 关闭当前Tab，如果得到上一个tab的引用，则关闭之后跳转到上一个Tab
+     * 锟截闭碉拷前Tab锟斤拷锟斤拷锟斤拷玫锟斤拷锟揭伙拷锟絫ab锟斤拷锟斤拷锟矫ｏ拷锟斤拷乇锟街拷锟斤拷锟阶拷锟斤拷锟揭伙拷锟絋ab
      */
     public void close() {
         TabPane tabPane = getTabPane();
@@ -63,14 +63,14 @@ public class VipModifyTab extends Tab {
         }
     }
 
-    public void setBean(VipInfo vipBean) {
+    public void setBean(VipInfoDto vipBean) {
         controller.setBean(vipBean);
     }
 
     /**
-     * 设置前一个Tab
+     * 锟斤拷锟斤拷前一锟斤拷Tab
      *
-     * @param preTab 上一个跳转至当前Tab的Tab
+     * @param preTab 锟斤拷一锟斤拷锟斤拷转锟斤拷锟斤拷前Tab锟斤拷Tab
      */
     public void setPreTab(Tab preTab) {
         this.preTab = preTab;

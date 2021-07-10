@@ -12,7 +12,7 @@ import javafx.scene.control.TableView;
 import java.util.List;
 
 /**
- * ÓÃ»§¿â´æÉÌÆ·Ïû·ÑÃ÷Ï¸±í
+ * ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½
  *
  * @author : Nonoas
  * @time : 2020-09-03 17:06
@@ -23,12 +23,12 @@ public class UsrGdsOdrTable extends TableView<UsrGdsOdrRecordVO> {
 
     private final ObservableList<UsrGdsOdrRecordVO> items = FXCollections.observableArrayList();
 
-    private final TableColumn<UsrGdsOdrRecordVO, String> orderDate = new TableColumn<>("¶©µ¥ÈÕÆÚ");
-    private final TableColumn<UsrGdsOdrRecordVO, String> userId = new TableColumn<>("»áÔ±¿¨ºÅ");
-    private final TableColumn<UsrGdsOdrRecordVO, String> userName = new TableColumn<>("»áÔ±ÐÕÃû");
-    private final TableColumn<UsrGdsOdrRecordVO, String> goods = new TableColumn<>("¶©µ¥ÄÚÈÝ");
-    private final TableColumn<UsrGdsOdrRecordVO, Number> amount = new TableColumn<>("ÊýÁ¿");
-    private final TableColumn<UsrGdsOdrRecordVO, String> transactor = new TableColumn<>("ÊÜÀíÈË");
+    private final TableColumn<UsrGdsOdrRecordVO, String> orderDate = new TableColumn<>("è¿›ä»·");
+    private final TableColumn<UsrGdsOdrRecordVO, String> userId = new TableColumn<>("ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½");
+    private final TableColumn<UsrGdsOdrRecordVO, String> userName = new TableColumn<>("ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½");
+    private final TableColumn<UsrGdsOdrRecordVO, String> goods = new TableColumn<>("è¿›ä»·");
+    private final TableColumn<UsrGdsOdrRecordVO, Number> amount = new TableColumn<>("ï¿½ï¿½ï¿½ï¿½");
+    private final TableColumn<UsrGdsOdrRecordVO, String> transactor = new TableColumn<>("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 
 
     public UsrGdsOdrTable() {

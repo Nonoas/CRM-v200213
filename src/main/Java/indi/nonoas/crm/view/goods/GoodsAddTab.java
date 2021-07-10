@@ -12,7 +12,7 @@ import javafx.scene.layout.Pane;
 public class GoodsAddTab extends Tab {
 	
 	public GoodsAddTab() {
-		this("Ìí¼ÓÉÌÆ·");
+		this("å•†å“æ·»åŠ ");
 	}
 
 	private GoodsAddTab(String str) {

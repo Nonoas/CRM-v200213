@@ -13,7 +13,7 @@ public class OrderDetailDao extends SqliteDao<OrderDetailBean> {
     private static final String SELECT_BY_ORDER = "select * from order_details where order_id=#{order_id}";
 
     /**
-     * µ¥Àý
+     * ï¿½ï¿½ï¿½ï¿½
      */
     private static volatile OrderDetailDao INSTANCE;
 
@@ -25,9 +25,9 @@ public class OrderDetailDao extends SqliteDao<OrderDetailBean> {
     }
 
     /**
-     * »ñÈ¡µ¥ÀýÊµÀý
+     * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
      *
-     * @return µ¥Àý
+     * @return ï¿½ï¿½ï¿½ï¿½
      */
     public static OrderDetailDao getInstance() {
         if (INSTANCE == null) {

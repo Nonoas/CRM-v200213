@@ -57,11 +57,11 @@ public class GoodsAddController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // ÉèÖÃ³õÊ¼Í¼Æ¬
+        // ï¿½ï¿½ï¿½Ã³ï¿½Ê¼Í¼Æ¬
         img_photo.setImage(new Image(ImageSrc.PHOTO_PATH));
-        //³õÊ¼»¯CombBox
-        cbb_type.getItems().addAll("²úÆ·Àà", "·şÎñÀà");
-        cbb_type.setValue("²úÆ·Àà");
+        //ï¿½ï¿½Ê¼ï¿½ï¿½CombBox
+        cbb_type.getItems().addAll("ï¿½ï¿½Æ·ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+        cbb_type.setValue("ï¿½ï¿½Æ·ï¿½ï¿½");
     }
 
     @FXML
@@ -71,7 +71,7 @@ public class GoodsAddController implements Initializable {
 
     @FXML
     private void cancelInfo() {
-        if (chc_isClose.isSelected()) { // Èç¹ûÑ¡ÔñÁËÌá½»ºó¹Ø±Õ£¬Ôò¹Ø±Õµ±Ç°tab
+        if (chc_isClose.isSelected()) { // ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½á½»ï¿½ï¿½Ø±Õ£ï¿½ï¿½ï¿½Ø±Õµï¿½Ç°tab
             TabPane tabPane = parentTab.getTabPane();
             tabPane.getTabs().remove(parentTab);
             return;
@@ -95,61 +95,61 @@ public class GoodsAddController implements Initializable {
         bean.setId(tf_id.getText().trim());
         bean.setName(tf_name.getText().trim());
 
-        String sp = tf_sellPrice.getText().trim();    //Ô¤ÊÛµ¥¼Û
+        String sp = tf_sellPrice.getText().trim();    //å•ä»·
         bean.setSellPrice(Double.parseDouble(sp));
 
-        String pp = tf_puchasPrice.getText().trim();    //½ø»õµ¥¼Û
+        String pp = tf_puchasPrice.getText().trim();    //è¿›ä»·
         double pur_price = pp.equals("") ? 0 : Double.parseDouble(pp);
         bean.setPurchasePrice(pur_price);
 
-        String quan = tf_quantity.getText().trim();    //³õÊ¼¿â´æ
+        String quan = tf_quantity.getText().trim();    //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½
         double quantity = quan.equals("") ? 0 : Double.parseDouble(quan);
         bean.setQuantity(quantity);
 
-        String md = tf_minDiscount.getText().trim();    //×îĞ¡ÕÛ¿Û
+        String md = tf_minDiscount.getText().trim();    //ï¿½ï¿½Ğ¡ï¿½Û¿ï¿½
         double min_dis = md.equals("") ? 0 : Double.parseDouble(md);
         bean.setMinDiscount(min_dis);
 
-        String de = tf_commission.getText().trim();    //Ìá³É½ğ¶î
+        String de = tf_commission.getText().trim();    //ï¿½ï¿½É½ï¿½ï¿½
         double comison = de.equals("") ? 0 : Double.parseDouble(de);
         bean.setDeduction(comison);
 
-        String deRate = tf_commissionRate.getText().trim();    //Ìá³É±ÈÀı
+        String deRate = tf_commissionRate.getText().trim();    //ï¿½ï¿½É±ï¿½ï¿½ï¿½
         double com_rate = deRate.equals("") ? 0 : Double.parseDouble(deRate);
         bean.setDeductionRate(com_rate);
 
-        bean.setBaseUnit(tf_unit.getText().trim());    //¼ÆÁ¿µ¥Î»
+        bean.setBaseUnit(tf_unit.getText().trim());    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»
 
         bean.setType(cbb_type.getValue());
 
 //		bean.setPhoto(photo);
         goodsService.insertInfo(bean);
 
-        if (chc_isClose.isSelected()) { // Èç¹ûÑ¡ÔñÁËÌá½»ºó¹Ø±Õ£¬Ôò¹Ø±Õµ±Ç°tab
+        if (chc_isClose.isSelected()) { // ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½á½»ï¿½ï¿½Ø±Õ£ï¿½ï¿½ï¿½Ø±Õµï¿½Ç°tab
             TabPane tabPane = parentTab.getTabPane();
             tabPane.getTabs().remove(parentTab);
         }
     }
 
     /**
-     * ÅĞ¶ÏÊÇ·ñ¿ÉÒÔÌá½»ĞÅÏ¢
+     * ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½á½»ï¿½ï¿½Ï¢
      *
-     * @return ¿ÉÒÔÎªtrue£¬²»¿ÉÓÃÎªfalse
+     * @return ï¿½ï¿½ï¿½ï¿½Îªtrueè¿›ä»·Îªfalse
      */
     private boolean isCommitable() {
-        String id = tf_id.getText().trim(); // ±àºÅ
-        String name = tf_name.getText().trim(); // Ãû³Æ
-        String sellPrice = tf_sellPrice.getText().trim(); // Ô¤ÊÛµ¥¼Û
-        String level = cbb_type.getValue(); // ÉÌÆ·ÀàĞÍ
+        String id = tf_id.getText().trim(); // ï¿½ï¿½ï¿½
+        String name = tf_name.getText().trim(); // ï¿½ï¿½ï¿½ï¿½
+        String sellPrice = tf_sellPrice.getText().trim(); // å•ä»·
+        String level = cbb_type.getValue(); // ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
         if (id.equals("") || name.equals("") || sellPrice.equals("") || level.equals("")) {
-            new MyAlert(AlertType.WARNING, "ÉÌÆ·±àºÅ¡¢ÉÌÆ·Ãû³Æ¡¢Ô¤ÊÛµ¥¼Û¡¢ËùÊôÀà±ğ²»ÄÜÎª¿Õ£¡").show();
+            new MyAlert(AlertType.WARNING, "ï¿½ï¿½Æ·ï¿½ï¿½Å¡ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½Æ¡ï¿½Ô¤ï¿½Ûµï¿½ï¿½Û¡è¿›ä»·ï¿½ï¿½Îªï¿½Õ£ï¿½").show();
             return false;
         }
         return true;
     }
 
     /**
-     * Í¨¹ıÍâ½ç´«µİµ±Ç°µÄtabÒıÓÃ
+     * Í¨ï¿½ï¿½ï¿½ï¿½ç´«ï¿½İµï¿½Ç°ï¿½ï¿½tabï¿½ï¿½ï¿½ï¿½
      */
     public void setPane(Tab tab) {
         this.parentTab = tab;

@@ -15,24 +15,23 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 public class PackageContentTable extends TableView<PackageContentDto> {
-    /**
-     * Êı¾İÔ´
-     */
+
     private final ObservableList<PackageContentDto> obList = FXCollections.observableArrayList();
+
     /**
-     * µ±Ç°Ñ¡ÖĞÊı¾İ
+     * é€‰æ‹©çš„æ•°æ®
      */
     private PackageContentDto selectedBean;
 
-    private final TableColumn<PackageContentDto, String> item_id = new TableColumn<>("ÉÌÆ·±àºÅ");
+    private final TableColumn<PackageContentDto, String> item_id = new TableColumn<>("å¥—é¤ç¼–å·");
 
-    private final TableColumn<PackageContentDto, String> item_name = new TableColumn<>("ÉÌÆ·Ãû³Æ");
+    private final TableColumn<PackageContentDto, String> item_name = new TableColumn<>("å¥—é¤åç§°");
 
-    private final TableColumn<PackageContentDto, String> item_money_cost = new TableColumn<>("ÉÌÆ·µ¥¼Û");
+    private final TableColumn<PackageContentDto, String> item_money_cost = new TableColumn<>("å•ä»·");
 
-    private final TableColumn<PackageContentDto, Number> item_amount = new TableColumn<>("ÊıÁ¿");
+    private final TableColumn<PackageContentDto, Number> item_amount = new TableColumn<>("æ•°é‡");
 
-    private final TableColumn<PackageContentDto, String> item_total = new TableColumn<>("Ğ¡¼Æ");
+    private final TableColumn<PackageContentDto, String> item_total = new TableColumn<>("å°è®¡");
 
     private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
     private final PackageService pkgService = (PackageService) SpringUtil.getBean("PackageServiceImpl");
@@ -48,7 +47,7 @@ public class PackageContentTable extends TableView<PackageContentDto> {
 
     private void initColumns() {
 
-        setTableMenuButtonVisible(true); // ÏÔÊ¾±í¸ñ²Ëµ¥°´Å¥
+        setTableMenuButtonVisible(true);
 
         item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getGoodsId()));
         item_name.setCellValueFactory(param -> {
@@ -60,7 +59,7 @@ public class PackageContentTable extends TableView<PackageContentDto> {
             String goodsID = param.getValue().getGoodsId();
             GoodsDto goodsBean = goodsService.selectById(goodsID);
             double numMoney = goodsBean.getSellPrice();
-            String show = String.format("£¤%.2f", numMoney);
+            String show = String.format("ï¿¥%.2f", numMoney);
             return new SimpleStringProperty(show);
         });
 
@@ -71,7 +70,7 @@ public class PackageContentTable extends TableView<PackageContentDto> {
             GoodsDto goodsBean = goodsService.selectById(goodsID);
             double numMoney = goodsBean.getSellPrice();
             double amount = param.getValue().getGoodsAmount();
-            String show = String.format("£¤%.2f", numMoney * amount);
+            String show = String.format("ï¿¥%.2f", numMoney * amount);
             return new SimpleStringProperty(show);
         });
 
@@ -83,44 +82,45 @@ public class PackageContentTable extends TableView<PackageContentDto> {
     }
 
     /**
-     * Õ¹Ê¾ËùÓĞÏîÄ¿ĞÅÏ¢
+     * æ˜¾ç¤ºå¥—é¤ä¸‹æ‰€æœ‰å•†å“
+     * @param id å¥—é¤id
      */
     public void showAllInfos(String id) {
-        clearData(); // Çå¿ÕËùÓĞÊı¾İ
+        clearData();
         List<PackageContentDto> listVipBeans = pkgService.listPkgContentByPkgId(id);
         if (listVipBeans != null)
             obList.addAll(listVipBeans);
     }
 
     /**
-     * Çå¿ÕÊı¾İÔ´
+     * æ¸…ç©º
      */
     public void clearData() {
         obList.clear();
     }
 
     /**
-     * Ìí¼ÓÊı¾İ
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param bean ĞèÒªÌí¼ÓµÄÊı¾İ
+     * @param bean ï¿½ï¿½Òªï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public void addBean(PackageContentDto bean) {
         obList.add(bean);
     }
 
     /**
-     * »ñÈ¡Ñ¡ÖĞµÄÊı¾İ
+     * ï¿½ï¿½È¡Ñ¡ï¿½Ğµï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return Ñ¡ÖĞµÄPackageContentBean
+     * @return Ñ¡ï¿½Ğµï¿½PackageContentBean
      */
     public PackageContentDto getSelectedData() {
         return this.selectedBean;
     }
 
     /**
-     * ÒÆ³ıÊı¾İ
+     * ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param bean ĞèÒªÒÆ³ıµÄPackageContentBean
+     * @param bean ï¿½ï¿½Òªï¿½Æ³ï¿½ï¿½ï¿½PackageContentBean
      */
     public void removeData(PackageContentDto bean) {
         this.obList.remove(bean);

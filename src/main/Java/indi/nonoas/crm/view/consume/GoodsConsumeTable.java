@@ -1,5 +1,6 @@
 package indi.nonoas.crm.view.consume;
 
+import indi.nonoas.crm.pojo.PackageContentDto;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.utils.SpringUtil;
@@ -7,7 +8,7 @@ import indi.nonoas.crm.component.table.GoodsEditTable;
 import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -26,10 +27,10 @@ public class GoodsConsumeTable extends GoodsEditTable<GoodsDto> {
     }
 
     @Override
-    public ArrayList<GoodsDto> getAllBeans() {
+    public List<GoodsDto> getAllBeans() {
         if (obList == null)
             return null;
-        return (ArrayList<GoodsDto>) obList.stream()
+        return obList.stream()
                 .map(this::dataToBean)
                 .collect(Collectors.toList());
 
@@ -66,9 +67,9 @@ public class GoodsConsumeTable extends GoodsEditTable<GoodsDto> {
     }
 
     /**
-     * »ñÈ¡±í¸ñÄÚÉÌÆ·µÄ×Ü¼Û¸ñ
+     * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½Ü¼Û¸ï¿½
      *
-     * @return ±í¸ñÄÚÉÌÆ·×Ü¼Û
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Ü¼ï¿½
      */
     public double getSumPrice() {
         double price = 0;

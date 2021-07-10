@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * VIP¹ÜÀí½çÃæ
+ * VIPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  *
  * @author Nonoas
  */
@@ -19,7 +19,7 @@ public class VipManageTab extends Tab {
     private static volatile VipManageTab instance;
 
     private VipManageTab() {
-        this("»áÔ±¹ÜÀí");
+        this("ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½");
     }
 
     private VipManageTab(String str) {

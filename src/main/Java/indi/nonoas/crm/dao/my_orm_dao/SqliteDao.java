@@ -7,9 +7,9 @@ import indi.nonoas.crm.utils.MyDataSource;
 import per.nonoas.orm.MyOrmUtil;
 
 /**
- * Dao²ã¸¸Àà
+ * Daoï¿½ã¸¸ï¿½ï¿½
  *
- * @param <T> BeanÀà·ºÐÍ
+ * @param <T> Beanï¿½à·ºï¿½ï¿½
  * @author Nonoas
  */
 @Deprecated

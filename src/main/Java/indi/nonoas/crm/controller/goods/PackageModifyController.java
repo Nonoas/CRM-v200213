@@ -9,6 +9,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PackageModifyController extends PackageController {
 
@@ -17,20 +18,17 @@ public class PackageModifyController extends PackageController {
     private final PackageService pkgService = (PackageService) SpringUtil.getBean("PackageServiceImpl");
 
     /**
-     * ½çÃæ³õÊ¼»¯
+     * åˆå§‹åŒ–è§†å›¾
      */
     protected void initView() {
         sp_goods.setContent(pkgGoodsTable);
         tf_id.setEditable(false);
     }
 
-    /**
-     * È¡Ïûµ±Ç°ÌîĞ´µÄĞÅÏ¢
-     */
     @FXML
     private void cancelInfo() {
 
-        if (chc_isClose.isSelected()) { // Èç¹ûÑ¡ÔñÁËÌá½»ºó¹Ø±Õ£¬Ôò¹Ø±Õµ±Ç°tab
+        if (chc_isClose.isSelected()) {
             TabPane tabPane = parentTab.getTabPane();
             tabPane.getTabs().remove(parentTab);
         }
@@ -46,38 +44,34 @@ public class PackageModifyController extends PackageController {
 
 
     /**
-     * Ìá½»ĞÅÏ¢
+     * æäº¤
      */
     @FXML
     private void commitIfo() {
-        // ·Ç¿ÕÅĞ¶Ï
         if (hasEmpty()) {
             return;
         }
-        // Ì×²ÍĞÅÏ¢
+        // ï¿½×²ï¿½ï¿½ï¿½Ï¢
         PackageDto packageBean = getPackageBean();
-        // Ì×²ÍÏÂÉÌÆ·ĞÅÏ¢
-        ArrayList<PackageContentDto> pkgContents = getPackageContentBeans(packageBean.getId());
+        // ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
+        List<PackageContentDto> pkgContents = getPackageContentBeans(packageBean.getId());
 
         pkgService.update(packageBean, pkgContents);
-        // Èç¹ûÑ¡ÔñÁËÌá½»ºó¹Ø±Õ£¬Ôò¹Ø±Õµ±Ç°tab
+        // ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½á½»ï¿½ï¿½Ø±Õ£ï¿½ï¿½ï¿½Ø±Õµï¿½Ç°tab
         if (chc_isClose.isSelected()) {
             TabPane tabPane = parentTab.getTabPane();
             tabPane.getTabs().remove(parentTab);
         }
     }
 
-    /**
-     * ´«µİµ±Ç°tabµÄÒıÓÃ
-     */
     public void setPane(Tab tab) {
         this.parentTab = tab;
     }
 
     /**
-     * Í¨¹ı½çÃæÄÚµÄĞÅÏ¢Éú³ÉÉÌÆ·ĞÅÏ¢¶ÔÏó
+     * Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
      *
-     * @return PackageBeanÊµÀı
+     * @return PackageBeanÊµï¿½ï¿½
      */
     private PackageDto getPackageBean() {
         PackageDto packageBean = new PackageDto();
@@ -95,12 +89,12 @@ public class PackageModifyController extends PackageController {
     }
 
     /**
-     * »ñÈ¡Ì×²ÍÄÚÉÌÆ·ĞÅÏ¢ÁĞ±í
+     * ï¿½ï¿½È¡ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½Ï¢ï¿½Ğ±ï¿½
      *
-     * @return PackageContentBean¼¯ºÏ
+     * @return PackageContentBeanï¿½ï¿½ï¿½ï¿½
      */
-    private ArrayList<PackageContentDto> getPackageContentBeans(String PkgID) {
-        ArrayList<PackageContentDto> packageContentDtos = pkgGoodsTable.getAllBeans();
+    private List<PackageContentDto> getPackageContentBeans(String PkgID) {
+        List<PackageContentDto> packageContentDtos = pkgGoodsTable.getAllBeans();
         for (PackageContentDto p : packageContentDtos) {
             p.setPkgId(PkgID);
         }
@@ -108,9 +102,9 @@ public class PackageModifyController extends PackageController {
     }
 
     /**
-     * ÉèÖÃĞèÒªĞŞ¸ÄµÄÌ×²ÍĞÅÏ¢£¬²¢ÌîÈë¶ÔÓ¦ÎÄ±¾¿ò
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½Ş¸Äµï¿½ï¿½×²ï¿½ï¿½ï¿½Ï¢è¿›ä»·ï¿½Ó¦ï¿½Ä±ï¿½ï¿½ï¿½
      *
-     * @param packageBean ĞèÒªĞŞ¸ÄµÄPackageBeanÊµÀı
+     * @param packageBean ï¿½ï¿½Òªï¿½Ş¸Äµï¿½PackageBeanÊµï¿½ï¿½
      */
     public void setBean(PackageDto packageBean) {
         String id = packageBean.getId();

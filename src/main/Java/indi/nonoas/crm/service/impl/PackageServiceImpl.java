@@ -61,10 +61,10 @@ public class PackageServiceImpl implements PackageService {
     }
 
     /**
-     * Í¨¹ýÌ×²Íid²éÑ¯Ì×²ÍÄÚÈÝ
+     * Í¨ï¿½ï¿½ï¿½×²ï¿½idï¿½ï¿½Ñ¯ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param pkgId Ì×²Íid
-     * @return Ì×²ÍÄÚÈÝ£¬¿É¿Õ
+     * @param pkgId ï¿½×²ï¿½id
+     * @return ï¿½×²ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½É¿ï¿½
      */
     @Override
     public List<PackageContentDto> listPkgContentByPkgId(String pkgId) {

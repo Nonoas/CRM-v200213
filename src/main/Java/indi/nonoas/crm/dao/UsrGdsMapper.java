@@ -13,27 +13,27 @@ import java.util.List;
 @Repository
 public interface UsrGdsMapper {
     /**
-     * ¸ù¾ÝÓÃ»§ID²éÑ¯ÓÃ»§ÉÌÆ·Óà¶î
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½IDï¿½ï¿½Ñ¯ï¿½Ã»ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½
      *
-     * @param userID ÓÃ»§ID
-     * @return ÓÃ»§ÉÌÆ·ÁÐ±í
+     * @param userID ï¿½Ã»ï¿½ID
+     * @return ï¿½Ã»ï¿½ï¿½ï¿½Æ·ï¿½Ð±ï¿½
      */
     List<UserGoods> selectByUser(String userID);
 
     /**
-     * ¸ù¾ÝÓÃ»§IDºÍÉÌÆ·ID²éÑ¯
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½IDï¿½ï¿½ï¿½ï¿½Æ·IDï¿½ï¿½Ñ¯
      *
-     * @param userId  ÓÃ»§ID
-     * @param goodsId ÉÌÆ·ID
-     * @return ÓÃ»§-ÉÌÆ·BeanÀà
+     * @param userId  ï¿½Ã»ï¿½ID
+     * @param goodsId ï¿½ï¿½Æ·ID
+     * @return ï¿½Ã»ï¿½-ï¿½ï¿½Æ·Beanï¿½ï¿½
      */
     UserGoods selectByUserGoods(@Param("userId") String userId, @Param("goodsId") String goodsId);
 
     /**
-     * ÅúÁ¿²åÈëÌæ»»Ä³Ò»ÁÐ
+     * è¿›ä»·ï¿½æ»»Ä³Ò»ï¿½ï¿½
      *
-     * @param userGoodsList ÓÃ»§-ÉÌÆ·¼¯ºÏ
-     * @return ³É¹¦£ºtrue
+     * @param userGoodsList ï¿½Ã»ï¿½-ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
+     * @return ï¿½É¹ï¿½ï¿½ï¿½true
      */
     boolean replaceUserGoods(@Param("userGoodsList") List<UserGoods> userGoodsList);
 

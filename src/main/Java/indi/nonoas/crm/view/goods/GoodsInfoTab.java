@@ -18,7 +18,7 @@ public class GoodsInfoTab extends Tab {
     private static volatile GoodsInfoTab instance;
 
     private GoodsInfoTab() {
-        this("商品信息");
+        this("鍟嗗搧淇℃伅");
     }
 
     private GoodsInfoTab(String str) {

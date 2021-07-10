@@ -1,6 +1,6 @@
 package indi.nonoas.crm.service.impl;
 
-import indi.nonoas.crm.pojo.dto.VipInfo;
+import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.config.UserConfig;
 import indi.nonoas.crm.dao.VipMapper;
 import indi.nonoas.crm.service.VipService;
@@ -21,9 +21,9 @@ public class VipServiceImpl implements VipService {
     private VipMapper vipMapper;
 
     /**
-     * ´ÓÅäÖÃÎÄ¼þÈ¡³ö×îÐÂ»áÔ±¿¨ºÅµÄÏÂÒ»Î»µÄ36½øÖÆ±íÊ¾
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Â»ï¿½Ô±ï¿½ï¿½ï¿½Åµï¿½ï¿½ï¿½Ò»Î»ï¿½ï¿½36ï¿½ï¿½ï¿½Æ±ï¿½Ê¾
      *
-     * @return 36½øÖÆ»áÔ±¿¨ºÅ
+     * @return 36ï¿½ï¿½ï¿½Æ»ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
      */
     @Override
     public String generateVipID() {
@@ -40,27 +40,27 @@ public class VipServiceImpl implements VipService {
     }
 
     @Override
-    public VipInfo getInfoByIdOrName(String id, String name) {
+    public VipInfoDto getInfoByIdOrName(String id, String name) {
         return vipMapper.getInfoByIdOrName(id, name);
     }
 
     @Override
-    public ArrayList<VipInfo> selectAllUser() {
+    public ArrayList<VipInfoDto> selectAllUser() {
         return vipMapper.selectAllUser();
     }
 
     @Override
-    public ArrayList<VipInfo> selectByFiltrate(String id, String name, String card_level) {
+    public ArrayList<VipInfoDto> selectByFiltrate(String id, String name, String card_level) {
         return vipMapper.selectByFiltrate(id, name, card_level);
     }
 
     @Override
-    public List<VipInfo> selectByDateFiltrate(String id, String name, String level, String dateFrom, String dateTo) {
+    public List<VipInfoDto> selectByDateFiltrate(String id, String name, String level, String dateFrom, String dateTo) {
         return vipMapper.selectByDateFiltrate(id, name, level, dateFrom, dateTo);
     }
 
     @Override
-    public void insertInfo(VipInfo vipBean) {
+    public void insertInfo(VipInfoDto vipBean) {
         vipMapper.insertInfo(vipBean);
     }
 
@@ -70,7 +70,7 @@ public class VipServiceImpl implements VipService {
     }
 
     @Override
-    public void updateInfo(VipInfo vipBean) {
+    public void updateInfo(VipInfoDto vipBean) {
         vipMapper.updateInfo(vipBean);
     }
 

@@ -5,9 +5,9 @@
 
 <mapper namespace="indi.nonoas.crm.dao.VipMapper">
 
-    <resultMap id="UserBean" type="indi.nonoas.crm.pojo.dto.VipInfo"/>
+    <resultMap id="UserBean" type="indi.nonoas.crm.pojo.dto.VipInfoDto"/>
 
-    <parameterMap id="UserBean" type="indi.nonoas.crm.pojo.dto.VipInfo"/>
+    <parameterMap id="UserBean" type="indi.nonoas.crm.pojo.dto.VipInfoDto"/>
 
     <select id="getUserById" resultMap="UserBean">
         select *
@@ -30,16 +30,16 @@
     <select id="selectByFiltrate" resultMap="UserBean">
         select *
         from user_info
-        where (id like '%' || #{id} || '%' or name like #{name})
-          and card_level like #{card_level} || '%'
+        where (ID like '%' || #{id} || '%' or NAME like #{name})
+          and CARD_LEVEL like #{card_level} || '%'
     </select>
 
     <select id="selectByDateFiltrate" resultMap="UserBean">
         select *
         from user_info
-        where (id like #{id} or name like #{name})
-          and card_level like #{card_level}
-          and admission_date between #{dateStart} and #{dateEnd}
+        where (ID like #{id} or NAME like #{name})
+          and CARD_LEVEL like #{card_level}
+          and ADMISSION_DATE between #{dateStart} and #{dateEnd}
     </select>
 
     <insert id="insertInfo" parameterMap="UserBean">

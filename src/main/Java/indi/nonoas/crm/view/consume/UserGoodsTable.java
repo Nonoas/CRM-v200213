@@ -2,7 +2,7 @@ package indi.nonoas.crm.view.consume;
 
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.UserGoods;
-import indi.nonoas.crm.pojo.dto.VipInfo;
+import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.pojo.vo.UserGoodsVO;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.service.UsrGdsService;
@@ -29,16 +29,16 @@ public class UserGoodsTable extends TableView<UserGoodsVO> {
     private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
     private final ObservableList<UserGoodsVO> obList = FXCollections.observableArrayList();
     private final ObservableList<TableColumn<UserGoodsVO, ?>> columns = getColumns();
-    private VipInfo vipBean;
+    private VipInfoDto vipBean;
     private final EventHandler eventHandler = new EventHandler();
     private UserGoods selectBean;
-    private final Label phd_noUser = new Label("ÉÐÎ´Ñ¡Ôñ»áÔ±");
-    private final Label phd_noData = new Label("¸ÃÓÃ»§Ã»ÓÐÈÎºÎÉÌÆ·");
+    private final Label phd_noUser = new Label("ï¿½ï¿½Î´Ñ¡ï¿½ï¿½ï¿½Ô±");
+    private final Label phd_noData = new Label("ï¿½ï¿½ï¿½Ã»ï¿½Ã»ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½Æ·");
 
-    private final TableColumn<UserGoodsVO, String> col_goodsID = new TableColumn<>("ÉÌÆ·±àºÅ");
-    private final TableColumn<UserGoodsVO, String> col_goodsName = new TableColumn<>("ÉÌÆ·Ãû³Æ");
-    private final TableColumn<UserGoodsVO, Number> col_amount = new TableColumn<>("Ê£ÓàÊýÁ¿");
-    private final TableColumn<UserGoodsVO, String> col_type = new TableColumn<>("ÉÌÆ·ÀàÐÍ");
+    private final TableColumn<UserGoodsVO, String> col_goodsID = new TableColumn<>("ï¿½ï¿½Æ·ï¿½ï¿½ï¿½");
+    private final TableColumn<UserGoodsVO, String> col_goodsName = new TableColumn<>("ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½");
+    private final TableColumn<UserGoodsVO, Number> col_amount = new TableColumn<>("Ê£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+    private final TableColumn<UserGoodsVO, String> col_type = new TableColumn<>("ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½");
 
 
     public UserGoodsTable() {
@@ -82,9 +82,9 @@ public class UserGoodsTable extends TableView<UserGoodsVO> {
     }
 
     /**
-     * ²éÑ¯ËùÓÐ ÓÃ»§-ÉÌÆ·
+     * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ ï¿½Ã»ï¿½-ï¿½ï¿½Æ·
      *
-     * @return ÓÃ»§-ÉÌÆ·ÁÐ±í,²éÑ¯Îª¿ÕÔòÎªnull
+     * @return ï¿½Ã»ï¿½-ï¿½ï¿½Æ·ï¿½Ð±ï¿½,ï¿½ï¿½Ñ¯Îªï¿½ï¿½ï¿½ï¿½Îªnull
      */
     private List<UserGoods> getUserGoods() {
         String userID = vipBean.getId();
@@ -92,9 +92,9 @@ public class UserGoodsTable extends TableView<UserGoodsVO> {
     }
 
     /**
-     * ½«bean×ªÎªVO
+     * ï¿½ï¿½bean×ªÎªVO
      *
-     * @param bean ½«bean×ªÎªVO
+     * @param bean ï¿½ï¿½bean×ªÎªVO
      * @return VO
      */
     private UserGoodsVO beanToVO(UserGoods bean) {
@@ -109,7 +109,7 @@ public class UserGoodsTable extends TableView<UserGoodsVO> {
     }
 
     /**
-     * ½«vo×ªÎªbean
+     * ï¿½ï¿½vo×ªÎªbean
      *
      * @param vo vo
      * @return bean
@@ -138,17 +138,17 @@ public class UserGoodsTable extends TableView<UserGoodsVO> {
     }
 
 
-    public void setVipBean(VipInfo vipBean) {
+    public void setVipBean(VipInfoDto vipBean) {
         this.vipBean = vipBean;
         setEmptyText();
         showAllData();
     }
 
     /**
-     * ÉèÖÃ±í¸ñÎª¿ÕÊ±µÄÄÚÈÝ
+     * ï¿½ï¿½ï¿½Ã±ï¿½ï¿½Îªï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     private void setEmptyText() {
-        if (vipBean == VipInfo.SANKE)
+        if (vipBean == VipInfoDto.SANKE)
             setPlaceholder(phd_noUser);
         else
             setPlaceholder(phd_noData);

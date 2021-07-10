@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- * сц╩╖илф╥сЮ╤Нйсм╪╤тоС
+ * О©╫ц╩О©╫О©╫О©╫ф╥О©╫О©╫О©╫О©╫О©╫м╪О©╫О©╫О©╫О©╫
  *
  * @author : Nonoas
  * @time : 2020-08-20 10:49

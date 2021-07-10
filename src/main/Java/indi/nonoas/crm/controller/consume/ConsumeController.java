@@ -6,7 +6,7 @@ import indi.nonoas.crm.dao.my_orm_dao.UserGoodsDao;
 import indi.nonoas.crm.dao.my_orm_dao.UserGoodsOrderDao;
 import indi.nonoas.crm.pojo.*;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
-import indi.nonoas.crm.pojo.dto.VipInfo;
+import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.service.PackageService;
@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static indi.nonoas.crm.pojo.dto.VipInfo.SANKE;
+import static indi.nonoas.crm.pojo.dto.VipInfoDto.SANKE;
 
 public class ConsumeController implements Initializable {
 
@@ -49,9 +49,9 @@ public class ConsumeController implements Initializable {
 
 
     /**
-     * »áÔ±ĞÅÏ¢
+     * ä¼šå‘˜ä¿¡æ¯
      */
-    private VipInfo vipBean = VipInfo.SANKE;
+    private VipInfoDto vipBean = VipInfoDto.SANKE;
     @FXML
     private Label lb_cardState;
     @FXML
@@ -75,7 +75,7 @@ public class ConsumeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initView();
-        //ÉèÖÃ»Ø³µ²éÑ¯
+        //è®¾ç½®å›è½¦æŸ¥è¯¢
         tf_find.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode().equals(KeyCode.ENTER)) {
                 inquireVIP();
@@ -83,14 +83,14 @@ public class ConsumeController implements Initializable {
         });
     }
 
-    @FXML // Çå¿ÕÕ¹Ê¾µÄĞÅÏ¢
+    @FXML // æ¸…ç©ºå±•ç¤ºçš„ä¿¡æ¯
     private void clearInfo() {
         tf_find.setText("");
         vipBean = SANKE;
         showFindResult(vipBean);
     }
 
-    @FXML // ²éÕÒĞÅÏ¢
+    @FXML // æŸ¥æ‰¾ä¿¡æ¯
     private void inquireVIP() {
         String keyWord = tf_find.getText().trim();
         if ("".equals(keyWord)) {
@@ -100,25 +100,25 @@ public class ConsumeController implements Initializable {
         if (vipBean != null) {
             showFindResult(vipBean);
         } else {
-            new MyAlert(AlertType.INFORMATION, "Ã»ÓĞÕÒµ½Äú²éÑ¯µÄ»áÔ±£¡").show();
+            new MyAlert(AlertType.INFORMATION, "æ²¡æœ‰æ‰¾åˆ°æ‚¨æŸ¥è¯¢çš„ä¼šå‘˜ï¼").show();
         }
     }
 
     /**
-     * ÏÔÊ¾ËÑË÷½á¹û
+     * æ˜¾ç¤ºæœç´¢ç»“æœ
      *
-     * @param bean ËÑË÷µÄÓÃ»§ĞÅÏ¢
+     * @param bean æœç´¢çš„ç”¨æˆ·ä¿¡æ¯
      */
-    private void showFindResult(VipInfo bean) {
+    private void showFindResult(VipInfoDto bean) {
         if (bean == null) {
             return;
         }
-        lb_cardState.setText("¿ÉÓÃ");
+        lb_cardState.setText("å¯ç”¨");
         lb_id.setText(bean.getId());
         lb_integral.setText(String.valueOf(bean.getIntegral()));
         lb_cardLevel.setText(bean.getCardLevel());
         lb_name.setText(bean.getName());
-        lb_balance.setText(String.format("£¤%.2f", bean.getBalance()));
+        lb_balance.setText(String.format("ï¿¥%.2f", bean.getBalance()));
         if (bean == SANKE) {
             lb_name.setStyle("-fx-text-fill: #d9534f");
         } else {
@@ -133,19 +133,19 @@ public class ConsumeController implements Initializable {
     private void initView() {
         showFindResult(vipBean);
 
-        initGoodsTab();        //³õÊ¼»¯ÉÌÆ·Ïû·ÑÃæ°å
-        initPackageTab();       //³õÊ¼»¯Ì×²ÍÏû·ÑÃæ°å
-        initCountTab();         //³õÊ¼»¯¼Æ´ÎÏû·ÑÃæ°å
+        initGoodsTab();        //åˆå§‹åŒ–å•†å“æ¶ˆè´¹é¢æ¿
+        initPackageTab();       //åˆå§‹åŒ–å¥—é¤æ¶ˆè´¹é¢æ¿
+        initCountTab();         //åˆå§‹åŒ–è®¡æ¬¡æ¶ˆè´¹é¢æ¿
     }
 
-    @FXML // Ìí¼Ó»áÔ±ĞÅÏ¢
+    @FXML // æ·»åŠ ä¼šå‘˜ä¿¡æ¯
     private void addVip() {
         MainController.addTab(new VipAddTab());
     }
 
 
     //===========================================================================
-    //                             ÉÌÆ·Ïû·Ñ
+    //                             å•†å“æ¶ˆè´¹
     //===========================================================================
 
     private final GoodsConsumeTable gc_table = new GoodsConsumeTable();
@@ -172,7 +172,7 @@ public class ConsumeController implements Initializable {
         pt_borderPane.setCenter(gc_table);
         bp_goodsTable.setCenter(goodsSelectTable);
 
-        //ÉèÖÃ±í¸ñµÄ¼àÌıÊÂ¼ş
+        //è®¾ç½®è¡¨æ ¼çš„ç›‘å¬äº‹ä»¶
         gc_table.getEventHandler().addEvent(() -> {
             if ("".equals(shp_orderNum.getText())) {
                 shp_orderNum.setText(OrderServiceImpl.goodsOrderNum());
@@ -183,20 +183,20 @@ public class ConsumeController implements Initializable {
             }
             pt_order_price.setText(String.format("%.2f", gc_table.getSumPrice()));
 
-            //ÓÃ»§ÕÛ¿Û
+            //ç”¨æˆ·æŠ˜æ‰£
             double discount = vipBean.getDiscount();
             pt_order_dis_price.setText(String.format("%.2f", gc_table.getSumPrice() * discount));
-            //»ı·Ö»ñÈ¡
+            //ç§¯åˆ†è·å–
             shp_integral.setText("0");
-            //»ı·ÖÏûºÄ
+            //ç§¯åˆ†æ¶ˆè€—
             shp_integral_cost.setText("0");
 
 
         });
 
-        //¡°ÕÛºó¼Û->ÓÃ»§ID¡±¼àÌı
+        //â€œæŠ˜åä»·->ç”¨æˆ·IDâ€ç›‘å¬
         lb_id.textProperty().addListener((observable, oldValue, newValue) -> {
-            logger.debug("»áÔ±¿¨ºÅ£º" + newValue);
+            logger.debug("ä¼šå‘˜å¡å·ï¼š" + newValue);
             double discount = vipBean.getDiscount();
             pt_order_dis_price.setText(String.format("%.2f", gc_table.getSumPrice() * discount));
         });
@@ -219,7 +219,7 @@ public class ConsumeController implements Initializable {
         }
 
         if (gc_table.getItems().isEmpty()) {
-            new MyAlert(AlertType.INFORMATION, "¶©µ¥ÄÚÈİÎª¿Õ£¡£¡").show();
+            new MyAlert(AlertType.INFORMATION, "è®¢å•å†…å®¹ä¸ºç©ºï¼ï¼").show();
             return;
         }
 
@@ -227,7 +227,7 @@ public class ConsumeController implements Initializable {
         List<OrderDetailBean> orderDetails = generateGoodsOrderDetails();
         ConsumeDialog consumeDialog = new ConsumeDialog(vipBean, orderBean, orderDetails);
         consumeDialog.showAndWait();
-        //Èç¹û³É¹¦Ìá½»£¬ÔòÇå³ı¶©µ¥ĞÅÏ¢
+        //å¦‚æœæˆåŠŸæäº¤ï¼Œåˆ™æ¸…é™¤è®¢å•ä¿¡æ¯
         if (consumeDialog.hasSubmit()) {
             clearGoodsOrder();
             goodsSelectTable.showAllInfos();
@@ -235,9 +235,9 @@ public class ConsumeController implements Initializable {
     }
 
     /**
-     * ÅĞ¶ÏÊÇ·ñ³¬³ö¿â´æ
+     * åˆ¤æ–­æ˜¯å¦è¶…å‡ºåº“å­˜
      *
-     * @return ³¬³ö¿â´æ·µ»Øtrue
+     * @return è¶…å‡ºåº“å­˜è¿”å›true
      */
     private boolean isGoodsOrderOutOfStock() {
 
@@ -248,11 +248,11 @@ public class ConsumeController implements Initializable {
             GoodsDto goodsBean = goodsService.selectById(goodsID);
             int storeCount = (int) goodsBean.getQuantity();
 
-            // Èç¹ûÏû·ÑÊıÁ¿³¬³ö¿â´æ£¬ÌáÊ¾ÊıÁ¿²»×ã
+            // å¦‚æœæ¶ˆè´¹æ•°é‡è¶…å‡ºåº“å­˜ï¼Œæç¤ºæ•°é‡ä¸è¶³
             if (costCount > storeCount) {
                 MyAlert alert = new MyAlert(AlertType.WARNING,
-                        String.format("¡¶(%s)%s¡·¿â´æ²»×ã %d%s £¡", goodsID, data.getName(), costCount, goodsBean.getBaseUnit()));
-                alert.setHeaderText("¿â´æ²»×ã");
+                        String.format("ã€Š(%s)%sã€‹åº“å­˜ä¸è¶³ %d%s ï¼", goodsID, data.getName(), costCount, goodsBean.getBaseUnit()));
+                alert.setHeaderText("åº“å­˜ä¸è¶³");
                 alert.show();
                 return true;
             }
@@ -261,9 +261,9 @@ public class ConsumeController implements Initializable {
     }
 
     /**
-     * Éú³É¶©µ¥
+     * ç”Ÿæˆè®¢å•
      *
-     * @return ¶©µ¥ĞÅÏ¢
+     * @return è®¢å•ä¿¡æ¯
      */
     private OrderBean generateGoodsOrder() {
         OrderBean bean = new OrderBean();
@@ -277,9 +277,9 @@ public class ConsumeController implements Initializable {
     }
 
     /**
-     * Éú³É¶©µ¥ÏêÇé
+     * ç”Ÿæˆè®¢å•è¯¦æƒ…
      *
-     * @return ¶©µ¥ÏêÇé¼¯ºÏ
+     * @return è®¢å•è¯¦æƒ…é›†åˆ
      */
     private List<OrderDetailBean> generateGoodsOrderDetails() {
         List<OrderDetailBean> list = new ArrayList<>();
@@ -302,18 +302,18 @@ public class ConsumeController implements Initializable {
 
 
     //===========================================================================
-    //                            Ì×²ÍÏû·Ñ
+    //                            å¥—é¤æ¶ˆè´¹
     //===========================================================================
 
     /**
-     * Ì×²Íµ¥Ñ¡±í¸ñ
+     * å¥—é¤å•é€‰è¡¨æ ¼
      */
     private final PackageSingleSelectTable pkgSelectTable = new PackageSingleSelectTable();
 
     private final PackageService pkgService= (PackageService) SpringUtil.getBean("PackageServiceImpl");
 
     /**
-     * Ì×²ÍÏû·Ñ±í¸ñ
+     * å¥—é¤æ¶ˆè´¹è¡¨æ ¼
      */
     private final PackageConsumeTable pcTable = new PackageConsumeTable();
     @FXML
@@ -334,30 +334,30 @@ public class ConsumeController implements Initializable {
     private TextField tc_orderDate;
 
     /**
-     * ³õÊ¼»¯¡°Ì×²Í¶©µ¥¡±½çÃæ
+     * åˆå§‹åŒ–â€œå¥—é¤è®¢å•â€ç•Œé¢
      */
     private void initPackageTab() {
         bp_pkgTable.setCenter(pkgSelectTable);
         tc_borderPane.setCenter(pcTable);
-        //ÕÛºó¼Û
-        tc_order_dis_price.setText("Ì×²Í²»´òÕÛ");
+        //æŠ˜åä»·
+        tc_order_dis_price.setText("å¥—é¤ä¸æ‰“æŠ˜");
         tc_order_dis_price.setStyle("-fx-text-fill: #cf4813");
-        //ÉèÖÃ¼àÌı
+        //è®¾ç½®ç›‘å¬
         pcTable.getEventHandler().addEvent(() -> {
-            //ÉèÖÃ¶©µ¥ºÅ
+            //è®¾ç½®è®¢å•å·
             if ("".equals(tc_orderNum.getText())) {
                 tc_orderNum.setText(OrderServiceImpl.packageOrderNum());
             }
-            //ÉèÖÃ¶©µ¥ÈÕÆÚ
+            //è®¾ç½®è®¢å•æ—¥æœŸ
             if ("".equals(tc_orderDate.getText())) {
                 DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 tc_orderDate.setText(sdf.format(LocalDateTime.now()));
             }
-            //¶©µ¥½ğ¶î
+            //è®¢å•é‡‘é¢
             tc_order_price.setText(String.format("%.2f", pcTable.getSumPrice()));
-            //»ı·Ö»ñÈ¡
+            //ç§¯åˆ†è·å–
             tc_integral_get.setText("0");
-            //»ı·ÖÏûºÄ
+            //ç§¯åˆ†æ¶ˆè€—
             tc_integral_cost.setText("0");
         });
 
@@ -370,7 +370,7 @@ public class ConsumeController implements Initializable {
     }
 
     /**
-     * Çå¿ÕÌ×²Í¶©µ¥
+     * æ¸…ç©ºå¥—é¤è®¢å•
      */
     @FXML
     private void clearPackageOrder() {
@@ -383,23 +383,23 @@ public class ConsumeController implements Initializable {
 
     @FXML
     private void payPackageOrder() {
-        //ÅĞ¶ÏÊÇ·ñ³¬³ö¿â´æ
+        //åˆ¤æ–­æ˜¯å¦è¶…å‡ºåº“å­˜
         if (isPackageOrderOutOfStock()) {
             return;
         }
-        //ÅĞ¶Ï¶©µ¥ÊÇ·ñÎª¿Õ
+        //åˆ¤æ–­è®¢å•æ˜¯å¦ä¸ºç©º
         if (pcTable.getItems().size() == 0) {
-            new MyAlert(AlertType.INFORMATION, "¶©µ¥ÄÚÈİÎª¿Õ£¡£¡").show();
+            new MyAlert(AlertType.INFORMATION, "è®¢å•å†…å®¹ä¸ºç©ºï¼ï¼").show();
             return;
         }
-        //Éú³É¶©µ¥Êı¾İ
+        //ç”Ÿæˆè®¢å•æ•°æ®
         OrderBean orderBean = generatePackageOrder();
-        //Éú³É¶©µ¥ÏêÇéÊı¾İ
+        //ç”Ÿæˆè®¢å•è¯¦æƒ…æ•°æ®
         List<OrderDetailBean> orderDetails = generatePackageOrderDetails();
-        //µ¯³öÏû·Ñ´°¿Ú
+        //å¼¹å‡ºæ¶ˆè´¹çª—å£
         PackageConsumeDialog consumeDialog = new PackageConsumeDialog(vipBean, orderBean, orderDetails);
         consumeDialog.showAndWait();
-        //Èç¹û³É¹¦Ìá½»£¬ÔòÇå³ı¶©µ¥ĞÅÏ¢
+        //å¦‚æœæˆåŠŸæäº¤ï¼Œåˆ™æ¸…é™¤è®¢å•ä¿¡æ¯
         if (consumeDialog.hasSubmit()) {
             clearPackageOrder();
             pkgSelectTable.showAllInfos();
@@ -407,9 +407,9 @@ public class ConsumeController implements Initializable {
     }
 
     /**
-     * Éú³ÉÌ×²Í¶©µ¥
+     * ç”Ÿæˆå¥—é¤è®¢å•
      *
-     * @return Ì×²Í¶©µ¥
+     * @return å¥—é¤è®¢å•
      */
     private OrderBean generatePackageOrder() {
         OrderBean bean = new OrderBean();
@@ -423,9 +423,9 @@ public class ConsumeController implements Initializable {
     }
 
     /**
-     * Éú³É¶©µ¥ÏêÇé
+     * ç”Ÿæˆè®¢å•è¯¦æƒ…
      *
-     * @return ¶©µ¥ÏêÇé¼¯ºÏ
+     * @return è®¢å•è¯¦æƒ…é›†åˆ
      */
     private List<OrderDetailBean> generatePackageOrderDetails() {
         List<OrderDetailBean> list = new ArrayList<>();
@@ -442,35 +442,35 @@ public class ConsumeController implements Initializable {
     }
 
     /**
-     * ÅĞ¶ÏÌ×²Í¶©µ¥ÊÇ·ñÎª¿Õ
+     * åˆ¤æ–­å¥—é¤è®¢å•æ˜¯å¦ä¸ºç©º
      *
-     * @return ¿Õ£ºtrue
+     * @return ç©ºï¼štrue
      */
     private boolean isPackageOrderOutOfStock() {
 
         ObservableList<GoodsEditTableVO> pkgItems = pcTable.getItems();
-        //±éÀú¶©µ¥ÄÚÌ×²ÍÁĞ±í
+        //éå†è®¢å•å†…å¥—é¤åˆ—è¡¨
         for (GoodsEditTableVO data : pkgItems) {
             String pkgID = data.getId();
             int costPkgCount = data.getAmount();
-            //²éÑ¯Ì×²Í°üº¬µÄÉÌÆ·
+            //æŸ¥è¯¢å¥—é¤åŒ…å«çš„å•†å“
             List<PackageContentDto> packageContents = pkgService.listPkgContentByPkgId(pkgID);
             if (packageContents == null) {
                 break;
             }
-            //±éÀúÌ×²ÍÄÚÉÌÆ·ÁĞ±í
+            //éå†å¥—é¤å†…å•†å“åˆ—è¡¨
             for (PackageContentDto bean : packageContents) {
                 String goodsID = bean.getGoodsId();
-                //ÏûºÄµÄÉÌÆ·ÊıÁ¿
+                //æ¶ˆè€—çš„å•†å“æ•°é‡
                 int costCount = bean.getGoodsAmount() * costPkgCount;
                 GoodsDto goodsBean = goodsService.selectById(goodsID);
-                //¿â´æÉÌÆ·ÊıÁ¿
+                //åº“å­˜å•†å“æ•°é‡
                 int storeCount = (int) goodsBean.getQuantity();
                 if (costCount > storeCount) {
-                    String msg = String.format("¡¶(%s)%s¡·Ì×²ÍÄÚ ¡¶(%s)%s¡·¿â´æ²»×ã %d%s £¡",
+                    String msg = String.format("ã€Š(%s)%sã€‹å¥—é¤å†… ã€Š(%s)%sã€‹åº“å­˜ä¸è¶³ %d%s ï¼",
                             pkgID, data.getName(), goodsID, goodsBean.getName(), costCount, goodsBean.getBaseUnit());
                     MyAlert alert = new MyAlert(AlertType.WARNING, msg);
-                    alert.setHeaderText("¿â´æ²»×ã");
+                    alert.setHeaderText("åº“å­˜ä¸è¶³");
                     alert.show();
                     return true;
                 }
@@ -486,7 +486,7 @@ public class ConsumeController implements Initializable {
 
 
     //===========================================================================
-    //                            ¼Æ´ÎÏû·Ñ
+    //                            è®¡æ¬¡æ¶ˆè´¹
     //===========================================================================
 
     private final CountConsumeTable ccTable = new CountConsumeTable();
@@ -503,7 +503,7 @@ public class ConsumeController implements Initializable {
     private TextField jc_orderTime;
 
     /**
-     * ÊÜÀíÈË
+     * å—ç†äºº
      */
     @FXML
     TextField jc_transactor;
@@ -514,10 +514,10 @@ public class ConsumeController implements Initializable {
 
         lb_id.textProperty().addListener((observable, oldValue, newValue) -> userGoodsTable.setVipBean(vipBean));
 
-        //Ìí¼ÓÊÂ¼şÎ¯ÍĞ
+        //æ·»åŠ äº‹ä»¶å§”æ‰˜
         userGoodsTable.addEvent(() -> {
             ccTable.addBean(userGoodsTable.getSelectBean());
-            //Èç¹û¶©µ¥Îª¿ÕÔòÉèÖÃÊ±¼ä
+            //å¦‚æœè®¢å•ä¸ºç©ºåˆ™è®¾ç½®æ—¶é—´
             if ("".equals(jc_orderTime.getText())) {
                 DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 jc_orderTime.setText(sdf.format(LocalDateTime.now()));
@@ -534,27 +534,27 @@ public class ConsumeController implements Initializable {
 
     @FXML
     private void payCountOrder() {
-        //ÅĞ¶Ï¶©µ¥ÊÇ·ñÎª¿Õ
+        //åˆ¤æ–­è®¢å•æ˜¯å¦ä¸ºç©º
         if (ccTable.getItems().size() == 0) {
-            new MyAlert(AlertType.WARNING, "¶©µ¥ÄÚÈİÎª¿Õ£¡").show();
+            new MyAlert(AlertType.WARNING, "è®¢å•å†…å®¹ä¸ºç©ºï¼").show();
             return;
         }
-        //ÅĞ¶ÏÊÇ·ñ³¬³öÓÃ»§¿â´æ
+        //åˆ¤æ–­æ˜¯å¦è¶…å‡ºç”¨æˆ·åº“å­˜
         if (isContOrderOutOfStock()) {
             return;
         }
 
-        //FIXME ĞèÒª½øÒ»²½ÓÅ»¯Îª-ÊÂÎñ
+        //FIXME éœ€è¦è¿›ä¸€æ­¥ä¼˜åŒ–ä¸º-äº‹åŠ¡
         List<UserGoodsOrderBean> ugoBeans = generateUserGoodsOrder();
         List<UserGoods> ugoList = generateUserGoodsData(ugoBeans);
         UserGoodsOrderDao dao = UserGoodsOrderDao.getInstance();
         UserGoodsDao ugDao = UserGoodsDao.getInstance();
         dao.insertOrders(ugoBeans);
         ugDao.reduceGoods(ugoList);
-        new MyAlert(AlertType.WARNING, "½áËã³É¹¦£¡").show();
+        new MyAlert(AlertType.WARNING, "ç»“ç®—æˆåŠŸï¼").show();
 
-        clearCountOrder();      //Çå¿Õ¼Æ´ÎÏû·Ñ¶©µ¥
-        userGoodsTable.showAllData();       //Ë¢ĞÂÓÃ»§ÉÌÆ·ÁĞ±í
+        clearCountOrder();      //æ¸…ç©ºè®¡æ¬¡æ¶ˆè´¹è®¢å•
+        userGoodsTable.showAllData();       //åˆ·æ–°ç”¨æˆ·å•†å“åˆ—è¡¨
     }
 
     @FXML
@@ -565,9 +565,9 @@ public class ConsumeController implements Initializable {
     }
 
     /**
-     * Éú³É¼Æ´ÎÏû·Ñ¶©µ¥
+     * ç”Ÿæˆè®¡æ¬¡æ¶ˆè´¹è®¢å•
      *
-     * @return ¼Æ´ÎÏû·Ñ¶©µ¥
+     * @return è®¡æ¬¡æ¶ˆè´¹è®¢å•
      */
     private List<UserGoodsOrderBean> generateUserGoodsOrder() {
         ObservableList<GoodsEditTableVO> items = ccTable.getItems();
@@ -585,10 +585,10 @@ public class ConsumeController implements Initializable {
     }
 
     /**
-     * Éú³ÉĞèÒª¸üĞÂµÄ ÓÃ»§-ÉÌÆ·ĞÅÏ¢
+     * ç”Ÿæˆéœ€è¦æ›´æ–°çš„ ç”¨æˆ·-å•†å“ä¿¡æ¯
      *
-     * @param ugoBeans ÓÃ»§-ÉÌÆ·¶©µ¥ĞÅÏ¢
-     * @return ÓÃ»§-ÉÌÆ·ĞÅÏ¢ÁĞ±í
+     * @param ugoBeans ç”¨æˆ·-å•†å“è®¢å•ä¿¡æ¯
+     * @return ç”¨æˆ·-å•†å“ä¿¡æ¯åˆ—è¡¨
      */
     private List<UserGoods> generateUserGoodsData(List<UserGoodsOrderBean> ugoBeans) {
         List<UserGoods> userGoods = new ArrayList<>(ugoBeans.size());
@@ -601,9 +601,9 @@ public class ConsumeController implements Initializable {
     }
 
     /**
-     * ÅĞ¶Ï¼Æ´ÎÏû·ÑÊÇ·ñ³¬³ö¿â´æ
+     * åˆ¤æ–­è®¡æ¬¡æ¶ˆè´¹æ˜¯å¦è¶…å‡ºåº“å­˜
      *
-     * @return ³¬³ö£ºtrue
+     * @return è¶…å‡ºï¼štrue
      */
     private boolean isContOrderOutOfStock() {
         String userID = vipBean.getId();
@@ -614,10 +614,10 @@ public class ConsumeController implements Initializable {
             int amountCost = data.getAmount();
             int amountRest = userGoods.getAmount();
             if (amountCost > amountRest) {
-                String msg = String.format("ÓÃ»§ÕËÏÂ [%s]%s ÊıÁ¿²»×ã %d%s£¡",
+                String msg = String.format("ç”¨æˆ·è´¦ä¸‹ [%s]%s æ•°é‡ä¸è¶³ %d%sï¼",
                         goodsBean.getId(), goodsBean.getName(), amountCost, goodsBean.getBaseUnit());
                 MyAlert alert = new MyAlert(AlertType.WARNING, msg);
-                alert.setHeaderText("ÓàÁ¿²»×ã");
+                alert.setHeaderText("ä½™é‡ä¸è¶³");
                 alert.show();
                 return true;
             }

@@ -2,7 +2,7 @@ package indi.nonoas.crm.controller.vip;
 
 import indi.nonoas.crm.component.alert.MyAlert;
 import indi.nonoas.crm.config.ImageSrc;
-import indi.nonoas.crm.pojo.dto.VipInfo;
+import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.service.VipService;
 import indi.nonoas.crm.utils.Log;
 import indi.nonoas.crm.utils.SpringUtil;
@@ -30,9 +30,9 @@ public class VipModifyController implements Initializable {
     private final ToggleGroup tGroup = new ToggleGroup();
 
     /**
-     * µ±Ç°²Ù×÷µÄbean
+     * ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½bean
      */
-    private VipInfo vipBean;
+    private VipInfoDto vipBean;
 
     private VipModifyTab parentTab;
 
@@ -77,24 +77,24 @@ public class VipModifyController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // ½«µ¥Ñ¡°´Å¥°ó¶¨ÔÚÒ»×é
+        // ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
         rbtn_man.setToggleGroup(tGroup);
-        rbtn_man.setUserData("ÄÐ");
+        rbtn_man.setUserData("ï¿½ï¿½");
         rbtn_women.setToggleGroup(tGroup);
         rbtn_women.setUserData("Å®");
         rbtn_secret.setToggleGroup(tGroup);
-        rbtn_secret.setUserData("±£ÃÜ");
-        // ÉèÖÃ³õÊ¼Í¼Æ¬
+        rbtn_secret.setUserData("ï¿½ï¿½ï¿½ï¿½");
+        // ï¿½ï¿½ï¿½Ã³ï¿½Ê¼Í¼Æ¬
         img_photo.setImage(new Image(ImageSrc.PHOTO_PATH));
-        // ³õÊ¼»¯CombBox
-        cbb_level.getItems().addAll("ÆÕÍ¨»áÔ±", "³¬¼¶»áÔ±");
+        // ï¿½ï¿½Ê¼ï¿½ï¿½CombBox
+        cbb_level.getItems().addAll("ï¿½ï¿½Í¨ï¿½ï¿½Ô±", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±");
 
     }
 
-    @FXML    //ÉÏ´«ÕÕÆ¬
+    @FXML    //ï¿½Ï´ï¿½ï¿½ï¿½Æ¬
     private void uploadPhoto() {
         FileChooser chooser = new FileChooser();
-        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Í¼Æ¬ÎÄ¼þ", "*.png", "*.jpg"));
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Í¼Æ¬ï¿½Ä¼ï¿½", "*.png", "*.jpg"));
         File photoFile = chooser.showOpenDialog(null);
         if (photoFile != null) {
             String photoUrl = photoFile.getAbsolutePath();
@@ -135,45 +135,45 @@ public class VipModifyController implements Initializable {
         vipBean.setCareer(tf_career.getText());
         vipBean.setEmail(tf_mail.getText());
         vipBean.setOther(tf_other.getText());
-//		vipBean.setPhoto("ÕÕÆ¬");
+//		vipBean.setPhoto("ï¿½ï¿½Æ¬");
 
-        vipService.updateInfo(vipBean);    //¸üÐÂÊý¾Ý¿â
+        vipService.updateInfo(vipBean);    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½
 
-        if (chc_isClose.isSelected()) { // Èç¹ûÑ¡ÔñÁËÌá½»ºó¹Ø±Õ£¬Ôò¹Ø±Õµ±Ç°tab
+        if (chc_isClose.isSelected()) { // ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½á½»ï¿½ï¿½Ø±Õ£ï¿½ï¿½ï¿½Ø±Õµï¿½Ç°tab
             cancelInfo();
         }
     }
 
     /**
-     * ÅÐ¶ÏÊÇ·ñ¿ÉÒÔÌá½»ÐÅÏ¢
+     * ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½á½»ï¿½ï¿½Ï¢
      *
-     * @return ¿ÉÒÔÎªtrue£¬²»¿ÉÓÃÎªfalse
+     * @return ï¿½ï¿½ï¿½ï¿½Îªtrueè¿›ä»·Îªfalse
      */
     private boolean isCommittable() {
-        String id = tf_id.getText().trim(); // ¿¨ºÅ
-        String name = tf_name.getText().trim(); // ÐÕÃû
-        String tel = tf_tel.getText().trim(); // µç»°ºÅÂë
-        String level = cbb_level.getValue(); // »áÔ±µÈ¼¶
+        String id = tf_id.getText().trim(); // ï¿½ï¿½ï¿½ï¿½
+        String name = tf_name.getText().trim(); // ï¿½ï¿½ï¿½ï¿½
+        String tel = tf_tel.getText().trim(); // ï¿½ç»°ï¿½ï¿½ï¿½ï¿½
+        String level = cbb_level.getValue(); // ï¿½ï¿½Ô±ï¿½È¼ï¿½
         if (id.equals("") || name.equals("") || tel.equals("") || level.equals("")) {
-            new MyAlert(AlertType.WARNING, "»áÔ±¿¨ºÅ¡¢»áÔ±ÐÕÃû¡¢ÁªÏµµç»°¡¢»áÔ±µÈ¼¶²»Îª¿Õ£¡").show();
+            new MyAlert(AlertType.WARNING, "ï¿½ï¿½Ô±ï¿½ï¿½ï¿½Å¡ï¿½ï¿½ï¿½Ô±è¿›ä»·Ïµï¿½ç»°ï¿½ï¿½ï¿½ï¿½Ô±ï¿½È¼ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½").show();
             return false;
         }
         return true;
     }
 
     /**
-     * Í¨¹ýÍâ½ç´«µÝµ±Ç°µÄtabÒýÓÃ
+     * Í¨ï¿½ï¿½ï¿½ï¿½ç´«ï¿½Ýµï¿½Ç°ï¿½ï¿½tabï¿½ï¿½ï¿½ï¿½
      */
     public void setPane(VipModifyTab tab) {
         this.parentTab = tab;
     }
 
     /**
-     * ´«µÝbean
+     * ï¿½ï¿½ï¿½ï¿½bean
      *
-     * @param bean µ±Ç°ÓÃ»§ÐÅÏ¢µÄVipBean
+     * @param bean ï¿½ï¿½Ç°ï¿½Ã»ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½VipBean
      */
-    public void setBean(VipInfo bean) {
+    public void setBean(VipInfoDto bean) {
         this.vipBean = bean;
         tf_mail.setText(vipBean.getEmail());
         tf_career.setText(vipBean.getCareer());
@@ -185,13 +185,13 @@ public class VipModifyController implements Initializable {
         tf_id.setText(vipBean.getId());
         tf_idcard.setText(vipBean.getIdcard());
         cbb_level.setValue(vipBean.getCardLevel());
-        // ÉèÖÃÏÔÊ¾µÄÕÕÆ¬
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Æ¬
         String photoUrl = bean.getPhoto();
         Log.i(this, photoUrl);
         if (photoUrl != null && !photoUrl.equals("")) {
             img_photo.setImage(new Image("file:" + bean.getPhoto()));
         }
-        // ÉèÖÃÏÔÊ¾³öÉúÈÕÆÚ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾è¿›ä»·
         String birthday = vipBean.getBirthday();
         if (birthday != null) {
             DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -202,7 +202,7 @@ public class VipModifyController implements Initializable {
 
         ObservableList<Toggle> toggles = tGroup.getToggles();
         for (Toggle rBtn : toggles) {
-            if (sex != null && rBtn.getUserData().equals(sex)) // ÉèÖÃÏÔÊ¾µÄÐÔ±ð
+            if (sex != null && rBtn.getUserData().equals(sex)) // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ô±ï¿½
                 rBtn.setSelected(true);
         }
     }

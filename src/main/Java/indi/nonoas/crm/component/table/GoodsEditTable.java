@@ -1,8 +1,6 @@
 package indi.nonoas.crm.component.table;
 
 import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -12,7 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import per.nonoas.delegate.EventHandler;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -21,38 +19,25 @@ import java.util.regex.Pattern;
  */
 public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
 
-    /**
-     * Êı¾İÔ´
-     */
     private final ObservableList<GoodsEditTableVO> obList = FXCollections.observableArrayList();
 
-    /**
-     * ±í¸ñÁĞ¼¯ºÏ
-     */
     private final ObservableList<TableColumn<GoodsEditTableVO, ?>> cols = getColumns();
 
-    /**
-     * µ±Ç°Ñ¡ÖĞÊı¾İ
-     */
     private GoodsEditTableVO selectedData;
 
-
-    /**
-     * ÊÂ¼şÎ¯ÍĞÀà
-     */
     private final EventHandler eventHandler = new EventHandler();
 
-    protected final TableColumn<GoodsEditTableVO, String> item_id = new TableColumn<>("ÉÌÆ·±àºÅ");
+    protected final TableColumn<GoodsEditTableVO, String> item_id = new TableColumn<>("å•†å“ç¼–å·");
 
-    protected final TableColumn<GoodsEditTableVO, String> item_name = new TableColumn<>("ÉÌÆ·Ãû³Æ");
+    protected final TableColumn<GoodsEditTableVO, String> item_name = new TableColumn<>("å•†å“åç§°");
 
-    protected final TableColumn<GoodsEditTableVO, String> item_money_cost = new TableColumn<>("ÉÌÆ·µ¥¼Û");
+    protected final TableColumn<GoodsEditTableVO, String> item_money_cost = new TableColumn<>("å•ä»·");
 
-    protected final TableColumn<GoodsEditTableVO, Number> item_amount = new TableColumn<>("ÊıÁ¿");
+    protected final TableColumn<GoodsEditTableVO, Number> item_amount = new TableColumn<>("æ•°é‡");
 
-    protected final TableColumn<GoodsEditTableVO, String> item_total = new TableColumn<>("Ğ¡¼Æ");
+    protected final TableColumn<GoodsEditTableVO, String> item_total = new TableColumn<>("å°è®¡");
 
-    protected final TableColumn<GoodsEditTableVO, String> item_op = new TableColumn<>("²Ù×÷");
+    protected final TableColumn<GoodsEditTableVO, String> item_op = new TableColumn<>("æ“ä½œ");
 
     public GoodsEditTable() {
         initColumns();
@@ -65,24 +50,24 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
 
     protected void initColumns() {
 
-        setTableMenuButtonVisible(true); // ÏÔÊ¾±í¸ñ²Ëµ¥°´Å¥
+        setTableMenuButtonVisible(true);
 
         item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getId()));
         item_name.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName()));
         item_money_cost.setCellValueFactory(param -> {
             double numMoney = param.getValue().getPrice();
-            String show = String.format("£¤%.2f", numMoney);
+            String show = String.format("ï¿¥%.2f", numMoney);
             return new SimpleStringProperty(show);
         });
 
         item_amount.setCellValueFactory(param -> new SimpleIntegerProperty(param.getValue().getAmount()));
 
         item_total.setCellValueFactory(param -> {
-            String show = String.format("£¤%.2f", param.getValue().getSum_price());
+            String show = String.format("ï¿¥%.2f", param.getValue().getSum_price());
             return new SimpleStringProperty(show);
         });
 
-        item_amount.setCellFactory(param -> new AmountCell());   //×Ô¶¨ÒåÊıÁ¿µ¥Ôª¸ñ
+        item_amount.setCellFactory(param -> new AmountCell());
         item_op.setCellFactory(param -> new DeleteCell());
 
         item_amount.setMinWidth(150);
@@ -98,16 +83,16 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
     }
 
     /**
-     * »ñÈ¡Ñ¡ÖĞµÄÊı¾İ
+     * ï¿½ï¿½È¡Ñ¡ï¿½Ğµï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return Ñ¡ÖĞµÄPackageContentBean
+     * @return Ñ¡ï¿½Ğµï¿½PackageContentBean
      */
     public GoodsEditTableVO getSelectedData() {
         return selectedData;
     }
 
     /**
-     * Çå¿ÕÊı¾İÔ´
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´
      */
     public void clearData() {
         obList.clear();
@@ -115,9 +100,9 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
     }
 
     /**
-     * ÒÆ³ıÊı¾İ
+     * ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param bean ĞèÒªÒÆ³ıµÄPackageContentBean
+     * @param bean ï¿½ï¿½Òªï¿½Æ³ï¿½ï¿½ï¿½PackageContentBean
      */
     public void removeData(GoodsEditTableVO bean) {
         obList.remove(bean);
@@ -125,62 +110,62 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
     }
 
     /**
-     * »ñÈ¡ÊÂ¼şÎ¯ÍĞ¶ÔÏó
+     * ï¿½ï¿½È¡ï¿½Â¼ï¿½Î¯ï¿½Ğ¶ï¿½ï¿½ï¿½
      *
-     * @return ÊÂ¼şÎ¯ÍĞ¶ÔÏó
+     * @return ï¿½Â¼ï¿½Î¯ï¿½Ğ¶ï¿½ï¿½ï¿½
      */
     public EventHandler getEventHandler() {
         return eventHandler;
     }
 
     //===========================================================================
-    //                            ³éÏó·½·¨
+    //                            ï¿½ï¿½ï¿½ó·½·ï¿½
     //===========================================================================
 
     /**
-     * »ñÈ¡ËùÓĞ±í¸ñÊı¾İ
+     * ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ğ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return S¶ÔÏó¼¯ºÏ
+     * @return Sï¿½ï¿½ï¿½ó¼¯ºï¿½
      */
-    public abstract ArrayList<S> getAllBeans();
+    public abstract List<S> getAllBeans();
 
     /**
-     * Ìí¼ÓÊı¾İ
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param bean ĞèÒªÌí¼ÓµÄÊı¾İ
+     * @param bean ï¿½ï¿½Òªï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public abstract void addBean(S bean);
 
 
     /**
-     * ½«Êı¾İÄ£ĞÍ×ªÎªÊµÌåÀà
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½×ªÎªÊµï¿½ï¿½ï¿½ï¿½
      *
-     * @return ÊµÌåÀà
+     * @return Êµï¿½ï¿½ï¿½ï¿½
      */
     protected abstract S dataToBean(GoodsEditTableVO data);
 
     /**
-     * ½«Ê¬ÌåÀà×ªÎªÊı¾İÄ£ĞÍ
+     * ï¿½ï¿½Ê¬ï¿½ï¿½ï¿½ï¿½×ªÎªï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
      *
-     * @return Êı¾İÄ£ĞÍ
+     * @return ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
      */
     protected abstract GoodsEditTableVO beanToData(S bean);
 
 
     //===========================================================================
-    //                            ÄÚ²¿Àà
+    //                            ï¿½Ú²ï¿½ï¿½ï¿½
     //===========================================================================
 
 
     /**
-     * ×Ô¶¨Òå¡°ÊıÁ¿¡±µ¥Ôª¸ñ
+     * ï¿½Ô¶ï¿½ï¿½å¡°è¿›ä»·Ôªï¿½ï¿½
      */
     protected class AmountCell extends TableCell<GoodsEditTableVO, Number> {
 
         public AmountCell() {
         }
 
-        //ÉèÖÃµ¥Ôª¸ñÑùÊ½
+        //ï¿½ï¿½ï¿½Ãµï¿½Ôªï¿½ï¿½ï¿½ï¿½Ê½
         @Override
         protected void updateItem(Number item, boolean empty) {
 
@@ -191,7 +176,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
                 Button btn_add = new Button("+");
                 Button btn_reduce = new Button("-");
                 TextField tf_number = new TextField(item.toString());
-                //ÉèÖÃ³õÊ¼³ß´ç
+                //ï¿½ï¿½ï¿½Ã³ï¿½Ê¼ï¿½ß´ï¿½
                 btn_add.setPrefWidth(35);
                 btn_reduce.setPrefWidth(35);
                 tf_number.setPrefWidth(50);
@@ -200,17 +185,17 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
 
                 HBox hBox = new HBox(10, btn_add, tf_number, btn_reduce);
 
-                ObservableList<GoodsEditTableVO> obList = getTableView().getItems(); //»ñÈ¡±í¸ñÔ´Êı¾İ
+                ObservableList<GoodsEditTableVO> obList = getTableView().getItems(); //ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½
                 GoodsEditTableVO bean = obList.get(getIndex());
 
-                //ÉèÖÃ°´Å¥¼àÌı
-                //¼ÓÒ»
+                //ï¿½ï¿½ï¿½Ã°ï¿½Å¥ï¿½ï¿½ï¿½ï¿½
+                //ï¿½ï¿½Ò»
                 btn_add.setOnAction(event -> {
                     int amount = Integer.parseInt(tf_number.getText()) + 1;
                     tf_number.setText(String.valueOf(amount));
 
                 });
-                //¼õÒ»
+                //ï¿½ï¿½Ò»
                 btn_reduce.setOnAction(event -> {
                     int amount = Integer.parseInt(tf_number.getText()) - 1;
                     if (amount > 0) {
@@ -218,10 +203,10 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
                     }
                 });
 
-                //ÎÄ±¾¿ò±ä»¯¼àÌı
+                //ï¿½Ä±ï¿½ï¿½ï¿½ä»¯ï¿½ï¿½ï¿½ï¿½
                 tf_number.textProperty().addListener((observable, oldValue, newValue) -> {
                     String pattern = "^\\d+$";
-                    boolean isNumber = Pattern.matches(pattern, newValue); //ÅĞ¶ÏÊÇ·ñÎªÕıÕûÊı
+                    boolean isNumber = Pattern.matches(pattern, newValue); //ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                     if (isNumber) {
                         bean.setAmount(Integer.parseInt(newValue));
                         GoodsEditTable<S> table = (GoodsEditTable<S>) getTableView();
@@ -240,7 +225,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
 
 
     /**
-     * ×Ô¶¨Òå²Ù×÷µ¥Ôª¸ñ
+     * ï¿½Ô¶è¿›ä»·Ôªï¿½ï¿½
      */
     protected class DeleteCell extends TableCell<GoodsEditTableVO, String> {
 
@@ -251,7 +236,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
         protected void updateItem(String item, boolean empty) {
             super.updateItem(item, empty);
             if (!empty) {
-                Button btn_delete = new Button("É¾³ı");
+                Button btn_delete = new Button("É¾ï¿½ï¿½");
                 btn_delete.getStyleClass().add("danger");
 
                 btn_delete.setOnAction(event -> {

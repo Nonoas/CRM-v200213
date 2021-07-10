@@ -6,7 +6,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.Pane;
 
 /**
- * ÉÌÆ·¹ÜÀíÃæ°å
+ * ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  *
  * @author Nonoas
  */

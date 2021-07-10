@@ -4,7 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
 /**
- * ÃÜÂë¼ÓÑÎ¹¤¾ß
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¹ï¿½ï¿½ï¿½
  */
 public class SaltUtil {
 
@@ -23,7 +23,7 @@ public class SaltUtil {
         String result = null;
         try {
             MessageDigest md = MessageDigest.getInstance(algorithm);
-            //¼ÓÃÜºóµÄ×Ö·û´®
+            //ï¿½ï¿½ï¿½Üºï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
             result = byteArrayToHexString(md.digest(mergePasswordAndSalt(rawPass).getBytes(StandardCharsets.UTF_8)));
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -44,10 +44,10 @@ public class SaltUtil {
     }
 
     /**
-     * ×ª»»×Ö½ÚÊý×éÎª16½øÖÆ×Ö´®
+     * ×ªï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½Îª16ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½
      *
-     * @param b ×Ö½ÚÊý×é
-     * @return 16½øÖÆ×Ö´®
+     * @param b ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @return 16ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½
      */
     private static String byteArrayToHexString(byte[] b) {
         StringBuilder resultSb = new StringBuilder();

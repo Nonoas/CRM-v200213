@@ -24,7 +24,7 @@ public class StatController implements Initializable {
     @FXML
     void goodsOrderRecord() {
         Dialog<String> dialog = new Dialog<>();
-        dialog.setTitle("ÉÌÆ·¶©µ¥¼ÇÂ¼");
+        dialog.setTitle("ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼");
         dialog.setResizable(true);
         DialogPane pane = dialog.getDialogPane();
         Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
@@ -37,7 +37,7 @@ public class StatController implements Initializable {
     @FXML
     void pkgConsumeRecord() {
         Dialog<String> dialog = new Dialog<>();
-        dialog.setTitle("ÓÃ»§¿â´æÏû·Ñ¼ÇÂ¼");
+        dialog.setTitle("ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¼ï¿½Â¼");
         dialog.setResizable(true);
         DialogPane pane = dialog.getDialogPane();
         Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();

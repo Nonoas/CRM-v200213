@@ -17,7 +17,7 @@ public class VipQueryTab extends Tab {
     private static volatile VipQueryTab instance;
 
     private VipQueryTab() {
-        this("»áÔ±²éÑ¯");
+        this("ä¼šå‘˜æŸ¥è¯¢");
     }
 
     private VipQueryTab(String str) {

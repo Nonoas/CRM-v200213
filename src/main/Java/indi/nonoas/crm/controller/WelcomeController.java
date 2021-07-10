@@ -8,6 +8,7 @@ import indi.nonoas.crm.common.ClientSession;
 import indi.nonoas.crm.service.LoginService;
 import indi.nonoas.crm.utils.SaltUtil;
 import indi.nonoas.crm.component.alert.MyAlert;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
@@ -41,45 +42,47 @@ public class WelcomeController implements Initializable {
         pf_password.setText("admin");
     }
 
-    @FXML // µÇÂ¼°´Å¥ÊÂ¼ş
+    @FXML
     private void login() {
         String username = tf_username.getValue();
         String password = pf_password.getText();
-        // ÅĞ¶ÏÓÃ»§ÃûÊÇ·ñÎª¿Õ
-        if (username.equals("")) {
-            new MyAlert(AlertType.WARNING, "ÓÃ»§Ãû²»ÄÜÎª¿Õ£¡").show();
+        // ç”¨æˆ·åå¯†ç éç©ºæ ¡éªŒ
+        if ("".equals(username.trim())) {
+            new MyAlert(AlertType.WARNING, "ç”¨æˆ·åä¸èƒ½ä¸ºç©º").show();
             return;
         }
-        // ÅĞ¶ÏÃÜÂëÊÇ·ñÎª¿Õ
-        if (password.equals("")) {
-            new MyAlert(AlertType.WARNING, "ÃÜÂë²»ÄÜÎª¿Õ£¡").show();
+        if ("".equals(password.trim())) {
+            new MyAlert(AlertType.WARNING, "å¯†ç ä¸èƒ½ä¸ºç©º").show();
             return;
         }
 
         btn_Login.setDisable(true);
-        btn_Login.setText("ÑéÖ¤ÃÜÂëÖĞ¡¤¡¤¡¤");
+        btn_Login.setText("ç™»å½•éªŒè¯ä¸­...");
 
-        VerifyTask vTask = new VerifyTask(username, password); // ĞÂ½¨Ïß³Ì£¬ÓÃÓÚÑéÖ¤ÃÜÂë²¢¸üĞÂUI
+        VerifyTask vTask = new VerifyTask(username, password); // ï¿½Â½ï¿½ï¿½ß³Ì£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ë²¢ï¿½ï¿½ï¿½ï¿½UI
         new Thread(vTask).start();
         vTask.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.getUserId() != null) {
                 ClientSession.addAttribute("user", newValue);
                 ApplicationStarter.toMainStageView();
             } else {
-                btn_Login.setText("µÇÂ¼");
+                btn_Login.setText("ç™»  å½•");
                 btn_Login.setDisable(false);
-                new MyAlert(AlertType.INFORMATION, "ÓÃ»§Ãû»òÃÜÂë´íÎó£¡").showAndWait();
+                new MyAlert(AlertType.INFORMATION, "ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯").showAndWait();
             }
         });
     }
 
     /**
-     * ×ÓÏß³ÌÈÎÎñ£¬ÓÃÓÚÑéÖ¤ÓÃ»§ÃûÃÜÂë
+     * å¯†ç æ ¡éªŒçº¿ç¨‹
      */
-    private static class VerifyTask extends javafx.concurrent.Task<LoginDto> {
+    private static class VerifyTask extends Task<LoginDto> {
+
+        LoginService service = (LoginService) SpringUtil.getBean("LoginServiceImpl");
 
         String username;
         String password;
+
 
         VerifyTask(String u, String p) {
             this.username = u;
@@ -88,15 +91,14 @@ public class WelcomeController implements Initializable {
 
         @Override
         protected LoginDto call() {
-            LoginService service = (LoginService) SpringUtil.getBean("LoginServiceImpl");
+
             LoginDto loginDto = service.verify(username, password);
-            // Èç¹û²éÑ¯½á¹ûÎª²»Îª¿Õ£¬Ôò·µ»Ø¸ÃLoginBean¶ÔÏó
-            if (loginDto != null)
+
+            if (loginDto != null) {
                 return loginDto;
-                // ·ñÔò·µ»ØÒ»¸ö¿ÕµÄLoginBean()¶ÔÏó
-                // Èç¹ûÖ±½Ó·µ»Ønull£¬ÔòChangeListener²»»á»Øµ÷£¬ÒòÎªoldÖµÎªnull
-            else
+            } else {
                 return new LoginDto();
+            }
         }
 
     }

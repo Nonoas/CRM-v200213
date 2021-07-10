@@ -2,7 +2,7 @@ package indi.nonoas.crm.controller.vip;
 
 import indi.nonoas.crm.component.alert.MyAlert;
 import indi.nonoas.crm.controller.MainController;
-import indi.nonoas.crm.pojo.dto.VipInfo;
+import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.service.VipService;
 import indi.nonoas.crm.utils.JXLUtil;
 import indi.nonoas.crm.utils.SpringUtil;
@@ -38,11 +38,11 @@ public class VipManageController implements Initializable {
     @FXML
     private TextField tf_findInfo;
     @FXML
-    private ComboBox<String> cbb_level;    //»áÔ±µÈ¼¶
+    private ComboBox<String> cbb_level;    //ï¿½ï¿½Ô±ï¿½È¼ï¿½
     @FXML
-    private DatePicker dpk_from;    //Èë»áÊ±¼ä·¶Î§£¨ÆðÊ¼£©
+    private DatePicker dpk_from;    //ï¿½ï¿½ï¿½Ê±ï¿½ä·¶Î§ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½
     @FXML
-    private DatePicker dpk_to;    //Èë»áÊ±¼ä·¶Î§£¨½áÊø£©
+    private DatePicker dpk_to;    //ï¿½ï¿½ï¿½Ê±ï¿½ä·¶Î§è¿›ä»·
 
     public VipManageController() {
         initData();
@@ -54,21 +54,21 @@ public class VipManageController implements Initializable {
     }
 
     /**
-     * ³õÊ¼»¯½çÃæ
+     * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     private void initView() {
         table = new VipInfoTable();
         scrollPane.setContent(table);
 
-        cbb_level.getItems().addAll("ËùÓÐµÈ¼¶", "ÆÕÍ¨»áÔ±", "³¬¼¶»áÔ±");
-        cbb_level.setValue("ËùÓÐµÈ¼¶");
+        cbb_level.getItems().addAll("ï¿½ï¿½ï¿½ÐµÈ¼ï¿½", "ï¿½ï¿½Í¨ï¿½ï¿½Ô±", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±");
+        cbb_level.setValue("ï¿½ï¿½ï¿½ÐµÈ¼ï¿½");
 
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String str_from = "1900-01-01";
         LocalDate from = LocalDate.parse(str_from, df);
         LocalDate to = LocalDate.now();
-        dpk_from.setValue(from);    //Èë»áÊ±¼äÉÏÏÞ
-        dpk_to.setValue(to);    //Èë»áÊ±¼äÏÂÏÞ
+        dpk_from.setValue(from);    //ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        dpk_to.setValue(to);    //ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
     }
 
@@ -79,40 +79,40 @@ public class VipManageController implements Initializable {
     @FXML
     private void findVIP() {
 
-        String idOrName = "%" + tf_findInfo.getText().trim() + "%";    //¿¨ºÅ»òÐÕÃû
-        String str0 = cbb_level.getValue().equals("ËùÓÐµÈ¼¶") ? "" : cbb_level.getValue();
-        String level = str0 + "%";    //»áÔ±µÈ¼¶
-        String dateFrom = dpk_from.getValue().toString();    //Ê±¼äÉÏÏÞ
-        String dateTo = dpk_to.getValue().toString();    //Ê±¼äÏÂÏÞ
+        String idOrName = "%" + tf_findInfo.getText().trim() + "%";    //ï¿½ï¿½ï¿½Å»ï¿½ï¿½ï¿½ï¿½ï¿½
+        String str0 = cbb_level.getValue().equals("ï¿½ï¿½ï¿½ÐµÈ¼ï¿½") ? "" : cbb_level.getValue();
+        String level = str0 + "%";    //ï¿½ï¿½Ô±ï¿½È¼ï¿½
+        String dateFrom = dpk_from.getValue().toString();    //Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        String dateTo = dpk_to.getValue().toString();    //Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-        List<VipInfo> listVipBeans = vipService.selectByDateFiltrate(idOrName, idOrName, level, dateFrom, dateTo);
+        List<VipInfoDto> listVipBeans = vipService.selectByDateFiltrate(idOrName, idOrName, level, dateFrom, dateTo);
         if (listVipBeans != null) {
             table.clearData();
-            for (VipInfo bean : listVipBeans)
+            for (VipInfoDto bean : listVipBeans)
                 table.addBean(bean);
         } else {
-            new MyAlert(AlertType.INFORMATION, "Ã»ÓÐÕÒµ½Äú²éÑ¯µÄ»áÔ±£¡").show();
+            new MyAlert(AlertType.INFORMATION, "Ã»ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½Ä»ï¿½Ô±ï¿½ï¿½").show();
         }
     }
 
-    @FXML // Ìí¼Ó»áÔ±ÐÅÏ¢
+    @FXML // ï¿½ï¿½Ó»ï¿½Ô±ï¿½ï¿½Ï¢
     private void addVip() {
         MainController.addTab(new VipAddTab());
     }
 
     /**
-     * É¾³ý»áÔ±ÐÅÏ¢
+     * É¾ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ï¢
      */
     @FXML
     private void deleteVip() {
-        VipInfo bean = table.getSelectedData();
+        VipInfoDto bean = table.getSelectedData();
         if (bean == null) {
-            new MyAlert(AlertType.INFORMATION, "ÇëÏÈÑ¡ÔñÒ»ÌõÊý¾Ý£¡").show();
+            new MyAlert(AlertType.INFORMATION, "ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½").show();
             return;
         }
-        String id = "¿¨ºÅ:" + bean.getId();
-        String name = "ÐÕÃû:" + bean.getName();
-        MyAlert alert = new MyAlert(AlertType.CONFIRMATION, "ÊÇ·ñÈ·¶¨É¾³ý¸ÃÓÃ»§µÄÐÅÏ¢£¿\n[ " + id + "£¬" + name + " ]");
+        String id = "ï¿½ï¿½ï¿½ï¿½:" + bean.getId();
+        String name = "ï¿½ï¿½ï¿½ï¿½:" + bean.getName();
+        MyAlert alert = new MyAlert(AlertType.CONFIRMATION, "ï¿½Ç·ï¿½È·ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½\n[ " + id + "ï¿½ï¿½" + name + " ]");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             table.removeData(bean);
@@ -121,13 +121,13 @@ public class VipManageController implements Initializable {
     }
 
     /**
-     * ÐÞ¸Ä»áÔ±ÐÅÏ¢
+     * ï¿½Þ¸Ä»ï¿½Ô±ï¿½ï¿½Ï¢
      */
     @FXML
     private void modifyVip() {
-        VipInfo bean = table.getSelectedData();
+        VipInfoDto bean = table.getSelectedData();
         if (bean == null) {
-            new MyAlert(AlertType.INFORMATION, "ÇëÏÈÑ¡ÔñÒ»ÌõÊý¾Ý£¡").show();
+            new MyAlert(AlertType.INFORMATION, "ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½").show();
             return;
         }
         MainController.addTab(new VipModifyTab(bean));
@@ -135,15 +135,15 @@ public class VipManageController implements Initializable {
 
     @FXML
     private void printInfo() {
-        File file = new File("D:/»áÔ±ÐÅÏ¢.xls");
+        File file = new File("D:/ï¿½ï¿½Ô±ï¿½ï¿½Ï¢.xls");
         OutputStream os = null;
         try {
             os = new FileOutputStream(file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        ObservableList<TableColumn<VipInfo, ?>> columns = table.getColumns();
-        ObservableList<VipInfo> items = table.getItems();
+        ObservableList<TableColumn<VipInfoDto, ?>> columns = table.getColumns();
+        ObservableList<VipInfoDto> items = table.getItems();
         List<Object> contentList = new ArrayList<>(items);
         String[] titles = new String[columns.size()];
         String[] fieldNames = {"id", "admissionDate", "name", "sex", "cardLevel", "balance", "cumulative", "address", "integral", "telephone", "idcard", "birthday", "career", "email", "other"};
@@ -152,9 +152,9 @@ public class VipManageController implements Initializable {
         }
         boolean hasPrint = JXLUtil.exportExcel(titles, fieldNames, contentList, os);
         if (hasPrint) {
-            new MyAlert(AlertType.INFORMATION, "´òÓ¡³É¹¦£¡\nÎÄ¼þ±£´æÎ»ÖÃÎª£º" + file.getAbsolutePath()).show();
+            new MyAlert(AlertType.INFORMATION, "ï¿½ï¿½Ó¡ï¿½É¹ï¿½ï¿½ï¿½\nï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½Îªï¿½ï¿½" + file.getAbsolutePath()).show();
         } else {
-            new MyAlert(AlertType.INFORMATION, "´òÓ¡Ê§°Ü£¡").show();
+            new MyAlert(AlertType.INFORMATION, "ï¿½ï¿½Ó¡Ê§ï¿½Ü£ï¿½").show();
         }
     }
 

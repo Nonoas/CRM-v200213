@@ -21,16 +21,13 @@ public class CustomSplash extends SplashScreen {
         flag = new File(DEFAULT_IMAGE).exists();
     }
 
-    /**
-     * ¸²¸ÇËüÒÔ´´½¨×Ô¼ºµÄ³õÊ¼´°¸ñ¸¸½Úµã¡£
-     *
-     * @return ±ê×¼Í¼Æ¬
-     */
+    // è‡ªå®šä¹‰å¯åŠ¨ç•Œé¢å›¾ç‰‡
     @Override
     public Parent getParent() {
 
-        if (!flag)
+        if (!flag) {
             return super.getParent();
+        }
 
         ImageView imageView = new ImageView("file:" + DEFAULT_IMAGE);
         final ProgressBar splashProgressBar = new ProgressBar();
@@ -41,9 +38,7 @@ public class CustomSplash extends SplashScreen {
     }
 
     /**
-     * ×Ô¶¨ÒåÆô¶¯ÆÁÄ»ÊÇ·ñÍêÈ«¿É¼û¡£
-     *
-     * @return Ä¬ÈÏÎªtrue
+     * è®¾ç½®ä¸ºå¯è§
      */
     @Override
     public boolean visible() {
@@ -51,9 +46,9 @@ public class CustomSplash extends SplashScreen {
     }
 
     /**
-     * Ê¹ÓÃÄú×Ô¼ºµÄÆô¶¯Í¼Ïñ£¬¶ø²»ÊÇÄ¬ÈÏµÄÆô¶¯Í¼Ïñ¡£
+     * è·å–å›¾ç‰‡è·¯å¾„
      *
-     * @return "Í¼ÏñÂ·¾¶"
+     * @return å›¾ç‰‡è·¯å¾„
      */
     @Override
     public String getImagePath() {

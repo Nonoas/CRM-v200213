@@ -10,13 +10,13 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.Pane;
 
 /**
- * ÏîÄ¿Ìí¼ÓÃæ°å
+ * ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * @author Nonoas
  *
  */
 public class PackageAddTab extends Tab{
 	public PackageAddTab() {
-		this("Ìí¼ÓÏîÄ¿");
+		this("ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿");
 	}
 	public PackageAddTab(String str) {
 		super(str);

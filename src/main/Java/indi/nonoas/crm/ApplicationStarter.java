@@ -27,7 +27,7 @@ public class ApplicationStarter extends AbstractJavaFxApplicationSupport {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setTitle("客户管理系统");
+        stage.setTitle("搴楅摵绠＄悊绯荤粺");
         stage.setResizable(false);
         super.start(stage);
     }
@@ -40,7 +40,7 @@ public class ApplicationStarter extends AbstractJavaFxApplicationSupport {
     }
 
     /**
-     * 跳转到主界面
+     * 璺宠浆鍒颁富鐣岄潰
      */
     public static void toMainStageView() {
         Stage stage = getStage();

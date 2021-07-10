@@ -2,7 +2,7 @@ package indi.nonoas.crm.service.impl;
 
 import indi.nonoas.crm.pojo.*;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
-import indi.nonoas.crm.pojo.dto.VipInfo;
+import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.pojo.vo.OrderRecordVO;
 import indi.nonoas.crm.dao.GoodsMapper;
 import indi.nonoas.crm.dao.OrderMapper;
@@ -12,13 +12,9 @@ import indi.nonoas.crm.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import per.nonoas.orm.AbstractTransaction;
-import per.nonoas.orm.BeanTransaction;
 
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,32 +48,32 @@ public class OrderServiceImpl implements OrderService {
                                 List<OrderDetailBean> orderDetails,
                                 List<UserGoods> userGoods,
                                 List<GoodsDto> goodsBeans,
-                                VipInfo vipBean) {
-        //¶©µ¥ÊÂÎñ
+                                VipInfoDto vipBean) {
+        //è¿›ä»·
         odrMapper.insertOrder(order);
-        //¶©µ¥ÏêÇéÊÂÎñ
+        //è¿›ä»·ï¿½ï¿½ï¿½ï¿½
         odrMapper.insertOrderDetails(orderDetails);
 
-        //Èç¹ûÊÇÉ¢¿ÍÔò²»×öÒÔÏÂÊÂÎñ
-        if (vipBean != VipInfo.SANKE) {
-            //ÓÃ»§ÊÂÎñ
+        //ï¿½ï¿½ï¿½ï¿½ï¿½É¢è¿›ä»·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        if (vipBean != VipInfoDto.SANKE) {
+            //ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
             vipMapper.updateInfo(vipBean);
-            //ÓÃ»§ÉÌÆ·
+            //ï¿½Ã»ï¿½ï¿½ï¿½Æ·
             ugMapper.replaceUserGoods(userGoods);
         }
-        //ÉÌÆ·ÊÂÎñ
+        //ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
         goodsMapper.updateGoodsAmount(goodsBeans);
     }
 
 
     /**
-     * ÉÌÆ·ÏÂµ¥ÊÂÎñ
+     * ï¿½ï¿½Æ·ï¿½Âµï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @param order        ¶©µ¥
-     * @param orderDetails ¶©µ¥ÏêÇé
-     * @param userGoods    ÐèÒª¸üÐÂµÄ ÓÃ»§-ÉÌÆ· ÁÐ±í
-     * @param goodsBeans   ÉÌÆ· ÁÐ±í
-     * @param vipBean      ÓÃ»§
+     * @param order        ï¿½ï¿½ï¿½ï¿½
+     * @param orderDetails è¿›ä»·
+     * @param userGoods    ï¿½ï¿½Òªï¿½ï¿½ï¿½Âµï¿½ ï¿½Ã»ï¿½-ï¿½ï¿½Æ· ï¿½Ð±ï¿½
+     * @param goodsBeans   ï¿½ï¿½Æ· ï¿½Ð±ï¿½
+     * @param vipBean      ï¿½Ã»ï¿½
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -85,28 +81,28 @@ public class OrderServiceImpl implements OrderService {
                                      List<OrderDetailBean> orderDetails,
                                      List<UserGoods> userGoods,
                                      List<GoodsDto> goodsBeans,
-                                     VipInfo vipBean) {
+                                     VipInfoDto vipBean) {
 
-        //Èç¹ûÊÇÉ¢¿ÍÔò²»×öÒÔÏÂÊÂÎñ
-        if (vipBean != VipInfo.SANKE) {
-            //ÓÃ»§ÊÂÎñ
+        //ï¿½ï¿½ï¿½ï¿½ï¿½É¢è¿›ä»·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        if (vipBean != VipInfoDto.SANKE) {
+            //ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
             vipMapper.updateInfo(vipBean);
-            //ÓÃ»§-ÉÌÆ·ÊÂÎñ
+            //ï¿½Ã»ï¿½-ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
             ugMapper.replaceUserGoods(userGoods);
         }
-        //¶©µ¥ÊÂÎñ
+        //è¿›ä»·
         odrMapper.insertOrder(order);
-        //¶©µ¥ÏêÇéÊÂÎñ
+        //è¿›ä»·ï¿½ï¿½ï¿½ï¿½
         odrMapper.insertOrderDetails(orderDetails);
-        //ÉÌÆ·ÊÂÎñ
+        //ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
         goodsMapper.updateGoodsAmount(goodsBeans);
     }
 
 
     /**
-     * Éú³ÉÉÌÆ·¶©µ¥ºÅ
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return ÉÌÆ·¶©µ¥ºÅ
+     * @return ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public static synchronized String goodsOrderNum() {
         final String prefix = "SP";
@@ -121,9 +117,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
-     * Éú³ÉÉÌÆ·¶©µ¥ºÅ
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
-     * @return ÉÌÆ·¶©µ¥ºÅ
+     * @return ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public static synchronized String packageOrderNum() {
         final String prefix = "TC";
@@ -139,7 +135,7 @@ public class OrderServiceImpl implements OrderService {
 
 
     //===========================================================================
-    //                            setter×¢Èë
+    //                            setter×¢ï¿½ï¿½
     //===========================================================================
 
     @Autowired

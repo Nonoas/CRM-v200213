@@ -2,14 +2,10 @@ package indi.nonoas.crm.service;
 
 import indi.nonoas.crm.pojo.*;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
-import indi.nonoas.crm.pojo.dto.VipInfo;
+import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.pojo.vo.OrderRecordVO;
 import org.springframework.transaction.annotation.Transactional;
-import per.nonoas.orm.AbstractTransaction;
-import per.nonoas.orm.BeanTransaction;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,44 +16,44 @@ import java.util.List;
 public interface OrderService {
 
     /**
-     * 查询所有商品订单
+     * 锟斤拷询锟斤拷锟斤拷锟斤拷品锟斤拷锟斤拷
      *
-     * @return 商品订单列表
+     * @return 锟斤拷品锟斤拷锟斤拷锟叫憋拷
      */
     List<OrderRecordVO> selectGdsOrds();
 
     /**
-     * 删除一年前的记录
+     * 删锟斤拷一锟斤拷前锟侥硷拷录
      */
     void delete365dAgo();
 
     /**
-     * 商品下单事务
+     * 锟斤拷品锟铰碉拷锟斤拷锟斤拷
      *
-     * @param order        订单
-     * @param orderDetails 订单详情
-     * @param userGoods    需要更新的 用户-商品 列表
-     * @param goodsBeans   商品 列表
-     * @param vipBean      用户
+     * @param order        锟斤拷锟斤拷
+     * @param orderDetails 杩涗环
+     * @param userGoods    锟斤拷要锟斤拷锟铰碉拷 锟矫伙拷-锟斤拷品 锟叫憋拷
+     * @param goodsBeans   锟斤拷品 锟叫憋拷
+     * @param vipBean      锟矫伙拷
      */
     void placeGoodsOrder(OrderBean order,
                          List<OrderDetailBean> orderDetails,
                          List<UserGoods> userGoods,
                          List<GoodsDto> goodsBeans,
-                         VipInfo vipBean) throws Exception;
+                         VipInfoDto vipBean) throws Exception;
 
     /**
-     * 商品下单事务
+     * 锟斤拷品锟铰碉拷锟斤拷锟斤拷
      *
-     * @param order        订单
-     * @param orderDetails 订单详情
-     * @param userGoods    需要更新的 用户-商品 列表
-     * @param goodsBeans   商品 列表
-     * @param vipBean      用户
+     * @param order        锟斤拷锟斤拷
+     * @param orderDetails 杩涗环
+     * @param userGoods    锟斤拷要锟斤拷锟铰碉拷 锟矫伙拷-锟斤拷品 锟叫憋拷
+     * @param goodsBeans   锟斤拷品 锟叫憋拷
+     * @param vipBean      锟矫伙拷
      */
     void placePackageOrder(OrderBean order,
                               List<OrderDetailBean> orderDetails,
                               List<UserGoods> userGoods,
                               List<GoodsDto> goodsBeans,
-                              VipInfo vipBean) ;
+                              VipInfoDto vipBean) ;
 }

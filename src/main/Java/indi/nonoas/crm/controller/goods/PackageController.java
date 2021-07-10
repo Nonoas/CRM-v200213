@@ -18,12 +18,12 @@ import java.util.ResourceBundle;
 public abstract class PackageController implements Initializable {
 
     /**
-     * ÉÌÆ·ÁÐ±í±í¸ñ
+     * ï¿½ï¿½Æ·ï¿½Ð±ï¿½ï¿½ï¿½
      */
     protected PackageContentEditTable pkgGoodsTable = new PackageContentEditTable();
 
     /**
-     * ÉÏ´«°´Å¥
+     * ï¿½Ï´ï¿½ï¿½ï¿½Å¥
      */
     @FXML
     protected Button btn_upload;
@@ -64,22 +64,22 @@ public abstract class PackageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //³õÊ¼»¯CombBox
-        cb_pkgType.getItems().addAll("²úÆ·Àà", "·þÎñÀà");
+        //ï¿½ï¿½Ê¼ï¿½ï¿½CombBox
+        cb_pkgType.getItems().addAll("ï¿½ï¿½Æ·ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
         initView();
     }
 
     /**
-     * ³õÊ¼»¯½çÃæ²Ù×÷
+     * ï¿½ï¿½Ê¼è¿›ä»·ï¿½
      */
     protected abstract void initView();
 
     /**
-     * Ìí¼ÓÉÌÆ·
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
      */
     @FXML
     protected void addGoods() {
-        //Ìí¼ÓÌ×²ÍÏîÄ¿µÄÉÌÆ·
+        //ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½Æ·
         GoodsSelectDialog dialog = new GoodsSelectDialog();
         dialog.showAndWait();
         ObservableList<GoodsDto> beans = dialog.getSelectGoods();
@@ -95,7 +95,7 @@ public abstract class PackageController implements Initializable {
     }
 
     /**
-     * É¾³ýÉÌÆ·
+     * É¾ï¿½ï¿½ï¿½ï¿½Æ·
      */
     @FXML
     protected void deleteGoods() {
@@ -103,7 +103,7 @@ public abstract class PackageController implements Initializable {
     }
 
     /**
-     * Çå¿ÕÉÌÆ·
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
      */
     @FXML
     protected void clearGoods() {
@@ -111,23 +111,23 @@ public abstract class PackageController implements Initializable {
     }
 
     /**
-     * ÓÃÓÚÌá½»Ê±ºò¼ì²éÊÇ·ñÓÐÎ´ÌîÑ¡Ïî
+     * ï¿½ï¿½ï¿½ï¿½ï¿½á½»Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Î´ï¿½ï¿½Ñ¡ï¿½ï¿½
      *
-     * @return ÓÐÔò·µ»Øtrue£¬Ã»ÓÐÔò·µ»Øfalse
+     * @return ï¿½ï¿½ï¿½ò·µ»ï¿½trueï¿½ï¿½Ã»ï¿½ï¿½ï¿½ò·µ»ï¿½false
      */
     protected boolean hasEmpty() {
 
         if (tf_id.getText().equals("")) {
-            new MyAlert(Alert.AlertType.WARNING, "ÏîÄ¿±àºÅ²»ÄÜÎª¿Õ£¡").show();
+            new MyAlert(Alert.AlertType.WARNING, "ï¿½ï¿½Ä¿ï¿½ï¿½Å²ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½").show();
             return true;
         } else if (tf_name.getText().equals("")) {
-            new MyAlert(Alert.AlertType.WARNING, "ÏîÄ¿Ãû³Æ²»ÄÜÎª¿Õ£¡").show();
+            new MyAlert(Alert.AlertType.WARNING, "ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½").show();
             return true;
         } else if (tf_money.getText().equals("")) {
-            new MyAlert(Alert.AlertType.WARNING, "Ì×²ÍÊÛ¼Û²»ÄÜÎª¿Õ£¡").show();
+            new MyAlert(Alert.AlertType.WARNING, "ï¿½×²ï¿½ï¿½Û¼Û²ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½").show();
             return true;
         } else if (tf_integral.getText().equals("")) {
-            new MyAlert(Alert.AlertType.WARNING, "Ì×²Í»ý·Ö²»ÄÜÎª¿Õ£¡").show();
+            new MyAlert(Alert.AlertType.WARNING, "ï¿½×²Í»ï¿½ï¿½Ö²ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½").show();
             return true;
         }
         return false;

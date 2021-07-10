@@ -11,11 +11,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LoginMapper {
     /**
-     * ÑéÖ¤µÇÂ¼ÐÅÏ¢
+     * ï¿½ï¿½Ö¤ï¿½ï¿½Â¼ï¿½ï¿½Ï¢
      *
-     * @param username ÓÃ»§Ãû
-     * @param password ÃÜÂë
-     * @return ³É¹¦·µ»Øbean£¬Ê§°Ü·µ»Ønull
+     * @param username ï¿½Ã»ï¿½ï¿½ï¿½
+     * @param password ï¿½ï¿½ï¿½ï¿½
+     * @return ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½beanï¿½ï¿½Ê§ï¿½Ü·ï¿½ï¿½ï¿½null
      */
     LoginDto verifySelect(@Param("id") String username, @Param("password") String password);
 }

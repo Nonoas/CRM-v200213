@@ -1,22 +1,22 @@
 package indi.nonoas.crm.pojo;
 
 /**
- * ÏîÄ¿ÄÚÈÝÐÅÏ¢Bean
+ * ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢Bean
  *
  * @author Nonoas
  */
 public class PackageContentDto {
 
     /**
-     * ÏîÄ¿±àºÅ
+     * ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½
      */
     private String pkgId;
     /**
-     * ÉÌÆ·±àºÅ
+     * ï¿½ï¿½Æ·ï¿½ï¿½ï¿½
      */
     private String goodsId;
     /**
-     * ÉÌÆ·ÊýÁ¿
+     * ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
      */
     private int goodsAmount;
 

@@ -38,7 +38,7 @@ public class ExternalPropertiesUtil {
         properties.setProperty(k, v);
         try {
             OutputStream out = new FileOutputStream(path);
-            properties.store(out, "¸üÐÂ");
+            properties.store(out, "ï¿½ï¿½ï¿½ï¿½");
         } catch (IOException e) {
             e.printStackTrace();
         }

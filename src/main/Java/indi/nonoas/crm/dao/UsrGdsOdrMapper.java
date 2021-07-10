@@ -12,9 +12,9 @@ import java.util.List;
 @Repository
 public interface UsrGdsOdrMapper {
     /**
-     * ²éÑ¯ËùÓÐÓÃ»§¿â´æÉÌÆ·Ïû·Ñ¼ÇÂ¼
+     * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½Ñ¼ï¿½Â¼
      *
-     * @return Ïû·Ñ¼ÇÂ¼ÁÐ±í
+     * @return ï¿½ï¿½ï¿½Ñ¼ï¿½Â¼ï¿½Ð±ï¿½
      */
     List<UsrGdsOdrRecordVO> selectUserGoodsOrder();
 }

@@ -13,19 +13,19 @@ import java.util.List;
 @Transactional
 public interface UsrGdsService {
     /**
-     * ¸ù¾ÝÓÃ»§ID²éÑ¯ÓÃ»§ÉÌÆ·Óà¶î
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½IDï¿½ï¿½Ñ¯ï¿½Ã»ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½
      *
-     * @param userID ÓÃ»§ID
-     * @return ÓÃ»§ÉÌÆ·ÁÐ±í
+     * @param userID ï¿½Ã»ï¿½ID
+     * @return ï¿½Ã»ï¿½ï¿½ï¿½Æ·ï¿½Ð±ï¿½
      */
     List<UserGoods> selectByUser(String userID);
 
     /**
-     * ¸ù¾ÝÓÃ»§IDºÍÉÌÆ·ID²éÑ¯
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½IDï¿½ï¿½ï¿½ï¿½Æ·IDï¿½ï¿½Ñ¯
      *
-     * @param userId  ÓÃ»§ID
-     * @param goodsId ÉÌÆ·ID
-     * @return ÓÃ»§-ÉÌÆ·BeanÀà
+     * @param userId  ï¿½Ã»ï¿½ID
+     * @param goodsId ï¿½ï¿½Æ·ID
+     * @return ï¿½Ã»ï¿½-ï¿½ï¿½Æ·Beanï¿½ï¿½
      */
     UserGoods selectByUserGoods(String userId,  String goodsId);
 }

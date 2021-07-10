@@ -2,7 +2,7 @@ package indi.nonoas.crm.controller.vip;
 
 import indi.nonoas.crm.component.alert.MyAlert;
 import indi.nonoas.crm.config.ImageSrc;
-import indi.nonoas.crm.pojo.dto.VipInfo;
+import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.service.VipLvService;
 import indi.nonoas.crm.service.VipService;
 import indi.nonoas.crm.utils.SpringUtil;
@@ -33,7 +33,7 @@ public class VipAddController implements Initializable {
     private final VipLvService vipLvService = (VipLvService) SpringUtil.getBean("VipLvServiceImpl");
 
     /**
-     * »áÔ±ÕÕÆ¬¾ø¶ÔÂ·¾¶
+     * ï¿½ï¿½Ô±ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
      */
     private String photoUrl;
     @FXML
@@ -41,7 +41,7 @@ public class VipAddController implements Initializable {
     @FXML
     private CheckBox chc_isClose;
     /**
-     * ÓÀ¾Ã°´Å¥
+     * ï¿½ï¿½ï¿½Ã°ï¿½Å¥
      */
     @FXML
     private CheckBox cbb_forever;
@@ -92,27 +92,27 @@ public class VipAddController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // ½«µ¥Ñ¡°´Å¥°ó¶¨ÔÚÒ»×é
+        // ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
         rbtn_man.setToggleGroup(tGroup);
-        rbtn_man.setUserData("ÄÐ");
+        rbtn_man.setUserData("ï¿½ï¿½");
         rbtn_women.setToggleGroup(tGroup);
         rbtn_women.setUserData("Å®");
         rbtn_secret.setToggleGroup(tGroup);
-        rbtn_secret.setUserData("±£ÃÜ");
-        // ÉèÖÃ³õÊ¼Í¼Æ¬
+        rbtn_secret.setUserData("ï¿½ï¿½ï¿½ï¿½");
+        // ï¿½ï¿½ï¿½Ã³ï¿½Ê¼Í¼Æ¬
         img_photo.setImage(new Image(ImageSrc.PHOTO_PATH));
-        // ³õÊ¼»¯CombBox
+        // ï¿½ï¿½Ê¼ï¿½ï¿½CombBox
         List<String> cbbItems = vipLvService.listAllNames();
         for (String item : cbbItems) {
             cbb_level.getItems().add(item);
         }
         cbb_level.setValue(cbbItems.get(0));
-        // ÓÀ¾ÃÑ¡Ïî¼àÌý
+        // ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½
         cbb_forever.selectedProperty().addListener(isForeverListener);
     }
 
     /**
-     * ¼àÌý¹ýÆÚÊ±¼äÊÇ·ñÎªÓÀ¾Ã
+     * è¿›ä»·Ê±ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½ï¿½ï¿½
      */
     private final ChangeListener<Boolean> isForeverListener = (observable, oldValue, newValue) -> {
         dpick_expiration.setDisable(newValue);
@@ -121,26 +121,26 @@ public class VipAddController implements Initializable {
         }
     };
 
-    @FXML // ×Ô¶¯Éú³É»áÔ±¿¨ºÅ
+    @FXML // ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½É»ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
     private void autoSetId() {
         if (!tf_id.getText().equals("")) {
-            new MyAlert(AlertType.WARNING, "ÇëÏÈÇå³ýÒÑ¾­ÌîÐ´µÄ»áÔ±¿¨ºÅ£¡").show();
+            new MyAlert(AlertType.WARNING, "è¿›ä»·Ñ¾ï¿½ï¿½ï¿½Ð´ï¿½Ä»ï¿½Ô±ï¿½ï¿½ï¿½Å£ï¿½").show();
             return;
         }
         String newID = vipService.generateVipID();
         tf_id.setText(newID);
     }
 
-    @FXML // ÉÏ´«»áÔ±ÕÕÆ¬
+    @FXML // ï¿½Ï´ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Æ¬
     private void uploadPhoto() {
         FileChooser chooser = new FileChooser();
-        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Í¼Æ¬ÎÄ¼þ", "*.png", "*.jpg"));
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Í¼Æ¬ï¿½Ä¼ï¿½", "*.png", "*.jpg"));
         File photoFile = chooser.showOpenDialog(null);
         photoUrl = photoFile.getAbsolutePath();
         img_photo.setImage(new Image("file:" + photoUrl));
     }
 
-    @FXML    //¹Ø±Õµ±Ç°Ãæ°å
+    @FXML    //ï¿½Ø±Õµï¿½Ç°ï¿½ï¿½ï¿½
     private void cancelInfo() {
         TabPane tabPane = parentTab.getTabPane();
         tabPane.getTabs().remove(parentTab);
@@ -151,7 +151,7 @@ public class VipAddController implements Initializable {
         if (!isCommittable()) {
             return;
         }
-        VipInfo bean = new VipInfo();
+        VipInfoDto bean = new VipInfoDto();
         bean.setId(tf_id.getText().trim());
         bean.setName(tf_name.getText().trim());
         bean.setSex((String) tGroup.getSelectedToggle().getUserData());
@@ -182,36 +182,36 @@ public class VipAddController implements Initializable {
         bean.setCareer(tf_career.getText());
         bean.setEmail(tf_mail.getText());
         bean.setOther(tf_other.getText());
-        bean.setPhoto(photoUrl); // ÕÕÆ¬
+        bean.setPhoto(photoUrl); // ï¿½ï¿½Æ¬
 
         vipService.insertInfo(bean);
 
-        new MyAlert(AlertType.CONFIRMATION, "»áÔ±ÐÅÏ¢Ìí¼Ó³É¹¦£¡").showAndWait();
-        if (chc_isClose.isSelected()) { // Èç¹ûÑ¡ÔñÁËÌá½»ºó¹Ø±Õ£¬Ôò¹Ø±Õµ±Ç°tab
+        new MyAlert(AlertType.CONFIRMATION, "ï¿½ï¿½Ô±ï¿½ï¿½Ï¢ï¿½ï¿½Ó³É¹ï¿½ï¿½ï¿½").showAndWait();
+        if (chc_isClose.isSelected()) { // ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½á½»ï¿½ï¿½Ø±Õ£ï¿½ï¿½ï¿½Ø±Õµï¿½Ç°tab
             cancelInfo();
         }
     }
 
     /**
-     * ÅÐ¶ÏÊÇ·ñ¿ÉÒÔÌá½»ÐÅÏ¢
+     * ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½á½»ï¿½ï¿½Ï¢
      *
-     * @return ¿ÉÒÔÎªtrue£¬²»¿ÉÓÃÎªfalse
+     * @return ï¿½ï¿½ï¿½ï¿½Îªtrueè¿›ä»·Îªfalse
      */
     private boolean isCommittable() {
-        String id = tf_id.getText().trim(); // ¿¨ºÅ
-        String name = tf_name.getText().trim(); // ÐÕÃû
-        String tel = tf_tel.getText().trim(); // µç»°ºÅÂë
-        String level = cbb_level.getValue(); // »áÔ±µÈ¼¶
+        String id = tf_id.getText().trim(); // ï¿½ï¿½ï¿½ï¿½
+        String name = tf_name.getText().trim(); // ï¿½ï¿½ï¿½ï¿½
+        String tel = tf_tel.getText().trim(); // ï¿½ç»°ï¿½ï¿½ï¿½ï¿½
+        String level = cbb_level.getValue(); // ï¿½ï¿½Ô±ï¿½È¼ï¿½
         LocalDate date = dp_addDate.getValue();
         if (id.equals("") || name.equals("") || tel.equals("") || level.equals("") || date == null) {
-            new MyAlert(AlertType.WARNING, "»áÔ±¿¨ºÅ¡¢»áÔ±ÐÕÃû¡¢ÁªÏµµç»°¡¢»áÔ±µÈ¼¶¡¢Èë»áÊ±¼ä²»ÄÜÎª¿Õ£¡").show();
+            new MyAlert(AlertType.WARNING, "ï¿½ï¿½Ô±ï¿½ï¿½ï¿½Å¡ï¿½ï¿½ï¿½Ô±è¿›ä»·Ïµï¿½ç»°ï¿½ï¿½ï¿½ï¿½Ô±ï¿½È¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä²»ï¿½ï¿½Îªï¿½Õ£ï¿½").show();
             return false;
         }
         return true;
     }
 
     /**
-     * Í¨¹ýÍâ½ç´«µÝµ±Ç°µÄtabÒýÓÃ
+     * Í¨ï¿½ï¿½ï¿½ï¿½ç´«ï¿½Ýµï¿½Ç°ï¿½ï¿½tabï¿½ï¿½ï¿½ï¿½
      */
     public void setPane(Tab tab) {
         this.parentTab = tab;

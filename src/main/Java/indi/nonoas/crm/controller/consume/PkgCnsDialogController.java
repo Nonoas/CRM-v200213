@@ -5,7 +5,7 @@ import indi.nonoas.crm.common.PayMode;
 import indi.nonoas.crm.component.alert.MyAlert;
 import indi.nonoas.crm.pojo.*;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
-import indi.nonoas.crm.pojo.dto.VipInfo;
+import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.service.GoodsService;
 import indi.nonoas.crm.service.OrderService;
 import indi.nonoas.crm.service.PackageService;
@@ -44,22 +44,22 @@ public class PkgCnsDialogController implements Initializable {
     private final OrderService orderService = (OrderService) SpringUtil.getBean("OrderServiceImpl");
 
     /**
-     * Ïû·ÑÕß
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
-    private VipInfo vipBean;
+    private VipInfoDto vipBean;
 
     /**
-     * ¶©µ¥
+     * ï¿½ï¿½ï¿½ï¿½
      */
     private OrderBean order;
 
     /**
-     * ¶©µ¥ÏêÇé
+     * è¿›ä»·
      */
     private List<OrderDetailBean> orderDetails;
 
     /**
-     * Ïû·ÑÕßÐÕÃû
+     * è¿›ä»·ï¿½ï¿½
      */
     @FXML
     private Label lb_consumer;
@@ -68,24 +68,24 @@ public class PkgCnsDialogController implements Initializable {
     private GridPane gp_rootPane;
 
     /**
-     * Ö§¸¶·½Ê½
+     * Ö§ï¿½ï¿½ï¿½ï¿½Ê½
      */
     @FXML
     private ComboBox<PayMode> cb_payMode;
 
     /**
-     * ÊÜÀíÈË
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @FXML
     private TextField tf_transactor;
 
     /**
-     * Ö§¸¶Êý¶î
+     * Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     @FXML
     private TextField tf_payValue;
     /**
-     * Óà¶î
+     * ï¿½ï¿½ï¿½
      */
     @FXML
     private Label lb_balance;
@@ -94,25 +94,25 @@ public class PkgCnsDialogController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         cb_payMode.getItems().addAll(PayMode.INTEGRAL, PayMode.CASH, PayMode.BALANCE, PayMode.FREE);
         cb_payMode.setValue(PayMode.CASH);
-        lb_balance.setText("ÒÑÑ¡ÔñÏÖ½ðÖ§¸¶");
-        //Ìí¼ÓÏÂÀ­Ñ¡Ïî¼àÌý
+        lb_balance.setText("ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Ö½ï¿½Ö§ï¿½ï¿½");
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½
         cb_payMode.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             switch (newValue) {
                 case CASH:
-                    lb_balance.setText("ÒÑÑ¡ÔñÏÖ½ðÖ§¸¶");
+                    lb_balance.setText("ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Ö½ï¿½Ö§ï¿½ï¿½");
                     tf_payValue.setText(String.valueOf(order.getPrice()));
                     break;
                 case BALANCE:
-                    lb_balance.setText(String.format("£¤%.2f", vipBean.getBalance()));
+                    lb_balance.setText(String.format("ï¿¥%.2f", vipBean.getBalance()));
                     tf_payValue.setText(String.valueOf(order.getPrice()));
                     break;
                 case INTEGRAL:
-                    lb_balance.setText(String.format("%d£¨»ý·Ö£©", vipBean.getIntegral()));
+                    lb_balance.setText(String.format("%dï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½", vipBean.getIntegral()));
                     tf_payValue.setText(String.valueOf(order.getIntegralCost()));
                     break;
                 case FREE:
-                    lb_balance.setText("ÒÑÑ¡ÔñÔùËÍ");
-                    tf_payValue.setText(String.format("£¤%.2f", 0.00));
+                    lb_balance.setText("ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+                    tf_payValue.setText(String.format("ï¿¥%.2f", 0.00));
                     break;
             }
         });
@@ -122,40 +122,40 @@ public class PkgCnsDialogController implements Initializable {
     @FXML
     private void submit() {
 
-        //ÅÐ¶ÏÊÇ·ñÓà¶î²»×ã
+        //ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½î²»ï¿½ï¿½
         if (isOutOfBalance()) {
             stage.close();
             return;
         }
 
-        order.setTransactor(tf_transactor.getText());   //»ñÈ¡ÊÜÀíÈË
+        order.setTransactor(tf_transactor.getText());   //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-        //ÉèÖÃ¼´½«´«ÈëÊý¾Ý¿âµÄ ÓÃ»§-ÉÌÆ·
+        //ï¿½ï¿½ï¿½Ã¼è¿›ä»·ï¿½ï¿½Ý¿ï¿½ï¿½ ï¿½Ã»ï¿½-ï¿½ï¿½Æ·
         List<UserGoods> userGoods = userGoodsData();
-        //ÉèÖÃ¼´½«¼õÉÙÊýÁ¿µÄ ÉÌÆ·
+        //ï¿½ï¿½ï¿½Ã¼è¿›ä»·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ·
         List<GoodsDto> goodsBeans = goodsData();
-        //ÉèÖÃÐèÒª¸üÐÂµÄÏû·ÑÕßÐÅÏ¢
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Âµè¿›ä»·ï¿½Ï¢
 
-        // TODO ¿ÉÄÜ´æÔÚÏû·Ñ²»³É¹¦£¬µ«ÊÇÓÃ»§BeanÊý¾Ý±»ÐÞ¸ÄµÄÇé¿ö
-        VipInfo vipBean = vipData();
-        //ÉèÖÃ×îÖÕ¶©µ¥ÐÅÏ¢
+        // TODO ï¿½ï¿½ï¿½Ü´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ²ï¿½ï¿½É¹è¿›ä»·Ã»ï¿½Beanï¿½ï¿½ï¿½Ý±ï¿½ï¿½Þ¸Äµï¿½ï¿½ï¿½ï¿½
+        VipInfoDto vipBean = vipData();
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
         OrderBean orderBean = orderData();
 
         try {
             orderService.placePackageOrder(orderBean, orderDetails, userGoods, goodsBeans, vipBean);
             hasSubmit = true;
-            new MyAlert(Alert.AlertType.INFORMATION, "½áËã³É¹¦£¡").show();
+            new MyAlert(Alert.AlertType.INFORMATION, "ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½").show();
         } catch (Exception e) {
             hasSubmit = false;
-            new MyAlert(Alert.AlertType.INFORMATION, "½áËãÊ§°Ü£¡").show();
+            new MyAlert(Alert.AlertType.INFORMATION, "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½").show();
         }
         stage.close();
     }
 
     /**
-     * ÅÐ¶ÏÊÇ·ñ³¬³öÓà¶î
+     * ï¿½Ð¶ï¿½ï¿½Ç·ñ³¬³ï¿½ï¿½ï¿½ï¿½
      *
-     * @return ³¬³ö£ºtrue
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½true
      */
     private boolean isOutOfBalance() {
         PayMode payMode = cb_payMode.getValue();
@@ -163,11 +163,11 @@ public class PkgCnsDialogController implements Initializable {
         switch (payMode) {
             case BALANCE:
                 flag = vipBean.getBalance() < order.getPrice();
-                if (flag) new MyAlert(Alert.AlertType.WARNING, "ÏÖ½ðÓà¶î²»×ã£¡").show();
+                if (flag) new MyAlert(Alert.AlertType.WARNING, "ï¿½Ö½ï¿½ï¿½ï¿½î²»ï¿½ã£¡").show();
                 return flag;
             case INTEGRAL:
                 flag = vipBean.getBalance() < order.getPrice();
-                if (flag) new MyAlert(Alert.AlertType.WARNING, "»ý·ÖÓà¶î²»×ã£¡").show();
+                if (flag) new MyAlert(Alert.AlertType.WARNING, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î²»ï¿½ã£¡").show();
                 return flag;
             default:
                 return false;
@@ -175,24 +175,24 @@ public class PkgCnsDialogController implements Initializable {
     }
 
     /**
-     * »ñÈ¡Ð´ÈëÊý¾Ý¿âµÄ ¡°ÓÃ»§-ÉÌÆ·¡± bean¶ÔÏó¼¯ºÏ
+     * ï¿½ï¿½È¡Ð´ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ ï¿½ï¿½ï¿½Ã»ï¿½-ï¿½ï¿½Æ·ï¿½ï¿½ beanï¿½ï¿½ï¿½ó¼¯ºï¿½
      *
-     * @return ÓÃ»§-ÉÌÆ· bean¼¯ºÏ
+     * @return ï¿½Ã»ï¿½-ï¿½ï¿½Æ· beanï¿½ï¿½ï¿½ï¿½
      */
     private List<UserGoods> userGoodsData() {
 
         List<UserGoods> userGoods = new ArrayList<>(16);
-        String userID = order.getUserId();      //»ñÈ¡ÓÃ»§ID
+        String userID = order.getUserId();      //ï¿½ï¿½È¡ï¿½Ã»ï¿½ID
 
-        for (OrderDetailBean od : orderDetails) {   //±éÀú¶©µ¥
+        for (OrderDetailBean od : orderDetails) {   //è¿›ä»·
             String pkgID = od.getProductId();
-            //Èç¹ûÌ×²Í²»Îª·þÎñÀà£¬Ôò²»Ìí¼Óµ½ÓÃ»§µÄÉÌÆ·¿â´æÖÐ
+            //ï¿½ï¿½ï¿½ï¿½×²Í²ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½à£¬ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½
             PackageDto packageDto = pkgService.selectById(pkgID);
-            if (!"·þÎñÀà".equals(packageDto.getType())) {
+            if (!"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½".equals(packageDto.getType())) {
                 break;
             }
-            int pkgAmount = od.getProductAmount();        //»ñÈ¡Ì×²ÍÊýÁ¿
-            //²éÑ¯Ì×²Í°üº¬µÄÉÌÆ·
+            int pkgAmount = od.getProductAmount();        //ï¿½ï¿½È¡ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½
+            //ï¿½ï¿½Ñ¯ï¿½×²Í°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
             List<PackageContentDto> pkgContList = pkgService.listPkgContentByPkgId(pkgID);
             for (PackageContentDto pkgContBean : pkgContList) {
 
@@ -204,17 +204,17 @@ public class PkgCnsDialogController implements Initializable {
     }
 
     /**
-     * Í¨¹ýÌ×²ÍÄÚÈÝÀ´Éú³ÉÒª²åÈëÊý¾Ý¿âµÄ ÓÃ»§-ÉÌÆ· Êý¾Ý
+     * Í¨ï¿½ï¿½ï¿½×²è¿›ä»·ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ ï¿½Ã»ï¿½-ï¿½ï¿½Æ· ï¿½ï¿½ï¿½ï¿½
      *
-     * @param userId    ÓÃ»§id
-     * @param pkgAmount Ì×²ÍÊýÁ¿
-     * @param pkgCont   Ì×²ÍÄÚÈÝ
-     * @return UserGoods ·Ç¿Õ
+     * @param userId    ï¿½Ã»ï¿½id
+     * @param pkgAmount ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @param pkgCont   ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @return UserGoods ï¿½Ç¿ï¿½
      */
     private UserGoods getUsrGoodsByPkgCont(String userId, int pkgAmount, PackageContentDto pkgCont) {
-        String gID = pkgCont.getGoodsId();          //ÉÌÆ·ID
-        int gAmount = pkgCont.getGoodsAmount();     //ÉÌÆ·ÊýÁ¿
-        //²éÑ¯Êý¾Ý¿âÊÇ·ñÒÑ¾­´æÔÚ¸ÃÖ÷¼ü¶ÔÓ¦µÄÊý¾Ý
+        String gID = pkgCont.getGoodsId();          //ï¿½ï¿½Æ·ID
+        int gAmount = pkgCont.getGoodsAmount();     //ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
+        //ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½Ç·ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         UserGoods usrGoods = usrGdsService.selectByUserGoods(userId, gID);
         if (usrGoods == null) {
             usrGoods = new UserGoods();
@@ -222,16 +222,16 @@ public class PkgCnsDialogController implements Initializable {
             usrGoods.setGoodsId(gID);
             usrGoods.setAmount(gAmount * pkgAmount);
         } else {
-            // Èç¹û´æÔÚÔòÖ±½Ó¼ÓÉÏ¹ºÂòÊýÁ¿
+            // è¿›ä»·ï¿½Ö±ï¿½Ó¼ï¿½ï¿½Ï¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             usrGoods.setAmount(usrGoods.getAmount() + pkgAmount * gAmount);
         }
         return usrGoods;
     }
 
     /**
-     * »ñÈ¡×îÖÕ¶©µ¥ÐÅÏ¢
+     * ï¿½ï¿½È¡ï¿½ï¿½ï¿½Õ¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
      *
-     * @return ×îÖÕ¶©µ¥ÐÅÏ¢
+     * @return ï¿½ï¿½ï¿½Õ¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
      */
     private OrderBean orderData() {
         PayMode payMode = cb_payMode.getValue();
@@ -254,20 +254,20 @@ public class PkgCnsDialogController implements Initializable {
 
 
     /**
-     * »ñÈ¡ÐèÒª¸üÐÂµÄ ¡°ÉÌÆ·¡± bean¶ÔÏó
+     * ï¿½ï¿½È¡ï¿½ï¿½Òªï¿½ï¿½ï¿½Âµï¿½ ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ beanï¿½ï¿½ï¿½ï¿½
      *
-     * @return ÉÌÆ· beanµÄ¼¯ºÏ
+     * @return ï¿½ï¿½Æ· beanï¿½Ä¼ï¿½ï¿½ï¿½
      */
     private List<GoodsDto> goodsData() {
         List<GoodsDto> goodsBeans = new ArrayList<>(16);
-        //±éÀúÌ×²Í¶©µ¥
+        //ï¿½ï¿½ï¿½ï¿½ï¿½×²Í¶ï¿½ï¿½ï¿½
         for (OrderDetailBean detail : orderDetails) {
             List<PackageContentDto> pkgContBeans = pkgService.listPkgContentByPkgId(detail.getProductId());
-            //±éÀúÌ×²ÍÄÚÈÝ
+            //ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½
             for (PackageContentDto pkgContBean : pkgContBeans) {
                 GoodsDto bean = goodsService.selectById(pkgContBean.getGoodsId());
-                //ÉÌÆ·ÊýÁ¿ -> ¿â´æÊýÁ¿ - Ì×²ÍÊýÁ¿ * Ì×²ÍÄÚÉÌÆ·ÊýÁ¿
-                bean.setQuantity(bean.getQuantity() - detail.getProductAmount() * pkgContBean.getGoodsAmount());     //´ÓÊý¾Ý¿âÖÐ¼õÈ¥¹ºÂòµÄÊýÁ¿
+                //ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ -> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ - ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½ * ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
+                bean.setQuantity(bean.getQuantity() - detail.getProductAmount() * pkgContBean.getGoodsAmount());     //ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½Ð¼ï¿½È¥è¿›ä»·ï¿½
                 goodsBeans.add(bean);
             }
         }
@@ -275,18 +275,18 @@ public class PkgCnsDialogController implements Initializable {
     }
 
     /**
-     * »ñÈ¡ÐèÒª¸üÐÂµÄ ¡°ÓÃ»§¡± ¶ÔÏó
+     * ï¿½ï¿½È¡ï¿½ï¿½Òªï¿½ï¿½ï¿½Âµï¿½ ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
      *
-     * @return Ïû·ÑÕß
+     * @return ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
-    private VipInfo vipData() {
-        //Èç¹ûÏû·ÑÕßÎªÉ¢¿Í£¬Ôò²»½øÐÐÊý¾Ý´¦Àí
-        if (vipBean == VipInfo.SANKE)
+    private VipInfoDto vipData() {
+        //è¿›ä»·ï¿½ÎªÉ¢ï¿½Í£ï¿½ï¿½ò²»½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½
+        if (vipBean == VipInfoDto.SANKE)
             return vipBean;
 
-        VipInfo bean = this.vipBean;
+        VipInfoDto bean = this.vipBean;
         PayMode payMode = cb_payMode.getValue();
-        //ÐèÒª¿Û³ýµÄÊý¾Ý£ºÓà¶î || »ý·Ö
+        //ï¿½ï¿½Òªï¿½Û³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ || ï¿½ï¿½ï¿½ï¿½
         switch (payMode) {
             case CASH:
                 break;
@@ -297,7 +297,7 @@ public class PkgCnsDialogController implements Initializable {
                 bean.setIntegral(bean.getIntegral() - order.getIntegralCost());
                 break;
         }
-        //ÐèÒªÔö¼ÓµÄ£º»ý·Ö
+        //ï¿½ï¿½Òªï¿½ï¿½ï¿½ÓµÄ£ï¿½ï¿½ï¿½ï¿½ï¿½
         bean.setIntegral(bean.getIntegral() + order.getIntegralGet());
         return bean;
     }
@@ -308,9 +308,9 @@ public class PkgCnsDialogController implements Initializable {
     }
 
     /**
-     * ÅÐ¶ÏÊÇ·ñ³É¹¦Ìá½»
+     * ï¿½Ð¶ï¿½ï¿½Ç·ï¿½É¹ï¿½ï¿½á½»
      *
-     * @return ³É¹¦·µ»Øtrue£¬Ê§°Ü·µ»Øfalse
+     * @return ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½trueï¿½ï¿½Ê§ï¿½Ü·ï¿½ï¿½ï¿½false
      */
     public boolean hasSubmit() {
         return hasSubmit;
@@ -318,19 +318,19 @@ public class PkgCnsDialogController implements Initializable {
 
 
     //===========================================================================
-    //                           Ö÷Àà×¢Èëcontroller·½·¨
+    //                           ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½controllerï¿½ï¿½ï¿½ï¿½
     //===========================================================================
 
     /**
-     * ×¢ÈëstageÒÀÀµ
+     * ×¢ï¿½ï¿½stageï¿½ï¿½ï¿½ï¿½
      *
-     * @param stage ¿ØÖÆµÄ´°¿Ú
+     * @param stage ï¿½ï¿½ï¿½ÆµÄ´ï¿½ï¿½ï¿½
      */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    public void setVipBean(VipInfo vipBean) {
+    public void setVipBean(VipInfoDto vipBean) {
         this.vipBean = vipBean;
         lb_consumer.setText("[" + vipBean.getId() + "] " + vipBean.getName());
     }
@@ -345,7 +345,7 @@ public class PkgCnsDialogController implements Initializable {
     }
 
     /**
-     * ÉèÖÃ½¹µã
+     * ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½
      */
     public void setFocus() {
         tf_transactor.requestFocus();

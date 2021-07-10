@@ -1,7 +1,7 @@
 package indi.nonoas.crm.pojo;
 
 /**
- * 用户的服务类商品
+ * 鐢ㄦ埛-鍟嗗搧
  *
  * @author : Nonoas
  * @time : 2020-08-07 14:03
