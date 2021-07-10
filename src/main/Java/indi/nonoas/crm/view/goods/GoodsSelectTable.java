@@ -14,11 +14,6 @@ public class GoodsSelectTable extends GoodsInfoTable {
         getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
-    /**
-     * ��ȡѡ进价Ʒ
-     *
-     * @return ѡ进价Ʒ��Ϣ
-     */
     public ObservableList<GoodsDto> getSelectedItems() {
         return getSelectionModel().getSelectedItems();
     }

@@ -4,39 +4,45 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 /**
- * �ײ���Ŀ��
+ * 套餐信息
  *
  * @author Nonoas
  */
 @TableName("package_info")
 public class PackageDto {
     /**
-     * ���
+     * 套餐编号
      */
     @TableId("id")
     private String id;
+
     /**
-     * ����
+     * 套餐名称
      */
     private String name;
+
     /**
-     * ���ֻ���
+     * 积分消耗
      */
     private int integralCost;
+
     /**
-     * ��Ǯ����
+     * 现金消耗
      */
     private double moneyCost;
+
     /**
-     * ����ۿ�
+     * 最低折扣
      */
     private double minDiscount;
+
     /**
-     * ��Ŀ����
+     * 套餐类型
      */
     private String type;
+
     /**
-     * ��ע��Ϣ
+     * 备注
      */
     private String other;
 

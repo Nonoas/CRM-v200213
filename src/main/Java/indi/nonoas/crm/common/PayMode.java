@@ -1,13 +1,13 @@
 package indi.nonoas.crm.common;
 
 /**
- * ֧����ʽö��
+ * 支付方式枚举
  */
 public enum PayMode {
-    INTEGRAL("����"),
-    CASH("�ֽ�"),
-    BALANCE("���"),
-    FREE("���");
+    INTEGRAL("积分"),
+    CASH("现金"),
+    BALANCE("余额"),
+    FREE("赠送");
 
     private final String val;
 
