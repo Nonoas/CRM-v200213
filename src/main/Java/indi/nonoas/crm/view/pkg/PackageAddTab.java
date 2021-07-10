@@ -10,13 +10,13 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.Pane;
 
 /**
- * ��Ŀ������
+ * 套餐添加Tab
  * @author Nonoas
  *
  */
 public class PackageAddTab extends Tab{
 	public PackageAddTab() {
-		this("�����Ŀ");
+		this("套餐添加");
 	}
 	public PackageAddTab(String str) {
 		super(str);

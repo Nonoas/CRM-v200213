@@ -8,7 +8,7 @@
 
     <select id="selectUserGoodsOrder" resultMap="UsrGdsOdrRecordVO">
         select *
-        from ug_order_record
+        from USER_GOODS_ORDER
     </select>
 
 </mapper>

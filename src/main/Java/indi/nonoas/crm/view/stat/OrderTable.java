@@ -30,16 +30,16 @@ public class OrderTable extends TableView<OrderRecordVO> {
 
     private final ObservableList<OrderRecordVO> items = FXCollections.observableArrayList();
 
-    private final TableColumn<OrderRecordVO, String> orderId = new TableColumn<>("������");
-    private final TableColumn<OrderRecordVO, String> userId = new TableColumn<>("��Ա����");
-    private final TableColumn<OrderRecordVO, String> userName = new TableColumn<>("��Ա����");
-    private final TableColumn<OrderRecordVO, String> datetime = new TableColumn<>("进价");
-    private final TableColumn<OrderRecordVO, Number> price = new TableColumn<>("�������");
-    private final TableColumn<OrderRecordVO, Number> integralCost = new TableColumn<>("进价");
-    private final TableColumn<OrderRecordVO, Number> integralGet = new TableColumn<>("���ֻ�ȡ");
-    private final TableColumn<OrderRecordVO, String> transactor = new TableColumn<>("������");
-    private final TableColumn<OrderRecordVO, String> payMode = new TableColumn<>("֧����ʽ");
-    private final TableColumn<OrderRecordVO, String> content = new TableColumn<>("进价");
+    private final TableColumn<OrderRecordVO, String> orderId = new TableColumn<>("订单号");
+    private final TableColumn<OrderRecordVO, String> userId = new TableColumn<>("会员卡号");
+    private final TableColumn<OrderRecordVO, String> userName = new TableColumn<>("会员姓名");
+    private final TableColumn<OrderRecordVO, String> datetime = new TableColumn<>("消费日期");
+    private final TableColumn<OrderRecordVO, Number> price = new TableColumn<>("订单金额");
+    private final TableColumn<OrderRecordVO, Number> integralCost = new TableColumn<>("积分消耗");
+    private final TableColumn<OrderRecordVO, Number> integralGet = new TableColumn<>("积分获取");
+    private final TableColumn<OrderRecordVO, String> transactor = new TableColumn<>("受理人");
+    private final TableColumn<OrderRecordVO, String> payMode = new TableColumn<>("支付方式");
+    private final TableColumn<OrderRecordVO, String> content = new TableColumn<>("订单内容");
 
 
     public OrderTable() {
@@ -90,7 +90,7 @@ public class OrderTable extends TableView<OrderRecordVO> {
                 if (goods != null)
                     sb.append(goods.getName()).append(detail.getProductAmount()).append(goods.getBaseUnit());
                 if (i < size - 1)
-                    sb.append("��");
+                    sb.append("，");
             }
             vo.setContent(sb.toString());
         }

@@ -17,7 +17,7 @@ public class GoodsTypeTab extends Tab {
     private static volatile GoodsTypeTab instance;
 
     private GoodsTypeTab() {
-        this("��Ʒ���");
+        this("商品类型管理");
     }
 
     private GoodsTypeTab(String str) {

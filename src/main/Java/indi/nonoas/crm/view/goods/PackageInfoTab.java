@@ -16,7 +16,7 @@ public class PackageInfoTab extends Tab {
     private static volatile PackageInfoTab instance;
 
     private PackageInfoTab() {
-        this("�ײ���Ŀ");
+        this("套餐管理");
     }
 
     private PackageInfoTab(String str) {

@@ -12,7 +12,7 @@ import javafx.scene.control.TableView;
 import java.util.List;
 
 /**
- * �û������Ʒ������ϸ��
+ * 用户库存商品消费明细表
  *
  * @author : Nonoas
  * @time : 2020-09-03 17:06
@@ -23,12 +23,12 @@ public class UsrGdsOdrTable extends TableView<UsrGdsOdrRecordVO> {
 
     private final ObservableList<UsrGdsOdrRecordVO> items = FXCollections.observableArrayList();
 
-    private final TableColumn<UsrGdsOdrRecordVO, String> orderDate = new TableColumn<>("进价");
-    private final TableColumn<UsrGdsOdrRecordVO, String> userId = new TableColumn<>("��Ա����");
-    private final TableColumn<UsrGdsOdrRecordVO, String> userName = new TableColumn<>("��Ա����");
-    private final TableColumn<UsrGdsOdrRecordVO, String> goods = new TableColumn<>("进价");
-    private final TableColumn<UsrGdsOdrRecordVO, Number> amount = new TableColumn<>("����");
-    private final TableColumn<UsrGdsOdrRecordVO, String> transactor = new TableColumn<>("������");
+    private final TableColumn<UsrGdsOdrRecordVO, String> orderDate = new TableColumn<>("订单日期");
+    private final TableColumn<UsrGdsOdrRecordVO, String> userId = new TableColumn<>("会员卡号");
+    private final TableColumn<UsrGdsOdrRecordVO, String> userName = new TableColumn<>("会员姓名");
+    private final TableColumn<UsrGdsOdrRecordVO, String> goods = new TableColumn<>("订单内容");
+    private final TableColumn<UsrGdsOdrRecordVO, Number> amount = new TableColumn<>("数量");
+    private final TableColumn<UsrGdsOdrRecordVO, String> transactor = new TableColumn<>("受理人");
 
 
     public UsrGdsOdrTable() {

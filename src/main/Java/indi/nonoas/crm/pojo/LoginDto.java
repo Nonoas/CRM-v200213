@@ -1,39 +1,39 @@
 package indi.nonoas.crm.pojo;
 
 /**
- * ��¼��Ϣ
- * 
+ * 登录信息
+ *
  * @author Nonoas
  *
  */
 public class LoginDto {
 
-	/** �˺� */
-	private String userId;
-	/** ���� */
-	private String userName;
-	/** ���� */
+	/** 账号 */
+	private String id;
+	/** 姓名 */
+	private String name;
+	/** 密码 */
 	private String password;
-	/** Ȩ�� */
+	/** 权限 */
 	private int root;
 
 	public LoginDto() {
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getId() {
+		return id;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getName() {
+		return name;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPassword() {
@@ -55,8 +55,8 @@ public class LoginDto {
 	@Override
 	public String toString() {
 		return "LoginBean{" +
-				"id='" + userId + '\'' +
-				", name='" + userName + '\'' +
+				"id='" + id + '\'' +
+				", name='" + name + '\'' +
 				", password='" + password + '\'' +
 				", root=" + root +
 				'}';

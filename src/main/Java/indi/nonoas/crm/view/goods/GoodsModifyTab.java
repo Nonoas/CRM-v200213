@@ -11,37 +11,38 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.Pane;
 
 /**
- * �޸���Ʒ����
- * @author Nonoas
+ * 商品修改
  *
+ * @author Nonoas
  */
 public class GoodsModifyTab extends Tab {
 
-	private final GoodsDto bean;
-	
-	public GoodsModifyTab(GoodsDto bean) {
-		this("�޸���Ʒ��Ϣ",bean);
-	}
-	public GoodsModifyTab(String str, GoodsDto bean) {
-		super(str);
-		this.bean=bean;
-		initView();
-	}
+    private final GoodsDto bean;
 
-	private void initView() {
-		URL url = getClass().getResource("/fxml/goods/goods_modify.fxml");
-		FXMLLoader fxmlLoader = new FXMLLoader();
-		fxmlLoader.setLocation(url);
-		fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
-		try {
-			Pane pane = fxmlLoader.load();
-			setContent(pane);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		setClosable(true);
-		GoodsModifyController controller=fxmlLoader.getController();
-		controller.setPane(this);
-		controller.setBean(bean);
-	}
+    public GoodsModifyTab(GoodsDto bean) {
+        this("商品修改", bean);
+    }
+
+    public GoodsModifyTab(String str, GoodsDto bean) {
+        super(str);
+        this.bean = bean;
+        initView();
+    }
+
+    private void initView() {
+        URL url = getClass().getResource("/fxml/goods/goods_modify.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(url);
+        fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
+        try {
+            Pane pane = fxmlLoader.load();
+            setContent(pane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        setClosable(true);
+        GoodsModifyController controller = fxmlLoader.getController();
+        controller.setPane(this);
+        controller.setBean(bean);
+    }
 }
