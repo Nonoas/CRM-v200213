@@ -44,22 +44,22 @@ public class PkgCnsDialogController implements Initializable {
     private final OrderService orderService = (OrderService) SpringUtil.getBean("OrderServiceImpl");
 
     /**
-     * ������
+     * 消费者
      */
     private VipInfoDto vipBean;
 
     /**
-     * ����
+     * 订单
      */
     private OrderDto order;
 
     /**
-     * 进价
+     * 订单详情
      */
     private List<OrderDetailBean> orderDetails;
 
     /**
-     * 进价��
+     * 消费者姓名
      */
     @FXML
     private Label lb_consumer;
@@ -68,24 +68,24 @@ public class PkgCnsDialogController implements Initializable {
     private GridPane gp_rootPane;
 
     /**
-     * ֧����ʽ
+     * 支付方式
      */
     @FXML
     private ComboBox<PayMode> cb_payMode;
 
     /**
-     * ������
+     * 受理人
      */
     @FXML
     private TextField tf_transactor;
 
     /**
-     * ֧������
+     * 支付数额
      */
     @FXML
     private TextField tf_payValue;
     /**
-     * ���
+     * 余额
      */
     @FXML
     private Label lb_balance;
@@ -128,7 +128,7 @@ public class PkgCnsDialogController implements Initializable {
             return;
         }
 
-        order.setTransactor(tf_transactor.getText());   //��ȡ������
+        order.setTransactor(tf_transactor.getText());
 
         // 即将修改的 用户-商品 数据
         List<UserGoods> userGoods = userGoodsData();
@@ -252,20 +252,20 @@ public class PkgCnsDialogController implements Initializable {
 
 
     /**
-     * ��ȡ��Ҫ���µ� ����Ʒ�� bean����
+     * 获取需要更新的 “商品” bean对象
      *
-     * @return ��Ʒ bean�ļ���
+     * @return 商品 bean的集合
      */
     private List<GoodsDto> goodsData() {
         List<GoodsDto> goodsBeans = new ArrayList<>(16);
-        //�����ײͶ���
+        //遍历套餐订单
         for (OrderDetailBean detail : orderDetails) {
             List<PackageContentDto> pkgContBeans = pkgService.listPkgContentByPkgId(detail.getProductId());
-            //�����ײ�����
+            //遍历套餐内容
             for (PackageContentDto pkgContBean : pkgContBeans) {
                 GoodsDto bean = goodsService.selectById(pkgContBean.getGoodsId());
-                //��Ʒ���� -> ������� - �ײ����� * �ײ�����Ʒ����
-                bean.setQuantity(bean.getQuantity() - detail.getProductAmount() * pkgContBean.getGoodsAmount());     //�����ݿ��м�ȥ进价�
+                //商品数量 -> 库存数量 - 套餐数量 * 套餐内商品数量
+                bean.setQuantity(bean.getQuantity() - detail.getProductAmount() * pkgContBean.getGoodsAmount());     //从数据库中减去购买的数量
                 goodsBeans.add(bean);
             }
         }
@@ -273,18 +273,18 @@ public class PkgCnsDialogController implements Initializable {
     }
 
     /**
-     * ��ȡ��Ҫ���µ� ���û��� ����
+     * 获取需要更新的 “用户” 对象
      *
-     * @return ������
+     * @return 消费者
      */
     private VipInfoDto vipData() {
-        //进价�Ϊɢ�ͣ��򲻽������ݴ���
+        //如果消费者为散客，则不进行数据处理
         if (vipBean == VipInfoDto.SANKE)
             return vipBean;
 
         VipInfoDto bean = this.vipBean;
         PayMode payMode = cb_payMode.getValue();
-        //��Ҫ�۳������ݣ���� || ����
+        //需要扣除的数据：余额 || 积分
         switch (payMode) {
             case CASH:
                 break;
@@ -295,7 +295,7 @@ public class PkgCnsDialogController implements Initializable {
                 bean.setIntegral(bean.getIntegral() - order.getIntegralCost());
                 break;
         }
-        //��Ҫ���ӵģ�����
+        //需要增加的：积分
         bean.setIntegral(bean.getIntegral() + order.getIntegralGet());
         return bean;
     }
@@ -306,9 +306,9 @@ public class PkgCnsDialogController implements Initializable {
     }
 
     /**
-     * �ж��Ƿ�ɹ��ύ
+     * 判断是否成功提交
      *
-     * @return �ɹ�����true��ʧ�ܷ���false
+     * @return 成功返回true，失败返回false
      */
     public boolean hasSubmit() {
         return hasSubmit;
@@ -316,13 +316,13 @@ public class PkgCnsDialogController implements Initializable {
 
 
     //===========================================================================
-    //                           ����ע��controller����
+    //                           主类注入controller方法
     //===========================================================================
 
     /**
-     * ע��stage����
+     * 注入stage依赖
      *
-     * @param stage ���ƵĴ���
+     * @param stage 控制的窗口
      */
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -343,7 +343,7 @@ public class PkgCnsDialogController implements Initializable {
     }
 
     /**
-     * ���ý���
+     * 设置焦点
      */
     public void setFocus() {
         tf_transactor.requestFocus();

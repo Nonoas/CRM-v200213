@@ -41,45 +41,45 @@ public class ConsumeDialogController implements Initializable {
     private final UsrGdsService ugService = (UsrGdsService) SpringUtil.getBean("UsrGdsServiceImpl");
 
     /**
-     * ������
+     * 消费者
      */
     private VipInfoDto vipBean;
 
     /**
-     * ����
+     * 订单
      */
     private OrderDto order;
 
     /**
-     * 进价
+     * 订单详情
      */
     private List<OrderDetailBean> orderDetails;
 
     /**
-     * 进价��
+     * 消费者姓名
      */
     @FXML
     private Label lb_consumer;
 
     /**
-     * ֧����ʽ
+     * 支付方式
      */
     @FXML
     private ComboBox<PayMode> cb_payMode;
 
     /**
-     * ������
+     * 受理人
      */
     @FXML
     private TextField tf_transactor;
 
     /**
-     * ֧������
+     * 支付数额
      */
     @FXML
     private TextField tf_payValue;
     /**
-     * ���
+     * 余额
      */
     @FXML
     private Label lb_balance;
@@ -175,9 +175,9 @@ public class ConsumeDialogController implements Initializable {
     }
 
     /**
-     * ��ȡ���ն�����Ϣ
+     * 获取最终订单信息
      *
-     * @return ���ն�����Ϣ
+     * @return 最终订单信息
      */
     private OrderDto orderData() {
         PayMode payMode = cb_payMode.getValue();
@@ -199,9 +199,9 @@ public class ConsumeDialogController implements Initializable {
     }
 
     /**
-     * ��ȡд�����ݿ�� ���û�-��Ʒ�� bean����
+     * 获取写入数据库的 “用户-商品” bean对象
      *
-     * @return �û�-��Ʒ bean����
+     * @return 用户-商品 bean集合
      */
     private List<UserGoods> userGoodsData() {
         List<UserGoods> userGoods = new ArrayList<>(orderDetails.size());
@@ -210,7 +210,7 @@ public class ConsumeDialogController implements Initializable {
             String gID = od.getProductId();
 
             GoodsDto bean = goodsService.selectById(gID);
-            if (!bean.getType().equals("������"))
+            if (!bean.getType().equals("服务类"))
                 break;
 
             int gAmount = od.getProductAmount();
@@ -231,6 +231,7 @@ public class ConsumeDialogController implements Initializable {
 
     /**
      * 设置消费或的商品信息
+     *
      * @return 消费后的商品信息
      */
     private List<GoodsDto> goodsData() {
