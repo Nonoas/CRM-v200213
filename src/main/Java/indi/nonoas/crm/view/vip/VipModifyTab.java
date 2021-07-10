@@ -1,7 +1,7 @@
 package indi.nonoas.crm.view.vip;
 
-import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.controller.vip.VipModifyController;
+import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.control.Tab;
@@ -18,7 +18,7 @@ public class VipModifyTab extends Tab {
     private Tab preTab;
 
     public VipModifyTab(VipInfoDto bean) {
-        this("�޸Ļ�Ա��Ϣ", bean);
+        this("会员修改", bean);
     }
 
     public VipModifyTab(String str, VipInfoDto bean) {
@@ -52,9 +52,6 @@ public class VipModifyTab extends Tab {
         });
     }
 
-    /**
-     * �رյ�ǰTab������õ���һ��tab�����ã���ر�֮����ת����һ��Tab
-     */
     public void close() {
         TabPane tabPane = getTabPane();
         if (tabPane != null) {
@@ -67,11 +64,6 @@ public class VipModifyTab extends Tab {
         controller.setBean(vipBean);
     }
 
-    /**
-     * ����ǰһ��Tab
-     *
-     * @param preTab ��һ����ת����ǰTab��Tab
-     */
     public void setPreTab(Tab preTab) {
         this.preTab = preTab;
     }

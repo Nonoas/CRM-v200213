@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * VIP�������
+ * 会员信息管理
  *
  * @author Nonoas
  */
@@ -19,7 +19,7 @@ public class VipManageTab extends Tab {
     private static volatile VipManageTab instance;
 
     private VipManageTab() {
-        this("��Ա����");
+        this("会员管理");
     }
 
     private VipManageTab(String str) {

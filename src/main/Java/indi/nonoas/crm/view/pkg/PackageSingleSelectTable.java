@@ -20,9 +20,7 @@ public class PackageSingleSelectTable extends PackageTable {
     }
 
     /**
-     * ��ȡ�¼�ί����
-     *
-     * @return �¼�ί����
+     * 获取事件处理类
      */
     public EventHandler getEventHandler() {
         return eventHandler;

@@ -33,9 +33,7 @@ public class VipInfoTable extends TableView<VipInfoDto> {
     private final ObservableList<VipInfoDto> obList = FXCollections.observableArrayList();
 
     private final ObservableList<TableColumn<VipInfoDto, ?>> colList = getColumns();
-    /**
-     * ��ǰѡ������
-     */
+
     private VipInfoDto selectedBean;
 
     private final TableColumn<VipInfoDto, String> item_balance = new TableColumn<>("余额");
@@ -82,31 +80,31 @@ public class VipInfoTable extends TableView<VipInfoDto> {
     }
 
     /**
-     * ��ʼ�������
+     * 初始化列
      */
     private void initColumns() {
 
         setTableMenuButtonVisible(true);
 
-        item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getId())); // ��Ա����
-        item_admission.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAdmissionDate())); // �������
-        item_name.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName())); // ����
-        item_sex.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSex())); // �Ա�
-        item_card_level.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getCardLevel())); // ��Ա�ȼ�
+        item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getId()));
+        item_admission.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAdmissionDate()));
+        item_name.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName()));
+        item_sex.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getSex()));
+        item_card_level.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getCardLevel()));
         item_discount.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getDiscount()));
         item_balance.setCellValueFactory(param -> {
             String str = String.format("￥%.2f", param.getValue().getBalance());
             return new SimpleStringProperty(str);
         });
-        item_cumulative.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getCumulative())); // �ۼ�����
-        item_address.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAddress())); // ��ϵ��ַ
-        item_integral.setCellValueFactory(param -> new SimpleIntegerProperty(param.getValue().getIntegral())); // ��Ա����
-        item_telephone.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTelephone())); // ��ϵ�绰
-        item_idCard.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getIdcard())); // ֤������
-        item_birthday.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getBirthday())); // 进价
-        item_career.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getCareer())); // ��λְҵ
-        item_email.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getEmail())); // ����
-        item_other.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getOther())); // ����
+        item_cumulative.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getCumulative()));
+        item_address.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getAddress()));
+        item_integral.setCellValueFactory(param -> new SimpleIntegerProperty(param.getValue().getIntegral()));
+        item_telephone.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getTelephone()));
+        item_idCard.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getIdcard()));
+        item_birthday.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getBirthday()));
+        item_career.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getCareer()));
+        item_email.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getEmail()));
+        item_other.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getOther()));
 
 
         colList.add(item_id);

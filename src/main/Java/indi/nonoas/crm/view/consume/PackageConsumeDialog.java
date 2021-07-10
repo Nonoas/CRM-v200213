@@ -17,7 +17,7 @@ import java.util.List;
  * @author : Nonoas
  * @time : 2020-08-18 15:54
  */
-@StageProperty(title = "进价")
+@StageProperty(title = "套餐消费")
 @FXML("/fxml/package_consume_dialog.fxml")
 public class PackageConsumeDialog extends ControllableStage {
 
@@ -39,11 +39,6 @@ public class PackageConsumeDialog extends ControllableStage {
         setResizable(false);
     }
 
-    /**
-     * �ж��Ƿ�ɹ��ύ
-     *
-     * @return �ɹ�����true��ʧ�ܷ���false
-     */
     public boolean hasSubmit() {
         return controller.hasSubmit();
     }

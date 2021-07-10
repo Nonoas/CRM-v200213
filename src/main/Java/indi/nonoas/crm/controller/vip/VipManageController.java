@@ -53,22 +53,19 @@ public class VipManageController implements Initializable {
         initView();
     }
 
-    /**
-     * ��ʼ������
-     */
     private void initView() {
         table = new VipInfoTable();
         scrollPane.setContent(table);
 
-        cbb_level.getItems().addAll("���еȼ�", "��ͨ��Ա", "������Ա");
-        cbb_level.setValue("���еȼ�");
+        cbb_level.getItems().addAll("所有等级", "普通会员", "超级会员");
+        cbb_level.setValue("所有等级");
 
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String str_from = "1900-01-01";
         LocalDate from = LocalDate.parse(str_from, df);
         LocalDate to = LocalDate.now();
-        dpk_from.setValue(from);    //���ʱ������
-        dpk_to.setValue(to);    //���ʱ������
+        dpk_from.setValue(from);
+        dpk_to.setValue(to);
 
     }
 
@@ -79,11 +76,11 @@ public class VipManageController implements Initializable {
     @FXML
     private void findVIP() {
 
-        String idOrName = "%" + tf_findInfo.getText().trim() + "%";    //���Ż�����
-        String str0 = cbb_level.getValue().equals("���еȼ�") ? "" : cbb_level.getValue();
+        String idOrName = "%" + tf_findInfo.getText().trim() + "%";
+        String str0 = cbb_level.getValue().equals("所有等级") ? "" : cbb_level.getValue();
         String level = str0 + "%";    //��Ա�ȼ�
-        String dateFrom = dpk_from.getValue().toString();    //ʱ������
-        String dateTo = dpk_to.getValue().toString();    //ʱ������
+        String dateFrom = dpk_from.getValue().toString();
+        String dateTo = dpk_to.getValue().toString();
 
         List<VipInfoDto> listVipBeans = vipService.selectByDateFiltrate(idOrName, idOrName, level, dateFrom, dateTo);
         if (listVipBeans != null) {
@@ -91,28 +88,31 @@ public class VipManageController implements Initializable {
             for (VipInfoDto bean : listVipBeans)
                 table.addBean(bean);
         } else {
-            new MyAlert(AlertType.INFORMATION, "û���ҵ�����ѯ�Ļ�Ա��").show();
+            new MyAlert(AlertType.INFORMATION, "没有找到您查找的会员信息！").show();
         }
     }
 
-    @FXML // ��ӻ�Ա��Ϣ
+    /**
+     * 添加会员信息
+     */
+    @FXML
     private void addVip() {
         MainController.addTab(new VipAddTab());
     }
 
     /**
-     * ɾ����Ա��Ϣ
+     * 删除会员信息
      */
     @FXML
     private void deleteVip() {
         VipInfoDto bean = table.getSelectedData();
         if (bean == null) {
-            new MyAlert(AlertType.INFORMATION, "����ѡ��һ�����ݣ�").show();
+            new MyAlert(AlertType.INFORMATION, "请选择一条会员信息！").show();
             return;
         }
-        String id = "����:" + bean.getId();
-        String name = "����:" + bean.getName();
-        MyAlert alert = new MyAlert(AlertType.CONFIRMATION, "�Ƿ�ȷ��ɾ�����û�����Ϣ��\n[ " + id + "��" + name + " ]");
+        String id = "卡号:" + bean.getId();
+        String name = "姓名:" + bean.getName();
+        MyAlert alert = new MyAlert(AlertType.CONFIRMATION, "您是否确认删除以下用户的信息？\n[ " + id + "，" + name + " ]");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             table.removeData(bean);
@@ -121,13 +121,13 @@ public class VipManageController implements Initializable {
     }
 
     /**
-     * �޸Ļ�Ա��Ϣ
+     * 修改会员信息
      */
     @FXML
     private void modifyVip() {
         VipInfoDto bean = table.getSelectedData();
         if (bean == null) {
-            new MyAlert(AlertType.INFORMATION, "����ѡ��һ�����ݣ�").show();
+            new MyAlert(AlertType.INFORMATION, "请选择一条会员信息！").show();
             return;
         }
         MainController.addTab(new VipModifyTab(bean));
@@ -135,7 +135,7 @@ public class VipManageController implements Initializable {
 
     @FXML
     private void printInfo() {
-        File file = new File("D:/��Ա��Ϣ.xls");
+        File file = new File("D:/会员信息.xls");
         OutputStream os = null;
         try {
             os = new FileOutputStream(file);
@@ -152,9 +152,9 @@ public class VipManageController implements Initializable {
         }
         boolean hasPrint = JXLUtil.exportExcel(titles, fieldNames, contentList, os);
         if (hasPrint) {
-            new MyAlert(AlertType.INFORMATION, "��ӡ�ɹ���\n�ļ�����λ��Ϊ��" + file.getAbsolutePath()).show();
+            new MyAlert(AlertType.INFORMATION, "打印成功！\n文件位于" + file.getAbsolutePath()).show();
         } else {
-            new MyAlert(AlertType.INFORMATION, "��ӡʧ�ܣ�").show();
+            new MyAlert(AlertType.INFORMATION, "打印失败！").show();
         }
     }
 

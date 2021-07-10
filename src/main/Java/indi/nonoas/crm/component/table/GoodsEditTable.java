@@ -236,7 +236,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
         protected void updateItem(String item, boolean empty) {
             super.updateItem(item, empty);
             if (!empty) {
-                Button btn_delete = new Button("ɾ��");
+                Button btn_delete = new Button("删除");
                 btn_delete.getStyleClass().add("danger");
 
                 btn_delete.setOnAction(event -> {
