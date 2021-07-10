@@ -223,9 +223,9 @@ public class ConsumeController implements Initializable {
             return;
         }
 
-        OrderBean orderBean = generateGoodsOrder();
+        OrderDto orderDto = generateGoodsOrder();
         List<OrderDetailBean> orderDetails = generateGoodsOrderDetails();
-        ConsumeDialog consumeDialog = new ConsumeDialog(vipBean, orderBean, orderDetails);
+        ConsumeDialog consumeDialog = new ConsumeDialog(vipBean, orderDto, orderDetails);
         consumeDialog.showAndWait();
         //如果成功提交，则清除订单信息
         if (consumeDialog.hasSubmit()) {
@@ -265,8 +265,8 @@ public class ConsumeController implements Initializable {
      *
      * @return 订单信息
      */
-    private OrderBean generateGoodsOrder() {
-        OrderBean bean = new OrderBean();
+    private OrderDto generateGoodsOrder() {
+        OrderDto bean = new OrderDto();
         bean.setUserId(vipBean.getId());
         bean.setOrderId(shp_orderNum.getText());
         bean.setDatetime(shp_orderDate.getText());
@@ -393,11 +393,11 @@ public class ConsumeController implements Initializable {
             return;
         }
         //生成订单数据
-        OrderBean orderBean = generatePackageOrder();
+        OrderDto orderDto = generatePackageOrder();
         //生成订单详情数据
         List<OrderDetailBean> orderDetails = generatePackageOrderDetails();
         //弹出消费窗口
-        PackageConsumeDialog consumeDialog = new PackageConsumeDialog(vipBean, orderBean, orderDetails);
+        PackageConsumeDialog consumeDialog = new PackageConsumeDialog(vipBean, orderDto, orderDetails);
         consumeDialog.showAndWait();
         //如果成功提交，则清除订单信息
         if (consumeDialog.hasSubmit()) {
@@ -411,8 +411,8 @@ public class ConsumeController implements Initializable {
      *
      * @return 套餐订单
      */
-    private OrderBean generatePackageOrder() {
-        OrderBean bean = new OrderBean();
+    private OrderDto generatePackageOrder() {
+        OrderDto bean = new OrderDto();
         bean.setUserId(vipBean.getId());
         bean.setOrderId(tc_orderNum.getText());
         bean.setDatetime(tc_orderDate.getText());

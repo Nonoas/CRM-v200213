@@ -36,7 +36,7 @@ public interface OrderService {
      * @param goodsBeans   ��Ʒ �б�
      * @param vipBean      �û�
      */
-    void placeGoodsOrder(OrderBean order,
+    void placeGoodsOrder(OrderDto order,
                          List<OrderDetailBean> orderDetails,
                          List<UserGoods> userGoods,
                          List<GoodsDto> goodsBeans,
@@ -51,9 +51,9 @@ public interface OrderService {
      * @param goodsBeans   ��Ʒ �б�
      * @param vipBean      �û�
      */
-    void placePackageOrder(OrderBean order,
-                              List<OrderDetailBean> orderDetails,
-                              List<UserGoods> userGoods,
-                              List<GoodsDto> goodsBeans,
-                              VipInfoDto vipBean) ;
+    void placePackageOrder(OrderDto order,
+                           List<OrderDetailBean> orderDetails,
+                           List<UserGoods> userGoods,
+                           List<GoodsDto> goodsBeans,
+                           VipInfoDto vipBean) ;
 }

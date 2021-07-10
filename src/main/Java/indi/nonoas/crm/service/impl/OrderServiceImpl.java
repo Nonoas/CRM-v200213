@@ -44,7 +44,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void placeGoodsOrder(OrderBean order,
+    public void placeGoodsOrder(OrderDto order,
                                 List<OrderDetailBean> orderDetails,
                                 List<UserGoods> userGoods,
                                 List<GoodsDto> goodsBeans,
@@ -77,11 +77,11 @@ public class OrderServiceImpl implements OrderService {
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void placePackageOrder(OrderBean order,
-                                     List<OrderDetailBean> orderDetails,
-                                     List<UserGoods> userGoods,
-                                     List<GoodsDto> goodsBeans,
-                                     VipInfoDto vipBean) {
+    public void placePackageOrder(OrderDto order,
+                                  List<OrderDetailBean> orderDetails,
+                                  List<UserGoods> userGoods,
+                                  List<GoodsDto> goodsBeans,
+                                  VipInfoDto vipBean) {
 
         //�����ɢ进价������
         if (vipBean != VipInfoDto.SANKE) {

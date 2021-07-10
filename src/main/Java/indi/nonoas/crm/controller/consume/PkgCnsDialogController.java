@@ -51,7 +51,7 @@ public class PkgCnsDialogController implements Initializable {
     /**
      * ����
      */
-    private OrderBean order;
+    private OrderDto order;
 
     /**
      * 进价
@@ -138,10 +138,10 @@ public class PkgCnsDialogController implements Initializable {
         // TODO 修改用户数据，可能存在支付失败但是用户类修改的情况
         VipInfoDto vipBean = vipData();
         // 订单数据
-        OrderBean orderBean = orderData();
+        OrderDto orderDto = orderData();
 
         try {
-            orderService.placePackageOrder(orderBean, orderDetails, userGoods, goodsBeans, vipBean);
+            orderService.placePackageOrder(orderDto, orderDetails, userGoods, goodsBeans, vipBean);
             hasSubmit = true;
             new MyAlert(Alert.AlertType.INFORMATION, "结算成功！").show();
         } catch (Exception e) {
@@ -153,6 +153,7 @@ public class PkgCnsDialogController implements Initializable {
 
     /**
      * 判断余额是否不足
+     *
      * @return 不足：true
      */
     private boolean isOutOfBalance() {
@@ -174,6 +175,7 @@ public class PkgCnsDialogController implements Initializable {
 
     /**
      * 获取即将写入数据库的 用户-商品 信息
+     *
      * @return 用户-商品 集合
      */
     private List<UserGoods> userGoodsData() {
@@ -183,13 +185,13 @@ public class PkgCnsDialogController implements Initializable {
 
         for (OrderDetailBean od : orderDetails) {
             String pkgID = od.getProductId();
-            //����ײͲ�Ϊ�����࣬����ӵ��û�����Ʒ�����
+            // 如果不是服务类则跳过
             PackageDto packageDto = pkgService.selectById(pkgID);
             if (!"服务类".equals(packageDto.getType())) {
                 break;
             }
-            int pkgAmount = od.getProductAmount();        //��ȡ�ײ�����
-            //��ѯ�ײͰ�������Ʒ
+            int pkgAmount = od.getProductAmount();
+            // 查询套餐内包含的商品
             List<PackageContentDto> pkgContList = pkgService.listPkgContentByPkgId(pkgID);
             for (PackageContentDto pkgContBean : pkgContList) {
 
@@ -201,17 +203,17 @@ public class PkgCnsDialogController implements Initializable {
     }
 
     /**
-     * ͨ���ײ进价���Ҫ�������ݿ�� �û�-��Ʒ ����
+     * 跳过套餐内容获取 用户-商品
      *
-     * @param userId    �û�id
-     * @param pkgAmount �ײ�����
-     * @param pkgCont   �ײ�����
-     * @return UserGoods �ǿ�
+     * @param userId    用户id
+     * @param pkgAmount 套餐数量
+     * @param pkgCont   套餐内容
+     * @return UserGoods 用户-商品
      */
     private UserGoods getUsrGoodsByPkgCont(String userId, int pkgAmount, PackageContentDto pkgCont) {
-        String gID = pkgCont.getGoodsId();          //��ƷID
-        int gAmount = pkgCont.getGoodsAmount();     //��Ʒ����
-        //��ѯ���ݿ��Ƿ��Ѿ����ڸ�������Ӧ������
+        String gID = pkgCont.getGoodsId();
+        int gAmount = pkgCont.getGoodsAmount();
+
         UserGoods usrGoods = usrGdsService.selectByUserGoods(userId, gID);
         if (usrGoods == null) {
             usrGoods = new UserGoods();
@@ -219,18 +221,17 @@ public class PkgCnsDialogController implements Initializable {
             usrGoods.setGoodsId(gID);
             usrGoods.setAmount(gAmount * pkgAmount);
         } else {
-            // 进价�ֱ�Ӽ��Ϲ�������
             usrGoods.setAmount(usrGoods.getAmount() + pkgAmount * gAmount);
         }
         return usrGoods;
     }
 
     /**
-     * ��ȡ���ն�����Ϣ
+     * 获取即将提交的 订单数据
      *
-     * @return ���ն�����Ϣ
+     * @return OrderBean
      */
-    private OrderBean orderData() {
+    private OrderDto orderData() {
         PayMode payMode = cb_payMode.getValue();
         order.setPayMode(payMode.val());
         switch (payMode) {
@@ -332,7 +333,7 @@ public class PkgCnsDialogController implements Initializable {
         lb_consumer.setText("[" + vipBean.getId() + "] " + vipBean.getName());
     }
 
-    public void setOrder(OrderBean order) {
+    public void setOrder(OrderDto order) {
         this.order = order;
         tf_payValue.setText(String.valueOf(order.getPrice()));
     }

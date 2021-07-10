@@ -7,9 +7,9 @@
         <id property="orderId" column="order_id"/>
     </resultMap>
 
-    <parameterMap id="OrderBeanP" type="indi.nonoas.crm.pojo.OrderBean"/>
+    <parameterMap id="OrderBeanP" type="indi.nonoas.crm.pojo.OrderDto"/>
 
-    <resultMap id="OrderBeanR" type="indi.nonoas.crm.pojo.OrderBean">
+    <resultMap id="OrderBeanR" type="indi.nonoas.crm.pojo.OrderDto">
         <id property="orderId" column="order_id"/>
         <result property="datetime" column="datetime"/>
         <result property="price" column="price"/>

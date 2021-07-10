@@ -5,7 +5,7 @@ import indi.nonoas.crm.component.annotation.StageProperty;
 import indi.nonoas.crm.component.stage.ControllableStage;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.controller.consume.ConsumeDialogController;
-import indi.nonoas.crm.pojo.OrderBean;
+import indi.nonoas.crm.pojo.OrderDto;
 import indi.nonoas.crm.pojo.OrderDetailBean;
 import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import javafx.scene.image.Image;
@@ -23,7 +23,7 @@ public class ConsumeDialog extends ControllableStage {
 
     private final ConsumeDialogController controller;
 
-    public ConsumeDialog(VipInfoDto vip, OrderBean order, List<OrderDetailBean> orderDetails) {
+    public ConsumeDialog(VipInfoDto vip, OrderDto order, List<OrderDetailBean> orderDetails) {
         initView();
         controller = (ConsumeDialogController) getController();
         controller.setStage(this);

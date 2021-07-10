@@ -1,6 +1,6 @@
 package indi.nonoas.crm.dao;
 
-import indi.nonoas.crm.pojo.OrderBean;
+import indi.nonoas.crm.pojo.OrderDto;
 import indi.nonoas.crm.pojo.OrderDetailBean;
 import indi.nonoas.crm.pojo.vo.OrderRecordVO;
 import org.apache.ibatis.annotations.Param;
@@ -27,7 +27,7 @@ public interface OrderMapper {
      *
      * @param order ����pojo
      */
-    void insertOrder(OrderBean order);
+    void insertOrder(OrderDto order);
 
     /**
      * ɾ��һ��ǰ�Ķ�����¼

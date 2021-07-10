@@ -48,7 +48,7 @@ public class ConsumeDialogController implements Initializable {
     /**
      * ����
      */
-    private OrderBean order;
+    private OrderDto order;
 
     /**
      * 进价
@@ -116,44 +116,46 @@ public class ConsumeDialogController implements Initializable {
     @FXML
     private void submit() {
 
-        //�ж��Ƿ�����
+        // 判断是否超余额
         if (isOutOfBalance()) {
             stage.close();
             return;
         }
-        order.setTransactor(tf_transactor.getText());   //��ȡ������
 
-        //进价���ݿ�� �û�-��Ʒ
+        // 设置受理人
+        order.setTransactor(tf_transactor.getText());
+
+        // 用户商品信息
         List<UserGoods> userGoods = userGoodsData();
-        //进价������ ��Ʒ
+        // 商品信息
         List<GoodsDto> goodsBeans = goodsData();
-        //��Ҫ���µ进价�Ϣ
+        // 用户信息
         VipInfoDto vipBean = vipData();
-        //���ն�����Ϣ
-        OrderBean orderBean = orderData();
+        // 订单信息
+        OrderDto orderDto = orderData();
 
         String msg = null;
         try {
-            orderService.placeGoodsOrder(orderBean, orderDetails, userGoods, goodsBeans, vipBean);
+            orderService.placeGoodsOrder(orderDto, orderDetails, userGoods, goodsBeans, vipBean);
             hasSubmit = true;
         } catch (Exception e) {
             msg = e.getMessage();
-            e.printStackTrace();
             hasSubmit = false;
+            e.printStackTrace();
         }
 
         if (hasSubmit) {
-            new MyAlert(Alert.AlertType.INFORMATION, "����ɹ���").show();
+            new MyAlert(Alert.AlertType.INFORMATION, "结算成功").show();
         } else {
-            new MyAlert(Alert.AlertType.ERROR, "����ʧ�ܣ�\n������Ϣ��" + msg).show();
+            new MyAlert(Alert.AlertType.ERROR, "结算失败\n错误信息：" + msg).show();
         }
         stage.close();
     }
 
     /**
-     * �ж��Ƿ񳬳����
+     * 判断是否超出余额
      *
-     * @return ������true
+     * @return 超出：true
      */
     private boolean isOutOfBalance() {
         PayMode payMode = cb_payMode.getValue();
@@ -177,7 +179,7 @@ public class ConsumeDialogController implements Initializable {
      *
      * @return ���ն�����Ϣ
      */
-    private OrderBean orderData() {
+    private OrderDto orderData() {
         PayMode payMode = cb_payMode.getValue();
         order.setPayMode(payMode.val());
         switch (payMode) {
@@ -207,13 +209,11 @@ public class ConsumeDialogController implements Initializable {
         for (OrderDetailBean od : orderDetails) {
             String gID = od.getProductId();
 
-            //�����ƷΪ�����࣬����ӵ��û�����Ʒ�����
             GoodsDto bean = goodsService.selectById(gID);
             if (!bean.getType().equals("������"))
                 break;
 
             int gAmount = od.getProductAmount();
-            //��ѯ���ݿ��Ƿ��Ѿ����ڸ�����
             UserGoods goods = ugService.selectByUserGoods(userID, gID);
             if (goods == null) {
                 goods = new UserGoods();
@@ -230,17 +230,14 @@ public class ConsumeDialogController implements Initializable {
 
 
     /**
-     * ��ȡ��Ҫ���µ� ����Ʒ�� bean����
-     *
-     * @return ��Ʒ bean�ļ���
+     * 设置消费或的商品信息
+     * @return 消费后的商品信息
      */
     private List<GoodsDto> goodsData() {
 
-        //进价�б��-������
         return orderDetails.stream()
                 .map(odrDtlBean -> {
                     GoodsDto bean = goodsService.selectById(odrDtlBean.getProductId());
-                    //�����ݿ��м�ȥ进价�
                     bean.setQuantity(bean.getQuantity() - odrDtlBean.getProductAmount());
                     return bean;
                 })
@@ -249,18 +246,19 @@ public class ConsumeDialogController implements Initializable {
     }
 
     /**
-     * ��ȡ��Ҫ���µ� ���û��� ����
+     * 获取消费或的用户信息
      *
-     * @return ������
+     * @return VipInfoDto
      */
     private VipInfoDto vipData() {
-        //进价�Ϊɢ�ͣ��򲻽������ݴ���
+        // 判断消费者是否为散客
         if (vipBean == VipInfoDto.SANKE)
             return vipBean;
 
         VipInfoDto bean = this.vipBean;
         PayMode payMode = cb_payMode.getValue();
-        //��Ҫ�۳������ݣ���� || ����
+
+        // 根据支付方式来设置用户余额
         switch (payMode) {
             case CASH:
             case FREE:
@@ -272,7 +270,7 @@ public class ConsumeDialogController implements Initializable {
                 bean.setIntegral(bean.getIntegral() - order.getIntegralCost());
                 break;
         }
-        //��Ҫ���ӵģ�����
+        // 设置获取的积分
         bean.setIntegral(bean.getIntegral() + order.getIntegralGet());
         return bean;
     }
@@ -282,11 +280,7 @@ public class ConsumeDialogController implements Initializable {
         stage.close();
     }
 
-    /**
-     * �ж��Ƿ�ɹ��ύ
-     *
-     * @return �ɹ�����true��ʧ�ܷ���false
-     */
+
     public boolean hasSubmit() {
         return hasSubmit;
     }
@@ -296,11 +290,6 @@ public class ConsumeDialogController implements Initializable {
     //                           ����ע��controller����
     //===========================================================================
 
-    /**
-     * ע��stage����
-     *
-     * @param stage ���ƵĴ���
-     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -310,7 +299,7 @@ public class ConsumeDialogController implements Initializable {
         lb_consumer.setText("[" + vipBean.getId() + "] " + vipBean.getName());
     }
 
-    public void setOrder(OrderBean order) {
+    public void setOrder(OrderDto order) {
         this.order = order;
         tf_payValue.setText(String.valueOf(order.getPrice()));
     }
@@ -319,9 +308,6 @@ public class ConsumeDialogController implements Initializable {
         this.orderDetails = orderDetail;
     }
 
-    /**
-     * ���ý���
-     */
     public void setFocus() {
         tf_transactor.requestFocus();
     }
