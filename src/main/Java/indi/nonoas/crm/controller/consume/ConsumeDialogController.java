@@ -88,24 +88,24 @@ public class ConsumeDialogController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         cb_payMode.getItems().addAll(PayMode.INTEGRAL, PayMode.CASH, PayMode.BALANCE, PayMode.FREE);
         cb_payMode.setValue(PayMode.CASH);
-        lb_balance.setText("��ѡ���ֽ�֧��");
-        //�������ѡ�����
+        lb_balance.setText("已选择现金支付");
+
         cb_payMode.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             switch (newValue) {
                 case CASH:
-                    lb_balance.setText("��ѡ���ֽ�֧��");
+                    lb_balance.setText("已选择现金支付");
                     tf_payValue.setText(String.valueOf(order.getPrice()));
                     break;
                 case BALANCE:
                     lb_balance.setText(String.format("￥%.2f", vipBean.getBalance()));
-                    tf_payValue.setText(String.valueOf(order.getPrice()));
+                    tf_payValue.setText(String.format("￥%.2f", order.getPrice()));
                     break;
                 case INTEGRAL:
-                    lb_balance.setText(String.format("%d�����֣�", vipBean.getIntegral()));
+                    lb_balance.setText(String.format("%d积分", vipBean.getIntegral()));
                     tf_payValue.setText(String.valueOf(order.getIntegralCost()));
                     break;
                 case FREE:
-                    lb_balance.setText("��ѡ������");
+                    lb_balance.setText("赠送");
                     tf_payValue.setText(String.format("￥%.2f", 0.00));
                     break;
             }

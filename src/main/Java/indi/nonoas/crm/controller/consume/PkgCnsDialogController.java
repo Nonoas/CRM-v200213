@@ -94,24 +94,24 @@ public class PkgCnsDialogController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         cb_payMode.getItems().addAll(PayMode.INTEGRAL, PayMode.CASH, PayMode.BALANCE, PayMode.FREE);
         cb_payMode.setValue(PayMode.CASH);
-        lb_balance.setText("��ѡ���ֽ�֧��");
-        //�������ѡ�����
+        lb_balance.setText("已选择现金支付");
+
         cb_payMode.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             switch (newValue) {
                 case CASH:
-                    lb_balance.setText("��ѡ���ֽ�֧��");
+                    lb_balance.setText("已选择现金支付");
                     tf_payValue.setText(String.valueOf(order.getPrice()));
                     break;
                 case BALANCE:
                     lb_balance.setText(String.format("￥%.2f", vipBean.getBalance()));
-                    tf_payValue.setText(String.valueOf(order.getPrice()));
+                    tf_payValue.setText(String.format("￥%.2f", order.getPrice()));
                     break;
                 case INTEGRAL:
-                    lb_balance.setText(String.format("%d�����֣�", vipBean.getIntegral()));
+                    lb_balance.setText(String.format("%d积分", vipBean.getIntegral()));
                     tf_payValue.setText(String.valueOf(order.getIntegralCost()));
                     break;
                 case FREE:
-                    lb_balance.setText("��ѡ������");
+                    lb_balance.setText("赠送");
                     tf_payValue.setText(String.format("￥%.2f", 0.00));
                     break;
             }
@@ -122,7 +122,7 @@ public class PkgCnsDialogController implements Initializable {
     @FXML
     private void submit() {
 
-        //�ж��Ƿ�����
+        // 判断是否超出库存
         if (isOutOfBalance()) {
             stage.close();
             return;
@@ -130,32 +130,30 @@ public class PkgCnsDialogController implements Initializable {
 
         order.setTransactor(tf_transactor.getText());   //��ȡ������
 
-        //���ü进价��ݿ�� �û�-��Ʒ
+        // 即将修改的 用户-商品 数据
         List<UserGoods> userGoods = userGoodsData();
-        //���ü进价����� ��Ʒ
+        // 即将修改的商品数据
         List<GoodsDto> goodsBeans = goodsData();
-        //������Ҫ���µ进价�Ϣ
 
-        // TODO ���ܴ������Ѳ��ɹ进价û�Bean���ݱ��޸ĵ����
+        // TODO 修改用户数据，可能存在支付失败但是用户类修改的情况
         VipInfoDto vipBean = vipData();
-        //�������ն�����Ϣ
+        // 订单数据
         OrderBean orderBean = orderData();
 
         try {
             orderService.placePackageOrder(orderBean, orderDetails, userGoods, goodsBeans, vipBean);
             hasSubmit = true;
-            new MyAlert(Alert.AlertType.INFORMATION, "����ɹ���").show();
+            new MyAlert(Alert.AlertType.INFORMATION, "结算成功！").show();
         } catch (Exception e) {
             hasSubmit = false;
-            new MyAlert(Alert.AlertType.INFORMATION, "����ʧ�ܣ�").show();
+            new MyAlert(Alert.AlertType.INFORMATION, "结算失败！").show();
         }
         stage.close();
     }
 
     /**
-     * �ж��Ƿ񳬳����
-     *
-     * @return ������true
+     * 判断余额是否不足
+     * @return 不足：true
      */
     private boolean isOutOfBalance() {
         PayMode payMode = cb_payMode.getValue();
@@ -163,11 +161,11 @@ public class PkgCnsDialogController implements Initializable {
         switch (payMode) {
             case BALANCE:
                 flag = vipBean.getBalance() < order.getPrice();
-                if (flag) new MyAlert(Alert.AlertType.WARNING, "�ֽ����㣡").show();
+                if (flag) new MyAlert(Alert.AlertType.WARNING, "余额不足").show();
                 return flag;
             case INTEGRAL:
                 flag = vipBean.getBalance() < order.getPrice();
-                if (flag) new MyAlert(Alert.AlertType.WARNING, "�������㣡").show();
+                if (flag) new MyAlert(Alert.AlertType.WARNING, "积分不足").show();
                 return flag;
             default:
                 return false;
@@ -175,20 +173,19 @@ public class PkgCnsDialogController implements Initializable {
     }
 
     /**
-     * ��ȡд�����ݿ�� ���û�-��Ʒ�� bean���󼯺�
-     *
-     * @return �û�-��Ʒ bean����
+     * 获取即将写入数据库的 用户-商品 信息
+     * @return 用户-商品 集合
      */
     private List<UserGoods> userGoodsData() {
 
         List<UserGoods> userGoods = new ArrayList<>(16);
-        String userID = order.getUserId();      //��ȡ�û�ID
+        String userID = order.getUserId();
 
-        for (OrderDetailBean od : orderDetails) {   //进价
+        for (OrderDetailBean od : orderDetails) {
             String pkgID = od.getProductId();
             //����ײͲ�Ϊ�����࣬����ӵ��û�����Ʒ�����
             PackageDto packageDto = pkgService.selectById(pkgID);
-            if (!"������".equals(packageDto.getType())) {
+            if (!"服务类".equals(packageDto.getType())) {
                 break;
             }
             int pkgAmount = od.getProductAmount();        //��ȡ�ײ�����
