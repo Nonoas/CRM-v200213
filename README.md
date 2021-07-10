@@ -1,34 +1,34 @@
 
-# ���̹���ϵͳ
+# 店铺管理系统
 
 ---
 
 [![star](https://gitee.com/nonoas/CRM-v200213/badge/star.svg?theme=dark)](https://gitee.com/nonoas/CRM-v200213/stargazers)
 [![fork](https://gitee.com/nonoas/CRM-v200213/badge/fork.svg?theme=dark)](https://gitee.com/nonoas/CRM-v200213/members)
 
-## �������
+## 软件介绍
 
-������Ǳ�����ǻ��� JavaFX8 ��һ�����С�͵��̹���ϵͳ�����ݿ�ʹ����Ƕʽ�� [H2���ݿ�](https://baike.baidu.com/item/H2%E6%95%B0%E6%8D%AE%E5%BA%93/23316077?fr=aladdin) ��
-�����û���װ���ݿ������Ҳ进价��ṩԶ�����ݿ⡣���ܰ��� ��Ʒ�����û�����Ա�������ײ͹�������ͳ�Ƶȹ��ܡ�
-进价�������ά����
+本软件是基于 JavaFX8 的一款单机的小型店铺管理系统，数据库使用内嵌式的 [H2数据库](https://baike.baidu.com/item/H2%E6%95%B0%E6%8D%AE%E5%BA%93/23316077?fr=aladdin)，
+无需用户安装数据库软件，也无需软件方提供远程数据库。功能包括 商品管理、用户管理、员工管理、套餐管理。报表统计等功能。
+本软件将持续更新维护。
 
-## �����ҳ
+## 软件首页
 
-![�����ҳ](https://img-blog.csdnimg.cn/20210610175826650.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1NTExNQ==,size_16,color_FFFFFF,t_70)
+![软件首页](https://img-blog.csdnimg.cn/20210610175826650.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1NTExNQ==,size_16,color_FFFFFF,t_70)
 
-## ��Ա����
+## 会员管理
 
-![��Ա����](https://img-blog.csdnimg.cn/20210610175957872.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1NTExNQ==,size_16,color_FFFFFF,t_70)
+![会员管理](https://img-blog.csdnimg.cn/20210610175957872.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1NTExNQ==,size_16,color_FFFFFF,t_70)
 
-## ��Ʒ����
+## 商品管理
 
-![��Ʒ����](https://img-blog.csdnimg.cn/20210610180046752.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1NTExNQ==,size_16,color_FFFFFF,t_70)
+![商品管理](https://img-blog.csdnimg.cn/20210610180046752.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1NTExNQ==,size_16,color_FFFFFF,t_70)
 
-## ��ʾ
+## 提示
 
-�����ʹ��maven进价�������
+软件需使用maven打包，打包插件如下
 
-``` xml
+```xml
     <build>
         <plugins>
             <plugin>
@@ -56,27 +56,27 @@
     </build>
 
 ```
-进价��Ŀ¼进价��ļ���
+打包后软件根目录需包含以下文件：
 ```
-��Ŀ¼
+根目录
 |
-��  CRM-v200324.jar (������)
-��  
-����config (�����ļ�)
-��  ��  userConfig.properties
-��  ��  
-��  ����splash (进价ͼƬ)
-��          Splash.png
-��          
-����data (���ݿ�)
-��      mycrm.db
-��      mycrm.mv.db
-��      mycrm.trace.db
-��      
-����photo (��Ƭ)
-    ����goods
-    ����user
+│  CRM-v200324.jar (主程序)
+│  
+├─config (配置文件)
+│  │  userConfig.properties
+│  │  
+│  └─splash (启动界面图片)
+│          Splash.png
+│          
+├─data (数据库)
+│      mycrm.db
+│      mycrm.mv.db
+│      mycrm.trace.db
+│      
+└─photo (照片)
+    ├─goods
+    └─user
 ```
 
-## ��л
-JavaFX��ʽ��[https://github.com/dicolar/jbootx](https://github.com/dicolar/jbootx)
+## 感谢
+JavaFX样式：[https://github.com/dicolar/jbootx](https://github.com/dicolar/jbootx)

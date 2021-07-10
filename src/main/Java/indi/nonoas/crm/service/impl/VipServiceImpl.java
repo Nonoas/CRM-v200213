@@ -21,9 +21,8 @@ public class VipServiceImpl implements VipService {
     private VipMapper vipMapper;
 
     /**
-     * �������ļ�ȡ�����»�Ա���ŵ���һλ��36���Ʊ�ʾ
-     *
-     * @return 36���ƻ�Ա����
+     * 生成会员卡号
+     * @return 30进制的会员卡号
      */
     @Override
     public String generateVipID() {
