@@ -37,7 +37,7 @@
     <select id="selectByDateFiltrate" resultMap="UserBean">
         select *
         from user_info
-        where (ID like '%' || #{id} || '%' or NAME like  '%' || #{name} || '%')
+        where (ID like '%' || #{id} || '%' or NAME like '%' || #{name} || '%')
           and CARD_LEVEL like #{level}
           and ADMISSION_DATE between #{dateFrom} and #{dateTo}
     </select>

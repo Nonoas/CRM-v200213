@@ -126,12 +126,12 @@ public class VipInfoTable extends TableView<VipInfoDto> {
     }
 
     /**
-     * չʾ�����û���Ϣ
+     * 显示所有会员信息
      */
     public void showAllInfos() {
-        clearData(); // 进价���
+        clearData();
         setPlaceholder(new TableProgressIndicator());
-        //���̲߳�ѯ����
+
         Task<List<VipInfoDto>> task = new Task<List<VipInfoDto>>() {
             @Override
             protected List<VipInfoDto> call() {
@@ -152,36 +152,33 @@ public class VipInfoTable extends TableView<VipInfoDto> {
     }
 
     /**
-     * �������Դ
+     * 清空数据
      */
     public void clearData() {
         obList.clear();
     }
 
     /**
-     * �������
-     *
-     * @param bean ��Ҫ��ӵ�VIPBean
+     * 添加用户信息
+     * @param dto 用户信息
      */
-    public void addBean(VipInfoDto bean) {
-        obList.add(bean);
+    public void addBean(VipInfoDto dto) {
+        obList.add(dto);
     }
 
     /**
-     * ��ȡѡ�е�����
-     *
-     * @return ѡ�е�VIPBean
+     * 获取选中的会员信息
+     * @return 选中信息
      */
     public VipInfoDto getSelectedData() {
         return this.selectedBean;
     }
 
     /**
-     * �Ƴ�����
-     *
-     * @param bean ��Ҫ�Ƴ���VIPBean
+     * 移除会员信息
+     * @param dto 需要移除的用户信息
      */
-    public void removeData(VipInfoDto bean) {
-        this.obList.remove(bean);
+    public void removeData(VipInfoDto dto) {
+        this.obList.remove(dto);
     }
 }

@@ -3,79 +3,81 @@ package indi.nonoas.crm.pojo.dto;
 import java.io.Serializable;
 
 /**
- * ��Ա��ϢBean
+ * 会员信息Bean
  *
  * @author Nonoas
  */
-public class VipInfoDto implements Serializable {
-
+public class VipInfoDto implements Serializable, Cloneable {
+    /**
+     * 串行版本
+     */
     private static final long serialVersionUID = 1L;
     /**
-     * ��Ա����
+     * 会员卡号
      */
     private String id;
     /**
-     * ��Ա����
+     * 会员姓名
      */
     private String name;
     /**
-     * ��Ա�Ա�
+     * 会员性别
      */
     private String sex;
     /**
-     * �������
+     * 入会日期
      */
     private String admissionDate;
     /**
-     * ��Ա�ȼ�
+     * 会员等级
      */
     private String cardLevel;
     /**
-     * ����
+     * 积分
      */
     private int integral;
     /**
-     * ���ѽ��
+     * 消费金额
      */
     private double cumulative;
     /**
-     * �������
+     * 卡内余额
      */
     private double balance;
     /**
-     * �����ۿ�
+     * 享受折扣
      */
     private double discount;
     /**
-     * ��ϵ��ַ
+     * 联系地址
      */
     private String address;
     /**
-     * ��ϵ�绰
+     * 联系电话
      */
     private String telephone;
     /**
-     * ֤������
+     * 证件号码
      */
     private String idcard;
     /**
-     * 进价
+     * 出生日期
      */
     private String birthday;
     /**
-     * ��λְҵ
+     * 单位职业
      */
     private String career;
     /**
-     * �����ʼ�
+     * 电子邮件
      */
     private String email;
     /**
-     * ����
+     * 其他
      */
     private String other;
     /**
-     * ��Ƭ
+     * 照片
      */
     private String photo;
 

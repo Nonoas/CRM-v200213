@@ -21,12 +21,12 @@ public interface VipMapper {
     ArrayList<VipInfoDto> selectAllUser();
 
     /**
-     * ������ɸѡ��Ϣ
+     * 过滤查询会员信息
      *
-     * @param id         ��Ա����
-     * @param name       ����
-     * @param card_level ��Ա�ȼ�
-     * @return VIPBean��ArrayList����, û�в�ѯ���ʱΪnull
+     * @param id         卡号
+     * @param name       姓名
+     * @param card_level 会员等级
+     * @return 会员信息，可为 null
      */
     ArrayList<VipInfoDto> selectByFiltrate(@Param("id") String id,
                                            @Param("name") String name,

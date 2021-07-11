@@ -163,11 +163,11 @@ public class ConsumeDialogController implements Initializable {
         switch (payMode) {
             case BALANCE:
                 flag = vipBean.getBalance() < order.getPrice();
-                if (flag) new MyAlert(Alert.AlertType.WARNING, "�ֽ����㣡").show();
+                if (flag) new MyAlert(Alert.AlertType.WARNING, "余额不足！").show();
                 return flag;
             case INTEGRAL:
                 flag = vipBean.getBalance() < order.getPrice();
-                if (flag) new MyAlert(Alert.AlertType.WARNING, "�������㣡").show();
+                if (flag) new MyAlert(Alert.AlertType.WARNING, "积分不足！").show();
                 return flag;
             default:
                 return false;
@@ -253,8 +253,9 @@ public class ConsumeDialogController implements Initializable {
      */
     private VipInfoDto vipData() {
         // 判断消费者是否为散客
-        if (vipBean == VipInfoDto.SANKE)
+        if (vipBean == VipInfoDto.SANKE) {
             return vipBean;
+        }
 
         VipInfoDto bean = this.vipBean;
         PayMode payMode = cb_payMode.getValue();

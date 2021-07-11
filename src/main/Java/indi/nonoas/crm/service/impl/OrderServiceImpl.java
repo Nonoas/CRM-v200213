@@ -1,13 +1,15 @@
 package indi.nonoas.crm.service.impl;
 
-import indi.nonoas.crm.pojo.*;
+import indi.nonoas.crm.dao.GoodsMapper;
+import indi.nonoas.crm.dao.OrderMapper;
+import indi.nonoas.crm.dao.UsrGdsMapper;
+import indi.nonoas.crm.dao.VipMapper;
+import indi.nonoas.crm.pojo.OrderDetailBean;
+import indi.nonoas.crm.pojo.OrderDto;
+import indi.nonoas.crm.pojo.UserGoods;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.pojo.vo.OrderRecordVO;
-import indi.nonoas.crm.dao.GoodsMapper;
-import indi.nonoas.crm.dao.OrderMapper;
-import indi.nonoas.crm.dao.VipMapper;
-import indi.nonoas.crm.dao.UsrGdsMapper;
 import indi.nonoas.crm.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +44,15 @@ public class OrderServiceImpl implements OrderService {
         odrMapper.delete365dAgo();
     }
 
+    /**
+     * 商品下单事务
+     *
+     * @param order        订单
+     * @param orderDetails 订单详情
+     * @param userGoods    需要更新的 用户-商品 列表
+     * @param goodsBeans   商品 列表
+     * @param vipBean      用户
+     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void placeGoodsOrder(OrderDto order,
@@ -49,32 +60,19 @@ public class OrderServiceImpl implements OrderService {
                                 List<UserGoods> userGoods,
                                 List<GoodsDto> goodsBeans,
                                 VipInfoDto vipBean) {
-        //进价
         odrMapper.insertOrder(order);
-        //进价����
         odrMapper.insertOrderDetails(orderDetails);
 
-        //�����ɢ进价������
         if (vipBean != VipInfoDto.SANKE) {
-            //�û�����
+            // 更新用户信息
             vipMapper.updateInfo(vipBean);
-            //�û���Ʒ
+            // 更新用户商品
             ugMapper.replaceUserGoods(userGoods);
         }
-        //��Ʒ����
+        // 更新商品数量
         goodsMapper.updateGoodsAmount(goodsBeans);
     }
 
-
-    /**
-     * ��Ʒ�µ�����
-     *
-     * @param order        ����
-     * @param orderDetails 进价
-     * @param userGoods    ��Ҫ���µ� �û�-��Ʒ �б�
-     * @param goodsBeans   ��Ʒ �б�
-     * @param vipBean      �û�
-     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void placePackageOrder(OrderDto order,
@@ -100,9 +98,8 @@ public class OrderServiceImpl implements OrderService {
 
 
     /**
-     * ������Ʒ������
-     *
-     * @return ��Ʒ������
+     * 生商品订单号
+     * @return 商品订单号
      */
     public static synchronized String goodsOrderNum() {
         final String prefix = "SP";
@@ -117,9 +114,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
-     * ������Ʒ������
-     *
-     * @return ��Ʒ������
+     * 生成订单号
+     * @return 订单号
      */
     public static synchronized String packageOrderNum() {
         final String prefix = "TC";
@@ -135,7 +131,7 @@ public class OrderServiceImpl implements OrderService {
 
 
     //===========================================================================
-    //                            setterע��
+    //                            setter注入
     //===========================================================================
 
     @Autowired

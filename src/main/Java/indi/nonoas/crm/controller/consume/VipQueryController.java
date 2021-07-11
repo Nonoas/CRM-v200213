@@ -26,7 +26,7 @@ public class VipQueryController implements Initializable {
 
     private final VipService vipService = (VipService) SpringUtil.getBean("UserServiceImpl");
 
-    private final VipInfoTable tv_vipInfo = new VipInfoTable(); // ��Ա��Ϣ��
+    private final VipInfoTable tv_vipInfo = new VipInfoTable();
 
     private final VipLvService vipLvService = (VipLvService) SpringUtil.getBean("VipLvServiceImpl");
 
@@ -42,37 +42,36 @@ public class VipQueryController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        sp_userInfo.setContent(new VipInfoTable());
-        cb_disType.getItems().add("ȫ������");
-        // �����ݿ�������û�Ա�ȼ�������ʼ��ComboBox
+        sp_userInfo.setContent(tv_vipInfo);
+        cb_disType.getItems().add("所有等级");
+
         List<String> listName = vipLvService.listAllNames();
         for (String str : listName) {
             cb_disType.getItems().add(str);
         }
-        cb_disType.setValue("ȫ������");
+        cb_disType.setValue("所有等级");
     }
 
     @FXML
     private void inquireVIPInfo() {
         String str = tf_findInfo.getText().trim();
-        String disType = cb_disType.getValue().equals("ȫ������") ? "" : cb_disType.getValue();
-        if (str.equals(""))
-            return;
-        ArrayList<VipInfoDto> listVipBeans = vipService.selectByFiltrate(str, str, disType);
+        String disType = cb_disType.getValue().equals("所有等级") ? "" : cb_disType.getValue();
+
+        List<VipInfoDto> listVipBeans = vipService.selectByFiltrate(str, str, disType);
         if (listVipBeans != null) {
             tv_vipInfo.clearData();
-            for (VipInfoDto bean : listVipBeans)
-                tv_vipInfo.addBean(bean);
+            for (VipInfoDto dto : listVipBeans) {
+                tv_vipInfo.addBean(dto);
+            }
         } else {
-            new MyAlert(Alert.AlertType.INFORMATION, "û���ҵ�����ѯ�Ļ�Ա��").show();
+            new MyAlert(Alert.AlertType.INFORMATION, "没有找到您查询的会员信息！").show();
         }
     }
 
-    @FXML // ��ʾȫ����Ϣ
+    @FXML
     private void showAll() {
         tv_vipInfo.showAllInfos();
     }
-
 
 
 }

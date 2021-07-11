@@ -1,5 +1,6 @@
 package indi.nonoas.crm.controller.consume;
 
+import com.baomidou.mybatisplus.core.toolkit.SerializationUtils;
 import indi.nonoas.crm.component.alert.MyAlert;
 import indi.nonoas.crm.controller.MainController;
 import indi.nonoas.crm.dao.my_orm_dao.UserGoodsDao;
@@ -28,6 +29,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import org.apache.log4j.Logger;
 
+import java.io.Serializable;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -45,7 +47,7 @@ public class ConsumeController implements Initializable {
 
     private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
 
-    private final UsrGdsService ugService= (UsrGdsService) SpringUtil.getBean("UsrGdsServiceImpl");
+    private final UsrGdsService ugService = (UsrGdsService) SpringUtil.getBean("UsrGdsServiceImpl");
 
 
     /**
@@ -225,7 +227,12 @@ public class ConsumeController implements Initializable {
 
         OrderDto orderDto = generateGoodsOrder();
         List<OrderDetailBean> orderDetails = generateGoodsOrderDetails();
-        ConsumeDialog consumeDialog = new ConsumeDialog(vipBean, orderDto, orderDetails);
+
+        // 判断消费用户是否为散客，如果不是散客则拷贝当前用户信息，防止出现内存脏数据
+        VipInfoDto vipInfoDto = vipBean == SANKE
+                ? SANKE
+                : SerializationUtils.clone(vipBean);
+        ConsumeDialog consumeDialog = new ConsumeDialog(vipInfoDto, orderDto, orderDetails);
         consumeDialog.showAndWait();
         //如果成功提交，则清除订单信息
         if (consumeDialog.hasSubmit()) {
@@ -310,7 +317,7 @@ public class ConsumeController implements Initializable {
      */
     private final PackageSingleSelectTable pkgSelectTable = new PackageSingleSelectTable();
 
-    private final PackageService pkgService= (PackageService) SpringUtil.getBean("PackageServiceImpl");
+    private final PackageService pkgService = (PackageService) SpringUtil.getBean("PackageServiceImpl");
 
     /**
      * 套餐消费表格
@@ -396,6 +403,10 @@ public class ConsumeController implements Initializable {
         OrderDto orderDto = generatePackageOrder();
         //生成订单详情数据
         List<OrderDetailBean> orderDetails = generatePackageOrderDetails();
+        // 判断消费用户是否为散客，如果不是散客则拷贝当前用户信息，防止出现内存脏数据
+        VipInfoDto vipInfoDto = vipBean == SANKE
+                ? SANKE
+                : SerializationUtils.clone(vipBean);
         //弹出消费窗口
         PackageConsumeDialog consumeDialog = new PackageConsumeDialog(vipBean, orderDto, orderDetails);
         consumeDialog.showAndWait();

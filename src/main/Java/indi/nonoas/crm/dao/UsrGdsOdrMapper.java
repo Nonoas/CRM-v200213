@@ -11,10 +11,6 @@ import java.util.List;
  */
 @Repository
 public interface UsrGdsOdrMapper {
-    /**
-     * ��ѯ�����û������Ʒ���Ѽ�¼
-     *
-     * @return ���Ѽ�¼�б�
-     */
+
     List<UsrGdsOdrRecordVO> selectUserGoodsOrder();
 }
