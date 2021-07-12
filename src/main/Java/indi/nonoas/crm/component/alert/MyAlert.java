@@ -7,11 +7,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-/**
- * �Զ���ĵ进价���ͼ���ͷ����
- *
- * @author Nonoas
- */
 public class MyAlert extends Alert {
 
     @SuppressWarnings("unused")

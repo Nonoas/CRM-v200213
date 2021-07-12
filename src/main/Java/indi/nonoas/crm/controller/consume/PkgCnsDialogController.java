@@ -24,6 +24,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 /**
  * @author : Nonoas
@@ -135,7 +136,6 @@ public class PkgCnsDialogController implements Initializable {
         // 即将修改的商品数据
         List<GoodsDto> goodsBeans = goodsData();
 
-        // TODO 修改用户数据，可能存在支付失败但是用户类修改的情况
         VipInfoDto vipBean = vipData();
         // 订单数据
         OrderDto orderDto = orderData();
@@ -176,11 +176,11 @@ public class PkgCnsDialogController implements Initializable {
     /**
      * 获取即将写入数据库的 用户-商品 信息
      *
-     * @return 用户-商品 集合
+     * @return 用户-商品 集合, 非 null
      */
     private List<UserGoods> userGoodsData() {
 
-        List<UserGoods> userGoods = new ArrayList<>(16);
+        List<UserGoods> userGoods = new ArrayList<>();
         String userID = order.getUserId();
 
         for (OrderDetailBean od : orderDetails) {
@@ -193,11 +193,10 @@ public class PkgCnsDialogController implements Initializable {
             int pkgAmount = od.getProductAmount();
             // 查询套餐内包含的商品
             List<PackageContentDto> pkgContList = pkgService.listPkgContentByPkgId(pkgID);
-            for (PackageContentDto pkgContBean : pkgContList) {
 
-                UserGoods usrGoods = getUsrGoodsByPkgCont(userID, pkgAmount, pkgContBean);
-                userGoods.add(usrGoods);
-            }
+            userGoods = pkgContList.stream()
+                    .map(pkgContBean -> getUsrGoodsByPkgCont(userID, pkgAmount, pkgContBean))
+                    .collect(Collectors.toList());
         }
         return userGoods;
     }

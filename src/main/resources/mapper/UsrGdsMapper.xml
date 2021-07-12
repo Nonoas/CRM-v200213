@@ -25,4 +25,5 @@
             (#{ug.userId}, #{ug.goodsId}, #{ug.amount})
         </foreach>
     </update>
+
 </mapper>

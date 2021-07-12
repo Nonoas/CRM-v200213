@@ -17,8 +17,8 @@ public class GoodsSelectDialog extends Dialog<GoodsDto> {
 
     public GoodsSelectDialog(){
 
-        setLogo();  //���ô���ͼ��
-        setStyle(); //������ʽ
+        setLogo();  //设置窗口图标
+        setStyle(); //设置样式
 
         DialogPane pane=new DialogPane();
         pane.setContent(table);
@@ -31,15 +31,15 @@ public class GoodsSelectDialog extends Dialog<GoodsDto> {
     }
 
     /**
-     * ��ȡѡ�е���Ʒ
-     * @return ѡ�е�GoodsBean
+     * 获取选中的商品
+     * @return 选中的GoodsBean
      */
     public ObservableList<GoodsDto> getSelectGoods(){
         return  table.getSelectedItems();
     }
 
     /**
-     * ���ô���logo
+     * 设置窗口logo
      */
     private void setLogo(){
         Stage stage= (Stage) getDialogPane().getScene().getWindow();
@@ -47,7 +47,7 @@ public class GoodsSelectDialog extends Dialog<GoodsDto> {
     }
 
     /**
-     * ������ʽ
+     * 设置样式
      */
     private void setStyle(){
         Scene scene=getDialogPane().getScene();

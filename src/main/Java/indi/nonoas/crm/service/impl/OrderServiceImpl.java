@@ -81,18 +81,14 @@ public class OrderServiceImpl implements OrderService {
                                   List<GoodsDto> goodsBeans,
                                   VipInfoDto vipBean) {
 
-        //�����ɢ进价������
         if (vipBean != VipInfoDto.SANKE) {
-            //�û�����
             vipMapper.updateInfo(vipBean);
-            //�û�-��Ʒ����
+
+            // Fixme h2数据库不支持 replace into 语法
             ugMapper.replaceUserGoods(userGoods);
         }
-        //进价
         odrMapper.insertOrder(order);
-        //进价����
         odrMapper.insertOrderDetails(orderDetails);
-        //��Ʒ����
         goodsMapper.updateGoodsAmount(goodsBeans);
     }
 

@@ -13,27 +13,27 @@ import java.util.List;
 @Repository
 public interface UsrGdsMapper {
     /**
-     * �����û�ID��ѯ�û���Ʒ���
+     * 根据用户ID查询用户商品余额
      *
-     * @param userID �û�ID
-     * @return �û���Ʒ�б�
+     * @param userID 用户ID
+     * @return 用户商品列表
      */
     List<UserGoods> selectByUser(String userID);
 
     /**
-     * �����û�ID����ƷID��ѯ
+     * 根据用户ID和商品ID查询
      *
-     * @param userId  �û�ID
-     * @param goodsId ��ƷID
-     * @return �û�-��ƷBean��
+     * @param userId  用户ID
+     * @param goodsId 商品ID
+     * @return 用户-商品Bean类
      */
     UserGoods selectByUserGoods(@Param("userId") String userId, @Param("goodsId") String goodsId);
 
     /**
-     * 进价�滻ĳһ��
+     * 批量插入替换某一列
      *
-     * @param userGoodsList �û�-��Ʒ����
-     * @return �ɹ���true
+     * @param userGoodsList 用户-商品集合
+     * @return 成功：true
      */
     boolean replaceUserGoods(@Param("userGoodsList") List<UserGoods> userGoodsList);
 

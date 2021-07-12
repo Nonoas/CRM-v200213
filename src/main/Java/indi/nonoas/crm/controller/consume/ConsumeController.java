@@ -36,6 +36,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static indi.nonoas.crm.pojo.dto.VipInfoDto.SANKE;
 
@@ -289,17 +291,19 @@ public class ConsumeController implements Initializable {
      * @return 订单详情集合
      */
     private List<OrderDetailBean> generateGoodsOrderDetails() {
-        List<OrderDetailBean> list = new ArrayList<>();
+
         ObservableList<GoodsEditTableVO> items = gc_table.getItems();
-        OrderDetailBean bean;
-        for (GoodsEditTableVO data : items) {
-            bean = new OrderDetailBean();
-            bean.setOrderId(shp_orderNum.getText());
-            bean.setProductId(data.getId());
-            bean.setProductAmount(data.getAmount());
-            list.add(bean);
-        }
-        return list;
+
+        return items.parallelStream()
+                .map(data -> {
+                    OrderDetailBean bean = new OrderDetailBean();
+                    bean.setOrderId(shp_orderNum.getText());
+                    bean.setProductId(data.getId());
+                    bean.setProductAmount(data.getAmount());
+                    return bean;
+                })
+                .collect(Collectors.toList());
+
     }
 
     @FXML
