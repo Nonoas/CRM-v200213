@@ -94,7 +94,7 @@ public class ConsumeDialogController implements Initializable {
             switch (newValue) {
                 case CASH:
                     lb_balance.setText("已选择现金支付");
-                    tf_payValue.setText(String.valueOf(order.getPrice()));
+                    tf_payValue.setText(String.format("￥%.2f", order.getPrice()));
                     break;
                 case BALANCE:
                     lb_balance.setText(String.format("￥%.2f", vipBean.getBalance()));
@@ -303,7 +303,7 @@ public class ConsumeDialogController implements Initializable {
 
     public void setOrder(OrderDto order) {
         this.order = order;
-        tf_payValue.setText(String.valueOf(order.getPrice()));
+        tf_payValue.setText(String.format("￥%.2f", order.getPrice()));
     }
 
     public void setOrderDetail(List<OrderDetailBean> orderDetail) {

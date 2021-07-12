@@ -1,5 +1,6 @@
 package indi.nonoas.crm.view.consume;
 
+import indi.nonoas.crm.component.annotation.CSS;
 import indi.nonoas.crm.component.annotation.FXML;
 import indi.nonoas.crm.component.annotation.StageProperty;
 import indi.nonoas.crm.component.stage.ControllableStage;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 @StageProperty(title = "商品消费")
 @FXML("/fxml/consume_dialog.fxml")
+@CSS("css/bootstrap3.css")
 public class ConsumeDialog extends ControllableStage {
 
     private final ConsumeDialogController controller;

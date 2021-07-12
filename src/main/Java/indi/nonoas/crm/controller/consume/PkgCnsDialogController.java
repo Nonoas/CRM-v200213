@@ -27,6 +27,8 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 /**
+ * 套餐订单结算窗口控制器
+ *
  * @author : Nonoas
  * @time : 2020-08-10 17:59
  */
@@ -334,7 +336,7 @@ public class PkgCnsDialogController implements Initializable {
 
     public void setOrder(OrderDto order) {
         this.order = order;
-        tf_payValue.setText(String.valueOf(order.getPrice()));
+        tf_payValue.setText(String.format("￥%.2f", order.getPrice()));
     }
 
     public void setOrderDetail(List<OrderDetailBean> orderDetail) {

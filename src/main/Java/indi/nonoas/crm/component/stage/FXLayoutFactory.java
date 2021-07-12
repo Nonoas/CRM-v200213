@@ -10,14 +10,14 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * ���湤����
+ * 布局构建工厂，可以通过注解设置 fxml 和 css
  *
  * @author : Nonoas
  * @time : 2020-08-10 23:00
  */
 public class FXLayoutFactory {
 
-    public static Object createFXLayout(Class<? extends Parent> clazz) {
+    public static Parent createFXLayout(Class<? extends Parent> clazz) {
 
         Parent parent = null;
 
