@@ -2,12 +2,12 @@ package indi.nonoas.crm.controller;
 
 import de.felixroske.jfxsupport.FXMLController;
 import indi.nonoas.crm.ApplicationStarter;
-import indi.nonoas.crm.pojo.LoginDto;
-import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.common.ClientSession;
+import indi.nonoas.crm.component.alert.MyAlert;
+import indi.nonoas.crm.pojo.LoginDto;
 import indi.nonoas.crm.service.LoginService;
 import indi.nonoas.crm.utils.SaltUtil;
-import indi.nonoas.crm.component.alert.MyAlert;
+import indi.nonoas.crm.utils.SpringUtil;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,7 +33,6 @@ public class WelcomeController implements Initializable {
     private PasswordField pf_password;
 
     public WelcomeController() {
-
     }
 
     @Override

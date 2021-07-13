@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import per.nonoas.delegate.EventHandler;
+import indi.nonoas.crm.common.delegate.EventHandler;
 
 import java.util.List;
 import java.util.regex.Pattern;

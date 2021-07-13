@@ -1,7 +1,5 @@
 package indi.nonoas.crm.utils;
 
-import org.sqlite.SQLiteConnection;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

@@ -50,4 +50,6 @@ public interface OrderService {
                            List<UserGoods> userGoods,
                            List<GoodsDto> goodsBeans,
                            VipInfoDto vipBean);
+
+    List<OrderDetailBean> selectByOrder(String orderId);
 }

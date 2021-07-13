@@ -1,5 +1,6 @@
 package indi.nonoas.crm.dao;
 
+import indi.nonoas.crm.pojo.UserGoodsDto;
 import indi.nonoas.crm.pojo.vo.UsrGdsOdrRecordVO;
 import org.springframework.stereotype.Repository;
 
@@ -13,4 +14,10 @@ import java.util.List;
 public interface UsrGdsOdrMapper {
 
     List<UsrGdsOdrRecordVO> selectUserGoodsOrder();
+
+    /**
+     * 插入 用户-商品 订单信息
+     * @param orders 用户-商品 订单信息
+     */
+     void insertOrders(List<UserGoodsDto> orders);
 }

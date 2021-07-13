@@ -4,6 +4,7 @@ import indi.nonoas.crm.pojo.UserGoods;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -36,6 +37,13 @@ public interface UsrGdsMapper {
      * @return 成功：true
      */
     boolean replaceUserGoods(@Param("userGoodsList") List<UserGoods> userGoodsList);
+
+    /**
+     * 减少用户商品的数量
+     *
+     * @param ugoList 用户商品信息
+     */
+    void reduceGoods(List<UserGoods> ugoList);
 
 
 }

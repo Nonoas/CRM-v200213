@@ -3,16 +3,11 @@ package indi.nonoas.crm.controller.consume;
 import com.baomidou.mybatisplus.core.toolkit.SerializationUtils;
 import indi.nonoas.crm.component.alert.MyAlert;
 import indi.nonoas.crm.controller.MainController;
-import indi.nonoas.crm.dao.my_orm_dao.UserGoodsDao;
-import indi.nonoas.crm.dao.my_orm_dao.UserGoodsOrderDao;
 import indi.nonoas.crm.pojo.*;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
-import indi.nonoas.crm.service.GoodsService;
-import indi.nonoas.crm.service.PackageService;
-import indi.nonoas.crm.service.UsrGdsService;
-import indi.nonoas.crm.service.VipService;
+import indi.nonoas.crm.service.*;
 import indi.nonoas.crm.service.impl.OrderServiceImpl;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.consume.*;
@@ -29,14 +24,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import org.apache.log4j.Logger;
 
-import java.io.Serializable;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static indi.nonoas.crm.pojo.dto.VipInfoDto.SANKE;
@@ -50,6 +43,11 @@ public class ConsumeController implements Initializable {
     private final GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
 
     private final UsrGdsService ugService = (UsrGdsService) SpringUtil.getBean("UsrGdsServiceImpl");
+
+    private final UsrGdsOdrService ugOdrService = (UsrGdsOdrService) SpringUtil.getBean("UsrGdsOdrServiceImpl");
+
+
+
 
 
     /**
@@ -560,12 +558,10 @@ public class ConsumeController implements Initializable {
         }
 
         //FIXME 需要进一步优化为-事务
-        List<UserGoodsOrderBean> ugoBeans = generateUserGoodsOrder();
+        List<UserGoodsDto> ugoBeans = generateUserGoodsOrder();
         List<UserGoods> ugoList = generateUserGoodsData(ugoBeans);
-        UserGoodsOrderDao dao = UserGoodsOrderDao.getInstance();
-        UserGoodsDao ugDao = UserGoodsDao.getInstance();
-        dao.insertOrders(ugoBeans);
-        ugDao.reduceGoods(ugoList);
+        ugOdrService.insertOrders(ugoBeans);
+        ugService.reduceGoods(ugoList);
         new MyAlert(AlertType.WARNING, "结算成功！").show();
 
         clearCountOrder();      //清空计次消费订单
@@ -584,11 +580,11 @@ public class ConsumeController implements Initializable {
      *
      * @return 计次消费订单
      */
-    private List<UserGoodsOrderBean> generateUserGoodsOrder() {
+    private List<UserGoodsDto> generateUserGoodsOrder() {
         ObservableList<GoodsEditTableVO> items = ccTable.getItems();
-        List<UserGoodsOrderBean> ugoBeans = new ArrayList<>(items.size());
+        List<UserGoodsDto> ugoBeans = new ArrayList<>(items.size());
         for (GoodsEditTableVO data : items) {
-            UserGoodsOrderBean ugo = new UserGoodsOrderBean();
+            UserGoodsDto ugo = new UserGoodsDto();
             ugo.setGoodsId(data.getId());
             ugo.setAmount(data.getAmount());
             ugo.setOrderDate(jc_orderTime.getText());
@@ -605,9 +601,9 @@ public class ConsumeController implements Initializable {
      * @param ugoBeans 用户-商品订单信息
      * @return 用户-商品信息列表
      */
-    private List<UserGoods> generateUserGoodsData(List<UserGoodsOrderBean> ugoBeans) {
+    private List<UserGoods> generateUserGoodsData(List<UserGoodsDto> ugoBeans) {
         List<UserGoods> userGoods = new ArrayList<>(ugoBeans.size());
-        for (UserGoodsOrderBean ugo : ugoBeans) {
+        for (UserGoodsDto ugo : ugoBeans) {
             UserGoods ug = ugService.selectByUserGoods(ugo.getUserId(), ugo.getGoodsId());
             ug.setAmount(ug.getAmount() - ugo.getAmount());
             userGoods.add(ug);

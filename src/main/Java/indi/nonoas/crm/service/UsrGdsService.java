@@ -20,4 +20,7 @@ public interface UsrGdsService {
     List<UserGoods> selectByUser(String userID);
 
     UserGoods selectByUserGoods(String userId, String goodsId);
+
+
+    void reduceGoods(List<UserGoods> ugoList);
 }

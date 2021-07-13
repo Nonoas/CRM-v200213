@@ -28,6 +28,11 @@ public class UsrGdsServiceImpl implements UsrGdsService {
         return usrGdsMapper.selectByUserGoods(userId, goodsId);
     }
 
+    @Override
+    public void reduceGoods(List<UserGoods> ugoList) {
+        usrGdsMapper.reduceGoods(ugoList);
+    }
+
     //===========================================================================
     //                            setterע��
     //===========================================================================

@@ -12,8 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import per.nonoas.delegate.Event;
-import per.nonoas.delegate.EventHandler;
+import indi.nonoas.crm.common.delegate.Event;
+import indi.nonoas.crm.common.delegate.EventHandler;
 
 import java.util.ArrayList;
 import java.util.List;

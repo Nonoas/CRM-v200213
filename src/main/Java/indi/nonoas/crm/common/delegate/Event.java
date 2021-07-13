@@ -1,4 +1,4 @@
-package per.nonoas.delegate;
+package indi.nonoas.crm.common.delegate;
 
 /**
  * @author : Nonoas

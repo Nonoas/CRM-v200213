@@ -92,6 +92,11 @@ public class OrderServiceImpl implements OrderService {
         goodsMapper.updateGoodsAmount(goodsBeans);
     }
 
+    @Override
+    public List<OrderDetailBean> selectByOrder(String orderId) {
+        return odrMapper.selectByOrder(orderId);
+    }
+
 
     /**
      * 生商品订单号

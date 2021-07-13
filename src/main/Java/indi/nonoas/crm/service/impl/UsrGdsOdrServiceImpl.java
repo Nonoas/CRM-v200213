@@ -1,5 +1,6 @@
 package indi.nonoas.crm.service.impl;
 
+import indi.nonoas.crm.pojo.UserGoodsDto;
 import indi.nonoas.crm.pojo.vo.UsrGdsOdrRecordVO;
 import indi.nonoas.crm.dao.UsrGdsOdrMapper;
 import indi.nonoas.crm.service.UsrGdsOdrService;
@@ -21,6 +22,16 @@ public class UsrGdsOdrServiceImpl implements UsrGdsOdrService {
     @Override
     public List<UsrGdsOdrRecordVO> selectUserGoodsOrder() {
         return usrGdsOdrMapper.selectUserGoodsOrder();
+    }
+
+    /**
+     * 插入 用户-商品 订单信息
+     *
+     * @param orders 用户-商品 订单信息
+     */
+    @Override
+    public void insertOrders(List<UserGoodsDto> orders) {
+        usrGdsOdrMapper.insertOrders(orders);
     }
 
 

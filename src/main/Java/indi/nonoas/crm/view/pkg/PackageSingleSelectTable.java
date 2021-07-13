@@ -3,7 +3,7 @@ package indi.nonoas.crm.view.pkg;
 import indi.nonoas.crm.pojo.PackageDto;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.SelectionMode;
-import per.nonoas.delegate.EventHandler;
+import indi.nonoas.crm.common.delegate.EventHandler;
 
 /**
  * @author : Nonoas

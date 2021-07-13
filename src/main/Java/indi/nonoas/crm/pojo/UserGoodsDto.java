@@ -4,7 +4,7 @@ package indi.nonoas.crm.pojo;
  * @author : Nonoas
  * @time : 2020-08-21 14:01
  */
-public class UserGoodsOrderBean {
+public class UserGoodsDto {
 
     private String userId;
     private String goodsId;

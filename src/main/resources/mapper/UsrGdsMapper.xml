@@ -26,4 +26,12 @@
         </foreach>
     </update>
 
+    <!--todo 批量更新-->
+    <update id="reduceGoods" parameterType="list">
+        update user_goods
+        set amount=#{amount}
+        where user_id = #{user_id}
+          and goods_id = #{goods_id}
+    </update>
+
 </mapper>

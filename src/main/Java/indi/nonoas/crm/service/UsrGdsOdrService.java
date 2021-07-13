@@ -1,5 +1,6 @@
 package indi.nonoas.crm.service;
 
+import indi.nonoas.crm.pojo.UserGoodsDto;
 import indi.nonoas.crm.pojo.vo.UsrGdsOdrRecordVO;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,4 +18,11 @@ public interface UsrGdsOdrService {
      * @return 消费记录列表
      */
     List<UsrGdsOdrRecordVO> selectUserGoodsOrder();
+
+
+    /**
+     * 插入 用户-商品 订单信息
+     * @param orders 用户-商品 订单信息
+     */
+    void insertOrders(List<UserGoodsDto> orders);
 }
