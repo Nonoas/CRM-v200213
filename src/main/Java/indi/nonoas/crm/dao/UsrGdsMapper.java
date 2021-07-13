@@ -1,6 +1,8 @@
 package indi.nonoas.crm.dao;
 
 import indi.nonoas.crm.pojo.UserGoods;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -30,20 +32,21 @@ public interface UsrGdsMapper {
      */
     UserGoods selectByUserGoods(@Param("userId") String userId, @Param("goodsId") String goodsId);
 
-    /**
-     * 批量插入替换某一列
-     *
-     * @param userGoodsList 用户-商品集合
-     * @return 成功：true
-     */
-    boolean replaceUserGoods(@Param("userGoodsList") List<UserGoods> userGoodsList);
 
     /**
      * 减少用户商品的数量
      *
-     * @param ugoList 用户商品信息
+     * @param userGoods 用户商品信息
      */
-    void reduceGoods(List<UserGoods> ugoList);
+    void reduceGoods(UserGoods userGoods);
+
+
+    @Delete("delete from USER_GOODS where USER_ID=#{userId} and GOODS_ID=#{goodsId}")
+    void deleteById(@Param("userId") String userId, @Param("goodsId") String goodsId);
+
+
+    @Insert("insert into USER_GOODS(user_id, goods_id, amount) VALUES ( #{userId},#{goodsId},#{amount} )")
+    void insert(UserGoods userGoods);
 
 
 }

@@ -3,6 +3,7 @@ package indi.nonoas.crm.service;
 import indi.nonoas.crm.pojo.OrderDetailBean;
 import indi.nonoas.crm.pojo.OrderDto;
 import indi.nonoas.crm.pojo.UserGoods;
+import indi.nonoas.crm.pojo.UserGoodsDto;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.pojo.vo.OrderRecordVO;
@@ -50,6 +51,8 @@ public interface OrderService {
                            List<UserGoods> userGoods,
                            List<GoodsDto> goodsBeans,
                            VipInfoDto vipBean);
+
+    void placeCountOrder(List<UserGoodsDto> ugoDtoList, List<UserGoods> ugoList);
 
     List<OrderDetailBean> selectByOrder(String orderId);
 }

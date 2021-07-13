@@ -1,12 +1,10 @@
 package indi.nonoas.crm.service.impl;
 
-import indi.nonoas.crm.dao.GoodsMapper;
-import indi.nonoas.crm.dao.OrderMapper;
-import indi.nonoas.crm.dao.UsrGdsMapper;
-import indi.nonoas.crm.dao.VipMapper;
+import indi.nonoas.crm.dao.*;
 import indi.nonoas.crm.pojo.OrderDetailBean;
 import indi.nonoas.crm.pojo.OrderDto;
 import indi.nonoas.crm.pojo.UserGoods;
+import indi.nonoas.crm.pojo.UserGoodsDto;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.pojo.vo.OrderRecordVO;
@@ -23,7 +21,7 @@ import java.util.List;
  * @author : Nonoas
  * @time : 2020-08-06 12:00
  */
-@Service("OrderServiceImpl")
+@Service("c")
 public class OrderServiceImpl implements OrderService {
 
     private OrderMapper odrMapper;
@@ -33,6 +31,9 @@ public class OrderServiceImpl implements OrderService {
     private VipMapper vipMapper;
 
     private GoodsMapper goodsMapper;
+
+    @Autowired
+    private UsrGdsOdrMapper usrGdsMapper;
 
     @Override
     public List<OrderRecordVO> selectGdsOrds() {
@@ -67,7 +68,11 @@ public class OrderServiceImpl implements OrderService {
             // 更新用户信息
             vipMapper.updateInfo(vipBean);
             // 更新用户商品
-            ugMapper.replaceUserGoods(userGoods);
+            userGoods.forEach(ug -> {
+                ugMapper.deleteById(ug.getUserId(), ug.getGoodsId());
+                ugMapper.insert(ug);
+            });
+
         }
         // 更新商品数量
         goodsMapper.updateGoodsAmount(goodsBeans);
@@ -84,12 +89,23 @@ public class OrderServiceImpl implements OrderService {
         if (vipBean != VipInfoDto.SANKE) {
             vipMapper.updateInfo(vipBean);
 
-            // Fixme h2数据库不支持 replace into 语法
-            ugMapper.replaceUserGoods(userGoods);
+            // 更新用户商品
+            userGoods.forEach(ug -> {
+                ugMapper.deleteById(ug.getUserId(), ug.getGoodsId());
+                ugMapper.insert(ug);
+            });
         }
         odrMapper.insertOrder(order);
         odrMapper.insertOrderDetails(orderDetails);
         goodsMapper.updateGoodsAmount(goodsBeans);
+    }
+
+    @Override
+    public void placeCountOrder(List<UserGoodsDto> ugoDtoList, List<UserGoods> ugoList) {
+        usrGdsMapper.insertOrders(ugoDtoList);
+        for (UserGoods ug : ugoList) {
+            ugMapper.reduceGoods(ug);
+        }
     }
 
     @Override
@@ -100,6 +116,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 生商品订单号
+     *
      * @return 商品订单号
      */
     public static synchronized String goodsOrderNum() {
@@ -116,6 +133,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 生成订单号
+     *
      * @return 订单号
      */
     public static synchronized String packageOrderNum() {

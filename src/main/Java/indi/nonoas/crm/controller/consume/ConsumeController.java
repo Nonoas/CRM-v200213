@@ -46,6 +46,8 @@ public class ConsumeController implements Initializable {
 
     private final UsrGdsOdrService ugOdrService = (UsrGdsOdrService) SpringUtil.getBean("UsrGdsOdrServiceImpl");
 
+    private final OrderService odrService = (OrderService) SpringUtil.getBean("ugOdrService");
+
     /**
      * 会员信息
      */
@@ -553,11 +555,11 @@ public class ConsumeController implements Initializable {
             return;
         }
 
-        //FIXME 需要进一步优化为-事务
+        // todo 封装
         List<UserGoodsDto> ugoBeans = generateUserGoodsOrder();
         List<UserGoods> ugoList = generateUserGoodsData(ugoBeans);
-        ugOdrService.insertOrders(ugoBeans);
-        ugService.reduceGoods(ugoList);
+
+        odrService.placeCountOrder(ugoBeans, ugoList);
         new MyAlert(AlertType.WARNING, "结算成功！").show();
 
         clearCountOrder();      //清空计次消费订单

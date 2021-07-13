@@ -30,7 +30,9 @@ public class UsrGdsServiceImpl implements UsrGdsService {
 
     @Override
     public void reduceGoods(List<UserGoods> ugoList) {
-        usrGdsMapper.reduceGoods(ugoList);
+        for (UserGoods ug : ugoList) {
+            usrGdsMapper.reduceGoods(ug);
+        }
     }
 
     //===========================================================================

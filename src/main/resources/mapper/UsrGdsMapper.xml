@@ -18,16 +18,7 @@
           and goods_id = #{goodsId};
     </select>
 
-    <update id="replaceUserGoods" parameterType="list">
-        replace into user_goods(user_id, goods_id, amount)
-        values
-        <foreach collection="userGoodsList" item="ug" separator=",">
-            (#{ug.userId}, #{ug.goodsId}, #{ug.amount})
-        </foreach>
-    </update>
-
-    <!--todo 批量更新-->
-    <update id="reduceGoods" parameterType="list">
+    <update id="reduceGoods">
         update user_goods
         set amount=#{amount}
         where user_id = #{user_id}

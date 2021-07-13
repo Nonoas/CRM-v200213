@@ -31,12 +31,12 @@ public interface GoodsMapper {
     ArrayList<GoodsDto> selectAll();
 
     /**
-     * ������ɸѡģ����ѯ
+     * 通过 编号，名称和类型筛选查找
      *
-     * @param id   ��Ʒ���
-     * @param name ��Ʒ����
-     * @param type ��Ʒ����
-     * @return GoodsBean��ArrayList����, ����Ϊnull
+     * @param id   编号
+     * @param name 名称
+     * @param type 类型
+     * @return 商品集合，可null
      */
     ArrayList<GoodsDto> selectByFiltrate(@Param("id") String id,
                                          @Param("name") String name,
@@ -45,35 +45,36 @@ public interface GoodsMapper {
     /**
      * 通过id删除商品
      *
-     * @param id ��Ʒid
+     * @param id 商品id
      */
     void deleteByID(String id);
 
     /**
-     * ����һ����Ʒ��Ϣ
+     * 插入商品信息
      *
-     * @param bean GoodsBean����
+     * @param bean 商品信息
      */
     void insertInfo(GoodsDto bean);
 
     /**
-     * ������Ʒ��Ϣ
+     * 更新商品信息
      *
-     * @param goodsBean GoodsBean����
+     * @param goodsBean GoodsBean
      */
     void update(GoodsDto goodsBean);
 
     /**
-     * ��ѯ������Ʒ进价
+     * 查询商品类型
      *
-     * @return ������Ʒ�������ƣ�����Ϊnull
+     * @return 商品类型集合
      */
     LinkedList<String> selectGoodsTypes();
 
     /**
-     * 进价�޸���Ʒ��Ϣ
+     * 更新商品数量
      *
-     * @return Ӱ�������
+     * @param goodsBeans 商品信息
+     * @return 更新成功的条目数
      */
     long updateGoodsAmount(@Param("goodsBeans") List<GoodsDto> goodsBeans);
 
