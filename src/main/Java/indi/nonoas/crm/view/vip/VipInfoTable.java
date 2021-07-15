@@ -20,7 +20,7 @@ import javafx.scene.control.TableView;
 import org.apache.log4j.Logger;
 
 /**
- * ��Ա��Ϣ��TableView
+ * 用户信息表
  *
  * @author Nonoas
  */
@@ -160,6 +160,7 @@ public class VipInfoTable extends TableView<VipInfoDto> {
 
     /**
      * 添加用户信息
+     *
      * @param dto 用户信息
      */
     public void addBean(VipInfoDto dto) {
@@ -168,6 +169,7 @@ public class VipInfoTable extends TableView<VipInfoDto> {
 
     /**
      * 获取选中的会员信息
+     *
      * @return 选中信息
      */
     public VipInfoDto getSelectedData() {
@@ -176,6 +178,7 @@ public class VipInfoTable extends TableView<VipInfoDto> {
 
     /**
      * 移除会员信息
+     *
      * @param dto 需要移除的用户信息
      */
     public void removeData(VipInfoDto dto) {

@@ -57,11 +57,11 @@ public class GoodsAddController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // ���ó�ʼͼƬ
+        // 设置初始图片
         img_photo.setImage(new Image(ImageSrc.PHOTO_PATH));
-        //��ʼ��CombBox
-        cbb_type.getItems().addAll("��Ʒ��", "������");
-        cbb_type.setValue("��Ʒ��");
+        //初始化CombBox
+        cbb_type.getItems().addAll("产品类", "服务类");
+        cbb_type.setValue("产品类");
     }
 
     @FXML
@@ -71,7 +71,7 @@ public class GoodsAddController implements Initializable {
 
     @FXML
     private void cancelInfo() {
-        if (chc_isClose.isSelected()) { // ���ѡ�����ύ��رգ���رյ�ǰtab
+        if (chc_isClose.isSelected()) { // 如果选择了提交后关闭，则关闭当前tab
             TabPane tabPane = parentTab.getTabPane();
             tabPane.getTabs().remove(parentTab);
             return;
@@ -95,61 +95,61 @@ public class GoodsAddController implements Initializable {
         bean.setId(tf_id.getText().trim());
         bean.setName(tf_name.getText().trim());
 
-        String sp = tf_sellPrice.getText().trim();    //单价
+        String sp = tf_sellPrice.getText().trim();    //预售单价
         bean.setSellPrice(Double.parseDouble(sp));
 
-        String pp = tf_puchasPrice.getText().trim();    //进价
+        String pp = tf_puchasPrice.getText().trim();    //进货单价
         double pur_price = pp.equals("") ? 0 : Double.parseDouble(pp);
         bean.setPurchasePrice(pur_price);
 
-        String quan = tf_quantity.getText().trim();    //��ʼ���
+        String quan = tf_quantity.getText().trim();    //初始库存
         double quantity = quan.equals("") ? 0 : Double.parseDouble(quan);
         bean.setQuantity(quantity);
 
-        String md = tf_minDiscount.getText().trim();    //��С�ۿ�
+        String md = tf_minDiscount.getText().trim();    //最小折扣
         double min_dis = md.equals("") ? 0 : Double.parseDouble(md);
         bean.setMinDiscount(min_dis);
 
-        String de = tf_commission.getText().trim();    //��ɽ��
+        String de = tf_commission.getText().trim();    //提成金额
         double comison = de.equals("") ? 0 : Double.parseDouble(de);
         bean.setDeduction(comison);
 
-        String deRate = tf_commissionRate.getText().trim();    //��ɱ���
+        String deRate = tf_commissionRate.getText().trim();    //提成比例
         double com_rate = deRate.equals("") ? 0 : Double.parseDouble(deRate);
         bean.setDeductionRate(com_rate);
 
-        bean.setBaseUnit(tf_unit.getText().trim());    //������λ
+        bean.setBaseUnit(tf_unit.getText().trim());    //计量单位
 
         bean.setType(cbb_type.getValue());
 
 //		bean.setPhoto(photo);
         goodsService.insertInfo(bean);
 
-        if (chc_isClose.isSelected()) { // ���ѡ�����ύ��رգ���رյ�ǰtab
+        if (chc_isClose.isSelected()) { // 如果选择了提交后关闭，则关闭当前tab
             TabPane tabPane = parentTab.getTabPane();
             tabPane.getTabs().remove(parentTab);
         }
     }
 
     /**
-     * �ж��Ƿ�����ύ��Ϣ
+     * 判断是否可以提交信息
      *
-     * @return ����Ϊtrue进价Ϊfalse
+     * @return 可以为true，不可用为false
      */
     private boolean isCommitable() {
-        String id = tf_id.getText().trim(); // ���
-        String name = tf_name.getText().trim(); // ����
-        String sellPrice = tf_sellPrice.getText().trim(); // 单价
-        String level = cbb_type.getValue(); // ��Ʒ����
+        String id = tf_id.getText().trim(); // 编号
+        String name = tf_name.getText().trim(); // 名称
+        String sellPrice = tf_sellPrice.getText().trim(); // 预售单价
+        String level = cbb_type.getValue(); // 商品类型
         if (id.equals("") || name.equals("") || sellPrice.equals("") || level.equals("")) {
-            new MyAlert(AlertType.WARNING, "��Ʒ��š���Ʒ���ơ�Ԥ�۵��ۡ进价��Ϊ�գ�").show();
+            new MyAlert(AlertType.WARNING, "商品编号、商品名称、预售单价、所属类别不能为空！").show();
             return false;
         }
         return true;
     }
 
     /**
-     * ͨ����紫�ݵ�ǰ��tab����
+     * 通过外界传递当前的tab引用
      */
     public void setPane(Tab tab) {
         this.parentTab = tab;

@@ -17,14 +17,9 @@ import java.util.ResourceBundle;
 
 public abstract class PackageController implements Initializable {
 
-    /**
-     * ��Ʒ�б���
-     */
+
     protected PackageContentEditTable pkgGoodsTable = new PackageContentEditTable();
 
-    /**
-     * �ϴ���ť
-     */
     @FXML
     protected Button btn_upload;
 
@@ -64,22 +59,22 @@ public abstract class PackageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //��ʼ��CombBox
-        cb_pkgType.getItems().addAll("��Ʒ��", "������");
+        // 初始化分类下拉选项
+        cb_pkgType.getItems().addAll("产品类", "服务类");
         initView();
     }
 
     /**
-     * ��ʼ进价�
+     * 初始化视图，通常是在子类构造器中调用
      */
     protected abstract void initView();
 
     /**
-     * �����Ʒ
+     * 添加商品
      */
     @FXML
     protected void addGoods() {
-        //����ײ���Ŀ����Ʒ
+
         GoodsSelectDialog dialog = new GoodsSelectDialog();
         dialog.showAndWait();
         ObservableList<GoodsDto> beans = dialog.getSelectGoods();
@@ -95,7 +90,7 @@ public abstract class PackageController implements Initializable {
     }
 
     /**
-     * ɾ����Ʒ
+     * 删除
      */
     @FXML
     protected void deleteGoods() {
@@ -103,7 +98,7 @@ public abstract class PackageController implements Initializable {
     }
 
     /**
-     * �����Ʒ
+     * 清空表单
      */
     @FXML
     protected void clearGoods() {
@@ -111,23 +106,22 @@ public abstract class PackageController implements Initializable {
     }
 
     /**
-     * �����ύʱ�����Ƿ���δ��ѡ��
-     *
-     * @return ���򷵻�true��û���򷵻�false
+     * 非空校验
+     * @return 有非法数据：true
      */
     protected boolean hasEmpty() {
 
-        if (tf_id.getText().equals("")) {
-            new MyAlert(Alert.AlertType.WARNING, "��Ŀ��Ų���Ϊ�գ�").show();
+        if ("".equals(tf_id.getText())) {
+            new MyAlert(Alert.AlertType.WARNING, "套餐编号不能为空！").show();
             return true;
-        } else if (tf_name.getText().equals("")) {
-            new MyAlert(Alert.AlertType.WARNING, "��Ŀ���Ʋ���Ϊ�գ�").show();
+        } else if ("".equals(tf_name.getText())) {
+            new MyAlert(Alert.AlertType.WARNING, "套餐名称不能为空！").show();
             return true;
-        } else if (tf_money.getText().equals("")) {
-            new MyAlert(Alert.AlertType.WARNING, "�ײ��ۼ۲���Ϊ�գ�").show();
+        } else if ("".equals(tf_money.getText())) {
+            new MyAlert(Alert.AlertType.WARNING, "套餐单价不能为空！").show();
             return true;
-        } else if (tf_integral.getText().equals("")) {
-            new MyAlert(Alert.AlertType.WARNING, "�ײͻ��ֲ���Ϊ�գ�").show();
+        } else if ("".equals(tf_integral.getText())) {
+            new MyAlert(Alert.AlertType.WARNING, "套餐积分不能为空！").show();
             return true;
         }
         return false;

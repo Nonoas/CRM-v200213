@@ -16,6 +16,7 @@ import java.util.LinkedList;
 @Service("GoodsServiceImpl")
 public class GoodsServiceImpl implements GoodsService {
 
+    @Autowired
     private GoodsMapper goodsMapper;
 
     @Override
@@ -53,11 +54,5 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsMapper.selectGoodsTypes();
     }
 
-    //===========================================================================
-    //                            setterע��
-    //===========================================================================
-    @Autowired
-    public void setGoodsMapper(GoodsMapper goodsMapper) {
-        this.goodsMapper = goodsMapper;
-    }
+
 }

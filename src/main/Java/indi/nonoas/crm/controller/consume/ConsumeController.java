@@ -44,9 +44,7 @@ public class ConsumeController implements Initializable {
 
     private final UsrGdsService ugService = (UsrGdsService) SpringUtil.getBean("UsrGdsServiceImpl");
 
-    private final UsrGdsOdrService ugOdrService = (UsrGdsOdrService) SpringUtil.getBean("UsrGdsOdrServiceImpl");
-
-    private final OrderService odrService = (OrderService) SpringUtil.getBean("ugOdrService");
+    private final OrderService odrService = (OrderService) SpringUtil.getBean("OrderServiceImpl");
 
     /**
      * 会员信息

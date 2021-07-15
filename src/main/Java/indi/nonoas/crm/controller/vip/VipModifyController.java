@@ -16,6 +16,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.net.URL;
@@ -29,8 +31,10 @@ public class VipModifyController implements Initializable {
 
     private final ToggleGroup tGroup = new ToggleGroup();
 
+    private final Logger logger = LoggerFactory.getLogger(VipModifyController.class);
+
     /**
-     * ��ǰ������bean
+     * 当前操作的bean
      */
     private VipInfoDto vipBean;
 
@@ -77,28 +81,34 @@ public class VipModifyController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // ����ѡ��ť����һ��
+        // 将单选按钮绑定在一组
         rbtn_man.setToggleGroup(tGroup);
-        rbtn_man.setUserData("��");
+        rbtn_man.setUserData("男");
         rbtn_women.setToggleGroup(tGroup);
-        rbtn_women.setUserData("Ů");
+        rbtn_women.setUserData("女");
         rbtn_secret.setToggleGroup(tGroup);
-        rbtn_secret.setUserData("����");
-        // ���ó�ʼͼƬ
+        rbtn_secret.setUserData("保密");
+        // 设置初始图片
         img_photo.setImage(new Image(ImageSrc.PHOTO_PATH));
-        // ��ʼ��CombBox
-        cbb_level.getItems().addAll("��ͨ��Ա", "������Ա");
+        // 初始化CombBox
+        cbb_level.getItems().addAll("普通会员", "超级会员");
 
     }
 
-    @FXML    //�ϴ���Ƭ
+    /**
+     * 上传照片
+     */
+    @FXML
     private void uploadPhoto() {
         FileChooser chooser = new FileChooser();
-        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("ͼƬ�ļ�", "*.png", "*.jpg"));
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("图片文件", "*.png", "*.jpg"));
         File photoFile = chooser.showOpenDialog(null);
         if (photoFile != null) {
             String photoUrl = photoFile.getAbsolutePath();
             img_photo.setImage(new Image("file:" + photoUrl));
+
+            logger.debug("图片地址：" + img_photo.getImage().toString());
+
             vipBean.setPhoto(photoUrl);
         }
 
@@ -111,67 +121,71 @@ public class VipModifyController implements Initializable {
 
     @FXML
     private void commitIfo() {
-        if (!isCommittable())
+        if (!isCommittable()) {
             return;
+        }
 
         vipBean.setId(tf_id.getText().trim());
         vipBean.setName(tf_name.getText().trim());
         vipBean.setSex((String) tGroup.getSelectedToggle().getUserData());
 
-        if (cbb_level.getValue() != null)
+        if (cbb_level.getValue() != null) {
             vipBean.setCardLevel(cbb_level.getValue());
+        }
 
         vipBean.setAddress(tf_address.getText());
 
         String strDiscount = tf_discount.getText().trim();
-        double discount = strDiscount.equals("") ? 1 : Double.parseDouble(strDiscount);
+        double discount = "".equals(strDiscount) ? 1 : Double.parseDouble(strDiscount);
         discount = discount > 0 && discount <= 1 ? discount : 1;
         vipBean.setDiscount(discount);
 
         vipBean.setTelephone(tf_tel.getText());
         vipBean.setIdcard(tf_idcard.getText());
-        if (dp_birthday.getValue() != null)
+        if (dp_birthday.getValue() != null) {
             vipBean.setBirthday(dp_birthday.getValue().toString());
+        }
         vipBean.setCareer(tf_career.getText());
         vipBean.setEmail(tf_mail.getText());
         vipBean.setOther(tf_other.getText());
-//		vipBean.setPhoto("��Ƭ");
 
-        vipService.updateInfo(vipBean);    //�������ݿ�
+//		vipBean.setPhoto("照片");
 
-        if (chc_isClose.isSelected()) { // ���ѡ�����ύ��رգ���رյ�ǰtab
+        vipService.updateInfo(vipBean);    //更新数据库
+
+        if (chc_isClose.isSelected()) { // 如果选择了提交后关闭，则关闭当前tab
             cancelInfo();
         }
     }
 
     /**
-     * �ж��Ƿ�����ύ��Ϣ
+     * 判断是否可以提交信息
      *
-     * @return ����Ϊtrue进价Ϊfalse
+     * @return 可以为true，不可用为false
      */
     private boolean isCommittable() {
-        String id = tf_id.getText().trim(); // ����
-        String name = tf_name.getText().trim(); // ����
-        String tel = tf_tel.getText().trim(); // �绰����
-        String level = cbb_level.getValue(); // ��Ա�ȼ�
-        if (id.equals("") || name.equals("") || tel.equals("") || level.equals("")) {
-            new MyAlert(AlertType.WARNING, "��Ա���š���Ա进价ϵ�绰����Ա�ȼ���Ϊ�գ�").show();
+        String id = tf_id.getText().trim(); // 卡号
+        String name = tf_name.getText().trim(); // 姓名
+        String tel = tf_tel.getText().trim(); // 电话号码
+        String level = cbb_level.getValue(); // 会员等级
+        if ("".equals(id) || "".equals(name) || "".equals(tel) || "".equals(level)) {
+            new MyAlert(AlertType.WARNING, "会员卡号、会员姓名、联系电话、会员等级不为空！").show();
             return false;
         }
         return true;
     }
 
     /**
-     * ͨ����紫�ݵ�ǰ��tab����
+     * 通过外界传递当前的tab引用
      */
     public void setPane(VipModifyTab tab) {
         this.parentTab = tab;
     }
 
     /**
-     * ����bean
+     * 传递bean
      *
-     * @param bean ��ǰ�û���Ϣ��VipBean
+     * @param bean 当前用户信息的VipBean
      */
     public void setBean(VipInfoDto bean) {
         this.vipBean = bean;
@@ -185,13 +199,13 @@ public class VipModifyController implements Initializable {
         tf_id.setText(vipBean.getId());
         tf_idcard.setText(vipBean.getIdcard());
         cbb_level.setValue(vipBean.getCardLevel());
-        // ������ʾ����Ƭ
+        // 设置显示的照片
         String photoUrl = bean.getPhoto();
         Log.i(this, photoUrl);
-        if (photoUrl != null && !photoUrl.equals("")) {
+        if (photoUrl != null && !"".equals(photoUrl)) {
             img_photo.setImage(new Image("file:" + bean.getPhoto()));
         }
-        // ������ʾ进价
+        // 设置显示出生日期
         String birthday = vipBean.getBirthday();
         if (birthday != null) {
             DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -202,8 +216,10 @@ public class VipModifyController implements Initializable {
 
         ObservableList<Toggle> toggles = tGroup.getToggles();
         for (Toggle rBtn : toggles) {
-            if (sex != null && rBtn.getUserData().equals(sex)) // ������ʾ���Ա�
+            if (sex != null && rBtn.getUserData().equals(sex)) // 设置显示的性别
+            {
                 rBtn.setSelected(true);
+            }
         }
     }
 

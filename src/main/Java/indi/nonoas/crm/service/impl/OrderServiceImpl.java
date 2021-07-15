@@ -21,7 +21,7 @@ import java.util.List;
  * @author : Nonoas
  * @time : 2020-08-06 12:00
  */
-@Service("c")
+@Service("OrderServiceImpl")
 public class OrderServiceImpl implements OrderService {
 
     private OrderMapper odrMapper;

@@ -1,14 +1,19 @@
 package indi.nonoas.crm.component.table;
 
+import indi.nonoas.crm.component.alert.MyAlert;
 import indi.nonoas.crm.pojo.vo.GoodsEditTableVO;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import indi.nonoas.crm.common.delegate.EventHandler;
+import javafx.util.Callback;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -18,6 +23,8 @@ import java.util.regex.Pattern;
  * @time : 2020-08-02 12:22
  */
 public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
+
+    private final Logger logger = LoggerFactory.getLogger(GoodsEditTable.class);
 
     private final ObservableList<GoodsEditTableVO> obList = FXCollections.observableArrayList();
 
@@ -40,12 +47,14 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
     protected final TableColumn<GoodsEditTableVO, String> item_op = new TableColumn<>("操作");
 
     public GoodsEditTable() {
+
         initColumns();
         setItems(obList);
         getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println(newValue);
+            logger.debug(newValue.toString());
             selectedData = newValue;
         });
+
     }
 
     protected void initColumns() {
@@ -83,16 +92,16 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
     }
 
     /**
-     * ��ȡѡ�е�����
+     * 获取选中的数据
      *
-     * @return ѡ�е�PackageContentBean
+     * @return GoodsEditTableVO
      */
     public GoodsEditTableVO getSelectedData() {
         return selectedData;
     }
 
     /**
-     * �������Դ
+     * 清空表中数据
      */
     public void clearData() {
         obList.clear();
@@ -100,19 +109,18 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
     }
 
     /**
-     * �Ƴ�����
+     * 移除某个元素
      *
-     * @param bean ��Ҫ�Ƴ���PackageContentBean
+     * @param bean 表格元素
      */
     public void removeData(GoodsEditTableVO bean) {
         obList.remove(bean);
-        refresh();
     }
 
     /**
-     * ��ȡ�¼�ί�ж���
+     * 获取事件处理类
      *
-     * @return �¼�ί�ж���
+     * @return EventHandler
      */
     public EventHandler getEventHandler() {
         return eventHandler;
@@ -145,27 +153,27 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
     protected abstract S dataToBean(GoodsEditTableVO data);
 
     /**
-     * ��ʬ����תΪ����ģ��
+     * 将类型 S 映射到 GoodsEditTableVO
      *
-     * @return ����ģ��
+     * @param bean S
+     * @return GoodsEditTableVO
      */
     protected abstract GoodsEditTableVO beanToData(S bean);
 
 
     //===========================================================================
-    //                            �ڲ���
+    //                            自定义单元格
     //===========================================================================
 
 
     /**
-     * �Զ��塰进价Ԫ��
+     * 数量单元格，包含 +、-两个按钮
      */
     protected class AmountCell extends TableCell<GoodsEditTableVO, Number> {
 
         public AmountCell() {
         }
 
-        //���õ�Ԫ����ʽ
         @Override
         protected void updateItem(Number item, boolean empty) {
 
@@ -176,7 +184,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
                 Button btn_add = new Button("+");
                 Button btn_reduce = new Button("-");
                 TextField tf_number = new TextField(item.toString());
-                //���ó�ʼ�ߴ�
+
                 btn_add.setPrefWidth(35);
                 btn_reduce.setPrefWidth(35);
                 tf_number.setPrefWidth(50);
@@ -225,11 +233,12 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
 
 
     /**
-     * �Զ进价Ԫ��
+     * 删除单元格
      */
     protected class DeleteCell extends TableCell<GoodsEditTableVO, String> {
 
         public DeleteCell() {
+
         }
 
         @Override
@@ -245,6 +254,8 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
                     items.remove(getIndex());
                     tableView.getEventHandler().execute();
                 });
+
+                this.setAlignment(Pos.CENTER);
                 this.setGraphic(btn_delete);
             } else {
                 setGraphic(null);

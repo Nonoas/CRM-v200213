@@ -64,8 +64,8 @@
     <insert id="insertInfo" parameterMap="GoodsBean">
         insert into goods_info(id, name, sell_price, purchase_price, quantity, min_discount, deduction,
                                deduction_rate, base_unit, type, photo)
-        values (#{id}, #{name}, #{sell_price}, #{purchase_price}, #{quantity}, #{min_discount}, #{deduction},
-                #{deduction_rate}, #{base_unit}, #{type}, #{photo})
+        values (#{id}, #{name}, #{sellPrice}, #{purchasePrice}, #{quantity}, #{minDiscount}, #{deduction},
+                #{deductionRate}, #{baseUnit}, #{type}, #{photo})
     </insert>
 
     <update id="update" parameterMap="GoodsBean">

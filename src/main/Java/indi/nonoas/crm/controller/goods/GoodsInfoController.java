@@ -97,7 +97,12 @@ public class GoodsInfoController implements Initializable {
 
     @FXML
     private void updateGoods() {
-        MainController.addTab(new GoodsModifyTab(table.getSelectedData()));
+        GoodsDto dto = table.getSelectedData();
+        if (null == dto) {
+            new MyAlert(Alert.AlertType.WARNING, "请先选择一条商品信息！").show();
+            return;
+        }
+        MainController.addTab(new GoodsModifyTab(dto));
     }
 
 

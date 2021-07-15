@@ -1,22 +1,22 @@
 package indi.nonoas.crm.pojo;
 
 /**
- * ��Ŀ������ϢBean
+ * 项目内容信息Bean
  *
  * @author Nonoas
  */
 public class PackageContentDto {
 
     /**
-     * ��Ŀ���
+     * 项目编号
      */
     private String pkgId;
     /**
-     * ��Ʒ���
+     * 商品编号
      */
     private String goodsId;
     /**
-     * ��Ʒ����
+     * 商品数量
      */
     private int goodsAmount;
 
