@@ -75,6 +75,9 @@
 │      mycrm.db
 │      mycrm.mv.db
 │      mycrm.trace.db
+│
+│─log (日志)
+│
 │      
 └─photo (照片)
     ├─goods

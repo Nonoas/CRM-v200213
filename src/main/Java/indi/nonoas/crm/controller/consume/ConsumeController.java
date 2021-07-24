@@ -553,7 +553,6 @@ public class ConsumeController implements Initializable {
             return;
         }
 
-        // todo 封装
         List<UserGoodsDto> ugoBeans = generateUserGoodsOrder();
         List<UserGoods> ugoList = generateUserGoodsData(ugoBeans);
 
