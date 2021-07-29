@@ -1,4 +1,4 @@
-package indi.nonoas.crm.controller.goods;
+package indi.nonoas.crm.controller.pkg;
 
 import indi.nonoas.crm.pojo.PackageDto;
 import indi.nonoas.crm.pojo.PackageContentDto;
@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PackageModifyController extends PackageController {
@@ -51,13 +50,14 @@ public class PackageModifyController extends PackageController {
         if (hasEmpty()) {
             return;
         }
-        // �ײ���Ϣ
+        // 获取套餐信息
         PackageDto packageBean = getPackageBean();
-        // �ײ�����Ʒ��Ϣ
+        // 获取套餐内商品信息
         List<PackageContentDto> pkgContents = getPackageContentBeans(packageBean.getId());
 
         pkgService.update(packageBean, pkgContents);
-        // ���ѡ�����ύ��رգ���رյ�ǰtab
+
+        // 判断是否关闭当前窗口
         if (chc_isClose.isSelected()) {
             TabPane tabPane = parentTab.getTabPane();
             tabPane.getTabs().remove(parentTab);
@@ -69,9 +69,8 @@ public class PackageModifyController extends PackageController {
     }
 
     /**
-     * ͨ�������ڵ���Ϣ������Ʒ��Ϣ����
-     *
-     * @return PackageBeanʵ��
+     * 根据表单生成套餐数据
+     * @return 用于插入数据库的套餐数据
      */
     private PackageDto getPackageBean() {
         PackageDto packageBean = new PackageDto();
@@ -102,9 +101,8 @@ public class PackageModifyController extends PackageController {
     }
 
     /**
-     * ������Ҫ�޸ĵ��ײ���Ϣ进价�Ӧ�ı���
-     *
-     * @param packageBean ��Ҫ�޸ĵ�PackageBeanʵ��
+     * 初始化需要修改的套餐信息
+     * @param packageBean 套餐信息
      */
     public void setBean(PackageDto packageBean) {
         String id = packageBean.getId();

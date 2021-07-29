@@ -22,7 +22,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -36,7 +37,7 @@ import static indi.nonoas.crm.pojo.dto.VipInfoDto.SANKE;
 
 public class ConsumeController implements Initializable {
 
-    private final Logger logger = Logger.getLogger(ConsumeController.class);
+    private final Logger logger = LoggerFactory.getLogger(ConsumeController.class);
 
     private final VipService vipService = (VipService) SpringUtil.getBean("UserServiceImpl");
 

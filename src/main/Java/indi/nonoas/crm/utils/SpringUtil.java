@@ -7,7 +7,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 /**
- * ÓÃÓÚ»ñÈ¡SpringÉÏÏÂÎÄ
+ * springå·¥å…·ç±»ï¼ŒåŠ¨æ€è·å– Bean
  *
  * @author Nonoas
  * @time 2020-09-01 20:53

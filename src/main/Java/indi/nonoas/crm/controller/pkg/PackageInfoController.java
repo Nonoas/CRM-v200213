@@ -1,4 +1,4 @@
-package indi.nonoas.crm.controller.goods;
+package indi.nonoas.crm.controller.pkg;
 
 import indi.nonoas.crm.view.pkg.PackageAddTab;
 import indi.nonoas.crm.view.pkg.PackageContentTable;

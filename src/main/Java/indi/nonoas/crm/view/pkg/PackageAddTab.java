@@ -3,7 +3,7 @@ package indi.nonoas.crm.view.pkg;
 import java.io.IOException;
 import java.net.URL;
 
-import indi.nonoas.crm.controller.goods.PackageAddController;
+import indi.nonoas.crm.controller.pkg.PackageAddController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.control.Tab;

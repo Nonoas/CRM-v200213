@@ -1,4 +1,4 @@
-package indi.nonoas.crm.controller.goods;
+package indi.nonoas.crm.controller.pkg;
 
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.pojo.PackageContentDto;

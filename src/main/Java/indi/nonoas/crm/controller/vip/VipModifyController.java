@@ -4,7 +4,6 @@ import indi.nonoas.crm.component.alert.MyAlert;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.service.VipService;
-import indi.nonoas.crm.utils.Log;
 import indi.nonoas.crm.utils.SpringUtil;
 import indi.nonoas.crm.view.vip.VipModifyTab;
 import javafx.collections.ObservableList;
@@ -18,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.net.URL;
@@ -201,8 +201,8 @@ public class VipModifyController implements Initializable {
         cbb_level.setValue(vipBean.getCardLevel());
         // 设置显示的照片
         String photoUrl = bean.getPhoto();
-        Log.i(this, photoUrl);
-        if (photoUrl != null && !"".equals(photoUrl)) {
+
+        if (!StringUtils.isEmpty(photoUrl)) {
             img_photo.setImage(new Image("file:" + bean.getPhoto()));
         }
         // 设置显示出生日期

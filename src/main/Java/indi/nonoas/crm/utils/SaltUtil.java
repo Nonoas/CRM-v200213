@@ -4,7 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
 /**
- * ������ι���
+ * 加密工具类
  */
 public class SaltUtil {
 
@@ -39,15 +39,15 @@ public class SaltUtil {
         if ((salt == null) || salt.equals("")) {
             return password;
         } else {
-            return password + "{" + salt.toString() + "}";
+            return password + "{" + salt + "}";
         }
     }
 
     /**
-     * ת���ֽ�����Ϊ16�����ִ�
+     * byteArrayToHexString
      *
-     * @param b �ֽ�����
-     * @return 16�����ִ�
+     * @param b 字节
+     * @return 16进制加密字符串
      */
     private static String byteArrayToHexString(byte[] b) {
         StringBuilder resultSb = new StringBuilder();

@@ -26,7 +26,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.net.URL;
@@ -35,7 +36,7 @@ import java.util.ResourceBundle;
 @FXMLController
 public class MainController implements Initializable {
 
-    private final Logger logger = Logger.getLogger(MainController.class);
+    private final Logger logger = LoggerFactory.getLogger(MainController.class);
 
     private static final double IMG_SIZE = 30;
 
@@ -107,6 +108,16 @@ public class MainController implements Initializable {
             tabs.add(tab);
         }
         rootTabPane.getSelectionModel().select(tab);
+    }
+
+    /**
+     * 从主TabPane移除Tab
+     *
+     * @param tab tab面板
+     */
+    public static void removeTab(Tab tab) {
+        ObservableList<Tab> tabs = rootTabPane.getTabs();
+        tabs.remove(tab);
     }
 
     private void initTopMenu() {
@@ -315,7 +326,7 @@ public class MainController implements Initializable {
         //删除旧订单
         new Thread(() -> {
             odrService.delete365dAgo();
-            logger.debug("==================\n" +
+            logger.debug("\n==================\n" +
                     "删除一年前的订单" +
                     "\n===================");
         }).start();

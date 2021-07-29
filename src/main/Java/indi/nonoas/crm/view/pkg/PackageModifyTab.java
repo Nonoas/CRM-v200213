@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import indi.nonoas.crm.pojo.PackageDto;
-import indi.nonoas.crm.controller.goods.PackageModifyController;
+import indi.nonoas.crm.controller.pkg.PackageModifyController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.control.Tab;

@@ -1,4 +1,4 @@
-package indi.nonoas.crm.controller.goods;
+package indi.nonoas.crm.controller.pkg;
 
 import indi.nonoas.crm.pojo.PackageDto;
 import indi.nonoas.crm.pojo.PackageContentDto;
@@ -7,7 +7,6 @@ import indi.nonoas.crm.utils.SpringUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PackageAddController extends PackageController {
@@ -20,7 +19,7 @@ public class PackageAddController extends PackageController {
     @Override
     protected void initView() {
         sp_goods.setContent(pkgGoodsTable);
-        cb_pkgType.setValue("��Ʒ��");
+        cb_pkgType.setValue("产品类");
     }
 
     /**
