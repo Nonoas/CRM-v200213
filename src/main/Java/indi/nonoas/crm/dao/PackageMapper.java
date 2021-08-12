@@ -15,13 +15,13 @@ import java.util.List;
 public interface PackageMapper extends BaseMapper<PackageDto> {
 
     /**
-     * ͨ�����˲�����Ŀ��Ϣ
+     * 筛选查询套餐信息
      *
-     * @param id     ���
-     * @param name   ����
-     * @param money1 ��Ǯ����
-     * @param money2 ��Ǯ����
-     * @return 进价进价���Ŀ��Ϣ, ����Ϊnull
+     * @param id  套餐id
+     * @param name   套餐名称
+     * @param money1 价格下限
+     * @param money2 价格上限
+     * @return 套餐信息
      */
     List<PackageDto> findByFilter(@Param("id") String id,
                                   @Param("name") String name,

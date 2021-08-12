@@ -25,4 +25,11 @@
         where pkg_id = #{pkgId}
     </select>
 
+    <select id="selectIdByGoodsId" resultType="java.lang.String">
+        select pkg_id
+        from PACKAGE_CONTENT
+        where GOODS_ID = #{goodsId}
+        limit 1
+    </select>
+
 </mapper>

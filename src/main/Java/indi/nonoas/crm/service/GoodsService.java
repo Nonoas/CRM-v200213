@@ -11,7 +11,7 @@ import java.util.LinkedList;
  * @time : 2020-08-19 22:05
  */
 @Transactional
-public interface GoodsService{
+public interface GoodsService {
 
     /**
      * 通过商品id查询对应商品的所有信息
@@ -61,7 +61,16 @@ public interface GoodsService{
 
     /**
      * 查询所有商品分类名称
+     *
      * @return 所有商品分类名称，可以为null
      */
     LinkedList<String> selectGoodsTypes();
+
+    /**
+     * 判断是否有套餐包含商品
+     *
+     * @param dto 当前商品
+     * @return 包含：true
+     */
+    boolean pkgContains(GoodsDto dto);
 }

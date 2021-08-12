@@ -1,5 +1,8 @@
 package indi.nonoas.crm.service.impl;
 
+import indi.nonoas.crm.dao.PackageMapper;
+import indi.nonoas.crm.dao.PkgContentMapper;
+import indi.nonoas.crm.pojo.PackageContentDto;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.dao.GoodsMapper;
 import indi.nonoas.crm.service.GoodsService;
@@ -18,6 +21,9 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     private GoodsMapper goodsMapper;
+
+    @Autowired
+    private PkgContentMapper pkgContentMapper;
 
     @Override
     public GoodsDto selectById(String id) {
@@ -52,6 +58,17 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public LinkedList<String> selectGoodsTypes() {
         return goodsMapper.selectGoodsTypes();
+    }
+
+    /**
+     * 判断是否有套餐包含商品
+     *
+     * @param dto 当前商品
+     * @return 包含：true
+     */
+    @Override
+    public boolean pkgContains(GoodsDto dto) {
+        return null != pkgContentMapper.selectIdByGoodsId(dto.getId());
     }
 
 

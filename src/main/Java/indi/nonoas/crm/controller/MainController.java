@@ -7,6 +7,7 @@ import indi.nonoas.crm.view.consume.VipQueryTab;
 import indi.nonoas.crm.view.goods.GoodsInfoTab;
 import indi.nonoas.crm.view.goods.GoodsTypeTab;
 import indi.nonoas.crm.view.goods.PackageInfoTab;
+import indi.nonoas.crm.view.staff.StaffInfoTab;
 import indi.nonoas.crm.view.stat.OrderTable;
 import indi.nonoas.crm.view.stat.UsrGdsOdrTable;
 import indi.nonoas.crm.view.vip.VipManageTab;
@@ -174,6 +175,7 @@ public class MainController implements Initializable {
         vipConsumeLb.setOnMouseClicked(event -> addTab(ConsumeTab.getInstance()));
         vipQueryLb.setOnMouseClicked(event -> addTab(VipQueryTab.getInstance()));
         //点击事件定义 end
+
         TitledPane titledPane = new TitledPane("用户消费", lv);
         titledPane.setExpanded(false);
         return titledPane;
@@ -242,7 +244,7 @@ public class MainController implements Initializable {
         lv.setPrefHeight(lv.getItems().size() * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
 
         yggl.setOnMouseClicked(event -> {
-            new MyAlert(Alert.AlertType.INFORMATION, "暂未开发，敬请期待！").show();
+            addTab(StaffInfoTab.getInstance());
         });
 
         TitledPane titledPane = new TitledPane("员工管理", lv);
@@ -277,6 +279,7 @@ public class MainController implements Initializable {
         lv.setPrefHeight(7 * (LeftMenuItemLabel.LEFT_MENUITEM_SIZE + 8));
 
         spxfjl.setOnMouseClicked(event -> {
+            // todo dialog面板需要抽出单独类，且界面需要更详细
             Dialog<String> dialog = new Dialog<>();
             dialog.setTitle("商品订单记录");
             dialog.setResizable(true);
@@ -289,6 +292,7 @@ public class MainController implements Initializable {
         });
 
         tcxfjl.setOnMouseClicked(event -> {
+            // todo dialog面板需要抽出单独类，且界面需要更详细
             Dialog<String> dialog = new Dialog<>();
             dialog.setTitle("用户库存消费记录");
             dialog.setResizable(true);
@@ -349,9 +353,9 @@ public class MainController implements Initializable {
 
         private LeftMenuItemLabel(String text) {
             super(text);
-            setPrefHeight(LEFT_MENUITEM_SIZE);
-            setMaxWidth(MAX_VALUE);
-            setAlignment(Pos.CENTER);
+            this.setPrefHeight(LEFT_MENUITEM_SIZE);
+            this.setMaxWidth(MAX_VALUE);
+            this.setAlignment(Pos.CENTER);
         }
     }
 }

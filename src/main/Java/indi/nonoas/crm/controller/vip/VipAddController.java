@@ -181,7 +181,7 @@ public class VipAddController implements Initializable {
         bean.setCareer(tf_career.getText());
         bean.setEmail(tf_mail.getText());
         bean.setOther(tf_other.getText());
-        bean.setPhoto(photoUrl); // ��Ƭ
+        bean.setPhoto(photoUrl);
 
         vipService.insertInfo(bean);
 

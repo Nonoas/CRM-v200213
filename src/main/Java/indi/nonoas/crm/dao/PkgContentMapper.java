@@ -36,4 +36,13 @@ public interface PkgContentMapper {
      */
     void deleteById(String pkgId);
 
+
+    /**
+     * 通过商品id查询一条套餐id
+     *
+     * @param goodsId 商品id
+     * @return 套餐id
+     */
+    String selectIdByGoodsId(String goodsId);
+
 }
