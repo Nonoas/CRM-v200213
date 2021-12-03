@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="indi.nonoas.crm.dao.UsrGdsOdrMapper">
+    <resultMap id="UsrGdsOdrRecordVO" type="indi.nonoas.crm.pojo.vo.UsrGdsOdrRecordVO"/>
+
+    <insert id="insertOrders">
+        insert into user_goods_order(user_id, goods_id, amount, order_date, transactor)
+        values (#{user_id}, #{goods_id}, #{amount}, #{order_date}, #{transactor})
+    </insert>
+
+    <select id="selectUserGoodsOrder" resultMap="UsrGdsOdrRecordVO">
+        select *
+        from USER_GOODS_ORDER
+    </select>
+
+</mapper>

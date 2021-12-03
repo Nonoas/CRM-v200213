@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox fx:id="vb_root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity" prefHeight="357.0" prefWidth="527.0" xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="indi.nonoas.crm.controller.WelcomeController">
+    <padding>
+        <Insets left="100.0" right="100.0"/>
+    </padding>
+    <GridPane alignment="CENTER" hgap="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="233.0"
+              prefWidth="327.0">
+        <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="NEVER" maxWidth="495.0" minWidth="10.0" prefWidth="50.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="588.0" minWidth="10.0" prefWidth="260.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        </rowConstraints>
+        <Label alignment="CENTER" text="用户名" GridPane.halignment="RIGHT" GridPane.rowIndex="1"/>
+        <Label alignment="CENTER" text="密码" GridPane.halignment="RIGHT" GridPane.rowIndex="2"/>
+        <PasswordField fx:id="pf_password" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <ComboBox fx:id="tf_username" editable="true" prefHeight="30.0" prefWidth="300.0" GridPane.columnIndex="1"
+                  GridPane.rowIndex="1"/>
+        <Button fx:id="btn_Login" mnemonicParsing="false" onAction="#login" prefHeight="30.0" prefWidth="349.0"
+                text="登    录" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="319.0" style="-fx-font-size: 22;" text="登录系统"
+               GridPane.columnSpan="2" GridPane.valignment="TOP"/>
+    </GridPane>
+</VBox>

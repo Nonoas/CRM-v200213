@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="indi.nonoas.crm.dao.UsrGdsMapper">
+    <resultMap id="UserGoods" type="indi.nonoas.crm.pojo.UserGoods"/>
+    <select id="selectByUser" parameterType="string" resultMap="UserGoods">
+        select *
+        from user_goods
+        where user_id = #{user_id}
+    </select>
+
+    <select id="selectByUserGoods" resultMap="UserGoods">
+        select *
+        from user_goods
+        where user_id = #{userId}
+          and goods_id = #{goodsId};
+    </select>
+
+    <update id="reduceGoods">
+        update user_goods
+        set amount=#{amount}
+        where user_id = #{user_id}
+          and goods_id = #{goods_id}
+    </update>
+
+</mapper>
