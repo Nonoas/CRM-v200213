@@ -8,8 +8,9 @@
     <artifactId>CRM-v200324</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
     <modules>
-        <module>jfx-maker</module>
+        <module>jfx-springboot-maker</module>
         <module>crm-client</module>
     </modules>
 

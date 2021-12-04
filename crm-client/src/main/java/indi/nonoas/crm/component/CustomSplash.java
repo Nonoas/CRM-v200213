@@ -1,6 +1,6 @@
 package indi.nonoas.crm.component;
 
-import de.felixroske.jfxsupport.SplashScreen;
+import indi.jfxmaker.splash.Splash;
 import javafx.scene.Parent;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
@@ -12,7 +12,7 @@ import java.io.File;
  * @author : Nonoas
  * @time : 2020-09-01 20:58
  */
-public class CustomSplash extends SplashScreen {
+public class CustomSplash extends Splash {
 
     private static final String DEFAULT_IMAGE = "config/splash/Splash.png";
     private final boolean flag;

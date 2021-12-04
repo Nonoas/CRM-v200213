@@ -82,7 +82,7 @@ public class VipManageController implements Initializable {
 
         String idOrName = "%" + tf_findInfo.getText().trim() + "%";
         String str0 = cbb_level.getValue().equals("所有等级") ? "" : cbb_level.getValue();
-        String level = str0 + "%";    //��Ա�ȼ�
+        String level = str0 + "%";
         String dateFrom = dpk_from.getValue().toString();
         String dateTo = dpk_to.getValue().toString();
 

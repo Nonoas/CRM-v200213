@@ -1,13 +1,13 @@
 package indi.nonoas.crm.controller;
 
 import de.felixroske.jfxsupport.FXMLController;
+import indi.nonoas.crm.ApplicationStarter;
 import indi.nonoas.crm.common.ClientSession;
 import indi.nonoas.crm.component.alert.MyAlert;
 import indi.nonoas.crm.pojo.LoginDto;
 import indi.nonoas.crm.service.LoginService;
 import indi.nonoas.crm.utils.SaltUtil;
 import indi.nonoas.crm.utils.SpringUtil;
-import indi.nonoas.crm.view.MainStage;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.concurrent.Task;
@@ -18,7 +18,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 @FXMLController
 public class WelcomeController implements Initializable {
@@ -63,9 +62,7 @@ public class WelcomeController implements Initializable {
         vTask.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.getId() != null) {
                 ClientSession.addAttribute("user", newValue);
-                new MainStage().show();
-                Stage stage = (Stage) btn_Login.getParent().getScene().getWindow();
-                stage.close();
+                ApplicationStarter.toMainStageView();
             } else {
                 btn_Login.setText("登  录");
                 btn_Login.setDisable(false);

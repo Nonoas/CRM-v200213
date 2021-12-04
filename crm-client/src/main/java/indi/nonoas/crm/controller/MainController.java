@@ -1,5 +1,6 @@
 package indi.nonoas.crm.controller;
 
+import de.felixroske.jfxsupport.FXMLController;
 import indi.nonoas.crm.common.ClientSession;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.pojo.LoginDto;
@@ -39,6 +40,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@FXMLController
 public class MainController implements Initializable {
 
     private final Logger logger = LoggerFactory.getLogger(MainController.class);

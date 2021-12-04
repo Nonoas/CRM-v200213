@@ -27,6 +27,15 @@
 
 ![商品管理](https://img-blog.csdnimg.cn/20210610180046752.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1NTExNQ==,size_16,color_FFFFFF,t_70)
 
+
+## 项目结构
+
+本项目由 Maven 构建，包含以下模块
+
+|模块名|说明|
+|---|---|
+|crm-client|店铺管理客户端|
+|jfx-springboot-maker|用于开发 crm-client 的框架，借鉴于 [springboot-javafx-support](https://github.com/roskenet/springboot-javafx-support) 项目，后续将单独发布|
 ## 提示
 
 软件需使用maven打包，打包插件如下
@@ -85,4 +94,7 @@
 ```
 
 ## 感谢
+
 JavaFX样式：[https://github.com/dicolar/jbootx](https://github.com/dicolar/jbootx)
+
+JavaFx-Springboot支持：[https://github.com/roskenet/springboot-javafx-support](https://github.com/roskenet/springboot-javafx-support)
