@@ -1,13 +1,13 @@
 package indi.jfxmaker.stage;
 
 import indi.jfxmaker.common.InsetConstant;
+import indi.jfxmaker.control.SysButtonEnum;
 import indi.jfxmaker.pane.TransparentPane;
 import java.util.Collection;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -39,7 +39,12 @@ public class AppStage {
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
 
-        stageRootPane.getSysButtons().addAll(new Button("—"), new Button("口"), new Button("X"));
+        stageRootPane.getSysButtons()
+            .addAll(
+                SysButtonEnum.minimizeButton(),
+                SysButtonEnum.maximizeButton(),
+                SysButtonEnum.closeButton()
+            );
     }
 
     /**
