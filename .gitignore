@@ -2,4 +2,8 @@
 
 */target
 
-*/*.iml
+crm-client/target
+crm-client/crm-client.iml
+
+jfx-springboot-maker/target
+jfx-springboot-maker/jfx-springboot-maker.iml
