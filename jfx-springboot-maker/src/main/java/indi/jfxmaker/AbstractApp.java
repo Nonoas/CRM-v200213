@@ -205,21 +205,21 @@ public abstract class AbstractApp extends Application {
             AppState.getAppStage().setResizable(view.getStageResizable());
             AppState.getAppStage().show();
         } catch (Throwable t) {
-            LOGGER.error("Failed to load application: ", t);
+            LOGGER.error("无法加载应用程序： ", t);
             showErrorAlert(t);
         }
     }
 
     /**
-     * Show error alert that close app.
+     * 显示关闭应用程序的错误警报。
      *
-     * @param throwable cause of error
+     * @param throwable 错误原因
      */
     private static void showErrorAlert(Throwable throwable) {
-        Alert alert = new Alert(AlertType.ERROR, "Oops! An unrecoverable error occurred.\n" +
-            "Please contact your software vendor.\n\n" +
-            "The application will stop now.\n\n" +
-            "Error: " + throwable.getMessage());
+        Alert alert = new Alert(AlertType.ERROR, "哎呀！发生了不可恢复的错误。\n" +
+            "请联系您的软件供应商。\n\n" +
+            "该应用程序将立即停止。\n\n" +
+            "错误： " + throwable.getMessage());
         alert.showAndWait().ifPresent(response -> Platform.exit());
     }
 

@@ -1,6 +1,8 @@
 package indi.nonoas.crm.controller;
 
 import de.felixroske.jfxsupport.FXMLController;
+import indi.jfxmaker.AppState;
+import indi.jfxmaker.stage.AppStage;
 import indi.nonoas.crm.common.ClientSession;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.pojo.LoginDto;
@@ -31,6 +33,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TitledPane;
+import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -57,6 +60,9 @@ public class MainController implements Initializable {
         rootTabPane = new TabPane();
         rootTabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
     }
+
+    @FXML
+    private ToolBar toolBar;
 
     @FXML
     private BorderPane bp_root;
@@ -88,6 +94,8 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        AppState.getAppStage().registryDragger(toolBar);
 
         //启动后台任务
         startBackgroundTask();
@@ -153,6 +161,7 @@ public class MainController implements Initializable {
      * 初始化左侧菜单
      */
     private void initLeftMenu() {
+
         leftMenuVb.getStylesheets().add("/css/leftmenu.css");
         ObservableList<Node> menuList = leftMenuVb.getChildren();
         menuList.add(this.consumeLeftMenu());
@@ -337,8 +346,8 @@ public class MainController implements Initializable {
         new Thread(() -> {
             odrService.delete365dAgo();
             logger.debug("\n==================\n" +
-                    "删除一年前的订单" +
-                    "\n===================");
+                "删除一年前的订单" +
+                "\n===================");
         }).start();
     }
 

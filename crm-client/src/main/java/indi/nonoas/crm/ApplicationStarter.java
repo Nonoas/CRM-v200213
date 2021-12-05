@@ -29,8 +29,6 @@ public class ApplicationStarter extends AbstractApp {
 
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setTitle("店铺管理系统");
-        stage.setResizable(false);
         super.start(stage);
     }
 
