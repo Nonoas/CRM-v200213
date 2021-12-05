@@ -57,6 +57,10 @@ public class TransparentPane extends AnchorPane {
         return sysButtons;
     }
 
+    public AnchorPane getContentPane() {
+        return this.contentPane;
+    }
+
     /**
      * 设置根布局
      *

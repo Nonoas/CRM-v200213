@@ -1,6 +1,5 @@
 package indi.jfxmaker.stage;
 
-import com.sun.javafx.cursor.CursorType;
 import indi.jfxmaker.common.InsetConstant;
 import indi.jfxmaker.common.Visibility;
 import indi.jfxmaker.control.SysButtonEnum;
@@ -52,6 +51,8 @@ public class AppStage {
         stage.setScene(scene);
 
         initSysButtons();
+        setCursorListen();
+        setResizedListener();
     }
 
     /**
@@ -77,8 +78,6 @@ public class AppStage {
 
         closeBtn.setOnAction(event -> this.close());
 
-        setContentViewResizeListener();
-
         stageRootPane.getSysButtons().addAll(minBtn, maxBtn, closeBtn);
     }
 
@@ -88,8 +87,10 @@ public class AppStage {
      * @param parent 根布局
      */
     public void setContentView(Parent parent) {
+
+
         // 设置窗口拖动
-        registryDragger(parent);
+//        registryDragger(parent);
 
         stageRootPane.setContent(parent);
     }
@@ -130,16 +131,6 @@ public class AppStage {
         }
     };
 
-
-    /**
-     * 拖动监听，用于调整窗口大小
-     */
-    private final EventHandler<MouseEvent> resizedHandler = event -> {
-        if (!stage.isMaximized()) {
-            stage.setX(event.getScreenX() - xOffset);
-            stage.setY(event.getScreenY() - yOffset);
-        }
-    };
 
     /**
      * 注册拖动节点到当前 AppStage:<br/>
@@ -201,19 +192,82 @@ public class AppStage {
     /**
      * 设置内容可缩放
      */
-    private void setContentViewResizeListener() {
-        stageRootPane.setOnMouseMoved(new EventHandler<MouseEvent>() {
+    private void setCursorListen() {
+        stage.getScene().setOnMouseMoved(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                // 消费此事件防止传递
                 event.consume();
 
                 Bounds layoutBounds = getResizeDealBounds();
 
                 Cursor cursor = cursorResizeType(event, layoutBounds);
 
-                stageRootPane.setCursor(cursor);
+                stage.getScene().setCursor(cursor);
             }
         });
+    }
+
+
+    /**
+     * 设置窗口大小改变事件
+     */
+    private void setResizedListener() {
+
+        // todo 有事件冲突  bug
+
+        stageRootPane.setOnMouseDragged(event -> {
+
+            double x = event.getSceneX();
+            double y = event.getSceneY();
+            // 保存窗口改变后的x、y坐标和宽度、高度，用于预判是否会小于最小宽度、最小高度
+            double nextX = stage.getX();
+            double nextY = stage.getY();
+            double nextWidth = stage.getWidth();
+            double nextHeight = stage.getHeight();
+
+            double stageEndY = nextY + nextHeight;
+            double stageEndX = nextX + nextWidth;
+
+            System.out.println(nextX + "," + stageEndX);
+
+            if (isRight || isBottomRight) {// 所有右边调整窗口状态
+                nextWidth = x;
+            }
+            if (isBottomRight || isBottom) {// 所有下边调整窗口状态
+                nextHeight = y;
+            }
+            if (isLeft || isTopLeft) {
+                nextX = event.getScreenX();
+                nextWidth = stageEndX - nextX;
+            }
+            if (isTop || isTopLeft) {
+                nextY = event.getScreenY();
+                nextHeight = stageEndY - nextY;
+            }
+//            if (nextWidth <= MIN_WIDTH) {// 如果窗口改变后的宽度小于最小宽度，则宽度调整到最小宽度
+//                nextWidth = MIN_WIDTH;
+//            }
+//            if (nextHeight <= MIN_HEIGHT) {// 如果窗口改变后的高度小于最小高度，则高度调整到最小高度
+//                nextHeight = MIN_HEIGHT;
+//            }
+            // 最后统一改变窗口的x、y坐标和宽度、高度，可以防止刷新频繁出现的屏闪情况
+
+            stage.setX(nextX);
+            stage.setY(nextY);
+            stage.setWidth(nextWidth);
+            stage.setHeight(nextHeight);
+
+            if (!isBottom && !isBottomRight && !isBottomLeft
+                && !isLeft && !isRight &&
+                !isTop && !isTopLeft && !isTopRight) {
+                stage.setX(event.getScreenX() - xOffset);
+                stage.setY(event.getScreenY() - yOffset);
+            }
+
+        });
+
+        stageRootPane.setOnMousePressed(pressHandler);
     }
 
     private Bounds getResizeDealBounds() {
@@ -223,11 +277,11 @@ public class AppStage {
         Bounds bounds = stageRootPane.getLayoutBounds();
 
         double left = bounds.getMinX() + offsetWith;
-        double right = bounds.getMaxX();
+        double width = bounds.getMaxX() - bounds.getMinX() - 2 * offsetWith;
         double top = bounds.getMinY() + offsetWith;
-        double bottom = bounds.getMaxY() ;
+        double height = bounds.getMaxY() - bounds.getMinX() - 2 * offsetWith;
 
-        return new BoundingBox(left, top, right, bottom);
+        return new BoundingBox(left, top, width, height);
     }
 
 
@@ -251,13 +305,6 @@ public class AppStage {
 
         double eX = e.getSceneX();
         double eY = e.getSceneY();
-
-        System.out.println("eX：" + eX);
-        System.out.println("minX：" + bounds.getMinX());
-        System.out.println("boundX：" + bounds.getMaxX());
-
-        System.out.println("eY：" + eY);
-        System.out.println("maxY：" + bounds.getMaxY());
 
         // 先将所有调整窗口状态重置
         isRight = isLeft = false;
@@ -286,17 +333,17 @@ public class AppStage {
         else if (eY > bounds.getMaxY()) {
             // 左下
             if (eX < bounds.getMinX()) {
-                isTopLeft = true;
+                isBottomLeft = true;
                 cursorType = Cursor.SW_RESIZE;
             }
             // 右下
             else if (eX > bounds.getMaxX()) {
-                isTopRight = true;
+                isBottomRight = true;
                 cursorType = Cursor.SE_RESIZE;
             }
             // 下
             else {
-                isTop = true;
+                isBottom = true;
                 cursorType = Cursor.S_RESIZE;
             }
         }
@@ -304,12 +351,12 @@ public class AppStage {
         else {
             // 左
             if (eX < bounds.getMinX()) {
-                isTopLeft = true;
+                isLeft = true;
                 cursorType = Cursor.W_RESIZE;
             }
             // 右
             else if (eX > bounds.getMaxX()) {
-                isTopRight = true;
+                isRight = true;
                 cursorType = Cursor.E_RESIZE;
             }
         }
