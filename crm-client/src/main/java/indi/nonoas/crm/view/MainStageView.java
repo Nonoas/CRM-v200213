@@ -1,7 +1,7 @@
 package indi.nonoas.crm.view;
 
-import de.felixroske.jfxsupport.AbstractFxmlView;
-import de.felixroske.jfxsupport.FXMLView;
+import indi.jfxmaker.fxml.AbstractFxmlView;
+import indi.jfxmaker.fxml.FXMLView;
 
 /**
  * @author : Nonoas

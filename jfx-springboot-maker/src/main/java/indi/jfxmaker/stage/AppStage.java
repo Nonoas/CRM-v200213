@@ -1,13 +1,18 @@
 package indi.jfxmaker.stage;
 
 import indi.jfxmaker.common.InsetConstant;
+import indi.jfxmaker.common.Visibility;
 import indi.jfxmaker.control.SysButtonEnum;
 import indi.jfxmaker.pane.TransparentPane;
+import indi.jfxmaker.utils.UIUtil;
 import java.util.Collection;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -39,12 +44,31 @@ public class AppStage {
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
 
-        stageRootPane.getSysButtons()
-            .addAll(
-                SysButtonEnum.minimizeButton(),
-                SysButtonEnum.maximizeButton(),
-                SysButtonEnum.closeButton()
-            );
+        initSysButtons();
+    }
+
+    /**
+     * 初始化窗口按钮，包括监听事件
+     */
+    private void initSysButtons() {
+        Button minBtn = SysButtonEnum.MINIMIZE.get();
+        Button maxBtn = SysButtonEnum.MAXIMIZE.get();
+        Button closeBtn = SysButtonEnum.CLOSE.get();
+
+        minBtn.setOnAction(event -> this.stage.setIconified(true));
+        maxBtn.setOnAction(event -> this.setMaximized(!stage.isMaximized()));
+
+        stage.resizableProperty().addListener((observable, oldValue, resizable) -> {
+            if (resizable) {
+                UIUtil.setVisible(maxBtn, Visibility.VISIBLE);
+            } else {
+                UIUtil.setVisible(maxBtn, Visibility.GONE);
+            }
+        });
+
+        closeBtn.setOnAction(event -> this.close());
+
+        stageRootPane.getSysButtons().addAll(minBtn, maxBtn, closeBtn);
     }
 
     /**

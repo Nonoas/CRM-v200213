@@ -1,6 +1,6 @@
 package indi.jfxmaker;
 
-import de.felixroske.jfxsupport.AbstractFxmlView;
+import indi.jfxmaker.fxml.AbstractFxmlView;
 import indi.jfxmaker.splash.Splash;
 import indi.jfxmaker.stage.AppStage;
 import java.awt.SystemTray;
@@ -16,7 +16,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -31,7 +30,6 @@ import org.springframework.context.ConfigurableApplicationContext;
  *
  * @author Nonoas
  */
-@SuppressWarnings("WeakerAccess")
 public abstract class AbstractApp extends Application {
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractApp.class);
 
@@ -204,6 +202,7 @@ public abstract class AbstractApp extends Application {
             applyEnvPropsToView();
 
             AppState.getAppStage().addIcons(icons);
+            AppState.getAppStage().setResizable(view.getStageResizable());
             AppState.getAppStage().show();
         } catch (Throwable t) {
             LOGGER.error("Failed to load application: ", t);

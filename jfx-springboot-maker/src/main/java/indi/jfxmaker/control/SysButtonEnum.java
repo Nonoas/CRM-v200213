@@ -2,6 +2,7 @@ package indi.jfxmaker.control;
 
 
 import javafx.scene.control.Button;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 
 /**
@@ -10,33 +11,61 @@ import javafx.scene.image.ImageView;
  */
 public enum SysButtonEnum {
 
-    INSTANCE;
+    MINIMIZE(SysButtonEnum.minimizeButton()),
+    MAXIMIZE(SysButtonEnum.maximizeButton()),
+    CLOSE(SysButtonEnum.closeButton());
 
-    SysButtonEnum() {
+    private final Button btn;
 
+    SysButtonEnum(Button button) {
+        this.btn = button;
     }
 
-    public static Button minimizeButton() {
-        Button button = new SysButton("-");
-        return button;
+    public Button get() {
+        return this.btn;
     }
 
-    public static Button maximizeButton() {
-        Button button = new SysButton();
-        ImageView imageView = new ImageView("/icon/sys_max.png");
-        imageView.setFitHeight(20);
-        imageView.setFitWidth(20);
-        button.setGraphic(imageView);
-        return button;
-    }
-
-    public static Button closeButton() {
-        Button button = new SysButton("X");
+    private static Button minimizeButton() {
+        Button button = new SysButton(new ImageView("/icon/sys_min.png"));
+        button.setStyle("-fx-background-color: transparent");
         button.hoverProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
-                button.setStyle("-fx-background-color: red;-fx-text-fill: white");
+                button.setStyle("-fx-background-color: #ddd");
             } else {
-                button.setStyle("-fx-background-color: transparent;-fx-text-fill:black");
+                button.setStyle("-fx-background-color: transparent");
+            }
+        });
+        return button;
+    }
+
+    private static Button maximizeButton() {
+        Button button = new SysButton(new ImageView("/icon/sys_max.png"));
+        button.setStyle("-fx-background-color: transparent");
+        button.hoverProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                button.setStyle("-fx-background-color: #dedede");
+            } else {
+                button.setStyle("-fx-background-color: transparent");
+            }
+        });
+        return button;
+    }
+
+    private static Button closeButton() {
+        ImageView iv = new ImageView("/icon/sys_close.png");
+
+        ImageView ivHover = new ImageView("/icon/sys_close.png");
+        ivHover.setEffect(new ColorAdjust(1, 1, 2, 1));
+
+        SysButton button = new SysButton(iv);
+        button.setStyle("-fx-background-color: transparent");
+        button.hoverProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                button.setStyle("-fx-background-color: #f55");
+                button.setIcon(ivHover);
+            } else {
+                button.setStyle("-fx-background-color: transparent");
+                button.setIcon(iv);
             }
         });
         return button;
