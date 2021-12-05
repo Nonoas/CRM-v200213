@@ -8,8 +8,19 @@ package indi.jfxmaker.common;
  */
 public enum Visibility {
 
+    /**
+     * 设置组件可见
+     */
     VISIBLE(true, true),
+
+    /**
+     * 设置组件不可见，但是会占用UI空间
+     */
     INVISIBLE(false, true),
+
+    /**
+     * 设置组件不可见，且不占用UI空间
+     */
     GONE(false, false);
 
     private final boolean visible;

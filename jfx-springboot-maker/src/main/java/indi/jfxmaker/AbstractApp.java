@@ -1,5 +1,6 @@
 package indi.jfxmaker;
 
+import de.felixroske.jfxsupport.PropertyReaderHelper;
 import indi.jfxmaker.fxml.AbstractFxmlView;
 import indi.jfxmaker.splash.Splash;
 import indi.jfxmaker.stage.AppStage;
@@ -92,22 +93,23 @@ public abstract class AbstractApp extends Application {
     }
 
     private void loadIcons(ConfigurableApplicationContext ctx) {
-//        try {
-//            final List<String> fsImages = PropertyReaderHelper.get(ctx.getEnvironment(), Constant.KEY_APPICONS);
-//
-//            if (!fsImages.isEmpty()) {
-//                fsImages.forEach((s) ->
-//                    {
-//                        Image img = new Image(getClass().getResource(s).toExternalForm());
-//                        icons.add(img);
-//                    }
-//                );
-//            } else { // add factory images
-//                icons.addAll(defaultIcons);
-//            }
-//        } catch (Exception e) {
-//            LOGGER.error("Failed to load icons: ", e);
-//        }
+        try {
+            final List<String> fsImages =
+                PropertyReaderHelper.get(ctx.getEnvironment(), "javafx.appicons");
+
+            if (!fsImages.isEmpty()) {
+                fsImages.forEach((s) ->
+                    {
+                        Image img = new Image(getClass().getResource(s).toExternalForm());
+                        icons.add(img);
+                    }
+                );
+            } else { // add factory images
+                icons.addAll(defaultIcons);
+            }
+        } catch (Exception e) {
+            LOGGER.error("Failed to load icons: ", e);
+        }
 
 
     }
@@ -305,22 +307,19 @@ public abstract class AbstractApp extends Application {
 
 
     /**
-     * Gets called after full initialization of Spring application context
-     * and JavaFX platform right before the initial view is shown.
-     * Override this method as a hook to add special code for your app. Especially meant to
-     * add AWT code to add a system tray icon and behavior by calling
-     * AppState.getSystemTray() and modifying it accordingly.
+     * 在 Spring 应用程序上下文和 JavaFX 平台完全初始化之后，在显示初始视图之前调用。
+     * 覆盖此方法作为一个钩子，为您的应用程序添加特殊代码。
+     * 特别是通过调用 AppState.getSystemTray() 并相应地修改它来添加 AWT 代码以添加系统托盘图标和行为。
      * <p>
      * By default noop.
      *
-     * @param stage can be used to customize the stage before being displayed
+     * @param stage 可用于自定义显示前的舞台
      * @param ctx   represents spring ctx where you can loog for beans.
      */
-    public void beforeInitialView(final Stage stage, final ConfigurableApplicationContext ctx) {
+    protected void beforeInitialView(final Stage stage, final ConfigurableApplicationContext ctx) {
     }
 
-    public void beforeShowingSplash(Stage splashStage) {
-
+    protected void beforeShowingSplash(Stage splashStage) {
     }
 
     public Collection<Image> loadDefaultIcons() {

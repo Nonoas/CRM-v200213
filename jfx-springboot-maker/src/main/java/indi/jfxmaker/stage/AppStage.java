@@ -1,5 +1,6 @@
 package indi.jfxmaker.stage;
 
+import com.sun.javafx.cursor.CursorType;
 import indi.jfxmaker.common.InsetConstant;
 import indi.jfxmaker.common.Visibility;
 import indi.jfxmaker.control.SysButtonEnum;
@@ -8,6 +9,9 @@ import indi.jfxmaker.utils.UIUtil;
 import java.util.Collection;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Bounds;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -61,6 +65,8 @@ public class AppStage {
         minBtn.setOnAction(event -> this.stage.setIconified(true));
         maxBtn.setOnAction(event -> this.setMaximized(!stage.isMaximized()));
 
+        // 最大化按钮绑定 Stage 的 resizable 属性
+        // resizable 为 false 的时候不显示最大化按钮
         stage.resizableProperty().addListener((observable, oldValue, resizable) -> {
             if (resizable) {
                 UIUtil.setVisible(maxBtn, Visibility.VISIBLE);
@@ -70,6 +76,8 @@ public class AppStage {
         });
 
         closeBtn.setOnAction(event -> this.close());
+
+        setContentViewResizeListener();
 
         stageRootPane.getSysButtons().addAll(minBtn, maxBtn, closeBtn);
     }
@@ -82,6 +90,7 @@ public class AppStage {
     public void setContentView(Parent parent) {
         // 设置窗口拖动
         registryDragger(parent);
+
         stageRootPane.setContent(parent);
     }
 
@@ -121,6 +130,16 @@ public class AppStage {
         }
     };
 
+
+    /**
+     * 拖动监听，用于调整窗口大小
+     */
+    private final EventHandler<MouseEvent> resizedHandler = event -> {
+        if (!stage.isMaximized()) {
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
+        }
+    };
 
     /**
      * 注册拖动节点到当前 AppStage:<br/>
@@ -176,5 +195,125 @@ public class AppStage {
 
     public void setResizable(boolean b) {
         stage.setResizable(b);
+    }
+
+
+    /**
+     * 设置内容可缩放
+     */
+    private void setContentViewResizeListener() {
+        stageRootPane.setOnMouseMoved(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                event.consume();
+
+                Bounds layoutBounds = getResizeDealBounds();
+
+                Cursor cursor = cursorResizeType(event, layoutBounds);
+
+                stageRootPane.setCursor(cursor);
+            }
+        });
+    }
+
+    private Bounds getResizeDealBounds() {
+        // 偏移范围
+        final double offsetWith = stageRootPane.getPadding().getTop() + 5.0;
+
+        Bounds bounds = stageRootPane.getLayoutBounds();
+
+        double left = bounds.getMinX() + offsetWith;
+        double right = bounds.getMaxX();
+        double top = bounds.getMinY() + offsetWith;
+        double bottom = bounds.getMaxY() ;
+
+        return new BoundingBox(left, top, right, bottom);
+    }
+
+
+    //=================================================================
+    //                           窗体拉伸属性
+    //=================================================================
+
+    private boolean isRight;
+    private boolean isLeft;
+    private boolean isBottomLeft;
+    private boolean isBottomRight;
+    private boolean isBottom;
+    private boolean isTopLeft;
+    private boolean isTopRight;
+    private boolean isTop;
+
+    // 设置鼠标悬停样式
+    private Cursor cursorResizeType(MouseEvent e, Bounds bounds) {
+
+        Cursor cursorType = Cursor.DEFAULT;// 鼠标光标初始为默认类型，若未进入调整窗口状态，保持默认类型
+
+        double eX = e.getSceneX();
+        double eY = e.getSceneY();
+
+        System.out.println("eX：" + eX);
+        System.out.println("minX：" + bounds.getMinX());
+        System.out.println("boundX：" + bounds.getMaxX());
+
+        System.out.println("eY：" + eY);
+        System.out.println("maxY：" + bounds.getMaxY());
+
+        // 先将所有调整窗口状态重置
+        isRight = isLeft = false;
+        isTop = isTopLeft = isTopRight = false;
+        isBottomRight = isBottomLeft = isBottom = false;
+
+        // 超出上边距
+        if (eY < bounds.getMinY()) {
+            // 左上
+            if (eX < bounds.getMinX()) {
+                isTopLeft = true;
+                cursorType = Cursor.NW_RESIZE;
+            }
+            // 右上
+            else if (eX > bounds.getMaxX()) {
+                isTopRight = true;
+                cursorType = Cursor.NE_RESIZE;
+            }
+            // 上
+            else {
+                isTop = true;
+                cursorType = Cursor.N_RESIZE;
+            }
+        }
+        // 超出下边距
+        else if (eY > bounds.getMaxY()) {
+            // 左下
+            if (eX < bounds.getMinX()) {
+                isTopLeft = true;
+                cursorType = Cursor.SW_RESIZE;
+            }
+            // 右下
+            else if (eX > bounds.getMaxX()) {
+                isTopRight = true;
+                cursorType = Cursor.SE_RESIZE;
+            }
+            // 下
+            else {
+                isTop = true;
+                cursorType = Cursor.S_RESIZE;
+            }
+        }
+        // 左右边界
+        else {
+            // 左
+            if (eX < bounds.getMinX()) {
+                isTopLeft = true;
+                cursorType = Cursor.W_RESIZE;
+            }
+            // 右
+            else if (eX > bounds.getMaxX()) {
+                isTopRight = true;
+                cursorType = Cursor.E_RESIZE;
+            }
+        }
+
+        return cursorType;
     }
 }
