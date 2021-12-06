@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -199,6 +200,11 @@ public class AppStage {
                 // 消费此事件防止传递
                 event.consume();
 
+                // 窗口大小不可改变时，直接退出
+                if (!stage.isResizable()) {
+                    return;
+                }
+
                 Bounds layoutBounds = getResizeDealBounds();
 
                 Cursor cursor = cursorResizeType(event, layoutBounds);
@@ -206,6 +212,7 @@ public class AppStage {
                 stage.getScene().setCursor(cursor);
             }
         });
+
     }
 
 
@@ -216,7 +223,10 @@ public class AppStage {
 
         // todo 有事件冲突  bug
 
-        stageRootPane.setOnMouseDragged(event -> {
+        stage.getScene().setOnMouseDragged(event -> {
+
+            double stageMinWidth = stage.getMinWidth();
+            double stageMinHeight = stage.getMinHeight();
 
             double x = event.getSceneX();
             double y = event.getSceneY();
@@ -229,34 +239,41 @@ public class AppStage {
             double stageEndY = nextY + nextHeight;
             double stageEndX = nextX + nextWidth;
 
-            System.out.println(nextX + "," + stageEndX);
-
-            if (isRight || isBottomRight) {// 所有右边调整窗口状态
-                nextWidth = x;
-            }
-            if (isBottomRight || isBottom) {// 所有下边调整窗口状态
-                nextHeight = y;
-            }
-            if (isLeft || isTopLeft) {
+            // 所有左边调整
+            if (isLeft || isTopLeft || isBottomLeft) {
                 nextX = event.getScreenX();
                 nextWidth = stageEndX - nextX;
             }
-            if (isTop || isTopLeft) {
+            // 所有右边调整
+            if (isTopRight || isRight || isBottomRight) {
+                nextWidth = x;
+            }
+
+            // 所有上边调整
+            if (isTop || isTopLeft || isTopRight) {
                 nextY = event.getScreenY();
                 nextHeight = stageEndY - nextY;
             }
-//            if (nextWidth <= MIN_WIDTH) {// 如果窗口改变后的宽度小于最小宽度，则宽度调整到最小宽度
-//                nextWidth = MIN_WIDTH;
-//            }
-//            if (nextHeight <= MIN_HEIGHT) {// 如果窗口改变后的高度小于最小高度，则高度调整到最小高度
-//                nextHeight = MIN_HEIGHT;
-//            }
-            // 最后统一改变窗口的x、y坐标和宽度、高度，可以防止刷新频繁出现的屏闪情况
+            // 所有下边调整
+            if (isBottomLeft || isBottomRight || isBottom) {
+                nextHeight = y;
+            }
 
-            stage.setX(nextX);
-            stage.setY(nextY);
+            // 如果窗口改变后的宽度小于最小宽度，则宽度调整到最小宽度
+            if (nextWidth <= stageMinWidth) {
+                nextWidth = stageMinWidth;
+            }
+
+            // 如果窗口改变后的高度小于最小高度，则高度调整到最小高度
+            if (nextHeight <= stageMinHeight) {
+                nextHeight = stageMinHeight;
+            }
+
+            // 最后统一改变窗口的x、y坐标和宽度、高度，可以防止刷新频繁出现的屏闪情况
             stage.setWidth(nextWidth);
             stage.setHeight(nextHeight);
+            stage.setX(nextX);
+            stage.setY(nextY);
 
             if (!isBottom && !isBottomRight && !isBottomLeft
                 && !isLeft && !isRight &&
