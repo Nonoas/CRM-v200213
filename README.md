@@ -11,7 +11,7 @@
 本软件是基于 JavaFX8 的一款单机的小型店铺管理系统，数据库使用内嵌式的 [H2数据库](https://baike.baidu.com/item/H2%E6%95%B0%E6%8D%AE%E5%BA%93/23316077?fr=aladdin),
 无需用户安装数据库软件，也无需软件方提供远程数据库。
 
-功能包括 商品管理、用户管理、员工管理、套餐管理。报表统计等功能。
+功能包括 商品管理、用户管理、员工管理、套餐管理、报表统计等功能。
 
 本软件将持续更新维护。
 
@@ -31,6 +31,15 @@
 |---|---|
 |crm-client|店铺管理客户端|
 |jfx-springboot-maker|用于开发 crm-client 的框架，借鉴于 [springboot-javafx-support](https://github.com/roskenet/springboot-javafx-support) 项目，后续将单独发布|
+
+## 项目开发
+
+###  项目启动
+
+项目代码 clone 至本地后，使用 `mvn clean compile` 命令编译后方可运行，或在 IDEA 中设置启动配置，如下图
+
+![启动配置](https://gitee.com/nonoas/picture-bed/raw/master/crm-client/run_config.png)
+
 ## 提示
 
 软件需使用maven打包，打包插件如下
