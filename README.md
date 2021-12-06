@@ -15,18 +15,13 @@
 
 本软件将持续更新维护。
 
-## 软件首页
+### 软件预览
 
 ![软件首页](https://img-blog.csdnimg.cn/20210610175826650.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1NTExNQ==,size_16,color_FFFFFF,t_70)
 
-## 会员管理
+### 使用说明
 
-![会员管理](https://img-blog.csdnimg.cn/20210610175957872.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1NTExNQ==,size_16,color_FFFFFF,t_70)
-
-## 商品管理
-
-![商品管理](https://img-blog.csdnimg.cn/20210610180046752.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1NTExNQ==,size_16,color_FFFFFF,t_70)
-
+地址：[点击跳转](https://gitee.com/nonoas/CRM-v200213/wikis/pages?sort_id=4913468&doc_id=932745) 至 wiki
 
 ## 项目结构
 
