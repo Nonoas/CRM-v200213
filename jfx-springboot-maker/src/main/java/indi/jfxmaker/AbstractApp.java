@@ -127,7 +127,7 @@ public abstract class AbstractApp extends Application {
             SpringApplication.run(this.getClass(), savedArgs)
         ).whenComplete((ctx, throwable) -> {
             if (throwable != null) {
-                LOGGER.error("Failed to load spring application context: ", throwable);
+                LOGGER.error("无法加载 spring 应用程序上下文： ", throwable);
                 Platform.runLater(() -> showErrorAlert(throwable));
             } else {
                 Platform.runLater(() -> {
@@ -147,11 +147,14 @@ public abstract class AbstractApp extends Application {
      * @see javafx.application.Application#start(javafx.stage.Stage)
      */
     @Override
-    public void start(final Stage stage) throws Exception {
+    public void start(Stage splashStage) throws Exception {
 
+        // 创建一个 AppStage， 主界面在此 AppStage 中展示
         AppState.setAppStage(new AppStage());
-//        AppState.setHostServices(this.getHostServices());
-        final Stage splashStage = new Stage(StageStyle.TRANSPARENT);
+        AppState.setHostServices(this.getHostServices());
+
+        // 设置启动屏幕
+        splashStage.initStyle(StageStyle.TRANSPARENT);
 
         if (AbstractApp.splashScreen.visible()) {
             final Scene splashScene = new Scene(splashScreen.getParent(), Color.TRANSPARENT);
@@ -300,7 +303,7 @@ public abstract class AbstractApp extends Application {
         }
 
         if (SystemTray.isSupported()) {
-//            AppState.setSystemTray(SystemTray.getSystemTray());
+           AppState.setSystemTray(SystemTray.getSystemTray());
         }
         Application.launch(appClass, args);
     }

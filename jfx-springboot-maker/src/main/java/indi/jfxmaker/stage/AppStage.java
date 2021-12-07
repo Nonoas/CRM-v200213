@@ -5,22 +5,27 @@ import indi.jfxmaker.common.Visibility;
 import indi.jfxmaker.control.SysButtonEnum;
 import indi.jfxmaker.pane.TransparentPane;
 import indi.jfxmaker.utils.UIUtil;
+import java.awt.Toolkit;
 import java.util.Collection;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javax.swing.JFrame;
 
 /**
  * App窗口，通常作为唯一窗口
@@ -32,12 +37,23 @@ public class AppStage {
 
     private final Stage stage = new Stage();
 
+    private final Scene scene;
+
     /**
      * 窗口根布局
      */
-    private final TransparentPane stageRootPane = new TransparentPane();
+    private final TransparentPane stageRootPane;
+
+    /**
+     * 根布局阴影半径
+     */
+    private final double ROOT_PANE_SHADOW_RADIUS = 15.0;
 
     public AppStage() {
+        // 初始化数据
+        stageRootPane = new TransparentPane();
+        scene = new Scene(stageRootPane);
+
         initView();
     }
 
@@ -46,14 +62,14 @@ public class AppStage {
      */
     private void initView() {
 
-        Scene scene = new Scene(stageRootPane);
         scene.setFill(Color.TRANSPARENT);
+
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
 
         initSysButtons();
-        setCursorListen();
-        setResizedListener();
+        initCursorListen();
+        initResizedListener();
     }
 
     /**
@@ -88,11 +104,6 @@ public class AppStage {
      * @param parent 根布局
      */
     public void setContentView(Parent parent) {
-
-
-        // 设置窗口拖动
-//        registryDragger(parent);
-
         stageRootPane.setContent(parent);
     }
 
@@ -105,8 +116,9 @@ public class AppStage {
         if (maximized) {
             stageRootPane.setPadding(InsetConstant.INSET_EMPTY);
         } else {
-            stageRootPane.setPadding(InsetConstant.INSET_25);
+            stageRootPane.setPadding(InsetConstant.INSET_15);
         }
+        stage.centerOnScreen();
         stage.setMaximized(maximized);
     }
 
@@ -148,11 +160,16 @@ public class AppStage {
         return this;
     }
 
+    /**
+     * 注销拖动节点
+     *
+     * @param parent 注销拖动节点
+     * @return 当前窗口
+     */
     public AppStage removeDragger(Parent parent) {
-        // 设置窗口拖动
+        // 取消组件的窗口拖动事件
         parent.setOnMousePressed(null);
         parent.setOnMouseDragged(null);
-        stageRootPane.setContent(parent);
         return this;
     }
 
@@ -193,24 +210,18 @@ public class AppStage {
     /**
      * 设置内容可缩放
      */
-    private void setCursorListen() {
-        stage.getScene().setOnMouseMoved(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                // 消费此事件防止传递
-                event.consume();
+    private void initCursorListen() {
 
-                // 窗口大小不可改变时，直接退出
-                if (!stage.isResizable()) {
-                    return;
-                }
-
-                Bounds layoutBounds = getResizeDealBounds();
-
-                Cursor cursor = cursorResizeType(event, layoutBounds);
-
-                stage.getScene().setCursor(cursor);
+        scene.addEventFilter(MouseEvent.MOUSE_MOVED, event -> {
+            // 消费此事件防止传递
+            event.consume();
+            // 窗口大小不可改变时，直接退出
+            if (!stage.isResizable() || stage.isMaximized()) {
+                return;
             }
+            Bounds layoutBounds = getResizeDealBounds();
+            Cursor cursor = cursorResizeType(event, layoutBounds);
+            scene.setCursor(cursor);
         });
 
     }
@@ -219,54 +230,52 @@ public class AppStage {
     /**
      * 设置窗口大小改变事件
      */
-    private void setResizedListener() {
+    private void initResizedListener() {
 
-        // todo 有事件冲突  bug
-
-        stage.getScene().setOnMouseDragged(event -> {
+        scene.setOnMouseDragged(event -> {
 
             double stageMinWidth = stage.getMinWidth();
             double stageMinHeight = stage.getMinHeight();
 
-            double x = event.getSceneX();
-            double y = event.getSceneY();
             // 保存窗口改变后的x、y坐标和宽度、高度，用于预判是否会小于最小宽度、最小高度
             double nextX = stage.getX();
             double nextY = stage.getY();
             double nextWidth = stage.getWidth();
             double nextHeight = stage.getHeight();
 
-            double stageEndY = nextY + nextHeight;
             double stageEndX = nextX + nextWidth;
+            double stageEndY = nextY + nextHeight;
 
             // 所有左边调整
             if (isLeft || isTopLeft || isBottomLeft) {
-                nextX = event.getScreenX();
+                nextX = event.getScreenX() - ROOT_PANE_SHADOW_RADIUS;
                 nextWidth = stageEndX - nextX;
             }
             // 所有右边调整
             if (isTopRight || isRight || isBottomRight) {
-                nextWidth = x;
+                nextWidth = event.getSceneX();
             }
 
             // 所有上边调整
             if (isTop || isTopLeft || isTopRight) {
-                nextY = event.getScreenY();
+                nextY = event.getScreenY() - ROOT_PANE_SHADOW_RADIUS;
                 nextHeight = stageEndY - nextY;
             }
             // 所有下边调整
             if (isBottomLeft || isBottomRight || isBottom) {
-                nextHeight = y;
+                nextHeight = event.getSceneY();
             }
 
             // 如果窗口改变后的宽度小于最小宽度，则宽度调整到最小宽度
             if (nextWidth <= stageMinWidth) {
                 nextWidth = stageMinWidth;
+                nextX = stage.getX();
             }
 
             // 如果窗口改变后的高度小于最小高度，则高度调整到最小高度
             if (nextHeight <= stageMinHeight) {
                 nextHeight = stageMinHeight;
+                nextY = stage.getY();
             }
 
             // 最后统一改变窗口的x、y坐标和宽度、高度，可以防止刷新频繁出现的屏闪情况
@@ -275,21 +284,25 @@ public class AppStage {
             stage.setX(nextX);
             stage.setY(nextY);
 
-            if (!isBottom && !isBottomRight && !isBottomLeft
-                && !isLeft && !isRight &&
-                !isTop && !isTopLeft && !isTopRight) {
+            if (!(isBottom || isBottomRight || isBottomLeft
+                || isLeft || isRight
+                || isTop || isTopLeft || isTopRight)) {
                 stage.setX(event.getScreenX() - xOffset);
                 stage.setY(event.getScreenY() - yOffset);
             }
-
         });
 
-        stageRootPane.setOnMousePressed(pressHandler);
+        scene.setOnMousePressed(pressHandler);
     }
+
+    /**
+     * 窗口拉伸触发的误差半径
+     */
+    private static final double stageResizeBoundRadius = 5.0;
 
     private Bounds getResizeDealBounds() {
         // 偏移范围
-        final double offsetWith = stageRootPane.getPadding().getTop() + 5.0;
+        final double offsetWith = ROOT_PANE_SHADOW_RADIUS + stageResizeBoundRadius;
 
         Bounds bounds = stageRootPane.getLayoutBounds();
 

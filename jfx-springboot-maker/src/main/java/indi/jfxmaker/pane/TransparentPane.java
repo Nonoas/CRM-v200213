@@ -2,6 +2,7 @@ package indi.jfxmaker.pane;
 
 import indi.jfxmaker.common.InsetConstant;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.effect.DropShadow;
@@ -11,6 +12,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 
 /**
+ * 透明面板
+ *
  * @author Nonoas
  * @datetime 2021/12/4 15:42
  */
@@ -34,7 +37,7 @@ public class TransparentPane extends AnchorPane {
 
         sysBtnBox.setAlignment(Pos.CENTER_RIGHT);
 
-        this.setPadding(InsetConstant.INSET_25);
+        this.setPadding(InsetConstant.INSET_15);
 
         setStyle("-fx-background-color: rgb(0, 0, 0, 0)");
 
@@ -82,8 +85,8 @@ public class TransparentPane extends AnchorPane {
 
     private DropShadow getDropShadow() {
         DropShadow dropshadow = new DropShadow();// 阴影向外
-        dropshadow.setRadius(20);// 颜色蔓延的距离
-        dropshadow.setSpread(0.1);// 颜色变淡的程度
+        dropshadow.setRadius(15);// 颜色蔓延的距离
+        dropshadow.setSpread(0.15);// 颜色变淡的程度
         dropshadow.setColor(Color.rgb(0, 0, 0, 0.3));// 设置颜色
         return dropshadow;
     }

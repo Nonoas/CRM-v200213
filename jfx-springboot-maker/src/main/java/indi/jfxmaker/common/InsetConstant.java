@@ -9,4 +9,5 @@ import javafx.geometry.Insets;
 public interface InsetConstant {
     Insets INSET_EMPTY = Insets.EMPTY;
     Insets INSET_25 = new Insets(25);
+    Insets INSET_15 = new Insets(15);
 }
