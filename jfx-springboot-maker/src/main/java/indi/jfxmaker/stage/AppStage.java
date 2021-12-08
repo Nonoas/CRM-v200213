@@ -7,6 +7,8 @@ import indi.jfxmaker.pane.TransparentPane;
 import indi.jfxmaker.utils.UIUtil;
 import java.awt.Toolkit;
 import java.util.Collection;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.BoundingBox;
@@ -39,6 +41,12 @@ public class AppStage {
 
     private final Scene scene;
 
+
+    /**
+     * 窗口最大化属性
+     */
+    private final SimpleBooleanProperty maximized = new SimpleBooleanProperty(false);
+
     /**
      * 窗口根布局
      */
@@ -47,7 +55,7 @@ public class AppStage {
     /**
      * 根布局阴影半径
      */
-    private final double ROOT_PANE_SHADOW_RADIUS = 15.0;
+    private static final double ROOT_PANE_SHADOW_RADIUS = 15.0;
 
     public AppStage() {
         // 初始化数据
@@ -81,7 +89,7 @@ public class AppStage {
         Button closeBtn = SysButtonEnum.CLOSE.get();
 
         minBtn.setOnAction(event -> this.stage.setIconified(true));
-        maxBtn.setOnAction(event -> this.setMaximized(!stage.isMaximized()));
+        maxBtn.setOnAction(event -> this.setMaximized(!isMaximized()));
 
         // 最大化按钮绑定 Stage 的 resizable 属性
         // resizable 为 false 的时候不显示最大化按钮
@@ -107,19 +115,42 @@ public class AppStage {
         stageRootPane.setContent(parent);
     }
 
+    public boolean isMaximized() {
+        return maximized.get();
+    }
+
+    public SimpleBooleanProperty maximizedProperty() {
+        return maximized;
+    }
+
+
+    // 最大化前的宽度，高度
+    private double preMaximizedWith = 0.0, preMaximizedHeight = 0.0;
+
     /**
      * 最大化窗口
      *
-     * @param maximized true：最大化
+     * @param isMax true：最大化
      */
-    public void setMaximized(boolean maximized) {
-        if (maximized) {
+    public void setMaximized(boolean isMax) {
+        maximized.set(isMax);
+        if (isMax) {
+            preMaximizedWith = stage.getWidth();
+            preMaximizedHeight = stage.getHeight();
+
             stageRootPane.setPadding(InsetConstant.INSET_EMPTY);
+            Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
+
+            stage.setX(visualBounds.getMinX());
+            stage.setY(visualBounds.getMinY());
+            stage.setWidth(visualBounds.getWidth());
+            stage.setHeight(visualBounds.getHeight());
         } else {
             stageRootPane.setPadding(InsetConstant.INSET_15);
+            stage.setWidth(Math.max(preMaximizedWith, stage.getMinWidth()));
+            stage.setHeight(Math.max(preMaximizedHeight, stage.getMinHeight()));
+            stage.centerOnScreen();
         }
-        stage.centerOnScreen();
-        stage.setMaximized(maximized);
     }
 
     public ObservableList<Node> getSystemButtons() {
@@ -138,7 +169,7 @@ public class AppStage {
      * 拖动监听，用于设置拖动后窗口的位置
      */
     private final EventHandler<MouseEvent> draggedHandler = event -> {
-        if (!stage.isMaximized()) {
+        if (!isMaximized()) {
             stage.setX(event.getScreenX() - xOffset);
             stage.setY(event.getScreenY() - yOffset);
         }
@@ -216,7 +247,7 @@ public class AppStage {
             // 消费此事件防止传递
             event.consume();
             // 窗口大小不可改变时，直接退出
-            if (!stage.isResizable() || stage.isMaximized()) {
+            if (!stage.isResizable() || this.isMaximized()) {
                 return;
             }
             Bounds layoutBounds = getResizeDealBounds();
@@ -233,6 +264,8 @@ public class AppStage {
     private void initResizedListener() {
 
         scene.setOnMouseDragged(event -> {
+
+            event.consume();
 
             double stageMinWidth = stage.getMinWidth();
             double stageMinHeight = stage.getMinHeight();
@@ -279,14 +312,13 @@ public class AppStage {
             }
 
             // 最后统一改变窗口的x、y坐标和宽度、高度，可以防止刷新频繁出现的屏闪情况
+
             stage.setWidth(nextWidth);
             stage.setHeight(nextHeight);
             stage.setX(nextX);
             stage.setY(nextY);
 
-            if (!(isBottom || isBottomRight || isBottomLeft
-                || isLeft || isRight
-                || isTop || isTopLeft || isTopRight)) {
+            if (Cursor.DEFAULT == scene.getCursor()) {
                 stage.setX(event.getScreenX() - xOffset);
                 stage.setY(event.getScreenY() - yOffset);
             }
