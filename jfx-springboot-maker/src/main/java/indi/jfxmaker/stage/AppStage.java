@@ -247,7 +247,7 @@ public class AppStage {
             // 消费此事件防止传递
             event.consume();
             // 窗口大小不可改变时，直接退出
-            if (!stage.isResizable() || this.isMaximized()) {
+            if (!stage.isResizable() || this.isMaximized() || stage.isFullScreen()) {
                 return;
             }
             Bounds layoutBounds = getResizeDealBounds();
@@ -265,16 +265,19 @@ public class AppStage {
 
         scene.setOnMouseDragged(event -> {
 
-            event.consume();
-
             double stageMinWidth = stage.getMinWidth();
             double stageMinHeight = stage.getMinHeight();
 
             // 保存窗口改变后的x、y坐标和宽度、高度，用于预判是否会小于最小宽度、最小高度
             double nextX = stage.getX();
             double nextY = stage.getY();
+
+
             double nextWidth = stage.getWidth();
             double nextHeight = stage.getHeight();
+
+            double currW = nextWidth;
+            double currH = nextHeight;
 
             double stageEndX = nextX + nextWidth;
             double stageEndY = nextY + nextHeight;
@@ -301,27 +304,30 @@ public class AppStage {
 
             // 如果窗口改变后的宽度小于最小宽度，则宽度调整到最小宽度
             if (nextWidth <= stageMinWidth) {
-                nextWidth = stageMinWidth;
                 nextX = stage.getX();
+                nextWidth = currW;
             }
 
             // 如果窗口改变后的高度小于最小高度，则高度调整到最小高度
             if (nextHeight <= stageMinHeight) {
-                nextHeight = stageMinHeight;
+                nextHeight = currH;
                 nextY = stage.getY();
             }
 
             // 最后统一改变窗口的x、y坐标和宽度、高度，可以防止刷新频繁出现的屏闪情况
-
             stage.setWidth(nextWidth);
             stage.setHeight(nextHeight);
             stage.setX(nextX);
             stage.setY(nextY);
 
-            if (Cursor.DEFAULT == scene.getCursor()) {
+            if (!(isBottom || isBottomRight || isBottomLeft
+                || isLeft || isRight
+                || isTop || isTopLeft || isTopRight)) {
                 stage.setX(event.getScreenX() - xOffset);
                 stage.setY(event.getScreenY() - yOffset);
             }
+
+            event.consume();
         });
 
         scene.setOnMousePressed(pressHandler);
