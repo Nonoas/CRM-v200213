@@ -8,7 +8,7 @@
     -fx-faint-focus-color: transparent;
 }
 
-.left-menu{
+.left-menu {
     -fx-background-color: #001529;
 }
 
@@ -25,7 +25,6 @@
 }
 
 .titled-pane {
-    -fx-border-image-width: 0;
     -fx-text-fill: white;
 }
 

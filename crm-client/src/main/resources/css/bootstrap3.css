@@ -1,3 +1,12 @@
+@font-face {
+	font-family : 'Microsoft YaHei Mono';
+	src: url('/fonts/MSYHMONO.ttf');
+}
+
+*{
+	-fx-font-family: 'Microsoft YaHei Mono';
+}
+
 .root {
 	-fx-body-color : #F5F5F5;
 	-fx-outer-border : #cecece;

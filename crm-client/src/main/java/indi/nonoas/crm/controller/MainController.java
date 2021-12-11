@@ -15,8 +15,10 @@ import indi.nonoas.crm.view.staff.StaffInfoTab;
 import indi.nonoas.crm.view.stat.OrderTable;
 import indi.nonoas.crm.view.stat.UsrGdsOdrTable;
 import indi.nonoas.crm.view.vip.VipManageTab;
+
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -64,6 +66,9 @@ public class MainController implements Initializable {
     @FXML
     private ToolBar toolBar;
 
+    /**
+     * 根布局
+     */
     @FXML
     private BorderPane bp_root;
 
@@ -328,17 +333,7 @@ public class MainController implements Initializable {
 
     @FXML
     private void linkAuthor() {
-        Application app = new Application() {
-            @Override
-            public void start(Stage primaryStage) {
-            }
-        };
-        app.getHostServices().showDocument("https://me.csdn.net/weixin_44155115");
-        try {
-            app.stop();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        AppState.getHostServices().showDocument("https://me.csdn.net/weixin_44155115");
     }
 
 
@@ -347,8 +342,8 @@ public class MainController implements Initializable {
         new Thread(() -> {
             odrService.delete365dAgo();
             logger.debug("\n==================\n" +
-                "删除一年前的订单" +
-                "\n===================");
+                    "删除一年前的订单" +
+                    "\n===================");
         }).start();
     }
 
