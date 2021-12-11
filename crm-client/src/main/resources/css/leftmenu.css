@@ -1,3 +1,8 @@
+/**
+ * 左侧菜单样式
+ * @author Nonoas
+*/
+
 .list-view .scroll-bar:vertical,
 .list-view .scroll-bar:horizontal {
     -fx-pref-width: 0;
@@ -5,6 +10,7 @@
 
 .list-view .list-cell {
     -fx-background-color: white;
+    -fx-background-radius: 0;
 }
 
 .list-view .list-cell:focused {

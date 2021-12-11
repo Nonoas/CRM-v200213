@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface StageProperty {
 
-    String title() default "JavaFX����";
+    String title() default "JavaFX店铺管理系统";
 
     String icons() default "";
 }
