@@ -24,7 +24,7 @@ public class PackageAddTab extends Tab{
 	}
 
 	private void initView() {
-		URL url = getClass().getResource("/fxml/package_add.fxml");
+		URL url = getClass().getResource("/fxml/pkg/package_add.fxml");
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		fxmlLoader.setLocation(url);
 		fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());

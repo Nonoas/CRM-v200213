@@ -71,7 +71,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="615.0" spacing="10.0">
                      <children>
-                        <Label text="项目内容：" />
+                        <Label text="套餐内容：" />
                      </children>
                   </HBox>
                   <ScrollPane fx:id="sp_pkg_content" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />

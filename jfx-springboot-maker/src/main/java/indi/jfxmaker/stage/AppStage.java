@@ -5,10 +5,8 @@ import indi.jfxmaker.common.Visibility;
 import indi.jfxmaker.control.SysButtonEnum;
 import indi.jfxmaker.pane.TransparentPane;
 import indi.jfxmaker.utils.UIUtil;
-import java.awt.Toolkit;
 import java.util.Collection;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.BoundingBox;
@@ -21,13 +19,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javax.swing.JFrame;
 
 /**
  * App窗口，通常作为唯一窗口
@@ -264,6 +259,10 @@ public class AppStage {
     private void initResizedListener() {
 
         scene.setOnMouseDragged(event -> {
+
+            if (isMaximized() || !stage.isResizable()) {
+                return;
+            }
 
             double stageMinWidth = stage.getMinWidth();
             double stageMinHeight = stage.getMinHeight();

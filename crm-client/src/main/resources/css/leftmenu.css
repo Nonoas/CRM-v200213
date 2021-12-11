@@ -1,10 +1,47 @@
+/**
+ * 左侧菜单样式
+ * @author Nonoas
+*/
+
+* {
+    -fx-background-color: #001529;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.label {
+    -fx-text-fill: white;
+}
+
+.titled-pane .title,
+.titled-pane .content,
+.titled-pane {
+    -fx-background-color: #001529;
+    -fx-border-width: 0;
+}
+
+.titled-pane {
+    -fx-border-image-width: 0;
+    -fx-text-fill: white;
+}
+
+.titled-pane .arrow {
+    -fx-background-color: white;
+    -fx-border-width: 0;
+}
+
+
+.list-view {
+    -fx-border-width: 0;
+}
+
 .list-view .scroll-bar:vertical,
 .list-view .scroll-bar:horizontal {
     -fx-pref-width: 0;
 }
 
 .list-view .list-cell {
-    -fx-background-color: white;
+    -fx-background-radius: 0;
 }
 
 .list-view .list-cell:focused {

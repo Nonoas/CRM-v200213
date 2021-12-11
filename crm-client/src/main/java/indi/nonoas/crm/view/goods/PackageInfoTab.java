@@ -36,7 +36,7 @@ public class PackageInfoTab extends Tab {
     }
 
     private void initView() {
-        URL url = getClass().getResource("/fxml/goods/package_info.fxml");
+        URL url = getClass().getResource("/fxml/pkg/package_info.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(url);
         fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());

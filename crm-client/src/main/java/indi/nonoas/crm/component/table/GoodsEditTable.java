@@ -125,18 +125,18 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
     }
 
     //===========================================================================
-    //                            ���󷽷�
+    //                           抽象方法
     //===========================================================================
 
     /**
-     * ��ȡ���б������
+     * 获取所有的数据
      *
-     * @return S���󼯺�
+     * @return S 指定的类型
      */
     public abstract List<S> getAllBeans();
 
     /**
-     * �������
+     * 添加数据
      *
      * @param bean ��Ҫ��ӵ�����
      */
@@ -144,9 +144,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
 
 
     /**
-     * ������ģ��תΪʵ����
-     *
-     * @return ʵ����
+     * 将data映射到某个对象
      */
     protected abstract S dataToBean(GoodsEditTableVO data);
 
@@ -191,17 +189,16 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
 
                 HBox hBox = new HBox(10, btn_add, tf_number, btn_reduce);
 
-                ObservableList<GoodsEditTableVO> obList = getTableView().getItems(); //��ȡ���Դ����
+                ObservableList<GoodsEditTableVO> obList = getTableView().getItems();
                 GoodsEditTableVO bean = obList.get(getIndex());
 
-                //���ð�ť����
-                //��һ
+                // 减少按钮
                 btn_add.setOnAction(event -> {
                     int amount = Integer.parseInt(tf_number.getText()) + 1;
                     tf_number.setText(String.valueOf(amount));
 
                 });
-                //��һ
+                // 增加按钮
                 btn_reduce.setOnAction(event -> {
                     int amount = Integer.parseInt(tf_number.getText()) - 1;
                     if (amount > 0) {
@@ -209,10 +206,10 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
                     }
                 });
 
-                //�ı���仯����
                 tf_number.textProperty().addListener((observable, oldValue, newValue) -> {
+                    // 整数正则表达式
                     String pattern = "^\\d+$";
-                    boolean isNumber = Pattern.matches(pattern, newValue); //�ж��Ƿ�Ϊ������
+                    boolean isNumber = Pattern.matches(pattern, newValue);
                     if (isNumber) {
                         bean.setAmount(Integer.parseInt(newValue));
                         GoodsEditTable<S> table = (GoodsEditTable<S>) getTableView();
@@ -243,10 +240,10 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
         protected void updateItem(String item, boolean empty) {
             super.updateItem(item, empty);
             if (!empty) {
-                Button btn_delete = new Button("删除");
-                btn_delete.getStyleClass().add("danger");
+                Button btnDelete = new Button("删除");
+                btnDelete.getStyleClass().add("danger");
 
-                btn_delete.setOnAction(event -> {
+                btnDelete.setOnAction(event -> {
                     GoodsEditTable<S> tableView = (GoodsEditTable<S>) getTableView();
                     ObservableList<GoodsEditTableVO> items = tableView.getItems();
                     items.remove(getIndex());
@@ -254,7 +251,7 @@ public abstract class GoodsEditTable<S> extends TableView<GoodsEditTableVO> {
                 });
 
                 this.setAlignment(Pos.CENTER);
-                this.setGraphic(btn_delete);
+                this.setGraphic(btnDelete);
             } else {
                 setGraphic(null);
             }

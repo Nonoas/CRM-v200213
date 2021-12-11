@@ -21,6 +21,7 @@ import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -358,18 +359,19 @@ public class MainController implements Initializable {
         /**
          * 左侧按钮高度
          */
-        private static final double LEFT_MENUITEM_SIZE = 30;
+        private static final double LEFT_MENUITEM_SIZE = 30.0;
 
         /**
          * 最大尺寸数值
          */
-        private static final double MAX_VALUE = 9999999;
+        private static final double MAX_VALUE = Double.MAX_VALUE;
 
         private LeftMenuItemLabel(String text) {
             super(text);
             this.setPrefHeight(LEFT_MENUITEM_SIZE);
             this.setMaxWidth(MAX_VALUE);
-            this.setAlignment(Pos.CENTER);
+            this.setAlignment(Pos.CENTER_LEFT);
+            setPadding(new Insets(0, 0, 0, 20));
         }
     }
 }
