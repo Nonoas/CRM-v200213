@@ -260,6 +260,10 @@ public class AppStage {
 
         scene.setOnMouseDragged(event -> {
 
+            if (isMaximized() || !stage.isResizable()) {
+                return;
+            }
+
             double stageMinWidth = stage.getMinWidth();
             double stageMinHeight = stage.getMinHeight();
 

@@ -18,7 +18,7 @@ import java.util.List;
  * @time : 2020-08-18 15:54
  */
 @StageProperty(title = "套餐消费")
-@FXML("/fxml/package_consume_dialog.fxml")
+@FXML("/fxml/pkg/package_consume_dialog.fxml")
 public class PackageConsumeDialog extends ControllableStage {
 
     private final PkgCnsDialogController controller;
