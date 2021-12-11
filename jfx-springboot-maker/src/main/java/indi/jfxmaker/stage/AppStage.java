@@ -5,7 +5,9 @@ import indi.jfxmaker.common.Visibility;
 import indi.jfxmaker.control.SysButtonEnum;
 import indi.jfxmaker.pane.TransparentPane;
 import indi.jfxmaker.utils.UIUtil;
+
 import java.util.Collection;
+
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -260,7 +262,7 @@ public class AppStage {
 
         scene.setOnMouseDragged(event -> {
 
-            if (isMaximized() || !stage.isResizable()) {
+            if (isMaximized()) {
                 return;
             }
 
@@ -320,8 +322,8 @@ public class AppStage {
             stage.setY(nextY);
 
             if (!(isBottom || isBottomRight || isBottomLeft
-                || isLeft || isRight
-                || isTop || isTopLeft || isTopRight)) {
+                    || isLeft || isRight
+                    || isTop || isTopLeft || isTopRight)) {
                 stage.setX(event.getScreenX() - xOffset);
                 stage.setY(event.getScreenY() - yOffset);
             }

@@ -4,15 +4,19 @@
 */
 
 * {
-    -fx-background-color: #001529;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
+}
+
+.left-menu{
+    -fx-background-color: #001529;
 }
 
 .label {
     -fx-text-fill: white;
 }
 
+.list-view .list-cell,
 .titled-pane .title,
 .titled-pane .content,
 .titled-pane {
@@ -30,11 +34,6 @@
     -fx-border-width: 0;
 }
 
-
-.list-view {
-    -fx-border-width: 0;
-}
-
 .list-view .scroll-bar:vertical,
 .list-view .scroll-bar:horizontal {
     -fx-pref-width: 0;
@@ -45,5 +44,5 @@
 }
 
 .list-view .list-cell:focused {
-    -fx-background-color: #ccc;
+    -fx-background-color: #1890ff;
 }

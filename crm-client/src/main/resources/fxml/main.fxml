@@ -24,7 +24,7 @@
         </ToolBar>
     </top>
     <left>
-        <VBox fx:id="leftMenuVb" alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="563.0" prefWidth="190.0" BorderPane.alignment="CENTER">
+        <VBox fx:id="leftMenuVb" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="563.0" prefWidth="190.0" styleClass="left-menu" BorderPane.alignment="CENTER">
             <BorderPane.margin>
                 <Insets />
             </BorderPane.margin>

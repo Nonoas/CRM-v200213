@@ -46,8 +46,8 @@ public class ApplicationStarter extends AbstractApp {
         AppStage appStage = getAppStage();
         appStage.close();
         appStage.setMaximized(true);
-        appStage.setMinWidth(1280);
-        appStage.setMinHeight(820);
+        appStage.setMinWidth(1200);
+        appStage.setMinHeight(800);
         appStage.setResizable(true);
         showView(MainStageView.class);
     }

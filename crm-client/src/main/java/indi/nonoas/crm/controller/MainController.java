@@ -193,6 +193,7 @@ public class MainController implements Initializable {
 
         TitledPane titledPane = new TitledPane("用户消费", lv);
         titledPane.setExpanded(false);
+
         return titledPane;
     }
 
