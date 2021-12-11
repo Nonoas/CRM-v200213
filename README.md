@@ -34,11 +34,23 @@
 
 ## 项目开发
 
+### 开发环境
+
+**jdk：** jdk11+
+
 ###  项目启动
 
-项目代码 clone 至本地后，使用 `mvn clean compile` 命令编译后方可运行，或在 IDEA 中设置启动配置，如下图
+1. 项目代码 clone 至本地后，使用 `mvn clean compile` 命令编译后方可运行，或在 IDEA 中设置启动配置，如下图
 
 ![启动配置](https://gitee.com/nonoas/picture-bed/raw/master/crm-client/run_config.png)
+
+2. 由于 jdk11 已经不包含 javafx 了，运行 javafx 项目需下载 [javafx-sdk](https://gluonhq.com/products/javafx/) 并添加以下 vm参数 配置：
+
+```bash
+--module-path "D:\RUNTIME\Local\Java\javafx-sdk-11.0.2\lib" --add-modules javafx.controls,javafx.fxml
+```
+
+![img.png](https://gitee.com/nonoas/picture-bed/raw/master/crm-client/vm-config.png)
 
 ## 提示
 
