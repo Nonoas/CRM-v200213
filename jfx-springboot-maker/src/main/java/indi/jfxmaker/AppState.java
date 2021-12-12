@@ -7,7 +7,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public enum AppState {
+
+    @SuppressWarnings("unused")
     INSTANCE;
+
     private static Scene scene;
 
     private static Stage stage;

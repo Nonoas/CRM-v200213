@@ -29,7 +29,7 @@ import javafx.stage.StageStyle;
 /**
  * App窗口，通常作为唯一窗口
  */
-public class AppStage {
+public class AppStage{
 
     private double xOffset = 0;
     private double yOffset = 0;
@@ -180,7 +180,6 @@ public class AppStage {
      * @param parent 注册节点
      * @return 当前窗口
      */
-    @SuppressWarnings("all")
     public AppStage registryDragger(Parent parent) {
         // 设置窗口拖动
         parent.setOnMousePressed(pressHandler);

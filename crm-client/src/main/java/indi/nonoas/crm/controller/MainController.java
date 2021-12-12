@@ -2,6 +2,7 @@ package indi.nonoas.crm.controller;
 
 import de.felixroske.jfxsupport.FXMLController;
 import indi.jfxmaker.AppState;
+import indi.jfxmaker.utils.UIUtil;
 import indi.nonoas.crm.common.ClientSession;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.pojo.LoginDto;
@@ -147,14 +148,10 @@ public class MainController implements Initializable {
         ImageView img_setting = new ImageView(ImageSrc.SETTING_PATH); // 设置图标
         ImageView img_exit = new ImageView(ImageSrc.EXIT_PATH); // 退出图标
 
-        img_shift.setFitHeight(IMG_SIZE);
-        img_shift.setFitWidth(IMG_SIZE);
-        img_backups.setFitHeight(IMG_SIZE);
-        img_backups.setFitWidth(IMG_SIZE);
-        img_setting.setFitHeight(IMG_SIZE);
-        img_setting.setFitWidth(IMG_SIZE);
-        img_exit.setFitHeight(IMG_SIZE - 1);
-        img_exit.setFitWidth(IMG_SIZE - 1);
+        UIUtil.setImageViewSize(img_shift, IMG_SIZE);
+        UIUtil.setImageViewSize(img_backups, IMG_SIZE);
+        UIUtil.setImageViewSize(img_setting, IMG_SIZE);
+        UIUtil.setImageViewSize(img_exit, IMG_SIZE - 1);
 
         btn_shift.setGraphic(img_shift);
         btn_backups.setGraphic(img_backups);

@@ -2,6 +2,7 @@ package indi.jfxmaker.utils;
 
 import indi.jfxmaker.common.Visibility;
 import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 
 /**
  * UI 处理工具
@@ -23,5 +24,26 @@ public class UIUtil {
     public static void setVisible(Node node, Visibility v) {
         node.setVisible(v.isVisible());
         node.setManaged(v.isManaged());
+    }
+
+    /**
+     * 设置ImageView的宽高
+     *
+     * @param widthHeight 宽和高
+     */
+    public static void setImageViewSize(ImageView iv, Double widthHeight) {
+        iv.setFitWidth(widthHeight);
+        iv.setFitHeight(widthHeight);
+    }
+
+    /**
+     * 设置ImageView的宽高
+     *
+     * @param width  宽
+     * @param height 高
+     */
+    public static void setImageViewSize(ImageView iv, Double width, Double height) {
+        iv.setFitWidth(width);
+        iv.setFitHeight(height);
     }
 }
