@@ -110,15 +110,8 @@ public abstract class AbstractApp extends Application {
         } catch (Exception e) {
             LOGGER.error("Failed to load icons: ", e);
         }
-
-
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see javafx.application.Application#init()
-     */
     @Override
     public void init() throws Exception {
         // Load in JavaFx Thread and reused by Completable Future, but should no be a big deal.
