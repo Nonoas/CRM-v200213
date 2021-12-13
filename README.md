@@ -17,7 +17,7 @@
 
 ### 软件预览
 
-![软件首页](https://img-blog.csdnimg.cn/20210610175826650.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDE1NTExNQ==,size_16,color_FFFFFF,t_70)
+![软件首页](https://gitee.com/nonoas/picture-bed/raw/master/crm-client/home.png)
 
 ### 使用说明
 
