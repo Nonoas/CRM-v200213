@@ -3,6 +3,7 @@ package indi.jfxmaker.utils;
 import indi.jfxmaker.common.Visibility;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * UI 处理工具
@@ -45,5 +46,34 @@ public class UIUtil {
     public static void setImageViewSize(ImageView iv, Double width, Double height) {
         iv.setFitWidth(width);
         iv.setFitHeight(height);
+    }
+
+    /**
+     * 设置 AnchorPane 锚点
+     *
+     * @param child  需要设置的子节点
+     * @param top    上
+     * @param right  右
+     * @param bottom 下
+     * @param left   左
+     */
+    public static void setAnchor(Node child, double top, double right, double bottom, double left) {
+        AnchorPane.setTopAnchor(child, top);
+        AnchorPane.setRightAnchor(child, right);
+        AnchorPane.setBottomAnchor(child, bottom);
+        AnchorPane.setLeftAnchor(child, left);
+    }
+
+    /**
+     * 设置 AnchorPane 锚点
+     *
+     * @param child              需要设置的子节点
+     * @param topRightBottomLeft 上下左右使用一样的锚点值
+     */
+    public static void setAnchor(Node child, double topRightBottomLeft) {
+        AnchorPane.setTopAnchor(child, topRightBottomLeft);
+        AnchorPane.setRightAnchor(child, topRightBottomLeft);
+        AnchorPane.setBottomAnchor(child, topRightBottomLeft);
+        AnchorPane.setLeftAnchor(child, topRightBottomLeft);
     }
 }

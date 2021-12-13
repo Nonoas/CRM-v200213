@@ -1,6 +1,7 @@
 package indi.jfxmaker.pane;
 
 import indi.jfxmaker.common.InsetConstant;
+import indi.jfxmaker.utils.UIUtil;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -46,10 +47,7 @@ public class TransparentPane extends AnchorPane {
 
         getChildren().setAll(contentPane, sysBtnBox);
 
-        AnchorPane.setTopAnchor(contentPane, 0.0);
-        AnchorPane.setRightAnchor(contentPane, 0.0);
-        AnchorPane.setBottomAnchor(contentPane, 0.0);
-        AnchorPane.setLeftAnchor(contentPane, 0.0);
+        UIUtil.setAnchor(contentPane, 0.0);
 
         AnchorPane.setTopAnchor(sysBtnBox, 0.0);
         AnchorPane.setRightAnchor(sysBtnBox, 0.0);
@@ -73,10 +71,7 @@ public class TransparentPane extends AnchorPane {
         if (content instanceof Region) {
             // 双向绑定宽高，使布局宽高随窗口变化
             Region region = (Region) content;
-            AnchorPane.setTopAnchor(region, 0.0);
-            AnchorPane.setRightAnchor(region, 0.0);
-            AnchorPane.setBottomAnchor(region, 0.0);
-            AnchorPane.setLeftAnchor(region, 0.0);
+            UIUtil.setAnchor(region, 0.0);
             contentPane.getChildren().setAll(region);
         } else {
             contentPane.getChildren().setAll(content);

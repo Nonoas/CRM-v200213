@@ -13,9 +13,9 @@ public class SysButton extends Button {
 
     public static final String STYLE_PATH = "/css/style.css";
 
-    private final static Double DEFAULT_SIZE = 40.0;
+    private final static Double DEFAULT_SIZE = 30.0;
 
-    private final static Double DEFAULT_ICON_SIZE = 22.0;
+    private final static Double DEFAULT_ICON_SIZE = 20.0;
 
     {
         getStylesheets().add(STYLE_PATH);
