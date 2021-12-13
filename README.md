@@ -17,7 +17,7 @@
 
 ### 软件预览
 
-![软件首页](https://gitee.com/nonoas/picture-bed/raw/master/crm-client/home.png)
+![软件首页](https://gitee.com/nonoas/picture-bed/raw/master/crm-client/home.jpg)
 
 ### 使用说明
 
