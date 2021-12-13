@@ -27,16 +27,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TitledPane;
-import javafx.scene.control.ToolBar;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -165,12 +156,14 @@ public class MainController implements Initializable {
     private void initLeftMenu() {
 
         leftMenuVb.getStylesheets().add("/css/leftmenu.css");
-        ObservableList<Node> menuList = leftMenuVb.getChildren();
-        menuList.add(this.consumeLeftMenu());
-        menuList.add(this.vipManageLeftMenu());
-        menuList.add(this.goodsManageLeftMenu());
-        menuList.add(this.staffManageLeftMenu());
-        menuList.add(this.statLeftMenu());
+        Accordion accordion = new Accordion();
+        leftMenuVb.getChildren().add(accordion);
+        accordion.getPanes().addAll(
+                this.consumeLeftMenu(),
+                this.vipManageLeftMenu(),
+                this.goodsManageLeftMenu(),
+                this.staffManageLeftMenu(),
+                this.statLeftMenu());
     }
 
     /**
@@ -178,7 +171,7 @@ public class MainController implements Initializable {
      *
      * @return Node节点
      */
-    private Node consumeLeftMenu() {
+    private TitledPane consumeLeftMenu() {
         ListView<Label> lv = new ListView<>();
         Label vipConsumeLb = new LeftMenuItemLabel("商品消费");
         Label vipQueryLb = new LeftMenuItemLabel("会员查询");
@@ -193,10 +186,7 @@ public class MainController implements Initializable {
         vipQueryLb.setOnMouseClicked(event -> addTab(VipQueryTab.getInstance()));
         //点击事件定义 end
 
-        TitledPane titledPane = new TitledPane("用户消费", lv);
-        titledPane.setExpanded(false);
-
-        return titledPane;
+        return createTitledPane("用户消费", lv);
     }
 
     /**
@@ -204,7 +194,7 @@ public class MainController implements Initializable {
      *
      * @return Node节点
      */
-    private Node vipManageLeftMenu() {
+    private TitledPane vipManageLeftMenu() {
         ListView<Label> lv = new ListView<>();
         Label vipManageLb = new LeftMenuItemLabel("会员管理");
         vipManageLb.setPrefHeight(LeftMenuItemLabel.LEFT_MENUITEM_SIZE);
@@ -215,9 +205,7 @@ public class MainController implements Initializable {
 
         vipManageLb.setOnMouseClicked(event -> addTab(VipManageTab.getInstance()));
 
-        TitledPane titledPane = new TitledPane("会员管理", lv);
-        titledPane.setExpanded(false);
-        return titledPane;
+        return createTitledPane("会员管理", lv);
     }
 
     /**
@@ -225,7 +213,7 @@ public class MainController implements Initializable {
      *
      * @return Node节点
      */
-    private Node goodsManageLeftMenu() {
+    private TitledPane goodsManageLeftMenu() {
         ListView<Label> lv = new ListView<>();
         Label goodsInfoLb = new LeftMenuItemLabel("商品信息");
         Label goodsTypeLb = new LeftMenuItemLabel("商品类别");
@@ -242,9 +230,7 @@ public class MainController implements Initializable {
         goodsTypeLb.setOnMouseClicked(event -> addTab(GoodsTypeTab.getInstance()));
         pkgLb.setOnMouseClicked(event -> addTab(PackageInfoTab.getInstance()));
 
-        TitledPane titledPane = new TitledPane("商品管理", lv);
-        titledPane.setExpanded(false);
-        return titledPane;
+        return createTitledPane("商品管理", lv);
     }
 
     /**
@@ -253,7 +239,7 @@ public class MainController implements Initializable {
      * @return Node节点
      */
     @SuppressWarnings("all")
-    private Node staffManageLeftMenu() {
+    private TitledPane staffManageLeftMenu() {
         ListView<Label> lv = new ListView<>();
         Label yggl = new LeftMenuItemLabel("员工管理");
 
@@ -265,9 +251,7 @@ public class MainController implements Initializable {
             addTab(StaffInfoTab.getInstance());
         });
 
-        TitledPane titledPane = new TitledPane("员工管理", lv);
-        titledPane.setExpanded(false);
-        return titledPane;
+        return createTitledPane("员工管理", lv);
     }
 
     /**
@@ -276,7 +260,7 @@ public class MainController implements Initializable {
      * @return Node节点
      */
     @SuppressWarnings("all")
-    private Node statLeftMenu() {
+    private TitledPane statLeftMenu() {
         ListView<Label> lv = new ListView<>();
         Label spxfjl = new LeftMenuItemLabel("商品消费记录");
         Label tcxfjl = new LeftMenuItemLabel("套餐消费记录");
@@ -322,7 +306,11 @@ public class MainController implements Initializable {
             dialog.show();
         });
 
-        TitledPane titledPane = new TitledPane("统计报表", lv);
+        return createTitledPane("统计报表", lv);
+    }
+
+    private TitledPane createTitledPane(String label, ListView<Label> content) {
+        TitledPane titledPane = new TitledPane(label, content);
         titledPane.setExpanded(false);
         return titledPane;
     }
