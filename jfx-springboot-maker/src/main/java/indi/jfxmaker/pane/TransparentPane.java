@@ -79,10 +79,14 @@ public class TransparentPane extends AnchorPane {
     }
 
     private DropShadow getDropShadow() {
-        DropShadow dropshadow = new DropShadow();// 阴影向外
-        dropshadow.setRadius(15);// 颜色蔓延的距离
-        dropshadow.setSpread(0.15);// 颜色变淡的程度
-        dropshadow.setColor(Color.rgb(0, 0, 0, 0.3));// 设置颜色
+        // 阴影向外
+        DropShadow dropshadow = new DropShadow();
+        // 颜色蔓延的距离
+        dropshadow.setRadius(15);
+        // 颜色变淡的程度
+        dropshadow.setSpread(0.15);
+        // 设置颜色
+        dropshadow.setColor(Color.rgb(0, 0, 0, 0.3));
         return dropshadow;
     }
 
