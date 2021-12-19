@@ -9,6 +9,7 @@ import indi.jfxmaker.AbstractApp;
 import java.util.Collection;
 import java.util.LinkedList;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
