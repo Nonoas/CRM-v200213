@@ -52,8 +52,8 @@ public @interface FXMLView {
     String title() default "";
 
     /**
-     * The style to be applied to the underlying stage
-     * when using this view as a modal window.
+     * 应用于底层阶段的样式
+     * 将此视图用作模式窗口时。
      */
     String stageStyle() default "UTILITY";
 
