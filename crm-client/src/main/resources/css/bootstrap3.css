@@ -28,7 +28,7 @@
 }
 
 .button,.menu-button,.toggle-button,.split-menu-button {
-	-fx-font-size: 14;
+	-fx-font-size: 12;
 	-fx-background-radius: 4;
 	-fx-border-radius: 4;
 	-fx-pref-height: 30;
@@ -709,7 +709,7 @@ VBox > .split-menu-button.last > .arrow-button {
 	-fx-background-radius: 0 0 4 4;
 	-fx-border-radius: 0 0 4 4;
 	-fx-border-color: #dddddd;
-	/*-fx-padding: -11;*/
+	-fx-start-margin: 10px;
 }
 
 .titled-pane.primary {
@@ -936,7 +936,7 @@ VBox > .split-menu-button.last > .arrow-button {
 }
 .slider .track {
 	-fx-background-color: #dad9da, white;
-	-fx-background-insets: -1, 0, 1;
+	/*-fx-background-insets: -1, 0, 1;*/
 	-fx-pref-height: 5;
 }
 .slider:vertical .track {

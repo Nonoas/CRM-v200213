@@ -26,6 +26,7 @@
 
 .titled-pane {
     -fx-text-fill: white;
+    -fx-padding: 0 0 0 1;
 }
 
 .titled-pane .arrow {

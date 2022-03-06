@@ -35,7 +35,7 @@
         </VBox>
     </left>
     <bottom>
-        <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" prefWidth="1028.0" BorderPane.alignment="CENTER">
+        <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" prefWidth="762.0" BorderPane.alignment="CENTER">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="420.0" minWidth="10.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="1030.0" minWidth="10.0" />
