@@ -97,7 +97,6 @@
 │          Splash.png
 │          
 ├─data (数据库)
-│      mycrm.db
 │      mycrm.mv.db
 │      mycrm.trace.db
 │
