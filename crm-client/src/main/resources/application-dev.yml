@@ -6,6 +6,10 @@ spring:
     url: jdbc:h2:./data/mycrm
     username: root
     password: 20210710mycrm
+  flyway:
+    enabled: true
+    baseline-version: 0
+    baseline-on-migrate: true
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
