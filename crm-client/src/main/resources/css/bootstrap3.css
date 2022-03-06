@@ -9,12 +9,13 @@
 
 .root {
 	-fx-body-color : #F5F5F5;
-	-fx-outer-border : #cecece;
+	-fx-outer-border : red;
 }
 
 .text {
 	-fx-font-smoothing-type: gray;
 }
+
 
 .button:focused, .toggle-button:focused,
 .split-menu-button:focused, .menu-button:focused,

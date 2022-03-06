@@ -21,7 +21,7 @@ import javafx.scene.paint.Color;
 public class TransparentPane extends AnchorPane {
 
     /**
-     * 内容布局
+     * 内容布局,实际显示节点的布局面板
      */
     private final AnchorPane contentPane = new AnchorPane();
 
@@ -40,7 +40,7 @@ public class TransparentPane extends AnchorPane {
 
         this.setPadding(InsetConstant.INSET_15);
 
-        setStyle("-fx-background-color: rgb(0, 0, 0, 0)");
+        setStyle("-fx-background-color: rgb(0,0,0,0)");
 
         contentPane.setStyle("-fx-background-color: white");
         contentPane.setEffect(getDropShadow());

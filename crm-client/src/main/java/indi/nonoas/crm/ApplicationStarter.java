@@ -1,18 +1,18 @@
 package indi.nonoas.crm;
 
+import indi.jfxmaker.AbstractApp;
 import indi.jfxmaker.stage.AppStage;
 import indi.nonoas.crm.component.CustomSplash;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.view.MainStageView;
 import indi.nonoas.crm.view.WelcomeView;
-import indi.jfxmaker.AbstractApp;
-import java.util.Collection;
-import java.util.LinkedList;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.Collection;
+import java.util.LinkedList;
 
 /**
  * crm 启动类
@@ -48,7 +48,7 @@ public class ApplicationStarter extends AbstractApp {
         appStage.close();
         appStage.setMaximized(true);
         appStage.setMinWidth(1200);
-        appStage.setMinHeight(800);
+        appStage.setMinHeight(750);
         appStage.setResizable(true);
         showView(MainStageView.class);
     }
