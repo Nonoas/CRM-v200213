@@ -5,6 +5,7 @@
 log
 
 CRM-v200324.iml
+*.trace.db
 
 crm-client/target
 crm-client/crm-client.iml
