@@ -28,7 +28,7 @@ public class PackageAddController extends PackageController {
     @FXML
     private void cancelInfo() {
 
-        if (chc_isClose.isSelected()) { // ���ѡ�����ύ��رգ���رյ�ǰtab
+        if (chc_isClose.isSelected()) {
             TabPane tabPane = parentTab.getTabPane();
             tabPane.getTabs().remove(parentTab);
         }

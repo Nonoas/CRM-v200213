@@ -100,15 +100,15 @@ public class GoodsModifyController implements Initializable {
 
         goodsService.update(goodsBean);
 
-        if (chc_isClose.isSelected()) { // ���ѡ�����ύ��رգ���رյ�ǰtab
+        if (chc_isClose.isSelected()) {
             cancelInfo();
         }
     }
 
-    @FXML // �ϴ���Ƭ
+    @FXML
     private void uploadPhoto() {
         FileChooser chooser = new FileChooser();
-        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("ͼƬ�ļ�", "*.png", "*.jpg"));
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("图片文件", "*.png", "*.jpg"));
         File photoFile = chooser.showOpenDialog(null);
         if (photoFile != null) {
             photoUrl = photoFile.getAbsolutePath();

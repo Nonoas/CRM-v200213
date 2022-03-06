@@ -58,7 +58,7 @@ public class PackageInfoController implements Initializable {
 
         List<PackageDto> list = pkgService.findByFilter(keywords, keywords, mLow, mHigh);
         if (list == null) {
-            new MyAlert(Alert.AlertType.INFORMATION, "û���ҵ�����ѯ����Ŀ��Ϣ��").show();
+            new MyAlert(Alert.AlertType.INFORMATION, "没有找到您查询的套餐信息！").show();
         } else {
             pkgTable.clearData();
             for (PackageDto bean : list)
