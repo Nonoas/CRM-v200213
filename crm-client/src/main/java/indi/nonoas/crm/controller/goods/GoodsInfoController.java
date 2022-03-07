@@ -41,7 +41,8 @@ public class GoodsInfoController implements Initializable {
     }
 
     private void initView() {
-        table = new ConditionTable<>(MENU_CODE, Collections.emptyList());
+        ArrayList<GoodsDto> goodsDtoList = goodsService.selectAll();
+        table = new ConditionTable<>(MENU_CODE, goodsDtoList);
         scrollPane.setContent(table);
 
         List<String> goodsTypes = goodsService.selectGoodsTypes();

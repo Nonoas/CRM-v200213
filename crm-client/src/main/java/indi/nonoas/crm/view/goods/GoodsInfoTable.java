@@ -59,7 +59,9 @@ public class GoodsInfoTable extends TableView<GoodsDto> {
 
         setTableMenuButtonVisible(true);
 
-        item_id.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getId()));
+        item_id.setCellValueFactory((TableColumn.CellDataFeatures<GoodsDto, String> param) -> {
+            return new SimpleStringProperty(param.getValue().getId());
+        });
         item_name.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getName()));
         item_sell_price.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getSellPrice()));
         item_purchase_price.setCellValueFactory(param -> new SimpleDoubleProperty(param.getValue().getPurchasePrice()));
