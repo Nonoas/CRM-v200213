@@ -10,6 +10,7 @@
 
 .left-menu {
     -fx-background-color: #001529;
+    -fx-padding: 0 0 0 1;
 }
 
 .label {

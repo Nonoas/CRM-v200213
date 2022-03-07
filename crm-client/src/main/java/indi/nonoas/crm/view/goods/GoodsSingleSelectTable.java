@@ -4,6 +4,8 @@ import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.view.consume.GoodsConsumeTable;
 import javafx.beans.value.ChangeListener;
 
+import java.util.Collections;
+
 /**
  * @author : Nonoas
  * @time : 2020-08-02 12:05
@@ -11,12 +13,8 @@ import javafx.beans.value.ChangeListener;
 public class GoodsSingleSelectTable extends GoodsInfoTable {
 
     public GoodsSingleSelectTable(GoodsConsumeTable gc_table) {
-        
-        super();
-        item_min_discount.setVisible(false);
-        item_deduction.setVisible(false);
-        item_deduction_rate.setVisible(false);
-        item_purchase_price.setVisible(false);
+        super(Collections.emptyList());
+
 
         ChangeListener<GoodsDto> cl_select = (observable, oldValue, newValue) -> {
             if (newValue != null) {

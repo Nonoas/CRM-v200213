@@ -1,5 +1,6 @@
 package indi.nonoas.crm.controller.vip;
 
+import cn.hutool.core.util.StrUtil;
 import indi.nonoas.crm.component.alert.MyAlert;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.controller.MainController;
@@ -7,11 +8,13 @@ import indi.nonoas.crm.pojo.dto.VipInfoDto;
 import indi.nonoas.crm.service.VipLvService;
 import indi.nonoas.crm.service.VipService;
 import indi.nonoas.crm.utils.SpringUtil;
+
 import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
+
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,6 +30,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
+import org.springframework.util.StringUtils;
 
 public class VipAddController implements Initializable {
 
@@ -125,7 +129,7 @@ public class VipAddController implements Initializable {
      */
     @FXML
     private void autoSetId() {
-        if (!"".equals(tf_id.getText())) {
+        if (! StrUtil.isBlank(tf_id.getText())) {
             new MyAlert(AlertType.WARNING, "请先清空填写的会员卡号！").show();
             return;
         }
@@ -165,15 +169,15 @@ public class VipAddController implements Initializable {
         }
 
         String strIntegral = tf_integral.getText().trim();
-        int iIntegral = "".equals(strIntegral) ? 0 : Integer.parseInt(strIntegral);
+        int iIntegral =  StrUtil.isBlank(strIntegral) ? 0 : Integer.parseInt(strIntegral);
         bean.setIntegral(iIntegral);
 
         String strBalance = tf_balance.getText().trim();
-        double dBalance = "".equals(strBalance) ? 0 : Double.parseDouble(strBalance);
+        double dBalance =  StrUtil.isBlank(strBalance) ? 0 : Double.parseDouble(strBalance);
         bean.setBalance(dBalance);
 
         String strDiscount = tf_discount.getText().trim();
-        double discount = "".equals(strDiscount) ? Double.parseDouble(strDiscount) : 1;
+        double discount = StrUtil.isBlank(strDiscount) ? 1 : Double.parseDouble(strDiscount);
         discount = discount > 0 && discount <= 1 ? discount : 1;
         bean.setDiscount(discount);
 
@@ -207,7 +211,7 @@ public class VipAddController implements Initializable {
         String tel = tf_tel.getText().trim();
         String level = cbb_level.getValue();
         LocalDate date = dp_addDate.getValue();
-        if ("".equals(id) || "".equals(name) || "".equals(tel) || "".equals(level) || date == null) {
+        if ( StrUtil.isBlank(id) ||  StrUtil.isBlank(name) ||  StrUtil.isBlank(tel) ||  StrUtil.isBlank(level) || date == null) {
             new MyAlert(AlertType.WARNING, "会员卡号，姓名，电话，会员等级和入会日期不能为空！").show();
             return false;
         }

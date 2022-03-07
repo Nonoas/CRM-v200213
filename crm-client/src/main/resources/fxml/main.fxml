@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.geometry.Point3D?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="bp_root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="indi.nonoas.crm.controller.MainController">
+<BorderPane fx:id="bp_root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="960.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="indi.nonoas.crm.controller.MainController">
     <top>
         <ToolBar fx:id="toolBar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="83.0" prefWidth="861.0" BorderPane.alignment="CENTER">
             <padding>
@@ -34,24 +26,4 @@
          </padding>
         </VBox>
     </left>
-    <bottom>
-        <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" prefWidth="762.0" BorderPane.alignment="CENTER">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="420.0" minWidth="10.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1030.0" minWidth="10.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="386.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <BorderPane.margin>
-                <Insets top="10.0" />
-            </BorderPane.margin>
-            <Hyperlink alignment="CENTER" onAction="#linkAuthor" prefHeight="28.0" prefWidth="158.0" text="\@作者:Nonoas" GridPane.halignment="CENTER" />
-            <Label fx:id="label_operator" text="操作员：" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-         <rotationAxis>
-            <Point3D />
-         </rotationAxis>
-        </GridPane>
-    </bottom>
 </BorderPane>

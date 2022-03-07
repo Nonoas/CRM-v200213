@@ -77,9 +77,6 @@ public class MainController implements Initializable {
     @FXML
     private Button btn_backups;
 
-    @FXML
-    private Label label_operator; // 操作员
-
     /**
      * 左侧菜单VBox
      */
@@ -101,12 +98,11 @@ public class MainController implements Initializable {
         initLeftMenu();
         initTopMenu();
 
+        bp_root.setStyle("-fx-padding: -1px");
         bp_root.setCenter(rootTabPane);
         addTab(ConsumeTab.getInstance());
 
         LoginDto loginDto = (LoginDto) ClientSession.getAttribute("user");
-
-        label_operator.setText("操作员：" + loginDto.getName());
 
     }
 
