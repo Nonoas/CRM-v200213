@@ -2,6 +2,7 @@ package indi.nonoas.crm.controller.consume;
 
 import static indi.nonoas.crm.pojo.dto.VipInfoDto.SANKE;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.SerializationUtils;
 import indi.nonoas.crm.component.alert.MyAlert;
 import indi.nonoas.crm.controller.MainController;
@@ -105,7 +106,7 @@ public class ConsumeController implements Initializable {
     @FXML // 查找信息
     private void inquireVIP() {
         String keyWord = tf_find.getText().trim();
-        if ("".equals(keyWord)) {
+        if ( StrUtil.isBlank(keyWord)) {
             return;
         }
         vipBean = vipService.getInfoByIdOrName(keyWord, keyWord);
@@ -186,10 +187,10 @@ public class ConsumeController implements Initializable {
 
         //设置表格的监听事件
         gc_table.getEventHandler().addEvent(() -> {
-            if ("".equals(shp_orderNum.getText())) {
+            if ( StrUtil.isBlank(shp_orderNum.getText())) {
                 shp_orderNum.setText(OrderServiceImpl.goodsOrderNum());
             }
-            if ("".equals(shp_orderDate.getText())) {
+            if ( StrUtil.isBlank(shp_orderDate.getText())) {
                 DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 shp_orderDate.setText(sdf.format(LocalDateTime.now()));
             }
@@ -366,11 +367,11 @@ public class ConsumeController implements Initializable {
         //设置监听
         pcTable.getEventHandler().addEvent(() -> {
             //设置订单号
-            if ("".equals(tc_orderNum.getText())) {
+            if ( StrUtil.isBlank(tc_orderNum.getText())) {
                 tc_orderNum.setText(OrderServiceImpl.packageOrderNum());
             }
             //设置订单日期
-            if ("".equals(tc_orderDate.getText())) {
+            if ( StrUtil.isBlank(tc_orderDate.getText())) {
                 DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 tc_orderDate.setText(sdf.format(LocalDateTime.now()));
             }
@@ -546,7 +547,7 @@ public class ConsumeController implements Initializable {
         userGoodsTable.addEvent(() -> {
             ccTable.addBean(userGoodsTable.getSelectBean());
             //如果订单为空则设置时间
-            if ("".equals(jc_orderTime.getText())) {
+            if ( StrUtil.isBlank(jc_orderTime.getText())) {
                 DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 jc_orderTime.setText(sdf.format(LocalDateTime.now()));
             }

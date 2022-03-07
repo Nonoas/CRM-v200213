@@ -1,6 +1,7 @@
 package indi.nonoas.crm.controller.goods;
 
 import indi.nonoas.crm.component.alert.MyAlert;
+import indi.nonoas.crm.component.table.ConditionTable;
 import indi.nonoas.crm.controller.MainController;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.service.GoodsService;
@@ -13,14 +14,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class GoodsInfoController implements Initializable {
 
-    private final GoodsInfoTable table = new GoodsInfoTable();
+    @SuppressWarnings("all")
+    private final String MENU_CODE = "GoodsInfo";
+
+    private ConditionTable<GoodsDto> table ;
 
     GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
 
@@ -40,6 +41,7 @@ public class GoodsInfoController implements Initializable {
     }
 
     private void initView() {
+        table = new ConditionTable<>(MENU_CODE, Collections.emptyList());
         scrollPane.setContent(table);
 
         List<String> goodsTypes = goodsService.selectGoodsTypes();
