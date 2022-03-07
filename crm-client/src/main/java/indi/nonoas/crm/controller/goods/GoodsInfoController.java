@@ -1,7 +1,6 @@
 package indi.nonoas.crm.controller.goods;
 
 import indi.nonoas.crm.component.alert.MyAlert;
-import indi.nonoas.crm.component.table.ConditionTable;
 import indi.nonoas.crm.controller.MainController;
 import indi.nonoas.crm.pojo.dto.GoodsDto;
 import indi.nonoas.crm.service.GoodsService;
@@ -17,11 +16,10 @@ import java.net.URL;
 import java.util.*;
 
 public class GoodsInfoController implements Initializable {
-
     @SuppressWarnings("all")
     private final String MENU_CODE = "GoodsInfo";
 
-    private ConditionTable<GoodsDto> table ;
+    private GoodsInfoTable table;
 
     GoodsService goodsService = (GoodsService) SpringUtil.getBean("GoodsServiceImpl");
 
@@ -42,7 +40,7 @@ public class GoodsInfoController implements Initializable {
 
     private void initView() {
         ArrayList<GoodsDto> goodsDtoList = goodsService.selectAll();
-        table = new ConditionTable<>(MENU_CODE, goodsDtoList, GoodsDto.class);
+        table = new GoodsInfoTable(goodsDtoList);
         scrollPane.setContent(table);
 
         List<String> goodsTypes = goodsService.selectGoodsTypes();
@@ -99,9 +97,9 @@ public class GoodsInfoController implements Initializable {
     private boolean goodsDeletable(GoodsDto dto) {
 
         // todo 解决商品删除或修改时，订单关联商品信息改变的问题
-        if(goodsService.pkgContains(dto)){
-           new MyAlert(Alert.AlertType.WARNING,"有套餐内包含该商品，暂时无法删除！").show();
-           return false;
+        if (goodsService.pkgContains(dto)) {
+            new MyAlert(Alert.AlertType.WARNING, "有套餐内包含该商品，暂时无法删除！").show();
+            return false;
         }
         return true;
     }
@@ -115,7 +113,7 @@ public class GoodsInfoController implements Initializable {
         String type = "全部类型".equals(cb_type.getValue()) ? "" : cb_type.getValue();
         ArrayList<GoodsDto> listVipBeans = goodsService.selectByFiltrate(keyWord, keyWord, type);
         if (listVipBeans != null) {
-            table.replaceData(listVipBeans);
+            table.refreshData(listVipBeans);
         } else {
             new MyAlert(Alert.AlertType.INFORMATION, "没有找到您查询的商品信息！").show();
         }
