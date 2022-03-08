@@ -22,20 +22,11 @@ public class GoodsInfoTable extends ConditionTable<GoodsDto> {
     private final static String MENU_CODE = "GoodsInfo";
 
     private final ObservableList<GoodsDto> obList = FXCollections.observableArrayList();
-    /**
-     * 当前选中的数据
-     */
-    private GoodsDto selectedData;
 
     public GoodsInfoTable(List<GoodsDto> items) {
         super(MENU_CODE, items, GoodsDto.class);
         setItems(obList);
         showAllInfos();
-        ChangeListener<GoodsDto> cl_select = (observable, oldValue, newValue) -> {
-            System.out.println(newValue);
-            selectedData = newValue;
-        };
-        getSelectionModel().selectedItemProperty().addListener(cl_select);
     }
 
     /**
