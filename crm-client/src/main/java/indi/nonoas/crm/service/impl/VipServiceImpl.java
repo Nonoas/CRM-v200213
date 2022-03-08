@@ -43,7 +43,7 @@ public class VipServiceImpl implements VipService {
     }
 
     @Override
-    public ArrayList<VipInfoDto> selectAllUser() {
+    public List<VipInfoDto> selectAllUser() {
         return vipMapper.selectAllUser();
     }
 

@@ -34,8 +34,11 @@ public class CustomSplash extends Splash {
         ImageView imageView = new ImageView("file:" + DEFAULT_IMAGE);
         imageView.setFitWidth(DEFAULT_WIDTH);
         imageView.setPreserveRatio(true);
+
         final ProgressBar splashProgressBar = new ProgressBar();
         splashProgressBar.setPrefWidth(imageView.getFitWidth());
+        splashProgressBar.setPrefHeight(4);
+
         final VBox vbox = new VBox();
         vbox.getChildren().addAll(imageView, splashProgressBar);
         return vbox;

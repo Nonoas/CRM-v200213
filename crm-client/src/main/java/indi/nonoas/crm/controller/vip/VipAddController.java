@@ -30,7 +30,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
-import org.springframework.util.StringUtils;
 
 public class VipAddController implements Initializable {
 
@@ -183,7 +182,7 @@ public class VipAddController implements Initializable {
 
         bean.setAddress(tf_address.getText());
         bean.setTelephone(tf_tel.getText());
-        bean.setIdcard(tf_idcard.getText());
+        bean.setIdCard(tf_idcard.getText());
         if (dp_birthday.getValue() != null) {
             bean.setBirthday(dp_birthday.getValue().toString());
         }

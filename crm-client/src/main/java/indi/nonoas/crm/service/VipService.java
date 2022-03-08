@@ -33,7 +33,7 @@ public interface VipService {
      *
      * @return VIPBean的ArrayList集合
      */
-    ArrayList<VipInfoDto> selectAllUser();
+    List<VipInfoDto> selectAllUser();
 
     /**
      * 多条件筛选信息

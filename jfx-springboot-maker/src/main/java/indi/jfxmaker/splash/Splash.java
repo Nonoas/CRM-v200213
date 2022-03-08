@@ -23,8 +23,7 @@ public class Splash {
      * @return Parent对象
      */
     public Parent getParent() {
-        final ImageView imageView =
-            new ImageView(getClass().getResource(getImagePath()).toExternalForm());
+        final ImageView imageView = new ImageView(getClass().getResource(getImagePath()).toExternalForm());
         final ProgressBar splashProgressBar = new ProgressBar();
         splashProgressBar.setPrefWidth(imageView.getImage().getWidth());
 

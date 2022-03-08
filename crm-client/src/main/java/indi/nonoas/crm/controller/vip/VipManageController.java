@@ -42,11 +42,11 @@ public class VipManageController implements Initializable {
     @FXML
     private TextField tf_findInfo;
     @FXML
-    private ComboBox<String> cbb_level;    //��Ա�ȼ�
+    private ComboBox<String> cbb_level;
     @FXML
-    private DatePicker dpk_from;    //���ʱ�䷶Χ����ʼ��
+    private DatePicker dpk_from;
     @FXML
-    private DatePicker dpk_to;    //���ʱ�䷶Χ进价
+    private DatePicker dpk_to;
 
     public VipManageController() {
         initData();
@@ -58,15 +58,16 @@ public class VipManageController implements Initializable {
     }
 
     private void initView() {
-        table = new VipInfoTable();
+        List<VipInfoDto> dtoList = vipService.selectAllUser();
+        table = new VipInfoTable(dtoList);
         scrollPane.setContent(table);
 
         cbb_level.getItems().addAll("所有等级", "普通会员", "超级会员");
         cbb_level.setValue("所有等级");
 
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String str_from = "1900-01-01";
-        LocalDate from = LocalDate.parse(str_from, df);
+        String strFrom = "1900-01-01";
+        LocalDate from = LocalDate.parse(strFrom, df);
         LocalDate to = LocalDate.now();
         dpk_from.setValue(from);
         dpk_to.setValue(to);

@@ -21,8 +21,8 @@
     <update id="reduceGoods">
         update user_goods
         set amount=#{amount}
-        where user_id = #{user_id}
-          and goods_id = #{goods_id}
+        where user_id = #{userId}
+          and goods_id = #{goodsId}
     </update>
 
 </mapper>

@@ -8,13 +8,11 @@ import java.io.Serializable;
  * @author Nonoas
  */
 public class VipInfoDto implements Serializable, Cloneable {
-    /**
-     * 串行版本
-     */
+
+    /** 串行版本 */
     private static final long serialVersionUID = 1L;
-    /**
-     * 会员卡号
-     */
+
+    /** 会员卡号 */
     private String id;
     /**
      * 会员姓名
@@ -59,7 +57,7 @@ public class VipInfoDto implements Serializable, Cloneable {
     /**
      * 证件号码
      */
-    private String idcard;
+    private String idCard;
     /**
      * 出生日期
      */
@@ -181,12 +179,12 @@ public class VipInfoDto implements Serializable, Cloneable {
         this.telephone = telephone;
     }
 
-    public String getIdcard() {
-        return idcard;
+    public String getIdCard() {
+        return idCard;
     }
 
-    public void setIdcard(String idcard) {
-        this.idcard = idcard;
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
     }
 
     public String getBirthday() {
