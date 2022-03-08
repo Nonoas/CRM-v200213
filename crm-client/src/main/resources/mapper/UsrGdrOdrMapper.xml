@@ -7,8 +7,10 @@
     <resultMap id="UsrGdsOdrRecordVO" type="indi.nonoas.crm.pojo.vo.UsrGdsOdrRecordVO"/>
 
     <insert id="insertOrders">
-        insert into user_goods_order(user_id, goods_id, amount, order_date, transactor)
-        values (#{user_id}, #{goods_id}, #{amount}, #{order_date}, #{transactor})
+        insert into user_goods_order(user_id, goods_id, amount, order_date, transactor) values
+        <foreach collection="list" separator="," item="item">
+            (#{item.userId}, #{item.goodsId}, #{item.amount}, #{item.orderDate}, #{item.transactor})
+        </foreach>
     </insert>
 
     <select id="selectUserGoodsOrder" resultMap="UsrGdsOdrRecordVO">

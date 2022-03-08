@@ -146,7 +146,7 @@ public class VipModifyController implements Initializable {
         vipBean.setDiscount(discount);
 
         vipBean.setTelephone(tf_tel.getText());
-        vipBean.setIdcard(tf_idcard.getText());
+        vipBean.setIdCard(tf_idcard.getText());
         if (dp_birthday.getValue() != null) {
             vipBean.setBirthday(dp_birthday.getValue().toString());
         }
@@ -202,7 +202,7 @@ public class VipModifyController implements Initializable {
         tf_name.setText(vipBean.getName());
         tf_discount.setText(String.valueOf(vipBean.getDiscount()));
         tf_id.setText(vipBean.getId());
-        tf_idcard.setText(vipBean.getIdcard());
+        tf_idcard.setText(vipBean.getIdCard());
         cbb_level.setValue(vipBean.getCardLevel());
         // 设置显示的照片
         String photoUrl = bean.getPhoto();

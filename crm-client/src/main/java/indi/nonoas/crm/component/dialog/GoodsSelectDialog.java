@@ -52,7 +52,7 @@ public class GoodsSelectDialog extends Dialog<GoodsDto> {
      */
     private void setStyle() {
         Scene scene = getDialogPane().getScene();
-        scene.getStylesheets().add("css/style.css");
+        scene.getStylesheets().add("css/style-normal.css");
     }
 
 }

@@ -4,19 +4,23 @@ import de.felixroske.jfxsupport.PropertyReaderHelper;
 import indi.jfxmaker.fxml.AbstractFxmlView;
 import indi.jfxmaker.splash.Splash;
 import indi.jfxmaker.stage.AppStage;
+
 import java.awt.SystemTray;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
+
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -25,6 +29,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+
+import javax.swing.text.html.Option;
 
 /**
  * The Class AbstractApp.
@@ -95,14 +101,14 @@ public abstract class AbstractApp extends Application {
     private void loadIcons(ConfigurableApplicationContext ctx) {
         try {
             final List<String> fsImages =
-                PropertyReaderHelper.get(ctx.getEnvironment(), "javafx.appicons");
+                    PropertyReaderHelper.get(ctx.getEnvironment(), "javafx.appicons");
 
             if (!fsImages.isEmpty()) {
                 fsImages.forEach((s) ->
-                    {
-                        Image img = new Image(getClass().getResource(s).toExternalForm());
-                        icons.add(img);
-                    }
+                        {
+                            Image img = new Image(getClass().getResource(s).toExternalForm());
+                            icons.add(img);
+                        }
                 );
             } else { // add factory images
                 icons.addAll(defaultIcons);
@@ -117,7 +123,7 @@ public abstract class AbstractApp extends Application {
         // Load in JavaFx Thread and reused by Completable Future, but should no be a big deal.
         defaultIcons.addAll(loadDefaultIcons());
         CompletableFuture.supplyAsync(() ->
-            SpringApplication.run(this.getClass(), savedArgs)
+                SpringApplication.run(this.getClass(), savedArgs)
         ).whenComplete((ctx, throwable) -> {
             if (throwable != null) {
                 LOGGER.error("无法加载 spring 应用程序上下文： ", throwable);
@@ -151,6 +157,7 @@ public abstract class AbstractApp extends Application {
 
         if (AbstractApp.splashScreen.visible()) {
             final Scene splashScene = new Scene(splashScreen.getParent(), Color.TRANSPARENT);
+            splashScene.getStylesheets().add("css/style-normal.css");
             splashStage.setScene(splashScene);
             splashStage.getIcons().addAll(defaultIcons);
             splashStage.initStyle(StageStyle.TRANSPARENT);
@@ -215,10 +222,24 @@ public abstract class AbstractApp extends Application {
      */
     private static void showErrorAlert(Throwable throwable) {
         Alert alert = new Alert(AlertType.ERROR, "哎呀！发生了不可恢复的错误。\n" +
-            "请联系您的软件供应商。\n\n" +
-            "该应用程序将立即停止。\n\n" +
-            "错误： " + throwable.getMessage());
-        alert.showAndWait().ifPresent(response -> Platform.exit());
+                "请联系您的软件供应商。\n\n" +
+                "该应用程序将立即停止。");
+
+        StringWriter sw = new StringWriter();
+        throwable.printStackTrace(new PrintWriter(sw));
+
+        TextArea textArea = new TextArea(sw.toString());
+        textArea.setEditable(false);
+        textArea.setWrapText(true);
+
+        VBox.setVgrow(textArea, Priority.ALWAYS);
+
+        VBox expContent = new VBox();
+        expContent.setMaxWidth(Double.MAX_VALUE);
+        expContent.getChildren().addAll(textArea);
+        alert.getDialogPane().setExpandableContent(expContent);
+        alert.showAndWait();
+        Platform.exit();
     }
 
     /**
@@ -289,14 +310,10 @@ public abstract class AbstractApp extends Application {
         savedInitialView = view;
         savedArgs = args;
 
-        if (splashScreen != null) {
-            AbstractApp.splashScreen = splashScreen;
-        } else {
-            AbstractApp.splashScreen = new Splash();
-        }
+        AbstractApp.splashScreen = Optional.ofNullable(splashScreen).orElseGet(Splash::new);
 
         if (SystemTray.isSupported()) {
-           AppState.setSystemTray(SystemTray.getSystemTray());
+            AppState.setSystemTray(SystemTray.getSystemTray());
         }
         Application.launch(appClass, args);
     }
@@ -320,10 +337,10 @@ public abstract class AbstractApp extends Application {
 
     public Collection<Image> loadDefaultIcons() {
         return Arrays.asList(
-            new Image(getClass().getResource("/icons/gear_16x16.png").toExternalForm()),
-            new Image(getClass().getResource("/icons/gear_24x24.png").toExternalForm()),
-            new Image(getClass().getResource("/icons/gear_36x36.png").toExternalForm()),
-            new Image(getClass().getResource("/icons/gear_42x42.png").toExternalForm()),
-            new Image(getClass().getResource("/icons/gear_64x64.png").toExternalForm()));
+                new Image(getClass().getResource("/icons/gear_16x16.png").toExternalForm()),
+                new Image(getClass().getResource("/icons/gear_24x24.png").toExternalForm()),
+                new Image(getClass().getResource("/icons/gear_36x36.png").toExternalForm()),
+                new Image(getClass().getResource("/icons/gear_42x42.png").toExternalForm()),
+                new Image(getClass().getResource("/icons/gear_64x64.png").toExternalForm()));
     }
 }

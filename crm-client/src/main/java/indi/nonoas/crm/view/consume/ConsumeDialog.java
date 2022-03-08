@@ -19,7 +19,7 @@ import javafx.stage.Modality;
  */
 @StageProperty(title = "商品消费")
 @FXML("/fxml/consume_dialog.fxml")
-@CSS("css/style.css")
+@CSS("css/style-normal.css")
 public class ConsumeDialog extends ControllableStage {
 
     private final ConsumeDialogController controller;

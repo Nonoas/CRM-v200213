@@ -24,7 +24,7 @@ public class VipQueryController implements Initializable {
 
     private final VipService vipService = (VipService) SpringUtil.getBean("UserServiceImpl");
 
-    private final VipInfoTable tv_vipInfo = new VipInfoTable();
+    private  VipInfoTable tvVipInfo;
 
     private final VipLvService vipLvService = (VipLvService) SpringUtil.getBean("VipLvServiceImpl");
 
@@ -39,8 +39,10 @@ public class VipQueryController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        List<VipInfoDto> dtoList = vipService.selectAllUser();
+        tvVipInfo = new VipInfoTable(dtoList);
 
-        sp_userInfo.setContent(tv_vipInfo);
+        sp_userInfo.setContent(tvVipInfo);
         cb_disType.getItems().add("所有等级");
 
         List<String> listName = vipLvService.listAllNames();
@@ -57,9 +59,9 @@ public class VipQueryController implements Initializable {
 
         List<VipInfoDto> listVipBeans = vipService.selectByFiltrate(str, str, disType);
         if (listVipBeans != null) {
-            tv_vipInfo.clearData();
+            tvVipInfo.clearData();
             for (VipInfoDto dto : listVipBeans) {
-                tv_vipInfo.addBean(dto);
+                tvVipInfo.addBean(dto);
             }
         } else {
             new MyAlert(Alert.AlertType.INFORMATION, "没有找到您查询的会员信息！").show();
@@ -68,7 +70,7 @@ public class VipQueryController implements Initializable {
 
     @FXML
     private void showAll() {
-        tv_vipInfo.showAllInfos();
+        tvVipInfo.showAllInfos();
     }
 
 

@@ -564,7 +564,7 @@ public class ConsumeController implements Initializable {
     @FXML
     private void payCountOrder() {
         //判断订单是否为空
-        if (ccTable.getItems().size() == 0) {
+        if (ccTable.getItems().isEmpty()) {
             new MyAlert(AlertType.WARNING, "订单内容为空！").show();
             return;
         }
@@ -585,6 +585,7 @@ public class ConsumeController implements Initializable {
 
     @FXML
     private void refreshUserGoods() {
+        userGoodsTable.getItems().clear();
         if (vipBean != SANKE) {
             userGoodsTable.showAllData();
         }
