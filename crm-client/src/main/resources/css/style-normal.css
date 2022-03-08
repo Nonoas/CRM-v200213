@@ -9,7 +9,7 @@
 }
 
 .text {
-	-fx-font-smoothing-type: gray;
+	/*-fx-font-smoothing-type: gray;*/
 }
 
 
@@ -450,8 +450,6 @@ VBox > .split-menu-button.last > .arrow-button {
 }
 
 .tab-pane .tab-header-area .tab {
-	-fx-border-radius: 4 4 0 0;
-	-fx-background-radius: 5 5 0 0;
 	-fx-background-color: transparent;
 	-fx-border-color: transparent;
 	-fx-padding: 3 10 5 10;
