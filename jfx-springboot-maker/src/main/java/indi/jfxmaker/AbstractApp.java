@@ -6,6 +6,8 @@ import indi.jfxmaker.splash.Splash;
 import indi.jfxmaker.stage.AppStage;
 
 import java.awt.SystemTray;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
@@ -15,7 +17,10 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -218,9 +223,23 @@ public abstract class AbstractApp extends Application {
     private static void showErrorAlert(Throwable throwable) {
         Alert alert = new Alert(AlertType.ERROR, "哎呀！发生了不可恢复的错误。\n" +
                 "请联系您的软件供应商。\n\n" +
-                "该应用程序将立即停止。\n\n" +
-                "错误： " + throwable.getMessage());
-        alert.showAndWait().ifPresent(response -> Platform.exit());
+                "该应用程序将立即停止。");
+
+        StringWriter sw = new StringWriter();
+        throwable.printStackTrace(new PrintWriter(sw));
+
+        TextArea textArea = new TextArea(sw.toString());
+        textArea.setEditable(false);
+        textArea.setWrapText(true);
+
+        VBox.setVgrow(textArea, Priority.ALWAYS);
+
+        VBox expContent = new VBox();
+        expContent.setMaxWidth(Double.MAX_VALUE);
+        expContent.getChildren().addAll(textArea);
+        alert.getDialogPane().setExpandableContent(expContent);
+        alert.showAndWait();
+        Platform.exit();
     }
 
     /**
