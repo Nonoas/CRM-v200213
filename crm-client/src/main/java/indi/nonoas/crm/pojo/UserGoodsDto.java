@@ -51,4 +51,5 @@ public class UserGoodsDto {
     public void setTransactor(String transactor) {
         this.transactor = transactor;
     }
+
 }

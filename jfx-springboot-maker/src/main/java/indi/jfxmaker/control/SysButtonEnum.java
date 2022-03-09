@@ -2,7 +2,13 @@ package indi.jfxmaker.control;
 
 
 import indi.jfxmaker.pane.SVGImage;
+import javafx.beans.property.BooleanProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 /**
@@ -36,6 +42,7 @@ public enum SysButtonEnum {
     }
 
     private static Button maximizeButton() {
+        // 非最大化时图标
         SVGImage svgImage = new SVGImage(
                 "M789.333333 192a42.666667 42.666667 0 0 1 42.666667 42.666667v554.666666a42.666667 42.666667 0 0 1-42.666667 " +
                         "42.666667h-554.666666a42.666667 42.666667 0 0 1-42.666667-42.666667v-554.666666a42.666667 " +
@@ -44,7 +51,27 @@ public enum SysButtonEnum {
                 Color.valueOf("#515151")
         );
         svgImage.setSize(15, 15);
-        return getBaseButton(svgImage);
+        // 最大化时图标
+        SVGImage svgImage0 = new SVGImage(
+                "M959.72 0H294.216a63.96 63.96 0 0 0-63.96 63.96v127.92H64.28A63.96 63.96 0 0 0 0.32 255.84V959.4a63.96 " +
+                        "63.96 0 0 0 63.96 63.96h703.56a63.96 63.96 0 0 0 63.96-63.96V792.465h127.92a63.96 63.96 0 0 0 " +
+                        "63.96-63.96V63.96A63.96 63.96 0 0 0 959.72 0zM767.84 728.505V959.4H64.28V255.84h703.56z m189.322 " +
+                        "0H831.8V255.84a63.96 63.96 0 0 0-63.96-63.96H294.216V63.96H959.72z",
+                Color.valueOf("#515151")
+        );
+        svgImage0.setSize(15, 15);
+
+        SVGButton btn = (SVGButton) getBaseButton(svgImage);
+        // todo 此处不严谨，应该通过窗口是否最大化来判断
+        btn.setOnMouseClicked(mouseEvent -> {
+            Node graphic = btn.getGraphic();
+            if (graphic == svgImage0) {
+                btn.setGraphic(svgImage);
+            } else {
+                btn.setGraphic(svgImage0);
+            }
+        });
+        return btn;
     }
 
     private static Button closeButton() {
@@ -61,7 +88,7 @@ public enum SysButtonEnum {
         return new SVGButton.SvgButtonBuilder()
                 .graphic(svgImage)
                 .graphicColor(Color.valueOf("#515151"))
-                .getGraphicColorHover(Color.WHITE)
+                .graphicColorHover(Color.WHITE)
                 .backgroundColor(Color.TRANSPARENT)
                 .backgroundColorHover(Color.valueOf("#f55"))
                 .build();
