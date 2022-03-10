@@ -35,7 +35,8 @@ public class OrderServiceImpl implements OrderService {
 
     private GoodsMapper goodsMapper;
 
-    @Autowired
+
+
     private UsrGdsOdrMapper usrGdsMapper;
 
     @Override
@@ -174,5 +175,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     public void setGoodsMapper(GoodsMapper goodsMapper) {
         this.goodsMapper = goodsMapper;
+    }
+    @Autowired
+    public void setUsrGdsMapper(UsrGdsOdrMapper usrGdsMapper) {
+        this.usrGdsMapper = usrGdsMapper;
     }
 }

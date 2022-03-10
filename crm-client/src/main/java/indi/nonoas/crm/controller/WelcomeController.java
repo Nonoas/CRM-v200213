@@ -8,8 +8,10 @@ import indi.nonoas.crm.pojo.LoginDto;
 import indi.nonoas.crm.service.LoginService;
 import indi.nonoas.crm.utils.SaltUtil;
 import indi.nonoas.crm.utils.SpringUtil;
+
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,7 +25,7 @@ import javafx.scene.layout.VBox;
 public class WelcomeController implements Initializable {
 
     @FXML
-    private VBox vb_root;
+    private VBox vbRoot;
     @FXML
     private ComboBox<String> tf_username;
     @FXML

@@ -2,23 +2,29 @@ package indi.jfxmaker.control;
 
 
 import indi.jfxmaker.pane.SVGImage;
-import javafx.beans.property.BooleanProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 /**
+ * 系统预设按钮
+ *
  * @author Nonoas
  * @datetime 2021/12/4 20:44
  */
 public enum SysButtonEnum {
 
+    /**
+     * 最新化按钮
+     */
     MINIMIZE(SysButtonEnum.minimizeButton()),
+    /**
+     * 最大化按钮
+     */
     MAXIMIZE(SysButtonEnum.maximizeButton()),
+    /**
+     * 关闭按钮
+     */
     CLOSE(SysButtonEnum.closeButton());
 
     private final Button btn;
