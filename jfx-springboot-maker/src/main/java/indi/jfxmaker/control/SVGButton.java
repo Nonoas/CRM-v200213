@@ -19,6 +19,14 @@ public class SVGButton extends Button {
 
     private final static Double DEFAULT_ICON_SIZE = 20.0;
 
+    private Color graphicColor;
+
+    private Color graphicColorHover;
+
+    private Color backgroundColor;
+
+    private Color backgroundColorHover;
+
     {
         getStylesheets().add(STYLE_PATH);
         getStyleClass().add(STYLE_CLASS);
@@ -34,6 +42,37 @@ public class SVGButton extends Button {
 
     public SVGButton(SVGImage node) {
         setGraphic(node);
+    }
+    public Color getGraphicColor() {
+        return graphicColor;
+    }
+
+    public void setGraphicColor(Color graphicColor) {
+        this.graphicColor = graphicColor;
+    }
+
+    public Color getGraphicColorHover() {
+        return graphicColorHover;
+    }
+
+    public void setGraphicColorHover(Color graphicColorHover) {
+        this.graphicColorHover = graphicColorHover;
+    }
+
+    public Color getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public void setBackgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
+    public Color getBackgroundColorHover() {
+        return backgroundColorHover;
+    }
+
+    public void setBackgroundColorHover(Color backgroundColorHover) {
+        this.backgroundColorHover = backgroundColorHover;
     }
 
 
@@ -70,7 +109,7 @@ public class SVGButton extends Button {
             return this;
         }
 
-        public SvgButtonBuilder getGraphicColorHover(Color getGraphicColorHover) {
+        public SvgButtonBuilder graphicColorHover(Color getGraphicColorHover) {
             this.graphicColorHover = getGraphicColorHover;
             return this;
         }
@@ -87,14 +126,19 @@ public class SVGButton extends Button {
 
         public SVGButton build() {
             SVGButton button = new SVGButton(graphic);
-            button.setStyle("-fx-background-color: " + ColorUtil.colorToHEX(backgroundColor));
+            button.setGraphicColor(graphicColor);
+            button.setGraphicColorHover(graphicColorHover);
+            button.setBackgroundColor(backgroundColor);
+            button.setBackgroundColorHover(backgroundColorHover);
+
+            button.setStyle("-fx-background-color: " + ColorUtil.colorToHEX(button.getBackgroundColor()));
             button.hoverProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue) {
-                    button.setStyle("-fx-background-color: " + ColorUtil.colorToHEX(backgroundColorHover));
-                    graphic.setFill(graphicColorHover);
+                    button.setStyle("-fx-background-color: " + ColorUtil.colorToHEX(button.getBackgroundColorHover()));
+                    ((SVGImage)button.getGraphic()).setFill(button.getGraphicColorHover());
                 } else {
-                    button.setStyle("-fx-background-color: " + ColorUtil.colorToHEX(backgroundColor));
-                    graphic.setFill(graphicColor);
+                    button.setStyle("-fx-background-color: " + ColorUtil.colorToHEX(button.getBackgroundColor()));
+                    ((SVGImage)button.getGraphic()).setFill(button.getGraphicColor());
                 }
             });
             return button;

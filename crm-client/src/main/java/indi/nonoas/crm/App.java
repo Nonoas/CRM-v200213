@@ -2,10 +2,8 @@ package indi.nonoas.crm;
 
 import indi.jfxmaker.AbstractApp;
 import indi.jfxmaker.stage.AppStage;
-import indi.nonoas.crm.component.CustomSplash;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.view.MainStageView;
-import indi.nonoas.crm.view.WelcomeView;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.mybatis.spring.annotation.MapperScan;
@@ -22,11 +20,7 @@ import java.util.LinkedList;
  */
 @MapperScan("indi.nonoas.crm.dao")
 @SpringBootApplication
-public class ApplicationStarter extends AbstractApp {
-
-    public static void main(String[] args) {
-        launch(ApplicationStarter.class, WelcomeView.class, new CustomSplash(), args);
-    }
+public class App extends AbstractApp {
 
     @Override
     public void start(Stage stage) throws Exception {
