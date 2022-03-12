@@ -8,7 +8,7 @@
 
 ## 软件介绍
 
-本软件是基于 JavaFX8 的一款单机的小型店铺管理系统，数据库使用内嵌式的 [H2数据库](https://baike.baidu.com/item/H2%E6%95%B0%E6%8D%AE%E5%BA%93/23316077?fr=aladdin),
+本软件是基于 JavaFX17 的一款单机的小型店铺管理系统，数据库使用内嵌式的 [H2数据库](https://baike.baidu.com/item/H2%E6%95%B0%E6%8D%AE%E5%BA%93/23316077?fr=aladdin),
 无需用户安装数据库软件，也无需软件方提供远程数据库。
 
 功能包括 商品管理、用户管理、员工管理、套餐管理、报表统计等功能。
@@ -38,57 +38,22 @@
 
 **jdk：** jdk11+
 
-###  项目启动
+### 打包成品
 
-1. 项目代码 clone 至本地后，使用 `mvn clean compile` 命令编译后方可运行，或在 IDEA 中设置启动配置，如下图
+终端运行以下指令，将在 crm-client 模块的 `target` 目录下生成 zip 文件，解压即可运行
 
-![启动配置](https://gitee.com/nonoas/picture-bed/raw/master/crm-client/run_config.png)
-
-2. 由于 jdk11 已经不包含 javafx 了，运行 javafx 项目需下载 [javafx-sdk](https://gluonhq.com/products/javafx/) 并添加以下 vm参数 配置：
-
-```bash
---module-path "D:\RUNTIME\Local\Java\javafx-sdk-11.0.2\lib" --add-modules javafx.controls,javafx.fxml
+```shell
+mvn clean package
 ```
 
-![img.png](https://gitee.com/nonoas/picture-bed/raw/master/crm-client/vm-config.png)
 
-## 提示
-
-软件需使用maven打包，打包插件如下
-
-```xml
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.3.1.RELEASE</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
-```
 打包后软件根目录需包含以下文件：
 ```
 根目录
 |
-│  CRM-v200324.jar (主程序)
+|  start.bat (程序启动脚本)
+|
+│  crm-client-xx.jar (主程序)
 │  
 ├─config (配置文件)
 │  │  userConfig.properties

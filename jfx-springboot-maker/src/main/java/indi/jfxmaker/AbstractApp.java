@@ -4,13 +4,6 @@ import de.felixroske.jfxsupport.PropertyReaderHelper;
 import indi.jfxmaker.fxml.AbstractFxmlView;
 import indi.jfxmaker.splash.Splash;
 import indi.jfxmaker.stage.AppStage;
-
-import java.awt.SystemTray;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.*;
-import java.util.concurrent.CompletableFuture;
-
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.application.Platform;
@@ -30,7 +23,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import javax.swing.text.html.Option;
+import java.awt.*;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.List;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * The Class AbstractApp.

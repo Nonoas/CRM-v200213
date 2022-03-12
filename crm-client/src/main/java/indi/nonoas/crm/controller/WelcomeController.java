@@ -1,7 +1,7 @@
 package indi.nonoas.crm.controller;
 
 import de.felixroske.jfxsupport.FXMLController;
-import indi.nonoas.crm.ApplicationStarter;
+import indi.nonoas.crm.App;
 import indi.nonoas.crm.common.ClientSession;
 import indi.nonoas.crm.component.alert.MyAlert;
 import indi.nonoas.crm.pojo.LoginDto;
@@ -64,7 +64,7 @@ public class WelcomeController implements Initializable {
         vTask.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.getId() != null) {
                 ClientSession.addAttribute("user", newValue);
-                ApplicationStarter.toMainStageView();
+                App.toMainStageView();
             } else {
                 btn_Login.setText("登  录");
                 btn_Login.setDisable(false);

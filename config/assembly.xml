@@ -1,0 +1,49 @@
+<assembly
+        xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3
+        http://maven.apache.org/xsd/assembly-1.1.3.xsd">
+    <id>${project.artifactId}</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+
+        <fileSet>
+            <directory>../</directory>
+            <outputDirectory>${file.separator}</outputDirectory>
+            <!-- 包含文件 -->
+            <includes>
+                <include>start.bat</include>
+                <include>data/**</include>
+                <include>config/**</include>
+            </includes>
+            <!-- 排除文件 -->
+            <excludes>
+                <exclude>config/assembly.xml</exclude>
+            </excludes>
+            <fileMode>0755</fileMode>
+        </fileSet>
+
+        <fileSet>
+            <directory>target</directory>
+            <outputDirectory>${file.separator}</outputDirectory>
+            <includes>
+                <include>lib/**</include>
+            </includes>
+            <fileMode>0755</fileMode>
+        </fileSet>
+
+        <fileSet>
+            <directory>target</directory>
+            <outputDirectory>${file.separator}</outputDirectory>
+            <includes>
+                <include>${project.artifactId}-*.jar</include>
+            </includes>
+            <fileMode>0755</fileMode>
+        </fileSet>
+    </fileSets>
+
+</assembly>
+
