@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="bp_root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="960.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="indi.nonoas.crm.controller.MainController">
+    <top>
+        <ToolBar fx:id="toolBar" minHeight="-Infinity" minWidth="-Infinity" prefHeight="83.0" prefWidth="861.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets left="20.0" right="20.0" />
+            </padding>
+            <Button fx:id="btn_shift" contentDisplay="TOP" mnemonicParsing="false" text="交班" />
+            <Button fx:id="btn_backups" contentDisplay="TOP" mnemonicParsing="false" text="备份" />
+            <Button fx:id="btn_setting" contentDisplay="TOP" mnemonicParsing="false" text="设置" />
+            <Button fx:id="btn_exit" contentDisplay="TOP" mnemonicParsing="false" text="退出" />
+        </ToolBar>
+    </top>
+    <left>
+        <VBox fx:id="leftMenuVb" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="563.0" prefWidth="190.0" styleClass="left-menu" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+        </VBox>
+    </left>
+</BorderPane>

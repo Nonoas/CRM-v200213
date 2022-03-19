@@ -1,0 +1,14 @@
+.idea
+
+*/target
+
+log
+
+CRM-v200324.iml
+*.trace.db
+
+crm-client/target
+crm-client/crm-client.iml
+
+jfx-springboot-maker/target
+jfx-springboot-maker/jfx-springboot-maker.iml
