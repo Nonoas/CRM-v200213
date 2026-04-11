@@ -21,7 +21,7 @@
 
     <select id="selectGdsOrds" resultMap="OrderRecordVO">
         select *
-        from ORDER_DETAILS
+        from order_details
     </select>
 
     <insert id="insertOrder" parameterMap="OrderBeanP">

@@ -24,6 +24,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import java.awt.*;
+import java.net.URL;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
@@ -104,8 +105,13 @@ public abstract class AbstractApp extends Application {
             if (!fsImages.isEmpty()) {
                 fsImages.forEach((s) ->
                         {
-                            Image img = new Image(getClass().getResource(s).toExternalForm());
-                            icons.add(img);
+                            URL iconUrl = getClass().getResource(s);
+                            if (iconUrl != null) {
+                                Image img = new Image(iconUrl.toExternalForm());
+                                icons.add(img);
+                            } else {
+                                LOGGER.warn("Icon resource not found: {}", s);
+                            }
                         }
                 );
             } else { // add factory images
@@ -334,11 +340,21 @@ public abstract class AbstractApp extends Application {
     }
 
     public Collection<Image> loadDefaultIcons() {
-        return Arrays.asList(
-                new Image(getClass().getResource("/icons/gear_16x16.png").toExternalForm()),
-                new Image(getClass().getResource("/icons/gear_24x24.png").toExternalForm()),
-                new Image(getClass().getResource("/icons/gear_36x36.png").toExternalForm()),
-                new Image(getClass().getResource("/icons/gear_42x42.png").toExternalForm()),
-                new Image(getClass().getResource("/icons/gear_64x64.png").toExternalForm()));
+        List<Image> loadedIcons = new ArrayList<>();
+        addIconIfExists(loadedIcons, "/icons/gear_16x16.png");
+        addIconIfExists(loadedIcons, "/icons/gear_24x24.png");
+        addIconIfExists(loadedIcons, "/icons/gear_36x36.png");
+        addIconIfExists(loadedIcons, "/icons/gear_42x42.png");
+        addIconIfExists(loadedIcons, "/icons/gear_64x64.png");
+        return loadedIcons;
+    }
+
+    private void addIconIfExists(List<Image> target, String path) {
+        URL iconUrl = getClass().getResource(path);
+        if (iconUrl != null) {
+            target.add(new Image(iconUrl.toExternalForm()));
+        } else {
+            LOGGER.warn("Default icon resource not found: {}", path);
+        }
     }
 }

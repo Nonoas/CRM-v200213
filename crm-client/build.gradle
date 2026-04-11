@@ -1,0 +1,71 @@
+import io.github.fvarrui.javapackager.gradle.PackageTask
+
+def myMainClassName = (findProperty('myMainClassName') ?: 'indi.nonoas.crm.Starter').toString()
+
+buildscript {
+    repositories {
+        mavenLocal()
+        gradlePluginPortal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'io.github.fvarrui:javapackager:1.7.5'
+    }
+}
+
+apply plugin: 'io.github.fvarrui.javapackager.plugin'
+
+version = '1.0.0'
+
+dependencies {
+    implementation project(':jfx-springboot-maker')
+
+    implementation 'org.flywaydb:flyway-core'
+    runtimeOnly 'com.h2database:h2'
+    implementation 'com.baomidou:mybatis-plus-spring-boot3-starter:3.5.5'
+    implementation 'cn.hutool:hutool-all:4.5.1'
+    implementation 'com.alibaba:fastjson:1.2.76'
+}
+
+javapackager {
+    mainClass = myMainClassName
+}
+
+tasks.register('packageMyApp', PackageTask) {
+    dependsOn tasks.clean
+    dependsOn tasks.build
+
+    mainClass = myMainClassName
+    bundleJre = true
+    generateInstaller = false
+    administratorRequired = false
+
+    winConfig {
+        createZipball = true
+    }
+}
+
+tasks.register('copyRuntimeLibs', Copy) {
+    from configurations.runtimeClasspath
+    into layout.buildDirectory.dir('lib')
+}
+
+tasks.register('run', JavaExec) {
+    group = 'application'
+    description = 'Runs this project as a Java application'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = myMainClassName
+}
+
+tasks.named('jar', Jar) {
+    dependsOn tasks.named('copyRuntimeLibs')
+
+    manifest {
+        attributes('Main-Class': myMainClassName)
+    }
+
+    doFirst {
+        def classPath = configurations.runtimeClasspath.files.collect { "lib/${it.name}" }.join(' ')
+        manifest.attributes('Class-Path': classPath)
+    }
+}

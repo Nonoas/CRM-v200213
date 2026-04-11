@@ -1,0 +1,38 @@
+pluginManagement {
+    def kotlinVersion = providers.gradleProperty('kotlinVersion').get()
+    def javafxPluginVersion = providers.gradleProperty('javafxPluginVersion').get()
+
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+        mavenLocal()
+    }
+
+    plugins {
+        id 'org.jetbrains.kotlin.jvm' version kotlinVersion
+        id 'org.openjfx.javafxplugin' version javafxPluginVersion
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode = RepositoriesMode.PREFER_SETTINGS
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+
+        maven {
+            url = uri('https://central.sonatype.com/repository/maven-snapshots/')
+        }
+
+        maven {
+            url = uri('https://mirrors.huaweicloud.com/repository/maven/')
+        }
+
+        maven {
+            url = uri('https://maven.aliyun.com/repository/central')
+        }
+    }
+}
+rootProject.name = 'CRM-v200213'
+include 'jfx-springboot-maker', 'crm-client'

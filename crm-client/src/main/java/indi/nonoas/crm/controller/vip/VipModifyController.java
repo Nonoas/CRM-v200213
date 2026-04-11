@@ -207,7 +207,7 @@ public class VipModifyController implements Initializable {
         // 设置显示的照片
         String photoUrl = bean.getPhoto();
 
-        if (!StringUtils.isEmpty(photoUrl)) {
+        if (StringUtils.hasLength(photoUrl)) {
             img_photo.setImage(new Image("file:" + bean.getPhoto()));
         }
         // 设置显示出生日期

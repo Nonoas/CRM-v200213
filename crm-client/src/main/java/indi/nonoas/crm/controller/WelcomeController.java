@@ -47,11 +47,11 @@ public class WelcomeController implements Initializable {
         String username = tf_username.getValue();
         String password = pf_password.getText();
         // 用户名密码非空校验
-        if ("".equals(username.trim())) {
+        if (username == null || "".equals(username.trim())) {
             new MyAlert(AlertType.WARNING, "用户名不能为空").show();
             return;
         }
-        if ("".equals(password.trim())) {
+        if (password == null || "".equals(password.trim())) {
             new MyAlert(AlertType.WARNING, "密码不能为空").show();
             return;
         }
@@ -59,18 +59,47 @@ public class WelcomeController implements Initializable {
         btn_Login.setDisable(true);
         btn_Login.setText("登录验证中...");
 
-        VerifyTask vTask = new VerifyTask(username, password);
-        new Thread(vTask).start();
-        vTask.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.getId() != null) {
-                ClientSession.addAttribute("user", newValue);
-                App.toMainStageView();
+        VerifyTask vTask;
+        try {
+            vTask = new VerifyTask(username, password);
+        } catch (Exception ex) {
+            resetLoginButton();
+            new MyAlert(AlertType.ERROR, "登录初始化失败：" + ex.getMessage()).showAndWait();
+            return;
+        }
+        vTask.setOnSucceeded(event -> {
+            LoginDto loginDto = vTask.getValue();
+            if (loginDto != null && loginDto.getId() != null) {
+                try {
+                    ClientSession.addAttribute("user", loginDto);
+                    App.toMainStageView();
+                } catch (Exception ex) {
+                    resetLoginButton();
+                    new MyAlert(AlertType.ERROR, "进入主界面失败：" + ex.getMessage()).showAndWait();
+                }
             } else {
-                btn_Login.setText("登  录");
-                btn_Login.setDisable(false);
+                resetLoginButton();
                 new MyAlert(AlertType.INFORMATION, "用户名或密码错误").showAndWait();
             }
         });
+
+        vTask.setOnFailed(event -> {
+            resetLoginButton();
+            Throwable throwable = vTask.getException();
+            String msg = throwable == null ? "未知错误" : throwable.getMessage();
+            new MyAlert(AlertType.ERROR, "登录失败：" + msg).showAndWait();
+        });
+
+        vTask.setOnCancelled(event -> resetLoginButton());
+
+        Thread verifyThread = new Thread(vTask, "login-verify-thread");
+        verifyThread.setDaemon(true);
+        verifyThread.start();
+    }
+
+    private void resetLoginButton() {
+        btn_Login.setText("登  录");
+        btn_Login.setDisable(false);
     }
 
     /**
@@ -78,13 +107,14 @@ public class WelcomeController implements Initializable {
      */
     private static class VerifyTask extends Task<LoginDto> {
 
-        LoginService service = (LoginService) SpringUtil.getBean("LoginServiceImpl");
+        private final LoginService service;
 
-        String username;
-        String password;
+        private final String username;
+        private final String password;
 
 
         VerifyTask(String u, String p) {
+            this.service = (LoginService) SpringUtil.getBean("LoginServiceImpl");
             this.username = u;
             this.password = new SaltUtil(u, "MD5").encode(p);
         }

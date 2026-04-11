@@ -231,8 +231,14 @@ public abstract class AbstractFxmlView implements ApplicationContextAware {
         final List<String> list =
             PropertyReaderHelper.get(applicationContext.getEnvironment(), "javafx.css");
         if (!list.isEmpty()) {
-            list.forEach(
-                css -> parent.getStylesheets().add(getClass().getResource(css).toExternalForm()));
+            list.forEach(css -> {
+                final URL cssUrl = getClass().getResource(css);
+                if (cssUrl != null) {
+                    parent.getStylesheets().add(cssUrl.toExternalForm());
+                } else {
+                    LOGGER.warn("global css file could not be located: {}", css);
+                }
+            });
         }
 
         addCSSFromAnnotation(parent);
@@ -352,7 +358,7 @@ public abstract class AbstractFxmlView implements ApplicationContextAware {
      * @return the bundle name
      */
     private String getBundleName() {
-        if (StringUtils.isEmpty(annotation.bundle())) {
+        if (!StringUtils.hasText(annotation.bundle())) {
             final String lbundle = getClass().getPackage().getName() + "." + getConventionalName();
             LOGGER.debug("Bundle: {} based on conventional name.", lbundle);
             return lbundle;

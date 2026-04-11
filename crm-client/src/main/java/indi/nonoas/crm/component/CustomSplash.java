@@ -6,7 +6,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
-import java.io.File;
+import java.net.URL;
 
 /**
  * @author : Nonoas
@@ -14,54 +14,35 @@ import java.io.File;
  */
 public class CustomSplash extends Splash {
 
-    private static final String DEFAULT_IMAGE = "config/splash/Splash.png";
+    private static final String DEFAULT_IMAGE = "/images/splash/Splash.png";
 
-    private static final double DEFAULT_WIDTH = 700d;
-    private final boolean flag;
-
-    public CustomSplash() {
-        flag = new File(DEFAULT_IMAGE).exists();
-    }
-
-    // 自定义启动界面图片
     @Override
     public Parent getParent() {
+        final ProgressBar splashProgressBar = new ProgressBar();
+        final VBox vbox = new VBox();
 
-        if (!flag) {
-            return super.getParent();
+        URL imageUrl = getClass().getResource(DEFAULT_IMAGE);
+        if (imageUrl != null) {
+            ImageView imageView = new ImageView(imageUrl.toExternalForm());
+            imageView.setFitWidth(700);
+            imageView.setPreserveRatio(true);
+            splashProgressBar.setPrefWidth(imageView.getFitWidth());
+            vbox.getChildren().addAll(imageView, splashProgressBar);
+        } else {
+            splashProgressBar.setPrefWidth(700);
+            vbox.getChildren().add(splashProgressBar);
         }
 
-        ImageView imageView = new ImageView("file:" + DEFAULT_IMAGE);
-        imageView.setFitWidth(DEFAULT_WIDTH);
-        imageView.setPreserveRatio(true);
-
-        final ProgressBar splashProgressBar = new ProgressBar();
-        splashProgressBar.setPrefWidth(imageView.getFitWidth());
-        splashProgressBar.setPrefHeight(4);
-
-        final VBox vbox = new VBox();
-        vbox.getChildren().addAll(imageView, splashProgressBar);
         return vbox;
     }
 
-    /**
-     * 设置为可见
-     */
     @Override
     public boolean visible() {
         return true;
     }
 
-    /**
-     * 获取图片路径
-     *
-     * @return 图片路径
-     */
     @Override
     public String getImagePath() {
-        if (!flag) {
-            return super.getImagePath();
-        }
         return DEFAULT_IMAGE;
     }
 }

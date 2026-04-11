@@ -15,16 +15,14 @@
             <charset>utf8</charset>
         </encoder>
         <!--滚动策略-->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!--路径-->
             <fileNamePattern>${LOG_HOME}/${APP_NAME}_%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
             <!--保存的时间（天数）-->
             <maxHistory>30</maxHistory>
             <!--日志文件的总大小-->
             <totalSizeCap>10GB</totalSizeCap>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>100MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxFileSize>100MB</maxFileSize>
         </rollingPolicy>
     </appender>
 
