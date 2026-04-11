@@ -9,7 +9,6 @@ import indi.jfxmaker.fxml.FXMLView;
  */
 @FXMLView(
     value = "/fxml/welcome.fxml",
-    css = {"/css/style-normal.css"},
     stageResizable = false
 )
 public class WelcomeView extends AbstractFxmlView {

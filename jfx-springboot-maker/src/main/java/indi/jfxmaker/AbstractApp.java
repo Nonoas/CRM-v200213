@@ -1,9 +1,9 @@
 package indi.jfxmaker;
 
 import de.felixroske.jfxsupport.PropertyReaderHelper;
+import github.nonoas.jfx.flat.ui.stage.AppStage;
 import indi.jfxmaker.fxml.AbstractFxmlView;
 import indi.jfxmaker.splash.Splash;
-import indi.jfxmaker.stage.AppStage;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.application.Platform;

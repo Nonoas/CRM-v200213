@@ -1,7 +1,8 @@
 plugins {
     id 'io.spring.dependency-management' version '1.1.7' apply false
     id 'org.openjfx.javafxplugin' apply false
-}
+    id 'java'
+    id 'application'}
 
 allprojects {
     group = 'indi.nonoas'
@@ -44,4 +45,28 @@ subprojects {
     tasks.withType(Test).configureEach {
         enabled = false
     }
+}
+
+application {
+    mainClass = myMainClassName
+    applicationDefaultJvmArgs = ["--enable-preview", "-Djavafx.enablePreview=true"]
+}
+
+tasks.named('run', JavaExec) {
+    dependsOn ':crm-client:classes'
+    classpath = project(':crm-client').sourceSets.main.runtimeClasspath
+    mainClass = myMainClassName
+    workingDir = project(':crm-client').projectDir
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += ["--enable-preview"]
+}
+
+tasks.withType(Test).configureEach {
+    jvmArgs += ["--enable-preview"]
+}
+
+tasks.withType(JavaExec).configureEach {
+    jvmArgs += ["--enable-preview", "-Djavafx.enablePreview=true"]
 }

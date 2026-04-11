@@ -105,10 +105,14 @@ public class VipAddController implements Initializable {
         rbtn_secret.setUserData("保密");
         img_photo.setImage(new Image(ImageSrc.PHOTO_PATH));
         List<String> cbbItems = vipLvService.listAllNames();
-        for (String item : cbbItems) {
-            cbb_level.getItems().add(item);
+        if (cbbItems != null) {
+            cbb_level.getItems().addAll(cbbItems);
         }
-        cbb_level.setValue(cbbItems.get(0));
+        if (!cbb_level.getItems().isEmpty()) {
+            cbb_level.setValue(cbb_level.getItems().get(0));
+        } else {
+            cbb_level.setPromptText("暂无会员等级");
+        }
 
         cbb_forever.selectedProperty().addListener(isForeverListener);
     }
@@ -141,6 +145,9 @@ public class VipAddController implements Initializable {
         FileChooser chooser = new FileChooser();
         chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("图片文件", "*.png", "*.jpg"));
         File photoFile = chooser.showOpenDialog(null);
+        if (photoFile == null) {
+            return;
+        }
         photoUrl = photoFile.getAbsolutePath();
         img_photo.setImage(new Image("file:" + photoUrl));
     }
@@ -227,3 +234,4 @@ public class VipAddController implements Initializable {
     }
 
 }
+

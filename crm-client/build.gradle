@@ -49,23 +49,3 @@ tasks.register('copyRuntimeLibs', Copy) {
     from configurations.runtimeClasspath
     into layout.buildDirectory.dir('lib')
 }
-
-tasks.register('run', JavaExec) {
-    group = 'application'
-    description = 'Runs this project as a Java application'
-    classpath = sourceSets.main.runtimeClasspath
-    mainClass = myMainClassName
-}
-
-tasks.named('jar', Jar) {
-    dependsOn tasks.named('copyRuntimeLibs')
-
-    manifest {
-        attributes('Main-Class': myMainClassName)
-    }
-
-    doFirst {
-        def classPath = configurations.runtimeClasspath.files.collect { "lib/${it.name}" }.join(' ')
-        manifest.attributes('Class-Path': classPath)
-    }
-}

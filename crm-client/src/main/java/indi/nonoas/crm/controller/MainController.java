@@ -31,6 +31,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.HeaderBar;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.ibatis.jdbc.ScriptRunner;
@@ -65,17 +67,13 @@ public class MainController implements Initializable {
     @FXML
     private BorderPane bp_root;
 
-    @FXML
-    private Button btn_shift;
+    private final Button btn_shift = new Button("交班");
 
-    @FXML
-    private Button btn_setting;
+    private final Button btn_setting = new Button("设置");
 
-    @FXML
-    private Button btn_exit;
+    private final Button btn_exit = new Button("退出");
 
-    @FXML
-    private Button btn_backups;
+    private final Button btn_backups = new Button("备份");
 
     /**
      * 左侧菜单VBox
@@ -90,7 +88,9 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        AppState.getAppStage().registryDragger(toolBar);
+        HeaderBar headerBar = AppState.getAppStage().getHeaderBar();
+        headerBar.setCenter(toolBar);
+        HeaderBar.setMargin(headerBar.getTrailing(), new Insets(10));
 
         //启动后台任务
         startBackgroundTask();
@@ -145,6 +145,12 @@ public class MainController implements Initializable {
         btn_backups.setGraphic(img_backups);
         btn_setting.setGraphic(img_setting);
         btn_exit.setGraphic(img_exit);
+
+        HBox buttonHBox = new HBox(10);
+        buttonHBox.setAlignment(Pos.CENTER_LEFT);
+        buttonHBox.setPadding(new  Insets(10, 10, 10, 10));
+        buttonHBox.getChildren().addAll(btn_shift, btn_backups, btn_setting, btn_exit);
+        AppState.getAppStage().getHeaderBar().setLeading(buttonHBox);
     }
 
     /**
@@ -152,7 +158,6 @@ public class MainController implements Initializable {
      */
     private void initLeftMenu() {
 
-        leftMenuVb.getStylesheets().add("/css/leftmenu.css");
         Accordion accordion = new Accordion();
         leftMenuVb.getChildren().add(accordion);
         accordion.getPanes().addAll(

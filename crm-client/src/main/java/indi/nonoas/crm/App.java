@@ -1,7 +1,8 @@
 package indi.nonoas.crm;
 
+import github.nonoas.jfx.flat.ui.stage.AppStage;
+import github.nonoas.jfx.flat.ui.theme.LightTheme;
 import indi.jfxmaker.AbstractApp;
-import indi.jfxmaker.stage.AppStage;
 import indi.nonoas.crm.config.ImageSrc;
 import indi.nonoas.crm.view.MainStageView;
 import javafx.scene.image.Image;
@@ -24,6 +25,7 @@ public class App extends AbstractApp {
 
     @Override
     public void start(Stage stage) throws Exception {
+        setUserAgentStylesheet(new LightTheme().getUserAgentStylesheet());
         super.start(stage);
     }
 
